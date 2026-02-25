@@ -22,6 +22,4 @@ Unlike traditional "you ask, I answer" chatbots, DesireCore's core philosophy is
 
 ## Next Steps
 
-- [Installation & Quick Start](./getting-started) — Get up and running with DesireCore
-- [Core Concepts](./core-concepts) — Learn about Companions, Receipts, Tools, and more
 - [FAQ](./faq) — Frequently asked questions

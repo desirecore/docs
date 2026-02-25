@@ -22,6 +22,4 @@ slug: /
 
 ## 下一步
 
-- [安装与启动](./getting-started) — 快速上手 DesireCore
-- [核心概念](./core-concepts) — 了解 Companion、回执、工具等关键概念
 - [常见问题](./faq) — 常见问题解答
