@@ -102,6 +102,19 @@ const config: Config = {
             },
           ],
         },
+        {
+          title: '法律',
+          items: [
+            {
+              label: '隐私政策',
+              to: '/privacy',
+            },
+            {
+              label: '使用条款',
+              to: '/terms',
+            },
+          ],
+        },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} DesireCore. All rights reserved.`,
     },
