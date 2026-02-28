@@ -1,30 +1,460 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * DesireCore Docs — "Liquid Glass" Design System
+ * Aligned with DesireCore main app visual identity.
+ * Apple-inspired glassmorphism, soft radial gradients, and fluid animations.
  */
 
-/* You can override the default Infima variables here. */
+/* ============================================================
+   1. COLOR SYSTEM — Apple-style palette
+   ============================================================ */
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Primary — Apple Green */
+  --ifm-color-primary: #34C759;
+  --ifm-color-primary-dark: #2DB14E;
+  --ifm-color-primary-darker: #2AA74A;
+  --ifm-color-primary-darkest: #228A3D;
+  --ifm-color-primary-light: #4ED164;
+  --ifm-color-primary-lighter: #5AD56E;
+  --ifm-color-primary-lightest: #7ADF8C;
+
+  /* Semantic colors */
+  --ifm-color-info: #007AFF;
+  --ifm-color-warning: #FF9F0A;
+  --ifm-color-danger: #FF3B30;
+  --ifm-color-success: #34C759;
+
+  /* Text */
+  --ifm-font-color-base: #1d1d1f;
+  --ifm-font-color-secondary: #6e6e73;
+
+  /* Code */
+  --ifm-code-font-size: 92%;
+  --docusaurus-highlighted-code-line-bg: rgba(52, 199, 89, 0.1);
+
+  /* Radius */
+  --ifm-global-radius: 12px;
+  --ifm-card-border-radius: 14px;
+  --ifm-code-border-radius: 0;
+  --ifm-alert-border-radius: 12px;
+
+  /* Shadows — soft multi-layer */
+  --ifm-global-shadow-lw: 0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  --ifm-global-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+  --ifm-global-shadow-tl: 0 4px 16px rgba(0, 0, 0, 0.06),
+    0 12px 40px rgba(0, 0, 0, 0.1);
+
+  /* Animation — Expo easing (DesireCore signature) */
+  --dc-ease-expo: cubic-bezier(0.32, 0.72, 0, 1);
+  --dc-duration-fast: 180ms;
+  --dc-duration-normal: 300ms;
+
+  /* Glass surfaces — Light */
+  --dc-glass-navbar: rgba(255, 255, 255, 0.72);
+  --dc-glass-sidebar: rgba(255, 255, 255, 0.45);
+  --dc-glass-footer: rgba(28, 28, 30, 0.92);
+  --dc-glass-backtop: rgba(255, 255, 255, 0.72);
+  --dc-glass-border: rgba(0, 0, 0, 0.06);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* ============================================================
+   2. DARK MODE COLORS
+   ============================================================ */
+
+[data-theme="dark"] {
+  --ifm-color-primary: #30D158;
+  --ifm-color-primary-dark: #28B84C;
+  --ifm-color-primary-darker: #25AE48;
+  --ifm-color-primary-darkest: #1E8F3B;
+  --ifm-color-primary-light: #4ADA6E;
+  --ifm-color-primary-lighter: #56DE78;
+  --ifm-color-primary-lightest: #7AE894;
+
+  --ifm-color-info: #0A84FF;
+  --ifm-color-warning: #FF9F0A;
+  --ifm-color-danger: #FF453A;
+
+  --ifm-font-color-base: #f5f5f7;
+  --ifm-font-color-secondary: #aeaeb2;
+
+  --ifm-background-color: #000000;
+
+  --docusaurus-highlighted-code-line-bg: rgba(48, 209, 88, 0.15);
+
+  --ifm-global-shadow-lw: 0 1px 3px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+  --ifm-global-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+
+  --dc-glass-navbar: rgba(28, 28, 30, 0.78);
+  --dc-glass-sidebar: rgba(28, 28, 30, 0.55);
+  --dc-glass-footer: rgba(28, 28, 30, 0.85);
+  --dc-glass-backtop: rgba(28, 28, 30, 0.72);
+  --dc-glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   3. FONTS — Apple system stack + Chinese support
+   ============================================================ */
+
+:root {
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Helvetica Neue", "Noto Sans SC", system-ui, sans-serif;
+  --ifm-font-family-monospace: "SF Mono", "JetBrains Mono", SFMono-Regular,
+    Menlo, monospace;
+  --ifm-line-height-base: 1.6;
+  --ifm-heading-font-weight: 600;
+}
+
+/* ============================================================
+   4. PAGE BACKGROUND — Multi-color radial gradient
+   ============================================================ */
+
+html {
+  background-color: #f5f5f7;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(52, 199, 89, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 15%, rgba(0, 122, 255, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 70% 80%, rgba(175, 82, 222, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 20% 90%, rgba(255, 214, 10, 0.05) 0%, transparent 50%),
+    #f5f5f7;
+  background-attachment: fixed;
+}
+
+[data-theme="dark"] body {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(48, 209, 88, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 15%, rgba(10, 132, 255, 0.03) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 70% 80%, rgba(175, 82, 222, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 20% 90%, rgba(255, 214, 10, 0.02) 0%, transparent 50%),
+    #000000;
+  background-attachment: fixed;
+}
+
+html[data-theme="dark"] {
+  background-color: #000000;
+}
+
+/* ============================================================
+   5. NAVBAR — Glassmorphism
+   ============================================================ */
+
+.navbar {
+  background: var(--dc-glass-navbar);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--dc-glass-border);
+  box-shadow: none;
+  transition: background var(--dc-duration-normal) var(--dc-ease-expo);
+}
+
+.navbar__link,
+.navbar__brand {
+  transition: color var(--dc-duration-fast) var(--dc-ease-expo),
+    opacity var(--dc-duration-fast) var(--dc-ease-expo);
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+.navbar__link--active {
+  font-weight: 600;
+}
+
+/* Mobile sidebar overlay */
+.navbar-sidebar {
+  background: var(--dc-glass-navbar);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  backdrop-filter: saturate(180%) blur(24px);
+}
+
+/* ============================================================
+   6. SIDEBAR — Glassmorphism
+   ============================================================ */
+
+.theme-doc-sidebar-container {
+  border-right: none !important;
+}
+
+.theme-doc-sidebar-container > div {
+  background: var(--dc-glass-sidebar);
+  -webkit-backdrop-filter: saturate(150%) blur(24px);
+  backdrop-filter: saturate(150%) blur(24px);
+  border-right: 1px solid var(--dc-glass-border);
+}
+
+/* Sidebar menu interaction */
+.menu__link {
+  border-radius: 8px;
+  transition: background var(--dc-duration-fast) var(--dc-ease-expo),
+    color var(--dc-duration-fast) var(--dc-ease-expo);
+}
+
+.menu__link:hover:not(.menu__link--active) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .menu__link:hover:not(.menu__link--active) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  background: rgba(52, 199, 89, 0.1);
+  color: var(--ifm-color-primary);
+}
+
+[data-theme="dark"] .menu__link--active:not(.menu__link--sublist) {
+  background: rgba(48, 209, 88, 0.12);
+}
+
+.menu__list-item-collapsible:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .menu__list-item-collapsible:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   7. FOOTER — Dark glass
+   ============================================================ */
+
+.footer--dark {
+  background: var(--dc-glass-footer);
+  -webkit-backdrop-filter: saturate(150%) blur(20px);
+  backdrop-filter: saturate(150%) blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer__link-item {
+  transition: color var(--dc-duration-fast) var(--dc-ease-expo);
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* ============================================================
+   8. CODE BLOCKS
+   ============================================================ */
+
+.prism-code {
+  border-radius: var(--ifm-code-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+div[class^="codeBlockContainer"],
+div[class*=" codeBlockContainer"] {
+  border-radius: var(--ifm-code-border-radius);
+  overflow: hidden;
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+code {
+  border-radius: 0;
+}
+
+/* ============================================================
+   9. TABLES
+   ============================================================ */
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--dc-glass-border);
+}
+
+table thead tr {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] table thead tr {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+[data-theme="dark"] table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+table th,
+table td {
+  border-color: var(--dc-glass-border);
+}
+
+/* ============================================================
+   10. BLOCKQUOTES
+   ============================================================ */
+
+blockquote {
+  border-left-color: var(--ifm-color-primary);
+  background: rgba(52, 199, 89, 0.04);
+}
+
+[data-theme="dark"] blockquote {
+  background: rgba(48, 209, 88, 0.06);
+}
+
+/* ============================================================
+   11. ALERTS / ADMONITIONS
+   ============================================================ */
+
+.alert {
+  border-radius: var(--ifm-alert-border-radius);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+/* ============================================================
+   12. BACK-TO-TOP BUTTON
+   ============================================================ */
+
+.theme-back-to-top-button {
+  background: var(--dc-glass-backtop) !important;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--dc-glass-border);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-md);
+  transition: transform var(--dc-duration-normal) var(--dc-ease-expo),
+    opacity var(--dc-duration-normal) var(--dc-ease-expo);
+}
+
+.theme-back-to-top-button:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   13. LINKS & TRANSITIONS
+   ============================================================ */
+
+a {
+  transition: color var(--dc-duration-fast) var(--dc-ease-expo);
+}
+
+.card {
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: transform var(--dc-duration-normal) var(--dc-ease-expo),
+    box-shadow var(--dc-duration-normal) var(--dc-ease-expo);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+/* ============================================================
+   14. TOC — Table of Contents
+   ============================================================ */
+
+.table-of-contents__link {
+  border-radius: 6px;
+  transition: color var(--dc-duration-fast) var(--dc-ease-expo),
+    background var(--dc-duration-fast) var(--dc-ease-expo);
+}
+
+.table-of-contents__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* ============================================================
+   15. SCROLLBAR — 4px ultra-thin
+   ============================================================ */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+[data-theme="dark"] * {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================================
+   16. PAGINATION NAV
+   ============================================================ */
+
+.pagination-nav__link {
+  border-radius: var(--ifm-global-radius);
+  border-color: var(--dc-glass-border);
+  transition: border-color var(--dc-duration-fast) var(--dc-ease-expo),
+    box-shadow var(--dc-duration-normal) var(--dc-ease-expo),
+    transform var(--dc-duration-normal) var(--dc-ease-expo);
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--ifm-global-shadow-lw);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   17. SEARCH
+   ============================================================ */
+
+.DocSearch-Button {
+  border-radius: 10px !important;
+  transition: box-shadow var(--dc-duration-fast) var(--dc-ease-expo) !important;
+}
+
+/* ============================================================
+   18. MARKDOWN CONTENT REFINEMENTS
+   ============================================================ */
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-weight: 600;
+}
+
+.markdown hr {
+  border-color: var(--dc-glass-border);
 }

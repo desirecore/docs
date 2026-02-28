@@ -61,7 +61,7 @@ const config: Config = {
       title: 'DesireCore',
       logo: {
         alt: 'DesireCore Logo',
-        src: 'img/logo.svg',
+        src: 'img/icon.png',
       },
       items: [
         {
