@@ -1,0 +1,10 @@
+{
+  "item.label.首页": {
+    "message": "Home",
+    "description": "Navbar item with label 首页"
+  },
+  "item.label.文档": {
+    "message": "Docs",
+    "description": "Navbar item with label 文档"
+  }
+}

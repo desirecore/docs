@@ -65,6 +65,11 @@ const config: Config = {
       },
       items: [
         {
+          href: 'https://www.desirecore.com',
+          label: '首页',
+          position: 'left',
+        },
+        {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
