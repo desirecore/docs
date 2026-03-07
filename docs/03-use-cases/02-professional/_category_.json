@@ -1,0 +1,10 @@
+{
+  "label": "专业场景",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "slug": "/use-cases/professional",
+    "description": "特定行业和职业的专业应用"
+  }
+}

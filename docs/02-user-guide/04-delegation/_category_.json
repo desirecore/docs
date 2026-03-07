@@ -1,0 +1,9 @@
+{
+  "label": "委派任务",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/delegation",
+    "description": "学习如何将任务委派给智能体执行"
+  }
+}

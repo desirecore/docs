@@ -1,0 +1,9 @@
+{
+  "label": "超级文书",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/super-document",
+    "description": "像 Code Review 一样协作写文档的全新方式"
+  }
+}

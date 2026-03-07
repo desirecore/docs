@@ -1,0 +1,8 @@
+{
+  "label": "Automation & Scheduling",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "Let agents auto-patrol, proactively notify, and execute tasks on schedule"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "label": "应用场景",
+  "position": 3,
+  "collapsed": false,
+  "link": {
+    "type": "doc",
+    "id": "use-cases/index"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Settings & Personalization",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Customize DesireCore's appearance, language, shortcuts, and compute configuration"
+  }
+}

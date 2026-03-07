@@ -1,0 +1,10 @@
+{
+  "label": "通用场景",
+  "position": 1,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "slug": "/use-cases/general",
+    "description": "适用于各行业的通用工作场景"
+  }
+}

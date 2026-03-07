@@ -1,0 +1,10 @@
+{
+  "label": "行业解决方案",
+  "position": 3,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "slug": "/use-cases/solutions",
+    "description": "端到端的行业解决方案"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Capability Extension",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "Extend agent capabilities through tools, MCP, and skill packs"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "label": "对话交互",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/conversations",
+    "description": "了解 DesireCore 的对话系统和消息交互方式"
+  }
+}

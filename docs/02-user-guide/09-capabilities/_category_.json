@@ -1,0 +1,9 @@
+{
+  "label": "能力扩展",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/capabilities",
+    "description": "通过工具、MCP 和技能包扩展智能体的能力"
+  }
+}

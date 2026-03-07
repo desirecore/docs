@@ -1,0 +1,9 @@
+{
+  "label": "记忆系统",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/memory",
+    "description": "了解智能体如何记住你的偏好和工作方式"
+  }
+}

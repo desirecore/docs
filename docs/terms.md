@@ -10,6 +10,8 @@ sidebar_position: 3
 
 DesireCore 是一款委派式交互的 Agent 操作系统，旨在为用户提供安全、私密、高效的 AI 助手服务。通过本软件，用户可以创建、管理和与个性化 AI 助手进行交互。
 
+DesireCore 本身不提供任何 AI 推理能力。用户需要自行配置第三方大语言模型（LLM）API（如 OpenAI、Anthropic、DeepSeek 等）才能使用 AI 对话功能。由此产生的 API 费用由用户自行承担，与 DesireCore 无关。
+
 我们致力于保护用户数据的完整性和隐私性，所有用户数据默认存储在本地设备上，除非用户明确选择同步或备份服务。
 
 ## 2. 许可协议

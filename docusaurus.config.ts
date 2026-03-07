@@ -1,6 +1,6 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from 'prism-react-renderer'
+import type { Config } from '@docusaurus/types'
+import type * as Preset from '@docusaurus/preset-classic'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -42,6 +42,8 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/desirecore/docs/edit/main/',
           routeBasePath: '/',
+          sidebarCollapsible: true,
+          sidebarCollapsed: true,
         },
         blog: false,
         theme: {
@@ -64,19 +66,55 @@ const config: Config = {
         src: 'img/icon.png',
       },
       items: [
+        // ===== 左侧 =====
         {
-          href: 'https://www.desirecore.com',
-          label: '首页',
+          to: '/',
+          label: '文档首页',
+          position: 'left',
+          activeBaseRegex: '^/$',
+        },
+        {
+          to: '/getting-started',
+          label: '快速上手',
           position: 'left',
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          to: '/user-guide',
+          label: '功能指南',
           position: 'left',
-          label: '文档',
+        },
+        {
+          to: '/use-cases',
+          label: '应用场景',
+          position: 'left',
+        },
+        {
+          to: '/concepts',
+          label: '概念解析',
+          position: 'left',
+        },
+        {
+          to: '/reference',
+          label: '参考资料',
+          position: 'left',
+        },
+        {
+          to: '/faq',
+          label: '常见问题',
+          position: 'left',
+        },
+        // ===== 右侧 =====
+        {
+          type: 'search',
+          position: 'right',
         },
         {
           type: 'localeDropdown',
+          position: 'right',
+        },
+        {
+          href: 'https://www.desirecore.com',
+          label: '官网',
           position: 'right',
         },
         {
@@ -92,32 +130,31 @@ const config: Config = {
         {
           title: '文档',
           items: [
-            {
-              label: '快速开始',
-              to: '/',
-            },
+            { label: '快速上手', to: '/getting-started' },
+            { label: '功能指南', to: '/user-guide' },
+            { label: '应用场景', to: '/use-cases' },
+          ],
+        },
+        {
+          title: '资源',
+          items: [
+            { label: '概念解析', to: '/concepts' },
+            { label: '参考资料', to: '/reference' },
+            { label: '常见问题', to: '/faq' },
           ],
         },
         {
           title: '社区',
           items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/desirecore/docs',
-            },
+            { label: '官方网站', href: 'https://www.desirecore.com' },
+            { label: '文档仓库', href: 'https://github.com/desirecore/docs' },
           ],
         },
         {
-          title: '法律',
+          title: '法律声明',
           items: [
-            {
-              label: '隐私政策',
-              to: '/privacy',
-            },
-            {
-              label: '使用条款',
-              to: '/terms',
-            },
+            { label: '隐私政策', to: '/privacy' },
+            { label: '使用条款', to: '/terms' },
           ],
         },
       ],
@@ -128,6 +165,6 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
-};
+}
 
-export default config;
+export default config

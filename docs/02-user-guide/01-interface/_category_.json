@@ -1,0 +1,9 @@
+{
+  "label": "界面导航",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/interface",
+    "description": "了解 DesireCore 的界面布局和各个功能区域"
+  }
+}

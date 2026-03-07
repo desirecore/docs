@@ -1,0 +1,9 @@
+{
+  "label": "安全与治理",
+  "position": 11,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/security",
+    "description": "了解 DesireCore 如何保障安全和用户控制权"
+  }
+}

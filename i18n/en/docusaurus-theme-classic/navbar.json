@@ -1,10 +1,34 @@
 {
-  "item.label.首页": {
-    "message": "Home",
-    "description": "Navbar item with label 首页"
+  "item.label.文档首页": {
+    "message": "Docs Home",
+    "description": "Navbar item with label 文档首页"
   },
-  "item.label.文档": {
-    "message": "Docs",
-    "description": "Navbar item with label 文档"
+  "item.label.快速上手": {
+    "message": "Quick Start",
+    "description": "Navbar item with label 快速上手"
+  },
+  "item.label.功能指南": {
+    "message": "Features",
+    "description": "Navbar item with label 功能指南"
+  },
+  "item.label.应用场景": {
+    "message": "Use Cases",
+    "description": "Navbar item with label 应用场景"
+  },
+  "item.label.概念解析": {
+    "message": "Concepts",
+    "description": "Navbar item with label 概念解析"
+  },
+  "item.label.参考资料": {
+    "message": "Reference",
+    "description": "Navbar item with label 参考资料"
+  },
+  "item.label.常见问题": {
+    "message": "FAQ",
+    "description": "Navbar item with label 常见问题"
+  },
+  "item.label.官网": {
+    "message": "Website",
+    "description": "Navbar item with label 官网"
   }
 }

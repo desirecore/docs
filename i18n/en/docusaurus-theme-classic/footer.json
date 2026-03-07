@@ -3,6 +3,10 @@
     "message": "Docs",
     "description": "The title of the footer links column with title=文档"
   },
+  "link.title.资源": {
+    "message": "Resources",
+    "description": "The title of the footer links column with title=资源"
+  },
   "link.title.社区": {
     "message": "Community",
     "description": "The title of the footer links column with title=社区"
@@ -11,9 +15,29 @@
     "message": "Legal",
     "description": "The title of the footer links column with title=法律"
   },
-  "link.item.label.快速开始": {
-    "message": "Quick Start",
-    "description": "The label of footer link with label=快速开始"
+  "link.item.label.快速上手": {
+    "message": "Getting Started",
+    "description": "The label of footer link with label=快速上手"
+  },
+  "link.item.label.功能指南": {
+    "message": "User Guide",
+    "description": "The label of footer link with label=功能指南"
+  },
+  "link.item.label.应用场景": {
+    "message": "Use Cases",
+    "description": "The label of footer link with label=应用场景"
+  },
+  "link.item.label.概念解析": {
+    "message": "Concepts",
+    "description": "The label of footer link with label=概念解析"
+  },
+  "link.item.label.参考资料": {
+    "message": "Reference",
+    "description": "The label of footer link with label=参考资料"
+  },
+  "link.item.label.常见问题": {
+    "message": "FAQ",
+    "description": "The label of footer link with label=常见问题"
   },
   "link.item.label.隐私政策": {
     "message": "Privacy Policy",
