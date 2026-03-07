@@ -13,7 +13,7 @@ DesireCore 将所有数据存储在本地文件系统中，不依赖云端服务
 | 平台 | 数据根目录 |
 |------|-----------|
 | **macOS** | `~/.desirecore/` |
-| **Windows** | `%APPDATA%\desirecore\` |
+| **Windows** | `用户文件夹\.desirecore\` |
 | **Linux** | `~/.desirecore/` |
 
 > `~` 表示用户主目录。例如 macOS 上 `/Users/你的用户名/.desirecore/`
@@ -41,7 +41,7 @@ DesireCore 应用本身的安装路径：
 |------|-------------|
 | **macOS** | `/Applications/DesireCore.app` |
 | **Windows** | `C:\Users\你的用户名\AppData\Local\Programs\desirecore\` |
-| **Linux** | `/opt/desirecore/` 或 `~/.local/share/applications/` |
+| **Linux** | 取决于 `AppImage` 文件所在的位置 |
 
 ## 配置文件
 

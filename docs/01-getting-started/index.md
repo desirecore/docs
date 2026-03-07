@@ -19,11 +19,11 @@ DesireCore 是一个"委派式交互的 Agent 操作系统"——你可以像带
 
 | 步骤 | 内容 | 预计时间 |
 |------|------|----------|
-| **1** | [检查系统要求](./01-system-requirements.md) | 30 秒 |
+| **1** | [检查系统要求](./01-system-requirements.md) | 10 秒 |
 | **2** | [安装 DesireCore](./02-installation/index.md) | 1-2 分钟 |
-| **3** | [首次启动](./03-first-run.md) | 30 秒 |
+| **3** | [首次启动](./03-first-run.md) | 10 秒 |
 | **4** | [配置 API Key](./04-configure-api-key.md) | 2 分钟 |
-| **5** | [第一次对话](./05-first-conversation.md) | 1 分钟 |
+| **5** | [第一次对话](./05-first-conversation.md) | 10 秒 |
 
 完成这些步骤后，你就可以开始探索 DesireCore 的更多功能了。如果你是老手，可以直接跳到 [配置 API Key](./04-configure-api-key.md) 这一步。
 

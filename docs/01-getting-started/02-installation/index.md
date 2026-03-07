@@ -10,11 +10,13 @@ DesireCore 桌面客户端支持 macOS、Windows 和 Linux 三大平台。
 
 ## 下载
 
-前往 DesireCore 官网下载最新版本：
+前往 DesireCore 官网，点击下载按钮即可获取最新版本：
 
-> **下载地址**：[https://www.desirecore.com/download](https://www.desirecore.com/download)
+> **下载地址**：[https://www.desirecore.com](https://www.desirecore.com)
 
-## 选择你的平台
+官网会自动检测你的操作系统和 CPU 架构，推荐最合适的安装包。如果需要其他版本，可以点击页面上的"More download options"展开完整列表。
+
+## 各平台安装包
 
 | 平台 | 安装包格式 | 文件名示例 | 指南 |
 |------|-----------|-----------|------|
@@ -26,8 +28,9 @@ DesireCore 桌面客户端支持 macOS、Windows 和 Linux 三大平台。
 | Linux (ARM64) | `.AppImage` | `DesireCore_arm64_x.y.z.AppImage` | [Linux 安装指南](./03-linux.md) |
 
 :::tip 不确定选哪个？
+大多数情况下，直接点击官网主页的下载按钮即可——网站会自动识别你的系统。如果自动检测不准确：
 
-- **macOS 用户**：如果你的 Mac 是 2020 年末或之后购买的，大概率是 Apple Silicon 芯片，选 `arm64` 版本。点击左上角  > 关于本机可以确认。
+- **macOS 用户**：点击左上角  > **关于本机**，查看"芯片"一栏确认是 Apple Silicon 还是 Intel。
 - **Windows 用户**：绝大多数情况下选 `x64` 版本即可。
 :::
 
@@ -35,4 +38,4 @@ DesireCore 桌面客户端支持 macOS、Windows 和 Linux 三大平台。
 Web、Android、iOS、鸿蒙版本正在开发中，详见 [更多版本](./04-more-versions.md)。
 :::
 
-选好平台后，点击上面对应的安装指南继续操作。
+下载完成后，点击上面对应的安装指南继续操作。

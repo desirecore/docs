@@ -12,13 +12,13 @@ keywords: [Windows, 安装, NSIS, SmartScreen]
 
 1. **下载安装包**
 
-   前往 [下载页面](https://www.desirecore.com/download)，选择 Windows 版本下载 `.exe` 安装文件。
+   前往 [官网](https://www.desirecore.com)，点击下载按钮。网站会自动检测你的系统架构并提供对应的 `.exe` 安装文件。如需手动选择（x64 / ARM64），可点击"More download options"。
 
    <!-- 截图占位: 下载 Windows 安装包 (windows-download.png) -->
 
 2. **运行安装程序**
 
-   双击下载的 `DesireCore_x64_版本号.exe` 文件，启动安装向导。
+   双击下载的 `.exe` 文件（如 `DesireCore_x64_版本号.exe`），启动安装向导。
 
 3. **选择安装选项**
 

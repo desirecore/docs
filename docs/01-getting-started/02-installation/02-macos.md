@@ -8,24 +8,11 @@ keywords: [macOS, 安装, DMG, Gatekeeper, Apple Silicon, Intel]
 
 本指南介绍如何在 macOS 上安装 DesireCore。
 
-## Apple Silicon vs Intel
-
-DesireCore 为两种架构分别提供了原生版本：
-
-| 芯片类型 | 对应版本 | 如何判断 |
-|---------|---------|---------|
-| Apple Silicon (M1/M2/M3/M4/M5) | `DesireCore_arm64_版本号.dmg` | 2020 年末及之后的 Mac |
-| Intel | `DesireCore_x64_版本号.dmg` | 2020 年之前的 Mac |
-
-:::tip 不确定是哪种芯片？
-点击屏幕左上角  > **关于本机**，查看"芯片"或"处理器"一栏。显示"Apple M1/M2/M3/M4/M5"则选 arm64 版本，显示"Intel"则选 x64 版本。
-:::
-
 ## 安装步骤
 
 1. **下载 DMG 文件**
 
-   前往 [下载页面](https://www.desirecore.com/download)，选择适合你芯片的 macOS 版本。
+   前往 [官网](https://www.desirecore.com)，点击下载按钮。网站会自动检测你的 Mac 芯片类型（Apple Silicon 或 Intel）并提供对应的 `.dmg` 安装包。
 
 2. **打开 DMG 文件**
 
