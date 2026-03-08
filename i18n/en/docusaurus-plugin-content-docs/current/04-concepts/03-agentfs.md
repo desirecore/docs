@@ -128,5 +128,5 @@ This means the agent doesn't need to read all files every time, but loads on dem
 ## Next Steps
 
 - Want to understand the various memory types of agents? Go to the Memory System chapter in the User Guide
-- Want to understand specific file formats? Read [File Format Reference](../reference/file-formats)
-- Want to understand where data is stored? Read [Data Storage Locations](../reference/data-locations)
+- Want to understand specific file formats? Read [File Format Reference](../05-reference/06-file-formats.md)
+- Want to understand where data is stored? Read [Data Storage Locations](../05-reference/07-data-locations.md)
