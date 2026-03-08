@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="sfBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="sfGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="sfPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="sfOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <filter id="sfShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <marker id="sfArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- 添加账户 -->
+  <g filter="url(#sfShadow)">
+    <rect x="140" y="16" width="180" height="44" rx="22" fill="url(#sfBlue)"/>
+    <text x="230" y="44" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">添加账户</text>
+  </g>
+
+  <line x1="230" y1="60" x2="230" y2="88" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- 拉取初始邮件 -->
+  <g filter="url(#sfShadow)">
+    <rect x="120" y="90" width="220" height="44" rx="12" fill="#F2F2F7" stroke="#E5E5EA" stroke-width="1"/>
+    <text x="230" y="110" text-anchor="middle" fill="#333" font-size="13" font-weight="500">拉取初始邮件</text>
+    <text x="230" y="126" text-anchor="middle" fill="#999" font-size="11">最近 50 封</text>
+  </g>
+
+  <line x1="230" y1="134" x2="230" y2="162" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- 启动后台轮询 -->
+  <g filter="url(#sfShadow)">
+    <rect x="120" y="164" width="220" height="44" rx="12" fill="url(#sfPurple)"/>
+    <text x="230" y="184" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">启动后台轮询</text>
+    <text x="230" y="200" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">默认每 30 秒</text>
+  </g>
+
+  <line x1="230" y1="208" x2="230" y2="236" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- 检查新邮件？ -->
+  <g filter="url(#sfShadow)">
+    <polygon points="230,238 330,280 230,322 130,280" fill="url(#sfOrange)" stroke="none"/>
+    <text x="230" y="277" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">有新邮件？</text>
+  </g>
+
+  <!-- 否 → 等待下一轮 -->
+  <line x1="330" y1="280" x2="395" y2="280" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <text x="358" y="272" fill="#FF3B30" font-size="11" font-weight="500">否</text>
+  <g filter="url(#sfShadow)">
+    <rect x="397" y="262" width="50" height="36" rx="8" fill="#F2F2F7" stroke="#E5E5EA" stroke-width="1"/>
+    <text x="422" y="278" text-anchor="middle" fill="#666" font-size="10">等待</text>
+    <text x="422" y="291" text-anchor="middle" fill="#666" font-size="10">下轮</text>
+  </g>
+  <!-- 回到轮询 -->
+  <path d="M 422 262 L 422 186 L 340 186" fill="none" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#sfArrow)"/>
+
+  <!-- 是 → 下载并存储 -->
+  <line x1="230" y1="322" x2="230" y2="350" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <text x="245" y="340" fill="#34C759" font-size="11" font-weight="500">是</text>
+
+  <g filter="url(#sfShadow)">
+    <rect x="145" y="352" width="170" height="44" rx="12" fill="url(#sfGreen)"/>
+    <text x="230" y="379" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">下载并存储</text>
+  </g>
+
+  <line x1="230" y1="396" x2="230" y2="424" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- 推送通知 -->
+  <g filter="url(#sfShadow)">
+    <rect x="145" y="426" width="170" height="44" rx="12" fill="url(#sfBlue)"/>
+    <text x="230" y="453" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">推送通知</text>
+  </g>
+
+  <!-- 回到轮询 -->
+  <path d="M 145 448 L 40 448 L 40 186 L 120 186" fill="none" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#sfArrow)"/>
+</svg>

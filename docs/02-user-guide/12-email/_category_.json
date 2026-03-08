@@ -1,0 +1,9 @@
+{
+  "label": "邮件管理",
+  "position": 12,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/email",
+    "description": "在 DesireCore 中统一管理多个邮箱账户，收发邮件、标签分类、规则过滤一站搞定"
+  }
+}
