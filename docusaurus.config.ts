@@ -113,9 +113,14 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://www.desirecore.com',
+          href: 'https://www.desirecore.cn',
           label: '官网',
           position: 'right',
+          customProps: {
+            localeHrefs: {
+              en: 'https://www.desirecore.com',
+            },
+          },
         },
         {
           href: 'https://github.com/desirecore/docs',

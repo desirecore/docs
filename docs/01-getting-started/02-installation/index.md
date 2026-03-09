@@ -12,7 +12,7 @@ DesireCore 桌面客户端支持 macOS、Windows 和 Linux 三大平台。
 
 前往 DesireCore 官网，点击下载按钮即可获取最新版本：
 
-> **下载地址**：[https://www.desirecore.com](https://www.desirecore.com)
+> **下载地址**：[https://www.desirecore.cn](https://www.desirecore.cn)
 
 官网会自动检测你的操作系统和 CPU 架构，推荐最合适的安装包。如果需要其他版本，可以点击页面上的"More download options"展开完整列表。
 

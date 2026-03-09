@@ -12,7 +12,7 @@ keywords: [Windows, 安装, NSIS, SmartScreen]
 
 1. **下载安装包**
 
-   前往 [官网](https://www.desirecore.com)，点击下载按钮。网站会自动检测你的系统架构并提供对应的 `.exe` 安装文件。如需手动选择（x64 / ARM64），可点击"More download options"。
+   前往 [官网](https://www.desirecore.cn)，点击下载按钮。网站会自动检测你的系统架构并提供对应的 `.exe` 安装文件。如需手动选择（x64 / ARM64），可点击"More download options"。
 
    <!-- 截图占位: 下载 Windows 安装包 (windows-download.png) -->
 

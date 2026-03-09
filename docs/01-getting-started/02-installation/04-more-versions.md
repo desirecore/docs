@@ -17,7 +17,7 @@ keywords: [Web, Android, iOS, 鸿蒙, HarmonyOS, 移动端]
 - **鸿蒙版** — 支持 HarmonyOS 设备
 :::
 
-我们会在版本发布时通过 [更新日志](../../05-reference/09-changelog.md) 和官方网站公布最新进展。
+我们会在版本发布时通过 [更新日志](../../05-reference/10-changelog/index.md) 和官方网站公布最新进展。
 
 目前请使用桌面客户端获得完整体验：
 

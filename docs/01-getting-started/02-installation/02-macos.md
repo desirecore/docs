@@ -12,7 +12,7 @@ keywords: [macOS, 安装, DMG, Gatekeeper, Apple Silicon, Intel]
 
 1. **下载 DMG 文件**
 
-   前往 [官网](https://www.desirecore.com)，点击下载按钮。网站会自动检测你的 Mac 芯片类型（Apple Silicon 或 Intel）并提供对应的 `.dmg` 安装包。
+   前往 [官网](https://www.desirecore.cn)，点击下载按钮。网站会自动检测你的 Mac 芯片类型（Apple Silicon 或 Intel）并提供对应的 `.dmg` 安装包。
 
 2. **打开 DMG 文件**
 

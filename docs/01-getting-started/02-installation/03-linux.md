@@ -12,7 +12,7 @@ keywords: [Linux, 安装, AppImage, Ubuntu, Fedora, ARM64]
 
 1. **下载 AppImage**
 
-   前往 [官网](https://www.desirecore.com)，点击下载按钮。网站会自动检测你的架构并提供对应的 `.AppImage` 文件。如需手动选择（x64 / ARM64），可点击"More download options"。
+   前往 [官网](https://www.desirecore.cn)，点击下载按钮。网站会自动检测你的架构并提供对应的 `.AppImage` 文件。如需手动选择（x64 / ARM64），可点击"More download options"。
 
 2. **添加执行权限**
 

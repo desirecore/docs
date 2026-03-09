@@ -18,5 +18,6 @@ Here you'll find quick reference materials you may need while using DesireCore.
 | [File Formats](./06-file-formats.md) | Format specifications for files in AgentFS |
 | [Data Locations](./07-data-locations.md) | Data storage paths for each platform |
 | [Detailed System Requirements](./08-system-requirements-detail.md) | Complete hardware and software requirements |
-| [Changelog](./09-changelog/index.md) | Version update history |
 | [Naming Philosophy](./01-naming-philosophy.md) | The origin and deeper meaning of the DesireCore name |
+| [Open Source Repositories](./09-open-source-repos.md) | Overview of official GitHub repositories |
+| [Changelog](./10-changelog/index.md) | Version update history |

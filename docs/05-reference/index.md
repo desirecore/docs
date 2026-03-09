@@ -19,4 +19,5 @@ sidebar_position: 0
 | [文件格式说明](./06-file-formats.md) | AgentFS 中各文件的格式规范 |
 | [数据存储位置](./07-data-locations.md) | 各平台的数据存储路径 |
 | [详细系统要求](./08-system-requirements-detail.md) | 完整的硬件和软件要求 |
-| [更新日志](./09-changelog/index.md) | 版本更新历史记录 |
+| [开源仓库](./09-open-source-repos.md) | 官方 GitHub 仓库一览 |
+| [更新日志](./10-changelog/index.md) | 版本更新历史记录 |
