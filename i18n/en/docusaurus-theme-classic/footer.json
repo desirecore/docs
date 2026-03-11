@@ -1,54 +1,62 @@
 {
   "link.title.文档": {
     "message": "Docs",
-    "description": "The title of the footer links column with title=文档"
+    "description": "The title of the footer links column with title=文档 in the footer"
   },
   "link.title.资源": {
     "message": "Resources",
-    "description": "The title of the footer links column with title=资源"
+    "description": "The title of the footer links column with title=资源 in the footer"
   },
   "link.title.社区": {
     "message": "Community",
-    "description": "The title of the footer links column with title=社区"
-  },
-  "link.title.法律": {
-    "message": "Legal",
-    "description": "The title of the footer links column with title=法律"
+    "description": "The title of the footer links column with title=社区 in the footer"
   },
   "link.item.label.快速上手": {
     "message": "Getting Started",
-    "description": "The label of footer link with label=快速上手"
+    "description": "The label of footer link with label=快速上手 linking to /getting-started"
   },
   "link.item.label.功能指南": {
     "message": "User Guide",
-    "description": "The label of footer link with label=功能指南"
+    "description": "The label of footer link with label=功能指南 linking to /user-guide"
   },
   "link.item.label.应用场景": {
     "message": "Use Cases",
-    "description": "The label of footer link with label=应用场景"
+    "description": "The label of footer link with label=应用场景 linking to /use-cases"
   },
   "link.item.label.概念解析": {
     "message": "Concepts",
-    "description": "The label of footer link with label=概念解析"
-  },
-  "link.item.label.参考资料": {
-    "message": "Reference",
-    "description": "The label of footer link with label=参考资料"
+    "description": "The label of footer link with label=概念解析 linking to /concepts"
   },
   "link.item.label.常见问题": {
     "message": "FAQ",
-    "description": "The label of footer link with label=常见问题"
+    "description": "The label of footer link with label=常见问题 linking to /faq"
   },
   "link.item.label.隐私政策": {
     "message": "Privacy Policy",
-    "description": "The label of footer link with label=隐私政策"
+    "description": "The label of footer link with label=隐私政策 linking to /privacy"
   },
   "link.item.label.使用条款": {
     "message": "Terms of Service",
-    "description": "The label of footer link with label=使用条款"
+    "description": "The label of footer link with label=使用条款 linking to /terms"
   },
   "copyright": {
     "message": "Copyright © 2026 DesireCore. All rights reserved.",
     "description": "The footer copyright"
+  },
+  "link.title.法律声明": {
+    "message": "Legal",
+    "description": "The title of the footer links column with title=法律声明 in the footer"
+  },
+  "link.item.label.更多": {
+    "message": "More",
+    "description": "The label of footer link with label=更多 linking to /more"
+  },
+  "link.item.label.官方网站": {
+    "message": "Official Website",
+    "description": "The label of footer link with label=官方网站 linking to https://www.desirecore.com"
+  },
+  "link.item.label.文档仓库": {
+    "message": "Docs Repository",
+    "description": "The label of footer link with label=文档仓库 linking to https://github.com/desirecore/docs"
   }
 }

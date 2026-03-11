@@ -1,0 +1,134 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.gettingStarted.category.安装应用": {
+    "message": "Installation",
+    "description": "The label for category '安装应用' in sidebar 'gettingStarted'"
+  },
+  "sidebar.userGuide.category.界面导航": {
+    "message": "Interface Navigation",
+    "description": "The label for category '界面导航' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.界面导航.link.generated-index.description": {
+    "message": "Learn about DesireCore's interface layout and functional areas",
+    "description": "The generated-index page description for category '界面导航' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.对话交互": {
+    "message": "Conversations",
+    "description": "The label for category '对话交互' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.对话交互.link.generated-index.description": {
+    "message": "Learn about DesireCore's conversation system and message interactions",
+    "description": "The generated-index page description for category '对话交互' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.教会智能体": {
+    "message": "Teach Your Agent",
+    "description": "The label for category '教会智能体' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.教会智能体.link.generated-index.description": {
+    "message": "Learn how to teach your AI agent using the six interaction primitives",
+    "description": "The generated-index page description for category '教会智能体' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.委派任务": {
+    "message": "Delegate Tasks",
+    "description": "The label for category '委派任务' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.委派任务.link.generated-index.description": {
+    "message": "Learn how to delegate tasks to your agent for execution",
+    "description": "The generated-index page description for category '委派任务' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.超级文书": {
+    "message": "Super Document",
+    "description": "The label for category '超级文书' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.超级文书.link.generated-index.description": {
+    "message": "Collaborate on documents like Code Review — a brand new way to write",
+    "description": "The generated-index page description for category '超级文书' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.智能体管理": {
+    "message": "Agent Management",
+    "description": "The label for category '智能体管理' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.智能体管理.link.generated-index.description": {
+    "message": "Create, edit, and manage your AI agents",
+    "description": "The generated-index page description for category '智能体管理' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.记忆系统": {
+    "message": "Memory System",
+    "description": "The label for category '记忆系统' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.记忆系统.link.generated-index.description": {
+    "message": "Learn how agents remember your preferences and work patterns",
+    "description": "The generated-index page description for category '记忆系统' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.自动化与调度": {
+    "message": "Automation & Scheduling",
+    "description": "The label for category '自动化与调度' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.自动化与调度.link.generated-index.description": {
+    "message": "Let agents auto-patrol, proactively notify, and execute tasks on schedule",
+    "description": "The generated-index page description for category '自动化与调度' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.能力扩展": {
+    "message": "Capability Extension",
+    "description": "The label for category '能力扩展' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.能力扩展.link.generated-index.description": {
+    "message": "Extend agent capabilities through tools, MCP, and skill packs",
+    "description": "The generated-index page description for category '能力扩展' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.设置与个性化": {
+    "message": "Settings & Personalization",
+    "description": "The label for category '设置与个性化' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.设置与个性化.link.generated-index.description": {
+    "message": "Customize DesireCore's appearance, language, shortcuts, and compute configuration",
+    "description": "The generated-index page description for category '设置与个性化' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.安全与治理": {
+    "message": "Security & Governance",
+    "description": "The label for category '安全与治理' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.安全与治理.link.generated-index.description": {
+    "message": "Learn how DesireCore ensures safety and keeps you in control",
+    "description": "The generated-index page description for category '安全与治理' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.邮件管理": {
+    "message": "Email Management",
+    "description": "The label for category '邮件管理' in sidebar 'userGuide'"
+  },
+  "sidebar.userGuide.category.邮件管理.link.generated-index.description": {
+    "message": "Manage multiple email accounts in DesireCore — send, receive, label, and filter all in one place",
+    "description": "The generated-index page description for category '邮件管理' in sidebar 'userGuide'"
+  },
+  "sidebar.useCases.category.通用场景": {
+    "message": "General Scenarios",
+    "description": "The label for category '通用场景' in sidebar 'useCases'"
+  },
+  "sidebar.useCases.category.通用场景.link.generated-index.description": {
+    "message": "Common work scenarios applicable to all industries",
+    "description": "The generated-index page description for category '通用场景' in sidebar 'useCases'"
+  },
+  "sidebar.useCases.category.专业场景": {
+    "message": "Professional Scenarios",
+    "description": "The label for category '专业场景' in sidebar 'useCases'"
+  },
+  "sidebar.useCases.category.专业场景.link.generated-index.description": {
+    "message": "Industry-specific and professional applications",
+    "description": "The generated-index page description for category '专业场景' in sidebar 'useCases'"
+  },
+  "sidebar.useCases.category.行业解决方案": {
+    "message": "Industry Solutions",
+    "description": "The label for category '行业解决方案' in sidebar 'useCases'"
+  },
+  "sidebar.useCases.category.行业解决方案.link.generated-index.description": {
+    "message": "End-to-end industry solutions",
+    "description": "The generated-index page description for category '行业解决方案' in sidebar 'useCases'"
+  },
+  "sidebar.more.category.更新日志": {
+    "message": "Changelog",
+    "description": "The label for category '更新日志' in sidebar 'more'"
+  }
+}

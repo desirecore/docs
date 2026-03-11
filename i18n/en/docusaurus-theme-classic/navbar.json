@@ -19,10 +19,6 @@
     "message": "Concepts",
     "description": "Navbar item with label 概念解析"
   },
-  "item.label.参考资料": {
-    "message": "Reference",
-    "description": "Navbar item with label 参考资料"
-  },
   "item.label.常见问题": {
     "message": "FAQ",
     "description": "Navbar item with label 常见问题"
@@ -30,5 +26,21 @@
   "item.label.官网": {
     "message": "Website",
     "description": "Navbar item with label 官网"
+  },
+  "title": {
+    "message": "DesireCore",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "DesireCore Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.更多": {
+    "message": "More",
+    "description": "Navbar item with label 更多"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
   }
 }
