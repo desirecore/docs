@@ -111,5 +111,5 @@ If you don't want to register vendor accounts yourself, DesireCore also plans to
 
 ## Next Steps
 
-- Want to see details of all supported vendors? Read [Supported AI Vendors List](../05-reference/04-supported-providers.md)
+- Want to see details of all supported vendors? Read [Supported AI Vendors List](../05-more/04-supported-providers.md)
 - Want to understand how to configure compute services? Go to the Settings chapter in the User Guide

@@ -1,0 +1,8 @@
+{
+  "label": "More",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Reference materials, changelog, and legal information"
+  }
+}

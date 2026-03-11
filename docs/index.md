@@ -54,11 +54,11 @@ keywords: [DesireCore, 用户手册, AI 智能体, 委派式交互, Agent OS]
 </div>
 <div className="col col--4 margin-bottom--lg">
 
-### 📋 参考资料
+### 📋 更多
 
 快捷键、术语表、供应商列表等速查内容。
 
-[查看参考 →](./reference/)
+[查看更多 →](./more/)
 
 </div>
 <div className="col col--4 margin-bottom--lg">
@@ -79,5 +79,5 @@ keywords: [DesireCore, 用户手册, AI 智能体, 委派式交互, Agent OS]
 - [配置 API Key](./getting-started/configure-api-key) — 连接 AI 服务的第一步
 - [教会智能体](./user-guide/teaching/delegation-interaction) — DesireCore 最核心的能力
 - [超级文书](./user-guide/super-document/overview) — 像 Code Review 一样协作写文档
-- [快捷键速查](./reference/keyboard-shortcuts) — 提升操作效率
+- [快捷键速查](./more/keyboard-shortcuts) — 提升操作效率
 - [智能体市场](./user-guide/agents/marketplace) — 发现和安装专业智能体

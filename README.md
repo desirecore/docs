@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://docs.desirecore.com"><img src="https://img.shields.io/website?url=https%3A%2F%2Fdocs.desirecore.com&label=docs" alt="Website"></a>
-  <a href="https://github.com/desirecore/docs/actions"><img src="https://img.shields.io/github/actions/workflow/status/desirecore/docs/deploy.yml?label=deploy" alt="Deploy"></a>
+  <a href="https://docs.desirecore.com"><img src="https://img.shields.io/badge/deployed%20on-Vercel-000000?logo=vercel" alt="Deployed on Vercel"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
 </p>
 

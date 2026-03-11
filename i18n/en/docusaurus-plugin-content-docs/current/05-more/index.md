@@ -1,15 +1,15 @@
 ---
-title: "Reference"
-description: "Quick reference, glossaries, and detailed reference materials for DesireCore"
-keywords: [reference, quick reference, glossary, shortcuts, providers]
+title: "More"
+description: "Quick reference, glossaries, and changelog for DesireCore"
+keywords: [reference, quick reference, glossary, shortcuts, providers, changelog]
 sidebar_position: 0
 ---
 
-# Reference
+# More
 
-Here you'll find quick reference materials you may need while using DesireCore.
+Here you'll find quick reference materials and changelog for DesireCore.
 
-| Reference | Description |
+| Content | Description |
 |---------|------|
 | [Keyboard Shortcuts](./02-keyboard-shortcuts.md) | Complete list of all keyboard shortcuts |
 | [Glossary](./03-glossary.md) | Definitions of 40+ core terms |
@@ -18,6 +18,5 @@ Here you'll find quick reference materials you may need while using DesireCore.
 | [File Formats](./06-file-formats.md) | Format specifications for files in AgentFS |
 | [Data Locations](./07-data-locations.md) | Data storage paths for each platform |
 | [Detailed System Requirements](./08-system-requirements-detail.md) | Complete hardware and software requirements |
-| [Naming Philosophy](./01-naming-philosophy.md) | The origin and deeper meaning of the DesireCore name |
 | [Open Source Repositories](./09-open-source-repos.md) | Overview of official GitHub repositories |
 | [Changelog](./10-changelog/index.md) | Version update history |

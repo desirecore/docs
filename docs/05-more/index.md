@@ -1,17 +1,16 @@
 ---
-title: "参考资料"
-description: "DesireCore 的速查表、术语表和详细参考资料"
-keywords: [参考, 速查, 术语表, 快捷键, 供应商]
+title: "更多"
+description: "DesireCore 的速查表、术语表和更新日志"
+keywords: [参考, 速查, 术语表, 快捷键, 供应商, 更新日志]
 sidebar_position: 0
 ---
 
-# 参考资料
+# 更多
 
-这里收集了你在使用 DesireCore 时可能需要随时查阅的速查内容。
+这里收集了你在使用 DesireCore 时可能需要随时查阅的速查内容和更新日志。
 
-| 参考资料 | 说明 |
+| 内容 | 说明 |
 |---------|------|
-| [命名理念](./01-naming-philosophy.md) | DesireCore 命名的由来与深层含义 |
 | [快捷键速查表](./02-keyboard-shortcuts.md) | 所有快捷键一览 |
 | [术语表](./03-glossary.md) | 40+ 核心术语的定义 |
 | [支持的 AI 供应商](./04-supported-providers.md) | 20+ 供应商及其模型列表 |

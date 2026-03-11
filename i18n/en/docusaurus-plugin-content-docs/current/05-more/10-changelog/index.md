@@ -12,7 +12,8 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
-| [v10.0.5](./v10.0.5) | 2026-03-08 | 心跳系统增强 — 时区支持、瞬态重试、抑制引擎与调度集成 |
+| [v10.0.6](./v10.0.6) | 2026-03-09 | Unified delegation tool, OpenClaw import, multi-source heartbeat and registry unification |
+| [v10.0.5](./v10.0.5) | 2026-03-08 | Heartbeat system enhancements — timezone support, transient retry, suppression engine and scheduler integration |
 | [v10.0.4](./v10.0.4) | 2026-03-08 | Fix Windows packaged build certificate directory permission issue |
 | [v10.0.3](./v10.0.3) | 2026-03-07 | Skill import and file reference passing support |
 | [v10.0.2](./v10.0.2) | 2026-03-06 | Conversation draft persistence and email virtual scrolling |

@@ -94,13 +94,13 @@ const config: Config = {
           position: 'left',
         },
         {
-          to: '/reference',
-          label: '参考资料',
+          to: '/faq',
+          label: '常见问题',
           position: 'left',
         },
         {
-          to: '/faq',
-          label: '常见问题',
+          to: '/more',
+          label: '更多',
           position: 'left',
         },
         // ===== 右侧 =====
@@ -144,7 +144,7 @@ const config: Config = {
           title: '资源',
           items: [
             { label: '概念解析', to: '/concepts' },
-            { label: '参考资料', to: '/reference' },
+            { label: '更多', to: '/more' },
             { label: '常见问题', to: '/faq' },
           ],
         },

@@ -47,6 +47,7 @@ DesireCore is built around the core philosophy of "cultivating and hosting digit
 
 | Concept | One-Sentence Explanation | When to Read |
 |---------|------------------------|--------------|
+| [Naming Philosophy](./naming-philosophy) | The origin and deeper meaning of the DesireCore name | Want to understand the brand |
 | [Digital Companion](./digital-companion) | DesireCore agents are not tools, but "digital colleagues" you cultivate | Want to understand product positioning |
 | [Delegation Model](./delegation-model) | From "Q&A" to "I teach, you do" | Want to understand interaction patterns |
 | [AgentFS Filesystem](./agentfs) | Each agent's "home" where all capabilities and memories exist as files | Want to understand data storage |

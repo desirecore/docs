@@ -54,11 +54,11 @@ Understand the core ideas and design behind DesireCore.
 </div>
 <div className="col col--4 margin-bottom--lg">
 
-### 📋 Reference
+### 📋 More
 
 Quick reference for keyboard shortcuts, glossary, provider list, and more.
 
-[View Reference →](./reference/)
+[View More →](./more/)
 
 </div>
 <div className="col col--4 margin-bottom--lg">
@@ -79,5 +79,5 @@ Having issues? Find the most common answers here.
 - [Configure API Key](./getting-started/configure-api-key) — The first step to connect AI services
 - [Teach Your Agent](./user-guide/teaching/delegation-interaction) — DesireCore's core capability
 - [Super Document](./user-guide/super-document/overview) — Collaborate on documents like Code Review
-- [Keyboard Shortcuts](./reference/keyboard-shortcuts) — Boost your productivity
+- [Keyboard Shortcuts](./more/keyboard-shortcuts) — Boost your productivity
 - [Agent Marketplace](./user-guide/agents/marketplace) — Discover and install professional agents

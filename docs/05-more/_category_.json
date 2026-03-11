@@ -1,8 +1,8 @@
 {
-  "label": "参考资料",
+  "label": "更多",
   "position": 5,
   "link": {
     "type": "doc",
-    "id": "reference/index"
+    "id": "more/index"
   }
 }

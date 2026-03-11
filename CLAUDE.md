@@ -4,7 +4,7 @@
 
 ## 项目概览
 
-DesireCore Docs 是 DesireCore（一个“委托操作系统”桌面应用）的官方文档站点。项目基于 **Docusaurus 3.9**（启用了 v4 future flags）、React 19 和 TypeScript 构建，部署到 `docs.desirecore.com`。
+DesireCore Docs 是 DesireCore（一个 Agent OS 桌面应用）的官方文档站点。项目基于 **Docusaurus 3.9**（启用了 v4 future flags）、React 19 和 TypeScript 构建，部署到 `docs.desirecore.com`。
 
 ## 常用命令
 
@@ -33,7 +33,7 @@ pnpm write-translations -- --locale en  # 生成英文翻译文件
 - `02-user-guide/` → `userGuide` 侧边栏（共 11 个子章节：界面、对话、教学、委托、超级文档、智能体、记忆、自动化、能力、设置、安全）
 - `03-use-cases/` → `useCases` 侧边栏（通用、专业、解决方案）
 - `04-concepts/` → `concepts` 侧边栏
-- `05-reference/` → `reference` 侧边栏
+- `05-more/` → `more` 侧边栏（速查内容、更新日志）
 - `06-faq/` → `faq` 侧边栏
 - 顶层页面：`index.md`、`privacy.md`、`terms.md`
 
@@ -59,3 +59,4 @@ pnpm write-translations -- --locale en  # 生成英文翻译文件
 - 文档默认使用中文编写；英文翻译单独维护在 `i18n/en/` 目录下
 - `onBrokenLinks: 'throw'`：一旦存在失效的内部链接，构建会直接失败
 - 需要 Node.js >= 20，并使用 pnpm 作为包管理器
+- **永远不要移动或重命名 `privacy.md` 和 `terms.md`**：这两个文件必须保持在 `docs/` 顶层，对应 URL `/privacy` 和 `/terms`。外部大量链接指向这些路径，修改路径会导致外部链接失效

@@ -111,5 +111,5 @@ DesireCore 支持超过 20 家 AI 供应商，覆盖全球主流服务：
 
 ## 下一步
 
-- 想查看所有支持的供应商详情？请阅读[支持的 AI 供应商列表](../05-reference/04-supported-providers.md)
+- 想查看所有支持的供应商详情？请阅读[支持的 AI 供应商列表](../05-more/04-supported-providers.md)
 - 想了解如何配置算力服务？请前往用户指南中的设置章节

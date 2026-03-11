@@ -17,7 +17,7 @@ The following versions are actively being developed:
 - **HarmonyOS** — Support for HarmonyOS devices
 :::
 
-We will announce the latest progress through the [Changelog](/reference/changelog) and the official website.
+We will announce the latest progress through the [Changelog](/more/changelog) and the official website.
 
 For now, please use the desktop client for the full experience:
 
