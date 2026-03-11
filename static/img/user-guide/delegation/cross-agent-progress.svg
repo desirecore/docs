@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" fill="none">
+  <defs>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="purpleHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="progressGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="btnPrimaryGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+  </defs>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Main card -->
+  <g filter="url(#shadow)">
+    <rect x="10" y="10" width="500" height="400" rx="12" fill="#fff" stroke="#E5E5EA" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="10" y="10" width="500" height="52" rx="12" fill="url(#purpleHeader)"/>
+    <rect x="10" y="42" width="500" height="20" fill="url(#purpleHeader)"/>
+    <text x="30" y="43" fill="#fff" font-size="17" font-weight="600">&#x1F91D; 协作任务：合同综合审查</text>
+
+    <!-- Agent count -->
+    <text x="30" y="88" fill="#888" font-size="13">参与智能体：</text>
+    <text x="108" y="88" fill="#333" font-size="13" font-weight="600">3 个</text>
+
+    <!-- Overall progress -->
+    <text x="30" y="115" fill="#888" font-size="13">整体进度：</text>
+    <text x="450" y="115" fill="#AF52DE" font-size="13" font-weight="600" text-anchor="end">75%</text>
+    <rect x="108" y="104" width="330" height="8" rx="4" fill="#F2F2F7"/>
+    <rect x="108" y="104" width="248" height="8" rx="4" fill="url(#progressGrad)"/>
+
+    <!-- Divider -->
+    <line x1="30" y1="130" x2="490" y2="130" stroke="#E5E5EA" stroke-width="1"/>
+
+    <!-- Agent 1: 法律顾问 - 完成 -->
+    <circle cx="44" cy="158" r="10" fill="#34C759"/>
+    <text x="38" y="163" fill="#fff" font-size="12" font-weight="700">&#x2713;</text>
+    <text x="64" y="163" fill="#333" font-size="14" font-weight="600">法律顾问</text>
+    <rect x="390" y="146" width="56" height="24" rx="12" fill="#E8FAE8"/>
+    <text x="418" y="163" text-anchor="middle" fill="#34C759" font-size="12" font-weight="600">完成</text>
+    <text x="80" y="188" fill="#888" font-size="12">审查了 15 个条款，发现 2 个风险点</text>
+
+    <!-- Divider -->
+    <line x1="64" y1="202" x2="490" y2="202" stroke="#F2F2F7" stroke-width="1"/>
+
+    <!-- Agent 2: 贸易顾问 - 执行中 -->
+    <circle cx="44" cy="228" r="10" fill="none" stroke="#007AFF" stroke-width="2"/>
+    <circle cx="44" cy="228" r="4" fill="#007AFF">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="64" y="233" fill="#333" font-size="14" font-weight="600">贸易顾问</text>
+    <rect x="390" y="216" width="56" height="24" rx="12" fill="#E8F0FE"/>
+    <text x="418" y="233" text-anchor="middle" fill="#007AFF" font-size="12" font-weight="600">执行中</text>
+    <text x="80" y="258" fill="#888" font-size="12">正在分析国际贸易条款...</text>
+
+    <!-- Divider -->
+    <line x1="64" y1="272" x2="490" y2="272" stroke="#F2F2F7" stroke-width="1"/>
+
+    <!-- Agent 3: 文书助手 - 等待中 -->
+    <circle cx="44" cy="298" r="10" fill="none" stroke="#C7C7CC" stroke-width="2"/>
+    <circle cx="44" cy="298" r="3" fill="#C7C7CC"/>
+    <text x="64" y="303" fill="#333" font-size="14" font-weight="600">文书助手</text>
+    <rect x="390" y="286" width="56" height="24" rx="12" fill="#F2F2F7"/>
+    <text x="418" y="303" text-anchor="middle" fill="#8E8E93" font-size="12" font-weight="600">等待中</text>
+    <text x="80" y="328" fill="#888" font-size="12">等待前序任务完成后开始</text>
+
+    <!-- Divider -->
+    <line x1="30" y1="348" x2="490" y2="348" stroke="#E5E5EA" stroke-width="1"/>
+
+    <!-- Buttons -->
+    <rect x="30" y="366" width="100" height="34" rx="8" fill="url(#btnPrimaryGrad)"/>
+    <text x="80" y="388" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">查看详情</text>
+
+    <rect x="145" y="366" width="100" height="34" rx="8" fill="#F2F2F7"/>
+    <text x="195" y="388" text-anchor="middle" fill="#666" font-size="13" font-weight="600">&#x23F8; 暂停</text>
+  </g>
+</svg>

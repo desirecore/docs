@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 790" width="520" height="790" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+  <style>
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Main card -->
+  <rect x="10" y="10" width="500" height="770" rx="12" fill="#ffffff" stroke="#E5E5EA" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Header -->
+  <rect x="10" y="10" width="500" height="52" rx="12" fill="url(#blueGrad)"/>
+  <rect x="10" y="40" width="500" height="22" fill="url(#blueGrad)"/>
+  <text x="260" y="43" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="600">&#x1F4CB; 执行回执</text>
+
+  <!-- Section 1: Basic Info -->
+  <text x="30" y="88" fill="#007AFF" font-size="13" font-weight="600">基本信息</text>
+  <text x="30" y="112" fill="#8E8E93" font-size="12">回执编号</text>
+  <text x="200" y="112" fill="#1C1C1E" font-size="12" font-weight="500">RCPT-20250315-143022</text>
+  <text x="30" y="132" fill="#8E8E93" font-size="12">任务</text>
+  <text x="200" y="132" fill="#1C1C1E" font-size="12" font-weight="500">审查采购合同 XX-2025-001</text>
+  <text x="30" y="152" fill="#8E8E93" font-size="12">执行时间</text>
+  <text x="200" y="152" fill="#1C1C1E" font-size="12" font-weight="500">2025-03-15 14:30 - 14:35</text>
+  <text x="30" y="172" fill="#8E8E93" font-size="12">总耗时</text>
+  <text x="200" y="172" fill="#1C1C1E" font-size="12" font-weight="500">5 分 12 秒</text>
+  <text x="30" y="192" fill="#8E8E93" font-size="12">状态</text>
+  <rect x="200" y="180" width="56" height="18" rx="9" fill="#E8F5E9"/>
+  <text x="228" y="193" text-anchor="middle" fill="#34C759" font-size="11" font-weight="600">已完成</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="210" x2="490" y2="210" stroke="#F2F2F7" stroke-width="1"/>
+
+  <!-- Section 2: Input and Output -->
+  <text x="30" y="232" fill="#007AFF" font-size="13" font-weight="600">输入与输出摘要</text>
+
+  <!-- Input box -->
+  <rect x="30" y="242" width="460" height="52" rx="8" fill="#F2F2F7"/>
+  <text x="46" y="260" fill="#007AFF" font-size="12" font-weight="600">&#x1F4E5; 输入</text>
+  <text x="46" y="277" fill="#1C1C1E" font-size="11">用户指令："帮我审查附件中的采购合同"</text>
+  <text x="46" y="291" fill="#8E8E93" font-size="11">附件：XX科技采购合同.pdf（128KB）</text>
+
+  <!-- Output box -->
+  <rect x="30" y="300" width="460" height="52" rx="8" fill="#F2F2F7"/>
+  <text x="46" y="318" fill="#34C759" font-size="12" font-weight="600">&#x1F4E4; 输出</text>
+  <text x="46" y="335" fill="#1C1C1E" font-size="11">审查报告已保存至：docs/审查报告-XX-2025-001.md</text>
+  <text x="46" y="349" fill="#8E8E93" font-size="11">发现 2 项风险，4 项合规 | 综合风险等级：中等</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="366" x2="490" y2="366" stroke="#F2F2F7" stroke-width="1"/>
+
+  <!-- Section 3: Steps -->
+  <text x="30" y="388" fill="#007AFF" font-size="13" font-weight="600">步骤执行明细</text>
+
+  <!-- Step 1 -->
+  <circle cx="42" cy="408" r="7" fill="url(#greenGrad)"/>
+  <text x="42" y="412" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">1</text>
+  <rect x="56" y="400" width="40" height="16" rx="4" fill="#E8F5E9"/>
+  <text x="76" y="411" text-anchor="middle" fill="#34C759" font-size="9" font-weight="600">固化</text>
+  <text x="104" y="412" fill="#1C1C1E" font-size="11">解析合同文件</text>
+  <text x="460" y="412" fill="#34C759" font-size="11" font-weight="500" text-anchor="end">&#x2705; 0.8s</text>
+
+  <!-- Step 2 -->
+  <circle cx="42" cy="434" r="7" fill="url(#greenGrad)"/>
+  <text x="42" y="438" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">2</text>
+  <rect x="56" y="426" width="40" height="16" rx="4" fill="#E8F5E9"/>
+  <text x="76" y="437" text-anchor="middle" fill="#34C759" font-size="9" font-weight="600">固化</text>
+  <text x="104" y="438" fill="#1C1C1E" font-size="11">检查违约金比例</text>
+  <text x="460" y="438" fill="#34C759" font-size="11" font-weight="500" text-anchor="end">&#x2705; 0.2s</text>
+  <text x="68" y="453" fill="#8E8E93" font-size="10">└─ 15% ≤ 20% → 合规</text>
+
+  <!-- Step 3 -->
+  <circle cx="42" cy="471" r="7" fill="url(#orangeGrad)"/>
+  <text x="42" y="475" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">3</text>
+  <rect x="56" y="463" width="40" height="16" rx="4" fill="#FFF3E0"/>
+  <text x="76" y="474" text-anchor="middle" fill="#FF9500" font-size="9" font-weight="600">固化</text>
+  <text x="104" y="475" fill="#1C1C1E" font-size="11">检查付款周期</text>
+  <text x="460" y="475" fill="#FF9500" font-size="11" font-weight="500" text-anchor="end">&#x26A0;&#xFE0F; 0.2s</text>
+  <text x="68" y="490" fill="#FF9500" font-size="10">└─ 15 天 &lt; 30 天 → 风险</text>
+
+  <!-- Step 4 -->
+  <circle cx="42" cy="508" r="7" fill="url(#orangeGrad)"/>
+  <text x="42" y="512" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">4</text>
+  <rect x="56" y="500" width="40" height="16" rx="4" fill="#F3E5F5"/>
+  <text x="76" y="511" text-anchor="middle" fill="#AF52DE" font-size="9" font-weight="600">灵活</text>
+  <text x="104" y="512" fill="#1C1C1E" font-size="11">分析进口设备条款</text>
+  <text x="460" y="512" fill="#FF9500" font-size="11" font-weight="500" text-anchor="end">&#x26A0;&#xFE0F; 1.5min</text>
+  <text x="68" y="527" fill="#FF9500" font-size="10">└─ 缺少中文说明书条款</text>
+
+  <!-- Step 5 -->
+  <circle cx="42" cy="545" r="7" fill="url(#greenGrad)"/>
+  <text x="42" y="549" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">5</text>
+  <rect x="56" y="537" width="40" height="16" rx="4" fill="#F3E5F5"/>
+  <text x="76" y="548" text-anchor="middle" fill="#AF52DE" font-size="9" font-weight="600">灵活</text>
+  <text x="104" y="549" fill="#1C1C1E" font-size="11">综合风险评估</text>
+  <text x="460" y="549" fill="#34C759" font-size="11" font-weight="500" text-anchor="end">&#x2705; 1.2min</text>
+
+  <!-- Step 6 -->
+  <circle cx="42" cy="571" r="7" fill="url(#greenGrad)"/>
+  <text x="42" y="575" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">6</text>
+  <rect x="56" y="563" width="52" height="16" rx="4" fill="#E3F2FD"/>
+  <text x="82" y="574" text-anchor="middle" fill="#007AFF" font-size="9" font-weight="600">人闸门</text>
+  <text x="116" y="575" fill="#1C1C1E" font-size="11">确认后保存报告</text>
+  <text x="460" y="575" fill="#34C759" font-size="11" font-weight="500" text-anchor="end">&#x2705; 3.5s</text>
+  <text x="68" y="590" fill="#8E8E93" font-size="10">└─ 用户确认：已批准</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="606" x2="490" y2="606" stroke="#F2F2F7" stroke-width="1"/>
+
+  <!-- Section 4: References -->
+  <text x="30" y="628" fill="#007AFF" font-size="13" font-weight="600">依据追溯</text>
+
+  <text x="30" y="648" fill="#AF52DE" font-size="11" font-weight="600">引用的规则</text>
+  <text x="42" y="664" fill="#1C1C1E" font-size="11">· 违约金标准（≤20%）—— 来自 3 月 1 日教学</text>
+  <text x="42" y="680" fill="#1C1C1E" font-size="11">· 付款周期标准（≥30 天）—— 来自 3 月 1 日教学</text>
+  <text x="42" y="696" fill="#1C1C1E" font-size="11">· 进口设备中文说明书 —— 来自 3 月 5 日教学</text>
+
+  <text x="30" y="716" fill="#AF52DE" font-size="11" font-weight="600">参考的示例</text>
+  <text x="42" y="732" fill="#1C1C1E" font-size="11">· 审查报告模板 —— 来自 3 月 2 日教学</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="746" x2="490" y2="746" stroke="#F2F2F7" stroke-width="1"/>
+
+  <!-- Section 5: File Changes -->
+  <text x="30" y="766" fill="#007AFF" font-size="13" font-weight="600">变更记录</text>
+  <text x="42" y="784" fill="#1C1C1E" font-size="11">&#x1F4C2; 新建文件：docs/审查报告-XX-2025-001.md（2.1KB）</text>
+</svg>

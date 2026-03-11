@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 340" fill="none">
+  <defs>
+  <style>
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF3B30"/>
+      <stop offset="100%" stop-color="#FF6961"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Card background -->
+  <rect x="10" y="10" width="440" height="320" rx="16" fill="#FFFFFF" filter="url(#shadow)" stroke="#E5E5EA" stroke-width="0.5"/>
+
+  <!-- Header -->
+  <rect x="10" y="10" width="440" height="48" rx="16" fill="url(#purpleGrad)"/>
+  <rect x="10" y="42" width="440" height="16" fill="url(#purpleGrad)"/>
+  <text x="30" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF">📝 已更新</text>
+
+  <!-- Rule content -->
+  <text x="30" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#1C1C1E">规则（已修改）：</text>
+  <rect x="30" y="94" width="400" height="76" rx="8" fill="#F2F2F7"/>
+  <text x="40" y="114" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#3A3A3C">"审查采购合同时，违约金不超过 20% 为正常。</text>
+  <text x="40" y="132" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#3A3A3C"> 审查销售合同时，违约金不超过 30% 为正常。</text>
+  <text x="40" y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#3A3A3C"> 超出标准的标记为高风险。"</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="184" x2="430" y2="184" stroke="#E5E5EA" stroke-width="0.5"/>
+
+  <!-- Change description -->
+  <text x="30" y="204" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#8E8E93">变更</text>
+  <text x="70" y="204" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#1C1C1E">增加了销售合同的违约金标准区分</text>
+
+  <!-- Purple change indicator tag -->
+  <rect x="30" y="220" width="80" height="22" rx="6" fill="#F3E8FF"/>
+  <text x="70" y="235" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#AF52DE" text-anchor="middle" font-weight="500">已修改</text>
+
+  <!-- Buttons -->
+  <rect x="30" y="260" width="120" height="34" rx="12" fill="url(#greenGrad)"/>
+  <text x="90" y="282" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">✓ 正确</text>
+
+  <rect x="170" y="260" width="120" height="34" rx="12" fill="url(#blueGrad)"/>
+  <text x="230" y="282" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">✎ 修改</text>
+
+  <rect x="310" y="260" width="120" height="34" rx="12" fill="url(#redGrad)"/>
+  <text x="370" y="282" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">✗ 撤销</text>
+</svg>

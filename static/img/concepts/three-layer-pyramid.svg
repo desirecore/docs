@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" fill="none">
+  <defs>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- L3: Top layer (narrowest) - Blue -->
+  <path d="M190,30 L390,30 Q402,30 402,42 L402,100 Q402,112 390,112 L190,112 Q178,112 178,100 L178,42 Q178,30 190,30 Z" fill="url(#blueGrad)" filter="url(#shadow)"/>
+  <text x="290" y="62" text-anchor="middle" fill="white" font-size="16" font-weight="600">L3 可逆</text>
+  <text x="290" y="84" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13">Reversible</text>
+
+  <!-- L2: Middle layer - Purple -->
+  <path d="M140,136 L440,136 Q452,136 452,148 L452,206 Q452,218 440,218 L140,218 Q128,218 128,206 L128,148 Q128,136 140,136 Z" fill="url(#purpleGrad)" filter="url(#shadow)"/>
+  <text x="290" y="168" text-anchor="middle" fill="white" font-size="16" font-weight="600">L2 可控</text>
+  <text x="290" y="190" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13">Controllable</text>
+
+  <!-- L1: Bottom layer (widest) - Green -->
+  <path d="M90,242 L490,242 Q502,242 502,254 L502,312 Q502,324 490,324 L90,324 Q78,324 78,312 L78,254 Q78,242 90,242 Z" fill="url(#greenGrad)" filter="url(#shadow)"/>
+  <text x="290" y="274" text-anchor="middle" fill="white" font-size="16" font-weight="600">L1 可见</text>
+  <text x="290" y="296" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13">Visible</text>
+
+  <!-- Right-side annotations -->
+  <line x1="410" y1="71" x2="440" y2="71" stroke="#007AFF" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="448" y="68" fill="#007AFF" font-size="13" font-weight="500">做错了能改回来</text>
+  <text x="448" y="84" fill="#5AC8FA" font-size="11">Undo any mistake</text>
+
+  <line x1="460" y1="177" x2="490" y2="177" stroke="#AF52DE" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="498" y="174" fill="#AF52DE" font-size="13" font-weight="500">能决定它做什么</text>
+  <text x="498" y="190" fill="#BF5AF2" font-size="11">Control what it does</text>
+
+  <line x1="510" y1="283" x2="540" y2="283" stroke="#34C759" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="548" y="280" fill="#34C759" font-size="13" font-weight="500">能看到它在做什么</text>
+  <text x="548" y="296" fill="#30D158" font-size="11">See what it's doing</text>
+</svg>

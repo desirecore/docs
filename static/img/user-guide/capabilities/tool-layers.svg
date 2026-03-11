@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="outerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5AC8FA" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#007AFF" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="midGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#AF52DE" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#BF5AF2" stop-opacity="0.30"/>
+    </linearGradient>
+    <linearGradient id="innerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+  </defs>
+
+  <!-- Outer layer: Custom Tools -->
+  <rect x="30" y="20" width="540" height="360" rx="12" fill="url(#outerGrad)" stroke="#5AC8FA" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="56" text-anchor="middle" font-size="16" font-weight="600" fill="#007AFF">第三层：自定义工具</text>
+  <text x="300" y="78" text-anchor="middle" font-size="13" fill="#5A7FA0">HTTP API / 本地脚本</text>
+
+  <!-- Middle layer: MCP Tools -->
+  <rect x="80" y="100" width="440" height="240" rx="12" fill="url(#midGrad)" stroke="#AF52DE" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="136" text-anchor="middle" font-size="16" font-weight="600" fill="#8E44AD">第二层：MCP 工具</text>
+  <text x="300" y="158" text-anchor="middle" font-size="13" fill="#7A5A8E">外部 MCP Server 提供</text>
+
+  <!-- Inner layer: Built-in Tools -->
+  <rect x="140" y="180" width="320" height="130" rx="12" fill="url(#innerGrad)" filter="url(#shadow)"/>
+  <text x="300" y="222" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">第一层：内置工具</text>
+  <text x="300" y="248" text-anchor="middle" font-size="13" fill="rgba(255,255,255,0.9)">DesireCore 自带</text>
+  <text x="300" y="270" text-anchor="middle" font-size="13" fill="rgba(255,255,255,0.85)">文件操作 / 搜索 / 命令执行</text>
+</svg>

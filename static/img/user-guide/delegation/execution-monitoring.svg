@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480" fill="none" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+  <style>
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="progressGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="btnShadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Card background -->
+  <rect x="10" y="10" width="500" height="460" rx="12" fill="#FFFFFF" filter="url(#cardShadow)" stroke="#E5E5EA" stroke-width="0.5"/>
+
+  <!-- Title bar with blue gradient -->
+  <rect x="10" y="10" width="500" height="52" rx="12" fill="url(#blueGrad)"/>
+  <rect x="10" y="38" width="500" height="24" fill="url(#blueGrad)"/>
+  <text x="36" y="42" font-size="16" font-weight="600" fill="#FFFFFF">&#x1F504; 正在执行：审查采购合同</text>
+
+  <!-- Step 1: completed -->
+  <g transform="translate(30, 82)">
+    <circle cx="10" cy="10" r="10" fill="url(#greenGrad)"/>
+    <polyline points="5,10 9,14 16,6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="28" y="14" font-size="13" fill="#1C1C1E" font-weight="500">步骤 1/6</text>
+    <text x="100" y="14" font-size="13" fill="#3A3A3C">解析合同文件</text>
+    <text x="390" y="14" font-size="12" fill="#8E8E93" text-anchor="end">完成（0.8s）</text>
+  </g>
+
+  <!-- Step 2: completed with sub-result -->
+  <g transform="translate(30, 118)">
+    <circle cx="10" cy="10" r="10" fill="url(#greenGrad)"/>
+    <polyline points="5,10 9,14 16,6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="28" y="14" font-size="13" fill="#1C1C1E" font-weight="500">步骤 2/6</text>
+    <text x="100" y="14" font-size="13" fill="#3A3A3C">检查违约金比例</text>
+    <text x="390" y="14" font-size="12" fill="#8E8E93" text-anchor="end">完成（0.2s）</text>
+  </g>
+  <!-- Sub-result for step 2 -->
+  <g transform="translate(58, 140)">
+    <line x1="0" y1="0" x2="0" y2="12" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="0" y1="12" x2="8" y2="12" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="14" y="16" font-size="12" fill="#34C759">15%，符合标准（≤20%）</text>
+  </g>
+
+  <!-- Step 3: completed with warning sub-result -->
+  <g transform="translate(30, 172)">
+    <circle cx="10" cy="10" r="10" fill="url(#greenGrad)"/>
+    <polyline points="5,10 9,14 16,6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="28" y="14" font-size="13" fill="#1C1C1E" font-weight="500">步骤 3/6</text>
+    <text x="100" y="14" font-size="13" fill="#3A3A3C">检查付款周期</text>
+    <text x="390" y="14" font-size="12" fill="#8E8E93" text-anchor="end">完成（0.2s）</text>
+  </g>
+  <!-- Sub-result for step 3 (warning) -->
+  <g transform="translate(58, 194)">
+    <line x1="0" y1="0" x2="0" y2="12" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="0" y1="12" x2="8" y2="12" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="14" y="16" font-size="12" fill="#FF9500">&#x26A0;&#xFE0F; 15 天，低于标准（≥30 天）</text>
+  </g>
+
+  <!-- Step 4: in progress -->
+  <g transform="translate(30, 226)">
+    <circle cx="10" cy="10" r="10" fill="url(#blueGrad)" opacity="0.15"/>
+    <circle cx="10" cy="10" r="6" fill="none" stroke="url(#blueGrad)" stroke-width="2" stroke-dasharray="12 6" stroke-linecap="round">
+      <animateTransform attributeName="transform" type="rotate" from="0 10 10" to="360 10 10" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="28" y="14" font-size="13" fill="#007AFF" font-weight="600">步骤 4/6</text>
+    <text x="100" y="14" font-size="13" fill="#007AFF">分析进口设备条款</text>
+    <text x="390" y="14" font-size="12" fill="#007AFF" text-anchor="end">执行中...</text>
+  </g>
+  <!-- Sub-result for step 4 -->
+  <g transform="translate(58, 248)">
+    <line x1="0" y1="0" x2="0" y2="12" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="0" y1="12" x2="8" y2="12" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="14" y="16" font-size="12" fill="#8E8E93">正在分析第 12-15 条相关条款...</text>
+  </g>
+
+  <!-- Step 5: waiting -->
+  <g transform="translate(30, 280)">
+    <circle cx="10" cy="10" r="10" fill="#F2F2F7"/>
+    <text x="6" y="15" font-size="11" fill="#8E8E93">&#x23F3;</text>
+    <text x="28" y="14" font-size="13" fill="#8E8E93" font-weight="500">步骤 5/6</text>
+    <text x="100" y="14" font-size="13" fill="#8E8E93">综合风险评估</text>
+    <text x="390" y="14" font-size="12" fill="#AEAEB2" text-anchor="end">等待中</text>
+  </g>
+
+  <!-- Step 6: waiting -->
+  <g transform="translate(30, 316)">
+    <circle cx="10" cy="10" r="10" fill="#F2F2F7"/>
+    <text x="6" y="15" font-size="11" fill="#8E8E93">&#x23F3;</text>
+    <text x="28" y="14" font-size="13" fill="#8E8E93" font-weight="500">步骤 6/6</text>
+    <text x="100" y="14" font-size="13" fill="#8E8E93">等待确认后发送</text>
+    <text x="390" y="14" font-size="12" fill="#AEAEB2" text-anchor="end">等待中</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="30" y1="348" x2="490" y2="348" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Progress bar -->
+  <text x="30" y="372" font-size="13" fill="#1C1C1E" font-weight="500">总进度</text>
+  <text x="490" y="372" font-size="13" fill="#007AFF" font-weight="600" text-anchor="end">60%</text>
+  <rect x="30" y="380" width="460" height="8" rx="4" fill="#F2F2F7"/>
+  <rect x="30" y="380" width="276" height="8" rx="4" fill="url(#progressGrad)"/>
+
+  <!-- Time info -->
+  <text x="30" y="410" font-size="12" fill="#8E8E93">已用时间：1 分 15 秒</text>
+  <text x="490" y="410" font-size="12" fill="#8E8E93" text-anchor="end">预计剩余：1-2 分钟</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="424" x2="490" y2="424" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Pause button -->
+  <rect x="130" y="436" width="110" height="36" rx="8" fill="#F2F2F7" filter="url(#btnShadow)"/>
+  <rect x="165" y="448" width="4" height="14" rx="1" fill="#8E8E93"/>
+  <rect x="173" y="448" width="4" height="14" rx="1" fill="#8E8E93"/>
+  <text x="184" y="459" font-size="13" fill="#3A3A3C" font-weight="500">暂停</text>
+
+  <!-- Stop button -->
+  <rect x="260" y="436" width="110" height="36" rx="8" fill="#FFF2F2" filter="url(#btnShadow)"/>
+  <rect x="297" y="449" width="12" height="12" rx="2" fill="#FF3B30"/>
+  <text x="315" y="459" font-size="13" fill="#FF3B30" font-weight="500">停止</text>
+</svg>

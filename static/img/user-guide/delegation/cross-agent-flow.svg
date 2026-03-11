@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 260" fill="none">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#AF52DE"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34C759"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Card 1: 法律顾问 (Blue) -->
+  <g filter="url(#shadow)">
+    <rect x="20" y="20" width="220" height="220" rx="12" fill="#fff" stroke="url(#blueGrad)" stroke-width="2"/>
+    <rect x="20" y="20" width="220" height="48" rx="12" fill="url(#blueGrad)"/>
+    <rect x="20" y="48" width="220" height="20" fill="url(#blueGrad)"/>
+    <text x="130" y="51" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">法律顾问</text>
+    <text x="40" y="95" fill="#333" font-size="13" font-weight="500">审查合同条款</text>
+    <line x1="40" y1="110" x2="220" y2="110" stroke="#E5E5EA" stroke-width="1"/>
+    <text x="40" y="133" fill="#888" font-size="12">输出：</text>
+    <text x="40" y="158" fill="#555" font-size="13">• 违约条款风险</text>
+    <text x="40" y="182" fill="#555" font-size="13">• 付款条件问题</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <line x1="248" y1="130" x2="290" y2="130" stroke="#AF52DE" stroke-width="2" marker-end="url(#arrowBlue)" stroke-dasharray="6,3"/>
+
+  <!-- Card 2: 贸易顾问 (Purple) -->
+  <g filter="url(#shadow)">
+    <rect x="300" y="20" width="220" height="220" rx="12" fill="#fff" stroke="url(#purpleGrad)" stroke-width="2"/>
+    <rect x="300" y="20" width="220" height="48" rx="12" fill="url(#purpleGrad)"/>
+    <rect x="300" y="48" width="220" height="20" fill="url(#purpleGrad)"/>
+    <text x="410" y="51" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">贸易顾问</text>
+    <text x="320" y="95" fill="#333" font-size="13" font-weight="500">审查贸易条款</text>
+    <line x1="320" y1="110" x2="500" y2="110" stroke="#E5E5EA" stroke-width="1"/>
+    <text x="320" y="133" fill="#888" font-size="12">输出：</text>
+    <text x="320" y="158" fill="#555" font-size="13">• 贸易条款分析</text>
+    <text x="320" y="182" fill="#555" font-size="13">• 合规性建议</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <line x1="528" y1="130" x2="570" y2="130" stroke="#34C759" stroke-width="2" marker-end="url(#arrowPurple)" stroke-dasharray="6,3"/>
+
+  <!-- Card 3: 文书助手 (Green) -->
+  <g filter="url(#shadow)">
+    <rect x="580" y="20" width="220" height="220" rx="12" fill="#fff" stroke="url(#greenGrad)" stroke-width="2"/>
+    <rect x="580" y="20" width="220" height="48" rx="12" fill="url(#greenGrad)"/>
+    <rect x="580" y="48" width="220" height="20" fill="url(#greenGrad)"/>
+    <text x="690" y="51" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">文书助手</text>
+    <text x="600" y="95" fill="#333" font-size="13" font-weight="500">生成正式报告</text>
+    <line x1="600" y1="110" x2="780" y2="110" stroke="#E5E5EA" stroke-width="1"/>
+    <text x="600" y="133" fill="#888" font-size="12">输出：</text>
+    <text x="600" y="158" fill="#555" font-size="13">• 完整审查报告</text>
+  </g>
+</svg>

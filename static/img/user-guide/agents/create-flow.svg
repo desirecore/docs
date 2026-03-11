@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 720" width="360" height="720">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8E8E93"/>
+    </marker>
+  </defs>
+
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      fill: #FFFFFF;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    .sub {
+      font-size: 11px;
+      fill: rgba(255,255,255,0.8);
+    }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Step 1: Blue -->
+  <rect x="55" y="20" width="250" height="52" rx="12" fill="url(#blue)" filter="url(#shadow)"/>
+  <text x="180" y="46">选择创建方式</text>
+
+  <!-- Arrow 1-2 -->
+  <line x1="180" y1="72" x2="180" y2="108" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Purple -->
+  <rect x="55" y="112" width="250" height="52" rx="12" fill="url(#purple)" filter="url(#shadow)"/>
+  <text x="180" y="132">填写基础信息</text>
+  <text x="180" y="150" class="sub">名称、描述</text>
+
+  <!-- Arrow 2-3 -->
+  <line x1="180" y1="164" x2="180" y2="200" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Green -->
+  <rect x="55" y="204" width="250" height="52" rx="12" fill="url(#green)" filter="url(#shadow)"/>
+  <text x="180" y="230">配置人格设定</text>
+
+  <!-- Arrow 3-4 -->
+  <line x1="180" y1="256" x2="180" y2="292" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Purple, dashed (optional) -->
+  <rect x="55" y="296" width="250" height="52" rx="12" fill="url(#purple)" fill-opacity="0.7" stroke="#BF5AF2" stroke-width="1.5" stroke-dasharray="6 3" filter="url(#shadow)"/>
+  <text x="180" y="316">配置行为准则</text>
+  <text x="180" y="334" class="sub">可选，后续可添加</text>
+
+  <!-- Arrow 4-5 -->
+  <line x1="180" y1="348" x2="180" y2="384" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Green, dashed (optional) -->
+  <rect x="55" y="388" width="250" height="52" rx="12" fill="url(#green)" fill-opacity="0.7" stroke="#30D158" stroke-width="1.5" stroke-dasharray="6 3" filter="url(#shadow)"/>
+  <text x="180" y="408">添加技能</text>
+  <text x="180" y="426" class="sub">可选，后续可添加</text>
+
+  <!-- Arrow 5-6 -->
+  <line x1="180" y1="440" x2="180" y2="476" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 6: Purple -->
+  <rect x="55" y="480" width="250" height="52" rx="12" fill="url(#purple)" filter="url(#shadow)"/>
+  <text x="180" y="500">创建完成</text>
+  <text x="180" y="518" class="sub">初始化 Git 仓库</text>
+
+  <!-- Arrow 6-7 -->
+  <line x1="180" y1="532" x2="180" y2="568" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 7: Blue -->
+  <rect x="55" y="572" width="250" height="52" rx="12" fill="url(#blue)" filter="url(#shadow)"/>
+  <text x="180" y="598">开始使用</text>
+</svg>

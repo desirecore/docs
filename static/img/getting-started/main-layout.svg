@@ -1,0 +1,228 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" fill="none" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+  <style>
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+    <!-- Window shadow -->
+    <filter id="windowShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+    <!-- Panel shadow for dividers -->
+    <filter id="panelShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <!-- Sidebar gradient (dark) -->
+    <linearGradient id="sidebarGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2C2C2E"/>
+      <stop offset="100%" stop-color="#1C1C1E"/>
+    </linearGradient>
+    <!-- Blue accent gradient -->
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <!-- Green gradient -->
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <!-- Purple gradient -->
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <!-- Orange gradient -->
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Window frame -->
+  <rect x="10" y="10" width="580" height="340" rx="12" fill="#F2F2F7" filter="url(#windowShadow)" stroke="#D1D1D6" stroke-width="0.5"/>
+
+  <!-- Title bar -->
+  <rect x="10" y="10" width="580" height="36" rx="12" fill="#E5E5EA"/>
+  <!-- Flatten bottom corners of title bar -->
+  <rect x="10" y="34" width="580" height="12" fill="#E5E5EA"/>
+
+  <!-- macOS traffic lights -->
+  <circle cx="30" cy="28" r="6" fill="#FF5F57"/>
+  <circle cx="50" cy="28" r="6" fill="#FEBC2E"/>
+  <circle cx="70" cy="28" r="6" fill="#28C840"/>
+
+  <!-- Title bar text -->
+  <text x="300" y="33" text-anchor="middle" font-size="12" font-weight="500" fill="#3C3C43" opacity="0.6">DesireCore</text>
+
+  <!-- Left sidebar (Navigation) - dark -->
+  <rect x="10" y="46" width="60" height="304" fill="url(#sidebarGrad)"/>
+  <!-- Bottom-left corner rounding -->
+  <rect x="10" y="338" width="60" height="12" rx="12" fill="url(#sidebarGrad)"/>
+  <rect x="10" y="338" width="60" height="6" fill="url(#sidebarGrad)"/>
+
+  <!-- Sidebar label -->
+  <text x="40" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#AEAEB2">导航栏</text>
+
+  <!-- Sidebar icon placeholders -->
+  <!-- Logo -->
+  <rect x="22" y="78" width="36" height="36" rx="8" fill="url(#blueGrad)" opacity="0.9"/>
+  <text x="40" y="101" text-anchor="middle" font-size="16" fill="#FFF">D</text>
+
+  <!-- Chat icon -->
+  <rect x="26" y="126" width="28" height="28" rx="6" fill="#3A3A3C"/>
+  <rect x="31" y="134" width="18" height="3" rx="1.5" fill="#8E8E93"/>
+  <rect x="31" y="140" width="12" height="3" rx="1.5" fill="#8E8E93"/>
+
+  <!-- Agent icon -->
+  <rect x="26" y="162" width="28" height="28" rx="6" fill="#3A3A3C"/>
+  <circle cx="40" cy="173" r="5" fill="#8E8E93"/>
+  <rect x="34" y="180" width="12" height="4" rx="2" fill="#8E8E93"/>
+
+  <!-- Knowledge icon -->
+  <rect x="26" y="198" width="28" height="28" rx="6" fill="#3A3A3C"/>
+  <rect x="32" y="205" width="16" height="14" rx="2" fill="#8E8E93"/>
+
+  <!-- Monitor icon -->
+  <rect x="26" y="234" width="28" height="28" rx="6" fill="#3A3A3C"/>
+  <rect x="32" y="241" width="16" height="11" rx="2" fill="none" stroke="#8E8E93" stroke-width="1.5"/>
+  <rect x="37" y="254" width="6" height="2" rx="1" fill="#8E8E93"/>
+
+  <!-- Settings (bottom area) -->
+  <rect x="26" y="296" width="28" height="28" rx="6" fill="#3A3A3C"/>
+  <circle cx="40" cy="310" r="7" fill="none" stroke="#8E8E93" stroke-width="1.5"/>
+  <circle cx="40" cy="310" r="2" fill="#8E8E93"/>
+
+  <!-- Divider line between sidebar and conversation list -->
+  <line x1="70" y1="46" x2="70" y2="350" stroke="#C6C6C8" stroke-width="0.5"/>
+
+  <!-- Middle panel (Conversation list) - light gray -->
+  <rect x="70" y="46" width="170" height="304" fill="#F9F9FB"/>
+  <!-- Bottom corner -->
+  <rect x="70" y="338" width="170" height="12" fill="#F9F9FB"/>
+
+  <!-- Conversation list label -->
+  <text x="155" y="66" text-anchor="middle" font-size="11" font-weight="600" fill="#1C1C1E">对话列表</text>
+
+  <!-- Search bar -->
+  <rect x="82" y="76" width="146" height="28" rx="8" fill="#E5E5EA"/>
+  <text x="155" y="94" text-anchor="middle" font-size="10" fill="#8E8E93">搜索</text>
+
+  <!-- Conversation items -->
+  <!-- Item 1 (active) -->
+  <rect x="78" y="114" width="154" height="56" rx="8" fill="url(#blueGrad)" opacity="0.15"/>
+  <rect x="78" y="114" width="154" height="56" rx="8" fill="none" stroke="url(#blueGrad)" stroke-width="1" opacity="0.3"/>
+  <circle cx="100" cy="136" r="14" fill="url(#blueGrad)"/>
+  <text x="100" y="140" text-anchor="middle" font-size="10" font-weight="600" fill="#FFF">DC</text>
+  <text x="120" y="133" font-size="11" font-weight="600" fill="#1C1C1E">DesireCore</text>
+  <text x="120" y="148" font-size="9" fill="#8E8E93">你好！有什么可以帮你？</text>
+  <text x="222" y="133" text-anchor="end" font-size="8" fill="#8E8E93">刚刚</text>
+
+  <!-- Item 2 -->
+  <rect x="78" y="178" width="154" height="56" rx="8" fill="transparent"/>
+  <circle cx="100" cy="200" r="14" fill="url(#purpleGrad)" opacity="0.7"/>
+  <text x="100" y="204" text-anchor="middle" font-size="10" font-weight="600" fill="#FFF">写</text>
+  <text x="120" y="197" font-size="11" font-weight="600" fill="#1C1C1E">写作助手</text>
+  <text x="120" y="212" font-size="9" fill="#8E8E93">帮你润色文章和文案</text>
+  <text x="222" y="197" text-anchor="end" font-size="8" fill="#AEAEB2">昨天</text>
+
+  <!-- Item 3 -->
+  <rect x="78" y="242" width="154" height="56" rx="8" fill="transparent"/>
+  <circle cx="100" cy="264" r="14" fill="url(#greenGrad)" opacity="0.7"/>
+  <text x="100" y="268" text-anchor="middle" font-size="10" font-weight="600" fill="#FFF">码</text>
+  <text x="120" y="261" font-size="11" font-weight="600" fill="#1C1C1E">代码伙伴</text>
+  <text x="120" y="276" font-size="9" fill="#8E8E93">编程问题随时问我</text>
+  <text x="222" y="261" text-anchor="end" font-size="8" fill="#AEAEB2">周一</text>
+
+  <!-- Divider line between conversation list and chat area -->
+  <line x1="240" y1="46" x2="240" y2="350" stroke="#D1D1D6" stroke-width="0.5"/>
+
+  <!-- Right panel (Chat area) - white -->
+  <rect x="240" y="46" width="350" height="304" fill="#FFFFFF"/>
+  <!-- Bottom-right corner -->
+  <rect x="240" y="338" width="350" height="12" rx="12" fill="#FFFFFF"/>
+  <rect x="240" y="338" width="12" height="6" fill="#FFFFFF"/>
+
+  <!-- Chat area header -->
+  <rect x="240" y="46" width="350" height="44" fill="#FAFAFA"/>
+  <line x1="240" y1="90" x2="590" y2="90" stroke="#E5E5EA" stroke-width="0.5"/>
+  <circle cx="268" cy="68" r="14" fill="url(#blueGrad)"/>
+  <text x="268" y="72" text-anchor="middle" font-size="10" font-weight="600" fill="#FFF">DC</text>
+  <text x="290" y="64" font-size="12" font-weight="600" fill="#1C1C1E">DesireCore</text>
+  <text x="290" y="78" font-size="9" fill="#34C759">在线</text>
+
+  <!-- Chat area label -->
+  <text x="415" y="66" text-anchor="middle" font-size="11" font-weight="600" fill="#1C1C1E" opacity="0">聊天区域</text>
+
+  <!-- Chat bubble from AI -->
+  <rect x="260" y="106" width="220" height="48" rx="12" fill="#F2F2F7" filter="url(#panelShadow)"/>
+  <text x="274" y="126" font-size="11" fill="#1C1C1E">你好！我是 DesireCore，</text>
+  <text x="274" y="142" font-size="11" fill="#1C1C1E">有什么可以帮助你的吗？</text>
+
+  <!-- Chat bubble from user -->
+  <rect x="370" y="170" width="200" height="36" rx="12" fill="url(#blueGrad)" filter="url(#panelShadow)"/>
+  <text x="384" y="193" font-size="11" fill="#FFFFFF">帮我了解一下你能做什么</text>
+
+  <!-- Chat bubble from AI -->
+  <rect x="260" y="222" width="250" height="56" rx="12" fill="#F2F2F7" filter="url(#panelShadow)"/>
+  <text x="274" y="242" font-size="11" fill="#1C1C1E">当然！我可以帮你完成各种任务：</text>
+  <text x="274" y="258" font-size="11" fill="#1C1C1E">对话、写作、编程、知识管理...</text>
+  <text x="274" y="270" font-size="10" fill="#8E8E93">正在输入...</text>
+
+  <!-- Message input area -->
+  <rect x="252" y="310" width="326" height="32" rx="16" fill="#F2F2F7" stroke="#D1D1D6" stroke-width="0.5"/>
+  <text x="274" y="330" font-size="11" fill="#C7C7CC">输入消息...</text>
+  <!-- Send button -->
+  <circle cx="564" cy="326" r="12" fill="url(#blueGrad)"/>
+  <polygon points="560,326 568,326 564,320" fill="#FFF"/>
+
+  <!-- Column labels at top -->
+  <rect x="12" y="350" width="56" height="0" fill="none"/>
+</svg>

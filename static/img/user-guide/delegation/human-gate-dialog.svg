@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+  <defs>
+    <filter id="cardShadow" x="-5%" y="-3%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08" flood-color="#000"/>
+    </filter>
+    <filter id="innerShadow" x="-5%" y="-3%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.05" flood-color="#000"/>
+    </filter>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF3B30"/>
+      <stop offset="100%" stop-color="#FF6961"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <clipPath id="cardClip">
+      <rect x="20" y="16" width="460" height="488" rx="16"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Card background -->
+  <rect x="20" y="16" width="460" height="488" rx="16" fill="#fff" filter="url(#cardShadow)"/>
+
+  <!-- Header bar with orange-yellow gradient -->
+  <g clip-path="url(#cardClip)">
+    <rect x="20" y="16" width="460" height="52" fill="url(#headerGrad)"/>
+  </g>
+  <!-- Header text -->
+  <text x="44" y="48" font-size="16" font-weight="600" fill="#fff">⚠️ 需要你的确认</text>
+  <!-- Cancel button -->
+  <rect x="410" y="28" width="56" height="28" rx="8" fill="rgba(255,255,255,0.3)"/>
+  <text x="438" y="47" font-size="12" font-weight="500" fill="#fff" text-anchor="middle">取消</text>
+
+  <!-- Content area -->
+  <!-- Operation type -->
+  <text x="44" y="92" font-size="12" fill="#8E8E93">操作类型</text>
+  <text x="44" y="110" font-size="14" font-weight="500" fill="#1C1C1E">写入文件</text>
+
+  <!-- Scope -->
+  <text x="44" y="136" font-size="12" fill="#8E8E93">影响范围</text>
+  <rect x="44" y="142" width="360" height="24" rx="6" fill="#F2F2F7"/>
+  <text x="54" y="158" font-size="12" font-weight="500" fill="#636366" font-family="SFMono-Regular, Menlo, monospace">docs/审查报告-XX-2025-001.md</text>
+
+  <!-- Risk level -->
+  <text x="44" y="186" font-size="12" fill="#8E8E93">风险等级</text>
+  <circle cx="52" cy="200" r="6" fill="#FFCC00"/>
+  <text x="64" y="205" font-size="14" font-weight="500" fill="#1C1C1E">中等</text>
+
+  <!-- Divider -->
+  <line x1="44" y1="220" x2="456" y2="220" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Source tracing -->
+  <text x="44" y="242" font-size="12" fill="#8E8E93">来源追溯</text>
+  <text x="44" y="260" font-size="13" fill="#1C1C1E">根据你的指令</text>
+  <text x="128" y="260" font-size="13" fill="#007AFF">"帮我审查这份采购合同"</text>
+  <text x="302" y="260" font-size="13" fill="#1C1C1E">，</text>
+  <text x="44" y="278" font-size="13" fill="#1C1C1E">智能体计划生成审查报告并保存到文档目录。</text>
+
+  <!-- Expandable detail area -->
+  <text x="44" y="306" font-size="13" font-weight="500" fill="#007AFF">▼ 查看详情</text>
+
+  <!-- Detail card (inner card with light gray bg) -->
+  <rect x="44" y="316" width="412" height="108" rx="10" fill="#F2F2F7" filter="url(#innerShadow)"/>
+  <text x="60" y="338" font-size="11" fill="#8E8E93">文件内容预览：</text>
+  <text x="60" y="358" font-size="13" font-weight="600" fill="#1C1C1E"># 合同审查报告</text>
+  <text x="60" y="378" font-size="13" font-weight="500" fill="#1C1C1E">## 一、基本信息</text>
+  <text x="60" y="396" font-size="13" fill="#3C3C43">甲方：XX科技有限公司</text>
+  <text x="60" y="414" font-size="13" fill="#8E8E93">...</text>
+
+  <!-- Checkbox -->
+  <rect x="44" y="440" width="16" height="16" rx="4" fill="none" stroke="#C7C7CC" stroke-width="1.5"/>
+  <text x="68" y="453" font-size="13" fill="#3C3C43">允许并记住（下次类似操作不再询问）</text>
+
+  <!-- Buttons row -->
+  <!-- Allow button (green) -->
+  <rect x="44" y="470" width="130" height="40" rx="12" fill="url(#greenGrad)"/>
+  <text x="109" y="495" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">✓ 允许</text>
+
+  <!-- Reject button (red) -->
+  <rect x="185" y="470" width="130" height="40" rx="12" fill="url(#redGrad)"/>
+  <text x="250" y="495" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">✗ 拒绝</text>
+
+  <!-- Modify button (blue) -->
+  <rect x="326" y="470" width="130" height="40" rx="12" fill="url(#blueGrad)"/>
+  <text x="391" y="495" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">✎ 修改</text>
+</svg>

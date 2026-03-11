@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" fill="none">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08" flood-color="#000"/>
+    </filter>
+    <!-- Blue gradient (input/output) -->
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <!-- Orange gradient (coordinator) -->
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <!-- Purple gradient (legal) -->
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <!-- Green gradient (finance) -->
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <!-- Teal gradient (data analyst) -->
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5AC8FA"/>
+      <stop offset="100%" stop-color="#64D2FF"/>
+    </linearGradient>
+    <!-- Pink gradient (AI writer) -->
+    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF2D55"/>
+      <stop offset="100%" stop-color="#FF6482"/>
+    </linearGradient>
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,3.5 L0,7" fill="#8E8E93"/>
+    </marker>
+    <!-- Mid-node gradient (grey) -->
+    <linearGradient id="grey" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E5E5EA"/>
+      <stop offset="100%" stop-color="#F2F2F7"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Phase labels -->
+  <text x="18" y="118" font-size="10" fill="#8E8E93" font-weight="600" letter-spacing="0.5">PHASE 1</text>
+  <text x="18" y="298" font-size="10" fill="#8E8E93" font-weight="600" letter-spacing="0.5">PHASE 2</text>
+  <text x="18" y="458" font-size="10" fill="#8E8E93" font-weight="600" letter-spacing="0.5">PHASE 3</text>
+
+  <!-- === INPUT: 招标文件 (blue capsule) === -->
+  <rect x="175" y="20" width="150" height="40" rx="20" fill="url(#blue)" filter="url(#shadow)"/>
+  <text x="250" y="45" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">招标文件</text>
+
+  <!-- Arrow: 招标文件 → 招投标助手 -->
+  <line x1="250" y1="60" x2="250" y2="88" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- === 招投标助手（统筹）(orange) === -->
+  <rect x="163" y="92" width="174" height="40" rx="12" fill="url(#orange)" filter="url(#shadow)"/>
+  <text x="250" y="117" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">招投标助手（统筹）</text>
+
+  <!-- Fan-out arrows from 招投标助手 to 3 agents -->
+  <!-- Left: 法律顾问 -->
+  <path d="M210,132 L210,145 L105,145 L105,158" stroke="#8E8E93" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- Center: 财务助手 -->
+  <line x1="250" y1="132" x2="250" y2="158" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Right: 数据分析师 -->
+  <path d="M290,132 L290,145 L395,145 L395,158" stroke="#8E8E93" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- === Phase 1 agents === -->
+  <!-- 法律顾问（合规审查）(purple) -->
+  <rect x="30" y="162" width="150" height="40" rx="12" fill="url(#purple)" filter="url(#shadow)"/>
+  <text x="105" y="187" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">法律顾问（合规审查）</text>
+
+  <!-- 财务助手（成本测算）(green) -->
+  <rect x="190" y="162" width="120" height="40" rx="12" fill="url(#green)" filter="url(#shadow)"/>
+  <text x="250" y="187" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">财务助手（成本测算）</text>
+
+  <!-- 数据分析师（竞争分析）(teal) -->
+  <rect x="320" y="162" width="150" height="40" rx="12" fill="url(#teal)" filter="url(#shadow)"/>
+  <text x="395" y="187" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">数据分析师（竞争分析）</text>
+
+  <!-- Converge arrows to 汇总分析报告 -->
+  <path d="M105,202 L105,218 L250,218" stroke="#8E8E93" stroke-width="1.5" fill="none"/>
+  <line x1="250" y1="202" x2="250" y2="218" stroke="#8E8E93" stroke-width="1.5"/>
+  <path d="M395,202 L395,218 L250,218" stroke="#8E8E93" stroke-width="1.5" fill="none"/>
+  <line x1="250" y1="218" x2="250" y2="238" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- === 汇总分析报告 (mid-node) === -->
+  <rect x="175" y="242" width="150" height="36" rx="12" fill="url(#grey)" filter="url(#shadow)"/>
+  <text x="250" y="265" text-anchor="middle" fill="#3A3A3C" font-size="13" font-weight="600">汇总分析报告</text>
+
+  <!-- Fan-out arrows to Phase 2 agents -->
+  <!-- Left: 招投标助手（技术方案） -->
+  <path d="M220,278 L220,290 L145,290 L145,308" stroke="#8E8E93" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- Right: AI 文书（排版整合） -->
+  <path d="M280,278 L280,290 L355,290 L355,308" stroke="#8E8E93" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- === Phase 2 agents === -->
+  <!-- 招投标助手（技术方案）(orange) -->
+  <rect x="58" y="312" width="174" height="40" rx="12" fill="url(#orange)" filter="url(#shadow)"/>
+  <text x="145" y="337" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">招投标助手（技术方案）</text>
+
+  <!-- AI 文书（排版整合）(pink) -->
+  <rect x="268" y="312" width="174" height="40" rx="12" fill="url(#pink)" filter="url(#shadow)"/>
+  <text x="355" y="337" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">AI 文书（排版整合）</text>
+
+  <!-- Converge arrows -->
+  <path d="M145,352 L145,370 L250,370" stroke="#8E8E93" stroke-width="1.5" fill="none"/>
+  <path d="M355,352 L355,370 L250,370" stroke="#8E8E93" stroke-width="1.5" fill="none"/>
+  <line x1="250" y1="370" x2="250" y2="388" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Invisible convergence dot -->
+  <circle cx="250" cy="370" r="2.5" fill="#8E8E93"/>
+
+  <!-- Fan-out arrows to Phase 3 agents -->
+  <!-- Left: 法律顾问（交叉审核） -->
+  <path d="M220,428 L220,440 L145,440 L145,458" stroke="#8E8E93" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <!-- Right: 财务助手（报价审核） -->
+  <path d="M280,428 L280,440 L355,440 L355,458" stroke="#8E8E93" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Invisible mid-node for convergence between Phase 2 and Phase 3 -->
+  <rect x="185" y="392" width="130" height="36" rx="12" fill="url(#grey)" filter="url(#shadow)"/>
+  <text x="250" y="415" text-anchor="middle" fill="#3A3A3C" font-size="13" font-weight="600">整合审核</text>
+
+  <!-- === Phase 3 agents === -->
+  <!-- 法律顾问（交叉审核）(purple) -->
+  <rect x="58" y="462" width="174" height="40" rx="12" fill="url(#purple)" filter="url(#shadow)"/>
+  <text x="145" y="487" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">法律顾问（交叉审核）</text>
+
+  <!-- 财务助手（报价审核）(green) -->
+  <rect x="268" y="462" width="174" height="40" rx="12" fill="url(#green)" filter="url(#shadow)"/>
+  <text x="355" y="487" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">财务助手（报价审核）</text>
+
+  <!-- Converge to final output -->
+  <path d="M145,502 L145,520 L250,520" stroke="#8E8E93" stroke-width="1.5" fill="none"/>
+  <path d="M355,502 L355,520 L250,520" stroke="#8E8E93" stroke-width="1.5" fill="none"/>
+  <line x1="250" y1="520" x2="250" y2="548" stroke="#8E8E93" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <circle cx="250" cy="520" r="2.5" fill="#8E8E93"/>
+
+  <!-- === OUTPUT: 最终投标文件 (blue capsule) === -->
+  <rect x="175" y="552" width="150" height="40" rx="20" fill="url(#blue)" filter="url(#shadow)"/>
+  <text x="250" y="577" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">最终投标文件</text>
+</svg>

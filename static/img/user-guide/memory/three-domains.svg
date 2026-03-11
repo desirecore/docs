@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340" fill="none">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08" flood-color="#000"/>
+    </filter>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#005EC4"/>
+    </linearGradient>
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="relGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="sharedGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Header bar -->
+  <rect x="20" y="20" width="740" height="60" rx="12" fill="url(#headerGrad)" filter="url(#shadow)"/>
+  <text x="390" y="58" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">智能体记忆</text>
+
+  <!-- Core Memory Card -->
+  <rect x="20" y="100" width="236" height="220" rx="12" fill="#fff" filter="url(#shadow)"/>
+  <rect x="20" y="100" width="236" height="52" rx="12" fill="url(#coreGrad)"/>
+  <rect x="20" y="132" width="236" height="20" fill="url(#coreGrad)"/>
+  <text x="138" y="127" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">核心记忆</text>
+  <text x="138" y="147" text-anchor="middle" fill="#fff" font-size="13" font-weight="500" opacity="0.9">Core Memory</text>
+
+  <text x="138" y="185" text-anchor="middle" fill="#333" font-size="14">智能体的出厂知识</text>
+
+  <line x1="52" y1="205" x2="224" y2="205" stroke="#E5E5EA" stroke-width="1"/>
+
+  <text x="138" y="232" text-anchor="middle" fill="#8E8E93" font-size="12">类比</text>
+  <rect x="88" y="244" width="100" height="32" rx="8" fill="#007AFF" opacity="0.1"/>
+  <text x="138" y="265" text-anchor="middle" fill="#007AFF" font-size="15" font-weight="600">性格特征</text>
+
+  <!-- Relationship Memory Card -->
+  <rect x="272" y="100" width="236" height="220" rx="12" fill="#fff" filter="url(#shadow)"/>
+  <rect x="272" y="100" width="236" height="52" rx="12" fill="url(#relGrad)"/>
+  <rect x="272" y="132" width="236" height="20" fill="url(#relGrad)"/>
+  <text x="390" y="127" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">关系记忆</text>
+  <text x="390" y="147" text-anchor="middle" fill="#fff" font-size="13" font-weight="500" opacity="0.9">Relationship Memory</text>
+
+  <text x="390" y="185" text-anchor="middle" fill="#333" font-size="14">你和智能体之间的互动经验</text>
+
+  <line x1="304" y1="205" x2="476" y2="205" stroke="#E5E5EA" stroke-width="1"/>
+
+  <text x="390" y="232" text-anchor="middle" fill="#8E8E93" font-size="12">类比</text>
+  <rect x="340" y="244" width="100" height="32" rx="8" fill="#AF52DE" opacity="0.1"/>
+  <text x="390" y="265" text-anchor="middle" fill="#AF52DE" font-size="15" font-weight="600">私人日记</text>
+
+  <!-- Shared Memory Card -->
+  <rect x="524" y="100" width="236" height="220" rx="12" fill="#fff" filter="url(#shadow)"/>
+  <rect x="524" y="100" width="236" height="52" rx="12" fill="url(#sharedGrad)"/>
+  <rect x="524" y="132" width="236" height="20" fill="url(#sharedGrad)"/>
+  <text x="642" y="127" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">共享记忆</text>
+  <text x="642" y="147" text-anchor="middle" fill="#fff" font-size="13" font-weight="500" opacity="0.9">Shared Memory</text>
+
+  <text x="642" y="185" text-anchor="middle" fill="#333" font-size="14">多个智能体共享的团队知识</text>
+
+  <line x1="556" y1="205" x2="728" y2="205" stroke="#E5E5EA" stroke-width="1"/>
+
+  <text x="642" y="232" text-anchor="middle" fill="#8E8E93" font-size="12">类比</text>
+  <rect x="592" y="244" width="100" height="32" rx="8" fill="#34C759" opacity="0.1"/>
+  <text x="642" y="265" text-anchor="middle" fill="#34C759" font-size="15" font-weight="600">团队手册</text>
+</svg>

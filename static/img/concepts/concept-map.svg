@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+  <style>
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+    <linearGradient id="sfBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="sfGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="sfPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="sfOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <filter id="sfShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <marker id="sfArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- ===== 顶层：数字同伴 (蓝色) ===== -->
+  <g filter="url(#sfShadow)">
+    <rect x="250" y="24" width="220" height="56" rx="12" fill="url(#sfBlue)"/>
+    <text x="360" y="49" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">数字同伴</text>
+    <text x="360" y="67" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">Digital Companion</text>
+  </g>
+
+  <!-- 注释标签 -->
+  <text x="485" y="56" fill="#999" font-size="11" font-style="italic">一切的起点</text>
+
+  <!-- 顶层到中层的三条连线 -->
+  <line x1="300" y1="80" x2="140" y2="148" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <line x1="360" y1="80" x2="360" y2="148" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <line x1="420" y1="80" x2="580" y2="148" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- ===== 中层：三个分支 (紫色) ===== -->
+  <!-- 委派式交互 -->
+  <g filter="url(#sfShadow)">
+    <rect x="40" y="150" width="200" height="56" rx="12" fill="url(#sfPurple)"/>
+    <text x="140" y="175" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">委派式交互</text>
+    <text x="140" y="193" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">Delegation</text>
+  </g>
+
+  <!-- AgentFS 文件系统 -->
+  <g filter="url(#sfShadow)">
+    <rect x="270" y="150" width="180" height="56" rx="12" fill="url(#sfPurple)"/>
+    <text x="360" y="175" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">AgentFS 文件系统</text>
+    <text x="360" y="193" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">AgentFS</text>
+  </g>
+
+  <!-- 算力模型 -->
+  <g filter="url(#sfShadow)">
+    <rect x="480" y="150" width="200" height="56" rx="12" fill="url(#sfPurple)"/>
+    <text x="580" y="175" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">算力模型</text>
+    <text x="580" y="193" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">Compute Model</text>
+  </g>
+
+  <!-- 中层到下层的连线 -->
+  <!-- 委派式交互 → 固化/灵活/人闸门 -->
+  <line x1="100" y1="206" x2="100" y2="288" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <!-- 委派式交互 → 回执系统 -->
+  <line x1="180" y1="206" x2="280" y2="288" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <!-- AgentFS → 自我进化 -->
+  <line x1="360" y1="206" x2="470" y2="288" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- ===== 下层：子概念 (绿色) ===== -->
+  <!-- 固化/灵活/人闸门 -->
+  <g filter="url(#sfShadow)">
+    <rect x="16" y="290" width="170" height="56" rx="12" fill="url(#sfGreen)"/>
+    <text x="101" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">固化 / 灵活 / 人闸门</text>
+    <text x="101" y="333" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">Step Types</text>
+  </g>
+
+  <!-- 回执系统 -->
+  <g filter="url(#sfShadow)">
+    <rect x="210" y="290" width="170" height="56" rx="12" fill="url(#sfGreen)"/>
+    <text x="295" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">回执系统</text>
+    <text x="295" y="333" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">Receipts</text>
+  </g>
+
+  <!-- 自我进化 -->
+  <g filter="url(#sfShadow)">
+    <rect x="404" y="290" width="170" height="56" rx="12" fill="url(#sfGreen)"/>
+    <text x="489" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">自我进化</text>
+    <text x="489" y="333" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">Self-Evolution</text>
+  </g>
+
+  <!-- 下层到底部汇聚的连线 -->
+  <line x1="101" y1="346" x2="300" y2="430" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <line x1="295" y1="346" x2="340" y2="430" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+  <line x1="489" y1="346" x2="400" y2="430" stroke="#999" stroke-width="1.5" marker-end="url(#sfArrow)"/>
+
+  <!-- ===== 底部汇聚：三层可控性 (橙色) ===== -->
+  <g filter="url(#sfShadow)">
+    <rect x="240" y="432" width="240" height="56" rx="12" fill="url(#sfOrange)"/>
+    <text x="360" y="457" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">三层可控性</text>
+    <text x="360" y="475" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11">可见 / 可控 / 可逆</text>
+  </g>
+</svg>

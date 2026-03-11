@@ -95,6 +95,12 @@
   --dc-glass-border: rgba(255, 255, 255, 0.08);
 }
 
+/* SVG diagrams — invert for dark mode (rendered as <img>, so internal CSS won't work) */
+[data-theme="dark"] article img[src$=".svg"],
+[data-theme="dark"] article img[src^="data:image/svg+xml"] {
+  filter: invert(93%) hue-rotate(180deg);
+}
+
 /* ============================================================
    3. FONTS — Apple system stack + Chinese support
    ============================================================ */

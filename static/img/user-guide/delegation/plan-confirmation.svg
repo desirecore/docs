@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 680" fill="none">
+  <defs>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5AC8FA"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#30D158"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#AF52DE"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="btnShadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      /* Secondary / inset backgrounds */
+      rect[fill="#F2F2F7"], rect[fill="#f2f2f2"] { fill: #2C2C2E !important; }
+
+      /* Tinted backgrounds → dark versions */
+      rect[fill="#FFFBE6"] { fill: #3A3520 !important; }
+      rect[fill="#FFF3E0"] { fill: #3A2E20 !important; }
+      rect[fill="#E8F5E9"] { fill: #1A3020 !important; }
+      rect[fill="#F3E5F5"], rect[fill="#F3E8FF"] { fill: #2A1A30 !important; }
+      rect[fill="#E3F2FD"] { fill: #1A2530 !important; }
+
+      /* Near-black text → light */
+      [fill="#1C1C1E"] { fill: #F5F5F7 !important; }
+      [fill="#333"], [fill="#333333"] { fill: #F5F5F7 !important; }
+      [fill="#4a4a4a"] { fill: #E5E5E7 !important; }
+      [fill="#3f3d56"] { fill: #E5E5E7 !important; }
+      [fill="#3A3A3C"] { fill: #D1D1D6 !important; }
+      [fill="#555"] { fill: #D1D1D6 !important; }
+      [fill="#666"] { fill: #C7C7CC !important; }
+
+      /* Medium gray text → brighter */
+      [fill="#636366"] { fill: #AEAEB2 !important; }
+      [fill="#8E8E93"] { fill: #A1A1A6 !important; }
+      [fill="#888"] { fill: #AEAEB2 !important; }
+      [fill="#999"] { fill: #AEAEB2 !important; }
+      [fill="#a8a8a8"] { fill: #C7C7CC !important; }
+
+      /* Gray shape fills */
+      rect[fill="#E5E5EA"] { fill: #48484A !important; }
+      rect[fill="#d8d8d8"] { fill: #48484A !important; }
+      rect[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#C7C7CC"] { fill: #48484A !important; }
+      circle[fill="#d8d8d8"] { fill: #48484A !important; }
+
+      /* Borders and strokes */
+      [stroke="#E5E5EA"] { stroke: #38383A !important; }
+      [stroke="#D1D1D6"] { stroke: #38383A !important; }
+      [stroke="#C6C6C8"] { stroke: #38383A !important; }
+      [stroke="#C7C7CC"] { stroke: #48484A !important; }
+      [stroke="#F2F2F7"] { stroke: #2C2C2E !important; }
+
+      /* Arrows and connectors */
+      [stroke="#999"] { stroke: #636366 !important; }
+      [stroke="#AAA"] { stroke: #636366 !important; }
+      [stroke="#8E8E93"] { stroke: #58585A !important; }
+      path[fill="#999"] { fill: #636366 !important; }
+
+      /* Warning stroke */
+      rect[stroke="#FFD60A"] { stroke: #B39700 !important; }
+    }
+  </style>
+
+  <!-- Card background -->
+  <rect x="16" y="16" width="468" height="648" rx="16" fill="#FFFFFF" filter="url(#cardShadow)" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Title bar -->
+  <rect x="16" y="16" width="468" height="52" rx="16" fill="url(#blueGrad)"/>
+  <rect x="16" y="44" width="468" height="24" fill="url(#blueGrad)"/>
+  <text x="250" y="48" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="600">📋 执行计划</text>
+
+  <!-- Task info -->
+  <text x="40" y="92" fill="#1C1C1E" font-size="13" font-weight="600">任务：<tspan font-weight="400">审查采购合同 XX-2025-001</tspan></text>
+  <text x="40" y="112" fill="#8E8E93" font-size="12">预计步骤：6 步　　预计时间：约 3-5 分钟</text>
+
+  <!-- Divider -->
+  <line x1="40" y1="124" x2="460" y2="124" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Step list label -->
+  <text x="40" y="144" fill="#1C1C1E" font-size="13" font-weight="600">步骤列表</text>
+
+  <!-- Step 1 -->
+  <circle cx="52" cy="168" r="8" fill="#C7C7CC"/>
+  <text x="52" y="172" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700">1</text>
+  <rect x="66" y="159" width="40" height="18" rx="4" fill="#E5E5EA"/>
+  <text x="86" y="172" text-anchor="middle" fill="#636366" font-size="10" font-weight="500">固化</text>
+  <text x="112" y="172" fill="#1C1C1E" font-size="12">解析合同文件，提取关键条款</text>
+  <text x="112" y="186" fill="#8E8E93" font-size="10">预计耗时：30 秒</text>
+
+  <!-- Step 2 -->
+  <circle cx="52" cy="210" r="8" fill="#C7C7CC"/>
+  <text x="52" y="214" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700">2</text>
+  <rect x="66" y="201" width="40" height="18" rx="4" fill="#E5E5EA"/>
+  <text x="86" y="214" text-anchor="middle" fill="#636366" font-size="10" font-weight="500">固化</text>
+  <text x="112" y="214" fill="#1C1C1E" font-size="12">检查违约金比例（标准：≤20%）</text>
+  <text x="112" y="228" fill="#8E8E93" font-size="10">预计耗时：10 秒</text>
+
+  <!-- Step 3 -->
+  <circle cx="52" cy="252" r="8" fill="#C7C7CC"/>
+  <text x="52" y="256" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700">3</text>
+  <rect x="66" y="243" width="40" height="18" rx="4" fill="#E5E5EA"/>
+  <text x="86" y="256" text-anchor="middle" fill="#636366" font-size="10" font-weight="500">固化</text>
+  <text x="112" y="256" fill="#1C1C1E" font-size="12">检查付款周期（标准：≥30 天）</text>
+  <text x="112" y="270" fill="#8E8E93" font-size="10">预计耗时：10 秒</text>
+
+  <!-- Step 4 (flexible - purple) -->
+  <circle cx="52" cy="294" r="8" fill="url(#purpleGrad)"/>
+  <text x="52" y="298" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700">4</text>
+  <rect x="66" y="285" width="40" height="18" rx="4" fill="#F3E8FF"/>
+  <text x="86" y="298" text-anchor="middle" fill="#AF52DE" font-size="10" font-weight="500">灵活</text>
+  <text x="112" y="298" fill="#1C1C1E" font-size="12">分析进口设备相关条款</text>
+  <text x="112" y="312" fill="#8E8E93" font-size="10">预计耗时：1-2 分钟</text>
+  <text x="112" y="326" fill="#8E8E93" font-size="10">说明：需要 AI 理解合同语义</text>
+
+  <!-- Step 5 (flexible - purple) -->
+  <circle cx="52" cy="350" r="8" fill="url(#purpleGrad)"/>
+  <text x="52" y="354" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700">5</text>
+  <rect x="66" y="341" width="40" height="18" rx="4" fill="#F3E8FF"/>
+  <text x="86" y="354" text-anchor="middle" fill="#AF52DE" font-size="10" font-weight="500">灵活</text>
+  <text x="112" y="354" fill="#1C1C1E" font-size="12">综合风险评估，生成审查报告</text>
+  <text x="112" y="368" fill="#8E8E93" font-size="10">预计耗时：1-2 分钟</text>
+
+  <!-- Step 6 (human gate - orange) -->
+  <circle cx="52" cy="392" r="8" fill="url(#orangeGrad)"/>
+  <text x="52" y="396" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700">6</text>
+  <rect x="66" y="383" width="52" height="18" rx="4" fill="#FFF3E0"/>
+  <text x="92" y="396" text-anchor="middle" fill="#FF9500" font-size="10" font-weight="500">人闸门</text>
+  <text x="124" y="396" fill="#1C1C1E" font-size="12">等待确认后发送审查报告</text>
+  <text x="124" y="410" fill="#8E8E93" font-size="10">说明：需要你确认报告内容才会执行发送</text>
+
+  <!-- Connecting line between steps -->
+  <line x1="52" y1="176" x2="52" y2="202" stroke="#E5E5EA" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="52" y1="218" x2="52" y2="244" stroke="#E5E5EA" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="52" y1="260" x2="52" y2="286" stroke="#E5E5EA" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="52" y1="302" x2="52" y2="342" stroke="#E5E5EA" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="52" y1="358" x2="52" y2="384" stroke="#E5E5EA" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Divider -->
+  <line x1="40" y1="430" x2="460" y2="430" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Risk warning area -->
+  <rect x="40" y="442" width="420" height="68" rx="10" fill="#FFFBE6" stroke="#FFD60A" stroke-width="1"/>
+  <text x="56" y="462" fill="#1C1C1E" font-size="13" font-weight="600">⚠️ 风险提示</text>
+  <text x="56" y="482" fill="#636366" font-size="12">• 合同为扫描件，OCR 识别可能有误差</text>
+  <text x="56" y="500" fill="#636366" font-size="12">• 进口设备条款需要人工复核</text>
+
+  <!-- Divider -->
+  <line x1="40" y1="524" x2="460" y2="524" stroke="#E5E5EA" stroke-width="1"/>
+
+  <!-- Legend -->
+  <text x="40" y="546" fill="#8E8E93" font-size="10">图例：</text>
+  <circle cx="82" cy="543" r="5" fill="#C7C7CC"/>
+  <text x="92" y="546" fill="#8E8E93" font-size="10">固化步骤</text>
+  <circle cx="152" cy="543" r="5" fill="url(#purpleGrad)"/>
+  <text x="162" y="546" fill="#8E8E93" font-size="10">灵活步骤</text>
+  <circle cx="222" cy="543" r="5" fill="url(#orangeGrad)"/>
+  <text x="232" y="546" fill="#8E8E93" font-size="10">人闸门</text>
+
+  <!-- Buttons -->
+  <!-- Confirm button (green) -->
+  <rect x="52" y="568" width="120" height="40" rx="12" fill="url(#greenGrad)" filter="url(#btnShadow)"/>
+  <text x="112" y="593" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="600">✓ 确认</text>
+
+  <!-- Modify button (blue) -->
+  <rect x="190" y="568" width="120" height="40" rx="12" fill="url(#blueGrad)" filter="url(#btnShadow)"/>
+  <text x="250" y="593" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="600">✎ 修改</text>
+
+  <!-- Cancel button (red) -->
+  <rect x="328" y="568" width="120" height="40" rx="12" fill="#FF3B30" filter="url(#btnShadow)"/>
+  <text x="388" y="593" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="600">✗ 取消</text>
+</svg>
