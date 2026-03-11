@@ -11,7 +11,8 @@
 <p align="center">
   <a href="https://docs.desirecore.com"><img src="https://img.shields.io/website?url=https%3A%2F%2Fdocs.desirecore.com&label=docs" alt="Website"></a>
   <a href="https://docs.desirecore.com"><img src="https://img.shields.io/badge/deployed%20on-Vercel-000000?logo=vercel" alt="Deployed on Vercel"></a>
-  <a href="#license"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/code-MIT-green" alt="Code License: MIT"></a>
+  <a href="./LICENSE-docs"><img src="https://img.shields.io/badge/docs-Custom%20Terms-lightgrey" alt="Documentation Rights: Custom Terms"></a>
 </p>
 
 ---
@@ -20,7 +21,7 @@
 
 This is the source repository for [DesireCore](https://www.desirecore.com) documentation, built with [Docusaurus 3](https://docusaurus.io/).
 
-DesireCore is a **Delegation OS** — a cross-platform desktop app that gives you an AI companion capable of learning, executing, auditing, and rolling back.
+DesireCore is a **Agent OS** — a cross-platform desktop app that gives you an AI companion capable of learning, executing, auditing, and rolling back.
 
 ## Prerequisites
 
@@ -88,7 +89,9 @@ Please follow [Conventional Commits](https://www.conventionalcommits.org/) for c
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+- Source code, theme customizations, and project configuration in this repository are licensed under the [MIT License](LICENSE).
+- Documentation text and translations under `docs/` and `i18n/` are copyright © 2026 Yunnan Solar Corona Technology Co., Ltd. and are not licensed under MIT.
+- Subject to the terms set out in [LICENSE-docs](LICENSE-docs), the documentation content may be copied, republished, distributed, translated, and publicly displayed, but modified versions and derivative works may not be distributed or created without prior written consent.
 
 ---
 

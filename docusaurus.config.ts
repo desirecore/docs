@@ -163,7 +163,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} DesireCore. All rights reserved.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Yunnan Solar Corona Technology Co., Ltd. All rights reserved.`,
     },
     prism: {
       theme: prismThemes.github,
