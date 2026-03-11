@@ -98,4 +98,5 @@ A complete set of copyright application materials, including source code identif
 - The more detailed the function description, the more the generated materials match reality. Including specific functional points (e.g., "supports Markdown syntax highlighting") is much better than vague descriptions (e.g., "an editor")
 - If your software has specific industry background (e.g., "smart agriculture", "education platform"), tell the agent, and it will reflect industry characteristics in screenshots and descriptions
 - Before application, you can have the Legal Advisor agent review material compliance together
+- **Teach your style preferences upfront**: If you have specific requirements for description style or module naming conventions (e.g., "use four-character phrases for all module names"), teach them to the Software Copyright Writer first — no need to adjust every time when batch-generating materials
 :::

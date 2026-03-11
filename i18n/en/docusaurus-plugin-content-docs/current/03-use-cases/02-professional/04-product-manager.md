@@ -16,6 +16,38 @@ The Product Manager agent can assist you with these daily tasks: writing structu
 
 **Product Manager** -- Specializes in project management and coordination, excelling in progress tracking, resource allocation, risk control, and team coordination.
 
+## Teaching First: Setting Your Product Workflow
+
+> Every team has its own iteration process and documentation standards. Teach your standards once, and every PRD and schedule it produces will be ready to use without constant format adjustments.
+
+### Teach Rules
+
+```
+You: Let me teach you our team's product standards:
+     [Upload PRD_Template_v3.docx]
+     1. User story format: "As a [role], I want [feature], so that [value]" (mandatory)
+     2. Priority definitions: P0 = must complete this iteration, P1 = try to complete, P2 = next iteration (mandatory)
+     3. Iteration cadence: bi-weekly sprints, Monday planning meetings, Friday retrospectives (preference)
+     4. Acceptance criteria: every requirement must have testable acceptance conditions — no vague descriptions like "improve experience" (mandatory)
+
+Product Manager: 📝 New learning recorded
+                 Source: PRD_Template_v3.docx + workflow notes
+                 Type: Rule (Product workflow standards)
+                 Level: Mandatory × 3, Preference × 1
+
+                 My understanding:
+                 Use the uploaded template format when writing PRDs. User stories
+                 must follow the "As a... I want... so that..." pattern. Priorities
+                 are split into P0/P1/P2 levels. Every requirement must include
+                 testable acceptance criteria. Iterations follow a bi-weekly cadence.
+
+                 [✓ Correct]  [✎ Modify]  [✗ Undo]
+
+You: [✓ Correct]
+```
+
+Once teaching is complete, the Product Manager agent has learned your PRD standards and iteration workflow. From now on, just describe your requirements and it will produce standardized PRDs.
+
 ## Complete Conversation Example
 
 ```
@@ -39,7 +71,7 @@ Product Manager: Sprint-7 Progress Report
 
         Risk Warning
         - Order module refactoring progress slightly slow, suggest Zhang San assist Wang Wu
-        - Integration testing depends on backend tasks, needs priority保障
+        - Integration testing depends on backend tasks, needs to be prioritized
 
         Estimated Completion Rate: 95%
         Suggestion: Move 1 low-priority task to next Sprint
@@ -64,6 +96,11 @@ Product Manager: User Tag System -- Requirements Document
 
         IV. Acceptance Criteria
         ...
+
+        📋 Receipt Summary
+        Rules applied: user story format · P0/P1/P2 priorities · acceptance criteria requirement
+        Template used: PRD Template v3
+        All from your teaching (last week) ✓
 ```
 
 ## Key Steps
@@ -81,4 +118,5 @@ Efficient iteration management support, including progress reports, requirements
 - Have the agent generate progress summaries before daily stand-ups to quickly understand team status
 - When writing requirements documents, first describe business scenarios and user pain points, and the agent will automatically break them down into user stories and acceptance criteria
 - When multiple projects run in parallel, have the agent analyze resource conflicts and recommend optimal allocation plans
+- **Generate PRDs in parallel**: During quarterly planning with multiple feature requests, tell the Product Manager agent about all of them at once — it will generate PRD drafts for each feature in parallel, all using the template and standards you taught it
 :::

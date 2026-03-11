@@ -16,6 +16,45 @@ The Data Analyst agent can complete this work in minutes: automatically identify
 
 **Data Analyst** -- Specializes in data cleaning, statistical analysis, trend prediction, and visual report generation, supporting CSV, Excel, JSON, and other data formats.
 
+## Teaching First: Setting Your Business Metrics
+
+> Every company calculates GMV, conversion rates, and other metrics differently. Teach your definitions once, and every future analysis will use the correct standards -- no more "the numbers don't match" moments.
+
+### Teaching Rules
+
+```
+You: Let me teach you our company's core data analysis definitions:
+    1. GMV standard: We use "Net GMV" (amount after deducting refunds), not Gross GMV (mandatory)
+    2. Conversion rate: Order UV / Visit UV, not Payment UV / Visit UV (mandatory)
+    3. Anomaly alerts: Flag metrics with day-over-day fluctuation exceeding 20% in red (mandatory)
+    4. Data sources: Sales data exported from "Business Platform", user data exported from "Data Warehouse" (preference)
+
+Data Analyst: 📝 New learning recorded
+              Type: Rule (Business metric definitions)
+              Level: Mandatory × 3, Preference × 1
+
+              My understanding:
+              GMV always uses net value (after refunds). Conversion rate
+              denominator is Visit UV, numerator is Order UV (not Payment UV).
+              Metrics with >20% day-over-day fluctuation are auto-flagged
+              in red. Two data sources map to different data types.
+
+              [✓ Correct]  [✎ Modify]  [✗ Undo]
+
+You: [✓ Correct] Let me also show you our weekly report template.
+    [Upload E-commerce_Weekly_Report_Template.xlsx]
+
+Data Analyst: 📝 New learning recorded
+              Type: Example (Weekly report template)
+              Contains: trend charts + TOP 10 products ranking + anomaly root cause analysis.
+
+              [✓ Correct]  [✎ Modify]  [✗ Undo]
+
+You: [✓ Correct]
+```
+
+After teaching, the Data Analyst has mastered your company's metric standards and report format. From now on, just send data and get reports directly.
+
 ## Complete Conversation Example
 
 ```
@@ -57,6 +96,11 @@ Data Analyst: West China deep dive analysis results:
         - New customer acquisition in November decreased 35% month-over-month
         - But average order value increased 8% against the trend, indicating high loyalty among existing customers
         Recommendation: Increase customer acquisition investment in West China while maintaining existing customers...
+
+        📋 Receipt Summary
+        Rules applied: Net GMV metric · Conversion rate definition (order UV) · 20% anomaly threshold
+        Template used: E-commerce Weekly Report Template
+        All from your teaching (2 weeks ago) ✓
 ```
 
 ## Key Steps
@@ -74,4 +118,5 @@ A complete analysis report with key metrics, regional comparisons, trend charts,
 - Ensure clear column names before uploading (e.g., "Sales Amount" instead of "col_1") so the agent can better understand data meaning
 - The more specific your analysis requirements, the more precise the results. "Analyze sales trends" is less effective than "Compare Q3 and Q4 growth rates by region, identifying the fastest and slowest growing regions"
 - If the data volume is large, have the agent do a data overview first, then dive deeper into directions of interest
+- **Batch analyze multi-department data**: When you need to review data across departments or product categories on Monday morning, send everything to the Data Analyst at once -- it will analyze each dataset in parallel, all using the same metric standards and report template you taught
 :::

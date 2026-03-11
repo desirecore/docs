@@ -16,6 +16,40 @@ The Finance Assistant agent can help you scientifically prepare budgets based on
 
 **Finance Assistant** -- Specializes in financial management, handling budget preparation, expense approval, report archiving, and cost analysis.
 
+## Teaching First: Setting Your Financial Policies
+
+> Every company has different reimbursement standards. Spend a few minutes teaching the Finance Assistant your company's policies, and it will review expense reports against your specific rules instead of generic standards.
+
+### Teaching Rules
+
+```
+You: I'm sharing our company's expense reimbursement policy for you to learn.
+     [Upload Company_Expense_Policy_2024.pdf]
+     A few key points to note:
+     1. Local transportation: Only accept e-receipts from ride-hailing apps, no paper taxi receipts (mandatory)
+     2. Meals: Weekday limit $15/person, client entertainment limit $40/person (mandatory)
+     3. Business travel accommodation: Tier-1 cities max $80/night, other cities max $55/night (mandatory)
+     4. Over-limit expenses: Must include a written explanation and department manager approval (preference)
+
+Finance Assistant: 📝 New learning recorded
+                   Source: Company_Expense_Policy_2024.pdf + supplementary notes
+                   Type: Rule (Expense reimbursement standards)
+                   Level: Mandatory × 3, Preference × 1
+
+                   My understanding:
+                   When reviewing expense reports, only accept e-receipts from
+                   ride-hailing apps for transportation; meals capped at $15/person
+                   on weekdays, $40/person for client entertainment; accommodation
+                   tiered by city (Tier-1 $80, others $55). Over-limit claims
+                   require written justification with manager sign-off.
+
+                   [✓ Correct]  [✎ Modify]  [✗ Undo]
+
+You: [✓ Correct]
+```
+
+Once teaching is complete, the Finance Assistant has learned your company's reimbursement standards. You can now send expense reports directly for review.
+
 ## Complete Conversation Example
 
 ```
@@ -64,6 +98,10 @@ Finance Assistant: Travel expenses adjusted to 350k. Reduction suggestions:
         Reimbursement Review Results:
         Approved 12 | Returned 2 | Rejected 1
         Detailed explanation...
+
+        📋 Receipt Summary
+        Rules applied: Meal limits · Accommodation standards · Transportation receipt requirements
+        All from your teaching (last week) ✓
 ```
 
 ## Key Steps
@@ -85,4 +123,5 @@ The Finance Assistant's suggestions are for reference only and do not constitute
 - Provide as complete historical data as possible when preparing budgets, budget accuracy will significantly improve
 - Expense review can be configured with your company's reimbursement standards (such as travel standards, entertainment limits), and the agent will strictly review according to standards
 - At month-end and quarter-end, have the Finance Assistant automatically generate financial reports with key metrics and anomaly alerts
+- **Month-end batch review**: Send all expense reports for the month to the Finance Assistant at once — it will check each one against the policies you taught it, automatically flag over-limit items, and typically complete the entire review within minutes
 :::

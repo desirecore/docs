@@ -8,13 +8,51 @@ keywords: [Bidding, Bid Document Preparation, Qualification Review, Pricing Stra
 
 ## Scenario Description
 
-Your company received a project bidding document with 18 days until the bid deadline. You need to understand qualification requirements, write technical proposals, develop pricing strategies, and ensure the bid documents are flawless. Any oversight in any环节could lead to disqualification.
+Your company received a project bidding document with 18 days until the bid deadline. You need to understand qualification requirements, write technical proposals, develop pricing strategies, and ensure the bid documents are flawless. Any oversight in any step could lead to disqualification.
 
 The Bidding Assistant agent can help you systematically complete the entire bidding process: interpreting bidding documents, self-reviewing bidding qualifications, generating technical proposal frameworks, analyzing optimal pricing, and item-by-item checking bid document completeness.
 
 ## Recommended Agent
 
 **Bidding Assistant** -- Bidding process management expert, responsible for bid document preparation, qualification review, and pricing strategy.
+
+## Teaching First: Building Your Company Profile
+
+> The most time-consuming part of bidding is repeatedly compiling company qualifications and past performance. Teach once, and every new project gets automatic matching from then on.
+
+### Teaching Rules
+
+```
+You: Let me teach you about our company profile for future bids:
+     [Upload Company Qualifications.pdf]
+     [Upload Recent Projects.xlsx]
+     A few rules to add:
+     1. Minimum profit margin on quotes: no less than 15%, skip the bid if below (mandatory)
+     2. When citing past performance in technical proposals, prioritize projects from the same industry and similar scale (preference)
+     3. All bid documents must use the company template format, with company logo and qualification number on the cover (mandatory)
+
+Bidding Assistant: 📝 New learning recorded
+                   Source: Company Qualifications.pdf + Recent Projects.xlsx + strategy notes
+                   Type: Rule (Bidding strategy)
+                   Level: Mandatory × 2, Preference × 1
+
+                   My understanding:
+                   Automatically match relevant company qualifications and similar
+                   past projects when bidding. Ensure profit margin ≥15% during
+                   pricing, otherwise recommend passing. Prioritize same-industry
+                   cases in technical proposals. Use company template for all
+                   document formatting.
+
+                   Qualifications recorded: Business license, ISO 9001/14001/45001,
+                   System Integration Level 3, 12 software copyrights...
+                   Track record recorded: 47 awarded contracts across 6 industries.
+
+                   [✓ Correct]  [✎ Modify]  [✗ Undo]
+
+You: [✓ Correct]
+```
+
+Once teaching is complete, the Bidding Assistant has your company's qualifications and bidding strategy on file. From now on, just send any new RFP directly for analysis.
 
 ## Complete Conversation Example
 
@@ -38,7 +76,7 @@ Bidding Assistant: Let me help you deeply interpret this bidding document.
         - Electronic and Intelligent Engineering Professional Contracting Level 1 qualification
         - Safety production license
         - ISO9001 Quality Management System certification
-        - Similar project业绩in past 3 years >= 3
+        - Similar project track record in past 3 years >= 3
 
         Scoring Criteria
         Business Section (30 points): Price 20 points + Performance 10 points
@@ -64,6 +102,12 @@ Bidding Assistant: Qualification Self-Review Results: Basically Qualified (3 ite
         2. Project Manager: Need to replace with personnel holding Mechanical and Electrical Engineering certificate
         3. Credit rating: Current AA level, need explanation or improvement
         ...
+
+        📋 Receipt Summary
+        Qualifications cited: System Integration Level 3 · ISO 9001 + 3 others
+        Past projects cited: 3 projects from the same industry
+        Rules applied: 15% profit floor · Company template format
+        All from your teaching (2 weeks ago) ✓
 ```
 
 ## Key Steps
@@ -80,6 +124,7 @@ A complete set of bidding materials, including bidding document interpretation r
 
 :::tip Best Practices
 - Have the agent analyze immediately after receiving the bidding document to discover qualification gaps early and allow time for supplementation
-- Focus technical proposal efforts on high-scoring chapters, the agent will提示which sections need key writing based on scoring criteria
+- Focus technical proposal efforts on high-scoring chapters, the agent will highlight which sections need focused writing based on scoring criteria
 - Be sure to do a completeness check the day before bidding to avoid disqualification due to formal issues (such as missing signatures/stamps)
+- **Parallel bidding**: When handling multiple RFPs simultaneously, send them all to the Bidding Assistant at once -- it will analyze each bidding document in parallel and automatically match the required qualifications and track record from your taught company profile
 :::

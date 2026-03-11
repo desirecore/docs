@@ -120,4 +120,5 @@ A complete set of bidding materials, cross-reviewed by multiple agents, covering
 - Start analysis immediately after receiving the bidding document to allow sufficient time for subsequent writing
 - The Q&A session is important, unfavorable terms found by the Legal Advisor can be clarified by requesting the bidder to clarify
 - Allow at least half a day for completeness check before final submission, don't wait until the last minute
+- **Upload your company profile in advance**: Teach the Bidding Assistant your business license, qualification certificates, and past winning bids upfront — it will automatically match relevant qualifications for each new project without you having to compile them every time
 :::
