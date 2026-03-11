@@ -165,6 +165,12 @@ const config: Config = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Yunnan Solar Corona Technology Co., Ltd. All rights reserved.`,
     },
+    algolia: {
+      appId: '68TB6NUYVW',
+      apiKey: 'd22553216ab4cff9ec3a7d146b0572c4',
+      indexName: 'DesireCore Docs',
+      contextualSearch: true,
+    },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
