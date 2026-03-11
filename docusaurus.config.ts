@@ -14,6 +14,16 @@ const config: Config = {
     v4: true,
   },
 
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: '55C74A6868CDD87B',
+      },
+    },
+  ],
+
   url: 'https://docs.desirecore.com',
   baseUrl: '/',
 
