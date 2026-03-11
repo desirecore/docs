@@ -12,6 +12,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.7](./v10.0.7) | 2026-03-11 | NSIS 安装包启动时检测 Windows 版本，低于 Win10 提示不支持 (#232) |
 | [v10.0.6](./v10.0.6) | 2026-03-09 | Unified delegation tool, OpenClaw import, multi-source heartbeat and registry unification |
 | [v10.0.5](./v10.0.5) | 2026-03-08 | Heartbeat system enhancements — timezone support, transient retry, suppression engine and scheduler integration |
 | [v10.0.4](./v10.0.4) | 2026-03-08 | Fix Windows packaged build certificate directory permission issue |
