@@ -180,6 +180,7 @@ const config: Config = {
       apiKey: 'd22553216ab4cff9ec3a7d146b0572c4',
       indexName: 'DesireCore Docs',
       contextualSearch: true,
+      askAi: 'giKzdtAUC3FW',
     },
     prism: {
       theme: prismThemes.github,
