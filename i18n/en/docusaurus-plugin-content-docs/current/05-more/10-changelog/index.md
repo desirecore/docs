@@ -12,6 +12,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.10](./v10.0.10) | 2026-03-13 | Persistent message queueing |
 | [v10.0.9](./v10.0.9) | 2026-03-12 | 修复Windows编译构建nsis异常 |
 | [v10.0.8](./v10.0.8) | 2026-03-12 | Bulk email optimization, fix file picker and Ubuntu compatibility issues |
 | [v10.0.7](./v10.0.7) | 2026-03-11 | NSIS 安装包启动时检测 Windows 版本，低于 Win10 提示不支持 (#232) |
