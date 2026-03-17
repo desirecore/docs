@@ -12,6 +12,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.11](./v10.0.11) | 2026-03-17 | Automatic email rule processing |
 | [v10.0.10](./v10.0.10) | 2026-03-13 | Persistent message queueing |
 | [v10.0.9](./v10.0.9) | 2026-03-12 | 修复Windows编译构建nsis异常 |
 | [v10.0.8](./v10.0.8) | 2026-03-12 | Bulk email optimization, fix file picker and Ubuntu compatibility issues |
