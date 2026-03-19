@@ -12,6 +12,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.13](./v10.0.13) | 2026-03-19 | Sub-agents executing delegated tasks will no longer be inter |
 | [v10.0.12](./v10.0.12) | 2026-03-19 | AI Image Display and Saving |
 | [v10.0.11](./v10.0.11) | 2026-03-17 | Automatic email rule processing |
 | [v10.0.10](./v10.0.10) | 2026-03-13 | Persistent message queueing |
