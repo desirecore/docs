@@ -12,6 +12,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.12](./v10.0.12) | 2026-03-19 | AI Image Display and Saving |
 | [v10.0.11](./v10.0.11) | 2026-03-17 | Automatic email rule processing |
 | [v10.0.10](./v10.0.10) | 2026-03-13 | Persistent message queueing |
 | [v10.0.9](./v10.0.9) | 2026-03-12 | 修复Windows编译构建nsis异常 |
