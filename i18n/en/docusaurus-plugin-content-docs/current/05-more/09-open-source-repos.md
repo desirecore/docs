@@ -24,6 +24,12 @@ The DesireCore project maintains several official repositories on GitHub. Feel f
 | [docs](https://github.com/desirecore/docs) | DesireCore documentation repository (this site) | Public |
 | [distribution](https://github.com/desirecore/distribution) | Official distribution — download installers for Windows, macOS, and Linux | Public |
 
+## Service Repositories
+
+| Repository | Description | Status |
+|------------|-------------|--------|
+| [release-manager](https://github.com/desirecore/release-manager) | Staged rollout management service — multi-channel gradual rollout, emergency halt, version management | Private |
+
 ## Ecosystem Repositories
 
 | Repository | Description | Status |

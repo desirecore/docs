@@ -8,11 +8,13 @@ keywords: [installation, startup, update, white screen, installation failure, ma
 
 ## Download failed or very slow?
 
-DesireCore installation packages are hosted on Qiniu Cloud CDN. If download speeds are slow, you can try:
+DesireCore installation packages are hosted on multiple download sources (CDN, build servers, GitHub Releases, etc.). The client and website automatically **speed-test** each source before downloading and pick the fastest one.
+
+If you still experience download issues, you can try:
 
 - Check if your network connection is normal
 - Try using a VPN or switching network environments
-- Get the latest download link from the official download page
+- Get the latest download link from the official download page (the website also supports multi-source speed testing)
 
 ## macOS shows "Cannot open because the developer cannot be verified"?
 
@@ -49,11 +51,15 @@ If the app stays on the loading screen, possible causes and solutions:
 
 ## How to update to the latest version?
 
-DesireCore supports automatic updates:
+DesireCore supports automatic updates, checking every 5 minutes after startup:
 
-1. After starting the app, if a new version is available, an update prompt will appear on the "Settings > About" page
-2. Click the update button to download and install the latest version
-3. Restart the application after the update is complete
+1. When a new version is detected, the system automatically downloads the update from the fastest source
+2. After download completes, a prompt appears — choose "Restart Now" to install
+3. Choose "Later" and you won't be prompted again for 24 hours
+
+You can also manually check for updates on the "Settings > About" page.
+
+**Update channels**: DesireCore offers **Stable** and **Beta** channels. Stable is used by default. You can switch to Beta in "Settings > About > Update Channel" to get early access to new features. See [About & Updates](../02-user-guide/10-settings/08-about.md#update-channels) for details.
 
 If automatic update fails, you can manually download the latest installation package from the official website and install over the existing version.
 
