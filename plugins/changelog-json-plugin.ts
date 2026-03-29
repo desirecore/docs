@@ -20,6 +20,8 @@ interface ChangelogSection {
 interface ChangelogVersion {
   version: string
   date: string
+  /** 版本宣传配图 URL（可选） */
+  coverImage?: string
   sections: ChangelogSection[]
   url: string
 }
@@ -52,6 +54,10 @@ function parseChangelogMd(content: string, fileName: string): ChangelogVersion |
   const dateMatch = content.match(/\*\*发布日期\*\*[：:]\s*(\d{4}-\d{2}-\d{2})/)
   const date = dateMatch ? dateMatch[1] : ''
 
+  // 提取配图（![...](/img/changelog/v10.0.17.png) 格式）
+  const imageMatch = content.match(/!\[.*?\]\((\/img\/changelog\/[^)]+)\)/)
+  const coverImage = imageMatch ? `${SITE_URL}${imageMatch[1]}` : undefined
+
   // 按 ## 标题分段解析
   const sections: ChangelogSection[] = []
   const lines = content.split('\n')
@@ -81,12 +87,14 @@ function parseChangelogMd(content: string, fileName: string): ChangelogVersion |
   // 过滤掉空 section
   const nonEmptySections = sections.filter((s) => s.items.length > 0)
 
-  return {
+  const result: ChangelogVersion = {
     version,
     date,
     sections: nonEmptySections,
     url: `${SITE_URL}/more/changelog/v${version}`,
   }
+  if (coverImage) result.coverImage = coverImage
+  return result
 }
 
 /**
