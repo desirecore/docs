@@ -92,4 +92,4 @@ However, please note that once data is sent to a third-party API, its processing
 
 ## What data does DesireCore itself collect?
 
-As a client application, DesireCore does not collect or upload any of your data beyond what you actively send to AI provider APIs. The application's update check only retrieves version information and does not transmit user data.
+As a client application, DesireCore only sends anonymous installation statistics to the update server on launch (device hash identifier, version number, operating system platform, and CPU architecture), used for counting unique installations. Beyond this, it does not collect or upload any of your data. The application's update check only retrieves version information and does not transmit user data.

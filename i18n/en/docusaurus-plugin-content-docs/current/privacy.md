@@ -4,13 +4,15 @@ sidebar_position: 4
 
 # Privacy Policy
 
-Last Updated: February 7, 2026
+Last Updated: March 29, 2026
 
 ## 1. Data Collection Scope
 
 DesireCore adopts a "local-first" data storage principle. The data we collect includes: user account information (such as username, email), user-created AI assistant configurations, conversation history, and app usage statistics.
 
 Except for necessary account verification and software update checks, all core data is stored locally on the user's device by default. We will not upload user data to the cloud without explicit consent.
+
+To improve the product and track installation counts, DesireCore sends anonymous installation statistics to our update server on each launch. This information only includes: an anonymous device identifier generated from hardware information (SHA-256 hash, irreversible), client version number, operating system platform, and CPU architecture. We do not collect any personally identifiable information, and this device identifier cannot be associated with your personal identity. This data is used solely for counting unique installations and platform distribution.
 
 We cannot access, view, or monitor the behavior of user-created agents or any content they generate. All interaction data between users and their created agents is entirely controlled by the user. We do not have and do not attempt to have the ability to monitor or review this data.
 

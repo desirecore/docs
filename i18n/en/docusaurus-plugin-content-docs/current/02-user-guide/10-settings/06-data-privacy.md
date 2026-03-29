@@ -88,4 +88,4 @@ DesireCore's design principles for privacy protection:
 - **Data Doesn't Leave Local**: All data is stored on your device by default, not automatically uploaded to the cloud
 - **API Key Secure Storage**: Uses operating system credential manager for encrypted storage
 - **AI Call Transparency**: Every AI model call request and response has audit records, viewable in activity records
-- **No Telemetry Collection**: DesireCore does not collect usage telemetry data
+- **Minimal Anonymous Statistics**: DesireCore only sends anonymous installation statistics on launch (device hash identifier, version number, platform), and does not collect usage behavior or conversation content

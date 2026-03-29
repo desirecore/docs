@@ -59,14 +59,19 @@ Every AI call's request and response is recorded in the "API Audit" of activity 
 - **Credential Encryption**: API Keys are encrypted and stored through the operating system's credential manager
 - **Local Data**: Currently local data files are stored in plaintext in the file system, relying on operating system file permissions for protection. If your device has risk of physical access by others, we recommend enabling the operating system's disk encryption feature (such as macOS FileVault, Windows BitLocker)
 
-## No Telemetry Collection
+## Minimal Anonymous Statistics
 
-DesireCore does not collect usage telemetry data. We do not:
+DesireCore only sends anonymous installation statistics to the update server on each launch, including:
+
+- A SHA-256 hashed device identifier based on hardware information (irreversible, cannot be associated with personal identity)
+- Client version number, operating system platform, and CPU architecture
+
+We do not:
 
 - Track your usage behavior
 - Collect crash reports (unless you actively submit)
 - Analyze your conversation content
-- Upload any statistical information
+- Upload any user content such as conversations, configurations, or files
 
 ## Update Security
 
