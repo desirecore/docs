@@ -12,6 +12,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.17](./v10.0.17) | 2026-03-29 | First-Time Onboarding |
 | [v10.0.16](./v10.0.16) | 2026-03-24 | Cloud Publishing |
 | [v10.0.15](./v10.0.15) | 2026-03-22 | Agent Folder Import |
 | [v10.0.14](./v10.0.14) | 2026-03-19 | Message Read Aloud |
