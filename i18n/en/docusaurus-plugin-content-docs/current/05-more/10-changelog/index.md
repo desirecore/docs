@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.18](./v10.0.18) | 2026-03-29 | Official launch of the desktop Agent operating system、Agent marketplace and i... |
 | [v10.0.17](./v10.0.17) | 2026-03-29 | First-time onboarding, quick agent creation, team collaboration, agent messaging, HttpRequest tool, update channels, Mermaid rendering, SuperDoc DOCX/PDF export |
 | [v10.0.16](./v10.0.16) | 2026-03-24 | Cloud publishing (GitHub/Gitee/Gitea), Markdown WYSIWYG editor, delegation UX upgrade |
 | [v10.0.15](./v10.0.15) | 2026-03-22 | Agent folder import, built-in MCP tools by default, SuperDoc resizable split panes |
