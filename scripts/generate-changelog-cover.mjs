@@ -21,7 +21,8 @@ const sharp = require('sharp')
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
-const CHANGELOG_DIR = resolve(ROOT, 'docs/05-more/10-changelog')
+const CHANGELOG_DIR_ZH = resolve(ROOT, 'docs/05-more/10-changelog')
+const CHANGELOG_DIR_EN = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/10-changelog')
 const IMG_DIR = resolve(ROOT, 'static/img/changelog')
 
 const API_ENDPOINT = 'https://ark.cn-beijing.volces.com/api/v3/images/generations'
@@ -103,14 +104,18 @@ function checkApiKey() {
   return apiKey
 }
 
-function parseChangelog(content) {
+function parseChangelog(content, lang = 'zh') {
   const sections = { features: [], fixes: [], improvements: [], date: '' }
 
-  const dateMatch = content.match(/\*\*发布日期\*\*[：:]\s*(.+)/)
+  // 支持中英文日期格式
+  const dateMatch = content.match(/\*\*(?:发布日期|Release Date)\*\*[：:]\s*(.+)/)
   if (dateMatch) sections.date = dateMatch[1].trim()
 
   const sectionRegex = /^## (.+)$/gm
   const matches = [...content.matchAll(sectionRegex)]
+
+  // 截断阈值：英文更长
+  const truncateLen = lang === 'en' ? 80 : 50
 
   for (let i = 0; i < matches.length; i++) {
     const title = matches[i][1].trim()
@@ -127,14 +132,15 @@ function parseChangelog(content) {
         const plainMatch = line.match(/^\s*-\s+(.+)/)
         if (plainMatch) {
           const t = plainMatch[1]
-          items.push(t.length > 50 ? t.slice(0, 49) + '…' : t)
+          items.push(t.length > truncateLen ? t.slice(0, truncateLen - 1) + '…' : t)
         }
       }
     }
 
-    if (title === '新功能') sections.features = items
-    else if (title === '修复') sections.fixes = items
-    else if (title === '改进') sections.improvements = items
+    // 匹配中英文标题
+    if (title === '新功能' || title === 'New Features') sections.features = items
+    else if (title === '修复' || title === 'Fixes' || title === 'Bug Fixes') sections.fixes = items
+    else if (title === '改进' || title === 'Improvements') sections.improvements = items
   }
 
   return sections
@@ -283,8 +289,19 @@ function buildListColumn(items, opts) {
  *
  * 三阶段：1) 收集测量  2) 计算布局  3) 渲染 SVG
  */
-function buildTextOverlay(version, sections) {
+function buildTextOverlay(version, sections, lang = 'zh') {
   const { features, fixes, improvements, date } = sections
+
+  // 中英文标签
+  const L = lang === 'en'
+    ? { features: 'New Features', fixes: 'Fixes', improvements: 'Improvements',
+        thisUpdate: 'This Update', fallbackFeat: count => `${count} bug fixes & stability improvements`,
+        fallbackDefault: 'Release update',
+        statFeat: n => `${n} Features`, statImp: n => `${n} Improvements`, statFix: n => `${n} Fixes` }
+    : { features: '新功能', fixes: '修复', improvements: '改进',
+        thisUpdate: '本次更新', fallbackFeat: count => `${count} 项问题修复与稳定性提升`,
+        fallbackDefault: '版本优化',
+        statFeat: n => `${n} 新功能`, statImp: n => `${n} 改进`, statFix: n => `${n} 修复` }
 
   // ════════════════════════════════════════════
   //  Phase 1: 收集数据
@@ -292,14 +309,14 @@ function buildTextOverlay(version, sections) {
 
   const col1Items = features.length > 0
     ? features
-    : fixes.length > 0 ? [`${fixes.length} 项问题修复与稳定性提升`] : ['版本优化']
+    : fixes.length > 0 ? [L.fallbackFeat(fixes.length)] : [L.fallbackDefault]
   const col2Items = improvements
   const twoColumn = col2Items.length > 0
 
   const stats = []
-  if (features.length > 0) stats.push(`${features.length} 新功能`)
-  if (improvements.length > 0) stats.push(`${improvements.length} 改进`)
-  if (fixes.length > 0) stats.push(`${fixes.length} 修复`)
+  if (features.length > 0) stats.push(L.statFeat(features.length))
+  if (improvements.length > 0) stats.push(L.statImp(improvements.length))
+  if (fixes.length > 0) stats.push(L.statFix(fixes.length))
   const statsText = stats.join('   ·   ')
 
   // ════════════════════════════════════════════
@@ -413,7 +430,7 @@ function buildTextOverlay(version, sections) {
   const fixLabelFontSize = Math.round(fixFontSize * 0.78)
   const fixLabelY = actualMainEnd + 40
   const fixLabelSvg = fixItems.length > 0
-    ? `\n  <text x="${padLeft}" y="${fixLabelY}" font-family="${FONT}" font-size="${fixLabelFontSize}" fill="${COLORS.purple}" font-weight="600" letter-spacing="2" opacity="0.8">修复</text>`
+    ? `\n  <text x="${padLeft}" y="${fixLabelY}" font-family="${FONT}" font-size="${fixLabelFontSize}" fill="${COLORS.purple}" font-weight="600" letter-spacing="2" opacity="0.8">${L.fixes}</text>`
     : ''
   const fixSvg = fixItems.length > 0 ? buildListColumn(fixItems, {
     x: padLeft, startY: fixStartY, gap: fixGap,
@@ -437,7 +454,7 @@ function buildTextOverlay(version, sections) {
       <stop offset="100%" stop-color="#0a0a18" stop-opacity="0"/>`
 
   const col2LabelSvg = twoColumn
-    ? `\n  <text x="${col2X}" y="${sectionLabelY}" font-family="${FONT}" font-size="${Math.round(fontSize * 0.7)}" fill="${COLORS.blue}" font-weight="600" letter-spacing="2">改进</text>`
+    ? `\n  <text x="${col2X}" y="${sectionLabelY}" font-family="${FONT}" font-size="${Math.round(fontSize * 0.7)}" fill="${COLORS.blue}" font-weight="600" letter-spacing="2">${L.improvements}</text>`
     : ''
   const col1LabelSize = Math.round(fontSize * 0.7)
 
@@ -488,7 +505,7 @@ function buildTextOverlay(version, sections) {
   <rect x="${padLeft}" y="${accentLineY}" width="360" height="4" rx="2" fill="url(#accentLine)"/>
 
   <!-- 栏标签 -->
-  <text x="${padLeft}" y="${sectionLabelY}" font-family="${FONT}" font-size="${col1LabelSize}" fill="${COLORS.green}" font-weight="600" letter-spacing="2">${features.length > 0 ? '新功能' : '本次更新'}</text>${col2LabelSvg}
+  <text x="${padLeft}" y="${sectionLabelY}" font-family="${FONT}" font-size="${col1LabelSize}" fill="${COLORS.green}" font-weight="600" letter-spacing="2">${features.length > 0 ? L.features : L.thisUpdate}</text>${col2LabelSvg}
 
   <!-- 左栏 -->
 ${col1Svg}
@@ -526,7 +543,7 @@ function insertImageRef(content, version, imgPath) {
     return content
   }
 
-  const dateLineRegex = /(\*\*发布日期\*\*[：:].+\n)/
+  const dateLineRegex = /(\*\*(?:发布日期|Release Date)\*\*[：:].+\n)/
   const match = content.match(dateLineRegex)
 
   if (match) {
@@ -551,61 +568,94 @@ async function main() {
   const { version, force } = parseArgs()
   const apiKey = checkApiKey()
 
-  const mdFile = resolve(CHANGELOG_DIR, `${version}.md`)
-  if (!existsSync(mdFile)) {
-    console.error(`错误: 找不到 changelog 文件: ${mdFile}`)
+  const zhMdFile = resolve(CHANGELOG_DIR_ZH, `${version}.md`)
+  const enMdFile = resolve(CHANGELOG_DIR_EN, `${version}.md`)
+  if (!existsSync(zhMdFile)) {
+    console.error(`错误: 找不到中文 changelog 文件: ${zhMdFile}`)
     process.exit(1)
   }
 
-  const imgFile = resolve(IMG_DIR, `${version}.png`)
-  const imgRefPath = `/img/changelog/${version}.png`
+  const zhImgFile = resolve(IMG_DIR, `${version}.png`)
+  const enImgFile = resolve(IMG_DIR, `${version}-en.png`)
+  const zhImgRefPath = `/img/changelog/${version}.png`
+  const enImgRefPath = `/img/changelog/${version}-en.png`
 
-  if (existsSync(imgFile) && !force) {
-    console.log(`图片已存在: ${imgFile}`)
+  if (existsSync(zhImgFile) && existsSync(enImgFile) && !force) {
+    console.log(`图片已存在: ${zhImgFile}, ${enImgFile}`)
     console.log('使用 --force 覆盖')
 
-    const content = readFileSync(mdFile, 'utf-8')
-    if (!content.includes('![')) {
-      const updated = insertImageRef(content, version, imgRefPath)
-      if (updated !== content) {
-        writeFileSync(mdFile, updated)
-        console.log(`已在 ${version}.md 中插入图片引用`)
+    // 仅检查并插入图片引用
+    for (const [mdFile, imgRefPath] of [[zhMdFile, zhImgRefPath], [enMdFile, enImgRefPath]]) {
+      if (!existsSync(mdFile)) continue
+      const content = readFileSync(mdFile, 'utf-8')
+      if (!content.includes('![')) {
+        const updated = insertImageRef(content, version, imgRefPath)
+        if (updated !== content) {
+          writeFileSync(mdFile, updated)
+          console.log(`已在 ${mdFile} 中插入图片引用`)
+        }
       }
     }
     return
   }
 
-  const content = readFileSync(mdFile, 'utf-8')
-  const sections = parseChangelog(content)
+  const zhContent = readFileSync(zhMdFile, 'utf-8')
+  const zhSections = parseChangelog(zhContent, 'zh')
 
-  console.log(`解析 ${version}:`)
-  console.log(`  新功能: ${sections.features.length} 项${sections.features.length > 0 ? ' (' + sections.features.join(', ') + ')' : ''}`)
-  console.log(`  修复: ${sections.fixes.length} 项`)
-  console.log(`  改进: ${sections.improvements.length} 项`)
-  console.log(`  日期: ${sections.date}\n`)
+  console.log(`解析 ${version} (中文):`)
+  console.log(`  新功能: ${zhSections.features.length} 项${zhSections.features.length > 0 ? ' (' + zhSections.features.join(', ') + ')' : ''}`)
+  console.log(`  修复: ${zhSections.fixes.length} 项`)
+  console.log(`  改进: ${zhSections.improvements.length} 项`)
+  console.log(`  日期: ${zhSections.date}\n`)
 
-  // 1. 生成 AI 背景图
-  const bgPrompt = buildBgPrompt(version, sections)
+  // 1. 生成 AI 背景图（基于中文内容生成 prompt，中英文共享同一背景）
+  const bgPrompt = buildBgPrompt(version, zhSections)
   const bgBuffer = await generateBgImage(bgPrompt, apiKey)
   console.log(`背景图已生成 (${(bgBuffer.length / 1024 / 1024).toFixed(1)} MB)`)
 
-  // 2. 构建文字叠加层
-  const overlaySvg = buildTextOverlay(version, sections)
-
-  // 3. 合成最终宣传图
-  console.log('正在合成宣传图...')
-  const finalBuffer = await compositeImage(bgBuffer, overlaySvg)
-
-  // 4. 保存
   mkdirSync(IMG_DIR, { recursive: true })
-  writeFileSync(imgFile, finalBuffer)
-  console.log(`宣传图已保存: ${imgFile} (${(finalBuffer.length / 1024 / 1024).toFixed(1)} MB)`)
 
-  // 5. 插入图片引用
-  const updated = insertImageRef(content, version, imgRefPath)
-  if (updated !== content) {
-    writeFileSync(mdFile, updated)
-    console.log(`已在 ${version}.md 中插入图片引用`)
+  // 2. 生成中文配图
+  console.log('正在合成中文宣传图...')
+  const zhOverlaySvg = buildTextOverlay(version, zhSections, 'zh')
+  const zhFinalBuffer = await compositeImage(bgBuffer, zhOverlaySvg)
+  writeFileSync(zhImgFile, zhFinalBuffer)
+  console.log(`中文宣传图已保存: ${zhImgFile} (${(zhFinalBuffer.length / 1024 / 1024).toFixed(1)} MB)`)
+
+  // 插入中文图片引用
+  const zhUpdated = insertImageRef(zhContent, version, zhImgRefPath)
+  if (zhUpdated !== zhContent) {
+    writeFileSync(zhMdFile, zhUpdated)
+    console.log(`已在中文 ${version}.md 中插入图片引用`)
+  }
+
+  // 3. 生成英文配图（共享背景，英文文字叠加层）
+  if (existsSync(enMdFile)) {
+    const enContent = readFileSync(enMdFile, 'utf-8')
+    const enSections = parseChangelog(enContent, 'en')
+
+    console.log(`\n解析 ${version} (English):`)
+    console.log(`  Features: ${enSections.features.length}`)
+    console.log(`  Fixes: ${enSections.fixes.length}`)
+    console.log(`  Improvements: ${enSections.improvements.length}`)
+    console.log(`  Date: ${enSections.date}\n`)
+
+    console.log('正在合成英文宣传图...')
+    const enOverlaySvg = buildTextOverlay(version, enSections, 'en')
+    const enFinalBuffer = await compositeImage(bgBuffer, enOverlaySvg)
+    writeFileSync(enImgFile, enFinalBuffer)
+    console.log(`英文宣传图已保存: ${enImgFile} (${(enFinalBuffer.length / 1024 / 1024).toFixed(1)} MB)`)
+
+    // 更新英文 markdown 引用英文配图
+    const enImgRef = enContent.includes('![')
+      ? enContent.replace(/!\[.*?\]\(\/img\/changelog\/[^)]+\)/, `![${version} Release Overview](${enImgRefPath})`)
+      : insertImageRef(enContent, version, enImgRefPath)
+    if (enImgRef !== enContent) {
+      writeFileSync(enMdFile, enImgRef)
+      console.log(`已在英文 ${version}.md 中更新图片引用`)
+    }
+  } else {
+    console.log(`未找到英文 changelog: ${enMdFile}，跳过英文配图生成`)
   }
 
   console.log('\n完成!')
