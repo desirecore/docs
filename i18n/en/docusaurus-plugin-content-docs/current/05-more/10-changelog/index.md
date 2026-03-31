@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.21](./v10.0.21) | 2026-03-31 | 修复：Fixed an issue on Windows where abnormal resolution of the user directory ... |
 | [v10.0.20](./v10.0.20) | 2026-03-30 | 修复：Fixed an issue where, when creating an agent from the plus menu, the popup... |
 | [v10.0.19](./v10.0.19) | 2026-03-29 | 修复：Fixed an issue where, during streaming output of conversation content, com... |
 | [v10.0.18](./v10.0.18) | 2026-03-29 | Update Notes Pop-up、Team Organizational Chart、Enhanced Team Management、Tool T... |
