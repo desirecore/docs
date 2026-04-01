@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.23](./v10.0.23) | 2026-04-01 | ZIP Agent Import，修复 3 项问题，改进 2 项 |
 | [v10.0.22](./v10.0.22) | 2026-03-31 | 修复：In Windows environments, `.md` files in AI responses can now be correctly ... |
 | [v10.0.21](./v10.0.21) | 2026-03-31 | 修复：Fixed an issue on Windows where abnormal resolution of the user directory ... |
 | [v10.0.20](./v10.0.20) | 2026-03-30 | 修复：Fixed an issue where, when creating an agent from the plus menu, the popup... |
