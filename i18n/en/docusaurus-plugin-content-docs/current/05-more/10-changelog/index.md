@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.25](./v10.0.25) | 2026-04-08 | Agent Proactive Messages、In-Session Waiting，修复 2 项问题，改进 1 项 |
 | [v10.0.24](./v10.0.24) | 2026-04-06 | Error Log Panel、Tool Search，修复 3 项问题，改进 3 项 |
 | [v10.0.23](./v10.0.23) | 2026-04-01 | ZIP Agent Import，修复 3 项问题，改进 2 项 |
 | [v10.0.22](./v10.0.22) | 2026-03-31 | 修复：In Windows environments, `.md` files in AI responses can now be correctly ... |
