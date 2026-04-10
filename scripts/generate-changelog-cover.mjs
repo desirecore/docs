@@ -71,7 +71,7 @@ const VISUAL_MAP = {
 
 const FIX_VISUALS = '精密齿轮组、扳手工具、绿色对勾修复标记'
 
-const FONT = "'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif"
+const FONT = "'Alibaba PuHuiTi 3.0', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif"
 
 // 项目色彩体系
 const COLORS = {
