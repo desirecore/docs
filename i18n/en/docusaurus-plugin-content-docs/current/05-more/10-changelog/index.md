@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.27](./v10.0.27) | 2026-04-10 | Global built-in email skills、Inline review of editor changes、Selective data i... |
 | [v10.0.26](./v10.0.26) | 2026-04-09 | Built-in Global Skill Expansion、Explore Delegation Preset、Dedicated SendUserM... |
 | [v10.0.25](./v10.0.25) | 2026-04-08 | Agent Proactive Messages、In-Session Waiting，修复 2 项问题，改进 1 项 |
 | [v10.0.24](./v10.0.24) | 2026-04-06 | Error Log Panel、Tool Search，修复 3 项问题，改进 3 项 |
