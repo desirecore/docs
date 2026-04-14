@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.31](./v10.0.31) | 2026-04-14 | Quick actions for user message cards，修复 6 项问题，改进 1 项 |
 | [v10.0.30](./v10.0.30) | 2026-04-14 | 修复：Fixed an issue where the protocol-compatible proxy could unexpectedly inte... |
 | [v10.0.29](./v10.0.29) | 2026-04-13 | Team Import/Export、Automatic Update Checks for Built-in Skills、Copy Audit Det... |
 | [v10.0.28](./v10.0.28) | 2026-04-13 | Structured Follow-up and Confirmation Interactions、Git Runtime Environment De... |
