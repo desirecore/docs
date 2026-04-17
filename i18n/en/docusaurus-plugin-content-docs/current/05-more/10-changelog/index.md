@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.34](./v10.0.34) | 2026-04-17 | 修复：When an error occurs midway through a streaming reply, the error message w... |
 | [v10.0.33](./v10.0.33) | 2026-04-16 | Workflow System、Workflow Execution and Tracking、Workflow Result Cards、PowerSh... |
 | [v10.0.32](./v10.0.32) | 2026-04-15 | 修复：Fixed issues during Agent delegation handoff where background information ... |
 | [v10.0.31](./v10.0.31) | 2026-04-14 | Quick actions for user message cards，修复 6 项问题，改进 1 项 |
