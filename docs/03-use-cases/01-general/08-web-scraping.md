@@ -42,7 +42,7 @@
 ## 典型使用场景
 
 ### 场景一：官网商品采集
-![官网商品采集](./assets/screenshot-20260414-223418.png)
+![官网商品采集](./assets/gucci-products-scraping.png)
 文件地址：./assets/web-scraping/gucci_handbags.xlsx
 
 ```

@@ -95,8 +95,8 @@
 
 
 ```
-![微服务架构图](./assets/screenshot-20260414-223754.png)
-文件地址：./assets/流程图/microservice-architecture.drawio
+![微服务架构图](./assets/microservice-architecture.png)
+文件地址：./assets/flowchart/microservice-architecture.drawio
 
 ### 场景三：从文档提取流程
 
