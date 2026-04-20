@@ -8,7 +8,7 @@ keywords: [Data Analysis, Report Generation, Visualization, Excel, Financial Rep
 
 ## Pain Points
 
-Every week, month, and quarter, business teams need to submit various data analysis reports: sales weekly reports, operations monthly reports, financial quarterly reports. Reports have strict format requirements, chart styles must be uniform, and data口径 must be consistent. Analysts spend a lot of time on "template filling": exporting data from Excel, adjusting formats, creating charts, writing conclusions — a single report takes at least half a day.
+Every week, month, and quarter, business teams need to submit various data analysis reports: sales weekly reports, operations monthly reports, financial quarterly reports. Reports have strict format requirements, chart styles must be uniform, and ensure consistency in data definitions. Analysts spend a lot of time on "template filling": exporting data from Excel, adjusting formats, creating charts, writing conclusions — a single report takes at least half a day.
 
 This use case lets an AI agent automatically generate standardized enterprise data analysis reports. Input raw data and report templates, and get professionally formatted, visually rich reports.
 
