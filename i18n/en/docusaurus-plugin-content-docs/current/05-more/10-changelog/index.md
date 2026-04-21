@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.36](./v10.0.36) | 2026-04-21 | 修复：When encountering an empty stream during a conversation, a long period of ... |
 | [v10.0.35](./v10.0.35) | 2026-04-20 | Built-in Windows PowerShell Tool、Continue Generating Button in the Input Box，... |
 | [v10.0.34](./v10.0.34) | 2026-04-17 | 修复：When an error occurs midway through a streaming reply, the error message w... |
 | [v10.0.33](./v10.0.33) | 2026-04-16 | Workflow System、Workflow Execution and Tracking、Workflow Result Cards、PowerSh... |
