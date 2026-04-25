@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.37](./v10.0.37) | 2026-04-25 | Approval Notification System、Memory Write Cards、Audit Log Export，修复 7 项问题，改进 2 项 |
 | [v10.0.36](./v10.0.36) | 2026-04-21 | 修复：When encountering an empty stream during a conversation, a long period of ... |
 | [v10.0.35](./v10.0.35) | 2026-04-20 | Built-in Windows PowerShell Tool、Continue Generating Button in the Input Box，... |
 | [v10.0.34](./v10.0.34) | 2026-04-17 | 修复：When an error occurs midway through a streaming reply, the error message w... |
