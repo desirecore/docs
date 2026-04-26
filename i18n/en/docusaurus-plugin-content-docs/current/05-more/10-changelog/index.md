@@ -75,6 +75,40 @@ The first public release of DesireCore, including the following core features:
 
 ---
 
+## Version Management Architecture
+
+The diagram below summarizes DesireCore's branching model, release channels, and tag conventions. The overall strategy: **any branch can be tagged into Alpha/Beta, with manual promotion to Stable, while the main branch (`main`) drives stable releases**.
+
+![DesireCore Version Management Architecture](/img/changelog/version-architecture.png)
+
+### Branching & Development Flow
+
+- **`main`**: The stable trunk. Only accepts PRs from `dev` or `hotfix/*`, and is the source for Stable releases.
+- **`dev`**: The integration branch. All `feature/*` work merges here via PR; its HEAD maps to the Alpha channel by default.
+- **`feature/*`**: Feature branches forked from `dev`. PR back to `dev` once complete.
+- **`hotfix/*`**: Emergency fix branches forked from `main`. After merging into `main`, fixes are back-merged into `dev` to avoid regressions in upcoming releases.
+
+### Release & Channel Flow
+
+DesireCore releases progress through three channels — Alpha → Beta → Stable:
+
+- **Alpha**: Development channel tracking the current commit on `dev`, used for day-to-day verification.
+- **Beta**: Pre-release channel where maintainers pick a commit on `main` and tag it `vX.Y.Z-beta.N` for early adopters.
+- **Stable**: Stable channel where, after Beta validation, maintainers manually promote the build to `vX.Y.Z`.
+
+### Core Rules
+
+- **Tags derive from commits**: Each release maps to a unique, reproducible commit.
+- **No direct pushes to `main`**: All changes land via PR, gated by code review and CI.
+- **Promotion, not rebuilding**: Beta → Stable is a channel switch — the binaries are byte-identical to the Beta build, so upgrading users receive exactly what was tested.
+- **Hotfix back-merge**: After a `hotfix/*` lands on `main`, it must be back-merged into `dev` so the next release does not regress the fix.
+
+### Build Artifacts & Version Conventions
+
+Each Stable release ships multi-platform artifacts (macOS arm64/x64, Windows, Linux deb, etc.), distinguished by version number and platform identifier in the filename. Version numbers follow Semantic Versioning (`major.minor.patch`), with pre-release suffixes appended as `-alpha.N` / `-beta.N`.
+
+---
+
 :::info Version Notes
 DesireCore follows Semantic Versioning. Each version number follows the format `major.minor.patch`.
 :::

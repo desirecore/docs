@@ -75,6 +75,40 @@ DesireCore 的首个公开版本，包含以下核心功能：
 
 ---
 
+## 版本管理架构
+
+下图概述了 DesireCore 的分支模型、发布渠道与 Tag 规范。整体策略是：**任意分支打 Tag 即可进入 Alpha/Beta 渠道，人工切换到 Stable，主分支（`main`）负责稳定发布**。
+
+![DesireCore 版本管理架构](/img/changelog/version-architecture.png)
+
+### 分支与开发流程
+
+- **`main`**：稳定主干，仅接受来自 `dev` 或 `hotfix/*` 的 PR，是 Stable 渠道发布的来源。
+- **`dev`**：日常集成分支，所有 `feature/*` 通过 PR 合入，其 HEAD 默认对应 Alpha 渠道。
+- **`feature/*`**：从 `dev` 派生的特性分支，开发完成后向 `dev` 提交 PR。
+- **`hotfix/*`**：从 `main` 派生的紧急修复分支，修复后合回 `main`，并回流到 `dev` 以避免后续版本回退。
+
+### 发布与渠道流程
+
+DesireCore 按 Alpha → Beta → Stable 三级渠道渐进推送：
+
+- **Alpha**：开发渠道，跟踪 `dev` 当前 commit，主要用于日常验证。
+- **Beta**：预发布渠道，由维护者从 `main` 选定 commit 打 `vX.Y.Z-beta.N` Tag，面向愿意尝鲜的用户。
+- **Stable**：稳定渠道，待 Beta 验证通过后由维护者人工晋级为 `vX.Y.Z`。
+
+### 核心规则
+
+- **Tag 由 Commit 派生**：每个版本对应唯一的 commit，构建产物可追溯、可复现。
+- **`main` 不允许直推**：所有变更必须通过 PR 合入，并通过代码审查与 CI。
+- **晋级而非重打包**：Beta → Stable 是渠道切换，不会重新构建二进制；用户升级到 Stable 时获得的产物与 Beta 完全一致。
+- **Hotfix 双向回流**：`hotfix/*` 合入 `main` 后需同步回 `dev`，确保下一个版本不会丢失已发布的修复。
+
+### 部署产物与版本规范
+
+每个 Stable 版本同时构建多平台产物（macOS arm64/x64、Windows、Linux deb 等），文件名通过版本号与平台标识进行区分。版本号遵循语义化版本 `主版本.次版本.修订版本`，预发布后缀以 `-alpha.N` / `-beta.N` 形式追加。
+
+---
+
 :::info 版本说明
 DesireCore 采用语义化版本号（Semantic Versioning）。每个版本号格式为 `主版本.次版本.修订版本`。
 :::
