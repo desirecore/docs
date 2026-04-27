@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.39](./v10.0.39) | 2026-04-27 | Enhanced Cloud Publishing and Importing、Agent Version Management、Media Genera... |
 | [v10.0.38](./v10.0.38) | 2026-04-27 | Agent Cloud Publishing and Importing、Agent Version Management、Media Generatio... |
 | [v10.0.37](./v10.0.37) | 2026-04-25 | Approval Notification System、Memory Write Cards、Audit Log Export，修复 7 项问题，改进 2 项 |
 | [v10.0.36](./v10.0.36) | 2026-04-21 | 修复：When encountering an empty stream during a conversation, a long period of ... |
