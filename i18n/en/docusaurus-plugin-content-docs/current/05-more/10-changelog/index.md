@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.41](./v10.0.41) | 2026-04-28 | Alpha Internal Testing Channel，修复 4 项问题 |
 | [v10.0.40](./v10.0.40) | 2026-04-28 | 修复：Fixed an issue in multi-turn conversations where follow-up questions could... |
 | [v10.0.39](./v10.0.39) | 2026-04-27 | Enhanced Cloud Publishing and Importing、Agent Version Management、Media Genera... |
 | [v10.0.38](./v10.0.38) | 2026-04-27 | Agent Cloud Publishing and Importing、Agent Version Management、Media Generatio... |
