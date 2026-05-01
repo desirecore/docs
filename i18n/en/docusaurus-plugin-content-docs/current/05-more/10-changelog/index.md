@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.44](./v10.0.44) | 2026-05-01 | 改进：Desktop runtime environment upgrade |
 | [v10.0.43](./v10.0.43) | 2026-05-01 | Brand-new update flow、Automatic update mode、draw.io diagram editing support、C... |
 | [v10.0.42](./v10.0.42) | 2026-04-28 | 修复：Front-end page refresh shortcuts have now been fully disabled in the deskt... |
 | [v10.0.41](./v10.0.41) | 2026-04-28 | Alpha Internal Testing Channel，修复 4 项问题 |
