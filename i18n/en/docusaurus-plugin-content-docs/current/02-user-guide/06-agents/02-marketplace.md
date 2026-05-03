@@ -71,6 +71,18 @@ If the Agent contains high-risk skills (such as file writing, command execution)
 
 Some Agents depend on specific tools or connections. If dependencies are missing, the system will prompt you to install the required components first.
 
+## Importing Agents
+
+Besides installing from the marketplace, you can import Agents from local files or public locations:
+
+| Method | Description |
+|--------|-------------|
+| Folder import | Select a local AgentFS folder |
+| ZIP import | Select a packaged Agent archive |
+| Public URL import | Enter a public repository or reachable Agent address |
+
+During import, DesireCore checks `agent.json`, repository structure, and agent ID. If a local Agent already uses the same UUID or path, the interface prompts you to overwrite, skip, or keep the existing content.
+
 ## Updating and Uninstalling
 
 ### Updating
@@ -94,5 +106,5 @@ If you have manually modified the Agent's configuration, the system will detect 
 
 ## Next Steps
 
-- [Create Custom Agent](./03-create-agent.md) — If the marketplace doesn't have an Agent that meets your needs, create one yourself
-- [Skills Management](./07-skills-management.md) — Learn how to add and manage skills for Agents
+- [Create Custom Agent](./03-create-agent.md) - If the marketplace doesn't have an Agent that meets your needs, create one yourself
+- [Skills Management](./07-skills-management.md) - Learn how to add and manage skills for Agents

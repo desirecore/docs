@@ -51,6 +51,20 @@ All dependencies for the DesireCore desktop version are built-in, and usually no
 | Runtime Environment | Yes | Built-in |
 | Git | No (recommended) | Used for Agent version management (optional) |
 
+## Runtime Environment Detection
+
+Open **Explorer** -> **Compute** -> **Runtime Environment** to inspect local toolchain status. The page detects common runtimes and command-line tools so you can tell whether agents can run scripts, code tasks, or container-related work.
+
+| Item | Description |
+|------|-------------|
+| Node.js / npm | Common for frontend, MCP, and script tools |
+| Python | Common for data analysis, document processing, and automation scripts |
+| Git | Used for agent repository versioning, publishing, and import |
+| Docker / Podman | Used for containerized builds and isolated tasks |
+| PowerShell | Windows command and script execution environment |
+
+Git detection shows installation state, version, path, and whether DesireCore is using native Git or a compatibility backend.
+
 ## Network Requirements
 
 ### Required Network Connections
@@ -78,6 +92,8 @@ The following features do not require network (when using Ollama local models):
 | Port | Purpose | Notes |
 |------|------|------|
 | Any available port | Agent Service (Fastify + Socket.IO) | Internal app communication, auto-assigned |
+| Any available port | Workflow Service | Workflow execution service, auto-assigned |
+| Any available port | Mail Service | Mail service, auto-assigned |
 | 11434 | Ollama local models | Only needed when using Ollama |
 | 8080 | Local Whisper | Only needed when using local voice recognition |
 

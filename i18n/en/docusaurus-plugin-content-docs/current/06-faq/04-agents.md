@@ -10,10 +10,10 @@ keywords: [Agent, Companion, installation failure, reset, marketplace, skills, m
 
 Common causes and solutions for marketplace installation failures:
 
-1. **Network issues** — Marketplace resources need to be downloaded from remote repositories; check network connection
-2. **Insufficient disk space** — Companion resources are stored in the `~/.desirecore/agents/` directory; ensure sufficient disk space
-3. **Version incompatibility** — Some Companions may require higher versions of the DesireCore client. Check if the error message contains `clientUpgradeRequired` information; if so, please update the client first
-4. **Directory permissions** — Ensure the `~/.desirecore/` directory has read/write permissions
+1. **Network issues** - Marketplace resources need to be downloaded from remote repositories; check network connection
+2. **Insufficient disk space** - Companion resources are stored in the `~/.desirecore/agents/` directory; ensure sufficient disk space
+3. **Version incompatibility** - Some Companions may require higher versions of the DesireCore client. Check if the error message contains `clientUpgradeRequired` information; if so, please update the client first
+4. **Directory permissions** - Ensure the `~/.desirecore/` directory has read/write permissions
 
 ## How to reset Companion to initial state?
 
@@ -45,10 +45,10 @@ If the Companion forgets content from conversations, it may be caused by context
 
 There are two ways:
 
-1. **Install from marketplace** — Browse and install skills in the marketplace; they will automatically be associated with the Companion after installation
-2. **Manual import** — Click "Import Skill" in the runtime status panel and select the skill file
+1. **Install from marketplace** - Browse and install skills in the marketplace; they will automatically be associated with the Companion after installation
+2. **Manual import** - Click "Import Skill" in skills management and select a `.md` skill file, a folder containing `SKILL.md`, or a `.zip` skill package
 
-Skills are stored as SKILL.md files in the `~/.desirecore/skills/` directory.
+Global skills are stored under `~/.desirecore/skills/`; agent-specific skills are stored inside the corresponding Companion repository. If an import fails, the UI shows the specific reason, such as missing `SKILL.md`, inaccessible paths, or invalid ZIP structure.
 
 ## What's the difference between global skills and exclusive skills?
 
@@ -56,6 +56,8 @@ Skills are stored as SKILL.md files in the `~/.desirecore/skills/` directory.
 |------|---------|---------|---------|
 | Global Skills | `~/.desirecore/skills/` | Available to all Companions | Automatically synced with client updates |
 | Exclusive Skills | Within Companion repository | Only available to corresponding Companion | Managed by the Companion itself |
+
+Project directories can also provide project-level skills through `.agents/skills/` or `.claude/skills/`. These are only available in the corresponding work directory context.
 
 ## What do Companion online/offline statuses mean?
 
@@ -72,7 +74,7 @@ If the Companion is in offline status, a "Start" button will be displayed in the
 Click the "Agent Profile" button (book icon) in the chat header to view the Companion's:
 
 - Basic information (name, role, description)
-- Installed skills
+- Installed skills, versions, and authors
 - Memory entries
 - Runtime status
 
@@ -91,6 +93,8 @@ The Companion's avatar and name are determined by its `agent.json` configuration
 1. Open the `~/.desirecore/agents/<companion-id>/` directory
 2. Edit the `name` and `avatar` fields in `agent.json`
 3. Restart the application to take effect
+
+To adjust the default model, edit the `llm` field in `agent.json`. Legacy `runtime` model configuration is migrated for compatibility, but new configuration should use `llm`.
 
 :::info
 Companions installed from the marketplace may overwrite your customizations after updates. It's recommended to only make custom modifications to locally created Companions.

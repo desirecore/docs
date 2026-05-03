@@ -1,274 +1,353 @@
 ---
-title: Built-in Tools Reference
-description: Complete list of all tools built into DesireCore, including each tool's function description, use cases, and risk level.
+title: Built-in Tools Overview
+description: Complete list of DesireCore built-in tools, including purpose, usage scenarios, and risk levels.
 keywords: [built-in tools, tool list, file operations, search, command execution, web fetch]
 ---
 
-# Built-in Tools Reference
+# Built-in Tools Overview
 
-Built-in tools are basic capabilities that come with DesireCore, installed with the client, ready to use without additional configuration. Below is the complete list of all built-in tools.
+Built-in tools ship with DesireCore and require no extra installation. Agents see only tools that are actually available in the current platform, permission policy, runtime environment, and task context.
 
 ## File Operations
 
-### Read — Read File
+### Read - Read Files
+
+Reads text, code, configuration files, images, and notebook content. It supports ranged reads, pagination, image preview, and notebook cell reads.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Inspect code, read documents, check configuration, preview images |
 
-Read content of file at specified path. Supports line number display and pagination for text files, automatically detects image files and presents them visually. For very large files, can specify read range (offset + limit).
+### Write - Write Files
 
-**Typical Use Cases**: View code files, read documents, view configuration files, preview images.
-
-### Write — Write File
+Creates a new file or fully overwrites an existing file. Missing directories are created automatically.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Medium |
 | Requires Confirmation | Yes |
+| Typical Use Cases | Create documents, save reports, generate configuration files |
 
-Write content to file at specified path. Automatically creates directory if it doesn't exist. This operation overwrites existing file content.
+### Edit - Edit Files
 
-**Typical Use Cases**: Create new files, save generated content, update configuration files.
-
-### Edit — Edit File
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Medium |
-| Requires Confirmation | Yes |
-
-Precise text replacement tool. Modifies files by specifying original text and new text, safer than full file overwrite. Supports smart matching (e.g., automatically handling quote style differences).
-
-**Typical Use Cases**: Modify specific functions in code, update configuration items, fix errors in documents.
-
-### NotebookEdit — Edit Jupyter Notebook
+Performs precise text replacement. It is better for small patches than rewriting an entire file.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Medium |
 | Requires Confirmation | Yes |
+| Typical Use Cases | Patch code, update configuration, fix a section of a document |
 
-Edit specified cells in Jupyter Notebook (.ipynb) files. Supports replace, insert, and delete modes.
+### NotebookEdit - Edit Jupyter Notebooks
 
-**Typical Use Cases**: Modify data analysis scripts, update experiment code, organize Notebook structure.
+Replaces, inserts, or deletes a specific Jupyter Notebook cell.
 
-## Search and Browse
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Yes |
+| Typical Use Cases | Adjust analysis notebooks, update experiments, organize computation steps |
 
-### Glob — Search File Names
+## Search and Discovery
+
+### Glob - Search File Names
+
+Finds files with glob patterns such as `**/*.ts`.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Find config files, locate tests, inspect project structure |
 
-Search files in directory by pattern. Supports glob wildcard patterns (e.g., `**/*.ts`). Prioritizes high-performance fd tool, automatically respects .gitignore rules.
+### Grep - Search File Contents
 
-**Typical Use Cases**: Find specific file types, locate configuration files in projects, search for test files.
-
-### Grep — Search File Content
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Low |
-| Requires Confirmation | No |
-
-Search for matching text content in files. Supports regular expressions and context line count. Prioritizes high-performance ripgrep, automatically respects .gitignore rules.
-
-**Typical Use Cases**: Search for function calls in code, find specific error messages, locate keywords in documents.
-
-### Ls — List Directory Contents
+Searches text or regular expressions in files with context lines, type filters, case control, and multiple output modes.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Find function calls, locate error messages, search documentation |
 
-List all files and subdirectories in specified directory. Shows file sizes, supports recursive mode. Skips hidden files by default.
+### Ls - List Directory
 
-**Typical Use Cases**: Browse project structure, view file lists in directories, understand project organization.
+Lists files and subdirectories, with optional recursion.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Browse workspaces, confirm paths, inspect folders |
+
+### ToolSearch - Search Available Tools
+
+Searches deferred tools and external capabilities that may be loaded on demand.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Find GitHub, browser debugging, or documentation lookup tools |
 
 ## Command Execution
 
-### Bash — Execute Command
+### Bash - Execute Shell Commands
+
+Runs shell commands. It supports timeouts, background execution, and output truncation.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | High |
 | Requires Confirmation | Yes |
+| Typical Use Cases | Run tests, build projects, install dependencies, execute scripts |
 
-Execute shell commands. Supports pipes, redirects, and other shell features. Cross-platform support (bash on macOS/Linux, Git Bash on Windows). Has timeout protection and output truncation mechanism.
-
-**Typical Use Cases**: Run build commands, execute tests, install dependencies, view system status.
-
-:::warning High Risk Operation
-Command execution is a high-risk operation requiring your confirmation every time. The agent will display the complete command to be executed in the confirmation dialog—please read carefully before confirming.
+:::warning High-Risk Operation
+Command execution can modify system state or access external networks. Review the command, working directory, and intent before approving.
 :::
 
-### Which — Check Command Availability
+### PowerShell - Execute Windows PowerShell Commands
+
+Available on Windows. Runs PowerShell commands and scripts with version-aware guidance, timeouts, background execution, and large-output handling.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | High |
+| Requires Confirmation | Yes |
+| Typical Use Cases | Windows administration, PowerShell scripts, local environment checks |
+
+### Which - Check Command Availability
+
+Checks whether one or more command-line tools are installed and returns executable paths.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Verify dependencies before running commands |
 
-Check if one or more command-line tools are installed in the system and return executable file paths.
+### Sleep - Wait in the Current Session
 
-**Typical Use Cases**: Check if tools are installed before executing commands.
+Waits from 0.1 to 300 seconds, then continues the same task chain. It does not occupy a shell process and can be interrupted.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Wait for builds, poll deployment status, rate-limit requests |
+
+:::tip Sleep vs. CreateSchedule
+Use `Sleep` for a short wait before continuing the current task. Use `CreateSchedule` for independent background reminders, reports, and recurring tasks.
+:::
 
 ## Network
 
-### WebFetch — Fetch Webpage
+### WebFetch - Fetch Web Pages
+
+Fetches a web page and converts it to Markdown, with main-content extraction, caching, and timeout controls.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Read online docs, inspect API references, extract article text |
 
-Fetch webpage content and convert to Markdown format. Supports smart content extraction (automatically removes ads and navigation bars), built-in 15-minute cache.
+### WebSearch - Search the Web
 
-**Typical Use Cases**: Consult online documentation, get blog article content, view API references.
-
-### WebSearch — Web Search
+Searches the internet with result limits and domain filters.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Find current information, public references, troubleshooting material |
 
-Search the internet for latest information. Supports domain whitelist and blacklist filtering.
+### HttpRequest - Send HTTP Requests
 
-**Typical Use Cases**: Find latest technical materials, search for problem solutions, get real-time information.
+Registered primarily on Windows for environments where common command-line network tools are unavailable.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on request content |
+| Typical Use Cases | Call APIs, check service status, retrieve structured data |
 
 ## Agent Collaboration
 
-### spawn_agent — Spawn Sub-agent
+### Delegate - Delegate Tasks
+
+Delegates work to another agent, a team, or a preset such as Explore. Supports sync, async, and handoff-style flows.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Medium |
-| Requires Confirmation | Yes |
+| Requires Confirmation | Depends on permissions and task content |
+| Typical Use Cases | Cross-domain collaboration, parallel research, read-only Explore analysis |
 
-Spawn a temporary sub-agent to handle specific subtasks. Sub-agents have independent context and tool sets, suitable for breaking complex tasks into independent sub-problems.
+### spawn_agent - Spawn Sub-Agent
 
-**Typical Use Cases**: Process multiple independent subtasks in parallel, split complex problems to specialized sub-agents.
-
-### handoff — Handoff Session
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Medium |
-| Requires Confirmation | Yes |
-
-Transfer current session to another agent, carrying context summary. Used when current agent believes another agent is better suited to handle your needs.
-
-**Typical Use Cases**: Problem exceeds current agent's professional scope, need another agent's specialized tools.
-
-### request_help — Request Assistance
+Starts a temporary sub-agent with an isolated context for a concrete subtask.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Medium |
-| Requires Confirmation | Yes |
+| Requires Confirmation | Depends on permissions and task content |
+| Typical Use Cases | Read several modules in parallel, split large investigations |
 
-Request professional assistance from another persistent agent. Unlike spawn_agent, the requested agent has its own memory and professional knowledge—similar to "asking a colleague."
+### handoff - Handoff Session
 
-**Typical Use Cases**: Need opinions from other domain experts, cross-agent collaboration to complete complex tasks.
-
-## Workspace Management
-
-### ManageWorkDirs — Manage Working Directories
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Medium |
-| Requires Confirmation | Yes |
-
-Manage user's working directory configuration. Supports listing, adding, removing, and setting primary directories.
-
-**Typical Use Cases**: Switch project workspaces, add new project directories.
-
-### GenerateUUID — Generate Unique Identifier
+Transfers the current conversation to a more suitable agent with reason and context summary.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Move a task to a specialized agent |
 
-Generate UUID v4 unique identifiers for scenarios requiring unique IDs.
+### request_help - Request Help
 
-**Typical Use Cases**: Create new agents, generate session identifiers.
-
-## Memory and Skills
-
-### RecallConversation — Retrieve Conversation History
+Asks another persistent agent for advice or assistance.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Consult a specialist agent |
 
-Retrieve topic records from conversation history. Can search for specific topics or browse by time range.
+### SendMessage - Agent-to-Agent Message
 
-**Typical Use Cases**: Review previously discussed solutions, find past decision records, reference historical conversations.
-
-### Skill — Load Skill
+Sends a message to another agent with context, intent, and waiting behavior.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Multi-agent collaboration, result handoff, team communication |
 
-Load and execute specified skill pack. Skill packs contain complete instructions that agents will strictly follow.
+### SendUserMessage - Send Message to User
 
-**Typical Use Cases**: Execute predefined workflows, apply professional skills.
+Sends a Markdown message to you, optionally with file attachments and proactive status.
 
-### CreateSchedule — Create Scheduled Task
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Report progress, send attached material, proactively surface important context |
+
+### AskUserQuestion - Ask the User
+
+Displays structured question cards in the current conversation.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Clarify requirements, confirm choices, gather multiple fields |
+
+### ManageTeam - Manage Team
+
+Creates and adjusts agent teams, supervisors, members, and team tasks.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Medium |
+| Requires Confirmation | Depends on operation |
+| Typical Use Cases | Form specialist teams, assign team-level work |
+
+## Workspace and Data
+
+### ManageWorkDirs - Manage Work Directories
+
+Lists, adds, removes, and sets primary work directories.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Yes |
+| Typical Use Cases | Add project folders, switch primary workspace, remove paths |
+
+### GenerateUUID - Generate Unique IDs
+
+Generates one or more UUID v4 identifiers.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
 | Requires Confirmation | No |
+| Typical Use Cases | Create IDs, generate test data, name resources |
 
-Create scheduled tasks. Supports delayed execution, specified time, periodic scheduling, and other modes.
+### RecallConversation - Retrieve Conversation History
 
-**Typical Use Cases**: Set timed reminders, create periodic report tasks, configure automatic checks.
+Retrieves historical conversations by keyword and time range.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Review prior discussions, find past decisions, restore context |
+
+### JsonRepair - Repair JSON
+
+Repairs common JSON formatting issues and can shape output toward an expected structure.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Fix model-generated JSON, clean configuration snippets |
+
+## Skills and Scheduling
+
+### Skill - Load Skill
+
+Loads and executes an installed skill pack. Skills may declare tools, trigger behavior, context mode, model, and provider preferences.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Inherited from skill configuration |
+| Requires Confirmation | Inherited from skill and invoked tools |
+| Typical Use Cases | Run professional workflows, invoke custom capabilities |
+
+### CreateSchedule - Create Scheduled Task
+
+Creates a background scheduled task using a specific time, delay, interval, or cron rule.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on approval policy |
+| Typical Use Cases | Set reminders, generate periodic reports, schedule independent prompt checks |
 
 ## MCP Resources
 
-### McpListResources — List MCP Resources
+### McpListResources / McpReadResource
+
+Lists or reads resources exposed by MCP servers.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
 
-List readable resources exposed by connected MCP Servers.
+### McpListPrompts / McpGetPrompt
 
-### McpReadResource — Read MCP Resource
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Low |
-| Requires Confirmation | No |
-
-Read content of specified resource provided by MCP Server.
-
-### McpListPrompts — List MCP Prompt Templates
+Lists or expands prompt templates provided by MCP servers.
 
 | Attribute | Value |
 |-----------|-------|
 | Risk Level | Low |
 | Requires Confirmation | No |
 
-List prompt templates provided by MCP Server.
+## Workflows
 
-### McpGetPrompt — Get MCP Prompt
+### WorkflowCreate / WorkflowValidate / WorkflowTest / WorkflowRun / WorkflowView
+
+Creates, validates, tests, runs, and opens workflow DSL files. Workflows can orchestrate triggers, code, LLM nodes, agents, and human gates.
 
 | Attribute | Value |
 |-----------|-------|
-| Risk Level | Low |
-| Requires Confirmation | No |
-
-Get and expand specified prompt template from MCP Server.
+| Risk Level | Low to Medium |
+| Requires Confirmation | No by default |
+| Typical Use Cases | Build reusable automations, validate workflows, run structured processes |

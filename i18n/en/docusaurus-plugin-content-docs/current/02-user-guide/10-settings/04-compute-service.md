@@ -1,113 +1,125 @@
 ---
 title: Compute Service Configuration
-description: Configure AI providers, manage API Keys and models to give agents reasoning capabilities.
+description: Configure AI providers, manage API keys and models, and give agents reasoning capability.
 keywords: [compute, AI provider, API Key, model, Provider, LLM, settings]
 ---
 
 # Compute Service Configuration
 
-Compute Service is one of DesireCore's core configurations. Agents need to call AI models to understand your intent, generate responses, and execute tasks, and these models are provided by various AI providers. You need to configure at least one provider here for the agent to work properly.
+Compute Service manages AI providers, API keys, model lists, and default mappings. Agents need at least one available model to understand requests, generate responses, call tools, and execute tasks. Image, voice, video, and music services are configured here as well.
 
-## Basic Concepts
+## Core Concepts
 
-- **Provider**: Platforms providing AI model services, such as OpenAI, Anthropic, DeepSeek, etc.
-- **API Key**: The key given to you by the provider for identity verification and billing
-- **Model**: Specific AI models, such as GPT-4o, Claude 3.5 Sonnet, DeepSeek-V3, etc.
-- **Default Mapping**: Specifies which model to use for different purposes
+| Concept | Description |
+|---------|-------------|
+| **Provider** | A platform or protocol configuration such as OpenAI, Anthropic, DeepSeek, Ollama, or OpenRouter |
+| **Provider ID** | The unique ID of a concrete provider instance |
+| **API Key** | The provider credential, stored in the system credential manager |
+| **Model** | A concrete model used for chat, tool use, image, voice, video, or music services |
+| **Default Mapping** | The default model selected for different task purposes |
 
-## Entering Compute Service Configuration
+## Opening Compute Settings
 
-There are two ways to enter:
+1. Open **Settings** -> **Compute Service**
+2. Or open **Explorer** -> **Compute** -> **AI Services**
 
-1. **Settings Panel** → Click **Compute Service** section (will jump to resource manager)
-2. **Resource Manager** → Click **Compute** card → **AI Services** Tab
+## Providers
 
-## Supported AI Providers
+DesireCore includes templates for many mainstream providers and supports custom OpenAI-compatible services:
 
-DesireCore has built-in configuration templates for over 20 mainstream AI providers:
+| Type | Examples | Good For |
+|------|----------|----------|
+| International providers | OpenAI, Anthropic, Google, Mistral, Cohere, xAI, Perplexity | General chat, reasoning, code, tool use |
+| China-based providers | DeepSeek, Zhipu, Qwen, Moonshot, Volcengine, iFlytek | Chinese tasks, local network conditions, cost control |
+| Aggregators | OpenRouter, SiliconFlow | Managing many models through one entry point |
+| Local models | Ollama | Local open-source models, device-local data, offline or intranet use |
+| Custom providers | Private deployments or company gateways | Internal OpenAI-compatible model services |
 
-| Provider | Description |
-|----------|-------------|
-| **OpenAI** | GPT-4o, GPT-4o-mini, etc. |
-| **Anthropic** | Claude 3.5 Sonnet, Claude 3 Opus, etc. |
-| **DeepSeek** | DeepSeek-V3, DeepSeek-R1, etc. |
-| **Google** | Gemini series |
-| **Zhipu AI** | GLM series |
-| **Baidu Wenxin** | ERNIE series |
-| **Tongyi Qianwen** | Qwen series |
-| **Moonshot** | Kimi series |
-| **SiliconFlow** | Aggregates multiple models |
-| **OpenRouter** | Unified interface aggregating multiple models |
-| **Ollama** | Locally deployed open-source models |
-| More... | Mistral, Cohere, xAI, Perplexity, Volcano Engine, iFlytek, etc. |
+Providers differ in price, context length, tool calling, media capability, regional availability, and network stability. A common setup is to configure more than one provider: low-cost models for routine work, higher-quality models for difficult reasoning or critical tasks, and Ollama or custom providers for local and intranet scenarios.
 
-:::tip How to Choose the Most Cost-Effective Configuration
-- **Limited Budget**: Recommend DeepSeek or Tongyi Qianwen, domestic models have lower prices and excellent Chinese capabilities
-- **Pursuing Quality**: Recommend Anthropic Claude or OpenAI GPT-4o
-- **Completely Free**: Use Ollama to run open-source models locally (requires good hardware configuration)
-- **Flexible Mix**: Configure multiple providers, use cheaper models for daily conversations, use high-end models for complex tasks
-:::
+You can also add custom providers. Custom providers usually need to be OpenAI API compatible. If media APIs and text APIs use different endpoints, configure a separate media API base URL.
 
-## Adding AI Providers
+## Adding and Verifying Providers
 
-1. On the AI Services page, click your target provider in the provider list on the left
-2. The right panel will display the configuration form for that provider
-3. Fill in your **API Key**
-4. If needed, modify the **Endpoint** (in most cases keep the default)
-5. After configuration, click verify to confirm the connection is normal
-
-### Custom Providers
-
-If your provider is not in the built-in list (e.g., privately deployed AI services), you can click **Add Custom Provider** to manually configure the endpoint and authentication method. Custom providers need to be compatible with the OpenAI API format.
-
-## Managing API Keys
-
-Your API Key is protected in the following ways:
-
-- API Key is stored in the system credential manager on your local device (macOS Keychain / Windows Credential Manager / Linux Secret Service)
-- Configuration files only store encrypted references, not plaintext
-- API Key is not uploaded to DesireCore servers or any third parties
-
-To modify API Key: Select the provider, click the **Edit** button, enter the new Key to overwrite the old value.
-
-## Model Verification
-
-After configuring a provider, we recommend verifying model availability:
-
-1. Select a configured provider
-2. Click the **Verify All Models** button
-3. The system will check each model's availability one by one
-
-Verification results are displayed with status labels:
+1. Select a provider in AI Services
+2. Enter API Key and Base URL
+3. Configure API format, media Base URL, and service types when needed
+4. Verify the key and models
 
 | Status | Meaning |
 |--------|---------|
-| **Available** | Model working normally |
-| **Error** | Model returned error, possibly Key doesn't have access to this model |
-| **Timeout** | Request timed out, possibly network issue |
-| **Checking** | Currently verifying |
+| **Available** | The model or service verified successfully |
+| **Error** | Key lacks permission, URL is wrong, model is unavailable, or provider returned an error |
+| **Timeout** | Network or provider response timeout |
+| **Checking** | Verification in progress |
+
+Model verification uses the appropriate path for each model type. Image, voice, video, and music models use media service routes; `mediaBaseUrl` is used when the normal Base URL points to a non-OpenAI-compatible endpoint.
+
+### Custom Providers
+
+Use a custom provider when the built-in templates do not include your provider, or when your organization routes models through an internal gateway. Check:
+
+- Whether the Base URL is OpenAI API compatible
+- Whether the API Key or auth headers match the gateway requirements
+- Whether model names match what the provider actually exposes
+- Whether text and media models need different Base URLs
+- Whether API format or service type needs explicit configuration
+
+If the same protocol has multiple instances, such as two OpenAI-compatible gateways, keep clear instance names and use `providerId` in agent-specific settings to target the intended instance.
+
+:::tip Token Plan Key
+Some providers distinguish pay-as-you-go API keys and Token Plan keys. The UI warns when a key appears to be configured in the wrong provider type.
+:::
+
+## API Key Security
+
+- API keys are stored in the OS credential manager
+- Config files store references, not plaintext keys
+- API keys are not uploaded to DesireCore servers
+
+To change an API key, select the provider instance, enter edit mode, save the new key, and it will replace the old credential. Removing a provider instance removes that configuration; any agent that still references it should be pointed to another provider or default mapping.
+
+Use separate keys for different suppliers or purposes when possible. It makes billing, rate limits, and permission issues easier to trace.
 
 ## Default Model Mapping
 
-DesireCore agents need different types of models when executing different tasks. **Default Mapping** lets you specify which model to use for each purpose.
+Default mappings decide which model to use when an agent has no dedicated override. Common purposes include daily chat, reasoning, code, documents, tool use, and media tasks.
 
-Common purpose types:
+When choosing mappings, combine models by role:
 
-- **Dialogue Generation**: Daily conversations and text generation
-- **Code Generation**: Writing and modifying code
-- **Document Processing**: Analyzing and generating documents
-- **Tool Calling**: Scenarios requiring Function Calling capabilities
+- **Low-cost default model**: routine chat, summarization, and lightweight tasks
+- **High-quality reasoning model**: complex analysis, planning, code review, and high-risk decision support
+- **Tool-use-stable model**: tasks that call files, commands, search, or external services frequently
+- **Media model**: image understanding, image generation, voice, video, or music tasks
 
-You can select models for each purpose in the **Default Mapping** Tab. Unset purposes will use the global default model.
+Default mapping is the global fallback. Agent-level configuration takes precedence when present.
 
-:::info
-Individual agents can also override the default mapping, specifying dedicated models for that agent in agent detail settings. Agent-level settings take precedence over global default mapping.
-:::
+## Agent-Level Model Override
 
-## Multi-Provider Management
+An individual agent can override global defaults in `agent.json`:
 
-You can configure multiple providers simultaneously. Benefits of doing this:
+```json
+{
+  "llm": {
+    "provider": "anthropic",
+    "providerId": "provider-anthropic-001",
+    "model": "claude-sonnet-4-5"
+  }
+}
+```
 
-- **Redundancy Backup**: When one provider's service is unavailable, you can switch to other providers
-- **Cost Optimization**: Use cheaper models for daily tasks, use high-end models for critical tasks
-- **Capability Complementarity**: Different providers' models have different strengths
+`provider` identifies the protocol or provider type. `providerId` identifies the concrete provider instance. When multiple providers share a protocol or model name, set `providerId` to avoid using the wrong Base URL or API Key.
+
+Migrated or manually maintained configs may still contain a `runtime` field. Use `llm` for agent model configuration. If you edit agent configuration manually, keep `llm.provider`, `llm.providerId`, and `llm.model` aligned.
+
+## Managing Multiple Providers
+
+Multiple providers help with redundancy, cost control, capability coverage, and network adaptation. If several providers share the same model name, DesireCore prefers an explicit `providerId`, then falls back to default mappings and available keys.
+
+When debugging model issues, check in this order:
+
+1. Whether the API key is in the correct provider and key type
+2. Whether Base URL and media Base URL match the provider API
+3. Whether the model name is still available
+4. Whether verification failed because of permission, provider error, or timeout
+5. Whether default mapping or agent `providerId` points to the intended provider instance

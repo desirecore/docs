@@ -1,91 +1,90 @@
 ---
-title: Data & Privacy
-description: Learn about DesireCore's data storage methods, manage data export, import, and deletion.
-keywords: [data, privacy, backup, export, import, deletion, local storage]
+title: Data and Privacy
+description: Understand how DesireCore stores data and how to export, import, and clear it.
+keywords: [data, privacy, backup, export, import, clear, local storage]
 ---
 
-# Data & Privacy
+# Data and Privacy
 
-DesireCore adopts a **Local-first** architecture, your data is stored locally on your device by default. This page introduces how to manage your data.
+DesireCore is local-first. Agents, skills, conversations, configuration, audit records, and caches are stored on your device by default. AI inference requests are sent only to the model providers you configure.
 
-## Data Storage Location
+## Data Location
 
-DesireCore's data is stored in the following directories by default:
-
-| Operating System | Path |
-|------------------|------|
+| OS | Path |
+|----|------|
 | macOS | `~/.desirecore/` |
 | Windows | `%USERPROFILE%\.desirecore\` |
 | Linux | `~/.desirecore/` |
 
-This directory contains:
-
-- **Agent Configuration**: `agents/` — Agent personas, memories, and settings
-- **Skill Definitions**: `skills/` — Global and agent-specific skills
-- **User Configuration**: `config/` — User profiles, avatars, compute configurations
-- **Conversation Records**: Session history and execution receipts
-- **Market Cache**: `market/` — Resources downloaded from the marketplace
+| Directory | Content |
+|-----------|---------|
+| `agents/` | Agent repositories, persona, principles, memory, skills, workflows |
+| `users/` | User profile, preferences, relationship memory |
+| `skills/` | Global skills, including built-in and imported skills |
+| `config/` | User settings, compute configuration, provider references |
+| `runs/` | Conversations, execution records, receipts, audit data |
+| `market/` | Marketplace cache |
+| `cache/` | Rebuildable cache |
+| `logs/` | Local logs and troubleshooting data |
 
 ## Exporting Data
 
-You can export DesireCore's data as a backup file for migrating to another device or regular backup.
+Open **Settings** -> **Data and Privacy** to export data. Exports can be selected by category.
 
-1. Open **Settings** → **Data & Privacy**
-2. Click **Export Data**
-3. Select save location
-4. Wait for export to complete
+| Category | Includes |
+|----------|----------|
+| Agents and Teams | AgentFS repositories, persona, principles, memory, skills, workflows, team definitions, and relationship memory |
+| Skills | Global and custom skills |
+| Conversations | Session messages, receipts, history |
+| System Configuration | User settings, non-plaintext compute configuration, UI preferences |
+| Media | Media resources created or referenced in conversations and tools |
+| Mail | Local mail data and rules |
+| Workspace Files | Selected work directory files |
+| Audit Logs | API audit, tool-call audit, and related metrics |
 
-The export file contains your agent configurations, conversation records, skills, and user settings.
+Exports exclude or separately handle runtime directories, caches, device identifiers, and plaintext secrets.
 
-:::tip
-We recommend regularly exporting data as backup, especially before upgrading the system or changing devices.
+:::tip Backup Advice
+Before upgrading, moving to a new device, or bulk-editing agents, export agents, user data, skills, system configuration, and audit logs.
 :::
 
 ## Importing Data
 
-Restore data from a backup file:
+When importing a backup, DesireCore reads the package and lets you choose which categories to restore. It checks structure, duplicate agents, skill or team conflicts, large workspace files, and path accessibility. When conflicts are found, the UI can offer options such as overwrite, skip, or keep both.
 
-1. Open **Settings** → **Data & Privacy**
-2. Click **Import Data**
-3. Select the previously exported backup file
-4. Wait for import to complete, the app will automatically restart
-
-:::warning
-Importing will overwrite current local data. If there is important data on the current device, we recommend exporting a backup first.
-:::
+Import may require an app restart or background service refresh after files are restored. If the current device already has important data, export a backup before importing.
 
 ## Clearing Local Data
 
-If you need to reset DesireCore to its initial state, you can selectively clear local data.
+You can clear local data by category:
 
-1. Open **Settings** → **Data & Privacy**
-2. Click **Clear Local Data**
-3. Select data categories to clear:
-
-| Data Category | Contains |
-|---------------|----------|
-| **Conversation Records** | All chat messages, session history, and execution receipts |
-| **Agents** | Agent configurations, personas, and memories (core agents will be automatically reinstalled) |
-| **Skills** | Global skill definitions (built-in skills will be automatically reinstalled) |
-| **Compute** | LLM providers, model lists, and compute node configurations |
-| **Storage** | S3 object storage connection configurations |
-| **Code Hosting** | GitHub/Gitee/Gitea connection configurations |
-| **User Profile** | User identity, avatar, personal memory library, and command approval settings |
-| **Market Data** | Official marketplace repository cache |
-| **Cache & Logs** | Usage statistics indexes, relationship graph cache, and log files |
-
-4. After confirming selection, click **Clear Selected Data**
-5. The system will stop background services, delete data, and restart the app in sequence
+| Category | Includes |
+|----------|----------|
+| Conversations | Chat messages, session history, receipts |
+| Agents | Agent configuration, persona, memory, and skills |
+| Skills | Global skills; built-in skills reinstall automatically |
+| Compute | LLM providers, model lists, compute nodes |
+| Storage | S3 or object storage connection settings |
+| Code Hosting | GitHub, Gitee, Gitea connection settings |
+| User Profile | Identity, avatar, memory library, approval preferences |
+| Market Data | Marketplace repository cache |
+| Cache and Logs | Usage indexes, relation graph cache, logs, rebuildable data |
 
 :::danger
-Data clearing **cannot be undone**. Cleared data will be permanently deleted. If you just want to resolve app anomalies, we recommend trying to clear the "Cache & Logs" category first, which usually solves most problems without losing important data.
+Clearing data is irreversible. For troubleshooting, clear cache and logs first instead of deleting agents or user profiles.
 :::
 
-## Privacy Protection
+## Privacy Guarantees
 
-DesireCore's design principles for privacy protection:
+- **Local storage**: core data stays on your device by default
+- **Key protection**: API keys are stored in the system credential manager
+- **Transparent calls**: AI requests, tool calls, and external service interactions can be audited
+- **Minimal telemetry**: startup statistics do not include conversation content
+- **Exportable audit**: audit logs can be exported as an independent category
 
-- **Data Doesn't Leave Local**: All data is stored on your device by default, not automatically uploaded to the cloud
-- **API Key Secure Storage**: Uses operating system credential manager for encrypted storage
-- **AI Call Transparency**: Every AI model call request and response has audit records, viewable in activity records
-- **Minimal Anonymous Statistics**: DesireCore only sends anonymous installation statistics on launch (device hash identifier, version number, platform), and does not collect usage behavior or conversation content
+## Sensitive Scenario Advice
+
+- Use local models or trusted private model services for highly sensitive content
+- Review API Audit in Activity to confirm which provider receives data
+- Keep confirmation enabled for command execution, file writes, and external sends
+- Export first, then selectively import when migrating devices

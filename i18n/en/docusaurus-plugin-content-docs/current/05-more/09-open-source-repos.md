@@ -14,8 +14,8 @@ The DesireCore project maintains several official repositories on GitHub. Feel f
 
 | Repository | Description | Status |
 |------------|-------------|--------|
-| [desirecore](https://github.com/desirecore/desirecore) | DesireCore client main repository | Tentatively planned to open source after stabilization, subject to company funding and business strategy — not a final commitment. Decoupled modules will be open-sourced progressively |
-| [desirecore-hostagent](https://github.com/desirecore/desirecore-hostagent) | Cross-platform Host Agent for Windows, macOS, Linux, Android, iOS, and HarmonyOS — a resident host service for OS permission acquisition, GUI operations, and command execution | Tentatively planned to open source after stabilization, subject to company funding and business strategy — not a final commitment. Decoupled modules will be open-sourced progressively |
+| `desirecore` | DesireCore client main repository | Tentatively planned to open source after stabilization, subject to company funding and business strategy - not a final commitment. Decoupled modules will be open-sourced progressively |
+| `desirecore-hostagent` | Cross-platform Host Agent for Windows, macOS, Linux, Android, iOS, and HarmonyOS - a resident host service for OS permission acquisition, GUI operations, and command execution | Tentatively planned to open source after stabilization, subject to company funding and business strategy - not a final commitment. Decoupled modules will be open-sourced progressively |
 
 ## Documentation & Distribution
 
@@ -28,7 +28,7 @@ The DesireCore project maintains several official repositories on GitHub. Feel f
 
 | Repository | Description | Status |
 |------------|-------------|--------|
-| [release-manager](https://github.com/desirecore/release-manager) | Staged rollout management service — multi-channel gradual rollout, emergency halt, version management | Private |
+| `release-manager` | Staged rollout management service - multi-channel gradual rollout, emergency halt, version management | Private |
 
 ## Ecosystem Repositories
 

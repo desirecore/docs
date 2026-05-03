@@ -1,104 +1,118 @@
 ---
 title: Notification Management
-description: Learn about DesireCore's three-tier notification system, notification settings, and notification history management.
-keywords: [notification, alert, three-tier notification, do not disturb, notification history]
+description: Learn about DesireCore's notification center, desktop notifications, approval notifications, and notification settings.
+keywords: [notification, alert, notification center, desktop notification, approval notification]
 ---
 
 # Notification Management
 
-Agents need to communicate important information to you at the right time. DesireCore designed a layered notification system to ensure important messages aren't missed while avoiding unnecessary interruptions.
+Agents need to surface important information at the right time. DesireCore routes notifications to the conversation stream, notification center, desktop notification, approval card, or error log depending on source and urgency.
 
-## Three-Tier Notification System
+## Notification Sources
 
-DesireCore notifications are divided into three levels with different visual presentations and behaviors:
+| Source | Description | Common Presentation |
+|--------|-------------|---------------------|
+| **Agent Messages** | Messages proactively sent by agents | Conversation message and unread badge |
+| **Heartbeat Alert** | A heartbeat check found something relevant | Heartbeat card in the conversation stream |
+| **Scheduled Task Result** | A scheduled task completed or failed | Task notification, system notification, execution history |
+| **Approval Request** | A sensitive operation needs confirmation | In-session approval card, notification jump, desktop reminder |
+| **System Error** | Service, tool, or connector failure | System notification and Activity error log |
 
-### Normal Notifications
+Heartbeat OK results are silent by default. Heartbeat Alert results appear as cards in the corresponding agent conversation stream and may be persisted to that agent's main conversation. They are not written to the notification center. Only heartbeat execution failures produce a system notification so you can check compute, network, or data-source problems. Scheduled-task query results enter task or system notifications depending on success or failure.
 
-Daily information notifications that don't require immediate processing.
+## Notification Center
 
-- **Source**: Notify-level results from heartbeat checks, scheduled task completion reports, etc.
-- **Visual**: Standard message card
-- **Sound**: None
-- **Behavior**: Appear in the conversation stream, you can view anytime
+Open the **bell icon** in the navigation rail to view the notification center. When unread notifications exist, the bell shows an unread state.
 
-### Important Notifications
+The notification center slides in from the right and includes:
 
-Notifications requiring your attention but not urgent.
+- **Top actions**: title, **Mark all as read**, and **Clear all**.
+- **Type filters**: All, Message, System, Task, Approval, and other available categories.
+- **Notification list**: sorted by newest first.
+- **Unread state**: unread items show a blue dot or badge.
+- **Jump behavior**: clicking a notification marks it as read and tries to open the related conversation, approval card, task record, or error detail.
 
-- **Source**: Important emails arriving, PR review requests, schedule changes, etc.
-- **Visual**: Prominently displayed message card
-- **Sound**: Subtle alert sound
-- **Behavior**: Appear in the conversation stream and show badge in notification center
+Each notification usually shows:
 
-### Urgent Notifications
+- category icon and color
+- title
+- relative time, such as "just now" or "3 minutes ago"
+- short body summary
+- unread indicator
 
-Notifications requiring your immediate decision or action.
+![Notification center panel](./img/notification-center.png)
 
-- **Source**: Action-level results from heartbeat checks, expiration reminders, etc.
-- **Visual**: Eye-catching action request card with action buttons
-- **Sound**: Clear alert sound
-- **Behavior**: Pop up desktop notifications, highlighted display in the app
+Local notification records are migrated to Agent Service storage when available. If the service is unavailable, the client falls back to local storage.
 
-:::info Level Determined by Agent
-Notification levels aren't fixed—agents autonomously judge which level to use based on content nature and urgency. The same email might be a normal notification for daily communication from a colleague, but an urgent notification if it's from the CEO.
-:::
+The notification store keeps up to 200 records. When it exceeds that limit, DesireCore removes the oldest read notification first; if every notification is unread, it removes the oldest notification. Press **Escape** to close the notification center.
+
+## Desktop Notifications
+
+When the app is not focused, or an item needs timely attention, DesireCore can use OS-native notifications.
+
+Desktop notifications usually include:
+
+- agent, system, or task name
+- short summary
+- click behavior that returns to the app and focuses the related place
+
+Browser environments require notification permission the first time desktop notifications are used. If permission is denied, re-enable it from browser or system settings.
+
+## App Badge
+
+On supported desktop environments, DesireCore shows an unread notification badge. The badge indicates pending attention, not every background event. Silent records such as heartbeat OK do not increase interruption.
+
+## Approval Notifications
+
+Operations that need confirmation appear as approval cards in the corresponding conversation. Notifications guide you back to the right place instead of floating approval dialogs across unrelated pages.
+
+Common approval scenarios include:
+
+- Bash or PowerShell commands
+- file writes, edits, or deletion
+- sending mail, messages, or external requests
+- publishing, importing, or overwriting agent repositories
+- workflow human-gate nodes
+
+Approval notifications retain request ID, operation summary, risk information, and status. After a decision, the notification is updated as approved, rejected, timed out, or completed. Pending or timed-out approvals are scanned and resurfaced so a page switch does not hide a decision.
+
+Approval risk has three fixed levels:
+
+| Risk Level | Meaning | Examples |
+|------------|---------|----------|
+| Low | Small scope and usually reversible | Reading information, marking state |
+| Medium | Writes files, calls external services, or changes local state | Generating report files, API calls, batch organization |
+| High | May be irreversible, externally visible, or sensitive | Deleting files, publishing, sending mail, high-risk commands |
+
+## Muting And Interruption Control
+
+DesireCore reduces repeated interruptions through:
+
+- heartbeat quiet hours, snooze, focus mode, cooldown, and 24-hour Alert deduplication
+- busy-signal detection while you are chatting
+- unread consolidation in the notification center
+- desktop notification and approval notification switches
+
+These strategies reduce unnecessary interruption without deleting audit records. Operations that need a decision still keep an approval entry so you can return to the right context.
 
 ## Notification Settings
 
-You can finely control notification behavior in settings:
+In **Settings** -> **Notifications**, you can configure:
 
-### Global Settings
+| Setting | Description |
+|---------|-------------|
+| **Desktop Notifications** | Enable or disable native OS notifications |
+| **Approval Notifications** | Control whether confirmation-required operations enter notification flow |
+| **Test Notification** | Send a test notification to verify permissions and display |
 
-| Setting | Description | Options |
-|---------|-------------|---------|
-| Desktop Notifications | System native notification popups | On / Off |
-| Sound Alerts | Notifications accompanied by sound | On / Off |
-| App Badge | Unread count on app icon | On / Off |
+Heartbeat quiet hours, cooldown, snooze, and focus mode are configured in heartbeat settings. They affect whether heartbeat Alerts enter the conversation stream, not notification-center read, clear, or filtering behavior.
 
-### Per-Agent Settings
+## Errors And History
 
-Each agent's notifications can be configured separately:
+Notifications are for attention; detailed failures are recorded in the Activity error log. For tool failures, model errors, connector problems, or background service issues, check [Audit Trail](../11-security/03-audit-trail.md).
 
-- Whether to receive notifications from this agent
-- Mute specific agent (keep records but don't push)
-- Set quiet hours for this agent
-
-### Do Not Disturb Mode
-
-When you need to focus on work:
-
-1. Enable **Do Not Disturb Mode**
-2. All normal and important notifications are silenced
-3. Only urgent notifications (Action level) can break through
-4. Suppressed notifications are presented together when you turn off Do Not Disturb
-
-:::tip Quick Enable
-You can quickly toggle Do Not Disturb mode in the status bar at the top of the app without entering the settings page.
-:::
-
-## Notification History
-
-All notifications are recorded in the notification center for later review:
-
-- **Timeline View** — View all notifications in chronological order
-- **Filter by Agent** — Only see notifications from a specific agent
-- **Filter by Level** — Only see important or urgent notifications
-- **Search** — Search for specific content in notification history
-
-The notification center also shows which notifications were suppressed by mute strategies (marked as "Suppressed"), and you can still view their content.
-
-## Handling Action Requests
-
-For Action-level operation requests, you have three handling options:
-
-| Action | Description |
-|--------|-------------|
-| **Confirm Execution** | The agent will execute the corresponding operation |
-| **Reject** | Operation won't execute, agent records your decision |
-| **Handle Later** | Mark as pending, remind again at next heartbeat |
-
-Each action request displays the **risk level** of the operation to help you make judgments:
-
-- **Low Risk** (Green): e.g., "Mark email as read"
-- **Medium Risk** (Orange): e.g., "Send email reply"
-- **High Risk** (Red): e.g., "Payment confirmation," "Delete file"
+| Entry Point | Main Purpose |
+|-------------|--------------|
+| Notification center | Review messages, task results, and approval entries |
+| Conversation stream | Continue agent messages, heartbeat Alerts, and approval cards |
+| Activity log | Debug tool calls, model requests, system events, and error details |

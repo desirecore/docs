@@ -1,12 +1,12 @@
 ---
 title: Version Control
-description: Learn about Git version management for Agents—viewing modification history, rolling back to historical versions, publishing and sharing Agents.
+description: Learn about Git version management for Agents - viewing modification history, rolling back to historical versions, publishing and sharing Agents.
 keywords: [Version Control, Git, Version History, Rollback, Publish, Share]
 ---
 
 # Version Control
 
-Each Agent in DesireCore is a Git repository. Every modification you make to the Agent—whether adjusting persona, teaching it new knowledge, or installing skills—is recorded as a Git commit. This means you can track complete modification history and return to any state at any time.
+Each Agent in DesireCore is a Git repository. Every modification you make to the Agent - whether adjusting persona, teaching it new knowledge, or installing skills - is recorded as a Git commit. This means you can track complete modification history and return to any state at any time.
 
 ## Git Version Management for Agents
 
@@ -76,19 +76,22 @@ When your Agent is well-tuned, you can share it with others.
    - Version number
    - Changelog
    - Category and tags
+   - Repository visibility
 3. Submit for review
 4. After approval, listed on the marketplace
+
+The publishing panel shows the local version, remote version, and commits since the last publication. The core Agent `desirecore` cannot be published from the client, so its publishing controls are disabled.
 
 ### Publication Content
 
 Publication **only includes Agent core domain** content:
 
-- `agent.json` — Entry configuration
-- `persona.md` — Persona
-- `principles.md` — Principles
-- `memory/` — General memories
-- `skills/` — Skill packs
-- `tools/` — Tool registration
+- `agent.json` - Entry configuration
+- `persona.md` - Persona
+- `principles.md` - Principles
+- `memory/` - General memories
+- `skills/` - Skill packs
+- `tools/` - Tool registration
 
 **Does not include** content:
 
@@ -106,9 +109,9 @@ If you just want to backup or migrate, you can export the Agent as a zip file:
 2. Select export scope
 3. Download the zip file
 
-The exported file contains complete Git history and can be imported and used on another device.
+During export, you can select content by category, such as Agents, skills, memory, and workspaces. The exported file can be imported and used on another device, and public Agent repositories can also be imported by public URL.
 
 ## Next Steps
 
-- [Agent Types](./01-agent-types.md) — Review Agent types and positioning
-- [Create Custom Agent](./03-create-agent.md) — Create your own Agent
+- [Agent Types](./01-agent-types.md) - Review Agent types and positioning
+- [Create Custom Agent](./03-create-agent.md) - Create your own Agent

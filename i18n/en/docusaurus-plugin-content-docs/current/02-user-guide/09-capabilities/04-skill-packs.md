@@ -1,135 +1,160 @@
 ---
 title: Skill Packs
-description: Learn about the concept of skill packs—how they differ from tools, how to install and manage skill packs, and how to create custom skills.
-keywords: [skill pack, Skill, skill installation, custom skill, skill marketplace]
+description: Understand skill packs - how they differ from tools, how to install and manage them, and how to create custom skills.
+keywords: [Skill Pack, Skill, skill installation, custom skill, skill marketplace]
 ---
 
 # Skill Packs
 
-If tools are the agent's "hands," then skill packs are its "methodology." Skill packs tell agents **how to do things**, orchestrating multiple tools into a complete workflow.
+If tools are the agent's "hands," skill packs are the agent's method. Tools answer "can the agent perform this action?" Skill packs answer "how should the agent handle this class of task?" They package judgment criteria, steps, references, and tool usage rules into auditable instructions.
 
 ## Tools vs. Skills
 
-These two concepts are easily confused. Let's illustrate with an example:
-
 | Dimension | Tool | Skill |
 |-----------|------|-------|
-| **Nature** | Atomic operation, does one thing | Process encapsulation, does a set of things |
-| **Granularity** | Single call | Multi-step orchestration |
-| **Example** | "Read file," "Search web" | "Data analysis report," "Contract review" |
-| **Analogy** | A hammer | An operation manual |
+| Essence | Atomic capability | Task method |
+| Granularity | Single call | Multi-step workflow |
+| Example | Read, Grep, PowerShell, WebFetch | Contract review, PDF form filling, web research |
+| Risk | Determined by tool and parameters | Determined by tools used in the skill flow |
+| Analogy | A hammer or pen | An operating manual |
 
-For example:
+For example, Read only reads files. A "Data Analysis Report" skill tells the agent how to read data, clean it, analyze it, visualize it, and write the report. A skill does not create new permissions; it tells the agent how to combine available tools, in what order, and what to do when the flow hits an exception.
 
-- The tool "read file" only does one thing—open and return file content
-- The skill "data analysis report" contains a complete workflow: read data file → data cleaning → statistical analysis → generate visualization → output report
+## What a Skill Pack Contains
 
-Skills are "ways of doing things," telling the agent which steps to execute, in what order, and following what standards.
+The core file is `SKILL.md`; a complete skill can also include scripts, references, templates, and evals:
 
-## What's in a Skill Pack
+```text
+my-skill/
++-- SKILL.md
++-- scripts/
++-- references/
++-- assets/
++-- evals/
+```
 
-Each skill pack contains the following:
+`SKILL.md` usually defines:
 
-- **Purpose Description** — What scenarios this skill applies to
-- **Execution Steps** — Detailed operation workflow
-- **Tool Dependencies** — What tools are needed
-- **Judgment Criteria** — When to use this skill
-- **Notes** — Details to pay special attention to during execution
+- Usage and non-usage criteria
+- Required inputs and execution steps
+- Available tools and permission boundaries
+- Output format and completion criteria
+- Failure handling and escalation paths
+- Metadata such as version, author, provider, or model preference
 
-:::info Nature of Skills
-From a technical perspective, a skill pack is a structured Markdown document. When an agent loads a skill, it strictly follows the instructions in the document. This means skill behavior is predictable and reviewable.
+:::info What Skills Are
+Technically, a skill pack is structured instruction plus related resources. When the agent loads a skill, its steps, constraints, and completion criteria become task context, so the behavior is reviewable and reusable.
 :::
 
-## Two Activation Methods
+## How Skills Become Active
 
-Skills can take effect in two ways:
+| Method | Description | Best For |
+|--------|-------------|----------|
+| Explicit invocation | The user selects or calls a skill directly | You know exactly which skill to use |
+| Automatic matching | The agent chooses a skill based on task and description | You describe the goal, not the implementation |
 
-### Explicit Activation
+Skills can declare `user-invocable`, `disable-model-invocation`, `allowed-tools`, and `context` to control direct invocation, automatic triggering, tool scope, and forked execution. `disable_model_invocation` is also accepted as a compatibility alias for `disable-model-invocation`.
 
-You manually click "Enable" in the skill list, and the agent will actively load the skill when needed.
+### Explicit Invocation
 
-Suitable for: Scenarios where you clearly know what skill you need.
+When you select a skill in the list or explicitly ask for it in chat, the system adds that skill to the current task context. This is useful when you already know the workflow you want, such as "use the contract review skill on this agreement."
 
-### Implicit Matching
+### Automatic Matching
 
-The agent automatically determines whether a skill is needed based on your task and loads it on demand.
+Automatic matching depends on the skill description and trigger conditions. You describe the goal, and the agent decides whether an enabled skill should be loaded.
 
-Suitable for: You only care about results, don't want to manage which skills are used.
+Only enabled skills enter the candidate set. If a skill declares `allowed-tools`, the agent stays within that tool scope while following the skill. If a skill disables model invocation, the model will not select it automatically; it must be invoked by the user or UI.
 
-## Browsing the Skill Marketplace
+## Skill Sources
 
-DesireCore provides a skill marketplace where you can discover and install new skills:
+| Source | Location | Notes |
+|--------|----------|-------|
+| Global Skills | `~/.desirecore/skills/` | Shared by all agents, including built-in skills |
+| Agent Skills | Inside the agent repository | Available only to that agent and can be published with it |
+| Project Skills | `.agents/skills/` or `.claude/skills/` in a work directory | Active only in that project context |
 
-1. Open the skill marketplace
-2. Browse by category: productivity, analysis, writing, development, etc.
-3. View skill details:
-   - Function description and applicable scenarios
-   - Tool dependencies (whether installed)
-   - Risk level
-   - User reviews
-4. Click "Install" to add to your agent
-
-### Installation Process
-
-When installing skills, the system automatically checks dependencies:
-
-- **All dependency tools ready** → Install and enable directly
-- **Missing some tools** → Prompt you to install missing tools first, then enable skill
+Only enabled skills are injected into the agent context. Capability declarations are gated by actual tool availability, so agents do not see tools that cannot be called in the current environment.
 
 :::tip Global Skills vs. Agent Skills
-Some skills are **global skills**, all agents can use them; some are bound to specific agents. Global skills usually provide general capabilities (e.g., file management, search optimization), while agent skills provide professional capabilities (e.g., legal review, data analysis).
+Global skills are best for general capabilities such as file handling, search optimization, and web access. Agent skills are best for a specific agent's professional workflow, project release process, or team convention.
 :::
+
+## Installing and Importing Skills
+
+You can install skills from the marketplace or import local skills.
+
+Marketplace details usually show:
+
+- What the skill does and when to use it
+- Required tools and permissions
+- Author, source, version, and update information
+- Provider, model, or runtime preferences
+
+Local import supports:
+
+- A single `.md` skill file
+- A folder containing `SKILL.md`
+- A `.zip` package
+
+The import flow checks path safety, file structure, and required metadata. If a skill declares a provider preference, runtime selection prefers matching providers with available keys. If it declares a tool allowlist, the agent executes inside that scope.
+
+Dependency checks surface problems before you rely on a skill:
+
+- **Required tools are ready**: the skill can be enabled or imported
+- **Tools or capabilities are missing**: the UI explains which part cannot run in the current environment
+- **The package is incomplete**: import fails when `SKILL.md` is missing, metadata is invalid, or the archive layout is unsupported
+
+Installing a skill does not grant system permissions by itself. High-risk actions still go through tool permissions, user confirmation, and approval flows.
+
+## Built-in Global Skills
+
+DesireCore includes global skills for skill creation, Word / Excel / PowerPoint document processing, PDF reading and forms, web access, frontend design, and mail operations. These skills are maintained through client and marketplace sync. You can inspect, disable, copy, or replace them with your own workflows.
 
 ## Managing Installed Skills
 
-In Agent Settings → Skill Management, you can:
+Skill management lets you maintain availability and provenance:
 
-- **View All Skills** — List of installed skills
-- **Enable/Disable** — Control whether a skill is available
-- **View Usage** — Understand skill usage frequency
-- **Uninstall** — Remove skills no longer needed
+- **View skills**: inspect installed, built-in, project, and agent skills
+- **Enable or disable**: control whether a skill enters the agent context or matching set
+- **Review details**: check descriptions, dependencies, invocation mode, allowed tools, and resource files
+- **Copy or customize**: create your own version of a built-in skill when you need local workflow changes
+- **Uninstall or remove**: delete marketplace or local skills you no longer need
+
+Project skills also depend on the current work directory and whether the agent is using that project context.
 
 ## Creating Custom Skills
 
-If marketplace skills can't meet your special needs, you can create your own skill packs.
+Before writing a skill, answer:
 
-### Basic Steps
+1. When should this skill be used?
+2. What steps should it follow?
+3. What output counts as done?
 
-1. Go to Agent Settings → Skill Management → Create Skill
-2. Fill in skill meta information:
-   - **Name**: Concisely describe skill purpose
-   - **Applicable Scenarios**: When to use
-   - **Risk Level**: Low/Medium/High
-3. Write skill instructions (Markdown format):
-   - Execution steps
-   - Judgment criteria
-   - Notes
-4. Declare tool dependencies
-5. Add usage examples (optional)
-6. Save and enable
+Good skills are clear to trigger, executable, bounded, verifiable, and focused. Put long background material in `references/`.
 
-### Skill Instruction Writing Tips
+### Basic Creation Flow
 
-Good skill instructions should be clear, specific, and unambiguous:
+1. Create a skill directory or a single Markdown skill file
+2. Write `SKILL.md` with the name, purpose, triggers, and execution steps
+3. Put long references in `references/` and reusable scripts in `scripts/`
+4. Declare tool boundaries, provider preferences, or context settings when needed
+5. Import and enable the skill
+6. Test trigger behavior, execution steps, and output format with simple examples
 
-- **Clear Steps** — What to do at each step, input what, output what
-- **Condition Judgment** — Under what circumstances take which branch
-- **Error Handling** — What to do if a step fails
-- **Completion Criteria** — What counts as "done"
+### Writing Tips
 
-:::warning Test Your Skills
-After creating custom skills, recommend testing in some simple scenarios first, confirming the agent can correctly understand and execute skill instructions before using for formal work.
+Skill instructions should be clear, specific, and unambiguous:
+
+- **Clear steps**: what each step does, what it takes as input, and what it returns
+- **Branches**: when to take each path
+- **Error handling**: whether to retry, skip, or ask the user for confirmation
+- **Completion criteria**: what counts as done and where deliverables should go
+- **Permission boundaries**: which actions must ask the user first and which tools are off limits
+
+:::warning Test First
+Custom skills influence agent behavior. Test them on simple examples before using them for important work.
 :::
 
 ## Skill Updates
 
-### Built-in Skills
-
-DesireCore comes with a batch of built-in global skills. These skills sync automatically with client updates, but the system respects your modifications:
-
-- If you modify a built-in skill's content, it **won't be overwritten** during updates
-- Only skills you haven't modified will be automatically updated to new versions
-
-### Marketplace Skills
-
-Skills installed from the marketplace can get updates through the marketplace. When a skill has a new version, you'll receive an update notification.
+Built-in and marketplace skills can detect available updates. Unmodified skills can sync automatically; modified skills are not silently overwritten. Copy a skill and give it your own name and ID if you want to keep local customization.

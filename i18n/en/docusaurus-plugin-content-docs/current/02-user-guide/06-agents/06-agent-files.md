@@ -14,24 +14,25 @@ Each Agent's files are stored in the `~/.desirecore/agents/<agent_id>/` director
 
 ```
 <agent_id>/
-├── agent.json        # Entry configuration
-├── persona.md        # Persona
-├── principles.md     # Principles
-├── memory/           # Memory files
-│   └── *.md          # One file per memory
-├── skills/           # Skills directory
-│   └── <skill_id>/   # One directory per skill
-│       └── SKILL.md  # Skill documentation
-├── tools/            # Tool registration
-├── workflows/        # Workflow definitions
-├── heartbeat/        # Heartbeat configuration
-├── resources/        # Resource files
-├── assets/           # Static resources
-└── .git/             # Git version management
++-- agent.json        # Entry configuration
++-- persona.md        # Persona
++-- principles.md     # Principles
++-- memory/           # Memory files
+|   +-- *.md          # One file per memory
++-- skills/           # Skills directory
+|   +-- <skill_id>/   # One directory per skill
+|       +-- SKILL.md  # Skill documentation
++-- tools/            # Tool registration
++-- workflows/        # Workflow definitions
++-- schedules/        # Scheduled task definitions
++-- heartbeat/        # Heartbeat configuration
++-- resources/        # Resource files
++-- assets/           # Static resources
++-- .git/             # Git version management
 ```
 
 :::info Why Use File System?
-DesireCore's design philosophy is "everything is files." Files are more transparent than databases—you can directly view, edit, back up, and version manage them. Every change to an Agent is recorded in Git history.
+DesireCore's design philosophy is "everything is files." Files are more transparent than databases - you can directly view, edit, back up, and version manage them. Every change to an Agent is recorded in Git history.
 :::
 
 ## Browsing Agent Files
@@ -79,16 +80,23 @@ You can upload reference documents, templates, data files, etc. to the Agent's `
 
 | File | Format | Description |
 |---|---|---|
-| `agent.json` | JSON | Entry configuration: metadata such as name, version, description, category |
+| `agent.json` | JSON | Entry configuration: name, version, description, default model, environment injection, heartbeat switch, permissions, and repository settings |
 | `persona.md` | Markdown | Persona: tone, style, response strategy |
 | `principles.md` | Markdown | Principles: rules, forbidden zones, priorities |
+| `memory/_policy.json` | JSON | Memory compression and retention policy |
 | `memory/*.md` | Markdown | Memory entries: learned knowledge and preferences |
 | `skills/*/SKILL.md` | Markdown | Skill documentation: skill description and execution instructions |
 | `tools/*.json` | JSON | Tool registration: parameter definitions for callable tools |
-| `heartbeat/HEARTBEAT.md` | Markdown | Heartbeat configuration: automatic tasks and trigger conditions |
+| `heartbeat/HEARTBEAT.md` | Markdown | Heartbeat inspection content: what the agent monitors and how it reports |
+| `workflows/*.yaml` | YAML | Visual workflow DSL |
+| `schedules/*.json` | JSON | Scheduled task definitions: trigger rule, target prompt, status, and lifecycle controls |
 | `resources/*` | Any | Reference resources: documents, templates, data files |
+
+:::tip Editing Configuration Directly
+Use `agent.json.llm` for default models, `agent.json.env` for date/time injection and date rollover reminders, heartbeat settings or `agent.json.heartbeat.enabled` for the heartbeat switch, and `memory/_policy.json` for automatic memory compression.
+:::
 
 ## Next Steps
 
-- [Skills Management](./07-skills-management.md) — Learn how to add and manage skills for Agents
-- [Version Control](./08-version-control.md) — Learn about Git version control for Agents
+- [Skills Management](./07-skills-management.md) - Learn how to add and manage skills for Agents
+- [Version Control](./08-version-control.md) - Learn about Git version control for Agents

@@ -24,13 +24,13 @@ DesireCore stores all data in the local file system, not relying on cloud server
 |-----------|---------|----------|-------------|
 | `config/` | Global configuration | User settings, preferences, API Key configuration | Restores defaults after deletion |
 | `config/avatar/` | User avatar | JPEG/PNG/WebP format avatar files | Safe to delete |
-| `agents/` | Agent本体 | Subdirectory for each agent (Git repository) | Loses agent data after deletion |
+| `agents/` | Agent files | Subdirectory for each agent (Git repository) | Loses agent data after deletion |
 | `agents/desirecore/` | Core agent | DesireCore built-in agent | Auto-reinstalls after deletion |
 | `users/` | User data | Personal profile, preferences, relationship memories with agents | Loses personalized data after deletion |
 | `skills/` | Global skills | All installed global skill packs | Built-in skills auto-reinstall after deletion |
 | `runs/` | Run records | Session records, task receipts | Safe to delete (loses history) |
 | `cache/` | Cache | Index cache, relationship graph cache | Safe to delete (auto-rebuilds) |
-| `logs/` | Logs | Runtime log files | Safe to delete |
+| `logs/` | Logs | Runtime logs and troubleshooting information | Safe to delete |
 | `market/` | Market data | Official market repository cache | Safe to delete (re-fetches) |
 
 ## Application Directory
@@ -63,7 +63,7 @@ The following directories contain important non-reproducible data. Regular backu
 | **Medium** | `skills/` | User-defined skills |
 | **Low** | `runs/` | Historical task records |
 
-You can export all data as backup with one click through "Settings > Data & Privacy > Export Data".
+You can export data through "Settings > Data & Privacy > Export Data" and choose categories such as agents, teams, skills, conversations, system configuration, media, mail, workspace files, and audit logs.
 
 ## Clearing Data
 
@@ -75,5 +75,10 @@ In "Settings > Data & Privacy > Clear Local Data", you can selectively clear:
 | Agents | Configurations, personas, memories (core agents auto-reinstall) | Not recoverable |
 | Skills | Global skills (built-in skills auto-reinstall) | Not recoverable |
 | Compute | Provider configurations, model lists | Not recoverable |
+| Storage | S3 or object storage connection settings | Not recoverable |
+| Code Hosting | GitHub, Gitee, Gitea connection settings | Not recoverable |
 | User Profile | Identity, avatar, memory bank | Not recoverable |
-| Cache & Logs | Index cache, log files | Auto-rebuilds |
+| Market Data | Marketplace repository cache | Auto-rebuilds |
+| Cache & Logs | Index cache, logs, troubleshooting data | Auto-rebuilds |
+
+Audit logs can be exported as a separate export category. The current clear-data entry does not expose a separate audit-log category; related execution records are handled through their actual storage locations, such as conversations or cache and logs.
