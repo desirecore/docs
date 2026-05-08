@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.49](./v10.0.49) | 2026-05-08 | Platform-specific update checks、Expanded Tongyi Qianwen compute and encoding ... |
 | [v10.0.48](./v10.0.48) | 2026-05-08 | Heartbeat notification file links、Concurrent heartbeat support for multiple a... |
 | [v10.0.47](./v10.0.47) | 2026-05-06 | Browser automation capabilities (web-access v2.0)、Site experience accumulatio... |
 | [v10.0.46](./v10.0.46) | 2026-05-05 | Multilingual UI support、Export Skills individually、Multilingual display for m... |
