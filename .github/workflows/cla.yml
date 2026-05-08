@@ -1,0 +1,47 @@
+name: "CLA Check"
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  cla-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check CLA agreement
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+
+            // Skip bot accounts
+            const botList = ['dependabot[bot]', 'renovate[bot]', 'github-actions[bot]'];
+            if (botList.includes(pr.user.login)) {
+              console.log(`Skipping CLA check for bot: ${pr.user.login}`);
+              return;
+            }
+
+            // Skip internal contributors (org owners, members, collaborators).
+            // CLA is only required for external contributors (CONTRIBUTOR / FIRST_TIME_CONTRIBUTOR / FIRST_TIMER / NONE).
+            const internalAssociations = ['OWNER', 'MEMBER', 'COLLABORATOR'];
+            if (internalAssociations.includes(pr.author_association)) {
+              console.log(`Skipping CLA check for internal contributor: ${pr.user.login} (${pr.author_association})`);
+              return;
+            }
+
+            const body = pr.body || '';
+            const claChecked =
+              body.includes('[x] 我已阅读并同意 [贡献者许可协议 (CLA)]') ||
+              body.includes('[x] I have read and agree to the [Contributor License Agreement (CLA)]');
+
+            if (!claChecked) {
+              core.setFailed(
+                '❌ CLA 检查未通过 / CLA check failed\n\n' +
+                '请在 PR 描述中勾选「我已阅读并同意贡献者许可协议 (CLA)」后再提交。\n' +
+                'Please check the "I have read and agree to the Contributor License Agreement (CLA)" checkbox in the PR description before submitting.\n\n' +
+                '如果 PR 描述中没有该选项，请使用仓库的 PR 模板重新创建。\n' +
+                'If the checkbox is missing, please recreate the PR using the repository PR template.'
+              );
+            }
