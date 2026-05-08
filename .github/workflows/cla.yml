@@ -16,9 +16,9 @@ jobs:
           script: |
             const pr = context.payload.pull_request;
 
-            // Skip bot accounts
+            // Skip bot accounts. pr.user.type === 'Bot' 覆盖所有机器人，allowlist 作兜底。
             const botList = ['dependabot[bot]', 'renovate[bot]', 'github-actions[bot]'];
-            if (botList.includes(pr.user.login)) {
+            if (pr.user.type === 'Bot' || botList.includes(pr.user.login)) {
               console.log(`Skipping CLA check for bot: ${pr.user.login}`);
               return;
             }
@@ -32,9 +32,10 @@ jobs:
             }
 
             const body = pr.body || '';
-            const claChecked =
-              body.includes('[x] 我已阅读并同意 [贡献者许可协议 (CLA)]') ||
-              body.includes('[x] I have read and agree to the [Contributor License Agreement (CLA)]');
+            // GitHub 将 [x] 与 [X] 均视为已勾选，宽松匹配以避免大小写误判。
+            const zhRe = /\[[xX]\][^\n]*我已阅读并同意[^\n]*贡献者许可协议/;
+            const enRe = /\[[xX]\][^\n]*I have read and agree to the[^\n]*Contributor License Agreement/;
+            const claChecked = zhRe.test(body) || enRe.test(body);
 
             if (!claChecked) {
               core.setFailed(
