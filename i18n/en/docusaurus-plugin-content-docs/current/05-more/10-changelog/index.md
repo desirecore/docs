@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.51](./v10.0.51) | 2026-05-11 | Conflict Resolution Dialog、Conversation Compression Command、Multilingual Skil... |
 | [v10.0.50](./v10.0.50) | 2026-05-09 | Conversation Compression、Agent Conflict Resolver、Multilingual Skill Injection... |
 | [v10.0.49](./v10.0.49) | 2026-05-08 | Platform-specific update checks、Expanded Tongyi Qianwen compute and encoding ... |
 | [v10.0.48](./v10.0.48) | 2026-05-08 | Heartbeat notification file links、Concurrent heartbeat support for multiple a... |
