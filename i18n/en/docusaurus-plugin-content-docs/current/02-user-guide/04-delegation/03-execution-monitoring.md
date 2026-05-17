@@ -1,7 +1,7 @@
 ---
 title: Execution Monitoring
-description: Learn how to monitor progress while the agent executes tasks, understand the difference between deterministic and adaptive steps, and how to pause and resume execution.
-keywords: [execution, monitoring, deterministic step, adaptive step, pause, resume, progress]
+description: Learn how to monitor progress while the agent executes tasks, understand the difference between deterministic and adaptive steps, and how the task list makes every step transparent.
+keywords: [execution, monitoring, deterministic step, adaptive step, pause, resume, progress, task list]
 ---
 
 # Execution Monitoring
@@ -41,12 +41,80 @@ When a task is executing, you will see a real-time updated progress panel:
 
 | Status | Icon | Meaning |
 |--------|------|---------|
-| Completed | ✅ | Step executed successfully |
+| Pending | 🔹 | Task created but not started |
 | In Progress | 🔄 | Currently processing |
-| Waiting | ⏳ | Queued for execution |
+| Completed | ✅ | Step executed successfully |
 | Needs Confirmation | 🚪 | Human Gate, waiting for your confirmation |
 | Warning | ⚠️ | Execution successful but problem found |
 | Failed | ❌ | Execution failed |
+| Discarded | 🗑️ | Task soft-deleted (still visible in the audit log) |
+
+## Task List (Transparent Progress)
+
+Once execution begins, the agent **converts each step in the plan into a task** on its own "task list". You can ask "where are we?" / "what's left?" any time—the agent doesn't need to recall anything; it just queries the list.
+
+### What the Task List Looks Like
+
+Each task has a clear title, status, and links to related context:
+
+```
+📋 Task List (agent "Contract Review Assistant")
+
+🔄 #1 Parse contract file, extract key clauses
+        In progress · linked to plans/review-procurement-contract.md step 1
+
+🔹 #2 Check penalty percentage
+        Pending · depends on #1 completing
+
+🔹 #3 Check payment terms
+        Pending · depends on #1 completing
+
+🔹 #4 Analyze imported equipment clauses (adaptive)
+        Pending · risk: med · depends on #1 #2 #3
+
+🔹 #5 Comprehensive risk assessment (adaptive)
+        Pending · risk: med · needs your confirmation
+
+🔹 #6 Send review report
+        Pending · risk: high · needs your confirmation
+```
+
+### Status Updates **Immediately**
+
+The agent's discipline is:
+- **Before starting a step**, immediately switch its status to "🔄 In Progress"
+- **As soon as a step is done**, switch to "✅ Completed"
+- **Never batch updates** across multiple steps
+
+That means what you see is always current—no "looks stalled but actually working" situations.
+
+### Task Dependencies
+
+A task can declare "you must finish X before me". For example, "run database migration" depends on "backup complete"—if the dependency hasn't finished, the agent won't start the dependent step, preventing out-of-order execution.
+
+Dependencies appear in the list as "depends on #X" so you can see the full task graph at a glance.
+
+### Deviations from the Plan Reflect in the List
+
+If the agent needs to adjust steps mid-flight, it will:
+
+1. Proactively tell you "I'm going to deviate from the original plan, because X"
+2. After your agreement, update the task list (add new tasks or modify existing ones)
+3. Append the deviation log to the `## Execution Notes` section at the end of the plan file
+
+This way, looking at the plan file + task list later gives you a complete reconstruction of "what actually happened".
+
+### Task Lists Are Private to Each Agent
+
+Each agent can see and modify **only its own** task list. By design:
+
+- **No interference**: Switching to another agent shows you its list—you won't see another agent's to-dos mixed in
+- **Clear accountability**: Each task traces back to a specific agent (no "who did this?")
+- **Isolated audit**: Task records travel with the agent, making it easy to audit per-agent
+
+:::tip What about multi-agent collaboration?
+When several agents work on a big task (e.g. a team task), each agent manages its own list and **shares progress via messages and receipts**—not by reading each other's lists. This mirrors real teamwork: each person has their own to-do list and aligns through updates and receipts. See [Cross-Agent Collaboration](./06-cross-agent.md).
+:::
 
 ## Deterministic Steps vs. Adaptive Steps
 

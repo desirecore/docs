@@ -76,11 +76,28 @@ Typing `/` (slash) in the input box pops up the command auto-completion menu. Sl
 
 | Type | Syntax | Description |
 |------|------|------|
-| System Commands | `/command_name` | Built-in functions, such as `/help`, `/skill`, etc. |
+| System Commands | `/command_name` | Built-in functions, such as `/help`, `/skill`, `/plan`, etc. |
 | Skill Invocation | `/skill:skill_name` | Call installed skills |
 | Quick Invocation | `/skill_name` | Directly input skill name for quick calling |
 
 After typing `/skill:`, the list of skills available to the current Digital Companion is automatically displayed, and continuing to input filters the matches.
+
+### Built-in System Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/plan` | Force the Companion to plan first before acting (see [Plan Confirmation](../04-delegation/02-plan-confirmation.md#asking-the-agent-to-always-plan-first)) |
+| `/new` | Start a new conversation, isolated from the current context |
+| `/compact` | Manually compact the current conversation history to free up context space |
+| `/steer` | Inject a guiding message while the Companion is thinking (without interrupting generation) |
+| `/help` | View the full list of available commands |
+
+:::tip Two ways to use `/plan`
+- Send `/plan` alone — enables Plan Mode without sending any message
+- Send `/plan replace all console.log with logger.info` — enables Plan Mode + submits the task
+
+After the plan is approved (or rejected), forced mode auto-disables.
+:::
 
 ## Shortcut Quick Reference
 
