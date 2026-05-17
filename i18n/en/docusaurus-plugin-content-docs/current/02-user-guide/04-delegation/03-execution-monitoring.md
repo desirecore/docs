@@ -42,6 +42,7 @@ When a task is executing, you will see a real-time updated progress panel:
 | Status | Icon | Meaning |
 |--------|------|---------|
 | Pending | 🔹 | Task created but not started |
+| Waiting | ⏳ | Queued (waiting on a dependency or an earlier step to finish) |
 | In Progress | 🔄 | Currently processing |
 | Completed | ✅ | Step executed successfully |
 | Needs Confirmation | 🚪 | Human Gate, waiting for your confirmation |
