@@ -140,14 +140,14 @@ DesireCore's collaborative writing feature. Based on a Markdown editor, supporti
 ### Teach
 One of the Six Primitives. Users tell agents how to do something, why to do it, and what exceptions apply. Teaching content is persisted as behavioral norms.
 
-### Team Version Management
-The ability to manage an entire Agent team as a single versioned unit — automatic recording of organizational changes (add member / change leader / disband), pushing to GitHub/Gitee remotes, releasing new team versions, one-click forking from someone else's link, and more. Independent from individual Agent version management.
-
 ### Team Member Lock
 The team's precise version pointer to each member Agent. Even as a member Agent keeps iterating in its own repository, the team continues to point at the locked version by default — guaranteeing that anyone installing the team later gets the exact same combination. Use "Upgrade Members" to sync to members' latest versions.
 
 ### Team Release
 Stamping a complete version number (e.g., v0.1.1) on the team, generating a changelog, and syncing to the remote. Once released, the version can be shared, reverted to, or used as a reference point.
+
+### Team Version Management
+The ability to manage an entire Agent team as a single versioned unit — automatic recording of organizational changes (add member / change leader / disband), pushing to GitHub/Gitee remotes, releasing new team versions, one-click forking from someone else's link, and more. Independent from individual Agent version management.
 
 ### Tool
 External capabilities that agents can invoke. Includes built-in tools (file read/write, search, etc.), MCP tools, and custom tools. Unified registration and management through the Tool Registry.

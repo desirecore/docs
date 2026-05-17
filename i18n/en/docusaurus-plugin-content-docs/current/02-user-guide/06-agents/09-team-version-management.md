@@ -233,3 +233,4 @@ Member versions revert to the roster from that point in time. You can choose whe
 
 - [Version Control](./08-version-control.md) — Version management for an individual Agent
 - [Cross-Agent Collaboration](../04-delegation/06-cross-agent.md) — How multiple Agents work together
+- [Intelligent Task Orchestration](../../04-concepts/10-task-orchestration.md) — Team mode vs. swarm mode explained
