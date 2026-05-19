@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.62](./v10.0.62) | 2026-05-19 | 修复：Fixed an issue where the Agent failed to keep the cloud version when handl... |
 | [v10.0.61](./v10.0.61) | 2026-05-19 | Team Git Version Management、High-Precision Math Tool、Model Capability Indicat... |
 | [v10.0.60](./v10.0.60) | 2026-05-15 | 修复：Fixed an issue on Windows where users might see a “Unable to uninstall old... |
 | [v10.0.59](./v10.0.59) | 2026-05-15 | Immersive Voice Interaction、AI Next Message Prediction、/steer Runtime Guidanc... |
