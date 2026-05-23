@@ -14,6 +14,13 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.67](./v10.0.67) | 2026-05-20 | 修复：For long-running agent tasks, when API retries occur, previously generated... |
+| [v10.0.66](./v10.0.66) | 2026-05-19 | 修复：Fixed an issue in asynchronous delegation scenarios where messages, delega... |
+| [v10.0.65](./v10.0.65) | 2026-05-19 | Chat formula rendering，修复 2 项问题，改进 1 项 |
+| [v10.0.64](./v10.0.64) | 2026-05-19 | Enhanced PDF Reading，修复 2 项问题，改进 2 项 |
+| [v10.0.63](./v10.0.63) | 2026-05-19 | 修复：When using models with vision capabilities, the Agent can now correctly re... |
+| [v10.0.62](./v10.0.62) | 2026-05-19 | 修复：Fixed an issue where the Agent failed to keep the cloud version when handl... |
+| [v10.0.61](./v10.0.61) | 2026-05-19 | Team Git Version Management、High-Precision Math Tool、Model Capability Indicat... |
 | [v10.0.60](./v10.0.60) | 2026-05-15 | 修复：Fixed an issue on Windows where users might see a “Unable to uninstall old... |
 | [v10.0.59](./v10.0.59) | 2026-05-15 | Immersive Voice Interaction、AI Next Message Prediction、/steer Runtime Guidanc... |
 | [v10.0.58](./v10.0.58) | 2026-05-14 | 修复：Fixed an issue on Windows where automatic updates could sometimes fail wit... |
