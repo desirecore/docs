@@ -258,3 +258,75 @@ Suitable scenarios:
 | Project collaboration | Use it together with website generation, automation, or workflow tasks |
 
 For beginners, focus first on three Resource Manager entries: Agents, Skills, and Automation. Agents determine “who does the work”, Skills determine “what can be done”, and Automation determines “when it runs”.
+
+## 4. Applications & Services
+
+The Applications & Services module provides platform-level configuration and management features, helping you connect external AI services, integrate third-party tools, and manage platform extensions.
+
+![Applications & Services](/img/user-guide/feature-entry/app-service.png)
+
+Click the "Applications & Services" icon in the left navigation bar to enter the Applications & Services page.
+
+### Core Entry Points
+
+The main functions on the Applications & Services page include:
+
+| No. | Function | Purpose |
+|---|---|---|
+| ① | Compute | Configure AI model providers and API keys, such as OpenAI, Alibaba Cloud, DeepSeek, etc. |
+| ② | MCP Services | Manage external tool and service integrations, such as Chrome DevTools, file systems, etc. |
+| ③ | Marketplace | Browse and install platform extension plugins to expand agent capabilities |
+
+### Configuration Flow
+
+#### 1. Configure Compute Services
+
+When using DesireCore for the first time, you need to configure at least one compute service for agents to work properly:
+
+1. Navigate to "Applications & Services" → "Compute"
+2. Click "Add Provider" or "Configure"
+3. Select a model provider (e.g., OpenAI, Alibaba Cloud, DeepSeek, etc.)
+4. Enter your API key and save
+5. Select the corresponding model in agent conversations to start using it
+
+> 💡 We recommend configuring multiple providers so the system can automatically switch when one service is unavailable.
+
+#### 2. Manage MCP Services
+
+MCP (Model Context Protocol) services allow agents to connect to and use external tools:
+
+1. Navigate to "Applications & Services" → "MCP Services"
+2. View the list of connected MCP services
+3. Enable or disable specific MCP services as needed
+4. Adding new MCP services requires providing configuration details
+
+#### 3. Browse the Marketplace
+
+The marketplace provides various extension features:
+
+| Type | Description |
+|---|---|
+| Document Processing | Support for generating and parsing Word, PDF, Excel, PPT, and other document formats |
+| Image Generation | Support for text-to-image, image editing, and other AI drawing features |
+| Text-to-Speech | Support for converting text to speech with multiple voice options |
+| Video Generation | Support for text-to-video, image-to-video, and other features |
+| Email Management | Support for multi-mailbox send/receive, rule configuration, and more |
+
+### Common Navigation Paths
+
+| Goal | Navigation Path |
+|------|----------------|
+| Add a model provider | Applications & Services → Compute → Add Provider → Enter Key |
+| Enable MCP tools | Applications & Services → MCP Services → Enable desired tools |
+| Install a plugin | Applications & Services → Marketplace → Search → Install |
+| Switch default model | Applications & Services → Compute → Select Provider → Set as Default |
+
+### Tips for Beginners
+
+When using for the first time, we recommend configuring in the following priority order:
+
+1. **Configure compute first** — Add at least one AI model provider, which is a prerequisite for using agents
+2. **Then browse MCP services** — Understand what external tools are available to enhance agent capabilities
+3. **Finally explore the marketplace** — Install extension plugins based on your actual needs
+
+> ⚠️ Compute configuration involves sensitive information such as API keys. Please keep them secure and do not share them with others.
