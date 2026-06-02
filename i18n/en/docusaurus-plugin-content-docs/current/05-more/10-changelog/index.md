@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.70](./v10.0.70) | 2026-06-02 | Service Catalog Governance and Self-Service Registration、Hidden Developer Mod... |
 | [v10.0.69](./v10.0.69) | 2026-05-29 | Upgraded agent creation workflow、Image management when editing messages、Enhan... |
 | [v10.0.68](./v10.0.68) | 2026-05-27 | Cloud account login and automatic compute binding、Version announcement popup、... |
 | [v10.0.67](./v10.0.67) | 2026-05-20 | 修复：For long-running agent tasks, when API retries occur, previously generated... |
