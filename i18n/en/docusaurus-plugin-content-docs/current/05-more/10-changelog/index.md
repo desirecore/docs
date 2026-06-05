@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.73](./v10.0.73) | 2026-06-05 | Offline Diagram Editing and Conversational Diagram Generation、Runtime Environ... |
 | [v10.0.72](./v10.0.72) | 2026-06-03 | 修复：Fixed an issue where the app could report an error on startup in some case... |
 | [v10.0.71](./v10.0.71) | 2026-06-02 | 修复：Fixed an issue where, in some cases, app development or build processes co... |
 | [v10.0.70](./v10.0.70) | 2026-06-02 | Service Catalog Governance and Self-Service Registration、Hidden Developer Mod... |
