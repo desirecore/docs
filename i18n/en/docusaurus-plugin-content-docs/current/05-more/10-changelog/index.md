@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.75](./v10.0.75) | 2026-06-08 | Updated installation reminders，修复 3 项问题，改进 1 项 |
 | [v10.0.74](./v10.0.74) | 2026-06-06 | PDF Document Outline Reading、Export Documents as PDF，修复 3 项问题，改进 6 项 |
 | [v10.0.73](./v10.0.73) | 2026-06-05 | Offline Diagram Editing and Conversational Diagram Generation、Runtime Environ... |
 | [v10.0.72](./v10.0.72) | 2026-06-03 | 修复：Fixed an issue where the app could report an error on startup in some case... |
