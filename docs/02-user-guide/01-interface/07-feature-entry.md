@@ -20,7 +20,7 @@
 | 安装应用 | 应用与服务 | 左侧“四宫格”图标 → 应用 → 安装 |
 | 接入外部服务 | 应用与服务 | 左侧“四宫格”图标 → 服务 → 选择 HTTP / MCP 服务 |
 
-![对话界面操作路径示意图](picture/main1.png)
+![对话界面操作路径示意图](/img/user-guide/feature-entry/main1.png)
 
 ## 一、对话界面的三个核心区域
 
@@ -102,7 +102,7 @@
 
 下面的动图演示了创作文档完成后，从结果卡片中选择导出格式并保存文件的过程。
 
-![创作文档导出](picture/20260610-173817.gif)
+![创作文档导出](/img/user-guide/feature-entry/20260610-173817.gif)
 
 阅读建议：
 
@@ -191,7 +191,7 @@
 
 资源管理器用于集中查看和管理 DesireCore 中的各类资源，包括智能体、技能、自动化任务、工作流、算力服务、邮箱、存储和代码仓库等。
 
-![资源管理器示意图](picture/resource-manager.png)
+![资源管理器示意图](/img/user-guide/feature-entry/resource-manager.png)
 
 点击左侧导航栏中的“文件夹”图标，进入到“资源管理器”页面。
 
@@ -262,7 +262,7 @@
 
 下面的动图演示了从技能页面进入导入入口、选择导入方式并完成导入的过程。
 
-![技能导入](picture/skill-import.gif)
+![技能导入](/img/user-guide/feature-entry/skill-import.gif)
 
 ### ③ 自动化
 
@@ -336,7 +336,7 @@
 
 “应用与服务”是独立的功能模块，用于集中管理可安装的应用和可连接的服务。它把常用能力分成两类：一类是可以直接安装和使用的应用，另一类是可以接入系统的外部服务。
 
-![应用与服务示意图](picture/app-service.png)
+![应用与服务示意图](/img/user-guide/feature-entry/app-service.png)
 
 进入方式：
 
