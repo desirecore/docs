@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.77](./v10.0.77) | 2026-06-15 | Conversation Export、ChatGPT Subscription Integration、Billing and Balance Cent... |
 | [v10.0.76](./v10.0.76) | 2026-06-09 | Zoomable chart preview、Tool backend configuration、Scheduling receipts in chat... |
 | [v10.0.75](./v10.0.75) | 2026-06-08 | Updated installation reminders，修复 3 项问题，改进 1 项 |
 | [v10.0.74](./v10.0.74) | 2026-06-06 | PDF Document Outline Reading、Export Documents as PDF，修复 3 项问题，改进 6 项 |
