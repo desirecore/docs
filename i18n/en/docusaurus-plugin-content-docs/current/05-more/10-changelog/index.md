@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.79](./v10.0.79) | 2026-06-23 | 恢复官方算力 /me/models 接入 + 对话模型选择禁用生成类模型 (#869)，修复 4 项问题 |
 | [v10.0.78](./v10.0.78) | 2026-06-16 | 修复：Fixed an issue on Windows where the app could fail to launch when opened v... |
 | [v10.0.77](./v10.0.77) | 2026-06-15 | Conversation Export、ChatGPT Subscription Integration、Billing and Balance Cent... |
 | [v10.0.76](./v10.0.76) | 2026-06-09 | Zoomable chart preview、Tool backend configuration、Scheduling receipts in chat... |
