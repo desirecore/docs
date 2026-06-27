@@ -3,12 +3,20 @@
 /**
  * Changelog 版本宣传图生成脚本
  *
- * 从 changelog markdown 中提取关键特性，调用火山引擎 doubao-seedream-5.0-lite
- * 生成背景插画，再用 sharp 叠加版本号、功能亮点等文字，输出完整宣传图。
+ * 从 changelog markdown 中提取关键特性，调用 OpenAI 兼容的图像生成接口
+ * （默认模型 image-2）生成背景插画，再用 sharp 叠加版本号、功能亮点等文字，
+ * 输出完整宣传图。生成的背景图会统一 resize 到 2848×1600，确保文字叠加层对齐。
+ *
+ * 环境变量（与文本 release notes 共用同一个 AI 网关）：
+ *   AI_BASE_URL — AI 网关 base URL（OpenAI 兼容，自动补 /v1/images/generations）
+ *   AI_API_KEY  — AI 网关 API Key（Bearer 鉴权）
+ *   IMAGE_MODEL — 图像模型名（默认 image-2；与文本模型 AI_MODEL 区分）
+ *   IMAGE_SIZE  — 请求生成尺寸（默认 2848x1600，与输出一致；最终都会 resize 到 2848×1600）
  *
  * 用法：
- *   ARK_API_KEY=xxx node scripts/generate-changelog-cover.mjs v10.0.16
- *   ARK_API_KEY=xxx node scripts/generate-changelog-cover.mjs v10.0.16 --force
+ *   AI_BASE_URL=https://your-gateway AI_API_KEY=xxx \
+ *     node scripts/generate-changelog-cover.mjs v10.0.16
+ *   ... node scripts/generate-changelog-cover.mjs v10.0.16 --force
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
@@ -25,11 +33,26 @@ const CHANGELOG_DIR_ZH = resolve(ROOT, 'docs/05-more/10-changelog')
 const CHANGELOG_DIR_EN = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/10-changelog')
 const IMG_DIR = resolve(ROOT, 'static/img/changelog')
 
-const API_ENDPOINT = 'https://ark.cn-beijing.volces.com/api/v3/images/generations'
-const MODEL_ID = 'doubao-seedream-5-0-260128'
-
+// 输出宣传图尺寸（文字叠加层布局按此尺寸计算）
 const WIDTH = 2848
 const HEIGHT = 1600
+
+// 图像生成接口（OpenAI 兼容）。复用文本 release notes 的同一个 AI 网关（AI_BASE_URL/AI_API_KEY），
+// 仅模型名单独用 IMAGE_MODEL 区分。endpoint / model / size 由环境变量驱动。
+const IMAGE_BASE_URL = process.env.AI_BASE_URL ?? ''
+const MODEL_ID = process.env.IMAGE_MODEL || 'image-2'
+// 请求生成尺寸：默认与输出尺寸一致（2848×1600，16:9）。原 seedream 模型即按此尺寸出图，
+// image-2 同为网关图像模型，预期支持同尺寸 → resize 成为无损兜底。模型若不支持可用
+// IMAGE_SIZE 覆盖为其支持的近似 16:9 尺寸，生成后仍会 resize 到 WIDTH×HEIGHT。
+const REQUEST_SIZE = process.env.IMAGE_SIZE || `${WIDTH}x${HEIGHT}`
+
+/** 由 base URL 推导 images/generations endpoint（兼容是否已含 /v1 或完整路径） */
+function buildImagesEndpoint(baseUrl) {
+  const t = baseUrl.replace(/\/+$/, '')
+  if (t.endsWith('/images/generations')) return t
+  if (/\/v1$/.test(t)) return `${t}/images/generations`
+  return `${t}/v1/images/generations`
+}
 
 // 功能关键词 → 视觉意象映射表
 const VISUAL_MAP = {
@@ -95,10 +118,14 @@ function parseArgs() {
 }
 
 function checkApiKey() {
-  const apiKey = process.env.ARK_API_KEY
+  const apiKey = process.env.AI_API_KEY
   if (!apiKey) {
-    console.error('错误: 未设置 ARK_API_KEY 环境变量')
-    console.error('用法: ARK_API_KEY=your-key node scripts/generate-changelog-cover.mjs v10.0.16')
+    console.error('错误: 未设置 AI_API_KEY 环境变量')
+    console.error('用法: AI_BASE_URL=... AI_API_KEY=your-key node scripts/generate-changelog-cover.mjs v10.0.16')
+    process.exit(1)
+  }
+  if (!IMAGE_BASE_URL) {
+    console.error('错误: 未设置 AI_BASE_URL 环境变量')
     process.exit(1)
   }
   return apiKey
@@ -187,20 +214,21 @@ function buildBgPrompt(version, sections) {
 }
 
 async function generateBgImage(prompt, apiKey) {
+  const endpoint = buildImagesEndpoint(IMAGE_BASE_URL)
   console.log('正在生成背景图...')
+  console.log(`Endpoint: ${endpoint}  Model: ${MODEL_ID}  Size: ${REQUEST_SIZE}`)
   console.log(`Prompt: ${prompt}\n`)
 
+  // OpenAI 兼容 images/generations 请求体（最小字段，最大兼容性）
   const body = {
     model: MODEL_ID,
     prompt,
-    size: `${WIDTH}x${HEIGHT}`,
+    size: REQUEST_SIZE,
+    n: 1,
     response_format: 'b64_json',
-    output_format: 'png',
-    watermark: false,
-    optimize_prompt_options: { mode: 'standard' },
   }
 
-  const response = await fetch(API_ENDPOINT, {
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -217,17 +245,33 @@ async function generateBgImage(prompt, apiKey) {
   const result = await response.json()
 
   if (result.error) {
-    throw new Error(`API 返回错误: ${result.error.code} - ${result.error.message}`)
+    const e = result.error
+    throw new Error(`API 返回错误: ${e.code ?? e.type ?? 'error'} - ${e.message ?? JSON.stringify(e)}`)
   }
 
-  if (!result.data?.[0]) throw new Error('API 未返回图片数据')
-
-  const imageData = result.data[0]
+  const imageData = result.data?.[0]
+  if (!imageData) throw new Error('API 未返回图片数据')
   if (imageData.error) {
     throw new Error(`图片生成失败: ${imageData.error.code} - ${imageData.error.message}`)
   }
 
-  return Buffer.from(imageData.b64_json, 'base64')
+  // 兼容 b64_json 与 url 两种返回
+  let rawBuffer
+  if (imageData.b64_json) {
+    rawBuffer = Buffer.from(imageData.b64_json, 'base64')
+  } else if (imageData.url) {
+    const imgResp = await fetch(imageData.url)
+    if (!imgResp.ok) throw new Error(`下载生成图片失败 (${imgResp.status}): ${imageData.url}`)
+    rawBuffer = Buffer.from(await imgResp.arrayBuffer())
+  } else {
+    throw new Error('API 返回数据缺少 b64_json/url 字段')
+  }
+
+  // 统一 resize 到 WIDTH×HEIGHT，确保文字叠加层布局对齐（不依赖模型实际输出尺寸）
+  return sharp(rawBuffer)
+    .resize(WIDTH, HEIGHT, { fit: 'fill' })
+    .png()
+    .toBuffer()
 }
 
 function escapeXml(str) {
