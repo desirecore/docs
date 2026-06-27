@@ -20,7 +20,7 @@ After reading this guide, you should be able to complete these basic operations:
 | Install an application | Applications and Services | Click the four-square icon on the left → Applications → Install |
 | Connect an external service | Applications and Services | Click the four-square icon on the left → Services → Select an HTTP / MCP service |
 
-![Conversation interface operation path](picture/main1.png)
+![Conversation interface operation path](/img/user-guide/feature-entry/main1.png)
 
 ## 1. Three Core Areas of the Conversation Interface
 
@@ -102,7 +102,7 @@ After an agent finishes creating a document, organizing a report, or generating 
 
 The animation below shows how to choose an export format from the result card and save the file after a document has been created.
 
-![Document export](picture/20260610-173817.gif)
+![Document export](/img/user-guide/feature-entry/20260610-173817.gif)
 
 Reading tips:
 
@@ -191,7 +191,7 @@ After completing a basic conversation, use these signs to check whether the oper
 
 The Resource Manager is used to centrally view and manage different types of resources in DesireCore, including agents, skills, automation tasks, workflows, compute services, email accounts, storage, and code repositories.
 
-![Resource Manager](picture/resource-manager.png)
+![Resource Manager](/img/user-guide/feature-entry/resource-manager.png)
 
 Click the “folder” icon in the left navigation bar to enter the Resource Manager page.
 
@@ -262,7 +262,7 @@ To confirm that a skill was imported successfully, check the following:
 
 The animation below shows the process of entering the import entry from the Skills page, choosing an import method, and completing the import.
 
-![Skill import](picture/skill-import.gif)
+![Skill import](/img/user-guide/feature-entry/skill-import.gif)
 
 ### ③ Automation
 
@@ -336,7 +336,7 @@ For beginners, focus first on three Resource Manager entries: Agents, Skills, an
 
 The Applications and Services page is a separate module for browsing installable applications and connectable services. It divides common capabilities into two groups: applications you can install and use directly, and external services you can connect to the system.
 
-![Applications and Services](picture/app-service.png)
+![Applications and Services](/img/user-guide/feature-entry/app-service.png)
 
 How to open it:
 
