@@ -22,7 +22,7 @@ The DesireCore project maintains several official repositories on GitHub. Feel f
 | Repository | Description | Status |
 |------------|-------------|--------|
 | [docs](https://github.com/desirecore/docs) | DesireCore documentation repository (this site) | Public |
-| [distribution](https://github.com/desirecore/agent-os) | Official distribution — download installers for Windows, macOS, and Linux | Public |
+| [agent-os](https://github.com/desirecore/agent-os) | Official distribution — download installers for Windows, macOS, and Linux | Public |
 
 ## Service Repositories
 
