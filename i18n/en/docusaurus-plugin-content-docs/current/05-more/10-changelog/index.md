@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.82](./v10.0.82) | 2026-06-29 | Marketplace page visual upgrade: The marketplace list and detail pages have b... |
 | [v10.0.81](./v10.0.81) | 2026-06-28 | Rewind、Text-to-Image/Video Tools、Task Board、History Version Viewer、Operationa... |
 | [v10.0.80](./v10.0.80) | 2026-06-24 | 修复：stabilize local user identity (#889)、Update Docs Changelog 字体安装去 sudo + 整段... |
 | [v10.0.79](./v10.0.79) | 2026-06-23 | 恢复官方算力 /me/models 接入 + 对话模型选择禁用生成类模型 (#869)，修复 4 项问题 |
