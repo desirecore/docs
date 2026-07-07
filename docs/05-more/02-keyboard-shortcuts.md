@@ -32,6 +32,8 @@ DesireCore 提供三种快捷键模式，你可以在「设置 > 快捷键 > 编
 | 发送消息 | `Enter` | `Enter` | 在输入框中发送消息 |
 | 换行 | `Shift+Enter` | `Shift+Enter` | 在输入框中插入换行 |
 | 取消输入 | `Escape` | `Escape` | 取消当前输入 |
+| 采纳预测 | `Tab` 或 `→` | `Tab` 或 `→` | 接受下一条消息预测 |
+| Rewind | `Cmd+Alt+Z` | `Ctrl+Alt+Z` | 回撤到检查点 |
 
 ## 超级文书
 

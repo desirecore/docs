@@ -49,5 +49,20 @@ DesireCore supports usage without login, all core functions are fully available 
 - **Logged-in User**: Future login will allow data sync to cloud (feature in development)
 
 :::info
-Current version's login feature is under development, all functions can be used normally without login. Your data is securely stored on your local device.
+Login is available for account-related capabilities such as official cloud compute, subscriptions, credits, account profile, and selected online services. Core local workflows still work without signing in.
+
+## Sign Up and Sign In
+
+You can sign up or sign in with email. Registration uses an email OTP code, and password recovery also uses email OTP.
+
+After signing in, DesireCore can sync account resources such as:
+
+- official cloud model provider
+- credit balance and expiring credits
+- subscription status
+- available partner models
+
+## Sign Out
+
+Signing out clears the local cloud-provider session state so expired tokens are not reused. It does not delete your local conversations, agents, files, or custom API keys.
 :::

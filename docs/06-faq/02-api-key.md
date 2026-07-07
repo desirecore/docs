@@ -57,7 +57,7 @@ DesireCore 支持兼容 OpenAI API 格式的自定义 Provider（如本地部署
 
 ## API 调用会产生费用吗？
 
-DesireCore 本身不收费，但调用 AI 模型 API 的费用由对应的供应商收取。费用取决于：
+如果你使用自备 API Key，调用 AI 模型 API 的费用由对应供应商收取；如果使用官方云端算力，会消耗订阅额度或 credit。费用取决于：
 
 - 你选择的模型（不同模型价格不同）
 - 消息的长度（按 Token 计费）
