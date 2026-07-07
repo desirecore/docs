@@ -14,6 +14,8 @@ DesireCore 不是一个封闭系统。它通过多层集成架构连接外部世
 
 这篇文档帮助你快速了解 DesireCore 所有集成能力的全貌，然后指引你到具体文档深入阅读。
 
+较新的 DesireCore 还提供 [应用与服务目录](./app-service-catalog)，用于管理应用安装、服务注册、健康探测、启停更新和审批请求。
+
 ## 集成能力全景
 
 | 集成类型 | 说明 | 详细文档 |
@@ -24,6 +26,7 @@ DesireCore 不是一个封闭系统。它通过多层集成架构连接外部世
 | **Computer Use** | 通过 HostAgent 操控桌面和移动设备的 GUI | [GUI 桌面自动化](./computer-use) |
 | **邮件** | 统一管理 Gmail / Outlook / IMAP 邮箱 | [邮件管理](../email/overview) |
 | **工作流** | 用可视化 DSL 编排触发器、代码、LLM、Agent 和人工确认节点 | [任务编排](../../concepts/task-orchestration) |
+| **应用与服务目录** | 管理应用安装、派生服务、审批和健康状态 | [应用与服务目录](./app-service-catalog) |
 
 :::tip 一句话理解
 内置工具是"出厂能力"，MCP 是"扩展接口"，技能包是"工作流模板"，Computer Use 是"万能后备"——四者互补，覆盖几乎所有场景。
