@@ -40,7 +40,22 @@ DesireCore 已在统信 UOS、银河麒麟（Kylin）、深度 Deepin、openKyli
 AppImage 是一种便携式应用格式——不需要安装，下载后直接运行。你可以把它放在任何你喜欢的目录里。
 :::
 
-## 创建桌面快捷方式
+## 推荐：安装 AppImage 启动器
+
+较新的 Linux 包提供 AppImage 启动器安装脚本。它会把 AppImage 放到固定位置，并创建命令行入口、应用菜单项和桌面快捷方式。
+
+典型安装结果：
+
+| 路径 | 用途 |
+|------|------|
+| `~/.local/share/desirecore/DesireCore.AppImage` | 固定 AppImage 路径 |
+| `~/.local/bin/desirecore` | 命令行启动入口 |
+| `~/.local/share/applications/desirecore.desktop` | 应用菜单入口 |
+| `~/.local/share/desirecore/launcher.env` | 沙箱或启动参数配置 |
+
+如果脚本不可用，也可以继续按下面的方式手动创建桌面快捷方式。
+
+## 手动创建桌面快捷方式
 
 如果你希望从应用菜单中启动 DesireCore，可以手动创建一个桌面入口文件：
 

@@ -56,7 +56,7 @@ DesireCore requires an internet connection to access AI services. Ensure your ne
 - **Access to DesireCore's update server**: e.g., `download.desirecore.net`, for receiving the latest versions and security patches
 - **Access to GitHub**: If you need to fetch marketplace Agents, Skills, or other resources from GitHub, ensure access to `github.com` and related CDN services. The system will automatically detect network conditions and provide fallback options when certain services are unavailable (e.g., using a secure CDN to access whitelisted repositories).
 
-**Note:** DesireCore does not include built-in AI models — it connects to third-party services via API to provide AI capabilities. As of the current version (v10.1.0), DesireCore remains a pure client-side application with no server components; the official team does not provide a backend API, and update services rely on object storage and CDN. Therefore, no server deployment is needed — as long as you can access the APIs listed above, everything will work.
+**Note:** DesireCore does not include built-in AI models. It connects to third-party APIs or official cloud compute for AI capabilities. Core data remains local-first; account sign-in, credits/subscriptions, cloud model lists, and update services require access to DesireCore online services. You can still use most core workflows with your own API keys and local data.
 
 :::tip Network Issues?
 If you have difficulty accessing overseas services, consider using providers with servers in your region for lower latency.

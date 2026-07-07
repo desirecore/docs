@@ -52,6 +52,14 @@ keywords: [Windows, 安装, NSIS, SmartScreen]
 
 <!-- 截图占位: SmartScreen 处理 (windows-smartscreen.png) -->
 
+## 更新和受保护目录
+
+如果使用默认安装位置（`%LOCALAPPDATA%\Programs\DesireCore`），自动更新通常不需要管理员权限。
+
+如果你把 DesireCore 安装到 `C:\Program Files\` 等受保护目录，更新安装器需要管理员权限。此时 Windows 会弹出 UAC 确认窗口；确认后安装器会以管理员身份继续更新。
+
+更新前 DesireCore 会尝试关闭旧进程和相关子进程，避免旧文件被占用。如果更新失败，可以先完全退出 DesireCore，必要时重启电脑后重新运行安装包。
+
 ## 卸载
 
 如果你需要卸载 DesireCore：

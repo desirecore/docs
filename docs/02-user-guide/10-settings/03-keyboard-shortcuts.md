@@ -33,6 +33,8 @@ DesireCore 内置了三种编辑器快捷键模式，适应不同用户的操作
 | 发送消息 | `Enter` |
 | 换行 | `Shift + Enter` |
 | 取消输入 | `Esc` |
+| 采纳预测 | `Tab` 或 `→` |
+| Rewind 到检查点 | `Cmd/Ctrl + Alt + Z` |
 
 ### 超级文书
 
