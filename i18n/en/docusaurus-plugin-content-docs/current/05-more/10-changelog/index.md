@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.84](./v10.0.84) | 2026-07-13 | Runtime Encrypted Packaging，修复 1 项问题 |
 | [v10.0.83](./v10.0.83) | 2026-07-11 | Claude subscription integration、Windows GUI automation、Thinking depth control... |
 | [v10.0.82](./v10.0.82) | 2026-06-29 | Marketplace page visual upgrade: The marketplace list and detail pages have b... |
 | [v10.0.81](./v10.0.81) | 2026-06-28 | Rewind、Text-to-Image/Video Tools、Task Board、History Version Viewer、Operationa... |
