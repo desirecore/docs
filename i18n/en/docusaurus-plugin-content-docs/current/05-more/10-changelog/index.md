@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.87](./v10.0.87) | 2026-07-14 | 修复：Fixed a regression where the app failed to restart automatically after an ... |
 | [v10.0.86](./v10.0.86) | 2026-07-14 | 修复：Fixed an issue on Windows where the progress window would not appear durin... |
 | [v10.0.85](./v10.0.85) | 2026-07-14 | Windows Upgrade Progress Window、Announcement Pop-up Login Entry，修复 3 项问题 |
 | [v10.0.84](./v10.0.84) | 2026-07-13 | Runtime Encrypted Packaging，修复 1 项问题 |
