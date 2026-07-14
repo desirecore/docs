@@ -214,7 +214,49 @@ function buildBgPrompt(version, sections) {
   ].join('')
 }
 
+/** 文生图请求重试上限（v10.0.87 封面因网关瞬时 fetch failed 缺图的教训） */
+const MAX_GEN_RETRIES = 5
+
+/**
+ * 判断错误是否值得重试：网络层错误（fetch failed/超时）、5xx、429 重试；
+ * 其余 4xx（400/401/402 配额/403/404）是客户端/配额问题，重试无意义且浪费配额。
+ */
+function isRetryableGenError(err) {
+  const m = String(err?.message ?? err)
+  const statusMatch = m.match(/API 请求失败 \((\d{3})\)/) || m.match(/下载生成图片失败 \((\d{3})\)/)
+  if (statusMatch) {
+    const status = Number(statusMatch[1])
+    return status >= 500 || status === 429
+  }
+  return true // 无 HTTP 状态码 = 网络层/响应解析异常，按瞬时故障重试
+}
+
+/**
+ * 带重试的背景图生成：失败自动重试（同一个错误反复出现也计入同一上限），
+ * 最多重试 MAX_GEN_RETRIES 次，指数退避 5s/10s/20s/40s/60s。
+ */
 async function generateBgImage(prompt, apiKey) {
+  let lastError
+  for (let attempt = 0; attempt <= MAX_GEN_RETRIES; attempt++) {
+    if (attempt > 0) {
+      const delay = Math.min(5000 * 2 ** (attempt - 1), 60000)
+      console.log(`第 ${attempt}/${MAX_GEN_RETRIES} 次重试（${delay / 1000}s 后）… 上次错误: ${lastError?.message ?? lastError}`)
+      await new Promise((r) => setTimeout(r, delay))
+    }
+    try {
+      return await requestBgImageOnce(prompt, apiKey)
+    } catch (err) {
+      lastError = err
+      if (!isRetryableGenError(err)) {
+        console.error(`不可重试错误，停止: ${err?.message ?? err}`)
+        throw err
+      }
+    }
+  }
+  throw lastError
+}
+
+async function requestBgImageOnce(prompt, apiKey) {
   const endpoint = buildImagesEndpoint(IMAGE_BASE_URL)
   console.log('正在生成背景图...')
   console.log(`Endpoint: ${endpoint}  Model: ${MODEL_ID}  Size: ${REQUEST_SIZE}`)
