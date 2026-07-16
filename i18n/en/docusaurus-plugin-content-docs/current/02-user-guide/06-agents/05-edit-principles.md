@@ -20,54 +20,52 @@ For example:
 | "Tone should be friendly" | "Must confirm before involving paid operations" |
 | "Give conclusion first, then reasons" | "Safety > Correctness > Efficiency" |
 
-## L0/L1/L2 Three-Layer Principle Structure
+## L0/L1/L2 Content Levels
 
-DesireCore's principles use a layered structure to ensure Agents have clear priorities when facing conflicts:
+DesireCore uses L0/L1/L2 to control how much prompt content is loaded. These are **content levels**, not system permission levels.
 
-### L0 — Absolute Hard Rules
+### L0 — Core Summary
 
-L0 principles are **absolute bottom lines** that the Agent cannot violate under any circumstances:
+L0 is a sentence or very short summary of the most important role and rules. It is always injected into the system prompt.
 
 - Must not help users engage in illegal activities
 - Must not leak other users' private data
 - Must not forge data or credentials
 
-:::warning L0 Principles Cannot Be Modified
-L0 layer principles are set by the system and cannot be deleted or modified by users. This ensures all Agents adhere to basic safety and ethical bottom lines.
-:::
+### L1 — Key Behavioral Guidelines
 
-### L1 — Important Behavioral Guidelines
-
-L1 principles are **strong constraints** that the Agent should follow, but can negotiate adjustments when explicitly requested by the user:
+L1 contains the key points the Agent should see while doing normal work. It is injected by default:
 
 - Must obtain user confirmation before executing delete, send, pay, and other operations
 - Inform users of risks when involving sensitive data
 - Mark uncertainty when giving advice
 
-### L2 — Preferences and Style Guidelines
+### L2 — Full Detail
 
-L2 principles are **soft constraints** that define the Agent's work preferences and style, which can be flexibly adjusted according to the scenario:
+L2 contains longer explanations, exceptions, examples, and operating detail. It is not injected by default and can be read on demand:
 
 - Output format preferences (Markdown / plain text)
 - Answer detail level (concise / detailed)
 - Specific domain work habits
 
-| Level | Constraint Strength | Modifiable | Example |
+| Level | Default Loading | Recommended Content | Editable |
 |---|---|---|---|
-| **L0** | Absolute bottom line | No | "Must not help with illegal activities" |
-| **L1** | Strong constraint | Yes | "Must confirm before sensitive operations" |
-| **L2** | Soft constraint | Yes | "Keep answers within 500 words" |
+| **L0** | Always injected | One-sentence core summary | Yes |
+| **L1** | Injected by default | Key rules and operating points | Yes |
+| **L2** | Read on demand | Full explanations, examples, and exceptions | Yes |
+
+:::warning Prompts are not permissions
+Putting a rule in L0 does not grant tool, file, command, or external-service permission, and cannot override DesireCore's code-level security and approval policies. Conversely, an editable L0 should not be described as an immutable system safety boundary.
+:::
 
 ## Adding and Modifying Principles
 
 ### Editing Through Interface
 
-1. Enter the Agent details page
-2. Click the "Principles" tab
-3. You can see the current list of L1 and L2 principles
-4. Click "Add Principle" to create a new entry
-5. Select the level (L1 or L2), enter the principle content
-6. Takes effect immediately after saving
+1. Open **Explorer -> Prompt Center**
+2. Expand the Agent and choose **Principles**
+3. Edit the complete `principles.md` Markdown file
+4. Save it, then open **Prompt Preview** to inspect how it combines with global, team, and persona prompts
 
 ### Teaching Through Conversation
 
@@ -81,17 +79,11 @@ The Agent will recognize these as behavioral principles and write them to `princ
 
 ### Direct File Editing
 
-Advanced users can directly edit the `~/.desirecore/agents/<agent_id>/principles.md` file. The file uses Markdown format with a clear and readable structure.
+Advanced users can edit the Agent's `principles.md` under the DesireCore data directory. Layered files must use exact second-level `## L0`, `## L1`, and `## L2` headings.
 
-## Principle Priority
+## Relationship to Other Prompt Layers
 
-When multiple principles may conflict, priority from high to low is:
-
-1. **L0 Hard Rules** — Always prioritized
-2. **L1 Strong Constraints** — Unless user explicitly requests exception
-3. **L2 Soft Constraints** — Can be flexibly handled according to specific scenarios
-
-If the user's instruction conflicts with an L1 principle, the Agent will remind the user of the conflict and wait for user confirmation. If the user's instruction conflicts with an L0 principle, the Agent will refuse to execute.
+At runtime, DesireCore combines editable prompts in this order: **global -> team -> Agent persona -> Agent principles**, then adds team identity, tools, memory, and other system context. L0/L1/L2 controls how much of each file is loaded; global/team/Agent controls its scope. Avoid contradictory rules across layers, and use Prompt Preview to inspect the final combination.
 
 :::tip Principle Writing Suggestions
 - **Specific beats vague**: "Must confirm before operations involving amounts over 1000 yuan" is better than "Confirm for large amounts"
@@ -103,3 +95,4 @@ If the user's instruction conflicts with an L1 principle, the Agent will remind 
 
 - [File Explorer](./06-agent-files.md) — Browse the Agent's file structure
 - [Edit Persona](./04-edit-persona.md) — Adjust the Agent's tone and style
+- [Prompt Center and Prompt Layers](./11-prompt-center.md) — Understand global, team, and Agent prompt composition

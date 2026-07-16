@@ -231,6 +231,18 @@ Agent: "Received, I will add confidentiality period check in subsequent steps.
         Current step unaffected, will incorporate in step 5 (comprehensive assessment)."
 ```
 
+## Approval and Waiting in Delegated Tasks
+
+A child Agent may request approval while executing a command or tool. DesireCore displays the request and final decision in the child conversation and **mirrors both into the parent Agent conversation that started the delegation**. Notifications also prefer the parent conversation, so you do not need to switch panels just to approve the child operation.
+
+| Approval mode | Waiting behavior during delegation |
+|---|---|
+| **AI Approval** | You can decide within 30 seconds; at expiry, the AI suggestion approves or rejects, or the operation is denied when no suggestion is available |
+| **Always Ask / Allowlist miss / External Tools Only** | Waits for a human decision and does not reject merely because an ordinary approval countdown elapsed |
+| **Allow All** | Skips ordinary confirmation, while deny lists, file scope, and tool permissions remain active |
+
+A synchronous delegation has a separate wait limit. If the parent receives a “wait timed out” result first, the child task has not necessarily ended: it may still be running in the background or waiting for your approval. The timeout notice includes an available task reference; the parent can continue waiting, ignore a later result, or terminate the child task when supported.
+
 :::info Next Step
 During execution, certain high-risk operations will trigger "Human Gate" confirmation. Go to [Human Gate Confirmation Mechanism](./04-human-gate.md) for details.
 :::

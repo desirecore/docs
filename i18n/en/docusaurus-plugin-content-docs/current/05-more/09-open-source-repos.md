@@ -15,7 +15,11 @@ The DesireCore project maintains several official repositories on GitHub. Feel f
 | Repository | Description | Status |
 |------------|-------------|--------|
 | `desirecore` | DesireCore client main repository | Tentatively planned to open source after stabilization, subject to company funding and business strategy - not a final commitment. Decoupled modules will be open-sourced progressively |
-| `desirecore-hostagent` | Cross-platform Host Agent for Windows, macOS, Linux, Android, iOS, and HarmonyOS - a resident host service for OS permission acquisition, GUI operations, and command execution | Tentatively planned to open source after stabilization, subject to company funding and business strategy - not a final commitment. Decoupled modules will be open-sourced progressively |
+| `desirecore-hostagent` | Native HostAgent platform code for GUI operations, device capabilities, discovery, pairing, and persistent execution | The macOS implementation is currently the GUI-operation carrier. Windows, Linux, other desktop, and mobile implementations remain under development. Tentatively planned to open source after stabilization, subject to company funding and business strategy, and not a final commitment |
+
+:::info Current platform carriers
+macOS GUI operations still run through HostAgent. To give Windows users local GUI automation before the native HostAgent is complete, Windows temporarily uses the independent third-party CUA Driver bundled with DesireCore. This does not mean HostAgent has been deprecated or replaced. Third-party components are not DesireCore official repositories; see [Third-Party Software and Licenses](./09-third-party-software.md).
+:::
 
 ## Documentation & Distribution
 

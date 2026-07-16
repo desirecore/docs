@@ -20,6 +20,8 @@ Persona is saved in the `persona.md` file in the Agent directory. It tells the A
 | **Forbidden Zones** | What not to do | "Don't use template clichés, don't avoid giving conclusions" |
 | **Uncertainty Handling** | What to do when unsure | "Explain uncertainty and provide verification path" |
 
+`persona.md` is part of the **Agent prompt layer**. At runtime, DesireCore also combines the current user's global prompt and prompts from every team the Agent belongs to. Open **Explorer -> Prompt Center** to edit these sources together and preview the result. See [Prompt Center and Prompt Layers](./11-prompt-center.md).
+
 :::info Persona vs. Principles
 **Persona** defines "how to do it"—tone, style, response methods. **Principles** define "what to do and not do"—rules, boundaries, priorities. They complement each other without overlapping.
 :::
@@ -70,6 +72,12 @@ Personality traits affect the Agent's interaction style. You can add multiple ta
 | Decisive | Tend to give clear conclusions, avoid ambiguity |
 | Cautious | Actively remind risks when involving sensitive operations |
 
+## Editing the File
+
+In Prompt Center, expand the Agent and choose **Persona** to edit the complete `persona.md` Markdown file. When it uses exact `## L0`, `## L1`, and `## L2` headings, L0 and L1 are injected by default while L2 remains available for on-demand detail. Without recognized layer headings, the complete file is injected as one persona section.
+
+After saving, open the Agent's prompt preview to inspect the combined global, team, Agent, and system sections. Preview is useful for finding duplication and conflicts. A live request may add conversation, tool, and runtime context, so use the request summary in Interface Audit as the final reference when diagnosing actual execution.
+
 ## Greeting Settings
 
 The greeting is the Agent's first sentence at the start of a new conversation. A good greeting should:
@@ -95,4 +103,5 @@ The Agent will record your preferences and apply them in subsequent conversation
 ## Next Steps
 
 - [Edit Principles](./05-edit-principles.md) — Set behavioral boundaries for the Agent
+- [Prompt Center and Prompt Layers](./11-prompt-center.md) — Manage global, team, and Agent prompts
 - [Create Custom Agent](./03-create-agent.md) — Review the creation process

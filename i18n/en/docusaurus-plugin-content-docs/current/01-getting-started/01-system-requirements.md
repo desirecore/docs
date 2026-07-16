@@ -24,6 +24,8 @@ The DesireCore desktop client supports macOS, Windows, and Linux. Below are the 
 DesireCore provides a native arm64 build for Apple Silicon (M1/M2/M3/M4/M5), offering faster performance and better power efficiency. The installer will automatically detect your chip architecture.
 :::
 
+macOS GUI automation currently runs through HostAgent. The first time you use the relevant capabilities, grant Accessibility, Screen Recording, and other permissions required by the task when macOS prompts you.
+
 ### Windows
 
 | Item | Minimum | Recommended |
@@ -33,6 +35,10 @@ DesireCore provides a native arm64 build for Apple Silicon (M1/M2/M3/M4/M5), off
 | Architecture | x86_64 / arm64 | x86_64 / arm64 |
 | Memory | 8 GB | 16 GB or more |
 | Disk Space | 2 GB | 20 GB or more |
+
+:::info Local Windows GUI automation
+The Windows installer bundles and enables CUA Driver by default, so local GUI automation does not require a separate HostAgent installation. This is a transitional implementation until Windows HostAgent is complete. macOS still uses HostAgent today, while HostAgent implementations for Windows, Linux, and other platforms remain under development. See [GUI Desktop Automation](../02-user-guide/09-capabilities/05-computer-use.md).
+:::
 
 ### Linux
 
@@ -63,3 +69,5 @@ If you have difficulty accessing overseas services, consider using providers wit
 :::
 
 Once your environment meets the requirements, you can proceed to [Install DesireCore](./02-installation/index.md).
+
+For bundled Git, Python, Node.js, CUA Driver, and their license boundaries, see [Detailed System Requirements](../05-more/08-system-requirements-detail.md).

@@ -21,7 +21,7 @@ DesireCore 是本地优先（Local-first）架构，核心数据和 Companion（
 
 ### 我的数据安全吗？
 
-所有 Companion 数据（记忆、配置、技能）存储在你的本地文件系统（`~/.desirecore/` 目录下），不会上传到第三方服务器。AI 对话内容仅发送至你配置的模型 API 供应商。API Key 通过系统凭据管理器加密存储。详见 [数据与隐私问题](./05-data-privacy.md)。
+所有 Companion 数据（记忆、配置、技能）存储在你的本地文件系统（`~/.desirecore/` 目录下），不会自动上传到第三方服务器。AI 对话内容会发送至你选择的模型供应商。DesireCore 管理的 API Key 保存在受保护的本地密钥存储中，原始密钥文件不会进入应用内普通备份。详见 [数据与隐私问题](./05-data-privacy.md)。
 
 ### 如何给 Companion 添加新工具？
 

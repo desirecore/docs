@@ -41,6 +41,20 @@ Click any model to switch the model used for the current conversation. Selected 
 Model selection is a **session-level** temporary override that does not affect other conversations or global default settings. It reverts to default after closing the conversation.
 :::
 
+## Thinking Depth
+
+When the selected model declares controllable reasoning or thinking capability, the input area shows **Thinking depth**:
+
+| Option | Behavior | Good for |
+|--------|----------|----------|
+| **Auto** | Sends no explicit thinking parameter and follows the model or provider default | When you do not know the model's best setting |
+| **Off** | Attempts to send the provider-specific disable setting | Simple questions and latency-sensitive work |
+| **Minimal / Low / Medium / High / Extra high** | Explicitly enables thinking at a relative depth | Tasks ranging from routine analysis to difficult reasoning, code, and long-running work |
+
+The default is Medium. The effective value is resolved in this order: **current conversation selection -> agent model setting -> global default**. Models without controllable reasoning fall back to Auto and the control is disabled.
+
+Deeper settings generally consume more reasoning budget, take longer, and may increase pay-as-you-go cost or subscription usage. Provider support is not uniform: on/off-only models collapse the depth choices to enabled, models without an extra-high level may fall back to High, and Off is best-effort where the upstream provider does not expose a true disable switch. Use actual output, latency, and provider billing as the final reference.
+
 ## Model Unavailable Warning
 
 If a previously selected model is unavailable for the following reasons, an orange warning bar appears at the top of the dropdown panel:
@@ -64,7 +78,7 @@ To modify the globally default model:
 3. Set the default model for each service type in "AI Services > Default Mapping"
 
 :::info Local First
-DesireCore's model configuration is stored locally. Your configured API Keys are securely stored through the system credential manager and are not uploaded to any third-party servers.
+DesireCore stores model configuration and API keys locally; key values reside in `~/.desirecore/config/secrets.json`. When you run a request through that provider, its key is sent to the provider as authentication. Protect the OS account, disk, and backups; see [Compute Service Configuration](../10-settings/04-compute-service.md#api-key-security) for the complete boundary.
 :::
 
 ## Model Selection Recommendations for Common Scenarios

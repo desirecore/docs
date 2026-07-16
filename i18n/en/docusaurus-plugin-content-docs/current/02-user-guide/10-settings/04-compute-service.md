@@ -14,7 +14,7 @@ Compute Service manages AI providers, API keys, model lists, and default mapping
 |---------|-------------|
 | **Provider** | A platform or protocol configuration such as OpenAI, Anthropic, DeepSeek, Ollama, or OpenRouter |
 | **Provider ID** | The unique ID of a concrete provider instance |
-| **API Key** | The provider credential, stored in the system credential manager |
+| **API Key** | The provider credential; its value is kept in the permission-protected local `secrets.json` while configuration stores a reference |
 | **Model** | A concrete model used for chat, tool use, image, voice, video, or music services |
 | **Default Mapping** | The default model selected for different task purposes |
 
@@ -71,11 +71,44 @@ If the same protocol has multiple instances, such as two OpenAI-compatible gatew
 Some providers distinguish pay-as-you-go API keys and Token Plan keys. The UI warns when a key appears to be configured in the wrong provider type.
 :::
 
+## Claude Pro / Max Subscription
+
+Some releases may show a **Claude Subscription** provider in Compute Service. This route sends model requests through Anthropic's official `@anthropic-ai/claude-agent-sdk`; it does not imitate Claude Code by forging request headers.
+
+### Runtime model and how it differs from Claude Code
+
+At the execution boundary, this is a dual-runtime collaboration:
+
+1. The **DesireCore Agent runtime** owns system prompts, memory, skills, tool registration, approvals, delegation, and execution audit.
+2. The **Claude Agent SDK runtime** uses the Claude subscription identity for model requests and returns text or `tool_use`.
+3. Every `tool_use` is handed back to DesireCore and executed through DesireCore's tools and approval pipeline.
+
+The SDK's bundled tools, skills, plugins, subagents, slash commands, and connectors are not enabled on this route, and the SDK does not execute file, command, or external-service actions for DesireCore. The context, tools, permission boundary, and resulting behavior therefore differ fundamentally from using Claude Code directly.
+
+If you need the full Claude Code programming workflow inside DesireCore, have a **DesireCore Agent invoke the locally installed Claude Code**. Selecting a Claude subscription model does not place the conversation inside Claude Code.
+
+### Connecting
+
+The UI first detects a local Claude Code login. Depending on release and platform, advanced options may also offer in-app login or a `claude setup-token` paste. When a credential expires, refresh fails, or the connection is removed, use the re-detect or sign-in action shown in the panel.
+
+### Terms, authorization, and account risk
+
+:::warning Eligibility is governed by Anthropic's rules
+Use of the official SDK shows that DesireCore implements this route through an official technical interface. It **does not authorize a third-party product to relay Claude Free, Pro, or Max credentials**. As of this update, Anthropic's [Claude Code legal and compliance guidance](https://code.claude.com/docs/en/legal-and-compliance) directs developers building third-party products to use API-key authentication or a supported cloud provider and says they may not offer Claude.ai login or relay Free, Pro, or Max credentials on users' behalf. The subscription entry should therefore remain release-gated until DesireCore has explicit authorization for this use case. Later availability depends on official authorization, then-current terms, region, account, and DesireCore release policy.
+:::
+
+You are responsible for confirming that your subscription use, account type, region, and automation comply with Anthropic's current terms. Rate limits, feature restrictions, credential invalidation, account suspension, or bans arising from subscription use or provider policy are risks borne by the user; DesireCore cannot control Anthropic's account decisions. For stable commercial or organizational access, prefer an Anthropic API key or an explicitly supported cloud authentication method.
+
 ## API Key Security
 
-- API keys are stored in the OS credential manager
-- Config files store references, not plaintext keys
-- API keys are not uploaded to DesireCore servers
+- API-key values are centralized in the local `~/.desirecore/config/secrets.json` file; provider configuration stores reference names instead of values
+- On platforms with POSIX permissions, DesireCore tightens the file mode to `0600`. On Windows, actual protection depends on the current OS account, directory ACLs, device locking, and disk encryption
+- `secrets.json` is a sensitive path that ordinary Agent file tools cannot read directly. An authorized connection resolves only the required reference at the execution layer and writes an access audit without the plaintext value
+- A key is sent as authentication to its corresponding third-party service only when the user invokes that service. DesireCore official-cloud credentials and external sign-in credentials follow their own authentication flows
+
+:::caution A local file is not a hardware-backed credential vault
+`secrets.json` is a permission-protected local credential file, not macOS Keychain, Windows Credential Manager, or a hardware security module. Anyone who controls your OS account, can read the disk, or obtains an inadequately protected backup may still obtain the credentials. Enable disk encryption and do not place this file in Git, cloud-drive sync, or a regular backup.
+:::
 
 To change an API key, select the provider instance, enter edit mode, save the new key, and it will replace the old credential. Removing a provider instance removes that configuration; any agent that still references it should be pointed to another provider or default mapping.
 

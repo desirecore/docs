@@ -69,6 +69,20 @@ What transfers between agents is not raw conversation content, but structured ta
 | **Constraints** | Rules or requirements to follow |
 | **Context** | Relevant background information |
 
+## Letting one agent update another agent's configuration
+
+When you explicitly request it, one agent can update another agent's AgentFS files, such as `persona.md` and `principles.md`. A team lead adjusting a member's role is the most common case, but team membership does not silently grant background access:
+
+- The change must come from your explicit request or consent; an agent must not rewrite another agent's persona or principles on its own
+- Cross-agent writes display an approval card and are not saved if you reject them
+- Another agent's memory does not become approval-free merely because both agents belong to the same team
+- Changes are recorded in tool audit data and Git history and can be reviewed or reverted through Rewind checkpoints
+- Afterward, the editing agent should identify the target agent, affected files, and main changes
+
+:::warning Sensitive paths remain protected
+Sensitive paths such as `.env`, `.ssh`, credential files, and Git internals remain blocked. User approval does not bypass these hard protections.
+:::
+
 ## Monitoring Collaboration Progress
 
 When multiple agents collaborate, you can see the overall progress panel:

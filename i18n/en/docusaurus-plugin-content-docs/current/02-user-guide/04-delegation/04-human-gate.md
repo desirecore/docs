@@ -6,11 +6,11 @@ keywords: [Human Gate, Human Gate, confirmation, permissions, risk level, securi
 
 # Human Gate Confirmation Mechanism
 
-Human Gate is the core mechanism of DesireCore's security system—forcing a pause and requesting your confirmation before the agent executes high-risk operations.
+Human Gate is DesireCore's pre-execution confirmation mechanism. Tool declarations, risk level, and the Agent's current [approval mode](../11-security/05-ai-approval.md) together decide whether an operation runs directly, is decided by AI, or pauses for you.
 
 ## What Operations Trigger Human Gate
 
-When the agent executes tasks, the following types of operations automatically trigger Human Gate:
+The following operations are commonly marked as requiring confirmation. Whether a card actually appears depends on the tool rule and approval mode:
 
 | Operation Type | Examples | Risk Level |
 |----------------|----------|------------|
@@ -23,8 +23,8 @@ When the agent executes tasks, the following types of operations automatically t
 | **Delete Operation** | Delete data or resources | High |
 | **Permission Change** | Modify access permissions | Critical |
 
-:::info Not All Operations Need Confirmation
-Read-only operations like reading files, analyzing data, and generating drafts usually don't need confirmation. The agent autonomously completes these low-risk operations to improve efficiency.
+:::info Risk level is not the only switch
+Read-only operations such as reading files, analyzing data, and generating drafts usually do not require confirmation. Conversely, External Tools Only and Allow All can reduce or skip ordinary prompts, while built-in deny rules, file scope, and tool permissions still apply.
 :::
 
 ## Confirmation Dialog
@@ -74,7 +74,7 @@ When Human Gate is triggered, you will see a confirmation dialog:
 | **Source Trace** | Why this operation is being performed, originating from which task |
 | **Details** | Specific operation content (expandable for viewing) |
 
-## Three Choices
+## Available Choices
 
 ### Approve
 
@@ -85,7 +85,7 @@ You: [Click ✓ Allow]
 Agent: "Okay, executing now..."
 ```
 
-If you check **"Allow and remember,"** similar operations next time (e.g., writing files in the same directory) will be automatically allowed without popping up confirmation.
+For command approvals that support remembering, you can also choose **Always Allow**. The current implementation stores an exact rule for the complete command; it does not automatically broaden authority to every operation in the same directory or every invocation of the executable.
 
 ### Deny
 
@@ -100,57 +100,24 @@ Agent: "Okay, I won't execute this operation.
 
 The agent will adjust subsequent behavior based on your reason for denial.
 
-### Modify
-
-You agree to execute but want to modify some parameters:
-
-```
-You: [Click ✎ Modify]
-
-[Edit panel opens]
-File path: docs/review-report-XX-2025-001.md
-→ Change to: docs/drafts/review-report-XX-2025-001-draft.md
-
-You: "Save to drafts directory and mark 'draft' in the filename."
-```
-
 ## Risk Levels and Confirmation Frequency
 
-Different risk level operations trigger confirmation at different frequencies:
+Risk level is an important input, but the final behavior also depends on the Agent approval mode:
 
 | Risk Level | Indicator | Confirmation Strategy | Examples |
 |------------|-----------|----------------------|----------|
 | **Low** | 🟢 | Auto-allowed by default | Read files, search information |
 | **Medium** | 🟡 | Ask by default, can be set to auto-allow | Write files, run safe commands |
-| **High** | 🟠 | Always ask, can check "remember" | Send emails, call external APIs |
-| **Critical** | 🔴 | Always ask, cannot skip | Delete data, financial operations, permission changes |
+| **High** | 🟠 | Requires confirmation by default; AI Approval may decide after its countdown | Send emails, call external APIs |
+| **Critical** | 🔴 | Prefer human confirmation; still verify the actual tool policy and Agent mode | Delete data, financial operations, permission changes |
 
-:::danger Critical Risk Operations Cannot Be Auto-Approved
-Operations involving finance, deletion, permission changes, and other critical risks will require confirmation every time, even if you check "remember." This is to protect you from unrecoverable losses.
+:::danger Do not treat the risk label as an unskippable hard boundary
+Allow All skips ordinary tool confirmations, and External Tools Only lets built-in tools and shell commands run directly. For Agents that can perform finance, deletion, publishing, or permission changes, use Always Ask and restrict their tools and file scope. Do not rely on a risk label or prompt text alone.
 :::
 
 ## Managing "Remember" Rules
 
-Rules you previously created through "Allow and remember" can be managed in settings:
-
-```
-You: "List all auto-allow rules."
-
-Agent: "Currently have 3 auto-allow rules:
-
-        1. ✅ Allow writing .md files in docs/ directory
-           Created: 3 days ago
-
-        2. ✅ Allow executing git related commands
-           Created: 1 week ago
-
-        3. ✅ Allow calling translation API
-           Created: 2 weeks ago
-
-        You can edit or delete these rules."
-```
-
-You can delete any rule at any time, making the agent revert to asking every time.
+You can review or remove remembered command rules in the Agent's approval preferences. New rules created through Always Allow match the complete command exactly. Administrator allowlists and deny lists use their own patterns. Deny rules and code-level blocklists take precedence over allow rules.
 
 :::tip Trust is Gradual
 When first using the agent, it's recommended to maintain more confirmations. As your trust in it increases, gradually expand the scope of auto-allows. This is like mentoring a new person in reality—first watch them work, confirm there are no problems, then slowly let go.
