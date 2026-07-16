@@ -4,17 +4,17 @@ sidebar_position: 4
 
 # Privacy Policy
 
-Last Updated: March 29, 2026
+Last Updated: July 16, 2026
 
 ## 1. Data Collection Scope
 
-DesireCore adopts a "local-first" data storage principle. The data we collect includes: user account information (such as username, email), user-created AI assistant configurations, conversation history, and app usage statistics.
+DesireCore follows a "local-first" data-storage principle. Data processed by the app may include account information (such as username and email), user-created agent configurations, conversation history, generated files, and app-usage statistics. Except for the connected scenarios described below, core data is stored on the user's local device by default.
 
 Except for necessary account verification and software update checks, all core data is stored locally on the user's device by default. We will not upload user data to the cloud without explicit consent.
 
 To improve the product and track installation counts, DesireCore sends anonymous installation statistics to our update server on each launch. This information only includes: an anonymous device identifier generated from hardware information (SHA-256 hash, irreversible), client version number, operating system platform, and CPU architecture. We do not collect any personally identifiable information, and this device identifier cannot be associated with your personal identity. This data is used solely for counting unique installations and platform distribution.
 
-We cannot access, view, or monitor the behavior of user-created agents or any content they generate. All interaction data between users and their created agents is entirely controlled by the user. We do not have and do not attempt to have the ability to monitor or review this data.
+We do not proactively collect or review agent content that remains only on the local device. When a user chooses to use account services, update checks, remote connections, third-party models, or other connected features, the data required to provide that feature is sent to the relevant service. Users should review the transmission scope and provider policies before use.
 
 ## 2. AgentFS Privacy Architecture
 
@@ -22,24 +22,26 @@ DesireCore uses the self-developed AgentFS file system architecture to ensure co
 
 User profile data is stored in independent user domains under `users/<user_id>/`, with each user's data completely isolated from other users. Relationship data (such as interaction patterns between AI assistants and users) belongs to the user domain and is not shared with "companions" (i.e., other AI assistants or users).
 
-This architecture ensures that: even when multiple users use the same device, their data remains physically isolated; AI assistants cannot access other users' or other AI assistants' data.
+This architecture provides logical isolation between user domains and agent workspaces. By default, an agent can access only its authorized workspace. When explicitly requested by the user and approved, an agent may perform audited cross-agent AgentFS operations; sensitive paths remain blocked by system controls. This isolation should not be treated as an absolute physical-security boundary if device-account or filesystem permissions are bypassed, or when the user authorizes export or cross-domain operations.
 
 ## 3. Local Storage Principle
 
 By default, all user data is stored only on the local device. This includes: conversation records, AI assistant configurations, user preference settings, and generated files.
 
-Locally stored data is protected using industry-standard encryption technology. Users can choose to enable password or biometric authentication for additional app access protection.
+The baseline protection for local data comes from the operating-system account, file permissions, and device security settings. DesireCore restricts Agents from directly reading the local secrets store. Users should still enable full-disk encryption, screen lock, and account access controls, and should protect devices and backup media.
 
-When users choose to export data backups, backup files also use encrypted formats to ensure data security even when backup files are transferred or stored on external media.
+An in-app regular backup does not directly include the original local secrets store and should not be understood as a package that is encrypted in its entirety. With **Migrate to New Device**, users may explicitly place eligible user-managed compute API keys into a separate encrypted payload. A migration passphrase is processed with scrypt, and the payload is authenticated and encrypted with AES-256-GCM. Account sessions, official cloud credentials, and credentials managed by OAuth, a CLI, or another external sign-in flow are outside this scope.
+
+DesireCore does not save or recover the migration passphrase. Even when a migration package contains encrypted keys, users should store the package separately from the passphrase, restrict access, and avoid importing files from an untrusted source or with questionable integrity. A raw copy of the local data directory is different from in-app export and may also copy the local secrets store; users must protect such copies as sensitive credential data.
 
 ## 4. Data Security
 
 We adopt multi-layer security measures to protect DesireCore application user data:
 
-- Transmission Security: All network communications use TLS 1.3 or higher encryption
-- Storage Security: Local data uses AES-256 encryption algorithm
-- Access Control: Supports password, PIN, and biometric authentication
-- Code Security: Open-source core code undergoes community auditing
+- Transmission Security: DesireCore uses HTTPS/TLS when connecting to supported online services and third-party APIs; final transport security also depends on endpoints configured by the user
+- Storage Security: Local data is protected by operating-system account and file permissions; optional migrated compute API keys use a separate AES-256-GCM encrypted payload
+- Access Control: Users should protect local data with OS screen lock, account permissions, full-disk encryption, and backup access controls
+- Code Security: Publicly released source code and third-party components may be reviewed under their respective licenses
 
 While we are committed to protecting data security, no system is absolutely secure. Users should take reasonable measures to protect their devices and account credentials.
 
@@ -65,11 +67,11 @@ Users bear full responsibility for their created agents, including but not limit
 
 ## 7. Third-Party API Configuration
 
-DesireCore itself does not integrate any third-party AI services. We provide users with the ability to manually configure third-party LLM APIs (such as OpenAI, Anthropic, etc.), allowing users to independently select and connect to desired services.
+DesireCore can connect to third-party AI services, including user-configured APIs, supported cloud services, and account connection methods. Some connections may use a provider's official SDK, but use of an official SDK does not mean that the provider has authorized DesireCore for every account type, credential, or usage scenario.
 
-When users configure and use third-party APIs, related interaction data will be directly transmitted to the third-party servers specified by the user. Processing of this data is governed by the privacy policy of that third-party service provider, not DesireCore.
+When users configure and use a third-party service, prompts, context, attachments, tool results, account identifiers, and diagnostic information needed to generate a response or perform a task may be transmitted to servers selected by the user or required by the feature. The exact data depends on the user's actions, model provider, and enabled features. Data received by a third party is governed by that provider's privacy policy and service terms.
 
-We recommend that users carefully read and understand the privacy policies and service terms of the respective service providers before configuring third-party APIs. Users bear full security responsibility for their configured API keys and related credentials.
+Before connecting any third-party service, users should read and understand the provider's privacy policy and service terms, confirm that their account, subscription, and credentials are permitted for that connection method, and protect API keys, login tokens, and other credentials.
 
 ## 8. Data Retention
 

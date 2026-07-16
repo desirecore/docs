@@ -31,6 +31,19 @@ If requests to the model API frequently time out:
 3. **Try changing endpoints** — Some providers have multiple API endpoints (e.g., different regions for OpenAI), which can be modified in Provider configuration
 4. **Reduce request frequency** — If sending large numbers of requests in a short time, you may trigger the provider's rate limit
 
+### What do the network banners in chat mean?
+
+Recent DesireCore versions evaluate the local Agent Service, device connectivity, and model-provider reachability separately instead of relying only on whether the operating system reports a Wi-Fi connection:
+
+| Banner | Meaning | What to do |
+|------|------|------|
+| **Network unreachable. Waiting for recovery** | The public network, DNS, proxy, or route is currently unavailable | Check DNS, proxy, VPN, and system networking. The original run is suspended and resumes automatically; do not repeatedly resend it |
+| **Model provider temporarily unreachable. Retrying** | Only the current Provider is degraded; other network access may still work | Wait for automatic retries or switch to another available Provider |
+| **Network issue. Confirming task status** | Connectivity just changed and DesireCore is reconciling the original run with the backend | Wait for reconciliation to avoid creating a duplicate run |
+| **Connecting to local service** | The desktop app is reconnecting to its local Agent Service; this is independent of public-network status | If it persists, restart DesireCore and check whether local security software is blocking it |
+
+After connectivity returns, DesireCore reconciles the existing session before deciding whether to keep waiting or resume retries. Resend manually only after the UI explicitly marks the run as failed.
+
 ## A model shows "unavailable"?
 
 Common reasons for model unavailability:

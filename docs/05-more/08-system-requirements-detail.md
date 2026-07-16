@@ -44,12 +44,19 @@ keywords: [系统要求, 硬件, 软件, 网络, 兼容性]
 
 ### 桌面版
 
-DesireCore 桌面版所有依赖已内置，通常不需要额外安装。
+DesireCore 桌面版会随包提供完成核心工作所需的基础组件，通常不需要你先配置开发环境。系统中已有的工具仍会被检测并在合适时优先使用。
 
 | 依赖 | 是否内置 | 说明 |
 |------|---------|------|
-| 运行时环境 | 是 | 已内置 |
-| Git | 否（推荐安装） | 用于智能体版本管理（可选） |
+| Git | 是 | 随包提供可移植 Git；也可选择系统 Git |
+| Python | 是 | 随包提供推荐版离线归档，首次启动后由 Hatch 静默导入到 DesireCore 管理目录 |
+| Node.js | 是 | 随包提供推荐版官方归档，首次启动后由 Volta 静默导入到 DesireCore 管理目录 |
+| macOS HostAgent | macOS 使用 | macOS 当前 GUI 操作载体；需要相应系统权限 |
+| CUA Driver | 仅 Windows | Windows HostAgent 完成前的本机 GUI 自动化过渡载体，默认启用 |
+
+当前内置清单为 Git 2.53.0、Python 3.13.9、Node.js 24.18.0 和 CUA Driver 0.7.1。确切补丁版本会随 DesireCore 发布更新，以 **资源管理器** → **算力** → **运行环境** 和安装包随附声明为准。
+
+Python 与 Node.js 的导入在服务启动后异步进行，不阻塞 DesireCore 主界面。若内置归档导入失败，系统会尝试在线安装；仍失败时，你可以在运行环境页手动选择版本。它们安装在 DesireCore/Hatch/Volta 管理的用户目录中，不等同于修改系统全局的 Python 或 Node.js。
 
 ## 运行环境检测
 
@@ -61,11 +68,25 @@ DesireCore 桌面版所有依赖已内置，通常不需要额外安装。
 |------|------|
 | Node.js / npm | 前端、MCP 和脚本工具常用运行环境 |
 | Python | 数据分析、文档处理和自动化脚本常用运行环境 |
-| Git | 智能体仓库版本管理、发布和导入时使用 |
+| Git | 智能体仓库版本管理、检查点、发布和导入时使用 |
 | Docker / Podman | 容器化运行、构建和隔离任务使用 |
 | PowerShell | Windows 命令和脚本执行环境 |
+| Homebrew | 仅 macOS 检测，用于判断常见软件安装环境 |
+| CUA Driver | 仅 Windows 检测，用于本机 GUI 自动化 |
 
-Git 检测会展示是否安装、版本、路径，以及当前使用原生 Git 还是兼容后端。缺少某些工具时，智能体仍可使用已内置的基础能力，但相关脚本、MCP 服务或工作流节点可能不可用。
+Git 检测会展示版本、路径和实际来源。默认“自动”模式会分别验证系统 Git 与随包 Git，并使用版本较高者；版本相同时优先系统 Git。你也可以在运行环境页明确选择“系统”或“内置”，首选项不可用时系统会提示并回退到另一来源。
+
+macOS 当前通过 HostAgent 承载本机 GUI 操作，需要辅助功能、屏幕录制等相应系统权限。Windows 的 CUA Driver 则优先使用 `PATH` 中用户自行安装的可用版本，再回退到 DesireCore 内置版本；它是 Windows HostAgent 完成前的过渡实现，只服务于当前 Windows 电脑。Windows、Linux、其他桌面与移动端 HostAgent 仍在开发。详见 [GUI 桌面自动化](../02-user-guide/09-capabilities/05-computer-use.md)。
+
+缺少 Docker、Podman 或你任务指定的特殊版本时，相关脚本、MCP 服务或工作流仍可能不可用。
+
+## 第三方组件说明
+
+内置不等于 DesireCore 对这些程序拥有著作权。CUA Driver、Git、Python 和 Node.js 均为独立第三方组件，权利归各自权利人，并受各自许可证及随附第三方条款约束。
+
+Git 使用 GPLv2；Python 和 Node.js 的二进制发行物还包含主体许可证之外的依赖许可。DesireCore 会按发布版本记录来源与许可材料，但不同平台、版本和归档的条款可能变化。请以安装包、组件归档及对应发布页面提供的完整文本为准。普通使用通常不要求你采取额外行动；若你提取、修改或再分发这些组件，应自行核对相应的署名、许可文本、对应源码和其他义务。
+
+详见 [第三方软件与许可](./09-third-party-software.md)和[用户协议](../terms.md)。
 
 ## 网络要求
 

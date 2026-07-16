@@ -36,6 +36,8 @@ Uploaded images are displayed as thumbnails above the input box. You can:
 
 - Click the thumbnail to view a larger preview
 - Hover over the thumbnail and click the close button in the upper right corner to remove the image
+- View upload progress and compressed file size before sending
+- When editing a sent user message, remove existing images or add new ones
 
 :::info Supported Image Formats
 Common image formats are supported, including JPEG, PNG, WebP, GIF, etc. Images are sent to the AI model in Base64 encoding for visual understanding.
@@ -58,9 +60,28 @@ Click the "+" button on the left side of the input box to open the system file p
 
 File reference tags support hovering to view the full path, and can also be removed by clicking the close button.
 
+### Editing References in a Sent Message
+
+For a sent **text + document references** message, hover over the message and select **Edit**. You can edit the text and the reference list together:
+
+- Remove one or every document reference with the close button on its chip
+- After removing a reference, use the dashed **+** button to select one or more documents again
+- Newly selected files are deduplicated by path; directories are not added as document references
+- Confirm an edit even when only the reference list changed and the text did not
+
+DesireCore resends the message with the edited text and authoritative document-reference list. Canceling keeps the original message and references unchanged. This control is available for messages that already contained document references; use the input area to add references to a new message.
+
 :::warning Difference Between File Reference and Image Upload
 "File Reference" only tells the Digital Companion the path of the file you referenced, and the Digital Companion will read it itself. "Image Upload" actually reads the image content and sends it to the AI model. If you want the AI to analyze an image, please use image upload instead of file reference.
 :::
+
+### Dragging into the Chat Area
+
+When you drag local files or folders over the chat area, it becomes highlighted. After you drop them:
+
+- Images are added as image attachments
+- Other files are added as file references
+- Folders are added as Working Directories
 
 ## Slash Commands
 

@@ -37,12 +37,22 @@ This guide covers how to install DesireCore on Windows.
    - Desktop shortcut
    - Searching for "DesireCore" in the Start menu
 
+## Local Components Included in the Installer
+
+The Windows package includes portable Git, recommended Python and Node.js runtime archives, and CUA Driver for local GUI automation. These are independent third-party components; you do not need to preinstall system Git, Python, Node.js, or HostAgent.
+
+- After first startup, DesireCore imports the recommended Python and Node.js versions into its managed directories in the background. This does not replace system-wide installations.
+- Git automatically selects an available, newer source between system and bundled Git by default. You can change the source on the Runtime Environment page.
+- CUA Driver is enabled for GUI automation on the current Windows computer. It is a pragmatic transitional implementation that gives Windows users this capability before Windows HostAgent is complete. macOS still uses HostAgent for GUI operations, while HostAgent implementations for Windows, Linux, and other platforms remain under development.
+
+These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning. Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/09-third-party-software.md) for sources and license boundaries.
+
 ## Handling Windows SmartScreen Prompts
 
 On the first run, Windows Defender SmartScreen may display a "Windows protected your PC" warning. This happens because DesireCore is a newly released application and hasn't yet accumulated enough reputation with Windows.
 
-:::info This is not a virus
-This prompt only means Windows is not yet familiar with this application — it does not indicate malware. The DesireCore installer is digitally signed.
+:::info Verify the source and signature first
+The prompt by itself only means that Windows wants you to confirm reputation or source information; it does not by itself prove that a file is safe or unsafe. Download the installer only from the official DesireCore download page, and verify its publisher and digital signature before proceeding. Do not run copies from unknown sources or with an unexpected signature.
 :::
 
 To proceed:
@@ -51,6 +61,12 @@ To proceed:
 2. Click "Run anyway"
 
 <!-- Screenshot placeholder: SmartScreen handling (windows-smartscreen.png) -->
+
+## Updates and Protected Directories
+
+Automatic updates normally do not require administrator privileges when DesireCore uses its default location under `%LOCALAPPDATA%\Programs\DesireCore`.
+
+If you install DesireCore under a protected directory such as `C:\Program Files\`, the updater may require administrator approval. Windows will display a UAC prompt before the installer continues. Before updating, DesireCore attempts to stop the old process and related subprocesses. If an update fails, fully exit DesireCore and retry; restart Windows first if files remain locked.
 
 ## Uninstall
 

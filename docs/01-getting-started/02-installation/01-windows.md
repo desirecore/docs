@@ -37,12 +37,22 @@ keywords: [Windows, 安装, NSIS, SmartScreen]
    - 桌面快捷方式
    - 开始菜单中搜索"DesireCore"
 
+## 随安装包提供的本地组件
+
+Windows 版会随包提供可移植 Git、推荐的 Python/Node.js 运行时归档，以及用于本机 GUI 自动化的 CUA Driver。它们是独立第三方组件，不会要求你提前安装系统 Git、Python、Node.js 或 HostAgent。
+
+- 首次启动后，DesireCore 会在后台把推荐的 Python 和 Node.js 导入其管理目录；这不会替换系统全局版本。
+- Git 默认在系统版本与内置版本中自动选择可用且较新的来源，你也可以在运行环境页手动切换。
+- CUA Driver 仅用于当前 Windows 电脑的 GUI 自动化，默认启用。它是 Windows HostAgent 完成前的权宜/过渡实现，让 Windows 用户先具备相关能力；macOS 当前仍由 HostAgent 承载 GUI 操作，Windows、Linux 和其他平台的 HostAgent 仍在开发。
+
+这些归档和可执行程序会增加安装包与首次启动后的磁盘占用。安全软件也可能在首次解包或运行时再次扫描它们；请等待扫描完成，不要通过关闭系统防护来强行绕过告警。你可以在 **资源管理器** → **算力** → **运行环境** 查看实际版本与路径。许可和来源说明见 [第三方软件与许可](../../05-more/09-third-party-software.md)。
+
 ## 处理 Windows SmartScreen 提示
 
 首次运行时，Windows Defender SmartScreen 可能会弹出"Windows 已保护你的电脑"的提示。这是因为 DesireCore 是新发布的应用，Windows 还没有积累足够的信誉评分。
 
-:::info 这不是病毒
-这个提示只是说明 Windows 还不熟悉这个应用，并不意味着它是恶意软件。DesireCore 的安装包已经过数字签名。
+:::info 先核对来源和签名
+这个提示本身只表示 Windows 的信誉或来源校验需要你确认，并不能单独证明文件安全或不安全。请只从 DesireCore 官方下载页获取安装包，并在继续前核对发布者与数字签名；不要运行来源不明或签名异常的副本。
 :::
 
 处理方法：

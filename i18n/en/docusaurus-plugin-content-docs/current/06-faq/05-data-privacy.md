@@ -20,13 +20,13 @@ DesireCore adopts a local-first architecture; all data is stored in your local f
 
 ## Is API Key storage secure?
 
-DesireCore uses the operating system's credential manager to securely store API Keys:
+DesireCore keeps the API keys it manages in a protected local secrets store. Compute Provider configuration contains references rather than key values. Agent file tools and commands are restricted from directly reading that secrets file, and platforms with POSIX permissions limit it to the current user. Configuring a compute Provider does not upload the key to DesireCore servers.
 
-- **macOS**: Keychain
-- **Windows**: Windows Credential Manager
-- **Linux**: libsecret / GNOME Keyring
+OAuth, CLI, or subscription sign-in credentials may be managed by the corresponding external tool or operating-system mechanism. They are outside the API-key migration scope.
 
-API Keys are not stored in plaintext in configuration files, nor are they transmitted to DesireCore's servers.
+:::warning
+Local protection does not make the data root safe to share. Copying all of `~/.desirecore/` may also copy `config/secrets.json`. Protect your OS account, enable full-disk encryption, and treat a raw directory copy as credential-bearing data.
+:::
 
 ## Where is conversation content sent?
 
@@ -44,23 +44,35 @@ If you have strict data privacy requirements, consider using locally deployed mo
 
 ## How to back up data?
 
-Backing up the entire `~/.desirecore/` directory will save all data. Recommended backup methods:
+Create a regular backup from **Settings > Data & Privacy > Export Data**. This is the recommended restore point for the same device and identity. It supports category selection and excludes caches, device identifiers, and the original local secrets store.
 
-1. **Manual copy** — Copy the `~/.desirecore/` directory to a safe location
-2. **Regular backup** — Use system backup tools (such as Time Machine, Windows Backup) to include this directory
-3. **Version control** — Companion repositories themselves use Git for version management; important Companions can be pushed to remote repositories
+Other backup methods:
+
+1. **System backup** — Protect the data directory with tools such as Time Machine or Windows Backup
+2. **Manual copy** — Quit DesireCore, then copy `~/.desirecore/` to a controlled location
+3. **Version control** — Companion repositories use Git; push only content you have explicitly determined is safe to share
 
 :::warning
-Please note when backing up that the `~/.desirecore/` directory may contain temporary files and cache. Core data is mainly in the `agents/`, `skills/`, and `config/` subdirectories.
+A system backup or raw directory copy is different from in-app export and may contain `config/secrets.json`, account sessions, logs, and caches. Encrypt the backup medium, restrict access, and never commit or send the entire data directory.
 :::
 
 ## How to migrate data to another computer?
 
-1. Back up the `~/.desirecore/` directory on the old computer
-2. Install DesireCore on the new computer
-3. Copy the backed-up directory to the `~/.desirecore/` location on the new computer
-4. Reconfigure API Keys (API Keys are stored through the system credential manager and cannot be directly migrated)
-5. Start DesireCore, data will be automatically loaded
+1. On the old computer, open **Settings > Data & Privacy > Migrate to New Device**
+2. Choose the migration categories; Agents and system configuration are required
+3. To carry eligible keys, explicitly select API-key migration and set a migration passphrase of at least 12 characters
+4. Install DesireCore on the new computer and preferably update it to the same or a newer version than the exporter
+5. Open **Import Data**, select the migration package, and choose whether to use the package identity or merge into the local identity
+6. If importing keys, enter the migration passphrase and resolve same-Provider conflicts by keeping the local or imported value
+7. Restart DesireCore, then verify connectivity and permissions for each imported key
+
+A regular backup and a device migration have different semantics. A backup is for same-device recovery and never carries API keys. A migration package contains identity metadata and carries only eligible user-managed compute Provider API keys after explicit opt-in. The original `config/secrets.json` is never placed in an in-app package.
+
+The key payload uses a migration passphrase processed with scrypt and is encrypted with AES-256-GCM. DesireCore does not save or recover the passphrase. Account sessions, official cloud compute, OAuth- or CLI-managed credentials, and other non-compute credentials are excluded and must be authorized again.
+
+:::warning
+If the target already has important data, create the regular backup required by the import flow. Migration stops the Agent service, interrupts running tasks, and may replace identity or configuration. Never import a migration package from an untrusted source.
+:::
 
 ## How to completely delete all data?
 
@@ -68,10 +80,7 @@ To thoroughly clear all local data from DesireCore:
 
 1. Close the DesireCore application
 2. Delete the `~/.desirecore/` directory
-3. Clear API Keys stored in the system credential manager:
-   - macOS: Open "Keychain Access", search for "desirecore" and delete
-   - Windows: Open "Credential Manager", search and delete relevant entries
-   - Linux: Use the `secret-tool` command to delete
+3. If you used a sign-in managed by OAuth, a CLI, or a subscription tool, sign out and clear its credentials according to that tool's instructions
 4. Uninstall the application
 5. Clear application cache directory (optional)
 

@@ -24,12 +24,12 @@ Cloud architecture means your conversations, instructions, and file content all 
 
 When you configure AI providers, you need to enter an API Key. DesireCore's protection measures for API Keys:
 
-- **System Credential Manager**: API Keys are stored in the operating system's secure credential manager
-  - macOS: Keychain
-  - Windows: Credential Manager
-  - Linux: Secret Service (e.g., GNOME Keyring)
-- **No Plaintext in Config Files**: Configuration files only store encrypted references, not API Key plaintext
-- **Not Uploaded to Remote**: API Keys are not sent to DesireCore servers or any third parties
+- **Centralized local store**: Keys managed by DesireCore are kept in `config/secrets.json`; compute Provider configuration stores only an `apiKeyRef`
+- **File permissions**: Platforms with POSIX permissions restrict the secrets file to the current user; other platforms rely on OS account and directory access controls
+- **Agent access controls**: Built-in file tools, content search, and command approval block Agents from directly reading the protected secrets file
+- **Constrained destination**: A BYOK value is not uploaded to DesireCore servers as configuration. When a model request is made, it is used only as authentication for the endpoint configured for that Provider
+
+OAuth, CLI, or subscription sign-in may be managed by the corresponding external tool or operating-system mechanism. These credentials are different from API keys managed by DesireCore and are excluded from optional API-key migration.
 
 ## Third-Party API Data Flow
 
@@ -55,9 +55,14 @@ Every AI call's request and response is recorded in the "API Audit" of activity 
 
 ## Data Encryption
 
-- **Transmission Encryption**: All communication with AI providers is encrypted via HTTPS
-- **Credential Encryption**: API Keys are encrypted and stored through the operating system's credential manager
-- **Local Data**: Currently local data files are stored in plaintext in the file system, relying on operating system file permissions for protection. If your device has risk of physical access by others, we recommend enabling the operating system's disk encryption feature (such as macOS FileVault, Windows BitLocker)
+- **Transmission encryption**: Supported online services use HTTPS/TLS by default. The final security of a custom Provider depends on the user-configured endpoint; do not use plaintext HTTP in production
+- **Local secrets protection**: The secrets file relies on the OS account, file permissions, and device security. Enable FileVault, BitLocker, or equivalent full-disk encryption
+- **Migration encryption**: A regular backup excludes the original secrets file. Only after explicit opt-in are eligible compute API keys processed with scrypt and placed in a separate AES-256-GCM migration payload
+- **Local data**: Other local files primarily rely on operating-system permissions. Do not assume that the whole data directory or a regular backup is encrypted by DesireCore
+
+:::warning Responsibility when migrating keys
+DesireCore does not save the migration passphrase. Store it separately from the migration package and never import an untrusted package. Imported keys are reset to an unverified state; verify their permissions, billing ownership, and connectivity on the new device. A raw copy of the whole data directory may contain the local secrets file and has a different risk profile from an in-app regular backup.
+:::
 
 ## Minimal Anonymous Statistics
 
@@ -86,7 +91,7 @@ DesireCore's automatic updates ensure security through:
 To maximize protection of your data security, we recommend:
 
 1. **Enable Disk Encryption**: Turn on the operating system's full-disk encryption feature
-2. **Regular Backup**: Regularly back up through the "Export Data" feature in settings
+2. **Regular Backup**: Use **Export Data** for same-device recovery, and use **Migrate to New Device** with a rollback point when changing devices
 3. **Review API Calls**: Regularly check API audits in activity records to confirm data flow meets expectations
 4. **Use Local Models**: For highly sensitive tasks, consider using locally deployed models like Ollama
 5. **Manage API Key Permissions**: Set minimum necessary permissions for API Keys in AI provider backends

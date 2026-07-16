@@ -10,13 +10,17 @@ keywords: [conversation issues, message sending failure, slow replies, lost hist
 
 When message sending fails, an error prompt will appear next to the message. Common causes and solutions:
 
-1. **Network interruption** — Check network connection and resend after recovery
+1. **Network interruption** — Check the network banner in chat. If it says DesireCore is waiting for recovery or confirming task status, the original run is still retained; wait for automatic recovery instead of resending immediately
 2. **API service unavailable** — The model provider may be under maintenance; try again later
 3. **Token limit exceeded** — The number of Tokens in a single request exceeds the model limit; try shortening the message or clearing some context
 4. **Insufficient API Key balance** — Check your provider account balance
 
 :::tip
 Failed message content is not lost. You can quickly retrieve and resend it through the input box history feature (press `Up` arrow key).
+:::
+
+:::warning Avoid duplicate runs
+During a network interruption, the reply may still be running on the service. DesireCore reconciles and resumes the original session after connectivity returns. Resend only after the message has explicitly entered a failed terminal state.
 :::
 
 ## Companion replies too slowly?

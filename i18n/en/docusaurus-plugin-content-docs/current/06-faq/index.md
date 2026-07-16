@@ -21,7 +21,7 @@ DesireCore uses a local-first architecture — core data and Companion (Agent) r
 
 ### Is my data secure?
 
-All Companion data (memory, configuration, skills) is stored in your local file system (under the `~/.desirecore/` directory) and will not be uploaded to third-party servers. AI conversation content is only sent to the model API provider you configure. API Keys are encrypted and stored through the system credential manager. See [Data and Privacy Issues](./05-data-privacy.md) for details.
+All Companion data (memory, configuration, skills) is stored in your local file system under `~/.desirecore/` and is not automatically uploaded to third-party servers. AI conversation content is sent to the model provider you select. API keys managed by DesireCore are kept in a protected local secrets store, whose original file is excluded from in-app regular backups. See [Data and Privacy Issues](./05-data-privacy.md) for details.
 
 ### How do I add new tools to a Companion?
 

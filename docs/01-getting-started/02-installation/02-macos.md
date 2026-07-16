@@ -28,6 +28,12 @@ keywords: [macOS, 安装, DMG, Gatekeeper, Apple Silicon, Intel]
 
    打开"应用程序"文件夹，双击 DesireCore 启动。
 
+## GUI 自动化与 HostAgent
+
+macOS 版本当前由 **HostAgent** 承载本机 GUI 操作和相关设备能力。HostAgent 是现行执行组件，并未被 Windows 使用的 CUA Driver 取代。
+
+首次使用界面读取、点击、输入或截图等能力时，macOS 可能要求授予 **辅助功能**、**屏幕录制**等权限。请只按实际任务需要授权；如果权限变更后能力没有立即恢复，重新启动 HostAgent 或 DesireCore 后再试。Windows 暂时使用内置 CUA Driver，是 Windows HostAgent 完成前让用户先获得 GUI 能力的过渡方案。
+
 ## 处理 Gatekeeper 提示
 
 首次打开时，macOS 可能会提示"无法打开 DesireCore，因为无法验证开发者"。这是因为 macOS 的安全机制 Gatekeeper 对新下载的应用会进行检查。

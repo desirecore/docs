@@ -150,9 +150,25 @@ You can attach images in the following ways:
 - Click the image button to select files
 - Directly **paste** images into the input box (Ctrl/Cmd + V)
 - **Drag and drop** images into the input area
+- Drag files or folders onto the full chat area and release when it highlights to add attachments or working-directory references
 
 Attached images are displayed as thumbnails above the input box. Hover to delete, click to preview larger image.
 
 :::warning File Reference vs Image Upload
 The "+" button adds files as **path references** — only telling the Agent where the file is; the image button is **actual upload** — the Agent can see the image content.
 :::
+
+## Message Action Bar
+
+Hover over a message to show its action bar. On narrow layouts, labels collapse into icons to keep the controls on one line.
+
+Message times use a compact display by default. Hover over a time to see the full local date and time including seconds, which is useful when checking cross-day or closely spaced execution records.
+
+Common actions include:
+
+- Copy plain text or Markdown
+- Retry the previous response
+- Edit a user message, including image attachments and deleting or reselecting document references already attached to that message
+- Read a message aloud
+- Select multiple messages and export them
+- Rewind to the checkpoint before a user message

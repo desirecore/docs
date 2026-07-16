@@ -38,8 +38,13 @@ DesireCore automatically queries the update server for new versions **every 5 mi
 When a new version is detected:
 
 1. The system automatically downloads the update package from the fastest available source, showing download progress percentage on the right
-2. After download completes, a prompt appears: **"New version downloaded. Restart now?"**
-3. Choose **Restart Now** to install the update; choose **Later** and you won't be prompted again for 24 hours
+2. After the download completes, the app prompts you to start installation or handle it later
+3. On Windows, selecting **Exit App and Upgrade Automatically** closes the main app and opens a separate upgrade-progress window. Wait for installation to finish, then launch the new version from that window. On other platforms, follow the displayed restart or installation flow
+4. Selecting **Later** temporarily suppresses repeated reminders
+
+:::warning Do not manually restart during a Windows update
+While the upgrade-progress window is running, do not start DesireCore again or terminate update-related processes. If the upgrade fails, use the progress-window action to open the installation directory and preserve the error details for troubleshooting.
+:::
 
 :::tip Multi-source Smart Download
 DesireCore maintains multiple download sources (CDN, build servers, GitHub Releases, etc.). Before downloading, the system automatically **speed-tests** each source and picks the fastest one, improving download speed and reliability. If one source is unavailable, it automatically falls back to another.

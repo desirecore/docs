@@ -6,14 +6,21 @@ keywords: [API Key, configuration, OpenAI, Claude, DeepSeek, Gemini, SiliconFlow
 
 # Configure API Key
 
-DesireCore is a local-first application — your data is stored locally, and AI capabilities are accessed through your own API Key. Configuring an API Key is the most critical step before you start using DesireCore.
+DesireCore is a local-first application: core data is stored locally by default. AI capability can be connected either by signing in for DesireCore official cloud compute or by configuring your own API key. A self-managed key remains useful for advanced and enterprise users, but it is no longer the only way to start.
+
+## Quick Start: Cloud Compute or Your Own Key
+
+| Method | Best for | Description |
+|--------|----------|-------------|
+| Official cloud compute | Users who do not want to register with each model provider first | Sign in to bind the `desirecore-cloud` provider and use a subscription or credits |
+| Your own API key | Existing provider accounts, direct cost control, or enterprise compliance | The key is stored in the permission-protected local `secrets.json`; provider configuration stores only a reference |
 
 ## What is an API Key?
 
 An API Key is like a "key" to access AI services. Each AI provider (such as OpenAI, Anthropic, DeepSeek, etc.) offers API services — you need to register on their website, obtain an API Key, and then enter it in DesireCore so it can call the corresponding AI models.
 
 :::info Cost Information
-Using an API Key to call AI services is billed by usage, with fees charged directly by the corresponding provider. DesireCore itself is free. Pricing varies widely between models, from fractions of a cent to tens of dollars per million tokens.
+Calls made with your own API key are billed by the corresponding provider. Official cloud compute consumes the applicable subscription allowance or credits. Pricing and usage multipliers vary by model.
 :::
 
 ## Configuring in DesireCore

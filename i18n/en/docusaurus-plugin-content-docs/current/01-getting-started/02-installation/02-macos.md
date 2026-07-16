@@ -32,6 +32,12 @@ This guide covers how to install DesireCore on macOS.
 
    Open the Applications folder and double-click DesireCore to launch.
 
+## GUI Automation and HostAgent
+
+The macOS version currently uses **HostAgent** as the carrier for local GUI operations and related device capabilities. HostAgent is an active execution component and has not been replaced by the CUA Driver used on Windows.
+
+The first time you use interface inspection, clicking, typing, screenshots, or similar capabilities, macOS may request **Accessibility**, **Screen Recording**, or other permissions. Grant only what the task requires. If a capability does not recover immediately after a permission change, restart HostAgent or DesireCore and try again. Windows temporarily uses the bundled CUA Driver as a transitional way to provide GUI capability before Windows HostAgent is complete.
+
 ## Handling Gatekeeper Prompts
 
 On the first launch, macOS may display a prompt saying "DesireCore can't be opened because the developer cannot be verified." This is macOS's security mechanism (Gatekeeper) checking newly downloaded applications.
