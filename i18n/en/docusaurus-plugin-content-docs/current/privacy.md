@@ -22,7 +22,7 @@ DesireCore uses the self-developed AgentFS file system architecture to ensure co
 
 User profile data is stored in independent user domains under `users/<user_id>/`, with each user's data completely isolated from other users. Relationship data (such as interaction patterns between AI assistants and users) belongs to the user domain and is not shared with "companions" (i.e., other AI assistants or users).
 
-This architecture provides logical isolation between user domains and agent workspaces. By default, an agent can access only its authorized workspace. When explicitly requested by the user and approved, an agent may perform audited cross-agent AgentFS operations; sensitive paths remain blocked by system controls. This isolation should not be treated as an absolute physical-security boundary if device-account or filesystem permissions are bypassed, or when the user authorizes export or cross-domain operations.
+This architecture provides logical isolation between user domains and agent workspaces. By default, an agent may access local files to carry out delegated tasks, while sensitive paths (such as SSH private keys and `.env` credential files) always remain blocked by system controls and write operations still go through tool approval; you can also enable "restrict to work directories" in an agent's configuration to confine that agent's file access to its authorized workspace. When explicitly requested by the user and approved, an agent may perform audited cross-agent AgentFS operations. This isolation should not be treated as an absolute physical-security boundary if device-account or filesystem permissions are bypassed, or when the user authorizes export or cross-domain operations.
 
 ## 3. Local Storage Principle
 
