@@ -34,7 +34,7 @@ DesireCore built-in tools evolve with the client. This page groups common tools 
 | `GenerateUUID` | Generate UUIDs | Low | No |
 | `JsonRepair` | Repair common JSON formatting problems | Low | No |
 
-Command execution always asks you to review the full command before it runs. Work directories provide the agent's default operating context; if you enable "restrict to work directories" in an agent's configuration, file reads and writes are strictly confined to the work-directory whitelist (with it disabled — the default — the agent may access regular local files while sensitive paths stay protected).
+Under the default approval mode, command execution asks you to review the full command before it runs (modes such as External Tools Only or Allow All follow their own rules — see the approval modes in the security settings). Work directories provide the agent's default operating context; if you enable "restrict to work directories" in an agent's configuration, file reads and writes are strictly confined to the work-directory whitelist (with it disabled — the default — the agent may access regular local files while sensitive paths stay protected).
 
 ## Web and Browser
 
