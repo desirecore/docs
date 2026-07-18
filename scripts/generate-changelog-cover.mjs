@@ -271,7 +271,7 @@ async function requestBgImageOnce(prompt, apiKey) {
     response_format: 'b64_json',
   }
 
-  const response = await fetch(endpoint, {
+  let response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -279,6 +279,26 @@ async function requestBgImageOnce(prompt, apiKey) {
     },
     body: JSON.stringify(body),
   })
+
+  // 部分上游（如 GptsAPI 的 image-2）不接受 response_format 参数直接 400，
+  // 去掉后重试一次（下方已兼容 b64_json 与 url 两种默认返回）
+  if (!response.ok && response.status === 400) {
+    const text = await response.text()
+    if (/response_format/i.test(text)) {
+      console.log('上游不支持 response_format 参数，去掉后重试…')
+      const { response_format: _omit, ...bodyNoFormat } = body
+      response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(bodyNoFormat),
+      })
+    } else {
+      throw new Error(`API 请求失败 (400): ${text}`)
+    }
+  }
 
   if (!response.ok) {
     const text = await response.text()
