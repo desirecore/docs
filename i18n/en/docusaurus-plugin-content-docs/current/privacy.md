@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Privacy Policy
 
-Last Updated: July 16, 2026
+Last Updated: July 18, 2026
 
 ## 1. Data Collection Scope
 
