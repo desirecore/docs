@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.90](./v10.0.90) | 2026-07-18 | Agent Management Tool，修复 3 项问题 |
 | [v10.0.89](./v10.0.89) | 2026-07-17 | File access whitelist changed to per-agent opt-in (no interception by default... |
 | [v10.0.88](./v10.0.88) | 2026-07-16 | Team Identity Awareness、Add/Remove Document References in Message Editing、Net... |
 | [v10.0.87](./v10.0.87) | 2026-07-14 | 修复：Fixed a regression where the app failed to restart automatically after an ... |
