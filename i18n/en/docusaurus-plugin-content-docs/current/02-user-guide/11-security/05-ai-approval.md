@@ -18,7 +18,7 @@ DesireCore stores an independent tool and command approval preference for each A
 | **External Tools Only** | Built-in/system tools and shell commands run without confirmation; MCP, HTTP, and script executors still require confirmation | External tools wait for you |
 | **Allow All** | Skips ordinary tool and command confirmations | No ordinary approval card, but code-level deny rules still apply |
 
-These are Agent-level preferences; an Agent without a saved preference uses AI Approval. Built-in patterns such as protection for `secrets.json`, user or administrator deny lists, file scope, tool availability, and other code-level checks take precedence. Allow All cannot override them.
+These are Agent-level preferences; an Agent without a saved preference uses AI Approval. Built-in patterns such as protection for `secrets.json`, user or administrator deny lists, sensitive-path protection, tool availability, and other code-level checks take precedence; when "restrict to work directories" is enabled for an agent, the file-scope whitelist is likewise a hard boundary that approval cannot cross (with it disabled — the default — the agent may access regular local files while sensitive paths stay blocked). Allow All cannot override them.
 
 :::warning External Tools Only boundary
 “External” means MCP, HTTP, and script executors. It does not mean “ask only when an operation affects the internet.” Shell commands are treated as a built-in execution capability and run directly in this mode, so enable it only for trusted Agents.
