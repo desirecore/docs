@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.92](./v10.0.92) | 2026-07-20 | Interactive terminal system、Manual multi-session mode、Agent-controlled contex... |
 | [v10.0.91](./v10.0.91) | 2026-07-20 | Reasoning Depth Options、Version Gating for Skill Installation，修复 6 项问题，改进 6 项 |
 | [v10.0.90](./v10.0.90) | 2026-07-18 | Agent Management Tool，修复 3 项问题 |
 | [v10.0.89](./v10.0.89) | 2026-07-17 | File access whitelist changed to per-agent opt-in (no interception by default... |
