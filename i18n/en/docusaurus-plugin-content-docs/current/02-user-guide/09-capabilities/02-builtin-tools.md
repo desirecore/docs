@@ -256,6 +256,28 @@ Creates and adjusts agent teams, supervisors, members, and team tasks.
 | Requires Confirmation | Depends on operation |
 | Typical Use Cases | Form specialist teams, assign team-level work |
 
+## Context Management
+
+### ManageContext - Manage Conversation Context
+
+Lets an agent actively curate its own conversation context: pin key content it wants to keep around, discard tool results it no longer needs, or collapse history down to just the system layer plus whatever is pinned when things get too cluttered. It can also temporarily adjust how much context budget the current session is allowed to use. None of this physically deletes the original record - the full history remains available to look back on.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on the operation (actions with information loss, such as clearing history or discarding a tool result, require confirmation; other operations do not) |
+| Typical Use Cases | Protect key conclusions from automatic pruning in long conversations, clean up oversized tool results, temporarily adjust the conversation's context budget |
+
+### CompactSession - Compress Session History
+
+Lets an agent proactively compress earlier conversation history into a summary, freeing up context space while preserving the important information.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+| Typical Use Cases | Trim down a long-running conversation once it has accumulated significant history |
+
 ## Workspace and Data
 
 ### ManageWorkDirs - Manage Work Directories

@@ -68,8 +68,11 @@ Browser, SitePattern, and LocalBookmarks tools are Web Access skill-scoped tools
 | Tool | Function | Risk | Confirmation |
 |------|----------|------|--------------|
 | `RecallConversation` | Retrieve conversation history | Low | No |
+| `ManageContext` | Pin/discard conversation content, clear history, adjust context budget | Medium | Depends |
 | `CompactSession` | Compact long conversation context | Low | No |
 | `Skill` | Load or invoke a skill | Depends | Depends |
+
+`ManageContext` lets an agent actively curate its own conversation context: pin key content it wants to keep around, discard tool results it no longer needs, collapse history down to just the system layer plus whatever is pinned, or temporarily adjust how much context budget the current session is allowed to use. None of this physically deletes the original record — the full history remains available to look back on (actions with information loss, such as clearing history or discarding a tool result, require confirmation; other operations do not).
 
 ## Automation
 
