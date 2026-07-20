@@ -69,6 +69,8 @@ What transfers between agents is not raw conversation content, but structured ta
 | **Constraints** | Rules or requirements to follow |
 | **Context** | Relevant background information |
 
+For lighter-weight collaboration subtasks, the delegating agent also decides on its own how much background the collaborator actually needs. If the work is something like confirming a conclusion or checking a number—things that don't require reviewing the full history—it can have the collaborator skip the full memory retrieval and carry only the information required to finish that specific task. This lets the collaborator respond faster and use fewer resources. This judgment is made by the agent based on how substantial the task is; it isn't something you configure manually, and you'll only notice it as a note like "background information trimmed" in the collaboration receipt or process log.
+
 ## Letting one agent update another agent's configuration
 
 When you explicitly request it, one agent can update another agent's AgentFS files, such as `persona.md` and `principles.md`. A team lead adjusting a member's role is the most common case, but team membership does not silently grant background access:

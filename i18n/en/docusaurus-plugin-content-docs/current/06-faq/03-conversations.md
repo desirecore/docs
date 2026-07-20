@@ -63,7 +63,7 @@ When conversations accumulate large amounts of context, they may exceed the mode
 
 ## Why does the Companion seem to forget what was said before?
 
-This may be related to context window limits. When conversation content exceeds the model's context length, earlier messages are truncated. The Companion's long-term memory (Memory) system can compensate for this — important information is written to memory and automatically referenced in subsequent conversations.
+This may be related to context window limits. When conversation content exceeds the model's context length, earlier messages are truncated. The Companion's long-term memory (Memory) system can compensate for this — important information is written to memory and automatically referenced in subsequent conversations. In addition, during long conversations the Companion can judge on its own which conclusions or key tool results matter most and mark them as exempt from cleanup, reducing this kind of sudden "forgetting" — this judgment call is made by the Companion itself, no manual action needed on your part.
 
 ## How to make the Companion forget certain content?
 
