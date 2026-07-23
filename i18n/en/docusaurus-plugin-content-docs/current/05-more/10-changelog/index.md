@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.95](./v10.0.95) | 2026-07-23 | Manual Session Project & Worktree Isolation、MCP OAuth Authentication、Built-in... |
 | [v10.0.94](./v10.0.94) | 2026-07-23 | Phone verification code login、Unified scheduling management tool、LSP semantic... |
 | [v10.0.93](./v10.0.93) | 2026-07-21 | Real-time Terminal Theme、Terminal Split Layout、Increased Terminal Limit & Sel... |
 | [v10.0.92](./v10.0.92) | 2026-07-20 | Interactive terminal system、Manual multi-session mode、Agent-controlled contex... |
