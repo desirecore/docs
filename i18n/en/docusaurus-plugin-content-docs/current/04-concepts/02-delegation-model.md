@@ -44,13 +44,13 @@ When encountering uncertainty, the companion won't guess — it will proactively
 
 ### 4. Plan — Plan (It formulates a plan)
 
-> Companion: "I plan to complete this contract review in three steps: 1) Structure check 2) Clause risk analysis 3) Generate review report. Step 2 involves modification suggestions and requires your confirmation before execution."
+> Companion: "I plan to complete this contract review in three steps: 1) Structure check 2) Clause risk analysis 3) Generate review report. If the report later needs to be sent to the other party, I will ask for confirmation immediately before sending it."
 
-The companion presents a plan, breaks down steps, and marks risk points and areas requiring your confirmation.
+The companion maintains a versioned plan in the workspace, breaks down steps, and marks risk points and the specific actions that truly require a human gate. You can review it through natural conversation or by editing the plan file—there is no Plan mode or blanket “approve plan” button.
 
 ### 5. Execute — Execute (It carries out the task)
 
-After you confirm the plan, the companion executes step by step. During the process, deterministic operations are done directly, operations requiring judgment are handled intelligently, and high-risk operations pause for your confirmation.
+Unless you explicitly ask for “plan only,” the companion proceeds within the permissions already granted. Deterministic operations run directly, judgment-heavy work remains adaptive, and high-risk actions such as sending, publishing, or deleting still pause for confirmation immediately before the action. Accepting a plan never replaces action-level permission.
 
 ### 6. Reflect — Reflect (It delivers receipts and reviews)
 
@@ -61,11 +61,11 @@ The companion submits a work receipt, reviews deviations, and writes new experie
 ## Complete Delegation Flow
 
 ```
-You initiate task → Companion asks for clarification → Companion formulates plan
+You initiate task → Companion clarifies as needed → Companion writes/updates plan
                                     ↓
-                          You confirm/modify plan
+                         Natural review or revision (as needed)
                                     ↓
-                          Companion executes task
+                    Execute authorized steps → Specific human gate (as needed)
                                     ↓
                           Companion reviews + delivers receipt
                                     ↓
