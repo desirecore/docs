@@ -2,7 +2,7 @@
 title: Sending Messages
 description: Learn how to send text, images, files, and use shortcuts and slash commands in DesireCore
 keywords: [sending messages, text input, image upload, file reference, screenshot, slash commands, keyboard shortcuts]
-last-reviewed: 2026-07-22
+last-reviewed: 2026-07-23
 ---
 
 # Sending Messages
@@ -89,11 +89,13 @@ When you drag local files or folders over the chat area, it becomes highlighted.
 The working-directory pill below the input and the resource panel show agent directories, global directories, and shared directories for teams the current agent belongs to.
 
 - Clicking an agent or global directory makes it the primary directory for normal conversations.
-- Clicking a team shared directory activates that team for the specific conversation. The pill then shows the team directory; click the same team again to leave the team scope.
+- Clicking a team shared directory activates that team for the specific conversation. The input pill then shows the directory with a Team label, and the resource button in the upper-right shows a team badge. Click the same team again to leave the team scope.
 - Team directories are not read-only labels. On the next message, DesireCore sends the corresponding `teamId` for backend validation; only a validated directory becomes the real cwd.
 - Directory scope cannot change while the agent is running, which prevents relative paths and file permissions from changing mid-execution.
 
 Team selection is independent for each conversation. In manual multi-conversation mode, different conversations with the same agent can use different team directories.
+
+When a team is created, DesireCore automatically establishes one shared-directory binding for the team. The supervisor, initial members, later-added members, and a replacement supervisor all inherit that same directory from team membership; non-members do not see it. If the directory cannot be bound, team creation fails instead of leaving a team without a shared directory.
 
 ## Slash Commands
 
