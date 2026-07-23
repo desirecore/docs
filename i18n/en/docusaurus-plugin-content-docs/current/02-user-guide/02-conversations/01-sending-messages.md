@@ -2,6 +2,7 @@
 title: Sending Messages
 description: Learn how to send text, images, files, and use shortcuts and slash commands in DesireCore
 keywords: [sending messages, text input, image upload, file reference, screenshot, slash commands, keyboard shortcuts]
+last-reviewed: 2026-07-22
 ---
 
 # Sending Messages
@@ -83,6 +84,17 @@ When you drag local files or folders over the chat area, it becomes highlighted.
 - Other files are added as file references
 - Folders are added as Working Directories
 
+## Switching Working Directories
+
+The working-directory pill below the input and the resource panel show agent directories, global directories, and shared directories for teams the current agent belongs to.
+
+- Clicking an agent or global directory makes it the primary directory for normal conversations.
+- Clicking a team shared directory activates that team for the specific conversation. The pill then shows the team directory; click the same team again to leave the team scope.
+- Team directories are not read-only labels. On the next message, DesireCore sends the corresponding `teamId` for backend validation; only a validated directory becomes the real cwd.
+- Directory scope cannot change while the agent is running, which prevents relative paths and file permissions from changing mid-execution.
+
+Team selection is independent for each conversation. In manual multi-conversation mode, different conversations with the same agent can use different team directories.
+
 ## Slash Commands
 
 Typing `/` (slash) in the input box pops up the command auto-completion menu. Slash commands let you quickly call system functions and Digital Companion skills.
@@ -97,7 +109,7 @@ Typing `/` (slash) in the input box pops up the command auto-completion menu. Sl
 
 | Type | Syntax | Description |
 |------|------|------|
-| System Commands | `/command_name` | Built-in functions, such as `/help`, `/skill`, `/plan`, etc. |
+| System Commands | `/command_name` | Built-in functions, such as `/help`, `/skill`, `/new`, and `/compact` |
 | Skill Invocation | `/skill:skill_name` | Call installed skills |
 | Quick Invocation | `/skill_name` | Directly input skill name for quick calling |
 
@@ -107,18 +119,12 @@ After typing `/skill:`, the list of skills available to the current Digital Comp
 
 | Command | Purpose |
 |---------|---------|
-| `/plan` | Force the Companion to plan first before acting (see [Plan Confirmation](../04-delegation/02-plan-confirmation.md#asking-the-agent-to-always-plan-first)) |
 | `/new` | Start a new conversation, isolated from the current context |
 | `/compact` | Manually compact the current conversation history to free up context space |
 | `/steer` | Inject a guiding message while the Companion is thinking (without interrupting generation) |
 | `/help` | View the full list of available commands |
 
-:::tip Two ways to use `/plan`
-- Send `/plan` alone — enables Plan Mode without sending any message
-- Send `/plan replace all console.log with logger.info` — enables Plan Mode + submits the task
-
-After the plan is approved (or rejected), forced mode auto-disables.
-:::
+If you want the agent to write a Plan without executing, say so naturally—for example, “Write the Plan first; do not execute yet.” Plans are versioned files in the working directory and do not require a mode or special command. See [Plan Files and Natural Collaboration](../04-delegation/02-plan-confirmation.md).
 
 ## Shortcut Quick Reference
 
