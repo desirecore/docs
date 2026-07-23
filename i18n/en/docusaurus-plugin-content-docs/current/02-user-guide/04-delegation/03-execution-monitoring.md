@@ -1,12 +1,12 @@
 ---
 title: Execution Monitoring
-description: Learn how to monitor progress while the agent executes tasks, understand the difference between deterministic and adaptive steps, and how the task list makes every step transparent.
+description: Learn how to monitor progress while the agent executes tasks, understand deterministic and adaptive steps, and when to use a task list for key progress.
 keywords: [execution, monitoring, deterministic step, adaptive step, pause, resume, progress, task list]
 ---
 
 # Execution Monitoring
 
-After confirming the plan, the agent begins executing the task. You can monitor the progress of each step in real time and intervene at any time when needed.
+After the plan is written, the agent follows your natural-language direction to continue, pause, or revise execution. You can monitor progress and intervene at any time; there is no blanket plan-approval state to operate first. For long-running work, newer DesireCore versions use the floating task board when responsibility, blockers, cross-agent coordination, or durable progress visibility genuinely need tracking.
 
 ## Real-Time Display of Execution Process
 
@@ -52,7 +52,7 @@ When a task is executing, you will see a real-time updated progress panel:
 
 ## Task List (Transparent Progress)
 
-Once execution begins, the agent **converts each step in the plan into a task** on its own "task list". You can ask "where are we?" / "what's left?" any time—the agent doesn't need to recall anything; it just queries the list.
+A task list is not a state machine for the Plan, and it does not mechanically duplicate every Plan step. The agent creates task items only when work needs explicit ownership, blocker tracking, cross-agent coordination, or durable visibility of key progress. Simple sequencing remains in the Plan file. You can still ask “where are we?” or “what’s left?” at any time.
 
 ### What the Task List Looks Like
 
@@ -62,7 +62,7 @@ Each task has a clear title, status, and links to related context:
 📋 Task List (agent "Contract Review Assistant")
 
 🔄 #1 Parse contract file, extract key clauses
-        In progress · linked to plans/review-procurement-contract.md step 1
+        In progress · linked to .desirecore/plans/<plan-id>/PLAN.md
 
 🔹 #2 Check penalty percentage
         Pending · depends on #1 completing
@@ -100,7 +100,7 @@ Dependencies appear in the list as "depends on #X" so you can see the full task 
 If the agent needs to adjust steps mid-flight, it will:
 
 1. Proactively tell you "I'm going to deviate from the original plan, because X"
-2. After your agreement, update the task list (add new tasks or modify existing ones)
+2. Incorporate your feedback through natural conversation; wait only when you explicitly require confirmation, otherwise update the relevant task items
 3. Append the deviation log to the `## Execution Notes` section at the end of the plan file
 
 This way, looking at the plan file + task list later gives you a complete reconstruction of "what actually happened".

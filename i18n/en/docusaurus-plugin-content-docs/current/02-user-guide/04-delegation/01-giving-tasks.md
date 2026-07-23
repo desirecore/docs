@@ -2,6 +2,7 @@
 title: Giving Tasks
 description: Learn how to clearly describe a task to your agent, and the difference between "giving a task" and "simple inquiry."
 keywords: [giving tasks, delegation, task description, delegate, task scope]
+last-reviewed: 2026-07-22
 ---
 
 # Giving Tasks
@@ -106,13 +107,13 @@ After you give a task, the agent operates according to the following process:
 ```
 You give a task
     ↓
-Agent may ask for clarification (Clarify) — if information is insufficient
+Agent creates or reads a Plan in the working directory
     ↓
-Agent creates a plan (Plan) — and waits for your confirmation
+Agent asks naturally for clarification when information is missing
     ↓
-You confirm or modify the plan
+Agent creates a new Plan revision from your answer
     ↓
-Agent begins execution (Execute)
+Agent begins execution within the active permission boundaries
     ↓
 Pauses for confirmation at key nodes (Human Gate)
     ↓
@@ -132,5 +133,5 @@ You can control the agent's autonomy as needed:
 | **Step-by-Step Confirmation** | High-risk or first-time execution | "Confirm with me before every step" |
 
 :::info Next Step
-After giving a task, the agent will first present you with a plan. Go to [Plan Confirmation](./02-plan-confirmation.md) to learn how to review and confirm the agent's execution plan.
+After receiving a task, the agent creates or reads a Plan in the working directory. See [Plan Files and Natural Collaboration](./02-plan-confirmation.md) to learn how to review, edit, and revise it through natural conversation.
 :::
