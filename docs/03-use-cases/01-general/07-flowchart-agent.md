@@ -121,7 +121,6 @@ keywords: [流程图, 架构图, 时序图, 可视化, 图表生成]
 
 ```
 ![微服务架构图](./assets/microservice-architecture.png)
-文件地址：./assets/flowchart/microservice-architecture.drawio
 
 ### 场景三：从文档提取流程
 
