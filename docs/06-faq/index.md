@@ -46,4 +46,6 @@ DesireCore 支持多家模型供应商，包括 OpenAI、Anthropic (Claude)、Go
 | [对话问题](./03-conversations.md) | 消息失败、回复太慢、历史丢失 |
 | [智能体问题](./04-agents.md) | 安装失败、重置智能体、记忆问题 |
 | [数据与隐私](./05-data-privacy.md) | 数据存储位置、备份方法、完全删除 |
-| [性能问题](./06-performance.md) | 内存占用、响应速度、优化方法 |
+| [性能问题](./06-performance.md) | 内存占用、磁盘空间、GPU、优化方法 |
+| [委派与协作](./07-delegation.md) | 委派进展、团队协作、回执查看 |
+| [自动化问题](./08-automation.md) | 调度 vs 心跳、定时任务、周期任务 |
