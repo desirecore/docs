@@ -8,6 +8,10 @@ keywords: [Windows, installation, NSIS, SmartScreen]
 
 This guide covers how to install DesireCore on Windows.
 
+:::tip Estimated time
+The entire installation typically takes just **1–2 minutes** (depending on download speed).
+:::
+
 ## Installation Steps
 
 1. **Download the installer**
@@ -80,5 +84,11 @@ To uninstall DesireCore:
 :::warning Data Cleanup
 During uninstallation, you'll be asked whether to also delete application data. If you plan to reinstall, it's recommended to keep the data; if you're sure you won't use it again, you can choose to delete everything.
 :::
+
+## Troubleshooting
+
+- **Installer won't open**: Verify the download completed successfully (file size ~100–200 MB), then try downloading again.
+- **Antivirus blocks installation**: Add the DesireCore install directory to your antivirus allowlist, or temporarily disable real-time protection and retry.
+- **Other issues**: Visit the [FAQ](../../06-faq/index.md) or contact our support team.
 
 After installation, head to [First Run](../03-first-run.md) to learn about the post-launch onboarding flow.

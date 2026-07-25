@@ -15,6 +15,10 @@ DesireCore is a local-first application: core data is stored locally by default.
 | Official cloud compute | Users who do not want to register with each model provider first | Sign in to bind the `desirecore-cloud` provider and use a subscription or credits |
 | Your own API key | Existing provider accounts, direct cost control, or enterprise compliance | The key is stored in the permission-protected local `secrets.json`; provider configuration stores only a reference |
 
+:::info Already using cloud compute?
+If you've signed in and bound official cloud compute, you can **skip this page** and go straight to [Your First Conversation](./05-first-conversation.md). Come back anytime to add more providers.
+:::
+
 ## What is an API Key?
 
 An API Key is like a "key" to access AI services. Each AI provider (such as OpenAI, Anthropic, DeepSeek, etc.) offers API services — you need to register on their website, obtain an API Key, and then enter it in DesireCore so it can call the corresponding AI models.
@@ -32,6 +36,10 @@ Calls made with your own API key are billed by the corresponding provider. Offic
 5. Click **Verify** to confirm the Key is valid
 
 <!-- Screenshot placeholder: Configure API Key (configure-api-key.png) -->
+
+:::note Key Security
+Your API Key is stored only in the local file `~/.desirecore/secrets.json` (file permission `600`, readable only by the current user). It is never uploaded to DesireCore servers or any third party.
+:::
 
 ## Provider API Key Guides
 

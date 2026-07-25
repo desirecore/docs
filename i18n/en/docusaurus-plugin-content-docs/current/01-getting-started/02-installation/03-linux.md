@@ -8,6 +8,15 @@ keywords: [Linux, installation, AppImage, Ubuntu, Fedora, ARM64, UnionTech UOS, 
 
 This guide covers how to install DesireCore on Linux. DesireCore is distributed as an AppImage, supporting both x64 and ARM64 architectures, and is compatible with most mainstream Linux distributions, including Chinese domestic operating systems such as UnionTech UOS, Kylin OS, Deepin, and openKylin.
 
+:::tip Experienced users — quick start
+```bash
+# Two commands after downloading:
+chmod +x DesireCore_x86_64_*.AppImage
+./DesireCore_x86_64_*.AppImage
+```
+If you hit a sandbox error, jump to [Troubleshooting](#troubleshooting-sandbox-errors).
+:::
+
 :::tip Chinese Domestic OS Users
 DesireCore has been tested and verified on UnionTech UOS, Kylin OS, Deepin, openKylin, and other Chinese domestic operating systems. For platform-specific installation instructions and compatibility details, please visit the [DesireCore China website](https://www.desirecore.cn).
 :::
