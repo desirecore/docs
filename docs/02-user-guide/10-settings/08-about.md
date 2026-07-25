@@ -90,3 +90,9 @@ DesireCore 提供两个更新通道：
 
 - **GitHub Issues**：在 DesireCore 的 GitHub 仓库中提交 Issue
 - **社区讨论**：加入 DesireCore 社区参与讨论
+
+## 相关页面
+
+- [数据与隐私](./06-data-privacy.md)：管理数据导出、导入和清除
+- [数据安全](../11-security/04-data-security.md)：了解更新安全和数据保护
+- [权限设置](./05-permissions.md)：管理系统权限

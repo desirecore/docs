@@ -63,3 +63,6 @@ AI 的建议可能出错。涉及不可逆、敏感数据、发布、外部通�
 - [人闸门确认机制](../04-delegation/04-human-gate.md)
 - [执行监控](../04-delegation/03-execution-monitoring.md)
 - [审计跟踪](./03-audit-trail.md)
+- [三层可控性](./01-controllability.md)：审批模式如何服务于可见、可控、可逆
+- [风险等级](./02-risk-levels.md)：操作如何被分级
+- [通知管理](../08-automation/02-notifications.md)：审批通知的展示和跳转
