@@ -132,7 +132,6 @@ image: /img/use-cases/covers/cover-flowchart-agent.jpg
 
 ```
 ![微服务架构图](./assets/microservice-architecture.png)
-文件地址：./assets/flowchart/microservice-architecture.drawio
 
 ### 场景三：从文档提取流程
 

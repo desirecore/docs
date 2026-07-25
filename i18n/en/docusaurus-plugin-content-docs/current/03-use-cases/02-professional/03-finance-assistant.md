@@ -2,6 +2,7 @@
 title: Finance Assistant
 description: Use the Finance Assistant agent to complete budget preparation, expense review, financial report generation, and cost analysis.
 keywords: [Finance Assistant, Budget Preparation, Expense Review, Financial Reports, Cost Analysis]
+image: /img/use-cases/covers/cover-finance-assistant.jpg
 ---
 
 # Finance Assistant

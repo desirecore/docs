@@ -2,6 +2,7 @@
 title: Bidding Assistant
 description: Use the Bidding Assistant agent to complete bid document preparation, qualification review, pricing strategy analysis, and bid document checking.
 keywords: [Bidding, Bid Document Preparation, Qualification Review, Pricing Strategy, Bid Management]
+image: /img/use-cases/covers/cover-bidding-assistant.jpg
 ---
 
 # Bidding Assistant

@@ -2,6 +2,7 @@
 title: Web Data Collection
 description: Use an AI agent to automatically browse web pages, extract information, and organize data, outputting structured results with scheduled tasks and change monitoring support.
 keywords: [Data Collection, Web Scraping, Data Extraction, Competitor Monitoring, Structured Data]
+image: /img/use-cases/covers/cover-web-scraping-agent.jpg
 ---
 
 # AI-Powered Web Data Collection

@@ -2,6 +2,7 @@
 title: Email Management
 description: Use the AI Assistant to intelligently classify emails, draft replies, and extract key information for efficient daily email processing.
 keywords: [Email Management, Email Classification, Email Replies, Efficiency, AI Assistant]
+image: /img/use-cases/covers/cover-email-management.jpg
 ---
 
 # Email Management

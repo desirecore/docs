@@ -2,6 +2,7 @@
 title: Real Estate Advisor
 description: Use the Real Estate Advisor agent for property analysis, price evaluation, home purchase policy interpretation, and multi-property comparison.
 keywords: [Real Estate Advisor, Property Analysis, Price Evaluation, Home Purchase Decision, Real Estate Investment]
+image: /img/use-cases/covers/cover-real-estate.jpg
 ---
 
 # Real Estate Advisor

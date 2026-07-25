@@ -2,6 +2,7 @@
 title: AI Bidding
 description: End-to-end bidding solution with multi-agent collaboration, covering the entire process from bidding document analysis to bid submission.
 keywords: [AI Bidding, Bid Document Preparation, Multi-agent Collaboration, Bid Management, Quality Control]
+image: /img/use-cases/covers/cover-ai-bidding.jpg
 ---
 
 # AI Bidding

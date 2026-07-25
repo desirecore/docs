@@ -2,6 +2,7 @@
 title: Meeting Assistant
 description: Use the AI Assistant to complete agenda preparation before meetings and minutes organization, action item extraction after meetings.
 keywords: [Meeting Assistant, Meeting Minutes, Agenda, Action Items, Efficiency]
+image: /img/use-cases/covers/cover-meeting-assistant.jpg
 ---
 
 # Meeting Assistant

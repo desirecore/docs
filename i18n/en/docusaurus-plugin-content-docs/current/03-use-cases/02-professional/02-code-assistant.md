@@ -2,6 +2,7 @@
 title: Code Assistant
 description: Use the Code Assistant agent to build complete projects through conversation, from architecture design to code implementation, testing, and deployment.
 keywords: [Code Assistant, Project Development, Full-Stack Development, Code Generation, Architecture Design]
+image: /img/use-cases/covers/cover-code-assistant.jpg
 ---
 
 # Code Assistant

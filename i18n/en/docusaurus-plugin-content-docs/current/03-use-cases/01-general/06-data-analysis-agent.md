@@ -2,6 +2,7 @@
 title: Data Analysis Report
 description: Use an AI agent to automatically generate standardized data analysis reports, supporting multi-source data ingestion, intelligent analysis and visualization, and formatted output.
 keywords: [Data Analysis, Report Generation, Visualization, Excel, Financial Report]
+image: /img/use-cases/covers/cover-data-analysis-agent.jpg
 ---
 
 # AI-Powered Standard Data Analysis Reports

@@ -2,6 +2,7 @@
 title: Product Manager
 description: Use the Product Manager agent to complete requirement document writing, iteration management, resource coordination, and risk control.
 keywords: [Product Manager, Requirements Document, Iteration Management, Sprint, Project Management]
+image: /img/use-cases/covers/cover-product-manager.jpg
 ---
 
 # Product Manager

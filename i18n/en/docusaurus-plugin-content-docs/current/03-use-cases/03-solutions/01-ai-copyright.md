@@ -2,6 +2,7 @@
 title: AI Copyright Registration
 description: Use DesireCore to fully automate software copyright registration, from requirement description to document generation, all in one place.
 keywords: [Copyright Registration, Software Copyright, Automation, Intellectual Property, Copyright Writing]
+image: /img/use-cases/covers/cover-ai-copyright.jpg
 ---
 
 # AI Copyright Registration

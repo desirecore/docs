@@ -2,6 +2,7 @@
 title: Document Writing
 description: Use the AI Copywriter agent to efficiently complete various writing tasks from outline to final draft, including project reports and proposal documents.
 keywords: [Document Writing, AI Copywriter, Reports, Writing Assistant, Content Creation]
+image: /img/use-cases/covers/cover-document-writing.jpg
 ---
 
 # Document Writing

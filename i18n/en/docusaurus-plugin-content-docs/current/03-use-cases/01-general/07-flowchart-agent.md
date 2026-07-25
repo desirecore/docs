@@ -2,6 +2,7 @@
 title: Flowchart Generation
 description: Use an AI agent to automatically generate professional flowcharts, architecture diagrams, and sequence charts from natural language descriptions or documents, with multi-format export support.
 keywords: [Flowchart, Architecture Diagram, Sequence Diagram, Visualization, Chart Generation]
+image: /img/use-cases/covers/cover-flowchart-agent.jpg
 ---
 
 # AI-Powered Automatic Flowchart Generation
@@ -108,7 +109,6 @@ This use case lets an AI agent automatically generate professional flowcharts ba
 
 ```
 ![Microservices Architecture](./assets/microservice-architecture.png)
-File location: ./assets/flowchart/microservice-architecture.drawio
 
 ### Scenario 3: Extract Process from Document
 

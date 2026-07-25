@@ -2,6 +2,7 @@
 title: Data Analysis
 description: Use the Data Analyst agent to quickly analyze sales data, user behavior, etc., and obtain visual reports and trend insights.
 keywords: [Data Analysis, Reports, Visualization, Trend Prediction, Data Analyst]
+image: /img/use-cases/covers/cover-data-analysis.jpg
 ---
 
 # Data Analysis
