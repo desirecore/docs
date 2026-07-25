@@ -63,6 +63,29 @@ AgentFS 的设计灵感来源于 Linux 操作系统的文件结构：
 
 ## 核心目录解析
 
+```mermaid
+graph LR
+    subgraph 智能体本体["agents/ — 智能体本体 (Git)"]
+        A[agent.json<br/>身份证]
+        B[persona.md<br/>性格]
+        C[principles.md<br/>准则]
+        D[memory/<br/>通用记忆]
+        E[skills/<br/>技能包]
+    end
+    subgraph 用户数据["users/ — 用户私有"]
+        F[profile.md<br/>用户画像]
+        G[relationship.md<br/>互动关系]
+        H[memory/<br/>专属记忆]
+    end
+    subgraph 运行态["runs/ — 会话临时数据"]
+        I[会话记录]
+        J[行动回执]
+    end
+    A -.->|被所有用户共享| F
+    D -.->|跨用户通用| H
+    E -->|调用| I
+```
+
 ### agents/ -- 智能体本体
 
 这是智能体的"灵魂"所在。每个智能体就是一个 Git 仓库，包含：

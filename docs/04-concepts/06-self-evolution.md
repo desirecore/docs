@@ -16,6 +16,23 @@ DesireCore 的智能体是**动态进化**的。它会在与你的每次互动�
 
 智能体的进化分为三个层次：
 
+```mermaid
+graph BT
+    subgraph L1["第一层：规则学习"]
+        A["你主动教学 → 写入规则/技能"]
+    end
+    subgraph L2["第二层：经验积累"]
+        B["互动中自动捕获 → 更新画像/记忆"]
+    end
+    subgraph L3["第三层：能力扩展"]
+        C["安装新技能/工具 → 拓展能力边界"]
+    end
+    L1 --> L2 --> L3
+    style L1 fill:#d5e8d4,stroke:#82b366
+    style L2 fill:#fff2cc,stroke:#d6b656
+    style L3 fill:#dae8fc,stroke:#6c8ebf
+```
+
 ### 第一层：规则学习（你教的）
 
 这是最直接的进化方式 -- 你明确告诉同伴应该怎么做。
