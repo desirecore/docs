@@ -6,7 +6,7 @@ keywords: [团队版本, FAQ, 故障排除, 冲突, 成员版本, 权限]
 
 # 团队版本管理 FAQ
 
-本页汇总团队版本管理中的常见问题。完整的操作指南请参阅[团队版本管理](./09-team-version-management.md)。
+本页汇总团队版本管理中的常见问题。完整的操作指南请参阅[团队版本管理](./10-team-version-management.md)。
 
 ## 连接与推送
 
@@ -101,7 +101,7 @@ keywords: [团队版本, FAQ, 故障排除, 冲突, 成员版本, 权限]
 
 ## 相关页面
 
-- [团队版本管理完整指南](./09-team-version-management.md)
+- [团队版本管理完整指南](./10-team-version-management.md)
 - [单个智能体版本管理](./08-version-control.md)
 - [Clone 与同步](./09-clone-and-sync.md)
 - [跨智能体协作](../04-delegation/06-cross-agent.md)

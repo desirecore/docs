@@ -134,11 +134,11 @@ DesireCore 中的每个智能体都是一个 Git 仓库。你对智能体的每�
 
 除了发布单个智能体，DesireCore 还支持克隆智能体和团队级版本管理：
 
-- [Clone 与同步](./clone-and-sync) — 复制智能体，选择是否复制私有数据，并处理后续同步
-- [团队版本管理](./team-version-control) — 团队远程托管、fork、release 和市场分发
+- [Clone 与同步](./09-clone-and-sync.md) — 复制智能体，选择是否复制私有数据，并处理后续同步
+- [团队版本管理](./10-team-version-management.md) — 团队远程托管、fork、release 和市场分发
 
 ## 下一步
 
-- [团队版本管理](./09-team-version-management.md) — 把整支智能体团队当作一个整体进行版本管理
+- [团队版本管理](./10-team-version-management.md) — 把整支智能体团队当作一个整体进行版本管理
 - [智能体类型](./01-agent-types.md) — 回顾智能体的类型和定位
 - [创建自定义智能体](./03-create-agent.md) — 创建你自己的智能体
