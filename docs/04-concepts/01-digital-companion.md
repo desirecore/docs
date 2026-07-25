@@ -6,6 +6,8 @@ keywords: [数字同伴, Digital Companion, 智能体, Agent, 产品理念]
 
 # 数字同伴
 
+![数字同伴成长路径 — 从认识彼此到持续进化的四阶段，以及工具与同伴的本质区别](/img/concepts/digital-companion.svg)
+
 ## 不只是"AI 助手"
 
 你可能已经用过各种 AI 产品 -- ChatGPT、Copilot、各种对话机器人。它们大多遵循一个模式：你提问，AI 回答；你关闭窗口，一切归零。下次再来，它依然是那个"什么都不记得的陌生人"。

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="hdGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#bf360c"/>
+      <stop offset="100%" style="stop-color:#e65100"/>
+    </linearGradient>
+    <marker id="arrR" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#e65100"/>
+    </marker>
+    <marker id="arrB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1565c0"/>
+    </marker>
+  </defs>
+  
+  <rect width="900" height="520" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="50" fill="url(#hdGrad4)" rx="12"/>
+  <rect x="0" y="28" width="900" height="22" fill="url(#hdGrad4)"/>
+  <text x="450" y="32" text-anchor="middle" fill="white" font-size="17" font-weight="bold">回执系统 — 每次任务的完整"工作报告"</text>
+  
+  <!-- Flow: Task → Execute → Receipt -->
+  <rect x="40" y="70" width="140" height="50" rx="8" fill="#1565c0"/>
+  <text x="110" y="92" text-anchor="middle" fill="white" font-size="12" font-weight="bold">📋 任务发起</text>
+  <text x="110" y="108" text-anchor="middle" fill="#bbdefb" font-size="10">用户委派</text>
+  
+  <line x1="180" y1="95" x2="220" y2="95" stroke="#546e7a" stroke-width="2" marker-end="url(#arrB)"/>
+  
+  <rect x="225" y="70" width="140" height="50" rx="8" fill="#00838f"/>
+  <text x="295" y="92" text-anchor="middle" fill="white" font-size="12" font-weight="bold">⚙️ 执行过程</text>
+  <text x="295" y="108" text-anchor="middle" fill="#b2ebf2" font-size="10">工具调用+决策</text>
+  
+  <line x1="365" y1="95" x2="405" y2="95" stroke="#546e7a" stroke-width="2" marker-end="url(#arrB)"/>
+  
+  <rect x="410" y="70" width="140" height="50" rx="8" fill="#e65100"/>
+  <text x="480" y="92" text-anchor="middle" fill="white" font-size="12" font-weight="bold">📦 生成回执</text>
+  <text x="480" y="108" text-anchor="middle" fill="#ffccbc" font-size="10">不可变记录</text>
+  
+  <line x1="550" y1="95" x2="590" y2="95" stroke="#546e7a" stroke-width="2" marker-end="url(#arrB)"/>
+  
+  <rect x="595" y="70" width="140" height="50" rx="8" fill="#2e7d32"/>
+  <text x="665" y="92" text-anchor="middle" fill="white" font-size="12" font-weight="bold">✅ 交付用户</text>
+  <text x="665" y="108" text-anchor="middle" fill="#c8e6c9" font-size="10">结果+回执</text>
+  
+  <!-- Receipt content detail -->
+  <rect x="40" y="145" width="820" height="195" rx="10" fill="#fff3e0" stroke="#ff8f00" stroke-width="1.5"/>
+  <text x="60" y="170" fill="#e65100" font-size="13" font-weight="bold">📄 回执包含的信息</text>
+  
+  <!-- Receipt fields in grid -->
+  <rect x="60" y="182" width="245" height="65" rx="6" fill="white" stroke="#ffcc80" stroke-width="1"/>
+  <text x="75" y="202" fill="#e65100" font-size="11" font-weight="bold">🏷️ 基本信息</text>
+  <text x="75" y="220" fill="#37474f" font-size="10">回执ID · 版本快照(Git)</text>
+  <text x="75" y="236" fill="#37474f" font-size="10">会话信息 · 时间戳</text>
+  
+  <rect x="320" y="182" width="245" height="65" rx="6" fill="white" stroke="#ffcc80" stroke-width="1"/>
+  <text x="335" y="202" fill="#e65100" font-size="11" font-weight="bold">📊 任务概要</text>
+  <text x="335" y="220" fill="#37474f" font-size="10">输入/输出摘要 · 完成状态</text>
+  <text x="335" y="236" fill="#37474f" font-size="10">用户修改次数</text>
+  
+  <rect x="580" y="182" width="260" height="65" rx="6" fill="white" stroke="#ffcc80" stroke-width="1"/>
+  <text x="595" y="202" fill="#e65100" font-size="11" font-weight="bold">🔧 工具调用清单</text>
+  <text x="595" y="220" fill="#37474f" font-size="10">每个工具：输入/输出/耗时</text>
+  <text x="595" y="236" fill="#37474f" font-size="10">是否经过用户确认</text>
+  
+  <rect x="60" y="258" width="245" height="65" rx="6" fill="white" stroke="#ffcc80" stroke-width="1"/>
+  <text x="75" y="278" fill="#e65100" font-size="11" font-weight="bold">🔍 检索轨迹</text>
+  <text x="75" y="296" fill="#37474f" font-size="10">查了哪些记忆/知识库</text>
+  <text x="75" y="312" fill="#37474f" font-size="10">匹配了什么内容</text>
+  
+  <rect x="320" y="258" width="245" height="65" rx="6" fill="white" stroke="#ffcc80" stroke-width="1"/>
+  <text x="335" y="278" fill="#e65100" font-size="11" font-weight="bold">📈 步骤类型统计</text>
+  <text x="335" y="296" fill="#37474f" font-size="10">固化/灵活/人闸门各多少</text>
+  <text x="335" y="312" fill="#37474f" font-size="10">自主程度一目了然</text>
+  
+  <rect x="580" y="258" width="260" height="65" rx="6" fill="white" stroke="#ffcc80" stroke-width="1"/>
+  <text x="595" y="278" fill="#e65100" font-size="11" font-weight="bold">🧬 记忆/技能补丁 + 回滚点</text>
+  <text x="595" y="296" fill="#37474f" font-size="10">学到了什么(diff) · 风险等级</text>
+  <text x="595" y="312" fill="#37474f" font-size="10">精确回滚点</text>
+  
+  <!-- Use cases -->
+  <rect x="40" y="360" width="820" height="70" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="60" y="385" fill="#0d47a1" font-size="12" font-weight="bold">💡 回执的五大用途</text>
+  <text x="60" y="408" fill="#37474f" font-size="11">🔎 事后审计 ｜ 🐛 问题排查 ｜ ⏪ 一键回滚 ｜ ⏱️ 效率分析（节省28分钟） ｜ 📈 持续改进（返工率趋势）</text>
+  
+  <!-- Trust chain -->
+  <rect x="40" y="448" width="820" height="52" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="60" y="472" fill="#1b5e20" font-size="12" font-weight="bold">🔗 信任链</text>
+  <text x="60" y="492" fill="#37474f" font-size="11">有回执 → 行为透明 → 可以验证 → 建立信任 → 敢于委派更多 → 效率提升 → 更多回执积累 → 信任加深</text>
+</svg>

@@ -6,6 +6,8 @@ keywords: [算力, Compute, BYOK, 供应商, 模型选择, API Key]
 
 # 算力模型
 
+![算力模型架构 — BYOK 自带钥匙与官方云端双路径，连接 20+ 供应商生态](/img/concepts/compute-model.svg)
+
 ## 什么是算力模型
 
 DesireCore 本身不内置 AI 模型，而是帮你**连接和管理**各种 AI 服务。就像一台电脑本身不产生电力，但它能使用不同的电源 -- 你可以接市电、用电池，甚至太阳能。

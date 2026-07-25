@@ -6,6 +6,8 @@ keywords: [命名, Desire, Core, 品牌, 理念]
 
 # 命名理念
 
+![命名理念 — Desire（用户意愿）注入 Core（核心引擎），三个视角理解产品价值](/img/concepts/naming-philosophy.svg)
+
 **DesireCore** = **Desire**（意愿/愿望）+ **Core**（核心）
 
 ---

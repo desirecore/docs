@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="hdGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0d47a1"/>
+      <stop offset="100%" style="stop-color:#1565c0"/>
+    </linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1565c0"/>
+    </marker>
+    <marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#546e7a"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="600" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="50" fill="url(#hdGrad2)" rx="12"/>
+  <rect x="0" y="28" width="900" height="22" fill="url(#hdGrad2)"/>
+  <text x="450" y="32" text-anchor="middle" fill="white" font-size="17" font-weight="bold">智能任务编排引擎 — 你的 AI 项目经理</text>
+  
+  <!-- Step 1: Intent Recognition -->
+  <rect x="40" y="70" width="250" height="130" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <rect x="40" y="70" width="250" height="30" rx="10" fill="#1565c0"/>
+  <rect x="40" y="88" width="250" height="12" fill="#1565c0"/>
+  <text x="165" y="90" text-anchor="middle" fill="white" font-size="13" font-weight="bold">① 意图识别</text>
+  <text x="60" y="120" fill="#37474f" font-size="11">📚 教学意图 → 写入规则</text>
+  <text x="60" y="142" fill="#37474f" font-size="11">👤 单任务 → 直接委派</text>
+  <text x="60" y="164" fill="#37474f" font-size="11">🔀 复杂编排 → 进入拆解</text>
+  <text x="60" y="190" fill="#78909c" font-size="10" font-style="italic">"这个人想让我做什么类型的事？"</text>
+  
+  <!-- Arrow 1→2 -->
+  <line x1="290" y1="135" x2="320" y2="135" stroke="#1565c0" stroke-width="2.5" marker-end="url(#arr)"/>
+  
+  <!-- Step 2: Task Decomposition -->
+  <rect x="325" y="70" width="250" height="130" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <rect x="325" y="70" width="250" height="30" rx="10" fill="#2e7d32"/>
+  <rect x="325" y="88" width="250" height="12" fill="#2e7d32"/>
+  <text x="450" y="90" text-anchor="middle" fill="white" font-size="13" font-weight="bold">② 任务拆解</text>
+  <text x="345" y="120" fill="#37474f" font-size="11">📋 拆分子任务</text>
+  <text x="345" y="142" fill="#37474f" font-size="11">🔗 分析依赖关系</text>
+  <text x="345" y="164" fill="#37474f" font-size="11">⚡ 确定并行/串行顺序</text>
+  <text x="345" y="190" fill="#78909c" font-size="10" font-style="italic">"能同时做的事绝不排队"</text>
+  
+  <!-- Arrow 2→3 -->
+  <line x1="575" y1="135" x2="605" y2="135" stroke="#1565c0" stroke-width="2.5" marker-end="url(#arr)"/>
+  
+  <!-- Step 3: Smart Matching -->
+  <rect x="610" y="70" width="250" height="130" rx="10" fill="#ede7f6" stroke="#6a1b9a" stroke-width="2"/>
+  <rect x="610" y="70" width="250" height="30" rx="10" fill="#6a1b9a"/>
+  <rect x="610" y="88" width="250" height="12" fill="#6a1b9a"/>
+  <text x="735" y="90" text-anchor="middle" fill="white" font-size="13" font-weight="bold">③ 智能分配</text>
+  <text x="630" y="120" fill="#37474f" font-size="11">🏷️ 技能标签匹配</text>
+  <text x="630" y="142" fill="#37474f" font-size="11">📊 历史表现评估</text>
+  <text x="630" y="164" fill="#37474f" font-size="11">⚖️ 当前负载均衡</text>
+  <text x="630" y="190" fill="#78909c" font-size="10" font-style="italic">"谁最适合做这件事？"</text>
+  
+  <!-- Arrow down to execution modes -->
+  <line x1="450" y1="200" x2="450" y2="230" stroke="#546e7a" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="450" y="225" text-anchor="middle" fill="#546e7a" font-size="10">自动选择执行模式</text>
+  
+  <!-- Two execution modes -->
+  <!-- Fixed mode -->
+  <rect x="60" y="245" width="370" height="140" rx="10" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <rect x="60" y="245" width="370" height="28" rx="10" fill="#e65100"/>
+  <rect x="60" y="261" width="370" height="12" fill="#e65100"/>
+  <text x="245" y="264" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🏭 固化模式（SOP / Workflow）</text>
+  <text x="80" y="292" fill="#37474f" font-size="11">• 预定义流程，严格按步骤执行</text>
+  <text x="80" y="312" fill="#37474f" font-size="11">• 每步可设为：固化步骤 / 灵活步骤 / 人闸门</text>
+  <text x="80" y="332" fill="#37474f" font-size="11">• 可预测、可审计、可重复</text>
+  <text x="80" y="358" fill="#78909c" font-size="10">适用：合规流程、标准化任务、团队协作</text>
+  <text x="80" y="376" fill="#78909c" font-size="10" font-style="italic">类比：工厂流水线，操作手册写好了</text>
+  
+  <!-- Flexible mode -->
+  <rect x="470" y="245" width="370" height="140" rx="10" fill="#e8eaf6" stroke="#283593" stroke-width="2"/>
+  <rect x="470" y="245" width="370" height="28" rx="10" fill="#283593"/>
+  <rect x="470" y="261" width="370" height="12" fill="#283593"/>
+  <text x="655" y="264" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🧠 灵活模式（AI 驱动编排）</text>
+  <text x="490" y="292" fill="#37474f" font-size="11">• 动态规划执行路径</text>
+  <text x="490" y="312" fill="#37474f" font-size="11">• 边做边调整，根据上下文新增子任务</text>
+  <text x="490" y="332" fill="#37474f" font-size="11">• 自适应、能应对不确定性</text>
+  <text x="490" y="358" fill="#78909c" font-size="10">适用：探索性任务、创意工作、信息不完整</text>
+  <text x="490" y="376" fill="#78909c" font-size="10" font-style="italic">类比：资深顾问，边调研边给方案</text>
+  
+  <!-- Arrow down to tracking -->
+  <line x1="450" y1="385" x2="450" y2="415" stroke="#546e7a" stroke-width="2" marker-end="url(#arrG)"/>
+  
+  <!-- Status tracking -->
+  <rect x="100" y="420" width="700" height="80" rx="10" fill="#eceff1" stroke="#607d8b" stroke-width="1.5"/>
+  <text x="120" y="445" fill="#263238" font-size="12" font-weight="bold">📡 全程状态追踪</text>
+  <text x="120" y="468" fill="#37474f" font-size="11">✅ 正常完成 → 触发下游 ｜ ⏰ 超时 → 提醒/重分配 ｜ ❌ 失败 → 自动重分配 ｜ 📦 全部完成 → 汇总回执交付</text>
+  <text x="120" y="490" fill="#78909c" font-size="10" font-style="italic">关键任务不会因为一个环节的意外而全盘崩溃</text>
+  
+  <!-- Bottom: parallel/serial example -->
+  <rect x="100" y="520" width="700" height="60" rx="8" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+  <text x="120" y="543" fill="#006064" font-size="11" font-weight="bold">💡 并行/串行示例（客户提案）</text>
+  <text x="120" y="565" fill="#37474f" font-size="10">[市场分析] ──┐                    ┌→ [方案撰写] → [排版交付]  </text>
+  <text x="500" y="565" fill="#37474f" font-size="10">              ├→ 并行 ─→ [竞品对比] ─┘</text>
+  <text x="120" y="575" fill="#37474f" font-size="10">[数据收集] ──┘                    </text>
+</svg>

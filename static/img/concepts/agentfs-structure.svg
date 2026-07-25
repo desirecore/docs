@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a237e"/>
+      <stop offset="100%" style="stop-color:#1565c0"/>
+    </linearGradient>
+    <linearGradient id="agentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd"/>
+      <stop offset="100%" style="stop-color:#bbdefb"/>
+    </linearGradient>
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5"/>
+      <stop offset="100%" style="stop-color:#e1bee7"/>
+    </linearGradient>
+    <linearGradient id="runGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9"/>
+      <stop offset="100%" style="stop-color:#c8e6c9"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="620" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="52" fill="url(#headerGrad)" rx="12"/>
+  <rect x="0" y="30" width="900" height="22" fill="url(#headerGrad)"/>
+  <text x="450" y="34" text-anchor="middle" fill="white" font-size="18" font-weight="bold">AgentFS 目录结构 — 每个智能体的"家"</text>
+  
+  <!-- Root -->
+  <rect x="350" y="68" width="200" height="36" rx="6" fill="#263238"/>
+  <text x="450" y="91" text-anchor="middle" fill="white" font-size="14" font-weight="bold">~/.desirecore/</text>
+  
+  <!-- Connector from root -->
+  <line x1="450" y1="104" x2="450" y2="120" stroke="#546e7a" stroke-width="2"/>
+  <line x1="150" y1="120" x2="750" y2="120" stroke="#546e7a" stroke-width="2"/>
+  
+  <!-- Three branches -->
+  <line x1="150" y1="120" x2="150" y2="140" stroke="#546e7a" stroke-width="2"/>
+  <line x1="450" y1="120" x2="450" y2="140" stroke="#546e7a" stroke-width="2"/>
+  <line x1="750" y1="120" x2="750" y2="140" stroke="#546e7a" stroke-width="2"/>
+  
+  <!-- agents/ section -->
+  <rect x="40" y="140" width="220" height="34" rx="6" fill="#1565c0"/>
+  <text x="150" y="162" text-anchor="middle" fill="white" font-size="13" font-weight="bold">agents/&lt;id&gt;/</text>
+  <text x="150" y="192" text-anchor="middle" fill="#546e7a" font-size="11" font-style="italic">🏠 智能体本体（Git 仓库）</text>
+  
+  <rect x="40" y="205" width="220" height="230" rx="8" fill="url(#agentGrad)" stroke="#90caf9" stroke-width="1.5"/>
+  <text x="60" y="228" fill="#1a237e" font-size="12" font-weight="bold">身份三件套</text>
+  <text x="70" y="248" fill="#37474f" font-size="11">📄 agent.json — 身份证</text>
+  <text x="70" y="268" fill="#37474f" font-size="11">📄 persona.md — 性格档案</text>
+  <text x="70" y="288" fill="#37474f" font-size="11">📄 principles.md — 行为准则</text>
+  <line x1="55" y1="298" x2="245" y2="298" stroke="#90caf9" stroke-width="1"/>
+  <text x="60" y="318" fill="#1a237e" font-size="12" font-weight="bold">能力与知识</text>
+  <text x="70" y="338" fill="#37474f" font-size="11">📁 memory/ — 记忆库</text>
+  <text x="70" y="358" fill="#37474f" font-size="11">📁 skills/ — 技能包</text>
+  <text x="70" y="378" fill="#37474f" font-size="11">📁 tools/ — 工具箱</text>
+  <text x="70" y="398" fill="#37474f" font-size="11">📁 workflows/ — 工作流</text>
+  <line x1="55" y1="408" x2="245" y2="408" stroke="#90caf9" stroke-width="1"/>
+  <text x="60" y="428" fill="#1a237e" font-size="12" font-weight="bold">主动行为</text>
+  <text x="70" y="448" fill="#37474f" font-size="11">📁 heartbeat/ — 心跳监控</text>
+  <text x="70" y="468" fill="#37474f" font-size="11">📁 schedules/ — 定时任务</text>
+  
+  <!-- users/ section -->
+  <rect x="340" y="140" width="220" height="34" rx="6" fill="#7b1fa2"/>
+  <text x="450" y="162" text-anchor="middle" fill="white" font-size="13" font-weight="bold">users/&lt;uid&gt;/</text>
+  <text x="450" y="192" text-anchor="middle" fill="#546e7a" font-size="11" font-style="italic">👤 用户私有数据</text>
+  
+  <rect x="340" y="205" width="220" height="195" rx="8" fill="url(#userGrad)" stroke="#ce93d8" stroke-width="1.5"/>
+  <text x="360" y="228" fill="#4a148c" font-size="12" font-weight="bold">全局画像</text>
+  <text x="370" y="248" fill="#37474f" font-size="11">📄 profile.md — 个人画像</text>
+  <text x="370" y="268" fill="#37474f" font-size="11">📄 preferences.md — 偏好</text>
+  <text x="370" y="288" fill="#37474f" font-size="11">📄 privacy.md — 隐私规则</text>
+  <line x1="355" y1="298" x2="545" y2="298" stroke="#ce93d8" stroke-width="1"/>
+  <text x="360" y="318" fill="#4a148c" font-size="12" font-weight="bold">用户×智能体关系</text>
+  <text x="370" y="338" fill="#37474f" font-size="11">📁 agents/&lt;id&gt;/</text>
+  <text x="385" y="358" fill="#37474f" font-size="11">📄 relationship.md — 契约</text>
+  <text x="385" y="378" fill="#37474f" font-size="11">📁 memory/ — 专属记忆</text>
+  <text x="385" y="398" fill="#37474f" font-size="11">📁 preferences/ — 专属设置</text>
+  
+  <!-- runs/ section -->
+  <rect x="640" y="140" width="220" height="34" rx="6" fill="#2e7d32"/>
+  <text x="750" y="162" text-anchor="middle" fill="white" font-size="13" font-weight="bold">runs/ + cache/ + logs/</text>
+  <text x="750" y="192" text-anchor="middle" fill="#546e7a" font-size="11" font-style="italic">⚡ 运行态（临时数据）</text>
+  
+  <rect x="640" y="205" width="220" height="145" rx="8" fill="url(#runGrad)" stroke="#a5d6a7" stroke-width="1.5"/>
+  <text x="660" y="228" fill="#1b5e20" font-size="12" font-weight="bold">会话运行态</text>
+  <text x="670" y="248" fill="#37474f" font-size="11">📁 runs/&lt;run_id&gt;/ — 会话记录</text>
+  <text x="670" y="268" fill="#37474f" font-size="11">📁 cache/ — 可重建缓存</text>
+  <text x="670" y="288" fill="#37474f" font-size="11">📁 logs/ — 运行日志</text>
+  <line x1="655" y1="298" x2="845" y2="298" stroke="#a5d6a7" stroke-width="1"/>
+  <text x="660" y="318" fill="#1b5e20" font-size="12" font-weight="bold">特点</text>
+  <text x="670" y="338" fill="#37474f" font-size="11">🔄 会话结束后可清理</text>
+  
+  <!-- Bottom comparison bar -->
+  <rect x="40" y="470" width="820" height="60" rx="8" fill="#eceff1" stroke="#b0bec5" stroke-width="1"/>
+  <text x="60" y="495" fill="#263238" font-size="12" font-weight="bold">设计灵感（Linux → AgentFS）</text>
+  <text x="60" y="518" fill="#546e7a" font-size="11">/usr/share → agents/（共享本体） ｜ /home → users/（私有数据） ｜ /var/run → runs/（运行态） ｜ /var/log → logs/（日志）</text>
+  
+  <!-- Key insight box -->
+  <rect x="40" y="545" width="820" height="55" rx="8" fill="#e8eaf6" stroke="#7986cb" stroke-width="1.5"/>
+  <text x="60" y="570" fill="#1a237e" font-size="12" font-weight="bold">💡 核心理念：一切皆文件</text>
+  <text x="60" y="590" fill="#37474f" font-size="11">文件是最透明的数据形态 → 直接打开就能看 ｜ Git 原生版本控制 ｜ AI 直接读写 ｜ 像软件一样分发和回滚</text>
+</svg>

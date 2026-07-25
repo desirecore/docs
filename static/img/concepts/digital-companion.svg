@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="hdGrad9" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#004d40"/>
+      <stop offset="100%" style="stop-color:#00695c"/>
+    </linearGradient>
+    <marker id="arrT" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#00695c"/>
+    </marker>
+  </defs>
+  
+  <rect width="900" height="420" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="50" fill="url(#hdGrad9)" rx="12"/>
+  <rect x="0" y="28" width="900" height="22" fill="url(#hdGrad9)"/>
+  <text x="450" y="32" text-anchor="middle" fill="white" font-size="17" font-weight="bold">数字同伴 — 从工具到伙伴的四阶段成长</text>
+  
+  <!-- Four growth stages -->
+  <!-- Stage 1 -->
+  <rect x="40" y="70" width="190" height="130" rx="10" fill="#e0f2f1" stroke="#00897b" stroke-width="2"/>
+  <circle cx="70" cy="95" r="14" fill="#00897b"/>
+  <text x="70" y="100" text-anchor="middle" fill="white" font-size="11" font-weight="bold">1</text>
+  <text x="92" y="100" fill="#004d40" font-size="12" font-weight="bold">认识彼此</text>
+  <text x="55" y="122" fill="#37474f" font-size="10">告诉它你的：</text>
+  <text x="55" y="140" fill="#37474f" font-size="10">• 工作习惯</text>
+  <text x="55" y="158" fill="#37474f" font-size="10">• 专业领域</text>
+  <text x="55" y="176" fill="#37474f" font-size="10">• 沟通偏好</text>
+  <text x="55" y="194" fill="#78909c" font-size="9" font-style="italic">"我喜欢先看结论"</text>
+  
+  <!-- Arrow -->
+  <line x1="230" y1="135" x2="255" y2="135" stroke="#00695c" stroke-width="2" marker-end="url(#arrT)"/>
+  
+  <!-- Stage 2 -->
+  <rect x="260" y="70" width="190" height="130" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <circle cx="290" cy="95" r="14" fill="#1976d2"/>
+  <text x="290" y="100" text-anchor="middle" fill="white" font-size="11" font-weight="bold">2</text>
+  <text x="312" y="100" fill="#0d47a1" font-size="12" font-weight="bold">教它做事</text>
+  <text x="275" y="122" fill="#37474f" font-size="10">教学形成行为规范：</text>
+  <text x="275" y="140" fill="#37474f" font-size="10">• 审查合同的规则</text>
+  <text x="275" y="158" fill="#37474f" font-size="10">• 写邮件的语气</text>
+  <text x="275" y="176" fill="#37474f" font-size="10">• 确认的阈值</text>
+  <text x="275" y="194" fill="#78909c" font-size="9" font-style="italic">可随时查看/修改/撤销</text>
+  
+  <!-- Arrow -->
+  <line x1="450" y1="135" x2="475" y2="135" stroke="#00695c" stroke-width="2" marker-end="url(#arrT)"/>
+  
+  <!-- Stage 3 -->
+  <rect x="480" y="70" width="190" height="130" rx="10" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <circle cx="510" cy="95" r="14" fill="#ef6c00"/>
+  <text x="510" y="100" text-anchor="middle" fill="white" font-size="11" font-weight="bold">3</text>
+  <text x="532" y="100" fill="#e65100" font-size="12" font-weight="bold">独立工作</text>
+  <text x="495" y="122" fill="#37474f" font-size="10">按规则自主行动：</text>
+  <text x="495" y="140" fill="#37474f" font-size="10">• 独立处理任务</text>
+  <text x="495" y="158" fill="#37474f" font-size="10">• 不确定时主动问</text>
+  <text x="495" y="176" fill="#37474f" font-size="10">• 交付详细回执</text>
+  <text x="495" y="194" fill="#78909c" font-size="9" font-style="italic">"做完交工作报告"</text>
+  
+  <!-- Arrow -->
+  <line x1="670" y1="135" x2="695" y2="135" stroke="#00695c" stroke-width="2" marker-end="url(#arrT)"/>
+  
+  <!-- Stage 4 -->
+  <rect x="700" y="70" width="165" height="130" rx="10" fill="#ede7f6" stroke="#6a1b9a" stroke-width="2"/>
+  <circle cx="730" cy="95" r="14" fill="#6a1b9a"/>
+  <text x="730" y="100" text-anchor="middle" fill="white" font-size="11" font-weight="bold">4</text>
+  <text x="752" y="100" fill="#4a148c" font-size="12" font-weight="bold">持续进化</text>
+  <text x="715" y="122" fill="#37474f" font-size="10">自动积累经验：</text>
+  <text x="715" y="140" fill="#37474f" font-size="10">• 提炼改进建议</text>
+  <text x="715" y="158" fill="#37474f" font-size="10">• 在你的监督下</text>
+  <text x="715" y="176" fill="#37474f" font-size="10">• 底线不可改变</text>
+  <text x="715" y="194" fill="#78909c" font-size="9" font-style="italic">越用越懂你</text>
+  
+  <!-- Comparison: Tool vs Companion -->
+  <rect x="40" y="220" width="400" height="105" rx="8" fill="#ffebee" stroke="#c62828" stroke-width="1.5"/>
+  <text x="60" y="243" fill="#b71c1c" font-size="12" font-weight="bold">🚕 传统 AI 工具（出租车）</text>
+  <text x="60" y="265" fill="#37474f" font-size="10">• 用完即走，下次不认识你</text>
+  <text x="60" y="283" fill="#37474f" font-size="10">• 每次从零开始，固定能力</text>
+  <text x="60" y="301" fill="#37474f" font-size="10">• 只会说不会做，行为黑箱</text>
+  <text x="60" y="319" fill="#78909c" font-size="10" font-style="italic">用 100 次和用 1 次完全一样</text>
+  
+  <rect x="460" y="220" width="400" height="105" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="480" y="243" fill="#1b5e20" font-size="12" font-weight="bold">🌱 DesireCore 数字同伴（实习生→骨干）</text>
+  <text x="480" y="265" fill="#37474f" font-size="10">• 长期培养，记住你的一切偏好</text>
+  <text x="480" y="283" fill="#37474f" font-size="10">• 你教什么学什么，持续成长</text>
+  <text x="480" y="301" fill="#37474f" font-size="10">• 能接活能行动，完全透明可控</text>
+  <text x="480" y="319" fill="#78909c" font-size="10" font-style="italic">越用越懂你，最终独当一面</text>
+  
+  <!-- Product philosophy -->
+  <rect x="40" y="345" width="820" height="55" rx="8" fill="#e0f2f1" stroke="#00695c" stroke-width="1.5"/>
+  <text x="60" y="368" fill="#004d40" font-size="12" font-weight="bold">产品哲学三支柱</text>
+  <rect x="60" y="376" width="230" height="18" rx="4" fill="#00897b"/>
+  <text x="175" y="389" text-anchor="middle" fill="white" font-size="10">可培养 — 用对话教会</text>
+  <rect x="310" y="376" width="250" height="18" rx="4" fill="#1976d2"/>
+  <text x="435" y="389" text-anchor="middle" fill="white" font-size="10">可托管 — 边界内自主执行</text>
+  <rect x="580" y="376" width="260" height="18" rx="4" fill="#6a1b9a"/>
+  <text x="710" y="389" text-anchor="middle" fill="white" font-size="10">可治理 — 可追溯/可回滚/可审计</text>
+</svg>

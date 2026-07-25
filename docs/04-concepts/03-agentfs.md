@@ -6,6 +6,8 @@ keywords: [AgentFS, 文件系统, 数据存储, Git, 智能体仓库]
 
 # AgentFS 文件系统
 
+![AgentFS 目录结构总览 — 展示智能体本体、用户私有数据和运行态三大分区](/img/concepts/agentfs-structure.svg)
+
 ## AgentFS 就像每个智能体的"家"
 
 如果把 DesireCore 比作一个社区，那么 AgentFS 就是每个智能体在这个社区中的"家"。这个家里有它的个人档案、工作手册、技能证书、记忆日志，还有每次工作的回执存档。

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="hdGrad7" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a237e"/>
+      <stop offset="100%" style="stop-color:#4527a0"/>
+    </linearGradient>
+    <marker id="arrD" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#5c6bc0"/>
+    </marker>
+  </defs>
+  
+  <rect width="900" height="500" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="50" fill="url(#hdGrad7)" rx="12"/>
+  <rect x="0" y="28" width="900" height="22" fill="url(#hdGrad7)"/>
+  <text x="450" y="32" text-anchor="middle" fill="white" font-size="17" font-weight="bold">Auto Dream 无损遗忘 — 像做梦一样整合记忆</text>
+  
+  <!-- Memory lifecycle -->
+  <text x="60" y="80" fill="#1a237e" font-size="13" font-weight="bold">记忆生命周期</text>
+  
+  <rect x="40" y="90" width="90" height="32" rx="6" fill="#4caf50"/>
+  <text x="85" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">活跃</text>
+  <text x="138" y="110" fill="#9e9e9e" font-size="12">→</text>
+  <rect x="150" y="90" width="90" height="32" rx="6" fill="#8bc34a"/>
+  <text x="195" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">近期</text>
+  <text x="248" y="110" fill="#9e9e9e" font-size="12">→</text>
+  <rect x="260" y="90" width="90" height="32" rx="6" fill="#ffc107"/>
+  <text x="305" y="110" text-anchor="middle" fill="#3e2723" font-size="10" font-weight="bold">归档</text>
+  <text x="358" y="110" fill="#9e9e9e" font-size="12">→</text>
+  <rect x="370" y="90" width="110" height="32" rx="6" fill="#5c6bc0" stroke="#3949ab" stroke-width="2"/>
+  <text x="425" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">💤 Dream</text>
+  <text x="488" y="110" fill="#9e9e9e" font-size="12">→</text>
+  <rect x="500" y="90" width="90" height="32" rx="6" fill="#ff7043"/>
+  <text x="545" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">压缩</text>
+  <text x="598" y="110" fill="#9e9e9e" font-size="12">→</text>
+  <rect x="610" y="90" width="90" height="32" rx="6" fill="#78909c"/>
+  <text x="655" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">清理</text>
+  
+  <!-- Dream produces new knowledge that goes back to "近期" -->
+  <path d="M 425 122 Q 425 140 300 142 Q 195 142 195 125" fill="none" stroke="#5c6bc0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrD)"/>
+  <text x="310" y="152" text-anchor="middle" fill="#5c6bc0" font-size="9">整合产出 → 以"近期"状态重新进入</text>
+  
+  <!-- Four stages of Dream -->
+  <text x="60" y="185" fill="#283593" font-size="13" font-weight="bold">Dream 四阶段</text>
+  
+  <!-- Scan -->
+  <rect x="40" y="195" width="195" height="110" rx="8" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="2"/>
+  <circle cx="70" cy="220" r="14" fill="#5c6bc0"/>
+  <text x="70" y="225" text-anchor="middle" fill="white" font-size="11" font-weight="bold">1</text>
+  <text x="92" y="225" fill="#1a237e" font-size="12" font-weight="bold">扫描 Scan</text>
+  <text x="55" y="248" fill="#37474f" font-size="10">识别主题相近的</text>
+  <text x="55" y="264" fill="#37474f" font-size="10">归档记忆群组</text>
+  <text x="55" y="288" fill="#78909c" font-size="9" font-style="italic">20条写作习惯→一组</text>
+  
+  <!-- Associate -->
+  <rect x="255" y="195" width="195" height="110" rx="8" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="2"/>
+  <circle cx="285" cy="220" r="14" fill="#5c6bc0"/>
+  <text x="285" y="225" text-anchor="middle" fill="white" font-size="11" font-weight="bold">2</text>
+  <text x="307" y="225" fill="#1a237e" font-size="12" font-weight="bold">关联 Associate</text>
+  <text x="270" y="248" fill="#37474f" font-size="10">分析语义关系：</text>
+  <text x="270" y="264" fill="#37474f" font-size="10">互补/重复/矛盾</text>
+  <text x="270" y="288" fill="#78909c" font-size="9" font-style="italic">类似梦中建立关联</text>
+  
+  <!-- Distill -->
+  <rect x="470" y="195" width="195" height="110" rx="8" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="2"/>
+  <circle cx="500" cy="220" r="14" fill="#5c6bc0"/>
+  <text x="500" y="225" text-anchor="middle" fill="white" font-size="11" font-weight="bold">3</text>
+  <text x="522" y="225" fill="#1a237e" font-size="12" font-weight="bold">提炼 Distill</text>
+  <text x="485" y="248" fill="#37474f" font-size="10">提取核心模式</text>
+  <text x="485" y="264" fill="#37474f" font-size="10">去除冗余噪声</text>
+  <text x="485" y="288" fill="#78909c" font-size="9" font-style="italic">浓缩≠删除细节</text>
+  
+  <!-- Reorganize -->
+  <rect x="685" y="195" width="185" height="110" rx="8" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="2"/>
+  <circle cx="715" cy="220" r="14" fill="#5c6bc0"/>
+  <text x="715" y="225" text-anchor="middle" fill="white" font-size="11" font-weight="bold">4</text>
+  <text x="737" y="225" fill="#1a237e" font-size="12" font-weight="bold">重组 Reorganize</text>
+  <text x="700" y="248" fill="#37474f" font-size="10">写入结构化知识</text>
+  <text x="700" y="264" fill="#37474f" font-size="10">原文标记"已整合"</text>
+  <text x="700" y="288" fill="#78909c" font-size="9" font-style="italic">版本历史可追溯</text>
+  
+  <!-- Arrows between stages -->
+  <text x="240" y="252" fill="#5c6bc0" font-size="14">→</text>
+  <text x="455" y="252" fill="#5c6bc0" font-size="14">→</text>
+  <text x="670" y="252" fill="#5c6bc0" font-size="14">→</text>
+  
+  <!-- Before/After example -->
+  <rect x="40" y="325" width="400" height="155" rx="8" fill="#fff8e1" stroke="#ffa000" stroke-width="1.5"/>
+  <text x="60" y="348" fill="#e65100" font-size="12" font-weight="bold">📝 Dream 前：20 条零散便签</text>
+  <text x="60" y="370" fill="#37474f" font-size="10">"用户要求文章开头直入主题"</text>
+  <text x="60" y="388" fill="#37474f" font-size="10">"用户偏好短段落，每段不超过3句"</text>
+  <text x="60" y="406" fill="#37474f" font-size="10">"用户不喜欢使用被动语态"</text>
+  <text x="60" y="424" fill="#37474f" font-size="10">"用户要求标题用动词开头"</text>
+  <text x="60" y="442" fill="#37474f" font-size="10">"用户希望文末总有行动号召"</text>
+  <text x="60" y="465" fill="#9e9e9e" font-size="10">... 以及另外十几条类似的碎片</text>
+  
+  <!-- Arrow -->
+  <text x="455" y="405" fill="#5c6bc0" font-size="20" font-weight="bold">→</text>
+  <text x="450" y="425" fill="#5c6bc0" font-size="9">Dream</text>
+  
+  <rect x="480" y="325" width="380" height="155" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="500" y="348" fill="#1b5e20" font-size="12" font-weight="bold">✅ Dream 后：1 份结构化画像</text>
+  <text x="500" y="372" fill="#37474f" font-size="10" font-weight="bold">用户写作风格画像</text>
+  <text x="500" y="392" fill="#37474f" font-size="10">• 目标读者：技术管理者</text>
+  <text x="500" y="410" fill="#37474f" font-size="10">• 整体风格：简洁直接，重结论轻铺垫</text>
+  <text x="500" y="428" fill="#37474f" font-size="10">• 段落：短段落(≤3句)，标题用动词</text>
+  <text x="500" y="446" fill="#37474f" font-size="10">• 语态：主动优先，避免被动</text>
+  <text x="500" y="464" fill="#37474f" font-size="10">• 结构：直入主题 + 结尾行动号召</text>
+  
+  <!-- Key insight -->
+  <text x="450" y="497" text-anchor="middle" fill="#546e7a" font-size="10">信息量没有减少，但检索效率和可用性大幅提升 — 不是"丢东西"，是"整理书架"</text>
+</svg>

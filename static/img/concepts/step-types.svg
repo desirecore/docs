@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="hdGrad6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#263238"/>
+      <stop offset="100%" style="stop-color:#455a64"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="900" height="480" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="50" fill="url(#hdGrad6)" rx="12"/>
+  <rect x="0" y="28" width="900" height="22" fill="url(#hdGrad6)"/>
+  <text x="450" y="32" text-anchor="middle" fill="white" font-size="17" font-weight="bold">三种步骤类型 — 固化 / 灵活 / 人闸门</text>
+  
+  <!-- Three columns -->
+  <!-- Hardened Step -->
+  <rect x="40" y="65" width="260" height="240" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <rect x="40" y="65" width="260" height="35" rx="10" fill="#1565c0"/>
+  <rect x="40" y="88" width="260" height="12" fill="#1565c0"/>
+  <text x="170" y="88" text-anchor="middle" fill="white" font-size="13" font-weight="bold">🏭 固化步骤</text>
+  <text x="60" y="120" fill="#0d47a1" font-size="11" font-weight="bold">执行者：规则/代码</text>
+  <text x="60" y="140" fill="#37474f" font-size="11">• 完全确定，结果可预测</text>
+  <text x="60" y="160" fill="#37474f" font-size="11">• 基于公式/模板/决策树</text>
+  <text x="60" y="180" fill="#37474f" font-size="11">• 不涉及 AI 推理</text>
+  <text x="60" y="205" fill="#546e7a" font-size="10" font-weight="bold">示例：</text>
+  <text x="60" y="223" fill="#37474f" font-size="10">计算报销金额</text>
+  <text x="60" y="241" fill="#37474f" font-size="10">按模板格式化文档</text>
+  <text x="60" y="259" fill="#37474f" font-size="10">查询数据库记录</text>
+  <text x="60" y="285" fill="#1565c0" font-size="10" font-style="italic">类比：流水线工人</text>
+  
+  <!-- Flexible Step -->
+  <rect x="320" y="65" width="260" height="240" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <rect x="320" y="65" width="260" height="35" rx="10" fill="#2e7d32"/>
+  <rect x="320" y="88" width="260" height="12" fill="#2e7d32"/>
+  <text x="450" y="88" text-anchor="middle" fill="white" font-size="13" font-weight="bold">🧠 灵活步骤</text>
+  <text x="340" y="120" fill="#1b5e20" font-size="11" font-weight="bold">执行者：AI 模型</text>
+  <text x="340" y="140" fill="#37474f" font-size="11">• 有自主判断空间</text>
+  <text x="340" y="160" fill="#37474f" font-size="11">• 涉及推理/生成/归纳</text>
+  <text x="340" y="180" fill="#37474f" font-size="11">• 在准则框架内发挥</text>
+  <text x="340" y="205" fill="#546e7a" font-size="10" font-weight="bold">示例：</text>
+  <text x="340" y="223" fill="#37474f" font-size="10">分析合同风险条款</text>
+  <text x="340" y="241" fill="#37474f" font-size="10">撰写邮件回复</text>
+  <text x="340" y="259" fill="#37474f" font-size="10">归纳会议要点</text>
+  <text x="340" y="285" fill="#2e7d32" font-size="10" font-style="italic">类比：有经验的员工</text>
+  
+  <!-- Human Gate -->
+  <rect x="600" y="65" width="260" height="240" rx="10" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <rect x="600" y="65" width="260" height="35" rx="10" fill="#e65100"/>
+  <rect x="600" y="88" width="260" height="12" fill="#e65100"/>
+  <text x="730" y="88" text-anchor="middle" fill="white" font-size="13" font-weight="bold">✋ 人闸门</text>
+  <text x="620" y="120" fill="#bf360c" font-size="11" font-weight="bold">执行者：人类</text>
+  <text x="620" y="140" fill="#37474f" font-size="11">• 自动暂停，等待确认</text>
+  <text x="620" y="160" fill="#37474f" font-size="11">• 需要人签发/补充信息</text>
+  <text x="620" y="180" fill="#37474f" font-size="11">• 触发条件可自定义</text>
+  <text x="620" y="205" fill="#546e7a" font-size="10" font-weight="bold">示例：</text>
+  <text x="620" y="223" fill="#37474f" font-size="10">发送邮件前确认</text>
+  <text x="620" y="241" fill="#37474f" font-size="10">超阈值付款审批</text>
+  <text x="620" y="259" fill="#37474f" font-size="10">删除重要文件</text>
+  <text x="620" y="285" fill="#e65100" font-size="10" font-style="italic">类比：需要领导签字</text>
+  
+  <!-- Comparison bar -->
+  <rect x="40" y="320" width="820" height="50" rx="8" fill="#eceff1" stroke="#90a4ae" stroke-width="1"/>
+  <text x="60" y="342" fill="#263238" font-size="11" font-weight="bold">确定性</text>
+  <rect x="130" y="332" width="200" height="16" rx="4" fill="#1565c0"/>
+  <rect x="330" y="332" width="200" height="16" rx="4" fill="#66bb6a"/>
+  <rect x="530" y="332" width="200" height="16" rx="4" fill="#ffa726"/>
+  <text x="230" y="345" text-anchor="middle" fill="white" font-size="9">完全确定</text>
+  <text x="430" y="345" text-anchor="middle" fill="white" font-size="9">有弹性空间</text>
+  <text x="630" y="345" text-anchor="middle" fill="white" font-size="9">取决于人的判断</text>
+  <text x="760" y="345" fill="#546e7a" font-size="10">→ 自主程度递增</text>
+  
+  <!-- Example workflow -->
+  <rect x="40" y="385" width="820" height="80" rx="8" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1.5"/>
+  <text x="60" y="408" fill="#283593" font-size="12" font-weight="bold">📋 实际示例：合同审查流程</text>
+  <rect x="60" y="418" width="130" height="30" rx="5" fill="#1565c0"/>
+  <text x="125" y="437" text-anchor="middle" fill="white" font-size="9">1.解析格式(固化)</text>
+  <text x="198" y="437" fill="#546e7a" font-size="11">→</text>
+  <rect x="210" y="418" width="145" height="30" rx="5" fill="#2e7d32"/>
+  <text x="282" y="437" text-anchor="middle" fill="white" font-size="9">2.识别条款(灵活)</text>
+  <text x="363" y="437" fill="#546e7a" font-size="11">→</text>
+  <rect x="375" y="418" width="145" height="30" rx="5" fill="#1565c0"/>
+  <text x="447" y="437" text-anchor="middle" fill="white" font-size="9">3.计算违约金(固化)</text>
+  <text x="528" y="437" fill="#546e7a" font-size="11">→</text>
+  <rect x="540" y="418" width="145" height="30" rx="5" fill="#2e7d32"/>
+  <text x="612" y="437" text-anchor="middle" fill="white" font-size="9">4.撰写意见(灵活)</text>
+  <text x="693" y="437" fill="#546e7a" font-size="11">→</text>
+  <rect x="705" y="418" width="140" height="30" rx="5" fill="#e65100"/>
+  <text x="775" y="437" text-anchor="middle" fill="white" font-size="9">5.确认发送(人闸门)</text>
+</svg>

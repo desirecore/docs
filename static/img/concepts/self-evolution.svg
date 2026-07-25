@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="-apple-system, 'Noto Sans SC', sans-serif">
+  <defs>
+    <linearGradient id="hdGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1b5e20"/>
+      <stop offset="100%" style="stop-color:#388e3c"/>
+    </linearGradient>
+    <marker id="arrEv" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#388e3c"/>
+    </marker>
+  </defs>
+  
+  <rect width="900" height="520" fill="#fafafa" rx="12"/>
+  
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="50" fill="url(#hdGrad3)" rx="12"/>
+  <rect x="0" y="28" width="900" height="22" fill="url(#hdGrad3)"/>
+  <text x="450" y="32" text-anchor="middle" fill="white" font-size="17" font-weight="bold">自我进化 — 三层机制 × 四种模式</text>
+  
+  <!-- Three layers (left side, stacked) -->
+  <text x="60" y="80" fill="#1b5e20" font-size="14" font-weight="bold">三层进化机制</text>
+  
+  <!-- Layer 1 -->
+  <rect x="40" y="95" width="380" height="70" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <circle cx="70" cy="130" r="16" fill="#4caf50"/>
+  <text x="70" y="135" text-anchor="middle" fill="white" font-size="12" font-weight="bold">1</text>
+  <text x="95" y="118" fill="#1b5e20" font-size="12" font-weight="bold">规则学习（你教的）</text>
+  <text x="95" y="138" fill="#37474f" font-size="11">你主动教学 → 生成 diff → 确认后生效</text>
+  <text x="95" y="155" fill="#78909c" font-size="10" font-style="italic">"以后写周报按这个格式"</text>
+  
+  <!-- Layer 2 -->
+  <rect x="40" y="175" width="380" height="70" rx="8" fill="#e3f2fd" stroke="#1976d2" stroke-width="2"/>
+  <circle cx="70" cy="210" r="16" fill="#1976d2"/>
+  <text x="70" y="215" text-anchor="middle" fill="white" font-size="12" font-weight="bold">2</text>
+  <text x="95" y="198" fill="#0d47a1" font-size="12" font-weight="bold">经验积累（互动中学的）</text>
+  <text x="95" y="218" fill="#37474f" font-size="11">自动捕获：沟通风格、专业偏好、工作习惯</text>
+  <text x="95" y="235" fill="#78909c" font-size="10" font-style="italic">"用户喜欢简洁直接的回答"</text>
+  
+  <!-- Layer 3 -->
+  <rect x="40" y="255" width="380" height="70" rx="8" fill="#ede7f6" stroke="#7b1fa2" stroke-width="2"/>
+  <circle cx="70" cy="290" r="16" fill="#7b1fa2"/>
+  <text x="70" y="295" text-anchor="middle" fill="white" font-size="12" font-weight="bold">3</text>
+  <text x="95" y="278" fill="#4a148c" font-size="12" font-weight="bold">能力扩展（新技能新工具）</text>
+  <text x="95" y="298" fill="#37474f" font-size="11">安装技能包、接入 MCP 工具、自主建议学习</text>
+  <text x="95" y="315" fill="#78909c" font-size="10" font-style="italic">"我需要学习这个能力"</text>
+  
+  <!-- Four modes (right side) -->
+  <text x="480" y="80" fill="#263238" font-size="14" font-weight="bold">四种进化模式</text>
+  
+  <rect x="460" y="95" width="200" height="55" rx="8" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="480" y="117" fill="#1b5e20" font-size="11" font-weight="bold">🔄 隐式学习</text>
+  <text x="480" y="137" fill="#37474f" font-size="10">每次对话自动 · 无需确认</text>
+  
+  <rect x="680" y="95" width="190" height="55" rx="8" fill="#bbdefb" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="700" y="117" fill="#0d47a1" font-size="11" font-weight="bold">📚 显式教学</text>
+  <text x="700" y="137" fill="#37474f" font-size="10">你主动教 · 需确认</text>
+  
+  <rect x="460" y="165" width="200" height="55" rx="8" fill="#fff9c4" stroke="#f9a825" stroke-width="1.5"/>
+  <text x="480" y="187" fill="#f57f17" font-size="11" font-weight="bold">📝 复盘进化</text>
+  <text x="480" y="207" fill="#37474f" font-size="10">任务完成后 · 视风险确认</text>
+  
+  <rect x="680" y="165" width="190" height="55" rx="8" fill="#e1bee7" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="700" y="187" fill="#6a1b9a" font-size="11" font-weight="bold">👥 协同进化</text>
+  <text x="700" y="207" fill="#37474f" font-size="10">多用户/多同伴 · 需确认</text>
+  
+  <!-- Safety boundary section -->
+  <rect x="40" y="350" width="820" height="150" rx="10" fill="#fff8e1" stroke="#ff8f00" stroke-width="2"/>
+  <text x="60" y="375" fill="#e65100" font-size="13" font-weight="bold">🛡️ 进化安全边界 — 你始终保持控制权</text>
+  
+  <!-- Three safety pillars -->
+  <rect x="60" y="390" width="240" height="90" rx="6" fill="#ffecb3" stroke="#ffa000" stroke-width="1"/>
+  <text x="80" y="412" fill="#e65100" font-size="11" font-weight="bold">🚫 不可触碰的底线</text>
+  <text x="80" y="432" fill="#37474f" font-size="10">• 核心人格不可自动覆盖</text>
+  <text x="80" y="450" fill="#37474f" font-size="10">• 安全红线不可放松</text>
+  <text x="80" y="468" fill="#37474f" font-size="10">• 权限等级不可自动提升</text>
+  
+  <rect x="320" y="390" width="250" height="90" rx="6" fill="#ffecb3" stroke="#ffa000" stroke-width="1"/>
+  <text x="340" y="412" fill="#e65100" font-size="11" font-weight="bold">👁️ 变更可审阅</text>
+  <text x="340" y="432" fill="#37474f" font-size="10">• 所有修改生成 diff</text>
+  <text x="340" y="450" fill="#37474f" font-size="10">• 可接受/拒绝部分修改</text>
+  <text x="340" y="468" fill="#37474f" font-size="10">• 不满意可一键回滚</text>
+  
+  <rect x="590" y="390" width="250" height="90" rx="6" fill="#ffecb3" stroke="#ffa000" stroke-width="1"/>
+  <text x="610" y="412" fill="#e65100" font-size="11" font-weight="bold">⚖️ 风险分级</text>
+  <text x="610" y="432" fill="#37474f" font-size="10">• 低风险 → 自动应用</text>
+  <text x="610" y="450" fill="#37474f" font-size="10">• 中风险 → 需确认</text>
+  <text x="610" y="468" fill="#37474f" font-size="10">• 高风险 → 必须明确同意</text>
+  
+  <!-- Growth arrow -->
+  <path d="M 230 260 Q 230 340 230 345" fill="none" stroke="#388e3c" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrEv)"/>
+  <text x="240" y="340" fill="#388e3c" font-size="10">进化产物受安全边界约束</text>
+</svg>
