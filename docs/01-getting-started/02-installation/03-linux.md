@@ -8,6 +8,15 @@ keywords: [Linux, 安装, AppImage, Ubuntu, Fedora, ARM64, 统信UOS, 银河麒�
 
 本指南介绍如何在 Linux 上安装 DesireCore。DesireCore 以 AppImage 格式分发，支持 x64 和 ARM64 架构，兼容大多数主流 Linux 发行版，同时也支持统信 UOS、银河麒麟、深度 Deepin、openKylin 等国产操作系统。
 
+:::tip 老手速览
+```bash
+# 下载后两步即可运行
+chmod +x DesireCore_x86_64_*.AppImage
+./DesireCore_x86_64_*.AppImage
+```
+如遇沙箱报错，请直接跳到 [常见问题排查](#常见问题排查)。
+:::
+
 :::tip 国产操作系统用户
 DesireCore 已在统信 UOS、银河麒麟（Kylin）、深度 Deepin、openKylin 等国产操作系统上完成适配测试。如需了解国产系统专属的安装说明和兼容性信息，请访问 [DesireCore 中国官网](https://www.desirecore.cn)。
 :::

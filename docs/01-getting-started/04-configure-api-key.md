@@ -15,6 +15,10 @@ DesireCore 是一个本地优先的应用——你的核心数据存储在本地
 | 官方云端算力 | 不想先注册各家供应商的新用户 | 登录后自动绑定 `desirecore-cloud`，按订阅或 credit 使用 |
 | 自备 API Key | 已有供应商账号、需要自控成本或企业合规 | API Key 存储在本机受权限保护的 `secrets.json` 中，供应商配置只保存引用 |
 
+:::info 已经用云端算力了？
+如果你已通过账号登录并绑定了官方云端算力，**可以跳过本页**，直接开始 [第一次对话](./05-first-conversation.md)。后续想添加更多供应商时随时回来配置。
+:::
+
 ## 什么是 API Key？
 
 API Key 就像是你访问 AI 服务的"钥匙"。每个 AI 供应商（如 OpenAI、Anthropic、DeepSeek 等）都提供 API 服务，你需要在它们的网站上注册并获取一个 API Key，然后在 DesireCore 中填入，DesireCore 就能调用对应的 AI 模型了。
@@ -32,6 +36,10 @@ API Key 就像是你访问 AI 服务的"钥匙"。每个 AI 供应商（如 Open
 5. 点击 **验证** 确认 Key 是否有效
 
 <!-- 截图占位: 配置 API Key (configure-api-key.png) -->
+
+:::note 密钥安全
+你的 API Key 仅保存在本机的 `~/.desirecore/secrets.json` 中（文件权限为 `600`，仅当前用户可读），不会上传到 DesireCore 服务器或任何第三方。
+:::
 
 ## 各供应商 API Key 获取指南
 
