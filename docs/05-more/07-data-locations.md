@@ -8,6 +8,10 @@ keywords: [数据存储, 文件路径, macOS, Windows, Linux, 目录]
 
 DesireCore 将所有数据存储在本地文件系统中，不依赖云端服务器存储你的个人数据。
 
+<!-- 可编辑源文件：assets/data-flow-diagram.drawio -->
+<!-- 导出为 PNG 后替换下方引用 -->
+<!-- ![数据流向图](./assets/data-flow-diagram.png) -->
+
 登录账号后，订阅、credit、云端模型列表等账号资源会从 DesireCore 在线服务同步；本地对话、智能体、文件和自定义 API Key 仍保存在本机。
 
 ## 各平台数据根目录
