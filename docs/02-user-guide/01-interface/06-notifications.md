@@ -20,6 +20,8 @@ keywords: [通知中心, 通知, 未读, 消息提醒, NotificationCenter]
 
 通知面板从右侧滑入，宽度 320px，包含以下区域：
 
+![通知中心面板示意图](/img/user-guide/interface/notification-panel.png)
+
 ```
 +----------------------------------+
 |  通知中心     [全部已读] [清除全部]|  <- 顶栏

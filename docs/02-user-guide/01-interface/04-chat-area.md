@@ -10,6 +10,8 @@ keywords: [聊天区域, 消息输入, 消息气泡, 模型选择, ChatArea, 斜
 
 ## 区域结构
 
+![聊天区域三层结构图](/img/user-guide/interface/chat-area-structure.png)
+
 ```
 +------------------------------------------+
 |  [头像] Agent名称 · 在线                  |  <- 头部（70px）

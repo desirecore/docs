@@ -12,6 +12,8 @@ keywords: [导航栏, NavRail, Tab, 功能入口, 设置, 通知]
 
 导航栏从上到下分为三个区域：
 
+![导航栏结构示意图](/img/user-guide/interface/navigation-rail-structure.png)
+
 ```
 +--------+
 | Traffic|  <- macOS 窗口控制按钮（仅 macOS）

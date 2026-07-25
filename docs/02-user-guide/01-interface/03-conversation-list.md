@@ -12,6 +12,8 @@ keywords: [对话列表, 搜索, 新建对话, 智能体分组, ConversationList
 
 对话列表由上下两部分组成：
 
+![对话列表元素标注图](/img/user-guide/interface/conversation-list-anatomy.png)
+
 ```
 +----------------------------------+
 |  对话            [+]  [搜索图标] |  <- 头部（标题 + 操作按钮）

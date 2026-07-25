@@ -6,6 +6,8 @@ keywords: [数字人, Digital Human, 3D, 翻转视图, 沉浸式交互, BackFace
 
 # 数字人界面
 
+![数字人 3D 界面概念图](/img/user-guide/interface/digital-avatar-concept.png)
+
 DesireCore 提供了一个独特的**3D 数字人界面**——你可以将聊天面板"翻转"过来，与智能体的虚拟形象进行更直观的交互。
 
 ## 翻转视图
