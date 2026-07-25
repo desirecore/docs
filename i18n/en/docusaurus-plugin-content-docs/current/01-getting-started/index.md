@@ -17,6 +17,8 @@ DesireCore is a "delegation-based interactive Agent OS" — you can train your A
 
 Follow these steps to start your first conversation with your AI companion:
 
+![Quick start flow: System Requirements → Install → First Run → Configure API Key → First Conversation](/img/getting-started/quickstart-flow-en.svg)
+
 | Step | Content | Estimated Time |
 |------|---------|----------------|
 | **1** | [Check system requirements](./01-system-requirements.md) | 10 seconds |

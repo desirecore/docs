@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 300" width="1120" height="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <!-- Background -->
+  <rect width="1120" height="300" fill="#fafbfc" rx="12"/>
+  
+  <!-- Title -->
+  <text x="560" y="52" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">🚀 Quick Start: Fully Set Up in 5 Minutes</text>
+  
+  <!-- Step 1 -->
+  <rect x="40" y="100" width="160" height="72" rx="12" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+  <text x="120" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">① System Requirements</text>
+  <text x="120" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">10 seconds</text>
+  
+  <!-- Arrow 1→2 -->
+  <path d="M200,136 L240,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead-en)"/>
+  
+  <!-- Step 2 -->
+  <rect x="250" y="100" width="160" height="72" rx="12" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="330" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">② Install DesireCore</text>
+  <text x="330" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">1–2 minutes</text>
+  
+  <!-- Arrow 2→3 -->
+  <path d="M410,136 L450,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead-en)"/>
+  
+  <!-- Step 3 -->
+  <rect x="460" y="100" width="160" height="72" rx="12" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+  <text x="540" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">③ First Run</text>
+  <text x="540" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">10 seconds</text>
+  
+  <!-- Arrow 3→4 -->
+  <path d="M620,136 L660,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead-en)"/>
+  
+  <!-- Step 4 -->
+  <rect x="670" y="100" width="160" height="72" rx="12" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+  <text x="750" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">④ Configure API Key</text>
+  <text x="750" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">2 minutes</text>
+  
+  <!-- Arrow 4→5 -->
+  <path d="M830,136 L870,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead-en)"/>
+  
+  <!-- Step 5 -->
+  <rect x="880" y="100" width="160" height="72" rx="12" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+  <text x="960" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">⑤ First Conversation</text>
+  <text x="960" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">10 seconds</text>
+  
+  <!-- Completion badge -->
+  <text x="960" y="210" text-anchor="middle" font-size="14" font-weight="bold" fill="#9673a6">🎉 Done!</text>
+  
+  <!-- Subtitle -->
+  <text x="560" y="260" text-anchor="middle" font-size="12" fill="#8899aa">~5 minutes total · No coding experience needed · macOS / Windows / Linux</text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead-en" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

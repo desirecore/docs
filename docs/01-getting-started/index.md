@@ -17,6 +17,8 @@ DesireCore 是一个"委派式交互的 Agent 操作系统"——你可以像带
 
 按照以下步骤，你很快就能和你的 AI 同伴开始第一次对话：
 
+![快速上手流程：检查系统要求 → 安装 → 首次启动 → 配置 API Key → 第一次对话](/img/getting-started/quickstart-flow.svg)
+
 | 步骤 | 内容 | 预计时间 |
 |------|------|----------|
 | **1** | [检查系统要求](./01-system-requirements.md) | 10 秒 |
