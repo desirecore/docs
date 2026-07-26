@@ -19,8 +19,8 @@ const sharp = require('sharp')
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
-const ZH_DIR = resolve(ROOT, 'docs/05-more/10-changelog')
-const EN_DIR = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/10-changelog')
+const ZH_DIR = resolve(ROOT, 'docs/05-more/11-changelog')
+const EN_DIR = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/11-changelog')
 const IMG_DIR = resolve(ROOT, 'static/img/changelog')
 
 // 从 generate-changelog-cover.mjs 中导入共享的函数和常量
