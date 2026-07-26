@@ -19,5 +19,5 @@ Here you'll find quick reference materials and changelog for DesireCore.
 | [Data Locations](./07-data-locations.md) | Data storage paths for each platform |
 | [Detailed System Requirements](./08-system-requirements-detail.md) | Complete hardware and software requirements |
 | [Open Source Repositories](./09-open-source-repos.md) | Overview of official GitHub repositories |
-| [Third-Party Software & Licenses](./09-third-party-software.md) | Bundled third-party components and open-source licenses |
-| [Changelog](./10-changelog/index.md) | Version update history |
+| [Third-Party Software & Licenses](./10-third-party-software.md) | Bundled third-party components and open-source licenses |
+| [Changelog](./11-changelog/index.md) | Version update history |

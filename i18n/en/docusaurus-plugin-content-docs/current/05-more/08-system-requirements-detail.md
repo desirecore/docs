@@ -84,7 +84,7 @@ Docker, Podman, and task-specific runtime versions may still need to be installe
 
 Git is GPLv2 software. Python and Node.js binary distributions also contain dependencies under licenses in addition to the main project license. DesireCore records release-specific sources and license materials, but terms can vary by platform, version, and archive. Refer to the complete text supplied with the installer, component archive, and corresponding release page. Ordinary use normally requires no extra action from you. If you extract, modify, or redistribute a component, you are responsible for reviewing attribution, license-text, corresponding-source, and other applicable obligations.
 
-See [Third-Party Software and Licenses](./09-third-party-software.md) and the [Terms of Service](../terms.md).
+See [Third-Party Software and Licenses](./10-third-party-software.md) and the [Terms of Service](../terms.md).
 
 ## Network Requirements
 

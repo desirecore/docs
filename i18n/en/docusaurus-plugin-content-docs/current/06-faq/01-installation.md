@@ -51,7 +51,7 @@ See [GUI Desktop Automation](../02-user-guide/09-capabilities/05-computer-use.md
 
 DesireCore agents need local version control, scripting, and Windows GUI capabilities, so the package includes independent Git, Python/Node.js archives, and CUA Driver. Security software may scan each file during installation, extraction, or first execution. A scan by itself is not a malware finding.
 
-Always use the official installer and keep system protection enabled. If security software reports a specific threat, do not blindly add an exclusion. Record the path, DesireCore version, detection name, and file hash, then report it through an official support channel. See [Third-Party Software and Licenses](../05-more/09-third-party-software.md) for component sources and license boundaries.
+Always use the official installer and keep system protection enabled. If security software reports a specific threat, do not blindly add an exclusion. Record the path, DesireCore version, detection name, and file hash, then report it through an official support channel. See [Third-Party Software and Licenses](../05-more/10-third-party-software.md) for component sources and license boundaries.
 
 ## White screen after startup?
 

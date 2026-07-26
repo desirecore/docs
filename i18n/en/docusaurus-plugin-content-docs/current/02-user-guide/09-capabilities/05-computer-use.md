@@ -102,7 +102,7 @@ Recommended practices:
 - Test business-critical workflows with a test account or copied data first.
 
 :::warning Third-party component
-The CUA Driver currently used on Windows is an independent third-party program supplied under its own license. It is not a DesireCore-owned component or HostAgent and serves as the transitional Windows carrier until Windows HostAgent is ready. Its version, compatibility, and upstream support may change. See the notices supplied with the software and [Third-Party Software and Licenses](../../05-more/09-third-party-software.md).
+The CUA Driver currently used on Windows is an independent third-party program supplied under its own license. It is not a DesireCore-owned component or HostAgent and serves as the transitional Windows carrier until Windows HostAgent is ready. Its version, compatibility, and upstream support may change. See the notices supplied with the software and [Third-Party Software and Licenses](../../05-more/10-third-party-software.md).
 :::
 
 ## Next Steps

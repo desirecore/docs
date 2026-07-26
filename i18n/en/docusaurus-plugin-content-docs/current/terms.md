@@ -29,7 +29,7 @@ To provide offline runtimes, version control, and local automation, DesireCore i
 - Node.js: MIT License, with third-party dependencies under additional licenses; the complete license inventory must be retained
 - cua-driver: MIT License; copyright and permission notices must be retained
 
-Aggregation of these separate components does not imply endorsement, certification, or warranty by their projects or rights holders. Third-party components are provided “as is” under their own licenses. Versions, availability, and packaging may change by platform or in response to upstream terms and compliance review. The Third-Party Notices, complete license texts, and corresponding-source information included with the installer are controlling. See [Third-Party Software and Licenses](./05-more/09-third-party-software.md) for a user-facing version and risk summary.
+Aggregation of these separate components does not imply endorsement, certification, or warranty by their projects or rights holders. Third-party components are provided “as is” under their own licenses. Versions, availability, and packaging may change by platform or in response to upstream terms and compliance review. The Third-Party Notices, complete license texts, and corresponding-source information included with the installer are controlling. See [Third-Party Software and Licenses](./05-more/10-third-party-software.md) for a user-facing version and risk summary.
 
 Users who redistribute an installer, extract a component, or redistribute a component separately are responsible for identifying and satisfying the applicable license obligations. DesireCore's aggregation grants no rights beyond the original licenses.
 

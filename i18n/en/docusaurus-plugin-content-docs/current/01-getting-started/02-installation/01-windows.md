@@ -45,7 +45,7 @@ The Windows package includes portable Git, recommended Python and Node.js runtim
 - Git automatically selects an available, newer source between system and bundled Git by default. You can change the source on the Runtime Environment page.
 - CUA Driver is enabled for GUI automation on the current Windows computer. It is a pragmatic transitional implementation that gives Windows users this capability before Windows HostAgent is complete. macOS still uses HostAgent for GUI operations, while HostAgent implementations for Windows, Linux, and other platforms remain under development.
 
-These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning. Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/09-third-party-software.md) for sources and license boundaries.
+These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning. Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/10-third-party-software.md) for sources and license boundaries.
 
 ## Handling Windows SmartScreen Prompts
 
