@@ -8,10 +8,6 @@ keywords: [快捷键, 键盘, 快捷操作, 效率]
 
 DesireCore 提供三种快捷键模式，你可以在「设置 > 快捷键 > 编辑器快捷键模式」中切换。
 
-<!-- 可编辑源文件：assets/keyboard-shortcuts-overview.drawio -->
-<!-- 导出为 PNG 后替换下方引用 -->
-<!-- ![快捷键分类速览](./assets/keyboard-shortcuts-overview.png) -->
-
 ## 快捷键模式
 
 | 模式 | 说明 | 适合人群 |

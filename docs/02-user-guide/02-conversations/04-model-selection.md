@@ -12,8 +12,6 @@ DesireCore 支持接入多家 AI 模型供应商（Provider），你可以在对
 
 模型选择器位于聊天头部区域的操作按钮组中，以一个图层叠加图标显示。
 
-![模型选择器面板示意](/img/user-guide/conversations/model-selector-panel.png)
-
 **图标颜色含义：**
 
 | 颜色 | 含义 |

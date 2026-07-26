@@ -16,23 +16,6 @@ DesireCore 通过将任务的每个步骤明确归类为三种类型之一，解
 
 ## 三种步骤类型
 
-```mermaid
-graph LR
-    subgraph 固化["🔒 固化步骤"]
-        H["规则/模板/API<br/>结果 100% 确定"]
-    end
-    subgraph 灵活["🧠 灵活步骤"]
-        F["AI 推理/生成<br/>在准则内自主判断"]
-    end
-    subgraph 人闸门["🚦 人闸门"]
-        G["暂停等待<br/>必须人类确认"]
-    end
-    固化 --> 灵活 --> 人闸门
-    style 固化 fill:#d5e8d4,stroke:#82b366
-    style 灵活 fill:#fff2cc,stroke:#d6b656
-    style 人闸门 fill:#f8cecc,stroke:#b85450
-```
-
 ### 固化步骤（Hardened Step）
 
 **像流水线一样确定执行。**

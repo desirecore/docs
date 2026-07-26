@@ -271,42 +271,10 @@ DesireCore 的供应商和模型列表由 config-center 持续更新，实际可
 | **特色** | 国内模型聚合，开源模型推理 |
 | **API Key 获取** | [cloud.siliconflow.cn](https://cloud.siliconflow.cn/) |
 
-## DesireCore 官方云算力
-
-DesireCore 提供官方云算力服务（DesireCore Cloud），无需自行注册各厂商账号，通过统一的 new-api 网关即可调用多家模型。在「设置 > 算力服务」中添加 `desirecore-cloud` 供应商并绑定账号即可使用。
-
-| 能力类型 | 可用模型 | 说明 |
-|---------|---------|------|
-| 对话 / 推理 | 由网关路由 | 按 model 名称路由到对应上游 |
-| 图像生成 | Wan2.7-Image-Pro、gpt-image-2 | 文生图 / 图生图 |
-| 视频生成 | HappyHorse-1.1、Seedance-2.0 | 文生视频 / 图生视频 |
-| 语音合成 | MiMo-V2.5-TTS 等 | 文字转语音 |
-
-:::tip
-官方云算力适合不想分别注册多家供应商、或需要快速体验生成类模型的用户。具体可用模型和价格以应用内「算力服务」实时列表为准。
-:::
-
-## 第三方网关中转（NewAPI）
-
-如果你使用自建的 [NewAPI](https://github.com/Calcium-Ion/new-api) 或其他 OpenAI 兼容网关，可以在 DesireCore 中选择 `newapi` 供应商类型，填入你的网关地址和 Token 即可接入。
-
-典型使用场景：
-
-- 公司/团队统一管理的 API 网关
-- 多渠道负载均衡与故障转移
-- 需要自定义计费或用量统计
-
-:::warning
-第三方网关的数据安全由其运营者负责。请确保你信任网关运营方，避免敏感数据经过不可信的中转节点。
-:::
-
 ## 创意生成
 
 | 供应商 | 服务类型 | 代表模型 | API Key 获取 |
 |--------|---------|---------|-------------|
-| MiniMax | 图像 / 视频 / 音乐 | Image-01, Hailuo-02, Music-1.5 | [platform.minimaxi.com](https://platform.minimaxi.com/) |
-| 火山引擎 Seedream | 图像 / 视频 | Seedream-4.0, Seedance-2.0 | [console.volcengine.com](https://console.volcengine.com/) |
-| 阿里 通义万相 | 图像 / 视频 | Wan2.7-Image, HappyHorse-1.1 | [dashscope.console.aliyun.com](https://dashscope.console.aliyun.com/) |
 | Stability AI | 图像生成 | Stable Diffusion 3.5 | [platform.stability.ai](https://platform.stability.ai/) |
 | 快手 可灵 | 视频生成 | 可灵 V2.5 | [klingai.com](https://klingai.com/) |
 
@@ -316,19 +284,3 @@ DesireCore 提供官方云算力服务（DesireCore Cloud），无需自行注�
 |--------|---------|------|-------------|
 | Ollama | 对话 | 本地运行开源模型（Llama 等） | 是 |
 | 本地 Whisper | 语音识别 | 本地运行 Whisper 模型 | 是 |
-
-## 如何选择供应商？
-
-| 需求场景 | 推荐方案 |
-|---------|---------|
-| 快速上手、不想注册多家账号 | DesireCore 官方云算力 |
-| 日常对话、性价比优先 | DeepSeek、Qwen-Plus、GPT-5-mini |
-| 深度推理 / 复杂任务 | Claude Opus 4.6、o3-pro、DeepSeek R1 |
-| 超长文档处理 | Gemini 2.5 Pro (1M)、GPT-4.1 (1M)、Qwen-Long (10M) |
-| 图像 / 视频生成 | 官方云算力（Wan2.7 / HappyHorse）或 MiniMax |
-| 数据不出本地 | Ollama + 本地 Whisper |
-| 团队统一管理 | 自建 NewAPI 网关 |
-
-:::tip
-多数场景建议配置 2–3 个供应商：一个主力对话模型 + 一个推理模型 + 一个低成本备用。DesireCore 支持在不同智能体和工具间分别指定模型。
-:::

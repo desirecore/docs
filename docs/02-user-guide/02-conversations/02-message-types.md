@@ -6,8 +6,6 @@ keywords: [消息类型, 用户消息, 智能体回复, 系统消息, 消息气�
 
 # 消息类型识别
 
-![三种消息类型视觉对比](/img/user-guide/conversations/message-types-comparison.png)
-
 DesireCore 的对话界面中有多种消息类型，每种都有独特的视觉样式，帮助你快速区分消息来源和性质。
 
 ## 用户消息
