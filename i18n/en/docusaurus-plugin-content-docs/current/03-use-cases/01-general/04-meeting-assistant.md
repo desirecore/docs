@@ -1,16 +1,22 @@
 ---
 title: Meeting Assistant
-description: Use the AI Assistant to complete agenda preparation before meetings and minutes organization, action item extraction after meetings.
+description: Use the meeting assistant to prepare agendas, organize minutes, extract to-dos and follow-up checklists.
 keywords: [Meeting Assistant, Meeting Minutes, Agenda, Action Items, Efficiency]
 ---
 
 # Meeting Assistant
 
-## Scenario Description
+## Real Workflow
 
-You have an important project coordination meeting this afternoon and need to prepare an agenda. After the meeting, you also need to organize meeting minutes, extract everyone's action items, and send them to all attendees. These administrative tasks, while not difficult, are very time-consuming.
+The real value of a meeting assistant isn't expanding a few sentences into minutes—it's completing the information loop before and after the meeting.
 
-The AI Assistant can help you efficiently complete the before and after of meetings: generating structured agendas before the meeting, and organizing formal minutes from your notes or transcription after the meeting, automatically extracting action items assigned to specific responsible parties.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Launch coordination meeting, requirement review, project retrospective, client meeting—any meeting needing pre-meeting preparation and post-meeting tracking |
+| Existing Materials | Meeting objectives, attendee roles, topics, handwritten notes, audio transcription, decisions made during meeting |
+| Pain Point | Pre-meeting topics not organized; post-meeting decisions and to-dos mixed together; responsible persons and deadlines easily missed |
+| DesireCore Intervention | Pre-meeting: generate agenda and items to be decided; post-meeting: organize minutes, to-do list and follow-up checklist |
+| Acceptance Result | Host gets a minutes document ready to send to attendees, plus a task list that can be synced to project management tools |
 
 ## Complete Conversation Example
 
@@ -71,16 +77,19 @@ AI Assistant: Meeting minutes have been organized:
 
 ## Key Steps
 
-1. **Meeting Agenda Generation** -- Provide attendees and discussion topics, the agent generates a structured agenda
-2. **Meeting Notes Organization** -- After the meeting, provide notes or transcription, the agent organizes into formal minutes
-3. **Action Item Extraction** -- Automatically extract action items from minutes, assigning responsible persons and deadlines
+1. **Pre-Meeting Goal Alignment** — Clarify what the meeting should produce: decisions, proposal review, risk sync or task assignment
+2. **Carry Previous Action Items** — Include last meeting's action items, open issues and new topics in the agenda
+3. **Distinguish Facts from Decisions** — In notes, separate discussion content, confirmed decisions, unconfirmed questions and risks
+4. **Structure Action Items** — Each to-do needs task, sole responsible person, deadline, completion criteria and dependencies
+5. **Post-Meeting Follow-Up Queue** — Minutes aren't just for sending; sync action items to project tools or next meeting agenda
 
 ## Final Deliverable
 
-A formal meeting minutes document ready to be sent, including decisions, action items, and next follow-up arrangements.
+A clearly structured meeting minutes draft containing decisions, to-do checklist, responsible persons, deadlines, completion criteria and next follow-up arrangements. Can be further converted to email format, Feishu announcement or project task list.
 
 :::tip Best Practices
-- Meeting notes don't need to record every word, just key decisions and assignments, the agent will help organize into complete minutes
-- If you have meeting recording transcription, paste it directly to the agent for better results
-- You can have the agent remember your preferred minutes format (e.g., "always list action items in a table"), so you don't need to repeat instructions next time
+- Meeting notes don't need to record every word, but key decisions, responsible persons and deadlines should be as clear as possible
+- If you have meeting audio transcription, paste it directly to the agent for better results
+- Minutes format can be remembered by the agent (e.g., "always list to-dos in a table"), so no need to repeat instructions next time
+- Meeting action items without a sole responsible person and completion criteria easily become "everyone knows but nobody pushes forward" items
 :::

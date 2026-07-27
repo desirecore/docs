@@ -1,16 +1,22 @@
 ---
 title: Flowchart Generation
-description: Use an AI agent to automatically generate professional flowcharts, architecture diagrams, and sequence charts from natural language descriptions or documents, with multi-format export support.
+description: Generate flowcharts, architecture diagrams, sequence charts and other editable charts from natural language descriptions, documents or code.
 keywords: [Flowchart, Architecture Diagram, Sequence Diagram, Visualization, Chart Generation]
 ---
 
 # AI-Powered Automatic Flowchart Generation
 
-## Pain Points
+## Real Workflow
 
-Product managers need flowcharts for PRDs, developers need architecture diagrams for technical docs, and operations teams need business process diagrams for SOPs — every time you have to open Visio, ProcessOn, or draw.io, dragging nodes one by one, connecting lines, aligning, and adjusting styles. For a moderately complex flowchart, drawing and beautifying takes at least half an hour.
+The flowchart scenario works because: logic already exists—it's just hidden in text, meeting discussions or code, causing different roles to have inconsistent understanding.
 
-This use case lets an AI agent automatically generate professional flowcharts based on natural language descriptions or document content, supporting multiple export formats, eliminating tedious manual work.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | PRD review, SOP creation, technical proposal review, API integration alignment |
+| Existing Materials | Verbal processes, PRD paragraphs, SOP documents, API specifications, code call chains |
+| Pain Point | Branches, exception paths and role boundaries unclear; manual drawing consumes lots of time |
+| DesireCore Intervention | First extract process structure, then generate flowcharts, swimlane diagrams, sequence diagrams or architecture diagrams, and adjust based on feedback |
+| Acceptance Result | Team gets a diagram usable for review and discussion, focusing on logic review rather than dragging nodes |
 
 ---
 
@@ -41,6 +47,19 @@ This use case lets an AI agent automatically generate professional flowcharts ba
 - **Image Formats**: PNG, SVG, PDF
 - **Editable Formats**: Mermaid code, draw.io XML, Visio
 - **Online Sharing**: Generate shareable links with collaborative editing support
+
+---
+
+## Workflow Control Points
+
+| Stage | Details to Confirm |
+|-------|-------------------|
+| Input Clarification | First confirm process boundaries: where it starts, where it ends, who participates |
+| Node Extraction | Separate actions, decisions, waits and exception handling into different nodes, don't mix into one sentence |
+| Role Separation | For cross-department processes, prefer swimlane diagrams, clarify which role owns each node |
+| Branch Review | Focus on checking "No", "Exception", "Timeout", "Rejection" paths are complete |
+| Style Output | Only adjust layout, colors and export format after logic is confirmed |
+| Future Maintenance | Save editable formats together, avoid having to redraw next time |
 
 ---
 
@@ -144,9 +163,9 @@ File location: ./assets/flowchart/microservice-architecture.drawio
 
 | Metric | Manual Drawing (Visio/draw.io) | AI Agent |
 |--------|--------------------------------|----------|
-| Simple flowchart (5-10 nodes) | ~15 minutes | ~10 seconds |
-| Complex flowchart (20+ nodes) | ~45 minutes | ~30 seconds |
+| Simple flowchart (5-10 nodes) | Manual drag, connect, align | Suitable for quick initial generation |
+| Complex flowchart (20+ nodes) | High modification and alignment cost | Suitable for confirming structure first, then multi-round adjustment |
 | Modification & Adjustment | Manual drag | Natural language description |
-| Style Uniformity | Manual setup required | Auto-applied templates |
+| Style Uniformity | Manual setup required | Can apply templates |
 | Format Conversion | Export one by one | One-click multi-format |
-| Learning Curve | Need to learn tool | Zero barrier |
+| Learning Curve | Need to learn drawing tool | Mainly through description and review

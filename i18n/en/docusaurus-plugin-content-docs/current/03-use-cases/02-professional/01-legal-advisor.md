@@ -1,24 +1,30 @@
 ---
 title: Legal Advisor
-description: Use the Legal Advisor agent for contract review, regulation retrieval, and legal risk assessment.
+description: Use the Legal Advisor agent to assist with contract pre-review, regulation retrieval, and legal risk assessment.
 keywords: [Legal Advisor, Contract Review, Regulation Retrieval, Risk Assessment, Compliance]
 ---
 
 # Legal Advisor
 
-## Scenario Description
+## Real Workflow
 
-You received a supplier contract that needs to be signed tomorrow, but your legal colleague is on a business trip. The contract is filled with dense clauses, and you're worried about unfavorable "traps" for the company.
+The core of the legal scenario is "pre-review" — the agent doesn't replace legal counsel to make final decisions. It's suited for organizing contract issues before formal legal review.
 
-The Legal Advisor agent can quickly review contracts, analyze the reasonableness of key clauses item by item, flag risk points, and provide modification suggestions. It's like having an experienced legal assistant by your side at all times.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Procurement contracts, outsourcing agreements, NDAs, and client agreements entering the approval process |
+| Existing Materials | Contract text, company review standards, historical review reports, business background, and contract value information |
+| Pain Point | Too many clauses, business owners unsure which points need legal counsel involvement, high communication costs with legal |
+| DesireCore Intervention | Legal Advisor flags risks per company standards, suggests revisions, identifies missing background info, and marks items needing legal confirmation |
+| Acceptance Result | Business owner receives a pre-review checklist, then discusses key clauses with legal counsel in a focused session |
 
 ## Recommended Agent
 
-**Legal Advisor** -- Specializes in legal compliance, with capabilities in contract review, regulation retrieval, risk assessment, and compliance recommendations.
+**Legal Advisor** — Suited for contract clause review, regulation research, compliance checklist preparation, and risk flagging.
 
-## Teaching First: Setting Your Review Standards
+## Teaching First: Teaching the Agent Your Review Standards
 
-> Spend 10 minutes teaching once, and the agent will automatically apply these standards every time it reviews a contract — no need to repeat yourself.
+> It's recommended to first teach the agent your company's contract review standards, red-line clauses, and report format. It will then apply the same rules consistently for every pre-review.
 
 ### Teach Rules
 
@@ -72,7 +78,7 @@ Once teaching is complete, the Legal Advisor has learned your company's contract
 You: Please help me review this supplier contract. It needs to be signed tomorrow.
     [Paste contract content]
 
-Legal Advisor: Let me help you quickly review this contract. Analyzing clauses...
+Legal Advisor: Let me do a contract pre-review. Analyzing clauses...
 
         Review Summary
 
@@ -120,22 +126,24 @@ Legal Advisor: Generated modification suggestion draft.
 
 ## Key Steps
 
-1. **Upload or Paste Contract** -- Provide the contract text to be reviewed
-2. **Get Review Report** -- The agent analyzes item by item, flagging risk levels
-3. **View Modification Suggestions** -- Specific modification text provided for each risk point
-4. **Generate Modified Draft** -- Optionally generate a contract version with all modification suggestions
+1. **Confirm Contract Background** — First clarify contract type, value, counterparty, business purpose, and clauses you're most concerned about
+2. **Apply Company Red Lines** — Check payment, breach, duration, IP, confidentiality, and dispute resolution clauses against your company standards
+3. **Generate Risk Matrix** — For each issue, annotate clause location, risk level, business impact, suggested revision, and whether legal counsel confirmation is needed
+4. **Output Negotiation Text** — Generate ready-to-use replacement language for high-risk clauses
+5. **Prepare Legal Consultation List** — Separately list issues that AI cannot judge and require additional business or legal background
 
 ## Final Deliverable
 
-A detailed contract review report, flagging all risk points and corresponding modification suggestions, so you know what you're getting into before signing.
+A contract pre-review report containing risk points, risk levels, suggested revision text, and a checklist of items requiring legal counsel confirmation.
 
 :::warning Disclaimer
-The Legal Advisor agent's suggestions are for reference only and do not constitute formal legal advice. For major legal decisions (such as large contract signing, litigation response, equity transactions, etc.), consult a licensed attorney.
+The Legal Advisor agent provides supplementary analysis and does not constitute formal legal advice. For major contracts, litigation, equity transactions, labor disputes, and similar matters, final review should be conducted by a licensed attorney or in-house legal counsel.
 :::
 
 :::tip Best Practices
 - When uploading contracts, also specify which clauses you're most concerned about (e.g., payment method, liability for breach), and the agent will focus on analyzing these sections
-- If it involves specific industries (such as construction, IT outsourcing), tell the agent the industry background, and it will provide more precise suggestions based on industry practices
-- You can have the Legal Advisor collaborate with the Finance Assistant, one reviewing clauses and the other calculating costs, for a comprehensive contract evaluation
-- **Batch contract review**: When you receive multiple contracts at once, send them all to the Legal Advisor — it will review each one in parallel, applying the same set of standards you taught it
+- If it involves specific industries (such as construction, IT outsourcing), tell the agent the industry background and applicable region so it can organize risks based on more relevant rules
+- You can have the Legal Advisor collaborate with the Finance Assistant — one reviewing clauses and the other calculating costs — for a comprehensive contract evaluation
+- When batch-reviewing contracts, first unify the review standards, then have the Legal Advisor output risk lists against the same criteria
+- The most important thing in contract pre-review is not "pointing out many issues" but distinguishing which must be changed, which can be negotiated, and which only need business awareness
 :::

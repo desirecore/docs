@@ -1,24 +1,30 @@
 ---
 title: AI Bidding
-description: End-to-end bidding solution with multi-agent collaboration, covering the entire process from bidding document analysis to bid submission.
+description: Multi-agent collaboration to assist with bidding document analysis, bid preparation, pricing estimation, and submission checking.
 keywords: [AI Bidding, Bid Document Preparation, Multi-agent Collaboration, Bid Management, Quality Control]
 ---
 
 # AI Bidding
 
-## Scenario Description
+## Real Workflow
 
-A large bidding project involves many aspects: bidding document interpretation, qualification review, technical proposal writing, pricing strategy formulation, compliance checking, document format review...... requiring coordination across legal, financial, technical, and business domains. The traditional approach is for each department to work separately and then manually integrate, which is time-consuming and error-prone.
+The AI Bidding scenario applies to large projects requiring multi-person collaboration. The problem isn't being unable to write individual bid sections, but that legal, finance, technical, and business each advance in parallel, and final integration easily misses items.
 
-DesireCore's AI Bidding solution enables multi-agent collaboration, allowing agents from various professional domains to work in parallel, cross-review, compressing the bidding cycle by more than half.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Large bidding project kick-off, requiring multi-role parallel handling of qualifications, proposals, pricing, and compliance |
+| Existing Materials | Bidding document, company qualifications database, past performance, cost estimation, contract clauses, bid templates |
+| Pain Point | Complex task dependencies, version conflicts, Q&A, pricing, signatures, and attachment checklists must not be missed |
+| DesireCore Intervention | Core dispatcher assigns tasks to bidding, legal, finance, data, and copywriting agents, and consolidates progress |
+| Acceptance Result | Project lead sees daily progress, gaps, and pending confirmations, ultimately receiving a complete bid materials package and checklist |
 
 ## Involved Agents
 
-- **Bidding Assistant** -- Coordinates the entire bidding process, prepares bid documents
-- **Legal Advisor** -- Reviews compliance and contract terms of bidding documents
-- **Finance Assistant** -- Cost estimation, pricing strategy analysis
-- **Data Analyst** -- Competitor analysis, market data support
-- **AI Copywriter** -- Copy polishing, layout integration
+- **Bidding Assistant** — Coordinates the entire bidding process, prepares bid documents
+- **Legal Advisor** — Reviews compliance and contract terms of bidding documents
+- **Finance Assistant** — Cost estimation, pricing strategy analysis
+- **Data Analyst** — Competitor analysis, market data support
+- **AI Copywriter** — Copy polishing, layout integration
 
 ## End-to-End Process
 
@@ -44,6 +50,14 @@ Bidding Assistant: Interpreting bidding document...
 ### Phase 2: Qualification Review and Strategy Formulation (Days 3-5)
 
 Bidding Assistant completes qualification self-review, Finance Assistant completes cost estimation, Legal Advisor provides compliance suggestions. Analysis results from all agents are compiled into a comprehensive evaluation report.
+
+This phase should produce a compliance matrix:
+
+| Bidding Requirement | Response Location | Responsible | Supporting Evidence | Status |
+|---------------------|-------------------|-------------|---------------------|--------|
+| ISO9001 Certificate | Business Section 2.1 | Business | Certificate scan | Available |
+| 3 similar projects in past 3 years | Business Section 3.2 | Business | Contract + Acceptance | Need 1 acceptance doc |
+| 3-year warranty | Technical Proposal 6.4 / Pricing | Technical + Finance | After-sales plan + Cost estimation | Cost TBD |
 
 ### Phase 3: Technical Proposal Writing (Days 6-12)
 
@@ -88,37 +102,30 @@ Bidding Assistant: Bidding document completeness check results:
 
 ## Multi-Agent Collaboration Flowchart
 
-```
-Bidding Document ──→ Bidding Assistant (Coordination)
-              ├──→ Legal Advisor (Compliance Review)
-              ├──→ Finance Assistant (Cost Estimation)
-              └──→ Data Analyst (Competitive Analysis)
-                         │
-                   Comprehensive Analysis Report
-                         │
-              ├──→ Bidding Assistant (Technical Proposal)
-              └──→ AI Copywriter (Layout Integration)
-                         │
-              ├──→ Legal Advisor (Cross Review)
-              └──→ Finance Assistant (Pricing Review)
-                         │
-                   Final Bidding Documents
-```
+![Multi-Agent Collaboration](/img/use-cases/ai-bidding-flow.svg)
 
 ## Quality Control
 
-- **Cross Review**: After each agent completes their work, other agents cross-check
-- **Risk Flagging**: All high-risk items are automatically flagged and must be confirmed by you
-- **Version Management**: Each modification is automatically saved as a version, can be traced back at any time
-- **Completeness Check**: Item-by-item verification of document checklist before submission
+- **Go/No-Go Records**: Preserve the judgment basis for whether to bid, avoiding consuming massive resources on unsuitable projects
+- **Compliance Matrix**: Every bidding requirement maps to a response location, responsible person, supporting evidence, and status
+- **Cross Review**: Technical, business, finance, and legal each check clauses that affect the others
+- **Version Management**: Bid documents, pricing, and attachments should have version numbers to avoid each file being modified independently
+- **Submission Checklist**: Verify signatures/stamps, deposits, digital format, physical copies, page numbers, table of contents, and sealing requirements item by item
+
+## DesireCore Capabilities Used
+
+- **Multi-Agent Team Collaboration**: Bidding, legal, finance, data, and copywriting agents work in parallel
+- **Workflow / SOP**: Formalize qualification review, compliance matrix, section writing, and submission checks into a process
+- **Super Document**: Bid modifications presented in a reviewable format, facilitating accept, reject, and rollback per item
+- **Security Approval & Audit**: Key checkpoints like pricing, commitment clauses, and stamp submissions preserve human confirmation and records
 
 ## Final Deliverable
 
-A complete set of bidding materials, cross-reviewed by multiple agents, covering technical proposals, business pricing, qualification proofs, and compliance review.
+A reviewable bid materials package covering Go/No-Go judgment, compliance matrix, technical proposal, business pricing, qualification proofs, compliance review, and pre-submission checklist.
 
 :::tip Best Practices
 - Start analysis immediately after receiving the bidding document to allow sufficient time for subsequent writing
-- The Q&A session is important, unfavorable terms found by the Legal Advisor can be clarified by requesting the bidder to clarify
-- Allow at least half a day for completeness check before final submission, don't wait until the last minute
-- **Upload your company profile in advance**: Teach the Bidding Assistant your business license, qualification certificates, and past winning bids upfront — it will automatically match relevant qualifications for each new project without you having to compile them every time
+- The Q&A session is important — unfavorable terms found by the Legal Advisor can be clarified by requesting the bidder to answer questions
+- Allow at least half a day for completeness check before final submission; don't wait until the last minute
+- Upload your company qualifications database, past performance, and bid templates in advance so subsequent projects can match materials faster
 :::
