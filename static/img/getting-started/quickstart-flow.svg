@@ -1,33 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 120" font-family="system-ui, -apple-system, sans-serif">
-  <g>
-    <rect x="10" y="30" width="140" height="60" rx="8" fill="#e8f4fd" stroke="#4a9ede" stroke-width="1.5"/>
-    <text x="80" y="55" text-anchor="middle" font-size="11" fill="#666">步骤 1</text>
-    <text x="80" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">检查系统要求</text>
-    <path d="M155 60 L175 60" stroke="#999" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-    <rect x="180" y="30" width="140" height="60" rx="8" fill="#e8f4fd" stroke="#4a9ede" stroke-width="1.5"/>
-    <text x="250" y="55" text-anchor="middle" font-size="11" fill="#666">步骤 2</text>
-    <text x="250" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">安装应用</text>
-    <path d="M325 60 L345 60" stroke="#999" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-    <rect x="350" y="30" width="140" height="60" rx="8" fill="#e8f4fd" stroke="#4a9ede" stroke-width="1.5"/>
-    <text x="420" y="55" text-anchor="middle" font-size="11" fill="#666">步骤 3</text>
-    <text x="420" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">首次启动</text>
-    <path d="M495 60 L515 60" stroke="#999" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-    <rect x="520" y="30" width="160" height="60" rx="8" fill="#fef3e2" stroke="#e8a838" stroke-width="1.5"/>
-    <text x="600" y="55" text-anchor="middle" font-size="11" fill="#666">步骤 4</text>
-    <text x="600" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">配置 API Key</text>
-    <path d="M685 60 L705 60" stroke="#999" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
-    <rect x="710" y="30" width="160" height="60" rx="8" fill="#e8f8e8" stroke="#4caf50" stroke-width="1.5"/>
-    <text x="790" y="55" text-anchor="middle" font-size="11" fill="#666">步骤 5</text>
-    <text x="790" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">第一次对话 🎉</text>
-  </g>
-  <text x="80" y="108" text-anchor="middle" font-size="10" fill="#999">10 秒</text>
-  <text x="250" y="108" text-anchor="middle" font-size="10" fill="#999">1-2 分钟</text>
-  <text x="420" y="108" text-anchor="middle" font-size="10" fill="#999">10 秒</text>
-  <text x="600" y="108" text-anchor="middle" font-size="10" fill="#999">2 分钟</text>
-  <text x="790" y="108" text-anchor="middle" font-size="10" fill="#999">10 秒</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 300" width="1120" height="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <!-- Background -->
+  <rect width="1120" height="300" fill="#fafbfc" rx="12"/>
+  
+  <!-- Title -->
+  <text x="560" y="52" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">🚀 快速上手：5 分钟完成全部设置</text>
+  
+  <!-- Step 1: 系统要求 -->
+  <rect x="40" y="100" width="160" height="72" rx="12" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+  <text x="120" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">① 检查系统要求</text>
+  <text x="120" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">10 秒</text>
+  
+  <!-- Arrow 1→2 -->
+  <path d="M200,136 L240,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 2: 安装 -->
+  <rect x="250" y="100" width="160" height="72" rx="12" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="330" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">② 安装 DesireCore</text>
+  <text x="330" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">1-2 分钟</text>
+  
+  <!-- Arrow 2→3 -->
+  <path d="M410,136 L450,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 3: 首次启动 -->
+  <rect x="460" y="100" width="160" height="72" rx="12" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+  <text x="540" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">③ 首次启动</text>
+  <text x="540" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">10 秒</text>
+  
+  <!-- Arrow 3→4 -->
+  <path d="M620,136 L660,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 4: 配置 API Key -->
+  <rect x="670" y="100" width="160" height="72" rx="12" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+  <text x="750" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">④ 配置 API Key</text>
+  <text x="750" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">2 分钟</text>
+  
+  <!-- Arrow 4→5 -->
+  <path d="M830,136 L870,136" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 5: 第一次对话 -->
+  <rect x="880" y="100" width="160" height="72" rx="12" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+  <text x="960" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">⑤ 第一次对话</text>
+  <text x="960" y="152" text-anchor="middle" font-size="12" fill="#5a6c7d">10 秒</text>
+  
+  <!-- Completion badge -->
+  <text x="960" y="210" text-anchor="middle" font-size="14" font-weight="bold" fill="#9673a6">🎉 完成！</text>
+  
+  <!-- Subtitle -->
+  <text x="560" y="260" text-anchor="middle" font-size="12" fill="#8899aa">总计约 5 分钟 · 无需编程经验 · 支持 macOS / Windows / Linux</text>
+  
+  <!-- Arrow marker definition -->
   <defs>
-    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <path d="M0,0 L8,3 L0,6" fill="#999"/>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
     </marker>
   </defs>
 </svg>
