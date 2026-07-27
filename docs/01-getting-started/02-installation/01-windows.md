@@ -43,13 +43,25 @@ keywords: [Windows, 安装, NSIS, SmartScreen]
 
 ## 随安装包提供的本地组件
 
-Windows 版会随包提供可移植 Git、推荐的 Python/Node.js 运行时归档，以及用于本机 GUI 自动化的 CUA Driver。它们是独立第三方组件，不会要求你提前安装系统 Git、Python、Node.js 或 HostAgent。
+Windows 版会随包提供以下独立第三方组件，不需要你提前安装系统 Git、Python、Node.js 或 HostAgent。
 
-- 首次启动后，DesireCore 会在后台把推荐的 Python 和 Node.js 导入其管理目录；这不会替换系统全局版本。
-- Git 默认在系统版本与内置版本中自动选择可用且较新的来源，你也可以在运行环境页手动切换。
-- CUA Driver 仅用于当前 Windows 电脑的 GUI 自动化，默认启用。它是 Windows HostAgent 完成前的权宜/过渡实现，让 Windows 用户先具备相关能力；macOS 当前仍由 HostAgent 承载 GUI 操作，Windows、Linux 和其他平台的 HostAgent 仍在开发。
+### 可移植 Git
 
-这些归档和可执行程序会增加安装包与首次启动后的磁盘占用。安全软件也可能在首次解包或运行时再次扫描它们；请等待扫描完成，不要通过关闭系统防护来强行绕过告警。你可以在 **资源管理器** → **算力** → **运行环境** 查看实际版本与路径。许可和来源说明见 [第三方软件与许可](../../05-more/09-third-party-software.md)。
+安装包内含便携版 Git。首次启动后，DesireCore 会在系统版本与内置版本中自动选择可用且较新的来源。你也可以在 **资源管理器** → **算力** → **运行环境** 手动切换。
+
+### Python / Node.js 运行时
+
+DesireCore 会在首次启动后，将推荐的 Python 和 Node.js 版本导入其管理目录（后台完成）。这不会替换你系统全局安装的版本。
+
+### CUA Driver（GUI 自动化）
+
+CUA Driver 仅用于当前 Windows 电脑的 GUI 自动化，默认启用。它是 Windows HostAgent 完成前的过渡实现，让 Windows 用户先具备 GUI 操作能力。macOS 当前仍由 HostAgent 承载 GUI 操作，Windows、Linux 和其他平台的 HostAgent 仍在开发中。
+
+:::note 磁盘占用与安全扫描
+这些归档和可执行程序会增加安装包与首次启动后的磁盘占用。安全软件也可能在首次解包或运行时再次扫描它们；请等待扫描完成，不要通过关闭系统防护来强行绕过告警。
+:::
+
+你可以在 **资源管理器** → **算力** → **运行环境** 查看实际版本与路径。许可和来源说明见 [第三方软件与许可](../../05-more/09-third-party-software.md)。
 
 ## 处理 Windows SmartScreen 提示
 

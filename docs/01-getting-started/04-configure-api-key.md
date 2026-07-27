@@ -8,6 +8,16 @@ keywords: [API Key, 配置, OpenAI, Claude, DeepSeek, Gemini, 硅基流动, 供�
 
 DesireCore 是一个本地优先的应用——你的核心数据存储在本地。AI 能力可以通过两种方式接入：登录后使用官方云端算力，或配置你自己的 API Key。配置 API Key 仍然是高级用户和企业用户最常用的方式，但它已经不是唯一入口。
 
+:::info 本页目录
+- [快速开始：云端算力或自备 Key](#快速开始云端算力或自备-key)
+- [什么是 API Key？](#什么是-api-key)
+- [在 DesireCore 中配置](#在-desirecore-中配置)
+- [各供应商 API Key 获取指南](#各供应商-api-key-获取指南)
+- [更多供应商](#更多供应商)
+- [验证连接](#验证连接)
+- [常见问题](#常见问题)
+:::
+
 ## 快速开始：云端算力或自备 Key
 
 | 方式 | 适合谁 | 说明 |
@@ -47,6 +57,9 @@ DesireCore 支持超过 20 个 AI 供应商。下面是最常用的几个供应�
 
 ### OpenAI（GPT 系列）
 
+<details>
+<summary>点击展开 OpenAI API Key 获取指南</summary>
+
 OpenAI 提供 GPT-5、GPT-4 等模型，是全球最知名的 AI 供应商之一。
 
 | 项目 | 信息 |
@@ -68,7 +81,12 @@ OpenAI 提供 GPT-5、GPT-4 等模型，是全球最知名的 AI 供应商之一
 API Key 只会显示一次，请立即复制并保存。如果丢失了，你需要重新创建一个。
 :::
 
+</details>
+
 ### Anthropic（Claude 系列）
+
+<details>
+<summary>点击展开 Anthropic API Key 获取指南</summary>
 
 Anthropic 提供 Claude 系列模型，以安全性和长文本处理能力著称。
 
@@ -86,7 +104,12 @@ Anthropic 提供 Claude 系列模型，以安全性和长文本处理能力著�
 3. 点击 **Create Key**
 4. 复制生成的 Key（以 `sk-ant-` 开头）
 
+</details>
+
 ### DeepSeek
+
+<details>
+<summary>点击展开 DeepSeek API Key 获取指南</summary>
 
 DeepSeek 是国内领先的 AI 公司，提供高性价比的对话和推理模型，API 服务器在国内，延迟低。
 
@@ -103,7 +126,12 @@ DeepSeek 是国内领先的 AI 公司，提供高性价比的对话和推理模�
 2. 进入控制台，点击 **API Keys**
 3. 创建新的 API Key 并复制
 
+</details>
+
 ### Google（Gemini 系列）
+
+<details>
+<summary>点击展开 Google API Key 获取指南</summary>
 
 Google 提供 Gemini 系列模型，拥有超长上下文窗口（最高 100 万 Token）。
 
@@ -121,7 +149,12 @@ Google 提供 Gemini 系列模型，拥有超长上下文窗口（最高 100 万
 3. 选择或创建 Google Cloud 项目
 4. 复制生成的 API Key
 
+</details>
+
 ### 硅基流动（SiliconFlow）
+
+<details>
+<summary>点击展开硅基流动 API Key 获取指南</summary>
 
 硅基流动是国内的 AI 推理服务平台，聚合了多种开源模型（如 Qwen），部分模型提供免费额度。
 
@@ -137,6 +170,8 @@ Google 提供 Gemini 系列模型，拥有超长上下文窗口（最高 100 万
 1. 访问 [siliconflow.cn](https://siliconflow.cn)，注册或登录
 2. 进入控制台，找到 **API 密钥** 页面
 3. 创建新的密钥并复制
+
+</details>
 
 ## 更多供应商
 
