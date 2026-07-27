@@ -22,18 +22,7 @@ This process usually takes only a few seconds, during which you'll see a brief l
 
 After startup, you'll enter DesireCore's main interface. It uses a three-column layout:
 
-<!-- Screenshot placeholder: Main interface overview (main-interface.png) -->
-
-```
-┌─────┬──────────────┬────────────────────────────┐
-│     │              │                            │
-│ Nav │  Conversation│        Chat Area           │
-│ Bar │    List      │                            │
-│     │              │                            │
-│     │              │                            │
-│     │              │                            │
-└─────┴──────────────┴────────────────────────────┘
-```
+![Main Interface Layout](/img/getting-started/main-layout.svg)
 
 ### Navigation Bar (Left)
 
