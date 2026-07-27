@@ -1,6 +1,6 @@
 ---
 title: Enterprise Service Coordination
-description: Use DesireCore's core scheduling agent to decompose complex tasks, delegate to professional agents, and track progress.
+description: Use DesireCore's core scheduling agent to decompose complex tasks, delegate to professional agents and track progress.
 keywords: [Enterprise Coordination, Multi-agent Collaboration, Cross-department, Task Orchestration, DesireCore]
 ---
 
@@ -8,15 +8,15 @@ keywords: [Enterprise Coordination, Multi-agent Collaboration, Cross-department,
 
 ## Real Workflow
 
-Enterprise service coordination scenarios apply to cross-role, cross-material, cross-timeline tasks. The real problem is not "no one is doing it" — it's that goal decomposition, progress synchronization, and result integration costs are too high.
+Enterprise service coordination scenarios apply to cross-role, cross-material, cross-timeline tasks. The real problem isn't "no one is doing it"—it's that goal decomposition, progress synchronization and result integration costs are too high.
 
 | Dimension | Real Situation |
 |-----------|----------------|
-| Trigger Point | New product launches, customer complaint escalations, compliance rectification, quarterly business reviews, and other cross-department tasks |
-| Existing Materials | Overall goal, deadlines, existing documents, related policies, pending decisions, and involved roles |
+| Trigger Point | New product launches, customer complaint escalations, compliance rectification, quarterly business reviews and other cross-department tasks |
+| Existing Materials | Overall goal, deadlines, existing documents, related policies, pending decisions and involved roles |
 | Pain Point | Many subtasks, unclear dependencies, scattered responsible parties; managers constantly chase progress and consolidate results |
-| DesireCore Intervention | Core dispatcher decomposes tasks, delegates to agents, tracks blockers, and centralizes items needing human decisions |
-| Acceptance Result | Manager sees unified progress, deliverables, and pending decisions rather than searching for information across multiple chat groups |
+| DesireCore Intervention | Core dispatcher decomposes tasks, delegates to agents, tracks blockers and centralizes items needing human decisions |
+| Acceptance Result | Manager sees unified progress, deliverables and pending decisions rather than searching for information across multiple chat groups |
 
 ## Involved Agents
 
@@ -35,10 +35,10 @@ You: We're releasing a new product next month and need to prepare all materials 
 
 DesireCore: I'll help you coordinate this product release. I've broken it down into the following work:
 
-        1. Legal Compliance Review -- Check product copy, user agreement
-        2. Marketing Material Preparation -- Product introduction, promotional copy, social media content
-        3. Financial Cost Accounting -- Release costs, pricing strategy
-        4. Project Planning -- Release timeline, task allocation
+        1. Legal Compliance Review — Check product copy, user agreement
+        2. Marketing Material Preparation — Product introduction, promotional copy, social media content
+        3. Financial Cost Accounting — Release costs, pricing strategy
+        4. Project Planning — Release timeline, task allocation
 
         Delegated to respective agents to start work:
         → Legal Advisor: Reviewing product compliance
@@ -101,12 +101,12 @@ DesireCore: Received emergency task, adjusting resource priority...
 
 ### Task Orchestration
 
-DesireCore can decompose a complex requirement into multiple subtasks, identify dependencies, and arrange serial or parallel execution:
+DesireCore can decompose a complex requirement into multiple subtasks, identify dependencies and arrange serial or parallel execution:
 
 - Tasks without dependencies execute in parallel to shorten total time
 - Tasks with dependencies are connected in series in sequence
 - Automatically monitor completion status of each task
-- Bind deliverables, responsible parties, and deadlines to each subtask
+- Bind deliverables, responsible parties and deadlines to each subtask
 
 ### Smart Scheduling
 
@@ -136,17 +136,17 @@ Cross-department tasks most commonly get stuck at "no one to make the call." Des
 
 ## Final Deliverable
 
-A trackable multi-agent collaboration workflow: tasks are decomposed, delegated, consolidated, and cross-checked, ultimately forming unified deliverables, progress reports, blockers, and pending decision lists.
+A trackable multi-agent collaboration workflow: tasks are decomposed, delegated, consolidated and cross-checked, ultimately forming unified deliverables, progress reports, blockers and pending decision lists.
 
 ## DesireCore Capabilities Used
 
-- **Intelligent Task Orchestration**: Identify intent, decompose subtasks, delegate to agents, track progress, and consolidate receipts
+- **Intelligent Task Orchestration**: Identify intent, decompose subtasks, delegate to agents, track progress and consolidate receipts
 - **Team Mode / Swarm Mode**: Long-term roles handle stable processes, temporary roles handle one-off complex tasks
 - **Decision Tree & Human Gate**: Key branches and high-risk actions require your confirmation before continuing
-- **Replay & Audit**: Review what each agent did, which step took the most time, and where optimization is needed
+- **Replay & Audit**: Review what each agent did, which step took the most time and where optimization is needed
 
 :::tip Best Practices
-- When describing requirements, state the overall goal (e.g., "release new product"), deadline, existing materials, and non-negotiable constraints
-- For projects with clear deadlines, inform time constraints from the start — the scheduler will prioritize tasks on the critical path
+- When describing requirements, state the overall goal (e.g., "release new product"), deadline, existing materials and non-negotiable constraints
+- For projects with clear deadlines, inform time constraints from the start—the scheduler will prioritize tasks on the critical path
 - Regularly check progress summaries and promptly respond to items requiring your decision to avoid blocking other agents' subsequent work
 :::
