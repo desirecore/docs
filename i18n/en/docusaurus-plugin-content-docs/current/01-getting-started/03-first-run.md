@@ -24,17 +24,25 @@ After startup, you'll enter DesireCore's main interface. It uses a three-column 
 
 ![Main Interface Layout](/img/getting-started/main-layout.svg)
 
+Below is a real interface screenshot (dark mode):
+
+![DesireCore Main Interface](/img/getting-started/main-interface-clean.png)
+
 ### Navigation Bar (Left)
 
 The narrow strip on the far left is the navigation bar, with the following items from top to bottom:
 
-- **Logo**: DesireCore icon
+- **Logo**: DesireCore icon (click to return to home)
 - **Conversations**: Chat interface (default page)
 - **Agents**: Manage your AI companions
 - **Knowledge Base**: View and manage knowledge resources
-- **Monitor**: View agent execution status
-- **Settings**: Application settings (bottom)
-- **Avatar**: Your profile (bottom)
+- **Notifications**: View system notifications and alerts
+- **Settings**: Application settings (bottom area)
+- **Avatar**: Your profile and account management (very bottom)
+
+:::info More Entries
+The navigation bar may also contain entries for Marketplace, Automation, Compute Management, etc. Specific items may change with version updates. Hover over icons to see feature names.
+:::
 
 ### Conversation List (Center)
 
@@ -42,7 +50,16 @@ The list displays all your conversation sessions. On first launch, you'll see a 
 
 ### Chat Area (Right)
 
-This is the main area for interacting with your AI companion. The top shows the current conversation's agent info, and the bottom has the message input box.
+This is the main area for interacting with your AI companion:
+
+- **Top**: Shows the current conversation's agent name, online status, and description
+- **Center**: Conversation message stream (empty on first launch)
+- **Bottom Input Box**: Type your message and press **Enter** to send, **Shift + Enter** for a new line. Below the input box are auxiliary buttons for attachments (+), image upload, model selection, etc.
+- **Status Bar** (very bottom): Shows keyboard shortcuts, such as `↵ Send`, `⇧ New Line`
+
+:::tip Tip
+Hover over navigation bar icons to see feature names. For detailed descriptions of each interface area, see [Interface Navigation](../02-user-guide/01-interface/01-layout-overview.md).
+:::
 
 ## Next Step
 
