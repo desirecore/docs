@@ -121,6 +121,9 @@ Trace/breakpoint trap (core dumped)
 
 这是因为 DesireCore 基于 Electron 构建，其 Chromium 内核需要 Linux **unprivileged user namespaces** 支持来运行沙箱。部分发行版（尤其是 Ubuntu 24.04+）默认通过 AppArmor 限制了此功能。
 
+<details>
+<summary><strong>🔧 完整排查与修复步骤</strong>（点击展开）</summary>
+
 #### 第一步：诊断问题
 
 在终端运行以下命令，确认系统的 user namespaces 状态：
@@ -181,7 +184,9 @@ sudo sysctl --system
    ~/Apps/DesireCore/DesireCore.AppImage
    ```
 
-#### 临时验证：快速测试应用能否运行
+</details>
+
+#### 快速验证：临时测试应用能否运行
 
 如果你只想先确认应用本身是否正常，可以临时禁用沙箱运行（**仅用于测试，不建议日常使用**）：
 
@@ -197,7 +202,7 @@ echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
 ```
 
 :::warning
-`--no-sandbox` 会关闭 Chromium 的进程沙箱隔离，降低安全性。请仅用于排查问题，不要作为日常启动方式。建议按照上述方案一或方案二进行正式配置。
+`--no-sandbox` 会关闭 Chromium 的进程沙箱隔离，降低安全性。请仅用于排查问题，不要作为日常启动方式。建议按照 [上方的完整排查步骤](#完整排查与修复步骤点击展开) 进行正式配置。
 :::
 
 ## 卸载
