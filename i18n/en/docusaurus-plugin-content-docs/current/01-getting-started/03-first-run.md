@@ -1,7 +1,7 @@
 ---
 title: First Run
 description: What to expect after launching DesireCore for the first time — the welcome flow and main interface overview.
-keywords: [first run, welcome, onboarding, interface, main window]
+keywords: [first run, welcome, onboarding, interface, main window, permissions, three-column layout, navigation bar]
 ---
 
 # First Run
@@ -17,6 +17,25 @@ On the first launch, DesireCore performs some initialization:
 - Syncs global skills
 
 This process usually takes only a few seconds, during which you'll see a brief loading screen.
+
+## Permissions
+
+Depending on your operating system, DesireCore may request the following permissions on first run:
+
+| Permission | Platform | Purpose | Required? |
+|-----------|----------|---------|-----------|
+| **Accessibility** | macOS | GUI automation — lets agents control other app windows | Optional, only needed for GUI automation |
+| **Screen Recording** | macOS | Screen capture — lets agents see screen content | Optional, only needed for screen awareness |
+| **Network Access** | All platforms | Calling AI model APIs, syncing data | Required |
+| **Local File Access** | All platforms | Reading and writing work files and knowledge base | Required |
+
+:::info macOS Users
+macOS will display a system permission dialog when first requested. If you deny a permission, you can always enable it later in **System Settings** → **Privacy & Security**. You can also check and manage permission status in DesireCore's **Settings** → **System Permissions**.
+:::
+
+:::tip Principle of Least Privilege
+DesireCore follows a principle of least privilege — it only requests permissions when actually needed. For your initial experience, even without granting Accessibility and Screen Recording permissions, core features like conversation and agent management work perfectly fine.
+:::
 
 ## Main Interface Overview
 

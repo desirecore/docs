@@ -49,6 +49,21 @@ DesireCore has been tested and verified on UnionTech UOS, Kylin OS, Deepin, open
 AppImage is a portable application format — no installation required, just download and run. You can place it in any directory you prefer.
 :::
 
+## Recommended: Install the AppImage Launcher
+
+Newer builds include an AppImage launcher setup script. It places the AppImage in a fixed location and creates a command-line entry, application menu item, and desktop shortcut for you.
+
+Typical installation result:
+
+| Path | Purpose |
+|------|---------|
+| `~/.local/share/desirecore/DesireCore.AppImage` | Fixed AppImage path |
+| `~/.local/bin/desirecore` | Command-line launcher |
+| `~/.local/share/applications/desirecore.desktop` | Application menu entry |
+| `~/.local/share/desirecore/launcher.env` | Sandbox or launch parameter configuration |
+
+If the script is not available, you can continue with the manual approach below.
+
 ## Creating a Desktop Shortcut
 
 If you'd like to launch DesireCore from the application menu, you can manually create a desktop entry file:
@@ -105,6 +120,9 @@ Trace/breakpoint trap (core dumped)
 ```
 
 This occurs because DesireCore is built on Electron, whose Chromium engine requires Linux **unprivileged user namespaces** for sandboxing. Some distributions (especially Ubuntu 24.04+) restrict this feature by default via AppArmor.
+
+<details>
+<summary><strong>🔧 Full diagnosis and fix steps</strong> (click to expand)</summary>
 
 #### Step 1: Diagnose the Issue
 
@@ -166,6 +184,8 @@ This option is for Ubuntu 24.04 and later. It grants user namespace access only 
    ~/Apps/DesireCore/DesireCore.AppImage
    ```
 
+</details>
+
 #### Quick Test: Verify the App Can Run
 
 If you just want to confirm the application itself works, you can temporarily disable sandboxing (**for testing only, not recommended for daily use**):
@@ -182,7 +202,7 @@ echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
 ```
 
 :::warning
-`--no-sandbox` disables Chromium's process sandbox isolation, reducing security. Use it only for troubleshooting. For regular use, configure Option 1 or Option 2 above.
+`--no-sandbox` disables Chromium's process sandbox isolation, reducing security. Use it only for troubleshooting. For regular use, follow the [full diagnosis and fix steps above](#full-diagnosis-and-fix-steps-click-to-expand).
 :::
 
 ## Uninstall

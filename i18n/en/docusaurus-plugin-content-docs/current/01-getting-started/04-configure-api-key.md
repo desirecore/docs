@@ -19,6 +19,30 @@ DesireCore is a local-first application: core data is stored locally by default.
 If you've signed in and bound official cloud compute, you can **skip this page** and go straight to [Your First Conversation](./05-first-conversation.md). Come back anytime to add more providers.
 :::
 
+### Getting Started with Official Cloud Compute
+
+If you choose official cloud compute, setup is very simple:
+
+1. Open DesireCore and click **Settings** (bottom-left) > **Account**
+2. Click **Sign In** and complete registration/login with your email or third-party account
+3. After signing in, DesireCore automatically binds the `desirecore-cloud` provider
+4. You can start chatting immediately — no manual API Key configuration needed
+
+:::tip When do I need my own key?
+Cloud compute is great for getting started quickly. If you need a specific model unique to a provider, want direct control over usage and costs, or have enterprise compliance requirements, you can always come back and add your own key later.
+:::
+
+## Page Navigation
+
+| Jump to | Description |
+|---------|-------------|
+| [What is an API Key?](#what-is-an-api-key) | Concept explanation |
+| [Configuring in DesireCore](#configuring-in-desirecore) | Configuration steps |
+| [OpenAI](#openai-gpt-series) · [Anthropic](#anthropic-claude-series) · [DeepSeek](#deepseek) · [Google](#google-gemini-series) · [SiliconFlow](#siliconflow) | Popular provider guides |
+| [More Providers](#more-providers) | 16+ other providers |
+| [Verifying the Connection](#verifying-the-connection) | Post-configuration verification |
+| [Troubleshooting](#troubleshooting) | Issue resolution |
+
 ## What is an API Key?
 
 An API Key is like a "key" to access AI services. Each AI provider (such as OpenAI, Anthropic, DeepSeek, etc.) offers API services — you need to register on their website, obtain an API Key, and then enter it in DesireCore so it can call the corresponding AI models.
