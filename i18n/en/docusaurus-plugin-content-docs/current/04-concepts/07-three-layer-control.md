@@ -18,20 +18,7 @@ DesireCore answers these questions through the **Three-Layer Controllability** m
 
 ## Three-Layer Controllability Model
 
-```
-          ┌───────────────┐
-          │  L3: Reversible│  ← Can fix mistakes
-          │  Reversible   │
-          └───────┬───────┘
-        ┌─────────┴─────────┐
-        │    L2: Controllable│  ← Can decide what it does
-        │    Controllable   │
-        └─────────┬─────────┘
-    ┌─────────────┴─────────────┐
-    │       L1: Visible          │  ← Can see what it's doing
-    │       Visible             │
-    └───────────────────────────┘
-```
+![Three-Layer Pyramid](/img/concepts/three-layer-pyramid.svg)
 
 ### L1: Visible — "I Can See What It's Doing"
 
@@ -79,15 +66,7 @@ DesireCore answers these questions through the **Three-Layer Controllability** m
 
 These three layers form a **trust ladder**:
 
-```
-Visible → Understand behavior → Establish preliminary trust
-  ↓
-Controllable → Set boundaries → Trust further enhanced
-  ↓
-Reversible → Eliminate worries → Complete trust
-  ↓
-Dare to delegate more tasks → Gain greater value
-```
+![Trust Ladder](/img/concepts/trust-ladder.svg)
 
 All three layers are indispensable:
 
