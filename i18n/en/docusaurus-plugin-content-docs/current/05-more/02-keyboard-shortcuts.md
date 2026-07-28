@@ -8,6 +8,8 @@ keywords: [keyboard shortcuts, hotkeys, shortcuts, efficiency]
 
 DesireCore offers three keyboard shortcut modes, which you can switch between in "Settings > Keyboard Shortcuts > Editor Shortcut Mode".
 
+![DesireCore Keyboard Shortcuts Overview](./assets/keyboard-shortcuts-overview.png)
+
 ## Shortcut Modes
 
 | Mode | Description | Best For |

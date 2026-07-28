@@ -1,0 +1,93 @@
+<mxfile host="app.diagrams.net" modified="2026-07-25T16:00:00.000Z" agent="DesireCore" version="31.0.2">
+  <diagram name="数据流图" id="data-flow">
+    <mxGraphModel dx="1100" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <!-- Title -->
+        <mxCell id="title" value="DesireCore 数据存储流向图" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="400" height="35" as="geometry"/>
+        </mxCell>
+        <!-- User -->
+        <mxCell id="user" value="👤 用户操作" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="70" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <!-- App Layer -->
+        <mxCell id="app" value="DesireCore 应用层&#xa;(Electron)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="170" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <!-- Edge user to app -->
+        <mxCell id="e_ua" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="user" target="app">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Storage: config -->
+        <mxCell id="cfg" value="config/&#xa;用户设置 · 算力配置&#xa;密钥存储" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="320" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <!-- Storage: agents -->
+        <mxCell id="agt" value="agents/&#xa;智能体本体&#xa;(Git 管理)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="320" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <!-- Storage: users -->
+        <mxCell id="usr" value="users/&#xa;画像 · 偏好&#xa;关系记忆" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="320" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <!-- Storage: skills -->
+        <mxCell id="skl" value="skills/&#xa;全局技能包" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="320" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <!-- Storage: runs -->
+        <mxCell id="run" value="runs/&#xa;会话记录&#xa;任务回执" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="780" y="320" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <!-- Edges app to storages -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="app" target="cfg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="app" target="agt">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="app" target="usr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="app" target="skl">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;curved=1;" edge="1" parent="1" source="app" target="run">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Secondary row: cache, logs, market -->
+        <mxCell id="cache" value="cache/&#xa;索引缓存" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f5f5f5;strokeColor=#999;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="460" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="logs" value="logs/&#xa;运行日志" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f5f5f5;strokeColor=#999;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="460" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="mkt" value="market/&#xa;市场缓存" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f5f5f5;strokeColor=#999;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="460" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Edges to secondary -->
+        <mxCell id="e6" style="dashed=1;strokeColor=#999;" edge="1" parent="1" source="app" target="cache">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" style="dashed=1;strokeColor=#999;" edge="1" parent="1" source="app" target="logs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" style="dashed=1;strokeColor=#999;" edge="1" parent="1" source="app" target="mkt">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Legend -->
+        <mxCell id="leg1" value="—— 核心数据（建议备份）" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="60" y="560" width="180" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2" value="- - - 可再生数据（可安全删除）" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontColor=#999;" vertex="1" parent="1">
+          <mxGeometry x="60" y="580" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <!-- Root path label -->
+        <mxCell id="path" value="数据根目录：~/.desirecore/" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=2;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="350" y="260" width="280" height="25" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
