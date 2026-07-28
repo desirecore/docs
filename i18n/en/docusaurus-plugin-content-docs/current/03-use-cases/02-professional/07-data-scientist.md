@@ -2,6 +2,7 @@
 title: Data Scientist
 description: Use the Data Analyst agent to assist with user behavior analysis, predictive modeling, operational monitoring and experiment evaluation.
 keywords: [Data Science, User Behavior Analysis, Predictive Models, Operational Monitoring, Visualization]
+image: /img/use-cases/covers/cover-data-scientist.jpg
 ---
 
 # Data Scientist

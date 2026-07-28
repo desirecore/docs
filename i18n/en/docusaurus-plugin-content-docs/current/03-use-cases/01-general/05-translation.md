@@ -2,6 +2,7 @@
 title: Translation Assistant
 description: Use the translation assistant to handle technical documents, business emails and localized text with unified terminology and style.
 keywords: [Translation, Multilingual, Localization, Glossary, Translator]
+image: /img/use-cases/covers/cover-translation.jpg
 ---
 
 # Translation Assistant

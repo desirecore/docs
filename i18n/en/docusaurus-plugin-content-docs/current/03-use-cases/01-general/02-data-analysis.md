@@ -2,6 +2,7 @@
 title: Data Analysis
 description: Use the Data Analyst agent to clean spreadsheets, calculate metrics, generate charts and organize analysis conclusions.
 keywords: [Data Analysis, Reports, Visualization, Trend Prediction, Data Analyst]
+image: /img/use-cases/covers/cover-data-analysis.jpg
 ---
 
 # Data Analysis

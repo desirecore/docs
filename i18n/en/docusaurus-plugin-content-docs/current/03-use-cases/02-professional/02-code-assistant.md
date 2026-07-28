@@ -2,6 +2,7 @@
 title: Code Assistant
 description: Use the Code Assistant agent for requirements clarification, architecture design, code implementation, testing, and iterative modifications.
 keywords: [Code Assistant, Project Development, Full-Stack Development, Code Generation, Architecture Design]
+image: /img/use-cases/covers/cover-code-assistant.jpg
 ---
 
 # Code Assistant

@@ -2,6 +2,7 @@
 title: Bidding Assistant
 description: Use the Bidding Assistant agent to assist with tender document interpretation, qualification self-review, bid preparation and submission checks.
 keywords: [Bidding, Bid Document Preparation, Qualification Review, Pricing Strategy, Bid Management]
+image: /img/use-cases/covers/cover-bidding-assistant.jpg
 ---
 
 # Bidding Assistant

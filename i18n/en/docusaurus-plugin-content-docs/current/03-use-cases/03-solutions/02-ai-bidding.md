@@ -2,6 +2,7 @@
 title: AI Bidding
 description: Multi-agent collaboration to assist with bidding document analysis, bid preparation, pricing estimation and submission checking.
 keywords: [AI Bidding, Bid Document Preparation, Multi-agent Collaboration, Bid Management, Quality Control]
+image: /img/use-cases/covers/cover-ai-bidding.jpg
 ---
 
 # AI Bidding

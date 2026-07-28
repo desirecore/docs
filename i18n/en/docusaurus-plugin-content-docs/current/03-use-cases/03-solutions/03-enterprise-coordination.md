@@ -2,6 +2,7 @@
 title: Enterprise Service Coordination
 description: Use DesireCore's core scheduling agent to decompose complex tasks, delegate to professional agents and track progress.
 keywords: [Enterprise Coordination, Multi-agent Collaboration, Cross-department, Task Orchestration, DesireCore]
+image: /img/use-cases/covers/cover-enterprise-coordination.jpg
 ---
 
 # Enterprise Service Coordination

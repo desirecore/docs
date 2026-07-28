@@ -2,6 +2,7 @@
 title: Legal Advisor
 description: Use the Legal Advisor agent to assist with contract pre-review, regulation retrieval, and legal risk assessment.
 keywords: [Legal Advisor, Contract Review, Regulation Retrieval, Risk Assessment, Compliance]
+image: /img/use-cases/covers/cover-legal-advisor.jpg
 ---
 
 # Legal Advisor

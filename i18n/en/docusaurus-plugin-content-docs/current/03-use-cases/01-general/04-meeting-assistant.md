@@ -2,6 +2,7 @@
 title: Meeting Assistant
 description: Use the meeting assistant to prepare agendas, organize minutes, extract to-dos and follow-up checklists.
 keywords: [Meeting Assistant, Meeting Minutes, Agenda, Action Items, Efficiency]
+image: /img/use-cases/covers/cover-meeting-assistant.jpg
 ---
 
 # Meeting Assistant

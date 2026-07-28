@@ -2,6 +2,7 @@
 title: Data Analysis Report
 description: Use the data analysis report agent to organize data, templates and analysis instructions into standard reports.
 keywords: [Data Analysis, Report Generation, Visualization, Excel, Financial Report]
+image: /img/use-cases/covers/cover-data-analysis-agent.jpg
 ---
 
 # AI-Powered Standard Data Analysis Reports

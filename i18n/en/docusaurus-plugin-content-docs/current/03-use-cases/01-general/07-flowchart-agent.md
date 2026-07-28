@@ -2,6 +2,7 @@
 title: Flowchart Generation
 description: Generate flowcharts, architecture diagrams, sequence charts and other editable charts from natural language descriptions, documents or code.
 keywords: [Flowchart, Architecture Diagram, Sequence Diagram, Visualization, Chart Generation]
+image: /img/use-cases/covers/cover-flowchart-agent.jpg
 ---
 
 # AI-Powered Automatic Flowchart Generation

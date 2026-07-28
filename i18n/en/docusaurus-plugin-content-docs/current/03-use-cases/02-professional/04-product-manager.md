@@ -2,6 +2,7 @@
 title: Product Manager
 description: Use the Product Manager agent to organize requirements, write PRDs, track iterations, and identify project risks.
 keywords: [Product Manager, Requirements Document, Iteration Management, Sprint, Project Management]
+image: /img/use-cases/covers/cover-product-manager.jpg
 ---
 
 # Product Manager
