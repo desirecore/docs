@@ -44,20 +44,67 @@ keywords: [计划, Plan, 确认, 审阅, 步骤, 执行计划, Plan Mode, 强制
 
 ![执行计划](/img/user-guide/delegation/plan-confirmation.svg)
 
-完整的计划是一份结构化文档，自动保存在 **当前工作目录** 的 `plans/` 子文件夹下（文件名按任务关键词命名，例如 `plans/review-procurement-contract.md`）。即便你关掉对话，文件也会留在那里，方便后续查阅或纳入版本控制。
+完整的计划是一份结构化 Markdown 文档，自动保存在 **当前工作目录** 的 `.desirecore/plans/<plan-id>/PLAN.md`（例如 `.desirecore/plans/plan-review-contract/PLAN.md`）。即便你关掉对话，文件也会留在那里，方便后续查阅或纳入版本控制。每次修订计划都会在 `revisions/` 子目录保存不可变历史版本。
 
 ### 计划文件的标准结构
 
-每份计划包含以下章节：
+每份计划是一份标准 Markdown 文件，位于智能体工作目录的 `.desirecore/plans/<plan-id>/PLAN.md`，采用 **YAML frontmatter + 正文** 的格式：
 
-| 章节 | 作用 |
+```yaml
+---
+schema: 1
+id: plan-review-contract
+title: 审查采购合同
+revision: 1
+parent_revision: null
+created_at: 2026-07-27T10:00:00+08:00
+updated_at: 2026-07-27T10:00:00+08:00
+workdir: /path/to/workspace
+plan_path: /path/to/workspace/.desirecore/plans/plan-review-contract/PLAN.md
+scope: agent
+related_workdirs: []
+---
+
+# 审查采购合同
+
+## 目标
+审查附件中的采购合同，识别法律和商务风险。
+
+## 约束
+- 参照已教的合同审查规则
+- 不修改原始合同文件
+
+## 步骤
+1. 解析合同 PDF，提取条款文本
+2. 按已教规则逐条检查（违约金、付款条件等）
+3. 灵活分析进口设备条款
+4. 生成审查报告
+5. 保存草稿并等待确认
+
+## 验证
+- 报告中覆盖所有已教规则
+- 无遗漏的高风险条款
+```
+
+**frontmatter 必填字段**：
+
+| 字段 | 说明 |
 |------|------|
-| **Context** | 为什么要做这件事、要解决的问题、约束条件 |
-| **Steps** | 分步操作清单，每一步标注风险等级与是否需要你中途确认 |
-| **Critical Files** | 涉及的关键文件清单（含路径和行号），让你一眼知道动哪儿 |
-| **Artifacts** | 会新建 / 修改 / 删除哪些文件 |
-| **Verification** | 怎么知道任务成功完成（可运行的检查命令或手测步骤） |
-| **Risks & Rollback** | 可能出错的地方，以及万一出错怎么撤回 |
+| `schema` | 固定为 `1` |
+| `id` | 计划唯一标识（kebab-case） |
+| `title` | 计划标题 |
+| `revision` | 当前版本号（从 1 开始递增） |
+| `parent_revision` | 上一版本号（首版为 `null`） |
+| `created_at` | 创建时间（ISO 8601） |
+| `updated_at` | 最后更新时间 |
+| `workdir` | 工作目录绝对路径 |
+| `plan_path` | 计划文件自身绝对路径 |
+| `scope` | 作用域（`agent` 或 `team`） |
+| `related_workdirs` | 关联工作目录列表 |
+
+**正文**是自由 Markdown，通常包含 `## 目标`、`## 约束`、`## 步骤`、`## 验证` 等章节，内容由智能体根据任务特性灵活组织。
+
+每次修订计划时，系统会创建新的不可变历史版本（保存在 `revisions/` 子目录），PLAN.md 始终保留最新版。
 
 ### 步骤类型说明
 
@@ -170,7 +217,7 @@ keywords: [计划, Plan, 确认, 审阅, 步骤, 执行计划, Plan Mode, 强制
         步骤 4：🧠 [灵活] → ⚙️ [固化] 按已有规则检查进口设备条款
         新增步骤 6：⚙️ [固化] 保存审查报告草稿
 
-        计划文件已更新至 plans/review-procurement-contract.md
+        计划文件已更新至 .desirecore/plans/plan-review-contract/PLAN.md
         确认按更新后的计划执行？"
 ```
 
@@ -194,16 +241,17 @@ keywords: [计划, Plan, 确认, 审阅, 步骤, 执行计划, Plan Mode, 强制
 
 ## 关于计划文件的位置
 
-每个智能体的计划文件落在**它自己的工作目录**下的 `plans/` 子文件夹——这是有意为之：
+每个智能体的计划文件落在**它自己的工作目录**下的 `.desirecore/plans/` 子目录——这是有意为之：
 
 - **可审阅**：计划是普通 Markdown 文件，你可以在编辑器里直接打开、对比版本
+- **自动版本化**：每次修订都创建不可变历史版本（`revisions/`），PLAN.md 保留最新状态
 - **可纳入版本控制**：如果工作目录是 git 仓库，计划会成为团队的"决策日志"
 - **跟项目走**：换台机器 / 拉一份仓库即可看到所有历史计划
 
 不同智能体之间**互相看不到**对方的计划——切换到另一个智能体，看到的就是它自己的计划库，不会混淆。
 
 :::info 不想让计划文件污染目录？
-你可以把 `plans/` 加进 `.gitignore`，让它只在本地保留、不进版本控制。
+你可以把 `.desirecore/plans/` 加进 `.gitignore`，让它只在本地保留、不进版本控制。
 :::
 
 :::info 下一步

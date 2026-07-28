@@ -44,20 +44,65 @@ The plan created by the agent typically includes the following information:
 
 ![Execution Plan](/img/user-guide/delegation/plan-confirmation.svg)
 
-The full plan is a structured document, automatically saved to the **current working directory** under the `plans/` subfolder (the file is named after the task's keywords, e.g. `plans/review-procurement-contract.md`). Even if you close the conversation, the file stays there for later review or version control.
+The full plan is a structured Markdown document, automatically saved at **`.desirecore/plans/<plan-id>/PLAN.md`** in the current working directory (e.g. `.desirecore/plans/plan-review-contract/PLAN.md`). Even if you close the conversation, the file stays there for later review or version control. Each plan revision creates an immutable historical version under the `revisions/` subdirectory.
 
-### Plan File Sections
+### Plan File Structure
 
-Each plan contains these sections:
+Each plan is a standard Markdown file using **YAML frontmatter + body** format:
 
-| Section | Purpose |
-|---------|---------|
-| **Context** | Why this is being done, the problem to solve, constraints |
-| **Steps** | Ordered step list, each marked with risk level and whether your confirmation is required mid-flight |
-| **Critical Files** | Critical files involved (with paths and line numbers), so you know exactly what's being touched |
-| **Artifacts** | Which files will be created / modified / deleted |
-| **Verification** | How to know the task succeeded (concrete runnable check commands or manual test steps) |
-| **Risks & Rollback** | What could go wrong, and how to recover if it does |
+```yaml
+---
+schema: 1
+id: plan-review-contract
+title: Review procurement contract
+revision: 1
+parent_revision: null
+created_at: 2026-07-27T10:00:00+08:00
+updated_at: 2026-07-27T10:00:00+08:00
+workdir: /path/to/workspace
+plan_path: /path/to/workspace/.desirecore/plans/plan-review-contract/PLAN.md
+scope: agent
+related_workdirs: []
+---
+
+# Review procurement contract
+
+## Goal
+Review the attached procurement contract, identifying legal and commercial risks.
+
+## Constraints
+- Follow previously taught contract review rules
+- Do not modify the original contract file
+
+## Steps
+1. Parse the contract PDF, extract clause text
+2. Check each clause against taught rules (penalties, payment terms, etc.)
+3. Adaptively analyze imported equipment clauses
+4. Generate review report
+5. Save draft and wait for confirmation
+
+## Verification
+- Report covers all taught rules
+- No overlooked high-risk clauses
+```
+
+**Required frontmatter fields**:
+
+| Field | Description |
+|-------|-------------|
+| `schema` | Always `1` |
+| `id` | Plan unique identifier (kebab-case) |
+| `title` | Plan title |
+| `revision` | Current version number (starting from 1) |
+| `parent_revision` | Previous version number (`null` for the first version) |
+| `created_at` | Creation time (ISO 8601) |
+| `updated_at` | Last update time |
+| `workdir` | Absolute path of the working directory |
+| `plan_path` | Absolute path of the plan file itself |
+| `scope` | Scope (`agent` or `team`) |
+| `related_workdirs` | List of related working directories |
+
+The **body** is free-form Markdown, typically containing `## Goal`, `## Constraints`, `## Steps`, `## Verification` sections, organized flexibly according to the task.
 
 ### Step Type Explanation
 
@@ -170,7 +215,7 @@ Agent: "Plan updated. Changes as follows:
         Step 4: 🧠 [Adaptive] → ⚙️ [Deterministic] Check imported equipment clauses according to existing rules
         New Step 6: ⚙️ [Deterministic] Save review report draft
 
-        Plan file updated at plans/review-procurement-contract.md
+        Plan file updated at .desirecore/plans/plan-review-contract/PLAN.md
         Confirm execution according to updated plan?"
 ```
 
@@ -194,16 +239,17 @@ Even if you trust the agent, it's recommended to take a look at the plan when ex
 
 ## Where Plan Files Live
 
-Each agent's plan files live in **its own working directory** under the `plans/` subfolder—this is intentional:
+Each agent's plan files live in **its own working directory** under the `.desirecore/plans/` subdirectory—this is intentional:
 
 - **Reviewable**: Plans are plain Markdown files; you can open them in any editor and diff versions
+- **Auto-versioned**: Each revision creates an immutable historical version (`revisions/`); PLAN.md always holds the latest
 - **Version-controllable**: If the working directory is a git repo, plans become the team's "decision log"
 - **Tied to the project**: Switch machines or check out a fresh copy of the repo to see all historical plans
 
 Different agents **cannot see each other's plans**—switching to another agent shows you its own plan library, no confusion.
 
 :::info Don't want plans cluttering the directory?
-Add `plans/` to `.gitignore` to keep them local only and out of version control.
+Add `.desirecore/plans/` to `.gitignore` to keep them local only and out of version control.
 :::
 
 :::info Next Step
