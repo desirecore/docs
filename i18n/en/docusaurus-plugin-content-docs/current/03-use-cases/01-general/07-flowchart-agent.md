@@ -108,7 +108,6 @@ This use case lets an AI agent automatically generate professional flowcharts ba
 
 ```
 ![Microservices Architecture](./assets/microservice-architecture.png)
-File location: ./assets/flowchart/microservice-architecture.drawio
 
 ### Scenario 3: Extract Process from Document
 
