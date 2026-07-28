@@ -56,6 +56,7 @@ DesireCore does not automatically change `.gitignore`, stage these files, or com
 - Click a team shared directory in the input-area working-directory pill or resource panel to activate that team's scope for the conversation. Click the same team again to leave it.
 - Team selection belongs to the specific conversation. DesireCore sends its `teamId`, and the backend revalidates membership and the shared directory instead of silently falling back.
 - Even when several directories are accessible, a task has one authoritative Plan in the current cwd. Other directories are recorded in `related_workdirs`, and cross-directory work uses absolute paths.
+- If a team is created with "only use team working directory" enabled, the team directory becomes the sole project working directory and sole Plan root; member/global directories are not written to `related_workdirs`. The member's original directory settings are not deleted.
 - Changing a normal primary directory does not move an in-progress Plan. Continuing across teams creates a new Plan in the new team directory and links the old one through `continued_from`.
 
 The working-directory scope cannot change while a conversation is running. After an idle conversation switches scope, its next message uses the new cwd, file permissions, project instructions, and Plan root together so old and new directory context cannot be mixed.

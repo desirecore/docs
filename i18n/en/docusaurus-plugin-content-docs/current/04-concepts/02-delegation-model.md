@@ -61,12 +61,14 @@ The companion submits a work receipt, reviews deviations, and writes new experie
 ## Complete Delegation Flow
 
 ```
-You initiate task → Companion clarifies as needed → Companion writes/updates plan
-                                    ↓
-                         Natural review or revision (as needed)
-                                    ↓
-                    Execute authorized steps → Specific human gate (as needed)
-                                    ↓
+You initiate task → Companion creates or reads Plan
+                              ↓
+              Writes clarification items first if info is missing, then asks you
+                              ↓
+                    Natural review or revision (as needed)
+                              ↓
+                   Execute authorized steps → Specific human gate (as needed)
+                              ↓
                           Companion reviews + delivers receipt
                                     ↓
                           Did it learn something new?
