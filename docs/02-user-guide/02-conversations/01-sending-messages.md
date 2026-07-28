@@ -155,4 +155,4 @@ DesireCore 的输入区域支持多种消息发送方式，包括文本、图片
 
 - 了解[消息类型识别](./02-message-types.md)，区分不同角色的消息
 - 查看[交互卡片详解](./03-cards.md)，了解 Companion 回复中的各种卡片
-- 了解[上下文控制](./context-control)和 [Rewind / Checkpoint](./rewind-checkpoints)
+- 了解[上下文控制](./09-context-control.md)和 [Rewind / Checkpoint](./10-rewind-checkpoints.md)
