@@ -1,49 +1,43 @@
 ---
 title: Web Data Collection
-description: Use an AI agent to automatically browse web pages, extract information, and organize data, outputting structured results with scheduled tasks and change monitoring support.
+description: Use an AI agent to browse public web pages, extract fields, and organize data into structured results.
 keywords: [Data Collection, Web Scraping, Data Extraction, Competitor Monitoring, Structured Data]
 ---
 
 # AI-Powered Web Data Collection
 
-## Pain Points
+## Real Workflow
 
-Market research requires monitoring competitor prices, operations teams need to collect industry news, and sales teams need to organize publicly available client information — every day spent switching between different websites, copying and pasting, and formatting. Traditional web scrapers require writing code and maintaining scripts; a single website redesign breaks them. Manual collection is inefficient and prone to missing key information.
+Web data collection scenarios are typically not long-running, stable large-scale scrapers, but rather temporary, low-frequency information gathering tasks where fields frequently change.
 
-This use case makes an AI agent your data collection assistant. Just tell it "where to collect what," and it automatically completes web browsing, information extraction, and data organization, outputting structured results.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Competitor research, job posting aggregation, public company information collection, industry news gathering |
+| Existing Materials | Target URLs, field requirements, filtering criteria, historical spreadsheets or output templates |
+| Pain Point | Website structures are inconsistent, manual copying easily misses fields, developing traditional scrapers isn't cost-effective |
+| DesireCore Intervention | Web Data Collection agent browses pages, extracts fields, preserves source links and outputs tables |
+| Acceptance Result | User receives a verifiable data table, then confirms collection scope and data usage per compliance requirements |
 
----
+## Recommended Agent
 
-## What It Can Do
+**Web Data Collection Agent** — Handles competitor pricing monitoring, public company information gathering, industry news aggregation, and other web browsing and data extraction tasks. Uses natural language instructions to specify collection targets and output formats.
 
-### 🌐 Intelligent Web Browsing
+## Work Flow Control Points
 
-- **Multi-Page Parallel**: Open multiple web pages simultaneously for batch collection
-- **Dynamic Content Handling**: Supports JavaScript-rendered pages, waits for content loading
-- **Login State Preservation**: Supports Cookie management for content requiring login
-- **Anti-Scraping Countermeasures**: Intelligent access frequency control, simulating human browsing behavior
+| Stage | Details to Confirm |
+|-------|-------------------|
+| Scope Confirmation | Target website, sections, page count, fields, and filtering criteria are clearly defined |
+| Compliance Check | Whether collection is allowed; whether login state, personal information, copyright content, or prohibited terms are involved |
+| Extraction Rules | Field names, price units, date formats, handling of missing values, and whether to preserve source links |
+| Data Cleaning | Deduplication, standardization, abnormal prices, empty fields, and duplicate products are handled |
+| Output Validation | Spot-check several records to confirm no field misalignment or omissions |
+| Ongoing Maintenance | Re-calibrate rules when page structures change; preserve collection logs for scheduled tasks |
 
-### 🎯 Precise Information Extraction
+## DesireCore Capabilities Used
 
-- **Natural Language Instructions**: "Extract product names, prices, and ratings from this page"
-- **Table Data Recognition**: Automatically identifies web tables and fully extracts row and column data
-- **List Content Collection**: News lists, product lists, search results — all batch collected
-- **Nested Data Processing**: Detail page links automatically followed for complete information collection
-
-### 📋 Structured Output
-
-- **Excel / CSV Export**: Standard table format for subsequent analysis
-- **JSON Format**: Integration with databases or other systems
-- **Custom Templates**: Define output fields and formats on demand
-- **Incremental Updates**: Compare with historical data, output only changes
-
-### 🔄 Scheduled Tasks
-
-- **Periodic Collection**: Execute automatically daily or weekly
-- **Change Monitoring**: Real-time alerts for price changes and content updates
-- **History Records**: Retain collection history for trend analysis
-
----
+- **Desktop Automation / GUI Control**: Browse pages through the browser, perform screenshot recognition and form interactions when needed
+- **Scheduled Inspection**: Periodically check for changes in prices, announcements, job postings, etc.; notify only when changes occur
+- **Security Audit**: Preserve collection sources, execution records, and output files for traceability
 
 ## Typical Use Cases
 
@@ -57,7 +51,7 @@ File location: ./assets/web-scraping/gucci_handbags.xlsx
     ├── Collection scope: All products in handbags category
     └── User instruction: "Collect names, prices, and links for all handbags on Gucci official site"
 
-⬇️ Agent processing (approx. 3-5 minutes)
+⬇️ Agent processing
 
 📊 Output: gucci_handbags.xlsx (33 products)
     ├── Product Name
@@ -80,7 +74,7 @@ File location: ./assets/web-scraping/gucci_handbags.xlsx
     ├── Keyword filtering rules
     └── User instruction: "Collect today's AI industry news, sorted by importance"
 
-⬇️ Agent processing (approx. 5-8 minutes)
+⬇️ Agent processing
 
 📊 Output
     ├── Today_News_Summary.md
@@ -98,7 +92,7 @@ File location: ./assets/web-scraping/gucci_handbags.xlsx
     ├── Target company list (50 companies)
     └── User instruction: "Collect basic information, funding status, and main products for these companies"
 
-⬇️ Agent processing (approx. 15-20 minutes)
+⬇️ Agent processing
 
 📊 Output
     ├── Company_Information_Database.xlsx
@@ -118,7 +112,7 @@ File location: ./assets/web-scraping/gucci_handbags.xlsx
     ├── Job keywords, city, salary range
     └── User instruction: "Find qualified Product Manager positions"
 
-⬇️ Agent processing (approx. 8-10 minutes)
+⬇️ Agent processing
 
 📊 Output
     ├── Job_Listing.xlsx
@@ -128,25 +122,32 @@ File location: ./assets/web-scraping/gucci_handbags.xlsx
     └── Salary distribution analysis chart
 ```
 
----
+## Key Steps
+
+1. **Define Collection Scope** — Specify target website, page sections, number of pages, fields to extract, and filtering criteria; the more specific, the more accurate the results
+2. **Compliance Review** — Before collection begins, confirm that the target website's terms of use and robots.txt permit automated access; for data involving personal information or copyright, verify authorization first
+3. **Set Extraction Rules** — Define field names, units, date formats, and how to handle missing values; request source link preservation for later verification
+4. **Data Cleaning and Validation** — After collection, deduplicate, standardize formats, handle outliers and empty fields; spot-check several records to confirm field accuracy
+5. **Automated Maintenance** — For periodic collection needs, set up scheduled tasks and preserve collection logs; re-calibrate extraction rules when page structure changes
 
 ## Efficiency Comparison
 
 | Metric | Manual Collection | Traditional Web Scraper | AI Agent |
 |--------|-------------------|-------------------------|----------|
-| Collect 100 data points | ~2 hours | ~5 minutes (after development) | ~10 minutes |
+| Collect 100 data points | Time-consuming, easily misses items | Fast after development complete | Suited for temporary or frequently-changing collection tasks |
 | Technical Barrier | None | High (requires programming) | Low (natural language) |
-| Website Adaptation Cost | None | High (code per site) | Low (auto-adaptation) |
-| Maintenance Cost | Continuous labor | High (updates needed on redesign) | Low (intelligent handling) |
+| Website Adaptation Cost | None | High (code per site) | Adjustable through field descriptions |
+| Maintenance Cost | Continuous labor | High (site redesign requires updates) | Requires re-calibration per page changes |
 | Unstructured Content | Handleable | Difficult | Strong |
-| Compliance | Human judgment | Requires configuration | Built-in frequency control |
+| Compliance | Human judgment | Requires configuration | Still requires user confirmation of site terms and data usage |
 
----
+## Final Deliverable
 
-## Usage Notes
+A structured data table with traceable source links, covering all fields specified in your requirements. You can continue asking the agent to filter, analyze, visualize, or export the data in other formats.
 
-⚠️ **Compliance Reminder**:
-- Please comply with target website's robots.txt and terms of use
+:::warning Compliance Reminder
+- Comply with the target website's robots.txt and terms of use
 - Control collection frequency to avoid burdening target websites
 - Only collect publicly accessible information
-- Collected data is for internal analysis use only; ensure data privacy compliance
+- For data involving personal information, account content, or copyright-protected content, confirm authorization and data usage scope first
+:::
