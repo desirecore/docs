@@ -95,4 +95,4 @@ At runtime, DesireCore combines editable prompts in this order: **global -> team
 
 - [File Explorer](./06-agent-files.md) — Browse the Agent's file structure
 - [Edit Persona](./04-edit-persona.md) — Adjust the Agent's tone and style
-- [Prompt Center and Prompt Layers](./12-prompt-center.md) — Understand global, team, and Agent prompt composition
+- [Prompt Center and Prompt Layers](./11-prompt-center.md) — Understand global, team, and Agent prompt composition
