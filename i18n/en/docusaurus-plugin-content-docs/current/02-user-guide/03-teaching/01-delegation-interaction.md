@@ -46,11 +46,11 @@ The agent will record this rule and automatically apply it next time it reviews 
 
 ### 2. Delegable
 
-Once taught, you can delegate tasks to the agent. It will first create a plan, seek your confirmation, and then execute within the permissions you allow.
+Once taught, you can delegate tasks to the agent. It first creates or updates a plan in the workspace, lets you review and revise it through natural conversation, and then executes within the permissions you allow.
 
 > "Help me review this procurement contract."
 
-The agent won't start immediately—it will first tell you what it plans to do, and only proceed after you confirm.
+The agent makes the plan visible first, but there is no blanket “approve plan” button. Say “plan only” when you want it to stop after planning; otherwise it may continue through authorized steps and will request confirmation separately before an actual high-risk action.
 
 ### 3. Auditable
 

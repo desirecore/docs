@@ -74,9 +74,10 @@ Agent: "I plan to review this contract in the following steps:
         3. [Deterministic] Check warranty period → Compare with 12-month minimum
         4. [Adaptive] Analyze imported equipment related clauses
         5. [Adaptive] Comprehensive contract risk assessment
-        6. [Human Gate] Generate review report, waiting for your confirmation before sending
+        6. [Human Gate] Ask for confirmation immediately before sending the report
 
-        Proceed with this plan?"
+        I will save this plan in the current workspace; you can revise it at any time.
+        If you want a plan without execution, say so explicitly."
 ```
 
 :::info What are Deterministic, Adaptive, and Human Gate?
@@ -89,7 +90,7 @@ See [Execution Monitoring](../04-delegation/03-execution-monitoring.md) for deta
 
 ### Step 5: Execute—It Executes the Task
 
-After you confirm the plan, the agent begins executing step by step. You can see the progress of each step in real time:
+Unless you ask for “plan only,” the agent proceeds step by step within the permissions already granted. You can see progress in real time; when it reaches a marked human gate, it still asks for confirmation for that specific action:
 
 ```
 Agent:
