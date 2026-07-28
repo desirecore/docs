@@ -20,7 +20,7 @@ Persona is saved in the `persona.md` file in the Agent directory. It tells the A
 | **Forbidden Zones** | What not to do | "Don't use template clichés, don't avoid giving conclusions" |
 | **Uncertainty Handling** | What to do when unsure | "Explain uncertainty and provide verification path" |
 
-`persona.md` is part of the **Agent prompt layer**. At runtime, DesireCore also combines the current user's global prompt and prompts from every team the Agent belongs to. Open **Explorer -> Prompt Center** to edit these sources together and preview the result. See [Prompt Center and Prompt Layers](./11-prompt-center.md).
+`persona.md` is part of the **Agent prompt layer**. At runtime, DesireCore also combines the current user's global prompt and prompts from every team the Agent belongs to. Open **Explorer -> Prompt Center** to edit these sources together and preview the result. See [Prompt Center and Prompt Layers](./12-prompt-center.md).
 
 :::info Persona vs. Principles
 **Persona** defines "how to do it"—tone, style, response methods. **Principles** define "what to do and not do"—rules, boundaries, priorities. They complement each other without overlapping.
@@ -103,5 +103,5 @@ The Agent will record your preferences and apply them in subsequent conversation
 ## Next Steps
 
 - [Edit Principles](./05-edit-principles.md) — Set behavioral boundaries for the Agent
-- [Prompt Center and Prompt Layers](./11-prompt-center.md) — Manage global, team, and Agent prompts
+- [Prompt Center and Prompt Layers](./12-prompt-center.md) — Manage global, team, and Agent prompts
 - [Create Custom Agent](./03-create-agent.md) — Review the creation process
