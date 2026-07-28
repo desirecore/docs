@@ -2,6 +2,7 @@
 title: Glossary
 description: Complete definitions of DesireCore core terms, sorted alphabetically
 keywords: [terms, glossary, definitions, Glossary]
+last-reviewed: 2026-07-22
 ---
 
 # Glossary
@@ -64,7 +65,7 @@ A record of changes to files or content, with deletions marked in red and additi
 The process of converting text to numerical vectors for semantic search and similarity matching. DesireCore supports embedding models from multiple providers.
 
 ### Execute (Do)
-One of the Six Primitives. After obtaining plan confirmation, the agent acts within allowed permissions and boundaries, invokes tools, and advances the task.
+One of the Six Primitives. The agent acts from the current Plan within the allowed permissions and boundaries, invokes tools, and advances the task. A Plan does not grant additional authorization.
 
 ## F
 
@@ -99,7 +100,7 @@ Model Context Protocol. An open standard proposed by Anthropic that allows AI mo
 The agent's personality definition file (`persona.md`). Contains communication style, decision preferences, output specifications, etc.—the core definition of "who the agent is like." Not a "character setting copy," but executable behavioral specifications.
 
 ### Plan
-One of the Six Primitives. The agent provides an execution plan, breaking down steps and marking risk points and areas requiring user confirmation.
+One of the Six Primitives. The agent keeps a versioned Plan in the current working directory, recording goals, constraints, steps, risks, and verification. Plans are revised through natural conversation; they are not a mode or execution permission.
 
 ### Principles
 The agent's behavioral rules file (`principles.md`). Defines "must do," "never do," and "when to ask for confirmation" rules.
