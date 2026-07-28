@@ -68,8 +68,6 @@ DesireCore 支持四级回滚粒度：
 
 ## 三层协同
 
-![三层可控性概念图](./img/controllability-layers.png)
-
 三层可控性并非独立存在，而是层层递进、相互配合：
 
 ```

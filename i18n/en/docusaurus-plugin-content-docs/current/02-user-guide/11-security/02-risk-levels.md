@@ -10,8 +10,6 @@ DesireCore classifies all agent operations into four risk levels based on potent
 
 ## Four-Level Risk Classification
 
-![Risk Level Pyramid](./img/risk-levels-pyramid.png)
-
 ### Low Risk
 
 **Meaning**: Read-only operations or pure information queries with no substantial impact on the system.

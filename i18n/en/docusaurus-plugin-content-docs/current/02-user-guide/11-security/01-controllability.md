@@ -68,8 +68,6 @@ DesireCore supports four levels of rollback granularity:
 
 ## Three Layers Working Together
 
-![Three-Layer Controllability Concept](./img/controllability-layers.png)
-
 The three layers of controllability aren't independent—they build on each other and work together:
 
 ```
