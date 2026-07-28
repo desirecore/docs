@@ -58,7 +58,7 @@ Auto Dream's work proceeds in four phases:
 
 ### Memory Lifecycle (Including the Dream Phase)
 
-In [Auto-Learning and Forgetting](/docs/02-user-guide/07-memory/04-auto-learning), we introduced the five-stage memory lifecycle. With Auto Dream, the complete lifecycle becomes:
+In [Auto-Learning and Forgetting](/docs/user-guide/memory/auto-learning), we introduced the five-stage memory lifecycle. With Auto Dream, the complete lifecycle becomes:
 
 ```
 Active → Recent → Archived → 💤 Dream → Compressed → Cleaned
@@ -120,6 +120,6 @@ Auto Dream never deletes any original memory. Even if you're not satisfied with 
 
 ## Next Steps
 
-- Want to understand how memory works end-to-end? Read [How the Agent Remembers You](/docs/02-user-guide/07-memory/01-how-memory-works) in the User Guide
-- Want to understand the ordinary forgetting mechanism? Read [Auto-Learning and Forgetting](/docs/02-user-guide/07-memory/04-auto-learning)
+- Want to understand how memory works end-to-end? Read [How the Agent Remembers You](/docs/user-guide/memory/how-memory-works) in the User Guide
+- Want to understand the ordinary forgetting mechanism? Read [Auto-Learning and Forgetting](/docs/user-guide/memory/auto-learning)
 - Want to understand the evolution mechanism? Read [Self-Evolution](./self-evolution)
