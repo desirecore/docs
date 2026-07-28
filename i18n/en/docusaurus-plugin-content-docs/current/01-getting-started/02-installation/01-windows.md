@@ -8,6 +8,10 @@ keywords: [Windows, installation, NSIS, SmartScreen]
 
 This guide covers how to install DesireCore on Windows.
 
+:::tip Estimated time
+The entire installation typically takes just **1–2 minutes** (depending on download speed).
+:::
+
 ## Installation Steps
 
 1. **Download the installer**
@@ -39,13 +43,25 @@ This guide covers how to install DesireCore on Windows.
 
 ## Local Components Included in the Installer
 
-The Windows package includes portable Git, recommended Python and Node.js runtime archives, and CUA Driver for local GUI automation. These are independent third-party components; you do not need to preinstall system Git, Python, Node.js, or HostAgent.
+The Windows package includes the following independent third-party components; you do not need to preinstall system Git, Python, Node.js, or HostAgent.
 
-- After first startup, DesireCore imports the recommended Python and Node.js versions into its managed directories in the background. This does not replace system-wide installations.
-- Git automatically selects an available, newer source between system and bundled Git by default. You can change the source on the Runtime Environment page.
-- CUA Driver is enabled for GUI automation on the current Windows computer. It is a pragmatic transitional implementation that gives Windows users this capability before Windows HostAgent is complete. macOS still uses HostAgent for GUI operations, while HostAgent implementations for Windows, Linux, and other platforms remain under development.
+### Portable Git
 
-These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning. Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/09-third-party-software.md) for sources and license boundaries.
+The installer bundles a portable version of Git. After first startup, DesireCore automatically selects the newer of the system and bundled Git by default. You can change the source on the **Explorer** → **Compute** → **Runtime Environment** page.
+
+### Python / Node.js Runtimes
+
+After first startup, DesireCore imports the recommended Python and Node.js versions into its managed directories in the background. This does not replace system-wide installations.
+
+### CUA Driver (GUI Automation)
+
+CUA Driver is enabled by default for GUI automation on the current Windows computer. It is a transitional implementation that gives Windows users GUI capabilities before Windows HostAgent is complete. macOS still uses HostAgent for GUI operations, while HostAgent implementations for Windows, Linux, and other platforms remain under development.
+
+:::note Disk Usage and Security Scans
+These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning.
+:::
+
+Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/09-third-party-software.md) for sources and license boundaries.
 
 ## Handling Windows SmartScreen Prompts
 
@@ -80,5 +96,11 @@ To uninstall DesireCore:
 :::warning Data Cleanup
 During uninstallation, you'll be asked whether to also delete application data. If you plan to reinstall, it's recommended to keep the data; if you're sure you won't use it again, you can choose to delete everything.
 :::
+
+## Troubleshooting
+
+- **Installer won't open**: Verify the download completed successfully (file size ~100–200 MB), then try downloading again.
+- **Antivirus blocks installation**: Add the DesireCore install directory to your antivirus allowlist, or temporarily disable real-time protection and retry.
+- **Other issues**: Visit the [FAQ](../../06-faq/index.md) or contact our support team.
 
 After installation, head to [First Run](../03-first-run.md) to learn about the post-launch onboarding flow.

@@ -8,6 +8,15 @@ keywords: [Linux, installation, AppImage, Ubuntu, Fedora, ARM64, UnionTech UOS, 
 
 This guide covers how to install DesireCore on Linux. DesireCore is distributed as an AppImage, supporting both x64 and ARM64 architectures, and is compatible with most mainstream Linux distributions, including Chinese domestic operating systems such as UnionTech UOS, Kylin OS, Deepin, and openKylin.
 
+:::tip Experienced users — quick start
+```bash
+# Two commands after downloading:
+chmod +x DesireCore_x86_64_*.AppImage
+./DesireCore_x86_64_*.AppImage
+```
+If you hit a sandbox error, jump to [Troubleshooting](#troubleshooting-sandbox-errors).
+:::
+
 :::tip Chinese Domestic OS Users
 DesireCore has been tested and verified on UnionTech UOS, Kylin OS, Deepin, openKylin, and other Chinese domestic operating systems. For platform-specific installation instructions and compatibility details, please visit the [DesireCore China website](https://www.desirecore.cn).
 :::
@@ -39,6 +48,21 @@ DesireCore has been tested and verified on UnionTech UOS, Kylin OS, Deepin, open
 :::tip What is AppImage?
 AppImage is a portable application format — no installation required, just download and run. You can place it in any directory you prefer.
 :::
+
+## Recommended: Install the AppImage Launcher
+
+Newer builds include an AppImage launcher setup script. It places the AppImage in a fixed location and creates a command-line entry, application menu item, and desktop shortcut for you.
+
+Typical installation result:
+
+| Path | Purpose |
+|------|---------|
+| `~/.local/share/desirecore/DesireCore.AppImage` | Fixed AppImage path |
+| `~/.local/bin/desirecore` | Command-line launcher |
+| `~/.local/share/applications/desirecore.desktop` | Application menu entry |
+| `~/.local/share/desirecore/launcher.env` | Sandbox or launch parameter configuration |
+
+If the script is not available, you can continue with the manual approach below.
 
 ## Creating a Desktop Shortcut
 
@@ -96,6 +120,9 @@ Trace/breakpoint trap (core dumped)
 ```
 
 This occurs because DesireCore is built on Electron, whose Chromium engine requires Linux **unprivileged user namespaces** for sandboxing. Some distributions (especially Ubuntu 24.04+) restrict this feature by default via AppArmor.
+
+<details>
+<summary><strong>🔧 Full diagnosis and fix steps</strong> (click to expand)</summary>
 
 #### Step 1: Diagnose the Issue
 
@@ -157,6 +184,8 @@ This option is for Ubuntu 24.04 and later. It grants user namespace access only 
    ~/Apps/DesireCore/DesireCore.AppImage
    ```
 
+</details>
+
 #### Quick Test: Verify the App Can Run
 
 If you just want to confirm the application itself works, you can temporarily disable sandboxing (**for testing only, not recommended for daily use**):
@@ -173,7 +202,7 @@ echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
 ```
 
 :::warning
-`--no-sandbox` disables Chromium's process sandbox isolation, reducing security. Use it only for troubleshooting. For regular use, configure Option 1 or Option 2 above.
+`--no-sandbox` disables Chromium's process sandbox isolation, reducing security. Use it only for troubleshooting. For regular use, follow the [full diagnosis and fix steps above](#full-diagnosis-and-fix-steps-click-to-expand).
 :::
 
 ## Uninstall

@@ -8,12 +8,70 @@ keywords: [API Key, 配置, OpenAI, Claude, DeepSeek, Gemini, 硅基流动, 供�
 
 DesireCore 是一个本地优先的应用——你的核心数据存储在本地。AI 能力可以通过两种方式接入：登录后使用官方云端算力，或配置你自己的 API Key。配置 API Key 仍然是高级用户和企业用户最常用的方式，但它已经不是唯一入口。
 
+:::info 本页目录
+- [快速开始：云端算力或自备 Key](#快速开始云端算力或自备-key)
+- [什么是 API Key？](#什么是-api-key)
+- [在 DesireCore 中配置](#在-desirecore-中配置)
+- [各供应商 API Key 获取指南](#各供应商-api-key-获取指南)
+- [更多供应商](#更多供应商)
+- [验证连接](#验证连接)
+- [常见问题](#常见问题)
+:::
+
 ## 快速开始：云端算力或自备 Key
 
 | 方式 | 适合谁 | 说明 |
 |------|--------|------|
 | 官方云端算力 | 不想先注册各家供应商的新用户 | 登录后自动绑定 `desirecore-cloud`，按订阅或 credit 使用 |
 | 自备 API Key | 已有供应商账号、需要自控成本或企业合规 | API Key 存储在本机受权限保护的 `secrets.json` 中，供应商配置只保存引用 |
+
+### 使用官方云端算力（推荐新手）
+
+如果你不想先注册各家供应商的账号，可以使用 DesireCore 官方云端算力：
+
+1. **登录 DesireCore 账号**
+   - 点击左下角的 **头像** 图标
+   - 选择 **登录** 或 **注册**
+   - 使用邮箱或第三方账号登录
+
+2. **自动绑定云端算力**
+   - 登录成功后，资源面板会自动出现 **官方云端算力** 分组
+   - 系统会同步你当前账号可用的模型
+   - 显示余额、credit、临期额度和消耗信息
+
+3. **开始使用**
+   - 云端算力会自动配置为默认供应商
+   - 你可以直接开始 [第一次对话](./05-first-conversation.md)，无需额外配置
+
+:::tip 云端算力优势
+- **无需注册**：不需要在多个供应商网站注册账号
+- **统一计费**：通过 DesireCore 账号统一管理消耗
+- **快速开始**：登录后即可使用，无需手动配置 API Key
+- **灵活切换**：后续可以随时添加自备 API Key 作为补充
+:::
+
+### 使用自备 API Key
+
+如果你已有供应商账号，或需要自控成本、企业合规，可以配置自己的 API Key：
+
+1. **获取 API Key**：参考下方的 [各供应商 API Key 获取指南](#各供应商-api-key-获取指南)
+2. **配置到 DesireCore**：参考 [在 DesireCore 中配置](#在-desirecore-中配置)
+3. **验证连接**：参考 [验证连接](#验证连接)
+
+:::note 混合使用
+手动 API Key 和官方云端算力可以并存。你可以为某些任务指定自己的供应商，其他任务使用云端算力。
+:::
+
+## 本页导航
+
+| 快速跳转 | 说明 |
+|----------|------|
+| [什么是 API Key？](#什么是-api-key) | 概念解释 |
+| [在 DesireCore 中配置](#在-desirecore-中配置) | 配置步骤 |
+| [OpenAI](#openaigpt-系列) · [Anthropic](#anthropicclaude-系列) · [DeepSeek](#deepseek) · [Google](#googlegemini-系列) · [硅基流动](#硅基流动siliconflow) | 热门供应商获取指南 |
+| [更多供应商](#更多供应商) | 其他 16+ 供应商列表 |
+| [验证连接](#验证连接) | 配置后验证 |
+| [常见问题](#常见问题) | 排查指引 |
 
 ## 什么是 API Key？
 
@@ -33,11 +91,18 @@ API Key 就像是你访问 AI 服务的"钥匙"。每个 AI 供应商（如 Open
 
 <!-- 截图占位: 配置 API Key (configure-api-key.png) -->
 
+:::note 密钥安全
+你的 API Key 仅保存在本机的 `~/.desirecore/secrets.json` 中（文件权限为 `600`，仅当前用户可读），不会上传到 DesireCore 服务器或任何第三方。
+:::
+
 ## 各供应商 API Key 获取指南
 
 DesireCore 支持超过 20 个 AI 供应商。下面是最常用的几个供应商的获取方法。
 
 ### OpenAI（GPT 系列）
+
+<details>
+<summary>点击展开 OpenAI API Key 获取指南</summary>
 
 OpenAI 提供 GPT-5、GPT-4 等模型，是全球最知名的 AI 供应商之一。
 
@@ -60,7 +125,12 @@ OpenAI 提供 GPT-5、GPT-4 等模型，是全球最知名的 AI 供应商之一
 API Key 只会显示一次，请立即复制并保存。如果丢失了，你需要重新创建一个。
 :::
 
+</details>
+
 ### Anthropic（Claude 系列）
+
+<details>
+<summary>点击展开 Anthropic API Key 获取指南</summary>
 
 Anthropic 提供 Claude 系列模型，以安全性和长文本处理能力著称。
 
@@ -78,7 +148,12 @@ Anthropic 提供 Claude 系列模型，以安全性和长文本处理能力著�
 3. 点击 **Create Key**
 4. 复制生成的 Key（以 `sk-ant-` 开头）
 
+</details>
+
 ### DeepSeek
+
+<details>
+<summary>点击展开 DeepSeek API Key 获取指南</summary>
 
 DeepSeek 是国内领先的 AI 公司，提供高性价比的对话和推理模型，API 服务器在国内，延迟低。
 
@@ -95,7 +170,12 @@ DeepSeek 是国内领先的 AI 公司，提供高性价比的对话和推理模�
 2. 进入控制台，点击 **API Keys**
 3. 创建新的 API Key 并复制
 
+</details>
+
 ### Google（Gemini 系列）
+
+<details>
+<summary>点击展开 Google API Key 获取指南</summary>
 
 Google 提供 Gemini 系列模型，拥有超长上下文窗口（最高 100 万 Token）。
 
@@ -113,7 +193,12 @@ Google 提供 Gemini 系列模型，拥有超长上下文窗口（最高 100 万
 3. 选择或创建 Google Cloud 项目
 4. 复制生成的 API Key
 
+</details>
+
 ### 硅基流动（SiliconFlow）
+
+<details>
+<summary>点击展开硅基流动 API Key 获取指南</summary>
 
 硅基流动是国内的 AI 推理服务平台，聚合了多种开源模型（如 Qwen），部分模型提供免费额度。
 
@@ -129,6 +214,8 @@ Google 提供 Gemini 系列模型，拥有超长上下文窗口（最高 100 万
 1. 访问 [siliconflow.cn](https://siliconflow.cn)，注册或登录
 2. 进入控制台，找到 **API 密钥** 页面
 3. 创建新的密钥并复制
+
+</details>
 
 ## 更多供应商
 
