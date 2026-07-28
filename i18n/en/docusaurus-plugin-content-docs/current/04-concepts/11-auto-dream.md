@@ -58,7 +58,7 @@ Auto Dream's work proceeds in four phases:
 
 ### Memory Lifecycle (Including the Dream Phase)
 
-In [Auto-Learning and Forgetting](/docs/user-guide/memory/auto-learning), we introduced the five-stage memory lifecycle. With Auto Dream, the complete lifecycle becomes:
+In [Auto-Learning and Forgetting](../user-guide/memory/auto-learning), we introduced the five-stage memory lifecycle. With Auto Dream, the complete lifecycle becomes:
 
 ```
 Active → Recent → Archived → 💤 Dream → Compressed → Cleaned
@@ -92,7 +92,7 @@ After Auto Dream consolidation, these memories are distilled into a structured *
 
 ## Relationship with Self-Evolution
 
-Auto Dream isn't just a memory management tool — it's also essential nourishment for the agent's [Self-Evolution](/docs/concepts/self-evolution).
+Auto Dream isn't just a memory management tool — it's also essential nourishment for the agent's [Self-Evolution](./self-evolution).
 
 When Dream consolidates scattered experiences into structured knowledge, the evolution mechanism can further leverage these results:
 
@@ -120,6 +120,6 @@ Auto Dream never deletes any original memory. Even if you're not satisfied with 
 
 ## Next Steps
 
-- Want to understand how memory works end-to-end? Read [How the Agent Remembers You](/docs/user-guide/memory/how-memory-works) in the User Guide
-- Want to understand the ordinary forgetting mechanism? Read [Auto-Learning and Forgetting](/docs/user-guide/memory/auto-learning)
+- Want to understand how memory works end-to-end? Read [How the Agent Remembers You](../user-guide/memory/how-memory-works) in the User Guide
+- Want to understand the ordinary forgetting mechanism? Read [Auto-Learning and Forgetting](../user-guide/memory/auto-learning)
 - Want to understand the evolution mechanism? Read [Self-Evolution](./self-evolution)
