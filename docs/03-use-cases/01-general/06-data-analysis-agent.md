@@ -2,7 +2,6 @@
 title: 数据分析报告
 description: 使用数据分析报告智能体把数据、模板和分析说明整理成标准报告。
 keywords: [数据分析, 报告生成, 可视化, Excel, 财务报告]
-image: /img/use-cases/covers/cover-data-analysis-agent.jpg
 ---
 
 # 智能体生成标准数据分析报告

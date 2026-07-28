@@ -2,7 +2,6 @@
 title: 房产顾问
 description: 使用房产顾问智能体辅助楼盘对比、价格参考、政策解读和购房需求梳理。
 keywords: [房产顾问, 楼盘分析, 价格评估, 购房决策, 房产投资]
-image: /img/use-cases/covers/cover-real-estate.jpg
 ---
 
 # 房产顾问

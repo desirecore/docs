@@ -2,7 +2,6 @@
 title: 法律顾问
 description: 使用法律顾问智能体辅助合同预审、法规检索和法律风险梳理。
 keywords: [法律顾问, 合同审查, 法规检索, 风险评估, 合规]
-image: /img/use-cases/covers/cover-legal-advisor.jpg
 ---
 
 # 法律顾问

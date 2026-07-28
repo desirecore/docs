@@ -2,7 +2,6 @@
 title: 数据科学家
 description: 使用数据分析师智能体辅助用户行为分析、预测建模、运营监控和实验评估。
 keywords: [数据科学, 用户行为分析, 预测模型, 运营监控, 可视化]
-image: /img/use-cases/covers/cover-data-scientist.jpg
 ---
 
 # 数据科学家

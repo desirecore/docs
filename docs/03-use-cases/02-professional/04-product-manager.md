@@ -2,7 +2,6 @@
 title: 产品经理
 description: 使用产品经理智能体整理需求、撰写 PRD、跟踪迭代并识别项目风险。
 keywords: [产品经理, 需求文档, 迭代管理, Sprint, 项目管理]
-image: /img/use-cases/covers/cover-product-manager.jpg
 ---
 
 # 产品经理

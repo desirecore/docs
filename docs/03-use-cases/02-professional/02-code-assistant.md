@@ -2,7 +2,6 @@
 title: 代码助手
 description: 使用代码助手智能体完成需求澄清、架构设计、代码实现、测试和迭代修改。
 keywords: [代码助手, 项目开发, 全栈开发, 代码生成, 架构设计]
-image: /img/use-cases/covers/cover-code-assistant.jpg
 ---
 
 # 代码助手

@@ -2,7 +2,6 @@
 title: 翻译助手
 description: 使用翻译助手处理技术文档、商务邮件和本地化文本，并统一术语和风格。
 keywords: [翻译, 多语言, 本地化, 术语表, 翻译助手]
-image: /img/use-cases/covers/cover-translation.jpg
 ---
 
 # 翻译助手

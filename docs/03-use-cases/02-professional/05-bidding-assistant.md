@@ -2,7 +2,6 @@
 title: 招投标助手
 description: 使用招投标助手智能体辅助招标文件解读、资格自审、标书编制和投标检查。
 keywords: [招投标, 标书编制, 资格审查, 报价策略, 投标管理]
-image: /img/use-cases/covers/cover-bidding-assistant.jpg
 ---
 
 # 招投标助手

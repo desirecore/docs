@@ -2,7 +2,6 @@
 title: 邮件管理
 description: 使用邮件助手分类邮件、提取关键信息、整理待办并起草回复。
 keywords: [邮件管理, 邮件分类, 邮件回复, 待办事项, AI 助手]
-image: /img/use-cases/covers/cover-email-management.jpg
 ---
 
 # 邮件管理

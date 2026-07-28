@@ -2,7 +2,6 @@
 title: 会议助手
 description: 使用会议助手准备议程、整理纪要、提取待办事项和跟进清单。
 keywords: [会议助手, 会议纪要, 议程, 待办事项, 效率提升]
-image: /img/use-cases/covers/cover-meeting-assistant.jpg
 ---
 
 # 会议助手

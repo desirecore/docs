@@ -2,7 +2,6 @@
 title: 流程图生成
 description: 根据自然语言描述、文档或代码生成流程图、架构图、时序图等可编辑图表。
 keywords: [流程图, 架构图, 时序图, 可视化, 图表生成]
-image: /img/use-cases/covers/cover-flowchart-agent.jpg
 ---
 
 # 用智能体生成流程图

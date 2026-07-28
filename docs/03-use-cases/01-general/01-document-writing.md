@@ -2,7 +2,6 @@
 title: 文档写作
 description: 使用 AI 文书智能体整理思路、生成大纲、起草项目报告和方案文档。
 keywords: [文档写作, AI 文书, 报告, 写作助手, 内容创作]
-image: /img/use-cases/covers/cover-document-writing.jpg
 ---
 
 # 文档写作

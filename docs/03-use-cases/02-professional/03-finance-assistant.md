@@ -2,7 +2,6 @@
 title: 财务助手
 description: 使用财务助手智能体辅助预算编制、费用审核、报表整理和成本分析。
 keywords: [财务助手, 预算编制, 费用审核, 财务报表, 成本分析]
-image: /img/use-cases/covers/cover-finance-assistant.jpg
 ---
 
 # 财务助手

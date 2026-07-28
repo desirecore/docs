@@ -2,7 +2,6 @@
 title: 数据分析
 description: 使用数据分析师智能体清洗表格、计算指标、生成图表并整理分析结论。
 keywords: [数据分析, 报表, 可视化, 趋势预测, 数据分析师]
-image: /img/use-cases/covers/cover-data-analysis.jpg
 ---
 
 # 数据分析

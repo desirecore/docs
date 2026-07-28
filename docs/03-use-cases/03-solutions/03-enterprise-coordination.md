@@ -2,7 +2,6 @@
 title: 企业服务协调
 description: 使用 DesireCore 核心调度智能体拆解复杂任务、分派专业智能体并跟踪进度。
 keywords: [企业协调, 多智能体协作, 跨部门, 任务编排, DesireCore]
-image: /img/use-cases/covers/cover-enterprise-coordination.jpg
 ---
 
 # 企业服务协调

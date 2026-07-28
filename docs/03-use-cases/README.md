@@ -16,24 +16,6 @@
 
 | 文件名 | 对应场景 |
 |--------|----------|
-| cover-data-analysis.jpg | 数据分析 (general) |
-| cover-data-analysis-agent.jpg | 数据分析 Agent (general) |
-| cover-document-writing.jpg | 文档写作 (general) |
-| cover-email-management.jpg | 邮件管理 (general) |
-| cover-flowchart-agent.jpg | 流程图 Agent (general) |
-| cover-meeting-assistant.jpg | 会议助手 (general) |
-| cover-translation.jpg | 翻译 (general) |
-| cover-web-scraping-agent.jpg | 网页抓取 Agent (general) |
-| cover-bidding-assistant.jpg | 投标助手 (professional) |
-| cover-code-assistant.jpg | 代码助手 (professional) |
-| cover-data-scientist.jpg | 数据科学家 (professional) |
-| cover-finance-assistant.jpg | 财务助手 (professional) |
-| cover-legal-advisor.jpg | 法律顾问 (professional) |
-| cover-product-manager.jpg | 产品经理 (professional) |
-| cover-real-estate.jpg | 房地产 (professional) |
-| cover-ai-bidding.jpg | AI 投标方案 (solutions) |
-| cover-ai-copyright.jpg | AI 版权保护 (solutions) |
-| cover-enterprise-coordination.jpg | 企业协同 (solutions) |
 
 ## 其他资产
 

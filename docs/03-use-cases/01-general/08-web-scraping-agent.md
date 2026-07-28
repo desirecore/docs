@@ -2,7 +2,6 @@
 title: 网页信息采集
 description: 使用网页信息采集智能体浏览公开网页、提取字段并整理为结构化数据。
 keywords: [信息采集, 网页爬虫, 数据抓取, 竞品监控, 结构化数据]
-image: /img/use-cases/covers/cover-web-scraping-agent.jpg
 ---
 
 # 智能体网页信息采集

@@ -2,7 +2,6 @@
 title: AI 招投标
 description: 使用多智能体协作辅助招标文件分析、标书编制、报价测算和投标检查。
 keywords: [AI 招投标, 标书编制, 多智能体协作, 投标管理, 质量控制]
-image: /img/use-cases/covers/cover-ai-bidding.jpg
 ---
 
 # AI 招投标

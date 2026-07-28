@@ -2,7 +2,6 @@
 title: AI 软著申请
 description: 使用 DesireCore 辅助准备软件著作权申请材料，包括说明书、操作手册、截图和代码材料。
 keywords: [软著申请, 软件著作权, 自动化, 知识产权, 软著写作]
-image: /img/use-cases/covers/cover-ai-copyright.jpg
 ---
 
 # AI 软著申请
