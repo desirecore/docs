@@ -18,7 +18,7 @@ DesireCore 项目在 GitHub 上维护了多个官方仓库，欢迎关注和参�
 | `desirecore-hostagent` | 原生 HostAgent 平台代码，用于 GUI 操作、设备能力、发现、配对与常驻执行 | macOS 实现当前已作为 GUI 操作载体；Windows、Linux、其他桌面与移动端实现仍在开发。初步计划稳定后开源，根据公司融资情况和经营战略决定，不作为最终承诺 |
 
 :::info 不同平台的当前载体
-macOS 当前仍由 HostAgent 承载 GUI 操作。Windows 为了让用户在原生 HostAgent 完成前先使用本机 GUI 自动化，暂时采用 DesireCore 随附的独立第三方 CUA Driver；这不表示 HostAgent 已被弃用或替代。第三方组件不属于 DesireCore 官方仓库，详见 [第三方软件与许可](./09-third-party-software.md)。
+macOS 当前仍由 HostAgent 承载 GUI 操作。Windows 为了让用户在原生 HostAgent 完成前先使用本机 GUI 自动化，暂时采用 DesireCore 随附的独立第三方 CUA Driver；这不表示 HostAgent 已被弃用或替代。第三方组件不属于 DesireCore 官方仓库，详见 [第三方软件与许可](./10-third-party-software.md)。
 :::
 
 ## 文档与分发

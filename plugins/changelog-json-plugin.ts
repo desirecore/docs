@@ -1,7 +1,7 @@
 /**
  * Docusaurus 插件：构建时生成 changelog.json
  *
- * 读取 docs/05-more/10-changelog/v*.md，解析 frontmatter 和 markdown sections，
+ * 读取 docs/05-more/11-changelog/v*.md，解析 frontmatter 和 markdown sections，
  * 输出结构化 JSON 到 static/api/changelog.json（开发+构建均可用）。
  */
 
@@ -137,7 +137,7 @@ function writeChangelogJson(targetDir: string, data: ChangelogJson): void {
 }
 
 export default function changelogJsonPlugin(context: LoadContext): Plugin {
-  const changelogDir = path.join(context.siteDir, 'docs', '05-more', '10-changelog')
+  const changelogDir = path.join(context.siteDir, 'docs', '05-more', '11-changelog')
 
   return {
     name: 'changelog-json-plugin',

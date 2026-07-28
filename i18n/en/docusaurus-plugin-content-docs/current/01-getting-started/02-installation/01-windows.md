@@ -61,7 +61,7 @@ CUA Driver is enabled by default for GUI automation on the current Windows compu
 These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning.
 :::
 
-Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/09-third-party-software.md) for sources and license boundaries.
+Open **Explorer** → **Compute** → **Runtime Environment** to inspect actual versions and paths. See [Third-Party Software and Licenses](../../05-more/10-third-party-software.md) for sources and license boundaries.
 
 ## Handling Windows SmartScreen Prompts
 

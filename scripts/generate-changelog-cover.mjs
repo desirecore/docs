@@ -30,8 +30,8 @@ const sharp = require('sharp')
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
-const CHANGELOG_DIR_ZH = resolve(ROOT, 'docs/05-more/10-changelog')
-const CHANGELOG_DIR_EN = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/10-changelog')
+const CHANGELOG_DIR_ZH = resolve(ROOT, 'docs/05-more/11-changelog')
+const CHANGELOG_DIR_EN = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/11-changelog')
 const IMG_DIR = resolve(ROOT, 'static/img/changelog')
 
 // 输出宣传图尺寸（文字叠加层布局按此尺寸计算）

@@ -102,7 +102,7 @@ GUI 自动化依赖目标平台提供的可访问性、窗口和输入能力，�
 - 对业务关键流程先在测试账号或副本数据上验证。
 
 :::warning 第三方组件
-Windows 当前使用的 CUA Driver 是由其权利人提供、按其自身许可证分发的独立第三方程序，并非 DesireCore 自有组件或 HostAgent。它是 Windows HostAgent 完成前的过渡载体；其版本、兼容性和上游支持可能变化，具体以随软件提供的第三方声明及 [第三方软件与许可](../../05-more/09-third-party-software.md) 为准。
+Windows 当前使用的 CUA Driver 是由其权利人提供、按其自身许可证分发的独立第三方程序，并非 DesireCore 自有组件或 HostAgent。它是 Windows HostAgent 完成前的过渡载体；其版本、兼容性和上游支持可能变化，具体以随软件提供的第三方声明及 [第三方软件与许可](../../05-more/10-third-party-software.md) 为准。
 :::
 
 ## 下一步

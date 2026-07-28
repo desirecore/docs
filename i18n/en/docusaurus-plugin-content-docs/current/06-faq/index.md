@@ -46,4 +46,6 @@ Have a specific issue? Go to the corresponding category for detailed answers:
 | [Conversation Issues](./03-conversations.md) | Message failure, slow replies, lost history |
 | [Agent Issues](./04-agents.md) | Installation failure, reset Agent, memory issues |
 | [Data and Privacy](./05-data-privacy.md) | Data storage location, backup methods, complete deletion |
-| [Performance Issues](./06-performance.md) | Memory usage, response speed, optimization methods |
+| [Performance Issues](./06-performance.md) | Memory usage, disk space, GPU, optimization methods |
+| [Delegation and Collaboration](./07-delegation.md) | Delegation progress, team collaboration, receipt viewing |
+| [Automation Issues](./08-automation.md) | Schedule vs heartbeat, timed tasks, periodic tasks |
