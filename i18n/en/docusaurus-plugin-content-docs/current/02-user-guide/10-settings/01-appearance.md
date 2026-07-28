@@ -13,6 +13,8 @@ DesireCore supports three theme modes. You can switch between them in settings a
 1. Click the **gear icon** in the bottom-left corner to open the settings panel
 2. Find the **Appearance** section
 
+![Appearance Settings Interface](./img/settings-appearance.png)
+
 ## Theme Modes
 
 DesireCore offers three theme modes:

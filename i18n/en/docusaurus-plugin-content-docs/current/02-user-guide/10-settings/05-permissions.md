@@ -13,6 +13,8 @@ Some DesireCore features require the operating system to grant corresponding per
 1. Open the **Settings** panel
 2. Click **System Permissions** in the **Permission Management** section
 
+![Permission Settings Interface](./img/settings-permissions.png)
+
 ## Permission List
 
 | Permission | Purpose | When Needed |
