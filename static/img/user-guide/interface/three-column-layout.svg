@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.12)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.05)"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)" rx="12"/>
+  <text x="400" y="35" text-anchor="middle" fill="#e0e0e0" font-size="16" font-weight="600">DesireCore 三栏布局</text>
+  <!-- NavRail -->
+  <rect x="30" y="55" width="62" height="370" rx="8" fill="url(#glass)" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+  <text x="61" y="80" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="600">NavRail</text>
+  <text x="61" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">62px</text>
+  <circle cx="61" cy="125" r="12" fill="rgba(74,222,128,0.2)" stroke="#4ade80" stroke-width="1"/>
+  <text x="61" y="129" text-anchor="middle" fill="#4ade80" font-size="8">Logo</text>
+  <rect x="47" y="150" width="28" height="24" rx="4" fill="rgba(74,222,128,0.15)" stroke="#4ade80" stroke-width="0.8"/>
+  <text x="61" y="165" text-anchor="middle" fill="#4ade80" font-size="7">对话</text>
+  <rect x="47" y="180" width="28" height="24" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+  <text x="61" y="195" text-anchor="middle" fill="#94a3b8" font-size="7">关系</text>
+  <rect x="47" y="210" width="28" height="24" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+  <text x="61" y="225" text-anchor="middle" fill="#94a3b8" font-size="7">资源</text>
+  <rect x="47" y="240" width="28" height="24" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+  <text x="61" y="255" text-anchor="middle" fill="#94a3b8" font-size="7">应用</text>
+  <rect x="47" y="270" width="28" height="24" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+  <text x="61" y="285" text-anchor="middle" fill="#94a3b8" font-size="7">市场</text>
+  <circle cx="61" cy="380" r="8" fill="rgba(255,149,0,0.2)" stroke="#ff9500" stroke-width="0.8"/>
+  <text x="61" y="383" text-anchor="middle" fill="#ff9500" font-size="6">🔔</text>
+  <circle cx="61" cy="405" r="8" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+  <text x="61" y="408" text-anchor="middle" fill="#94a3b8" font-size="6">⚙</text>
+  <!-- Conversation List -->
+  <rect x="102" y="55" width="200" height="370" rx="8" fill="url(#glass)" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+  <text x="202" y="80" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="600">对话列表</text>
+  <text x="202" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">290px</text>
+  <rect x="112" y="105" width="180" height="30" rx="6" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.3)" stroke-width="0.5"/>
+  <text x="202" y="124" text-anchor="middle" fill="#94a3b8" font-size="9">🔍 搜索智能体...</text>
+  <rect x="112" y="145" width="180" height="45" rx="6" fill="rgba(74,222,128,0.08)" stroke="rgba(74,222,128,0.3)" stroke-width="0.8"/>
+  <circle cx="130" cy="167" r="10" fill="rgba(74,222,128,0.3)"/>
+  <text x="148" y="163" fill="#e0e0e0" font-size="9">DesireCore</text>
+  <text x="148" y="178" fill="#64748b" font-size="8">好的，让我帮你分析...</text>
+  <text x="275" y="163" fill="#64748b" font-size="7">11:05</text>
+  <rect x="112" y="200" width="180" height="45" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <circle cx="130" cy="222" r="10" fill="rgba(175,82,222,0.3)"/>
+  <text x="148" y="218" fill="#e0e0e0" font-size="9">法律助手</text>
+  <text x="148" y="233" fill="#64748b" font-size="8">合同审查已完成...</text>
+  <text x="275" y="218" fill="#64748b" font-size="7">昨天</text>
+  <rect x="112" y="255" width="180" height="45" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <circle cx="130" cy="277" r="10" fill="rgba(0,122,255,0.3)"/>
+  <text x="148" y="273" fill="#e0e0e0" font-size="9">数据分析师</text>
+  <text x="148" y="288" fill="#64748b" font-size="8">报表已生成...</text>
+  <text x="275" y="273" fill="#64748b" font-size="7">周一</text>
+  <!-- Chat Area -->
+  <rect x="312" y="55" width="460" height="370" rx="8" fill="url(#glass)" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+  <text x="542" y="80" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="600">聊天区域</text>
+  <text x="542" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">flex-1 自适应</text>
+  <!-- Header -->
+  <rect x="322" y="105" width="440" height="35" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <circle cx="342" cy="122" r="10" fill="rgba(74,222,128,0.3)"/>
+  <text x="360" y="126" fill="#e0e0e0" font-size="9" font-weight="500">DesireCore</text>
+  <circle cx="420" cy="122" r="3" fill="#4ade80"/>
+  <text x="430" y="126" fill="#4ade80" font-size="8">在线</text>
+  <text x="700" y="126" fill="#64748b" font-size="8">[沉浸] [档案] [更多]</text>
+  <!-- Messages -->
+  <rect x="340" y="155" width="250" height="35" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <text x="355" y="176" fill="#e0e0e0" font-size="9">你好！有什么可以帮你的？</text>
+  <rect x="500" y="200" width="220" height="35" rx="12" fill="rgba(74,222,128,0.2)" stroke="rgba(74,222,128,0.3)" stroke-width="0.5"/>
+  <text x="515" y="221" fill="#e0e0e0" font-size="9">帮我分析一下这份报告</text>
+  <rect x="340" y="250" width="300" height="50" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <text x="355" y="271" fill="#e0e0e0" font-size="9">好的，让我读取文件并分析...</text>
+  <rect x="355" y="280" width="120" height="14" rx="3" fill="rgba(0,122,255,0.15)"/>
+  <text x="360" y="290" fill="#60a5fa" font-size="7">🔧 Read 文件...</text>
+  <!-- Input -->
+  <rect x="322" y="385" width="440" height="30" rx="15" fill="rgba(255,255,255,0.06)" stroke="rgba(74,222,128,0.4)" stroke-width="1"/>
+  <text x="345" y="404" fill="#64748b" font-size="9">输入消息...</text>
+  <text x="340" y="404" fill="#94a3b8" font-size="9">[+] [📷] [✂]</text>
+  <circle cx="742" cy="400" r="12" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1"/>
+  <text x="742" y="404" text-anchor="middle" fill="#4ade80" font-size="8">↑</text>
+</svg>

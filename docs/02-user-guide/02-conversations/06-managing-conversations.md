@@ -70,7 +70,7 @@ DesireCore 的对话以 Companion 为单位组织 --- 每个 Companion 对应一
 | Rewind | 回到某条用户消息前的检查点 | 保留旧分支 |
 | 清除聊天记录 | 删除当前 Companion 的历史消息 | 否 |
 
-详见 [上下文控制](./context-control) 和 [Rewind 与 Checkpoint](./rewind-checkpoints)。
+详见 [上下文控制](./09-context-control.md) 和 [Rewind 与 Checkpoint](./10-rewind-checkpoints.md)。
 
 ## 删除对话
 
@@ -109,5 +109,5 @@ DesireCore 的对话支持跨会话的上下文延续：
 
 - 返回查看[发送消息](./01-sending-messages.md)的详细操作
 - 了解[交互卡片](./03-cards.md)的含义
-- 学习[导出对话](./exporting-conversations)
+- 学习[导出对话](./08-exporting-conversations.md)
 - 遇到问题？查看[常见问题](../../06-faq/index.md)

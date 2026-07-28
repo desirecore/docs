@@ -45,7 +45,7 @@ Companion 的消息可以包含多种结构化内容：
 | `.md` 路径 | 可信助手回复中的本地 Markdown 路径可点击打开 |
 | 图片 | 图片附件可预览，也会参与对话导出 |
 
-消息操作栏中「复制」会复制纯文本，「复制 Markdown」会保留 Markdown 结构。详见 [Markdown 与图表渲染](./markdown-rendering)。
+消息操作栏中「复制」会复制纯文本，「复制 Markdown」会保留 Markdown 结构。详见 [Markdown 与图表渲染](./07-markdown-rendering.md)。
 
 ### 思考过程
 
@@ -119,4 +119,4 @@ Companion 的心跳（Heartbeat）系统会定期检查状态并汇报。需要�
 
 - 深入了解[交互卡片详解](./03-cards.md)，掌握各种功能卡片的用途
 - 学习如何[选择 AI 模型](./04-model-selection.md)
-- 阅读 [Markdown 与图表渲染](./markdown-rendering)
+- 阅读 [Markdown 与图表渲染](./07-markdown-rendering.md)
