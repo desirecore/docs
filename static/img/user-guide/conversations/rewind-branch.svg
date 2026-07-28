@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="rgba(255,255,255,0.4)"/></marker>
+  </defs>
+  <rect width="700" height="300" fill="url(#bg3)" rx="12"/>
+  <text x="350" y="30" text-anchor="middle" fill="#e0e0e0" font-size="14" font-weight="600">Rewind 分支机制</text>
+  <!-- Main timeline -->
+  <line x1="60" y1="80" x2="640" y2="80" stroke="rgba(74,222,128,0.5)" stroke-width="2" marker-end="url(#arr2)"/>
+  <circle cx="100" cy="80" r="8" fill="#4ade80"/>
+  <text x="100" y="65" text-anchor="middle" fill="#94a3b8" font-size="9">消息1</text>
+  <circle cx="200" cy="80" r="8" fill="#4ade80"/>
+  <text x="200" y="65" text-anchor="middle" fill="#94a3b8" font-size="9">消息2</text>
+  <circle cx="300" cy="80" r="8" fill="#4ade80"/>
+  <text x="300" y="65" text-anchor="middle" fill="#94a3b8" font-size="9">消息3</text>
+  <circle cx="400" cy="80" r="8" fill="#4ade80"/>
+  <text x="400" y="65" text-anchor="middle" fill="#94a3b8" font-size="9">消息4</text>
+  <circle cx="500" cy="80" r="8" fill="#4ade80"/>
+  <text x="500" y="65" text-anchor="middle" fill="#94a3b8" font-size="9">消息5</text>
+  <!-- Rewind point -->
+  <circle cx="300" cy="80" r="12" fill="none" stroke="#ff9500" stroke-width="2" stroke-dasharray="3,2"/>
+  <text x="300" y="105" text-anchor="middle" fill="#ff9500" font-size="8">⏪ Rewind 点</text>
+  <!-- Branch 1 -->
+  <path d="M300,88 C300,130 320,140 360,150" fill="none" stroke="rgba(96,165,250,0.6)" stroke-width="2" marker-end="url(#arr2)"/>
+  <line x1="360" y1="150" x2="600" y2="150" stroke="rgba(96,165,250,0.5)" stroke-width="2" marker-end="url(#arr2)"/>
+  <circle cx="400" cy="150" r="7" fill="#60a5fa"/>
+  <text x="400" y="140" text-anchor="middle" fill="#60a5fa" font-size="8">消息3'</text>
+  <circle cx="500" cy="150" r="7" fill="#60a5fa"/>
+  <text x="500" y="140" text-anchor="middle" fill="#60a5fa" font-size="8">消息4'</text>
+  <text x="620" y="155" fill="#60a5fa" font-size="9">新路径</text>
+  <!-- Branch label -->
+  <rect x="330" y="170" width="200" height="22" rx="4" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.3)" stroke-width="0.5"/>
+  <text x="430" y="185" text-anchor="middle" fill="#60a5fa" font-size="8">第一次 Rewind 后的新分支</text>
+  <!-- Info box -->
+  <rect x="60" y="210" width="580" height="75" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <text x="80" y="235" fill="#e0e0e0" font-size="11" font-weight="500">关键特性</text>
+  <text x="80" y="255" fill="#94a3b8" font-size="9">• 旧分支（绿色）始终保留，不会被删除</text>
+  <text x="80" y="272" fill="#94a3b8" font-size="9">• 新分支（蓝色）从 Rewind 点开始，可以独立发展</text>
+  <text x="400" y="255" fill="#94a3b8" font-size="9">• 可多次 Rewind，产生多个分支</text>
+  <text x="400" y="272" fill="#94a3b8" font-size="9">• 支持恢复文件、记忆、技能等工作状态</text>
+</svg>

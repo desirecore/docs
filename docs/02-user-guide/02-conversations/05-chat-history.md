@@ -81,9 +81,9 @@ DesireCore 会保存你与每个 Companion 的所有对话记录。你可以随�
 - 图片附件可以随导出嵌入
 - 工具调用可选择隐藏、摘要或完整展开
 
-详见 [导出对话](./exporting-conversations)。
+详见 [导出对话](./08-exporting-conversations.md)。
 
 ## 下一步
 
 - 了解如何[管理对话](./06-managing-conversations.md)，包括新建、删除和清除上下文
-- 学习[上下文控制](./context-control)，区分历史、压缩和新上下文
+- 学习[上下文控制](./09-context-control.md)，区分历史、压缩和新上下文

@@ -53,7 +53,7 @@ Skill cards can show name, description, source, version, author, status, direct-
 3. Review the skill description, dependencies, and risk notes
 4. Install and confirm when prompted
 
-Global marketplace skills are installed into the global skills directory. Agent-bound skills are written into the corresponding agent repository.
+When installing a skill, you can choose the install target: global, a specific agent, or a project-level directory. Global marketplace skills are installed into the global skills directory where all agents can discover them. Agent-bound skills are written into the corresponding agent repository. Project-level skills only take effect in the corresponding work directory, making them ideal for maintaining team conventions, project scripts, and local templates alongside the project.
 
 ### Local Import
 
@@ -122,6 +122,39 @@ These fields affect card display, command completion, automatic triggering, tool
 
 :::tip Clear Trigger Conditions
 The clearer the skill description, the easier it is for the agent to choose it at the right time. State when to use it and when not to use it near the top of `SKILL.md`.
+:::
+
+## Skill Source Priority
+
+When multiple skills are available for the same task, the agent considers them in the following order:
+
+| Source | Typical Path | Scope |
+|--------|-------------|-------|
+| Project-level Skill | `<workdir>/.agents/skills/` | Current project or work directory |
+| Claude-compatible Skill | `<workdir>/.claude/skills/` | Compatible with existing Claude project configs |
+| Agent Skill | `agents/<agent_id>/skills/` | Current agent |
+| Global Skill | Global skills directory | All agents |
+
+When both `.agents/skills` and `.claude/skills` exist, DesireCore prefers `.agents/skills`. This lets you migrate to the native structure at your own pace without breaking older projects.
+
+## Skill Export
+
+You can export individual skills from the skill detail panel. The exported ZIP includes:
+
+- `SKILL.md`
+- Optional scripts, references, templates, and asset files
+- Metadata, input/output schemas, and localized content
+
+Exporting skills is useful for sharing a single capability between teams rather than exporting an entire agent.
+
+## Multi-language and Resource References
+
+Skills can declare localized content. When the UI language is set to Chinese, the agent prioritizes the Chinese description; when set to English, it loads the English version. This allows the same skill to behave consistently across multilingual teams.
+
+Skill documents can use `${SKILL_DIR}` or `{{SKILL_DIR}}` to reference resources within the skill directory, such as templates, scripts, or sample files. At runtime, the system resolves these placeholders to real paths, avoiding hardcoded absolute paths across different machines.
+
+:::info Auto-injection
+Not every skill is automatically injected into the model context. Only skills that are explicitly invoked, determined to be needed by the agent, or allowed for auto-injection in their metadata are loaded. This reduces context pollution and unnecessary tool exposure.
 :::
 
 ## Next Steps

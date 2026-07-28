@@ -1,24 +1,31 @@
 ---
 title: Enterprise Service Coordination
-description: Use DesireCore's core scheduling agent to achieve cross-department collaboration, multi-agent orchestration, and project management integration.
+description: Use DesireCore's core scheduling agent to decompose complex tasks, delegate to professional agents and track progress.
 keywords: [Enterprise Coordination, Multi-agent Collaboration, Cross-department, Task Orchestration, DesireCore]
+image: /img/use-cases/covers/cover-enterprise-coordination.jpg
 ---
 
 # Enterprise Service Coordination
 
-## Scenario Description
+## Real Workflow
 
-Your company is releasing a new product next month. This involves Legal reviewing product copy, Marketing creating promotional materials, Finance calculating cost pricing, Project Manager establishing release timeline...... The traditional approach requires you to contact each department individually, follow up on progress, and integrate information, resulting in extremely high coordination costs.
+Enterprise service coordination scenarios apply to cross-role, cross-material, cross-timeline tasks. The real problem isn't "no one is doing it"—it's that goal decomposition, progress synchronization and result integration costs are too high.
 
-DesireCore's core scheduling agent is like a project manager. It can understand your overall requirements, automatically break down tasks and delegate them to the most suitable professional agents for parallel execution, monitor progress in real-time, and finally integrate all deliverables for you.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | New product launches, customer complaint escalations, compliance rectification, quarterly business reviews and other cross-department tasks |
+| Existing Materials | Overall goal, deadlines, existing documents, related policies, pending decisions and involved roles |
+| Pain Point | Many subtasks, unclear dependencies, scattered responsible parties; managers constantly chase progress and consolidate results |
+| DesireCore Intervention | Core dispatcher decomposes tasks, delegates to agents, tracks blockers and centralizes items needing human decisions |
+| Acceptance Result | Manager sees unified progress, deliverables and pending decisions rather than searching for information across multiple chat groups |
 
 ## Involved Agents
 
-- **DesireCore Core** -- Task orchestration, agent scheduling, global monitoring
-- **Legal Advisor** -- Compliance review
-- **AI Copywriter** -- Marketing material writing
-- **Finance Assistant** -- Cost accounting and pricing
-- **Product Manager** -- Release timeline and task allocation
+- **DesireCore Core** — Task orchestration, agent scheduling, global monitoring
+- **Legal Advisor** — Compliance review
+- **AI Copywriter** — Marketing material writing
+- **Finance Assistant** — Cost accounting and pricing
+- **Product Manager** — Release timeline and task allocation
 
 ## Complete Conversation Example
 
@@ -29,10 +36,10 @@ You: We're releasing a new product next month and need to prepare all materials 
 
 DesireCore: I'll help you coordinate this product release. I've broken it down into the following work:
 
-        1. Legal Compliance Review -- Check product copy, user agreement
-        2. Marketing Material Preparation -- Product introduction, promotional copy, social media content
-        3. Financial Cost Accounting -- Release costs, pricing strategy
-        4. Project Planning -- Release timeline, task allocation
+        1. Legal Compliance Review — Check product copy, user agreement
+        2. Marketing Material Preparation — Product introduction, promotional copy, social media content
+        3. Financial Cost Accounting — Release costs, pricing strategy
+        4. Project Planning — Release timeline, task allocation
 
         Delegated to respective agents to start work:
         → Legal Advisor: Reviewing product compliance
@@ -95,11 +102,12 @@ DesireCore: Received emergency task, adjusting resource priority...
 
 ### Task Orchestration
 
-DesireCore can automatically break down a complex requirement into multiple subtasks, identify dependencies between tasks, and arrange serial or parallel execution:
+DesireCore can decompose a complex requirement into multiple subtasks, identify dependencies and arrange serial or parallel execution:
 
 - Tasks without dependencies execute in parallel to shorten total time
 - Tasks with dependencies are connected in series in sequence
 - Automatically monitor completion status of each task
+- Bind deliverables, responsible parties and deadlines to each subtask
 
 ### Smart Scheduling
 
@@ -108,6 +116,7 @@ When system resources are tight or unexpected situations occur, DesireCore will:
 - Reallocate resources based on task priority
 - Emergency tasks automatically preempt resources from low-priority tasks
 - When an agent fails, automatically reassign tasks to backup agents
+- Centralize blockers for your review rather than scattering them across multiple conversations
 
 ### Intent Recognition
 
@@ -116,12 +125,29 @@ DesireCore can distinguish whether you are **Teaching** or **Delegating Tasks**:
 - "Use a relaxed tone for emails in the future" → Teaching, records preference and syncs to all copywriting agents
 - "Help me write an email to the client" → Delegating, assigned to AI Copywriter for execution
 
+### Decision Point Management
+
+Cross-department tasks most commonly get stuck at "no one to make the call." DesireCore will list items needing your decision separately:
+
+| Decision Point | Source | Impact | Next Step |
+|---------------|--------|--------|-----------|
+| Pricing: 299 or 399 | Finance Assistant | Affects margin and market positioning | After you confirm pricing, AI Copywriter updates promotional materials |
+| Accept data processing clauses in user agreement | Legal Advisor | Affects launch compliance | After you confirm, sync with Product Manager to schedule launch |
+| Delay release date | Product Manager | Affects marketing cadence and CS preparation | After you confirm, readjust task dependencies |
+
 ## Final Deliverable
 
-An efficiently operating multi-agent collaboration system that compresses cross-department coordination from days to tens of minutes, with all professional work advancing in parallel, cross-reviewed, and finally integrated into unified deliverables.
+A trackable multi-agent collaboration workflow: tasks are decomposed, delegated, consolidated and cross-checked, ultimately forming unified deliverables, progress reports, blockers and pending decision lists.
+
+## DesireCore Capabilities Used
+
+- **Intelligent Task Orchestration**: Identify intent, decompose subtasks, delegate to agents, track progress and consolidate receipts
+- **Team Mode / Swarm Mode**: Long-term roles handle stable processes, temporary roles handle one-off complex tasks
+- **Decision Tree & Human Gate**: Key branches and high-risk actions require your confirmation before continuing
+- **Replay & Audit**: Review what each agent did, which step took the most time and where optimization is needed
 
 :::tip Best Practices
-- When describing requirements, state the global goal (e.g., "release new product"), let DesireCore determine which agents need to participate, which is more efficient than specifying individually
-- For projects with clear deadlines, inform time constraints from the start, and the scheduler will prioritize tasks on the critical path
-- Regularly check progress summaries and promptly respond to items requiring your decision to avoid blocking subsequent work of other agents
+- When describing requirements, state the overall goal (e.g., "release new product"), deadline, existing materials and non-negotiable constraints
+- For projects with clear deadlines, inform time constraints from the start—the scheduler will prioritize tasks on the critical path
+- Regularly check progress summaries and promptly respond to items requiring your decision to avoid blocking other agents' subsequent work
 :::

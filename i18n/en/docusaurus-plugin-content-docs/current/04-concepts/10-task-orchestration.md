@@ -120,5 +120,5 @@ After the whole process finishes, the consolidated receipt the engine produces i
 ## Next Steps
 
 - Want to understand step controllability? Read [Hardened/Flexible/Human Gate](./step-types)
-- Want to understand how multiple agents collaborate? Read [Cross-Agent Collaboration](../02-user-guide/04-delegation/06-cross-agent.md) in the user guide
+- Want to understand how multiple agents collaborate? Read [Cross-Agent Collaboration](../user-guide/delegation/cross-agent) in the user guide
 - Want to understand the task receipt system? Read [Receipt System](./receipt-system)

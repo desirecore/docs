@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="320" fill="url(#bg2)" rx="12"/>
+  <text x="350" y="30" text-anchor="middle" fill="#e0e0e0" font-size="14" font-weight="600">上下文生命周期</text>
+  <!-- Timeline arrow -->
+  <line x1="50" y1="80" x2="650" y2="80" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="rgba(255,255,255,0.4)"/></marker></defs>
+  <!-- Messages on timeline -->
+  <circle cx="100" cy="80" r="6" fill="#4ade80"/>
+  <text x="100" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">消息1</text>
+  <circle cx="180" cy="80" r="6" fill="#4ade80"/>
+  <text x="180" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">消息2</text>
+  <circle cx="260" cy="80" r="6" fill="#4ade80"/>
+  <text x="260" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">消息3</text>
+  <circle cx="340" cy="80" r="6" fill="#60a5fa"/>
+  <text x="340" y="70" text-anchor="middle" fill="#60a5fa" font-size="8">/compact</text>
+  <circle cx="420" cy="80" r="6" fill="#4ade80"/>
+  <text x="420" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">消息4</text>
+  <circle cx="500" cy="80" r="6" fill="#4ade80"/>
+  <text x="500" y="70" text-anchor="middle" fill="#94a3b8" font-size="8">消息5</text>
+  <circle cx="580" cy="80" r="6" fill="#f472b6"/>
+  <text x="580" y="70" text-anchor="middle" fill="#f472b6" font-size="8">/new</text>
+  <!-- Compact zone -->
+  <rect x="70" y="100" width="240" height="80" rx="8" fill="rgba(96,165,250,0.08)" stroke="rgba(96,165,250,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="190" y="125" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="500">压缩为摘要</text>
+  <text x="190" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">消息1-3 的要点被提炼</text>
+  <text x="190" y="162" text-anchor="middle" fill="#94a3b8" font-size="9">原始内容仍可查看</text>
+  <!-- Active context -->
+  <rect x="350" y="100" width="200" height="80" rx="8" fill="rgba(74,222,128,0.08)" stroke="rgba(74,222,128,0.3)" stroke-width="1"/>
+  <text x="450" y="125" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="500">活跃上下文</text>
+  <text x="450" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">摘要 + 最近消息</text>
+  <text x="450" y="162" text-anchor="middle" fill="#94a3b8" font-size="9">模型实际读取的内容</text>
+  <!-- New boundary -->
+  <rect x="560" y="100" width="90" height="80" rx="8" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1"/>
+  <text x="605" y="125" text-anchor="middle" fill="#f472b6" font-size="10" font-weight="500">新边界</text>
+  <text x="605" y="145" text-anchor="middle" fill="#94a3b8" font-size="9">之前的内容</text>
+  <text x="605" y="162" text-anchor="middle" fill="#94a3b8" font-size="9">不再自动读取</text>
+  <!-- Legend -->
+  <rect x="50" y="210" width="600" height="95" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+  <text x="70" y="235" fill="#e0e0e0" font-size="11" font-weight="500">命令对比</text>
+  <circle cx="80" cy="258" r="5" fill="#60a5fa"/>
+  <text x="95" y="262" fill="#94a3b8" font-size="9">/compact — 压缩旧消息为摘要，保留任务连续性，适合同一长任务</text>
+  <circle cx="80" cy="280" r="5" fill="#f472b6"/>
+  <text x="95" y="284" fill="#94a3b8" font-size="9">/new — 完全切断上下文关联，适合切换到全新话题</text>
+  <circle cx="80" cy="302" r="5" fill="#ff9500"/>
+  <text x="95" y="306" fill="#94a3b8" font-size="9">自动压缩 — 接近上下文上限时系统自动触发，无需手动操作</text>
+</svg>

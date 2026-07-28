@@ -88,7 +88,7 @@ Each change comes with a reason explanation, telling you why the Agent made this
 
 | Element | Meaning | Example |
 |---|---|---|
-| **Purpose** | Why the change was made | "Make expression more formal,符合商务文书规范" |
+| **Purpose** | Why the change was made | "Make expression more formal, following business document standards" |
 | **Basis** | What decision was based on | "Reference user preference: formal tone" |
 | **Scope** | What was modified | "Only affects second paragraph, doesn't change overall structure" |
 

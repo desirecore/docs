@@ -1,24 +1,31 @@
 ---
 title: Translation Assistant
-description: Use the Translator agent to translate technical documents, business emails, etc., preserving original style and professional terminology.
+description: Use the translation assistant to handle technical documents, business emails and localized text with unified terminology and style.
 keywords: [Translation, Multilingual, Localization, Glossary, Translator]
+image: /img/use-cases/covers/cover-translation.jpg
 ---
 
 # Translation Assistant
 
-## Scenario Description
+## Real Workflow
 
-You need to translate a technical document into English for the overseas team, but regular translation tools produce "Chinglish" results with inconsistent professional terminology. Or you received an email in Japanese and need to quickly understand the content and reply.
+This scenario isn't about single-sentence translation—it's about delivery-oriented translation for real readers, focusing on terminology, tone and contextual consistency.
 
-The Translator agent supports mutual translation among 12 mainstream languages, understands contextual nuances, preserves original style, and supports custom glossaries to ensure consistent professional vocabulary.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Sending API documentation to overseas clients, replying to foreign-language emails, preparing product localization content |
+| Existing Materials | Source text, target language, reader identity, product terminology glossary, historical translation style |
+| Pain Point | Inconsistent terminology, stiff literal translations, code/API names/legal/business wording prone to errors |
+| DesireCore Intervention | Translator generates translation based on glossary, lists key terminology, style choices and ambiguous sentences |
+| Acceptance Result | User receives reviewable translation, focusing on professional terminology, client-sensitive expressions and contextual consistency |
 
 ## Recommended Agent
 
-**Translator** -- Supports mutual translation among 12 languages including Chinese, English, Japanese, Korean, French, German, Spanish, and Russian, excelling in professional translation of business documents, technical materials, and legal files.
+**Translator** — Supports mutual translation among Chinese, English, Japanese, Korean, French, German, Spanish, Russian and other mainstream languages; suitable for business documents, technical materials, product localization and cross-language email communication.
 
-## Teaching First: Setting Your Terminology and Style
+## Teaching First: Master Your Terminology and Style
 
-> The biggest challenge in professional translation is inconsistency -- the same term translated differently across documents. Take a few minutes to upload your glossary once, and every translation after that will follow it precisely.
+> The biggest challenge in long-term translation projects is terminology inconsistency. The same product name, feature name or industry term should maintain the same translation across documents.
 
 ### Teaching Rules
 
@@ -44,7 +51,7 @@ Translator: 📝 New learning recorded
 You: [✓ Correct] By the way, I'll send you updated glossaries whenever they change.
 ```
 
-Once teaching is complete, the Translator has learned your glossary and style preferences. From now on, just send documents for translation -- terminology will be applied automatically.
+Once teaching is complete, the Translator has learned your glossary and style preferences. From now on, just send documents for translation—terminology will be applied automatically.
 
 ## Complete Conversation Example
 
@@ -101,19 +108,21 @@ Translator: Text type identified: Business Email (Formal)
 
 ## Key Steps
 
-1. **Upload or Paste Document** -- Provide the text content to be translated
-2. **Set Translation Preferences** -- Specify target language, style (formal/neutral/casual), and glossary
-3. **Get Translation Result** -- The agent returns translated text and terminology glossary
-4. **Review and Adjust** -- Provide revision suggestions for the translation, the agent makes precise adjustments
+1. **Define Reader and Purpose** — The same Chinese text will be translated differently for developers, clients, legal or marketing
+2. **Prepare Localization Package** — Provide glossary, product names, variable/placeholder rules, style guide and historical translations
+3. **Translate by Context** — Technical docs preserve code and API names, marketing copy preserves tone, UI text considers length and button context
+4. **Terminology and Format QA** — Check terminology consistency, number units, links, variables, punctuation and untranslatable content
+5. **Consolidate Translation Memory** — Store confirmed terminology and expressions for consistent batch translation later
 
 ## Final Deliverable
 
-An idiomatic, professional translated document with a terminology glossary to ensure consistency in subsequent translations.
+A reviewable translation, usually accompanied by terminology mapping, style notes, untranslatable items and sentences that could be ambiguous in the source text.
 
 :::tip Best Practices
-- Before translation, tell the agent the document's purpose and target audience (e.g., "API documentation for American developers"), the translation style will be more appropriate
+- Before translation, tell the agent the document's purpose and target audience (e.g., "API documentation for American developers"), the translation style will be more stable
 - If you have internal company glossaries, provide them upfront, and the agent will strictly follow them
-- For long documents, suggest translating in batches and confirming terminology consistency between batches
-- For legal documents, contracts, and other critical translations, the results should be reviewed by legal professionals
-- **Batch translation**: When you have multiple documents to translate, send them all at once -- the Translator will process them in parallel with globally consistent terminology, ensuring the same term is never translated differently across documents
+- For long documents, translate in batches and confirm terminology consistency between each batch
+- Legal documents, contracts and other critical translations should be reviewed by legal professionals for final approval
+- Before batch translation, confirm unified glossary and style requirements, then send multiple documents to the translator for processing
+- For product interface and help center translations, check variables, button lengths, links and screenshot context—don't just look at the sentences themselves
 :::

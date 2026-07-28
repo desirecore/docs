@@ -103,11 +103,22 @@ Different tasks suit different models. DesireCore helps you automatically select
 | tts | Speech synthesis | TTS models |
 | asr | Speech recognition | ASR models |
 
+## Official Cloud Compute
+
+If you don't want to register vendor accounts yourself, you can sign in to your DesireCore account to use official cloud compute. Cloud compute appears in the resource panel as the `desirecore-cloud` provider and syncs the models available to your current account.
+
+Cloud compute features:
+
+- Usage based on subscription or credits
+- Model list synced via account API
+- Model selector displays relative cost multiplier
+- Can coexist with BYOK vendors
+
 You can customize these mappings in settings — for example, point daily conversation to cheaper models, and important tasks to the strongest models.
 
-## Pre-configured Compute Packages
+## Generative vs. Chat Models
 
-If you don't want to register vendor accounts yourself, DesireCore also plans to offer pre-configured compute packages — out-of-the-box, pay-as-you-go. But BYOK mode is always available; you won't be locked into any single vendor.
+Image, video, music, TTS and other generative models do not appear as regular chat models. They are invoked by `GenerateImage`, `GenerateVideo`, TTS, or music generation skills. The chat model selector only shows models suitable for conversation, and filters out entries that have been explicitly verified as failed or deprecated.
 
 ## Next Steps
 

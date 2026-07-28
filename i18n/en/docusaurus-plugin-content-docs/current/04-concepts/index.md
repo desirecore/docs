@@ -56,6 +56,8 @@ DesireCore is built around the core philosophy of "cultivating and hosting digit
 | [Self-Evolution](./self-evolution) | The secret to understanding you better over time | Want to understand agent growth |
 | [Three-Layer Controllability](./three-layer-control) | Visible, Controllable, Reversible — you always hold the initiative | Want to understand safety guarantees |
 | [Compute Model](./compute-model) | Bring your own keys, choose your own engines | Want to understand AI model configuration |
+| [Task Orchestration](./task-orchestration) | Automatic task decomposition and best-agent matching — your "project manager" | Want to understand task distribution |
+| [Auto Dream](./auto-dream) | Lossless forgetting — preserving value through compression | Want to understand memory consolidation |
 
 ## Reading Recommendations
 

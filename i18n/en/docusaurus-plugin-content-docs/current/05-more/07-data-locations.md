@@ -8,6 +8,8 @@ keywords: [data storage, file path, macOS, Windows, Linux, directory]
 
 DesireCore stores all data in the local file system, not relying on cloud servers to store your personal data.
 
+![DesireCore Data Storage Flow Diagram](./assets/data-flow-diagram.png)
+
 ## Platform Data Root Directories
 
 | Platform | Data Root Directory |

@@ -1,24 +1,31 @@
 ---
 title: Code Assistant
-description: Use the Code Assistant agent to build complete projects through conversation, from architecture design to code implementation, testing, and deployment.
+description: Use the Code Assistant agent for requirements clarification, architecture design, code implementation, testing, and iterative modifications.
 keywords: [Code Assistant, Project Development, Full-Stack Development, Code Generation, Architecture Design]
+image: /img/use-cases/covers/cover-code-assistant.jpg
 ---
 
 # Code Assistant
 
-## Scenario Description
+## Real Workflow
 
-You have a new project to build — maybe an internal tool, an API service, or a mini-program. The traditional way requires writing every line from scratch, and if you're unfamiliar with the tech stack, you're constantly switching between docs and code.
+The focus of coding scenarios is not "describe one sentence and let AI build the entire project" — it's about translating clear requirements into changes that fit the existing codebase's structure, standards, and tests.
 
-The Code Assistant agent can help you build entire projects through conversation: describe your requirements, and it designs the architecture; confirm the plan, and it writes the code; report issues, and it iterates. It's like pair programming with a full-stack engineer.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | New business modules, bug fixes, test coverage, migration scripts, internal tool development |
+| Existing Materials | Requirements spec, existing code, team standards, API contracts, database schema, test commands |
+| Pain Point | Code must follow existing architecture, edge cases need tests, changes must not break existing logic |
+| DesireCore Intervention | Code Assistant reads context and standards first, then proposes design, writes code, adds tests, and runs verification |
+| Acceptance Result | Engineer receives reviewable diffs, test results, and design decisions that need human confirmation |
 
 ## Recommended Agent
 
-**Code Assistant** -- Proficient in Python, TypeScript, Go, Rust, and other mainstream languages, capable of handling the full development lifecycle from architecture design to code implementation, testing, and deployment.
+**Code Assistant** — Suited for architecture design, code implementation, refactoring, test coverage, debugging, and deployment scripts.
 
-## Teaching First: Setting Your Tech Stack and Standards
+## Teaching First: Teaching the Agent Your Tech Stack and Standards
 
-> Teach your project conventions once, and every feature it builds will follow your tech stack and team practices — no matter what you're developing.
+> Teach your tech stack, directory structure, code style, and test requirements first — the generated code will then be much closer to team standards.
 
 ### Teach Rules
 
@@ -34,17 +41,17 @@ You: Let me teach you our team's tech stack and development standards:
      5. All functions must have type annotations — Python type hints, frontend TypeScript strict mode (preference)
 
 Code Assistant: 📝 New learning recorded
-               Source: team-dev-guide.md + supplementary notes
-               Type: Rule (Tech stack and development standards)
-               Level: Mandatory × 4, Preference × 1
+                Source: team-dev-guide.md + supplementary notes
+                Type: Rule (Tech stack and development standards)
+                Level: Mandatory × 4, Preference × 1
 
-               My understanding:
-               Backend: FastAPI + PostgreSQL + SQLAlchemy. Frontend: React + TS +
-               Tailwind. Project organized by feature modules (modules/xxx/), each
-               containing router, service, model. Unified API response format
-               {"code", "data", "message"}. Full type annotations throughout.
+                My understanding:
+                Backend: FastAPI + PostgreSQL + SQLAlchemy. Frontend: React + TS +
+                Tailwind. Project organized by feature modules (modules/xxx/), each
+                containing router, service, model. Unified API response format
+                {"code", "data", "message"}. Full type annotations throughout.
 
-               [✓ Correct]  [✎ Modify]  [✗ Undo]
+                [✓ Correct]  [✎ Modify]  [✗ Undo]
 
 You: [✓ Correct]
 ```
@@ -56,17 +63,17 @@ You: Here's our existing user module code structure. Follow this pattern for new
      [Paste modules/user/ directory: router.py, service.py, model.py examples]
 
 Code Assistant: 📝 New learning recorded
-               Type: Example (Module code structure)
-               Router layer handles routing and parameter validation only. All business
-               logic lives in the Service layer. Model layer uses SQLAlchemy declarative
-               base. Services call each other through dependency injection.
+                Type: Example (Module code structure)
+                Router layer handles routing and parameter validation only. All business
+                logic lives in the Service layer. Model layer uses SQLAlchemy declarative
+                base. Services call each other through dependency injection.
 
-               [✓ Correct]  [✎ Modify]  [✗ Undo]
+                [✓ Correct]  [✎ Modify]  [✗ Undo]
 
 You: [✓ Correct]
 ```
 
-Once teaching is complete, the Code Assistant knows your tech stack and project conventions. From now on, just describe what you need and it will write code that fits your team's style.
+Once teaching is complete, the Code Assistant knows your tech stack and project conventions. From now on, describe what you need and it will generate designs and code changes according to these standards.
 
 ## Complete Conversation Example
 
@@ -163,18 +170,26 @@ Code Assistant: Generated:
 
 ## Key Steps
 
-1. **Describe Requirements** -- Tell the agent what feature you need in natural language
-2. **Confirm Architecture** -- The agent generates an architecture design for your review
-3. **Iterative Development** -- The agent generates code module by module, you confirm step by step
-4. **Test and Verify** -- The agent auto-generates tests and runs them to ensure code quality
+1. **Lock Down Requirement Boundaries** — Clarify user stories, API scope, data model, permission rules, and what NOT to do
+2. **Read Existing Context** — Have the Code Assistant review directory structure, adjacent modules, test patterns, and team standards first
+3. **Design Before Coding** — Confirm database tables, API contracts, service boundaries, error handling, and compatibility plans before writing code
+4. **Implement in Small Steps** — Split into model, service, router, tests as reviewable small changes
+5. **Run Verification Loop** — Execute tests, lint, build, or local startup; preserve failure logs and fix history
 
 ## Final Deliverable
 
-A complete feature module with data models, business logic, API routes, and test cases — all following your team's conventions, ready to integrate into your project.
+A reviewable set of feature module code, typically including data models, business logic, API routes, and test cases. Code review, test execution, and security checks are still recommended before merging.
+
+## DesireCore Capabilities Used
+
+- **Local File System Read/Write**: Directly read project structure, modify files, and preserve diffs in your workspace
+- **Command Execution & Test Verification**: Run tests, builds, lint; preserve failure logs and fix history
+- **AgentFS Memory**: Team tech stack, directory structure, code style, and test commands can be persisted as long-term rules
 
 :::tip Best Practices
-- Teach the Code Assistant your tech stack and project structure first — that way the code it writes can be used directly without major refactoring
-- When building new features, have it design the architecture first, confirm, then write code — avoids costly rework from going in the wrong direction
+- Teach the Code Assistant your tech stack and project structure first — that way generated code will be much closer to team standards
+- When developing new features, have it do architecture design first, confirm, then write code — avoids costly rework from going in the wrong direction
 - For unfamiliar tech (e.g., WebSocket, message queues), just describe the business requirement and the Code Assistant will choose the right technical approach and implement it
-- **Develop multiple features in parallel**: When you have several features to build, describe them all at once — the Code Assistant will generate architecture designs and code for each in parallel, all following the same standards you taught it
+- When multiple features are developed in parallel, first clarify priorities and dependencies, then have the Code Assistant generate designs and changes separately
+- Don't ask it to "build the entire project at once." Real development works better with small commits, test verification, and code review
 :::

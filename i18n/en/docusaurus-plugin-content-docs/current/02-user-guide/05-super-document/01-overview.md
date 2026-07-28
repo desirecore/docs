@@ -45,28 +45,24 @@ Super Document is suitable for any document work involving AI:
 
 ## Super Document Workflow at a Glance
 
+```mermaid
+flowchart TD
+    A[You initiate writing task] --> B[Agent generates or modifies content]
+    B --> C[Diff view displays all changes]
+    C --> D{You review item by item}
+    D -->|Accept| E[Change takes effect]
+    D -->|Reject| F[Restore original text]
+    D -->|Edit| G[Manual adjustment]
+    E --> H[Confirm to form a new version]
+    F --> H
+    G --> H
+    H --> I[Continue conversation, further iteration...]
+
+    style C fill:#fff3cd,stroke:#ffc107
+    style H fill:#d4edda,stroke:#28a745
 ```
-You initiate writing task
-    |
-    v
-Agent generates or modifies content
-    |
-    v
-Diff view displays all changes  <-- Red = Deletion, Green = Addition
-    |
-    v
-You review item by item
-    |
-    +--> Accept: Change takes effect
-    +--> Reject: Restore original text
-    +--> Edit: Manual adjustment
-    |
-    v
-Confirm to form a new version
-    |
-    v
-Continue conversation, further iteration...
-```
+
+> 💡 In the **Diff view**, <span style={{color: '#dc3545'}}>red = deletion</span> and <span style={{color: '#28a745'}}>green = addition</span>, making every change clear at a glance.
 
 Each round of changes is recorded as a version. You can return to any historical version at any time, just like Git history for code.
 

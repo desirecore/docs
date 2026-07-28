@@ -8,6 +8,10 @@ keywords: [安装, 下载, macOS, Windows, Linux]
 
 DesireCore 桌面客户端支持 macOS、Windows 和 Linux 三大平台。
 
+:::info 安装前确认
+请先确保你的设备满足 [系统要求](../01-system-requirements.md)（8 GB 内存、2 GB 磁盘空间、可访问互联网）。
+:::
+
 ## 下载
 
 前往 DesireCore 官网，点击下载按钮即可获取最新版本：

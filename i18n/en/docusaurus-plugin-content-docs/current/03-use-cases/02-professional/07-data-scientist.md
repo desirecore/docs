@@ -1,20 +1,27 @@
 ---
 title: Data Scientist
-description: Use the Data Analyst agent for advanced data analysis, user behavior insights, predictive models, and operational monitoring.
+description: Use the Data Analyst agent to assist with user behavior analysis, predictive modeling, operational monitoring and experiment evaluation.
 keywords: [Data Science, User Behavior Analysis, Predictive Models, Operational Monitoring, Visualization]
+image: /img/use-cases/covers/cover-data-scientist.jpg
 ---
 
 # Data Scientist
 
-## Scenario Description
+## Real Workflow
 
-You're the head of the product team. Recently, user churn has increased, but you're not sure why. You have a lot of user behavior data and need someone to help you find clues, build predictive models, and provide actionable improvement suggestions.
+Data science scenarios aren't about "letting AI find insights"—they're about when teams already have data and competing hypotheses, using analysis to narrow down to verifiable directions.
 
-The Data Analyst agent can not only do basic statistical analysis but also handle complex user behavior analysis, build predictive models, and set up operational monitoring dashboards to help you discover business opportunities from data.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | User churn rising, conversion declining, A/B experiment results unclear, operational strategy needs review |
+| Existing Materials | Behavior logs, user profiles, channel sources, version changes, experiment groups and business hypotheses |
+| Pain Point | Reasons behind metric changes unclear; different teams have different explanations; lack unified analysis framework |
+| DesireCore Intervention | Data Analyst does funnels, segmentation, anomaly detection and predictive model first draft, organizes verifiable hypotheses |
+| Acceptance Result | Team gets prioritized recommendations, experiment suggestions and monitoring metrics, then decides product or operational actions |
 
 ## Recommended Agent
 
-**Data Analyst** -- Supports advanced statistical analysis, predictive models, user segmentation, anomaly detection, and real-time monitoring dashboards.
+**Data Analyst** — Suitable for statistical analysis, predictive models, user segmentation, anomaly detection and operational monitoring dashboards.
 
 ## Complete Conversation Example
 
@@ -66,18 +73,20 @@ Data Analyst: Improvement Priority Ranking (by expected effect):
 
 ## Key Steps
 
-1. **Upload Behavior Data** -- Provide user behavior logs, event data, etc.
-2. **Funnel Analysis** -- The agent automatically identifies key churn nodes in the user journey
-3. **Deep Attribution** -- Analyze specific reasons for churn nodes
-4. **Predictive Modeling** -- Predict future trends based on historical data
-5. **Improvement Suggestions** -- Provide actionable improvement plans prioritized by importance
+1. **Define Business Problem** — First clarify whether it's churn, conversion, retention, payment or activity problem
+2. **Organize Event Definitions** — Confirm user ID, event names, timestamps, channels, versions and experiment groups are consistent
+3. **Build Funnels and Segmentation** — Break down changes by new/returning users, channels, devices, versions and behavior depth
+4. **Form Testable Hypotheses** — Match hypotheses like "onboarding too long" or "entry not obvious" with data evidence
+5. **Build Models and Monitoring** — Models only serve as risk ranking; ultimately land on monitorable metrics and experiment plans
+6. **Output Action Priority** — Sort by impact scope, implementation cost, verification cycle and risk
 
 ## Final Deliverable
 
-A complete user behavior analysis report, including funnel analysis, churn attribution, user segmentation, predictive models, and priority-ranked improvement plans.
+A user behavior analysis report containing data definitions, funnel analysis, churn attribution, user segmentation, predictive model first draft, monitoring metrics and prioritized experiment suggestions.
 
 :::tip Best Practices
-- The more complete the data, the more accurate the analysis. Ideally include user behavior events, timestamps, device information, and other dimensions
+- The more complete the data, the more accurate the analysis. Ideally include user behavior events, timestamps, device information and other dimensions
 - Start with global analysis to understand the overall situation, then dive deep into specific issues. Avoid getting into details from the start
-- Analysis results should translate into executable product improvements, you can have the agent prioritize by "input-output ratio"
+- Analysis results should translate into executable product improvements—have the agent prioritize by impact scope, implementation cost and verification method
+- User behavior analysis shouldn't jump directly to "reasons"—first confirm tracking definitions, version changes and sample composition are stable
 :::

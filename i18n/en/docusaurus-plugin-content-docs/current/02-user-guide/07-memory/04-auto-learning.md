@@ -55,8 +55,18 @@ Therefore, DesireCore designed a natural forgetting mechanism that mimics the hu
 
 Each memory goes through the following stages:
 
-```
-Active → Recent → Archived → Compressed → Pruned
+```mermaid
+flowchart LR
+    A[Active] --> B[Recent]
+    B --> C[Archived]
+    C --> D[Compressed]
+    D --> E[Pruned]
+
+    style A fill:#c8e6c9,stroke:#4caf50,color:#333
+    style B fill:#fff9c4,stroke:#ffc107,color:#333
+    style C fill:#ffe0b2,stroke:#ff9800,color:#333
+    style D fill:#ffccbc,stroke:#ff5722,color:#333
+    style E fill:#ffcdd2,stroke:#f44336,color:#333
 ```
 
 | Stage | Description | What You Can See |
@@ -74,6 +84,36 @@ Forgetting doesn't happen arbitrarily. The system triggers memory compression in
 1. **Storage Over Budget** — Total memory exceeds the set limit
 2. **Memory Too Old** — A memory hasn't been referenced for a long time, and there are enough similar memories
 3. **Manual Organization** — You actively click the "Organize Memory" button
+
+### Auto Dream: Lossless Forgetting
+
+Beyond the regular forgetting flow, DesireCore offers a smarter memory management method—**Auto Dream (Lossless Forgetting)**.
+
+Auto Dream is inspired by the human "dreaming" mechanism: when you're not using the agent, the system automatically consolidates scattered memories into more structured knowledge in the background. Unlike regular forgetting, Auto Dream doesn't lose semantics—it refines and reorganizes rather than compresses and deletes.
+
+```mermaid
+flowchart LR
+    A[Active] --> B[Recent]
+    B --> C[Archived]
+    C --> D[💤 Dream\nLossless]
+    D --> E[Compressed]
+    E --> F[Pruned]
+
+    style A fill:#c8e6c9,stroke:#4caf50,color:#333
+    style B fill:#fff9c4,stroke:#ffc107,color:#333
+    style C fill:#ffe0b2,stroke:#ff9800,color:#333
+    style D fill:#e1bee7,stroke:#9c27b0,color:#333
+    style E fill:#ffccbc,stroke:#ff5722,color:#333
+    style F fill:#ffcdd2,stroke:#f44336,color:#333
+```
+
+With Auto Dream added, the complete memory lifecycle becomes:
+
+The Dream stage occurs between Archive and Compress: the system scans archived memories for related content, merging multiple scattered memories into a single piece of structured knowledge, preserving core semantics while significantly reducing storage.
+
+:::tip Deep Dive
+Want to understand the full mechanism of Auto Dream? Read the concept document [Auto Dream: Lossless Forgetting](../../concepts/auto-dream).
+:::
 
 ### Never-Forget Protection
 

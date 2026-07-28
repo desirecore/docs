@@ -1,20 +1,27 @@
 ---
 title: Document Writing
-description: Use the AI Copywriter agent to efficiently complete various writing tasks from outline to final draft, including project reports and proposal documents.
+description: Use the AI Copywriter agent to organize ideas, generate outlines, draft project reports and proposal documents.
 keywords: [Document Writing, AI Copywriter, Reports, Writing Assistant, Content Creation]
+image: /img/use-cases/covers/cover-document-writing.jpg
 ---
 
 # Document Writing
 
-## Scenario Description
+## Real Workflow
 
-You need to write a project report but don't know where to start facing a blank page. Or you already have ideas, but organizing them into a well-structured, professionally expressed document takes a lot of time.
+This scenario doesn't work by "letting AI write a report from scratch"—it requires the user to already have a batch of scattered but real materials that need to be organized into deliverable documents.
 
-The AI Copywriter agent can help you from scratch: first organize ideas to generate an outline, then gradually expand it into a complete draft, and finally make precise modifications based on your feedback. The entire process is like collaborating with an experienced writing partner.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Project review, client report, quarterly summary, proposal review requiring formal materials |
+| Existing Materials | Project background, key data, meeting minutes, chat conclusions, existing PPTs or spreadsheets |
+| Pain Point | Information scattered, structure undecided, tone and audience unclear, repeated format changes time-consuming |
+| DesireCore Intervention | AI Copywriter first organizes outline, then generates drafts by chapter; data or charts can be delegated to Data Analyst when needed |
+| Acceptance Result | Person in charge receives a reviewable document draft, then supplements facts, sets conclusions, adjusts tone |
 
 ## Recommended Agent
 
-**AI Copywriter** -- A knowledge-based agent focused on content creation and copywriting, excelling in brand copy, marketing planning, and multi-style adaptation.
+**AI Copywriter** — Suitable for reports, proposals, announcements, marketing copy and other text tasks; generates drafts according to your specified audience, tone and template.
 
 ## Complete Conversation Example
 
@@ -70,17 +77,25 @@ AI Copywriter: Adjusted to a more formal business style and added quantitative m
 
 ## Key Steps
 
-1. **Clarify Requirements** -- Tell the agent the document type, purpose, and target audience
-2. **Generate Outline** -- The agent generates a structured outline based on your information
-3. **Write Draft** -- After confirming the outline, expand each chapter into complete content
-4. **Review and Revise** -- You provide revision suggestions, and the agent precisely adjusts style, wording, and data
+1. **Define Deliverable Audience** — First clarify who the document is for: client, boss, review committee, archiving system; different audiences mean different structure and tone
+2. **Organize Fact Package** — List project scope, deliverables, timeline, budget, key data, outstanding issues and lessons learned
+3. **Review Structure Before Writing** — Confirm chapters cover background, completed work, result comparison, issues and next steps before expanding each section
+4. **Complete Evidence Chain** — For each conclusion, add data, screenshots, links or sources to avoid just having nice words
+5. **Generate Versions by Use Case** — The same materials can generate formal reports, summary briefs, email versions or archive versions
 
 ## Final Deliverable
 
-A well-structured, professionally expressed project summary report with quantitative data support and clear logical flow, ready for presentation or archiving.
+A complete, well-structured document draft with traceable factual basis, chapter logic and reusable versions. You can continue having the AI Copywriter supplement data, adjust tone, compress length or create presentation versions.
+
+## DesireCore Capabilities Used
+
+- **Super Document**: View AI modifications in Diff format, accept, reject or continue editing each change individually
+- **Natural Language Teaching**: Teach report templates, word prohibitions, writing styles to the AI Copywriter for future reuse
+- **Multi-Agent Collaboration**: Data, charts, legal clauses etc. can be delegated to corresponding agents first, then integrated by AI Copywriter
 
 :::tip Best Practices
-- Provide sufficient background information (data, timelines, key stakeholders) in the first communication for more accurate content generation
-- Make good use of "Super Document Mode" which can coordinate multiple agents in one document, such as having the Data Analyst provide chart data, then having the AI Copywriter integrate it into the report
-- If you're not satisfied with a paragraph, point out specific issues (e.g., "tone too casual", "lacks data support") rather than vaguely saying "make it better"
+- Provide background information, data, timeline and key people in your first communication; minimize having the agent fill in assumptions
+- When dissatisfied with a paragraph, point out specific issues like "tone too casual", "lacks data support", "this section doesn't match facts"
+- For charts, data conclusions or contract clauses, let corresponding agents process them first in Super Document mode, then have AI Copywriter integrate into the report
+- Project summary documents should not just list "what was done"—also include whether scope was completed, timeline/budget deviations, outstanding issues and lessons learned
 :::

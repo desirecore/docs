@@ -8,6 +8,10 @@ keywords: [macOS, installation, DMG, Gatekeeper, Apple Silicon, Intel]
 
 This guide covers how to install DesireCore on macOS.
 
+:::tip Estimated time
+The entire installation typically takes just **1 minute** — download the DMG, drag to Applications, done.
+:::
+
 ## Installation Steps
 
 1. **Download the DMG file**
@@ -75,5 +79,12 @@ To also remove application data, delete the following directories:
 ~/Library/Application Support/DesireCore/
 ~/.desirecore/
 ```
+
+## Troubleshooting
+
+- **DMG won't open**: Verify the download completed successfully, then try downloading again.
+- **"is damaged and can't be opened" message**: This is usually Gatekeeper blocking the app — follow the "Handling Gatekeeper Prompts" section above.
+- **Slow performance on Apple Silicon**: Confirm you downloaded the arm64 version, not x64 (Rosetta translation incurs a performance penalty).
+- **Other issues**: Visit the [FAQ](../../06-faq/index.md) or contact our support team.
 
 After installation, head to [First Run](../03-first-run.md) to learn about the post-launch onboarding flow.

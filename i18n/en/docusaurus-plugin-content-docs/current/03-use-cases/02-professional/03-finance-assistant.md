@@ -1,26 +1,33 @@
 ---
 title: Finance Assistant
-description: Use the Finance Assistant agent to complete budget preparation, expense review, financial report generation, and cost analysis.
+description: Use the Finance Assistant agent to assist with budget preparation, expense review, report organization, and cost analysis.
 keywords: [Finance Assistant, Budget Preparation, Expense Review, Financial Reports, Cost Analysis]
+image: /img/use-cases/covers/cover-finance-assistant.jpg
 ---
 
 # Finance Assistant
 
-## Scenario Description
+## Real Workflow
 
-It's the end of the quarter, and you need to prepare the department budget for next quarter. You need to reference historical data, consider business growth plans, and reasonably allocate various expenses. At the same time, there's a pile of reimbursement documents waiting for review.
+Financial scenarios truly exist in "well-defined policies but tedious manual verification" work, such as budget drafts, expense reviews, cost attribution, and report compilation.
 
-The Finance Assistant agent can help you scientifically prepare budgets based on historical data, intelligently review the compliance of reimbursement documents, generate standardized financial reports, and identify cost optimization opportunities.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Month-end expense review, quarterly budget preparation, expense overrun analysis, departmental cost analysis |
+| Existing Materials | Historical budgets, actual expenditures, business plans, expense policies, invoices, and approval records |
+| Pain Point | Policy details are intricate, documents are numerous, over-limit reasons and missing materials require line-by-line review |
+| DesireCore Intervention | Finance Assistant checks expenses against policies, summarizes over-limit items, missing invoices, budget variances, and adjustment suggestions |
+| Acceptance Result | Finance staff receives a budget draft or review report, then handles exceptions and approval opinions |
 
 ## Recommended Agent
 
-**Finance Assistant** -- Specializes in financial management, handling budget preparation, expense approval, report archiving, and cost analysis.
+**Finance Assistant** — Suited for budget estimation, expense policy compliance, report archiving, cost analysis, and anomaly flagging.
 
-## Teaching First: Setting Your Financial Policies
+## Teaching First: Teaching the Agent Your Financial Policies
 
-> Every company has different reimbursement standards. Spend a few minutes teaching the Finance Assistant your company's policies, and it will review expense reports against your specific rules instead of generic standards.
+> Every company's reimbursement standards are different. Teach the company policies clearly first, and subsequent reviews will follow your rules instead of generic standards.
 
-### Teaching Rules
+### Teach Rules
 
 ```
 You: I'm sharing our company's expense reimbursement policy for you to learn.
@@ -32,18 +39,18 @@ You: I'm sharing our company's expense reimbursement policy for you to learn.
      4. Over-limit expenses: Must include a written explanation and department manager approval (preference)
 
 Finance Assistant: 📝 New learning recorded
-                   Source: Company_Expense_Policy_2024.pdf + supplementary notes
-                   Type: Rule (Expense reimbursement standards)
-                   Level: Mandatory × 3, Preference × 1
+                    Source: Company_Expense_Policy_2024.pdf + supplementary notes
+                    Type: Rule (Expense reimbursement standards)
+                    Level: Mandatory × 3, Preference × 1
 
-                   My understanding:
-                   When reviewing expense reports, only accept e-receipts from
-                   ride-hailing apps for transportation; meals capped at $15/person
-                   on weekdays, $40/person for client entertainment; accommodation
-                   tiered by city (Tier-1 $80, others $55). Over-limit claims
-                   require written justification with manager sign-off.
+                    My understanding:
+                    When reviewing expense reports, only accept e-receipts from
+                    ride-hailing apps for transportation; meals capped at $15/person
+                    on weekdays, $40/person for client entertainment; accommodation
+                    tiered by city (Tier-1 $80, others $55). Over-limit claims
+                    require written justification with manager sign-off.
 
-                   [✓ Correct]  [✎ Modify]  [✗ Undo]
+                    [✓ Correct]  [✎ Modify]  [✗ Undo]
 
 You: [✓ Correct]
 ```
@@ -106,22 +113,24 @@ Finance Assistant: Travel expenses adjusted to 350k. Reduction suggestions:
 
 ## Key Steps
 
-1. **Provide Basic Information** -- Historical data, business plans, budget constraints
-2. **Generate Budget Draft** -- The agent generates itemized budget based on data
-3. **Adjust and Optimize** -- Adjust various amounts based on your feedback
-4. **Expense Review** -- Batch review reimbursement documents, check compliance
+1. **Define Accounting Scope** — First clarify department, project, period, budget categories, and approval criteria
+2. **Align Budget with Actuals** — Compare budget, actual, forecast, and same-period historical data; identify major variances
+3. **Explain Variance Causes** — Break down variances into business growth, price changes, one-time expenses, over-limit costs, or accounting differences
+4. **Review Policy Compliance** — Check expense documents for invoice types, amount limits, approval chains, and supplementary explanations
+5. **Output Approval Recommendations** — Categorize into approved, returned for materials, over-limit requiring approval, and rejected
 
 ## Final Deliverable
 
-A data-driven scientific budget plan and compliance review report.
+A budget draft or expense review report containing budget-actual variances, calculation basis, over-limit items, missing materials, and items pending confirmation.
 
 :::warning Disclaimer
-The Finance Assistant's suggestions are for reference only and do not constitute professional financial or tax advice. For major financial decisions, consult a professional accountant.
+The Finance Assistant provides supplementary organization and preliminary analysis, and does not constitute professional financial, audit, or tax advice. For major financial decisions, tax filings, and external disclosures, consult qualified professionals.
 :::
 
 :::tip Best Practices
-- Provide as complete historical data as possible when preparing budgets, budget accuracy will significantly improve
+- Provide as complete historical data as possible when preparing budgets — budget accuracy will significantly improve
 - Expense review can be configured with your company's reimbursement standards (such as travel standards, entertainment limits), and the agent will strictly review according to standards
-- At month-end and quarter-end, have the Finance Assistant automatically generate financial reports with key metrics and anomaly alerts
-- **Month-end batch review**: Send all expense reports for the month to the Finance Assistant at once — it will check each one against the policies you taught it, automatically flag over-limit items, and typically complete the entire review within minutes
+- At month-end and quarter-end, have the Finance Assistant compile financial reports with key metrics and anomaly alerts
+- During month-end batch reviews, have the Finance Assistant first summarize over-limit items, missing invoices, and items needing supplementary explanations, then have finance staff make final decisions
+- Financial analysis should not only look at variance amounts — also explain the nature of variances: temporary expenses, structural changes, revenue growth-driven, or budget planning bias
 :::

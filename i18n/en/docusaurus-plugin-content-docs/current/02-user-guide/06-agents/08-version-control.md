@@ -113,6 +113,6 @@ During export, you can select content by category, such as Agents, skills, memor
 
 ## Next Steps
 
-- [Team Version Management](./09-team-version-management.md) - Manage an entire Agent team as a single versioned unit
+- [Team Version Management](./10-team-version-management.md) - Manage an entire Agent team as a single versioned unit
 - [Agent Types](./01-agent-types.md) - Review Agent types and positioning
 - [Create Custom Agent](./03-create-agent.md) - Create your own Agent

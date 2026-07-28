@@ -1,24 +1,31 @@
 ---
 title: Bidding Assistant
-description: Use the Bidding Assistant agent to complete bid document preparation, qualification review, pricing strategy analysis, and bid document checking.
+description: Use the Bidding Assistant agent to assist with tender document interpretation, qualification self-review, bid preparation and submission checks.
 keywords: [Bidding, Bid Document Preparation, Qualification Review, Pricing Strategy, Bid Management]
+image: /img/use-cases/covers/cover-bidding-assistant.jpg
 ---
 
 # Bidding Assistant
 
-## Scenario Description
+## Real Workflow
 
-Your company received a project bidding document with 18 days until the bid deadline. You need to understand qualification requirements, write technical proposals, develop pricing strategies, and ensure the bid documents are flawless. Any oversight in any step could lead to disqualification.
+The core of bidding scenarios isn't "writing bid documents"—it's managing a set of materials, qualifications, pricing and format requirements around a deadline.
 
-The Bidding Assistant agent can help you systematically complete the entire bidding process: interpreting bidding documents, self-reviewing bidding qualifications, generating technical proposal frameworks, analyzing optimal pricing, and item-by-item checking bid document completeness.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | After receiving tender documents, need to complete qualification assessment, proposal writing and material submission before deadline |
+| Existing Materials | Tender documents, company qualifications, track record, personnel certificates, bid templates, pricing worksheets |
+| Pain Point | Qualification gaps discovered too late; scoring criteria not fully analyzed; signatures, stamps and attachment lists easily missed |
+| DesireCore Intervention | Bidding Assistant extracts timeline, qualification requirements and scoring criteria, matches qualifications and track record, generates checklists |
+| Acceptance Result | Bid lead gets qualification self-review, bid framework and pre-submission checklist, then coordinates commercial, technical and finance to proceed |
 
 ## Recommended Agent
 
-**Bidding Assistant** -- Bidding process management expert, responsible for bid document preparation, qualification review, and pricing strategy.
+**Bidding Assistant** — Suitable for tender document interpretation, qualification self-review, technical proposal framework, pricing estimation and bid document completeness checks.
 
-## Teaching First: Building Your Company Profile
+## Teaching First: Build Your Company Profile
 
-> The most time-consuming part of bidding is repeatedly compiling company qualifications and past performance. Teach once, and every new project gets automatic matching from then on.
+> The most time-consuming part of bidding is repeatedly compiling company qualifications and past performance. Maintain qualification and track record libraries in advance—subsequent projects will be easier to match materials.
 
 ### Teaching Rules
 
@@ -112,19 +119,21 @@ Bidding Assistant: Qualification Self-Review Results: Basically Qualified (3 ite
 
 ## Key Steps
 
-1. **Bidding Document Interpretation** -- The agent extracts key requirements, timeline, and scoring criteria
-2. **Qualification Self-Review** -- Item-by-item check if bidding conditions are met, flag missing items
-3. **Technical Proposal Generation** -- Generate proposal framework based on bidding requirements, highlighting scoring focus
-4. **Pricing Strategy Analysis** -- Based on cost estimation and competitive analysis, recommend optimal pricing
-5. **Document Completeness Check** -- Item-by-item check if all documents are complete before bidding
+1. **Go/No-Go Initial Screening** — First check mandatory qualification requirements, profit floor, delivery capacity and competitive landscape to decide whether to bid
+2. **Analyze Tender Documents** — Extract timeline, scoring criteria, required qualifications, response format, attachment list and disqualification risks
+3. **Build Compliance Matrix** — Each tender requirement maps to response location, responsible person, evidence materials and completion status
+4. **Assign Content Responsibilities** — Technical, commercial, finance and legal each handle corresponding sections; Bidding Assistant maintains master checklist
+5. **Pricing and Risk Review** — Pricing range should simultaneously consider cost, profit, warranty, payment cycle and unfavorable contract terms
+6. **Pre-Submission Check** — Verify signatures, stamps, bid bonds, attachments, page numbers, table of contents and electronic/hard copy format against checklist
 
 ## Final Deliverable
 
-A complete set of bidding materials, including bidding document interpretation report, qualification self-review checklist, technical proposal, pricing analysis, and bid document check list.
+A set of bid materials ready for further review and refinement, including Go/No-Go conclusion, compliance matrix, qualification self-review checklist, technical proposal framework, pricing estimation and submission checklist.
 
 :::tip Best Practices
-- Have the agent analyze immediately after receiving the bidding document to discover qualification gaps early and allow time for supplementation
-- Focus technical proposal efforts on high-scoring chapters, the agent will highlight which sections need focused writing based on scoring criteria
+- Have the agent analyze immediately after receiving the tender document to discover qualification gaps early and allow time for supplementation
+- Focus technical proposal efforts on high-scoring chapters—the agent will highlight which sections need focused writing based on scoring criteria
 - Be sure to do a completeness check the day before bidding to avoid disqualification due to formal issues (such as missing signatures/stamps)
-- **Parallel bidding**: When handling multiple RFPs simultaneously, send them all to the Bidding Assistant at once -- it will analyze each bidding document in parallel and automatically match the required qualifications and track record from your taught company profile
+- When handling multiple tender projects simultaneously, have the Bidding Assistant separately output qualification gaps and timelines for each, then have project leads decide resource allocation
+- Real bid management isn't "finishing the bid document"—it's ensuring every tender requirement has a response, evidence, responsible person and status
 :::

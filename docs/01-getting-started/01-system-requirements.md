@@ -8,6 +8,10 @@ keywords: [系统要求, 硬件, 操作系统, 兼容性]
 
 DesireCore 桌面客户端支持 macOS、Windows、Linux 三大平台。下面列出了各平台的环境要求。
 
+:::tip 快速判断
+如果你的电脑是近 3 年内购买的，基本都能流畅运行 DesireCore。最低只需要 8 GB 内存和 2 GB 磁盘空间。
+:::
+
 ## 桌面版
 
 ### macOS

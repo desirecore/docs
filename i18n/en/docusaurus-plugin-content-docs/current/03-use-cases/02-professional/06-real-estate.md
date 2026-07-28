@@ -1,20 +1,27 @@
 ---
 title: Real Estate Advisor
-description: Use the Real Estate Advisor agent for property analysis, price evaluation, home purchase policy interpretation, and multi-property comparison.
+description: Use the Real Estate Advisor agent to assist with property comparison, price reference, policy interpretation, and purchase needs assessment.
 keywords: [Real Estate Advisor, Property Analysis, Price Evaluation, Home Purchase Decision, Real Estate Investment]
+image: /img/use-cases/covers/cover-real-estate.jpg
 ---
 
 # Real Estate Advisor
 
-## Scenario Description
+## Real Workflow
 
-You're preparing to buy a house and have looked at several properties. Every agent says their recommendation is the best. You're not sure which property truly suits you or whether the quoted price is reasonable. You need objective, professional analysis to assist your decision.
+Real estate scenarios truly exist in the "too much information but unclear decision dimensions" stage. Users need not a single recommendation, but a clear view of the trade-offs.
 
-The Real Estate Advisor agent can help you analyze property advantages and disadvantages, evaluate price reasonableness, interpret changes in home purchase policies, and systematically compare multiple candidate properties, giving your home purchase decision data support.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Multiple properties entering shortlist, need to compare for self-use, commute, school district, budget, and risks |
+| Existing Materials | Budget, family plans, workplace location, property listings, mortgage terms, public transaction data |
+| Pain Point | Agent information is one-sided; monthly payments, taxes, amenities, policies, and long-term needs are all mixed together |
+| DesireCore Intervention | Real Estate Advisor organizes comparison tables, estimates monthly payments, lists items to verify, and outlines trade-offs for different choices |
+| Acceptance Result | User gets a viewing and decision checklist — bringing questions to verify on-site rather than just accepting recommendations |
 
 ## Recommended Agent
 
-**Real Estate Advisor** -- Real estate domain professional advisor, providing property analysis, price evaluation, and home purchase decision support.
+**Real Estate Advisor** — Suited for property information organization, price reference, home purchase policy interpretation, and multi-property comparison.
 
 ## Complete Conversation Example
 
@@ -23,7 +30,7 @@ You: I'm torn between Property A and Property B. Can you help me compare?
     Property A: 85k/sqm, 89 sqm 3-bedroom, 500m from subway
     Property B: 78k/sqm, 95 sqm 3-bedroom, 1.2km from subway
 
-Real Estate Advisor: Okay, let me do a comprehensive comparison analysis for you.
+Real Estate Advisor: Okay, let me prepare a comparison based on the information you provided.
 
         Basic Information Comparison
         | Dimension       | Property A      | Property B      |
@@ -43,22 +50,22 @@ Real Estate Advisor: Okay, let me do a comprehensive comparison analysis for you
         Property B Advantages:
         - 8% lower unit price, better value
         - 6 sqm larger, more spacious 3-bedroom
-        - More mature surrounding commercial配套
+        - More mature surrounding commercial amenities
 
         Purchase Recommendation
         - Value school district and commute → Choose A
-        - Value value and living comfort → Choose B
+        - Value affordability and living comfort → Choose B
 
         What is the main purpose of your purchase? Self-use or investment?
         Do you have school district needs?
 
-You: Buying as wedding home for self-use, planning to have children within 2 years, working in CBD.
+You: Buying as a wedding home for self-use, planning to have children within 2 years, working in CBD.
 
 Real Estate Advisor: Based on your situation, I recommend Property A, reasons:
-        1. School district needs: Property A's对口school ranks higher
+        1. School district needs: Property A's feeder school ranks higher
         2. Commute: 500m to subway, about 35 minutes to CBD
         3. Value retention: School district homes are more resilient during market adjustments
-        4. Total price difference only 160k, but school district and commute advantages are obvious
+        4. Total price difference only 160k, but school district and commute advantages are clear
 
         Monthly payment reference (30% down payment, 30-year loan):
         Property A: Monthly payment approx 28,500 CNY
@@ -68,17 +75,23 @@ Real Estate Advisor: Based on your situation, I recommend Property A, reasons:
 
 ## Key Steps
 
-1. **Clarify Needs** -- Tell the agent budget, purpose, preferences (school district, commute, etc.)
-2. **Property Analysis** -- The agent analyzes location, supporting facilities, developer background
-3. **Price Evaluation** -- Reference surrounding transaction data to evaluate quote reasonableness
-4. **Comparison Decision** -- Systematically compare multiple candidate properties and give recommendations
+1. **Define Purchase Constraints** — First clarify budget, down payment, monthly payment cap, commute, school district, floor plan, and holding period
+2. **Organize Candidate Properties** — Put total price, area, floor level, transportation, amenities, taxes, and mortgage terms into the same comparison table
+3. **Verify Key Risks** — Include property rights, purchase restrictions, mortgage eligibility, historical transactions, property management, school district, noise, and quality issues in the verification checklist
+4. **Calculate True Cost** — Don't just look at property price; also consider taxes, agent fees, renovation, monthly payments, interest rates, and cash flow pressure
+5. **Bring Questions to Viewings** — Output an on-site verification checklist rather than just giving a "choose A / choose B" conclusion
 
 ## Final Deliverable
 
-An objective property comparison analysis report, including price evaluation, advantage/disadvantage comparison, and personalized home purchase recommendations.
+A property comparison analysis draft containing total price, true cost, commute, amenities, school district, monthly payment reference, items to verify, and on-site viewing questions.
+
+:::warning Disclaimer
+The Real Estate Advisor agent provides information organization and supplementary analysis, and does not constitute investment, mortgage, or legal advice. Before purchasing, verify property details, policies, mortgage terms, taxes, and contract clauses.
+:::
 
 :::tip Best Practices
-- Try to provide complete purchase needs (budget, purpose, family situation, commute location) for more precise recommendations
-- When unsure about agent quotes, have the agent query surrounding similar property transaction prices for reference
-- When policies change (such as interest rate adjustments, purchase restrictions easing), consult the agent promptly to understand specific impacts on you
+- Provide complete purchase requirements (budget, purpose, family situation, commute location) for more precise comparisons
+- When unsure about an agent's quoted price, have the agent query surrounding similar property transaction prices for reference
+- When policies change (such as interest rate adjustments, purchase restriction easing), consult the agent promptly to understand specific impacts on you
+- Don't just look at unit price for property decisions — property rights, mortgage, taxes, school district eligibility, property management, and the final contract all affect the outcome
 :::

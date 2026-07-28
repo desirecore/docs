@@ -1,16 +1,23 @@
 ---
 title: Data Analysis Report
-description: Use an AI agent to automatically generate standardized data analysis reports, supporting multi-source data ingestion, intelligent analysis and visualization, and formatted output.
+description: Use the data analysis report agent to organize data, templates and analysis instructions into standard reports.
 keywords: [Data Analysis, Report Generation, Visualization, Excel, Financial Report]
+image: /img/use-cases/covers/cover-data-analysis-agent.jpg
 ---
 
 # AI-Powered Standard Data Analysis Reports
 
-## Pain Points
+## Real Workflow
 
-Every week, month, and quarter, business teams need to submit various data analysis reports: sales weekly reports, operations monthly reports, financial quarterly reports. Reports have strict format requirements, chart styles must be uniform, and ensure consistency in data definitions. Analysts spend a lot of time on "template filling": exporting data from Excel, adjusting formats, creating charts, writing conclusions — a single report takes at least half a day.
+This scenario suits periodic reports. The real pain point isn't "can't analyze"—it's having to repeat data extraction, template filling, chart creation and writing the same structure of conclusions every time.
 
-This use case lets an AI agent automatically generate standardized enterprise data analysis reports. Input raw data and report templates, and get professionally formatted, visually rich reports.
+| Dimension | Real Situation |
+|-----------|----------------|
+| Trigger Point | Sales weekly reports, operations monthly reports, financial quarterly reports, departmental business analysis—fixed-cycle reports |
+| Existing Materials | Current period data, previous report, company template, metric definitions, chart style requirements |
+| Pain Point | Multi-department data formats inconsistent, report template fixed but filling tedious, anomaly explanations easily missed |
+| DesireCore Intervention | Data analysis report agent generates department reports and summary version according to template, and highlights abnormal metrics |
+| Acceptance Result | Analyst focuses on checking anomaly explanations and management suggestions, no longer spending time on copy-paste and formatting |
 
 ---
 
@@ -41,6 +48,27 @@ This use case lets an AI agent automatically generate standardized enterprise da
 - **PDF Reports**: Beautifully typeset, suitable for distribution and archiving
 - **PPT Presentations**: Automatically generates presentation slides
 - **Online Preview**: Preview before generation, with fine-tuning support before export
+
+---
+
+## Workflow Control Points
+
+| Stage | Details to Confirm |
+|-------|-------------------|
+| Data Ingestion | Whether each department's data range, time scope, field names and units are consistent |
+| Data Cleaning | Whether there are empty values, duplicate rows, outliers, merged cells and inconsistent category names |
+| Metric Calculation | Whether MoM, YoY, proportion, average order value etc. use company unified definitions |
+| Chart Generation | Whether charts serve conclusions, not just "looking good" by stacking charts |
+| Text Conclusions | Whether each conclusion can be traced back to specific data, charts or business explanations |
+| Template Output | Whether title, table of contents, headers/footers, chart styles and export format meet company standards |
+
+---
+
+## DesireCore Capabilities Used
+
+- **Workflow / SOP**: Solidify monthly, weekly and quarterly report processes into fixed steps, reducing repeated instructions
+- **Multi-Agent Collaboration**: Data Analyst handles calculations and charts, AI Copywriter handles report text and layout
+- **Scheduled Tasks**: Can automatically generate periodic reports or remind you to supplement data sources at fixed times
 
 ---
 
@@ -134,9 +162,13 @@ File location: ./assets/data-analysis/finance_q1_report
 
 | Metric | Manual Report Creation | Fixed Script Generation | AI Agent |
 |--------|------------------------|-------------------------|----------|
-| Single report time | ~3 hours | ~10 minutes | ~3 minutes |
-| Batch generation (10 reports) | ~30 hours | ~20 minutes | ~15 minutes |
-| Template adaptation cost | Manual each time | Code modification required | Natural language description |
-| Anomaly analysis capability | Relies on human experience | Requires preset rules | Intelligent identification |
-| Conclusion writing | Manual | None | Auto-generated |
+| Single report time | Usually takes hours | Fast after development complete | Suitable for generating reviewable first drafts |
+| Batch generation (10 reports) | Easily filled with formatting and copy-paste | Suitable for fixed formats | Suitable for batch tasks with same template, different data sources |
+| Template adaptation cost | Manual adjustment each time | Code modification required | Natural language description |
+| Anomaly analysis capability | Relies on human experience | Requires preset rules | Assists identification |
+| Conclusion writing | Manual | None | Generates first draft |
 | Format consistency | Error-prone | High | High |
+
+:::tip Usage Suggestion
+These periodic reports are best suited for solidifying templates and metric definitions first. Once the template is stable, each month mainly checks anomaly explanations and management suggestions—no need to repeatedly adjust formatting.
+:::
