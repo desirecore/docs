@@ -33,6 +33,8 @@ OAuth, CLI, or subscription sign-in may be managed by the corresponding external
 
 ## Third-Party API Data Flow
 
+![Data Flow Diagram](./img/data-flow.png)
+
 When agents call AI models, data is sent to the AI providers you configure. Here's what you need to know:
 
 ```

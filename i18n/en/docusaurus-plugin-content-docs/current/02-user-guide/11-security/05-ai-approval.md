@@ -26,6 +26,8 @@ These are Agent-level preferences; an Agent without a saved preference uses AI A
 
 ## How AI Approval Works
 
+![Approval Flow Diagram](./img/approval-flow.png)
+
 AI Approval is not a preference model that silently learns and expands authority over time. For an operation that requires confirmation, DesireCore starts a separate risk judgment and displays its suggestion and reason on the card:
 
 ```text
