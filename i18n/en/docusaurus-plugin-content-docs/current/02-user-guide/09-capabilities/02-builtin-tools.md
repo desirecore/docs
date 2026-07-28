@@ -432,7 +432,7 @@ Calls the local Mail Service REST API for account listing, email send/receive/se
 
 ### ManageSchedule - Manage Scheduled Tasks
 
-Creates and manages scheduled tasks with delay, timer, interval, and cron triggers. See [Schedule](../08-automation/02-schedule.md).
+Creates and manages scheduled tasks with delay, timer, interval, and cron triggers. See [Schedule](../08-automation/03-scheduled-tasks.md).
 
 | Attribute | Value |
 |-----------|-------|
