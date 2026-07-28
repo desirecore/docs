@@ -55,8 +55,18 @@ DesireCore 的记忆系统不仅能记住，还会自动学习和适度遗忘—
 
 每条记忆会经历以下阶段：
 
-```
-活跃（Active）→ 近期（Recent）→ 归档（Archived）→ 压缩（Compressed）→ 清理（Pruned）
+```mermaid
+flowchart LR
+    A[活跃\nActive] --> B[近期\nRecent]
+    B --> C[归档\nArchived]
+    C --> D[压缩\nCompressed]
+    D --> E[清理\nPruned]
+
+    style A fill:#c8e6c9,stroke:#4caf50,color:#333
+    style B fill:#fff9c4,stroke:#ffc107,color:#333
+    style C fill:#ffe0b2,stroke:#ff9800,color:#333
+    style D fill:#ffccbc,stroke:#ff5722,color:#333
+    style E fill:#ffcdd2,stroke:#f44336,color:#333
 ```
 
 | 阶段 | 说明 | 你能看到什么 |
@@ -83,8 +93,20 @@ Auto Dream 的灵感来自人类的"做梦"机制：在你不使用智能体的�
 
 加入 Auto Dream 后，完整的记忆生命周期变为：
 
-```
-活跃（Active）→ 近期（Recent）→ 归档（Archived）→ 💤 Dream → 压缩（Compressed）→ 清理（Pruned）
+```mermaid
+flowchart LR
+    A[活跃\nActive] --> B[近期\nRecent]
+    B --> C[归档\nArchived]
+    C --> D[💤 Dream\n无损遗忘]
+    D --> E[压缩\nCompressed]
+    E --> F[清理\nPruned]
+
+    style A fill:#c8e6c9,stroke:#4caf50,color:#333
+    style B fill:#fff9c4,stroke:#ffc107,color:#333
+    style C fill:#ffe0b2,stroke:#ff9800,color:#333
+    style D fill:#e1bee7,stroke:#9c27b0,color:#333
+    style E fill:#ffccbc,stroke:#ff5722,color:#333
+    style F fill:#ffcdd2,stroke:#f44336,color:#333
 ```
 
 Dream 阶段发生在归档和压缩之间：系统扫描归档记忆中的关联内容，将多条零散记忆合并为一条结构化知识，保留核心语义的同时大幅减少存储。

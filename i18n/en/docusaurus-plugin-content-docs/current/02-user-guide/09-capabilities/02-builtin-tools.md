@@ -186,36 +186,6 @@ Delegates work to another agent, a team, or a preset such as Explore. Supports s
 | Requires Confirmation | Depends on permissions and task content |
 | Typical Use Cases | Cross-domain collaboration, parallel research, read-only Explore analysis |
 
-### spawn_agent - Spawn Sub-Agent
-
-Starts a temporary sub-agent with an isolated context for a concrete subtask.
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Medium |
-| Requires Confirmation | Depends on permissions and task content |
-| Typical Use Cases | Read several modules in parallel, split large investigations |
-
-### handoff - Handoff Session
-
-Transfers the current conversation to a more suitable agent with reason and context summary.
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Low |
-| Requires Confirmation | No |
-| Typical Use Cases | Move a task to a specialized agent |
-
-### request_help - Request Help
-
-Asks another persistent agent for advice or assistance.
-
-| Attribute | Value |
-|-----------|-------|
-| Risk Level | Low |
-| Requires Confirmation | No |
-| Typical Use Cases | Consult a specialist agent |
-
 ### SendMessage - Agent-to-Agent Message
 
 Sends a message to another agent with context, intent, and waiting behavior.
@@ -373,3 +343,125 @@ Creates, validates, tests, runs, and opens workflow DSL files. Workflows can orc
 | Risk Level | Low to Medium |
 | Requires Confirmation | No by default |
 | Typical Use Cases | Build reusable automations, validate workflows, run structured processes |
+
+## Terminal Control
+
+### TerminalControl - Interactive Terminal
+
+Creates and manages interactive PTY sessions. Unlike Bash, TerminalControl supports waiting for prompts, handling `(y/n)` confirmations, and password input.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | High |
+| Requires Confirmation | Yes |
+| Typical Use Cases | Long-running dev servers, interactive installers, collaborative terminal work |
+
+## Document and Media
+
+### ExportDocument - Export Document
+
+Converts Markdown or editor content to PDF, DOCX, etc., preserving headings, tables, code blocks, images, and formulas.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low to Medium |
+| Requires Confirmation | Depends on target path |
+
+### GenerateImage / GenerateVideo - Generate Images and Videos
+
+Invokes configured media providers for text-to-image, image-to-image, text-to-video, reference material, and first/last-frame generation. See [Media Generation](./media-generation).
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on provider and cost |
+
+### BeautifyImage - Beautify Image
+
+Crops, centers, removes borders, and enhances existing images with output-size protection.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on provider and cost |
+
+### GenerateDiagram - Generate Diagram
+
+Renders draw.io XML into architecture diagrams, flowcharts, UML, mind maps, and more, displayed as editable diagram cards in the conversation.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+
+### UnderstandImage - Image Understanding
+
+Returns a visual model's description or answer about an image given its URL. Used as a fallback when the primary model lacks vision support.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+
+### Canvas - Browser Window Control
+
+Controls Electron BrowserWindow for web page display, JS execution, screenshots, and A2UI message pushing.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on operation |
+
+### EnterWorktree / ExitWorktree - Isolated Workspace
+
+Creates or reuses an isolated Git linked worktree for file modifications and commands, without affecting the main workspace.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Yes |
+
+### MailOperations - Email Operations
+
+Calls the local Mail Service REST API for account listing, email send/receive/search, labels, and automation rules. See [Email Management](../email/overview).
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Depends on operation |
+
+### ManageSchedule - Manage Scheduled Tasks
+
+Creates and manages scheduled tasks with delay, timer, interval, and cron triggers. See [Schedule](../08-automation/02-schedule.md).
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Medium |
+| Requires Confirmation | Yes |
+
+### RefreshAgentFS - Refresh Agent State
+
+Triggers an immediate refresh of the frontend UI and tool/skill registry after writing AgentFS files.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+
+### MathCalc - High-Precision Calculator
+
+Deterministic high-precision math calculations for financial, ratio, statistical, and formula verification tasks.
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
+
+### HeartbeatRespond - Heartbeat Response
+
+Submits heartbeat patrol results including outcome, notification text, output files, and next-check suggestions. See [Heartbeat](../08-automation/01-heartbeat.md).
+
+| Attribute | Value |
+|-----------|-------|
+| Risk Level | Low |
+| Requires Confirmation | No |
