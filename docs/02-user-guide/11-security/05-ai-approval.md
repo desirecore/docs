@@ -8,6 +8,8 @@ keywords: [AI 审批, 工具审批, 命令审批, ask-external, 白名单, 权�
 
 DesireCore 为每个智能体提供独立的工具与命令审批偏好。审批发生在真正执行操作之前；提示词、Skill 或委派不能绕过这条执行边界。
 
+![审批决策流程示意图：请求 → 风险评估 → 审批卡片 → 决策](./img/approval-flow.png)
+
 ## 五种模式
 
 | 模式 | 行为 | 等待方式 |
@@ -63,3 +65,6 @@ AI 的建议可能出错。涉及不可逆、敏感数据、发布、外部通�
 - [人闸门确认机制](../04-delegation/04-human-gate.md)
 - [执行监控](../04-delegation/03-execution-monitoring.md)
 - [审计跟踪](./03-audit-trail.md)
+- [三层可控性](./01-controllability.md)：审批模式如何服务于可见、可控、可逆
+- [风险等级](./02-risk-levels.md)：操作如何被分级
+- [通知管理](../08-automation/02-notifications.md)：审批通知的展示和跳转
