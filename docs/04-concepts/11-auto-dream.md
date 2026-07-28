@@ -58,7 +58,7 @@ Auto Dream 的工作分为四个阶段：
 
 ### 记忆生命周期（含 Dream 阶段）
 
-在 [自动学习与遗忘](../02-user-guide/07-memory/04-auto-learning) 中，我们介绍了记忆的五阶段生命周期。加入 Auto Dream 后，完整的生命周期变为：
+在 [自动学习与遗忘](../user-guide/memory/auto-learning) 中，我们介绍了记忆的五阶段生命周期。加入 Auto Dream 后，完整的生命周期变为：
 
 ```
 活跃 → 近期 → 归档 → 💤 Dream → 压缩 → 清理
@@ -120,6 +120,6 @@ Auto Dream 不会删除任何原始记忆。即使你对整合结果不满意，
 
 ## 下一步
 
-- 想了解记忆的完整工作原理？请阅读用户指南中的 [智能体如何记住你](../02-user-guide/07-memory/01-how-memory-works)
-- 想了解普通遗忘机制？请阅读 [自动学习与遗忘](../02-user-guide/07-memory/04-auto-learning)
+- 想了解记忆的完整工作原理？请阅读用户指南中的 [智能体如何记住你](../user-guide/memory/how-memory-works)
+- 想了解普通遗忘机制？请阅读 [自动学习与遗忘](../user-guide/memory/auto-learning)
 - 想了解进化机制？请阅读 [自我进化](./self-evolution)

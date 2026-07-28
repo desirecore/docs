@@ -120,5 +120,5 @@ DesireCore 的**智能任务编排引擎**就是你的"项目经理"。当你提
 ## 下一步
 
 - 想了解步骤的可控性？请阅读 [固化/灵活/人闸门](./step-types)
-- 想了解多智能体如何协作？请阅读用户指南中的 [跨智能体协作](../02-user-guide/04-delegation/06-cross-agent)
+- 想了解多智能体如何协作？请阅读用户指南中的 [跨智能体协作](../user-guide/delegation/cross-agent)
 - 想了解任务的回执系统？请阅读 [回执系统](./receipt-system)
