@@ -58,6 +58,7 @@ DesireCore is built around the core philosophy of "cultivating and hosting digit
 | [Compute Model](./compute-model) | Bring your own keys, choose your own engines | Want to understand AI model configuration |
 | [Task Orchestration](./task-orchestration) | Automatic task decomposition and best-agent matching — your "project manager" | Want to understand task distribution |
 | [Auto Dream](./auto-dream) | Lossless forgetting — preserving value through compression | Want to understand memory consolidation |
+| [Agent Permission Boundaries](./agent-permission-boundary) | Whoever acts is bound by their own ceiling; accountability for overreach lies with the executor | Want to understand permissions across collaborating agents |
 
 ## Reading Recommendations
 
