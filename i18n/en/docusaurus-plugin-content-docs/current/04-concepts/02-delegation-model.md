@@ -107,8 +107,13 @@ Example conversations:
 3. **Capability Growth**: The companion's capabilities are cumulative. Today you taught contract review, tomorrow email writing, the day after it can handle more complex integrated tasks
 4. **Risk Controllability**: Through combinations of hardened steps, flexible steps, and human gates, you can precisely control the companion's autonomy
 
+## Companions Delegate to Each Other Too
+
+Delegation is not limited to "you → companion." Companions can delegate to, message, interject into, and even interrupt one another. Permissions in those cases follow one fixed rule: **whoever acts is bound by their own ceiling** — the requested companion still acts entirely within the permissions you granted it, neither widened nor narrowed by the fact that the request came from another companion. See [Agent Permission Boundaries](./agent-permission-boundary).
+
 ## Next Steps
 
+- Want to understand permissions across collaborating companions? Read [Agent Permission Boundaries](./agent-permission-boundary)
 - Want to understand how companions control risk? Read [Hardened/Flexible/Human Gate](./step-types)
 - Want to understand the "work report" after companions finish tasks? Read [Receipt System](./receipt-system)
 - Want to understand how companions get smarter? Read [Self-Evolution](./self-evolution)
