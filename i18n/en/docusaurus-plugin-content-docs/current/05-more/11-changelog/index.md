@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.97](./v10.0.97) | 2026-07-31 | Built-in File Workbench、Comprehensive Upgrade of Inter-Agent Messaging、SMS Ve... |
 | [v10.0.96](./v10.0.96) | 2026-07-24 | Step-by-step Q&A、Same-turn skill tool unlocking、Enhanced automation informati... |
 | [v10.0.95](./v10.0.95) | 2026-07-23 | Manual Session Project & Worktree Isolation、MCP OAuth Authentication、Built-in... |
 | [v10.0.94](./v10.0.94) | 2026-07-23 | Phone verification code login、Unified scheduling management tool、LSP semantic... |
