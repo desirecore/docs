@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 380" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="520" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a1a2e"/>
+      <stop offset="1" stop-color="#16213e"/>
+    </linearGradient>
+    <filter id="blur1"><feGaussianBlur in="SourceGraphic" stdDeviation="2"/></filter>
+  </defs>
+  <rect width="520" height="380" rx="12" fill="url(#bg)"/>
+  <!-- Title -->
+  <text x="24" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#e2e8f0">外观设置</text>
+  <line x1="24" y1="48" x2="496" y2="48" stroke="#334155" stroke-width="1"/>
+  <!-- Theme selector -->
+  <rect x="24" y="64" width="472" height="56" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="40" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">主题</text>
+  <text x="40" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">跟随系统（默认）</text>
+  <!-- Dropdown indicator -->
+  <rect x="380" y="76" width="104" height="32" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <text x="392" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">跟随系统</text>
+  <path d="M472 90 L476 96 L480 90" stroke="#64748b" stroke-width="1.5" fill="none"/>
+  <!-- Three theme previews -->
+  <rect x="24" y="136" width="472" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="40" y="158" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">主题预览</text>
+  <!-- Light theme preview -->
+  <rect x="40" y="172" width="136" height="52" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="48" y="180" width="48" height="6" rx="2" fill="#e2e8f0"/>
+  <rect x="48" y="192" width="80" height="4" rx="2" fill="#cbd5e1"/>
+  <rect x="48" y="200" width="64" height="4" rx="2" fill="#e2e8f0"/>
+  <text x="108" y="216" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">浅色</text>
+  <!-- Dark theme preview -->
+  <rect x="192" y="172" width="136" height="52" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <rect x="200" y="180" width="48" height="6" rx="2" fill="#334155"/>
+  <rect x="200" y="192" width="80" height="4" rx="2" fill="#1e293b"/>
+  <rect x="200" y="200" width="64" height="4" rx="2" fill="#334155"/>
+  <text x="260" y="216" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">暗色</text>
+  <!-- System theme preview -->
+  <rect x="344" y="172" width="136" height="52" rx="6" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="352" y="180" width="48" height="6" rx="2" fill="#334155"/>
+  <rect x="352" y="192" width="80" height="4" rx="2" fill="#1e293b"/>
+  <rect x="352" y="200" width="64" height="4" rx="2" fill="#3b82f6" opacity="0.6"/>
+  <text x="412" y="216" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#3b82f6" text-anchor="middle">跟随系统 ✓</text>
+  <!-- Glassmorphism section -->
+  <rect x="24" y="252" width="472" height="108" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="40" y="276" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">毛玻璃效果（Glassmorphism）</text>
+  <rect x="40" y="292" width="140" height="52" rx="6" fill="#1e293b" fill-opacity="0.6" stroke="#475569" stroke-width="0.5" filter="url(#blur1)"/>
+  <text x="110" y="314" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">半透明面板</text>
+  <rect x="196" y="292" width="140" height="52" rx="6" fill="#1e293b" fill-opacity="0.6" stroke="#475569" stroke-width="0.5" filter="url(#blur1)"/>
+  <text x="266" y="314" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">背景模糊</text>
+  <rect x="352" y="292" width="140" height="52" rx="6" fill="#1e293b" fill-opacity="0.6" stroke="#60a5fa" stroke-width="0.5" filter="url(#blur1)"/>
+  <text x="422" y="314" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">柔和阴影</text>
+</svg>
