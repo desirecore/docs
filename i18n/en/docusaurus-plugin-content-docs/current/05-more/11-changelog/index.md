@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.100](./v10.0.100) | 2026-08-09 | Browser Integration、Built-in Terminal、File Workbench、Task Manager、Delegation ... |
 | [v10.0.99](./v10.0.99) | 2026-08-05 | Models grouped by provider、API audit refresh、Beike Wings requirement clarific... |
 | [v10.0.98](./v10.0.98) | 2026-08-05 | Built-in Browser Workspace、Background Task Manager、MindOpt Solver Connection、... |
 | [v10.0.97](./v10.0.97) | 2026-07-31 | Built-in File Workbench、Comprehensive Upgrade of Inter-Agent Messaging、SMS Ve... |
