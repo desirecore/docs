@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.102](./v10.0.102) | 2026-08-11 | Intelligent Model Routing，修复 2 项问题 |
 | [v10.0.101](./v10.0.101) | 2026-08-11 | Smart Model Routing、Subtask (Child Task)、Detached Conversation Window、Cross-R... |
 | [v10.0.100](./v10.0.100) | 2026-08-09 | Browser Integration、Built-in Terminal、File Workbench、Task Manager、Delegation ... |
 | [v10.0.99](./v10.0.99) | 2026-08-05 | Models grouped by provider、API audit refresh、Beike Wings requirement clarific... |
