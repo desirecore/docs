@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.105](./v10.0.105) | 2026-08-11 | Global Task Board、UI Takeover、Unlimited Import Size、Work Context，修复 7 项问题，改进 4 项 |
 | [v10.0.104](./v10.0.104) | 2026-08-11 | 修复：Fixed an issue on macOS packaged builds where a newly created terminal wou... |
 | [v10.0.103](./v10.0.103) | 2026-08-11 | 修复：Fixed an issue where, on Apple Silicon Macs without Rosetta, installing th... |
 | [v10.0.102](./v10.0.102) | 2026-08-11 | Intelligent Model Routing，修复 2 项问题 |
