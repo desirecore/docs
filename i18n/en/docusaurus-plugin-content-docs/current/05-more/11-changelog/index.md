@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.107](./v10.0.107) | 2026-08-12 | Automatic local HostAgent connection、Provider-scoped smart routing、Sidebar se... |
 | [v10.0.106](./v10.0.106) | 2026-08-12 | Task Board Multi-Agent Collaboration、Task Board Global Workbench、Task Board A... |
 | [v10.0.105](./v10.0.105) | 2026-08-11 | Global Task Board、UI Takeover、Unlimited Import Size、Work Context，修复 7 项问题，改进 4 项 |
 | [v10.0.104](./v10.0.104) | 2026-08-11 | 修复：Fixed an issue on macOS packaged builds where a newly created terminal wou... |
