@@ -8,8 +8,6 @@ Current Version: v3
 
 Last Updated: August 16, 2026
 
-Version History: [v1](./privacy-v1.md) · [v2](./privacy-v2.md)
-
 ## 1. Data Collection Scope
 
 DesireCore follows a "local-first" data-storage principle. Data processed by the app may include account information (such as username and email), user-created agent configurations, conversation history, generated files, and app-usage statistics. Except for the connected scenarios described below, core data is stored on the user's local device by default.
@@ -97,7 +95,7 @@ Parents or guardians who believe their child has provided us with personal infor
 
 ## 10. Policy Updates
 
-This Privacy Policy is versioned. Each update creates a new version while historical versions remain available. Before the main interface becomes available, DesireCore presents the then-current Privacy Policy and Terms of Service and requires the user to explicitly agree again. Continued use alone does not constitute acceptance of a new version. A user who disagrees may stop using the software; turning off non-essential **Send Usage Statistics** does not prevent use of core features.
+This Privacy Policy is versioned. Each update creates a new version. Before the main interface becomes available, DesireCore presents the then-current Privacy Policy and Terms of Service and requires the user to explicitly agree again. App and website builds include only the currently effective text and do not offer a historical-version viewer. Continued use alone does not constitute acceptance of a new version. A user who disagrees may stop using the software; turning off non-essential **Send Usage Statistics** does not prevent use of core features.
 
 ## 11. Contact Us
 

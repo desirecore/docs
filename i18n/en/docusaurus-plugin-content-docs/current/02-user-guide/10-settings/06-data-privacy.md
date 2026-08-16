@@ -46,7 +46,7 @@ When connected to a remote instance, the settings page reads both this machine a
 
 ## Agreement Versions and Re-consent
 
-The Privacy Policy and Terms of Service have independent version numbers. DesireCore records the version and acceptance time for each agreement locally. On first use, when a record is missing, or whenever either agreement publishes a new version, the app presents the current versions and requires explicit agreement again before opening the main interface. Historical versions remain available from the current policy pages.
+The Privacy Policy and Terms of Service have independent version numbers. DesireCore records the version and acceptance time for each agreement locally. On first use, when a record is missing, or whenever either agreement publishes a new version, the app presents the current versions and requires explicit agreement again before opening the main interface. The app and website show only the currently effective versions and provide no historical-version viewer.
 
 ## Exporting Data
 
