@@ -27,6 +27,23 @@ DesireCore is local-first. Agents, skills, conversations, configuration, audit r
 | `cache/` | Rebuildable cache |
 | `logs/` | Local logs and troubleshooting data |
 
+## Usage Statistics
+
+**Settings → Data & Privacy → Send Usage Statistics** is the single switch for installation and product-usage statistics. It is disabled by default in the current version. DesireCore begins accumulating and sending the statistics below only after you actively enable it.
+
+When enabled, DesireCore sends two categories of pseudonymous statistics:
+
+| Category | Sent | Never sent |
+|----------|------|------------|
+| Installation statistics | A device identifier derived from hardware identifiers with SHA-256, version, operating system, and CPU architecture; after success, it is not sent again during the same UTC day | Name, email address, conversations, prompts, or files |
+| Product-usage statistics | A hardware-independent random UUID, UTC date, version, platform, and daily numeric counts for tasks, outcomes, and delivery signals | Conversations or prompts, outputs, Agent names or identifiers, task titles, usernames, email addresses, filenames, or paths |
+
+The two identifiers are not derived from one another and never appear in the same request. Product statistics are aggregated locally by day and sent on the following day or when connectivity returns. The unsent queue is retained for no more than 30 days. Agent identifiers used to calculate the number of distinct Agents remain local; only the count is transmitted.
+
+Turning the switch off immediately stops both reports and local product-usage counting, and deletes the local random statistics identifier and pending queue. Re-enabling it creates a new random identifier. Turning it off does not automatically delete data already transmitted. Server-side deduplication records may be retained for up to 400 days; numeric aggregates with device-level identifiers removed may be used for long-term trend analysis.
+
+When connected to a remote instance, the settings page reads both this machine and the connected instance. A disagreement is shown as a mixed state; if the remote value cannot be read, the UI explicitly reports that its state is unknown. Turning the switch off attempts to apply the choice to both sides. A remote write failure does not roll back the setting on this machine.
+
 ## Exporting Data
 
 Open **Settings** -> **Data and Privacy** to export data. Exports can be selected by category.
@@ -117,7 +134,7 @@ Clearing data is irreversible. For troubleshooting, clear cache and logs first i
 - **Local storage**: core data stays on your device by default
 - **Key protection**: in-app export always excludes the original local secrets store; eligible compute API keys enter a migration package only as a separate encrypted payload after explicit opt-in
 - **Transparent calls**: AI requests, tool calls, and external service interactions can be audited
-- **Minimal telemetry**: startup statistics do not include conversation content
+- **Minimal telemetry**: installation and product-usage statistics contain only device/random identifiers, version, platform, and numeric counts; they exclude conversations, prompts, outputs, Agent names, task titles, and file paths, and can be disabled with one switch
 - **Exportable audit**: audit logs can be exported as an independent category
 
 ## Sensitive Scenario Advice

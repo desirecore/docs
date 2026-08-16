@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Privacy Policy
 
-Last Updated: July 18, 2026
+Last Updated: August 16, 2026
 
 ## 1. Data Collection Scope
 
@@ -12,15 +12,19 @@ DesireCore follows a "local-first" data-storage principle. Data processed by the
 
 Except for necessary account verification and software update checks, all core data is stored locally on the user's device by default. We will not upload user data to the cloud without explicit consent.
 
-To improve the product and track installation counts, DesireCore sends anonymous installation statistics to our update server on each launch. This information only includes: an anonymous device identifier generated from hardware information (SHA-256 hash, irreversible), client version number, operating system platform, and CPU architecture. We do not collect any personally identifiable information, and this device identifier cannot be associated with your personal identity. This data is used solely for counting unique installations and platform distribution.
+After the user actively enables **Send Usage Statistics**, the default instance of a packaged DesireCore app sends installation statistics to the release service to count installations and understand platform distribution. After a successful transmission, it does not send again during the same UTC day; if the network request fails, the app may retry during a later check. The report contains only a pseudonymous device identifier derived from hardware identifiers with SHA-256, the client version, operating-system platform, and CPU architecture. The device identifier does not contain a name, email address, or conversation content, but it can recognize the same installation and therefore should not be treated as fully anonymous data.
+
+When enabled, DesireCore also aggregates usage statistics locally by UTC day to understand whether product features are effective, and sends them on the following day or after connectivity returns. A report contains a random statistics identifier (UUID) that is independent of hardware, the summary date, client version, operating-system platform, and numeric counts such as tasks, turns, successful/failed/partial outcomes, multi-Agent tasks, user aborts, background timeouts, task acceptances, file deliveries, messages sent, and distinct Agents used. It does not contain conversation content, prompts, outputs, Agent names or identifiers, task titles, usernames, email addresses, filenames, or file paths. Agent identifiers used to calculate a distinct count remain local; only the count is transmitted.
+
+The installation-statistics device identifier and the product-usage random identifier are independent: neither is derived from the other, and they are never sent in the same request. In the current version, **Send Usage Statistics** is disabled by default and controls both categories. DesireCore does not transmit or accumulate these statistics until you actively enable the switch under **Settings → Data & Privacy**. Turning it off immediately stops transmission and local product-usage counting, and deletes the local random statistics identifier and pending queue. Re-enabling it creates a new random statistics identifier. Turning it off does not automatically delete records that were already transmitted.
 
 We do not proactively collect or review agent content that remains only on the local device. When a user chooses to use account services, update checks, remote connections, third-party models, or other connected features, the data required to provide that feature is sent to the relevant service. Users should review the transmission scope and provider policies before use.
 
 ## 2. AgentFS Privacy Architecture
 
-DesireCore uses the self-developed AgentFS file system architecture to ensure complete isolation and privacy protection of user data.
+DesireCore uses the AgentFS file-system architecture to provide domain-based storage and logical isolation for user data.
 
-User profile data is stored in independent user domains under `users/<user_id>/`, with each user's data completely isolated from other users. Relationship data (such as interaction patterns between AI assistants and users) belongs to the user domain and is not shared with "companions" (i.e., other AI assistants or users).
+User profile data is stored in independent user domains under `users/<user_id>/`. Relationship data (such as interaction patterns between AI assistants and users) belongs to the user domain and is not shared with "companions" (i.e., other AI assistants or users) by default.
 
 This architecture provides logical isolation between user domains and agent workspaces. By default, an agent may access local files to carry out delegated tasks, while sensitive paths (such as SSH private keys and `.env` credential files) always remain blocked by system controls and write operations still go through tool approval; you can also enable "restrict to work directories" in an agent's configuration to confine that agent's file access to its authorized workspace. When explicitly requested by the user and approved, an agent may perform audited cross-agent AgentFS operations. This isolation should not be treated as an absolute physical-security boundary if device-account or filesystem permissions are bypassed, or when the user authorizes export or cross-domain operations.
 
@@ -49,13 +53,13 @@ It should be specifically noted that: we cannot perform any security monitoring 
 
 ## 5. User Rights
 
-Users have complete control over their data:
+Subject to applicable law and available product features, users can manage their data through the following rights and controls:
 
 - Right to Access: Users can view all their stored data at any time
 - Right to Export: Supports exporting data in portable format for backup or migration
 - Right to Deletion: Users can permanently delete their account and all related data
 - Right to Correction: Users can modify their personal profile and preference settings at any time
-- Right to Restrict Processing: Users can choose to disable specific data collection features (such as usage statistics)
+- Right to Restrict Processing: Users can turn off **Send Usage Statistics** under **Settings → Data & Privacy**; the switch controls both installation and product-usage statistics
 
 ## 6. User-Created Agents
 
@@ -75,7 +79,9 @@ Before connecting any third-party service, users should read and understand the 
 
 ## 8. Data Retention
 
-User data is retained only while the user has an active account. After a user deletes their account, all related data will be permanently deleted from our systems within 30 days (subject to technical and legal requirements).
+Account data is retained only for as long as needed to provide account services. After a user deletes their account, related account data will be permanently deleted from our systems within 30 days (subject to technical and legal requirements).
+
+Unsent product-usage statistics remain on the device for no more than 30 days and are discarded after that period. To prevent duplicate counting for the same device and day, the release service may retain the random statistics identifier and date in deduplication records for up to 400 days. Numeric aggregates with the device-level identifier removed may be retained for long-term product trend analysis. Turning off **Send Usage Statistics** deletes the local random identifier and pending queue, but does not automatically delete deduplication records or aggregates that were already transmitted. To ask questions or exercise applicable data rights, contact us using the details in this policy.
 
 Locally stored data retention is entirely controlled by the user. Uninstalling the app does not automatically delete local data files; users need to manually clear them or use the in-app data deletion feature.
 
@@ -87,9 +93,7 @@ Parents or guardians who believe their child has provided us with personal infor
 
 ## 10. Policy Updates
 
-We may update this Privacy Policy from time to time. Significant changes will be communicated to users through in-app notifications.
-
-Continued use of our services constitutes acceptance of the revised Privacy Policy. We encourage users to periodically review this policy for the latest information.
+We may update this Privacy Policy from time to time. Material changes will be communicated through an in-app notice. If a change introduces processing that requires separate consent under applicable law, we will request your choice before that processing begins. Declining non-essential statistics will not prevent use of core features. We encourage users to review this policy periodically.
 
 ## 11. Contact Us
 
