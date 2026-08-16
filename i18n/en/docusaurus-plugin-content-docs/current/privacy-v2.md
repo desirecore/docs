@@ -1,14 +1,16 @@
 ---
 sidebar_position: 4
+slug: /privacy/v2
+unlisted: true
 ---
 
 # Privacy Policy
 
-Current Version: v3
+Version: v2 (Historical)
+
+Current Version: [Privacy Policy](./privacy.md) · Version History: [v1](./privacy-v1.md)
 
 Last Updated: August 16, 2026
-
-Version History: [v1](./privacy-v1.md) · [v2](./privacy-v2.md)
 
 ## 1. Data Collection Scope
 
@@ -16,11 +18,11 @@ DesireCore follows a "local-first" data-storage principle. Data processed by the
 
 Except for necessary account verification and software update checks, all core data is stored locally on the user's device by default. We will not upload user data to the cloud without explicit consent.
 
-**Send Usage Statistics** is enabled by default. While enabled, the default instance of a packaged DesireCore app sends installation statistics to the release service to count installations and understand platform distribution. After a successful transmission, it does not send again during the same UTC day; if the network request fails, the app may retry during a later check. The report contains only a pseudonymous device identifier derived from hardware identifiers with SHA-256, the client version, operating-system platform, and CPU architecture. The device identifier does not contain a name, email address, or conversation content, but it can recognize the same installation and therefore should not be treated as fully anonymous data.
+After the user actively enables **Send Usage Statistics**, the default instance of a packaged DesireCore app sends installation statistics to the release service to count installations and understand platform distribution. After a successful transmission, it does not send again during the same UTC day; if the network request fails, the app may retry during a later check. The report contains only a pseudonymous device identifier derived from hardware identifiers with SHA-256, the client version, operating-system platform, and CPU architecture. The device identifier does not contain a name, email address, or conversation content, but it can recognize the same installation and therefore should not be treated as fully anonymous data.
 
-When enabled, DesireCore also aggregates usage statistics locally by UTC day to understand whether product features are effective, and sends them on the following day or after connectivity returns. A report contains a random statistics identifier (UUID) that is independent of hardware, the summary date, client version, operating-system platform, and numeric counts such as tasks, turns, successful/failed/partial outcomes, multi-Agent tasks, user aborts, background timeouts, task acceptances, file deliveries, messages sent, and distinct Agents used. It does not contain usernames, email addresses, account profiles, conversations, prompts, model outputs, artifacts, filenames, file contents, file paths, Agent names or identifiers, or task titles. DesireCore does not read those categories of user data to build a statistics report. Agent identifiers used to calculate a distinct count remain local; only the count is transmitted.
+When enabled, DesireCore also aggregates usage statistics locally by UTC day to understand whether product features are effective, and sends them on the following day or after connectivity returns. A report contains a random statistics identifier (UUID) that is independent of hardware, the summary date, client version, operating-system platform, and numeric counts such as tasks, turns, successful/failed/partial outcomes, multi-Agent tasks, user aborts, background timeouts, task acceptances, file deliveries, messages sent, and distinct Agents used. It does not contain conversation content, prompts, outputs, Agent names or identifiers, task titles, usernames, email addresses, filenames, or file paths. Agent identifiers used to calculate a distinct count remain local; only the count is transmitted.
 
-The installation-statistics device identifier and the product-usage random identifier are independent: neither is derived from the other, and they are never sent in the same request. **Send Usage Statistics** controls both categories and is enabled by default in the current version; you may turn it off at any time under **Settings → Data & Privacy**. Turning it off immediately stops transmission and local product-usage counting, and deletes the local random statistics identifier and pending queue. Re-enabling it creates a new random statistics identifier. Turning it off does not automatically delete records that were already transmitted.
+The installation-statistics device identifier and the product-usage random identifier are independent: neither is derived from the other, and they are never sent in the same request. In the current version, **Send Usage Statistics** is disabled by default and controls both categories. DesireCore does not transmit or accumulate these statistics until you actively enable the switch under **Settings → Data & Privacy**. Turning it off immediately stops transmission and local product-usage counting, and deletes the local random statistics identifier and pending queue. Re-enabling it creates a new random statistics identifier. Turning it off does not automatically delete records that were already transmitted.
 
 We do not proactively collect or review agent content that remains only on the local device. When a user chooses to use account services, update checks, remote connections, third-party models, or other connected features, the data required to provide that feature is sent to the relevant service. Users should review the transmission scope and provider policies before use.
 
@@ -97,7 +99,7 @@ Parents or guardians who believe their child has provided us with personal infor
 
 ## 10. Policy Updates
 
-This Privacy Policy is versioned. Each update creates a new version while historical versions remain available. Before the main interface becomes available, DesireCore presents the then-current Privacy Policy and Terms of Service and requires the user to explicitly agree again. Continued use alone does not constitute acceptance of a new version. A user who disagrees may stop using the software; turning off non-essential **Send Usage Statistics** does not prevent use of core features.
+We may update this Privacy Policy from time to time. Material changes will be communicated through an in-app notice. If a change introduces processing that requires separate consent under applicable law, we will request your choice before that processing begins. Declining non-essential statistics will not prevent use of core features. We encourage users to review this policy periodically.
 
 ## 11. Contact Us
 
