@@ -8,8 +8,6 @@ Current Version: v2
 
 Last Updated: August 16, 2026
 
-Version History: [v1](./terms-v1.md)
-
 ## 1. Service Scope
 
 DesireCore is a delegation-based Agent operating system designed to provide users with secure, private, and efficient AI assistant services. Through this software, users can create, manage, and interact with personalized AI assistants.
@@ -73,7 +71,7 @@ Third-party software, models, account systems, and network services may change o
 
 ## 8. Agreement Changes
 
-These Terms of Service are versioned. Each update creates a new version while historical versions remain available. Whenever either the Privacy Policy or Terms of Service changes version, DesireCore presents both then-current agreements before the main interface becomes available and requires the user to explicitly agree again.
+These Terms of Service are versioned. Each update creates a new version. Whenever either the Privacy Policy or Terms of Service changes version, DesireCore presents both then-current agreements before the main interface becomes available and requires the user to explicitly agree again. App and website builds include only the currently effective text and do not offer a historical-version viewer.
 
 Continued use alone does not constitute acceptance of modified terms. If you do not agree to a new version, you should stop using the service and may export or delete your data before termination.
 
