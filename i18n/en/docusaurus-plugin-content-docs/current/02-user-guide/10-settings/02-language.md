@@ -24,7 +24,7 @@ More languages will be added in future versions based on community feedback.
 3. Click the dropdown menu to the right of **Language**
 4. Select your target language
 
-![Language Settings](/img/user-guide/settings/settings-language.svg)
+![Language Settings](./img/settings-language.svg)
 
 After switching, all interface text will immediately update to the selected language.
 

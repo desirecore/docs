@@ -7,27 +7,27 @@
   </defs>
   <rect width="520" height="320" rx="12" fill="url(#bg)"/>
   <!-- Title -->
-  <text x="24" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#e2e8f0">语言设置</text>
+  <text x="24" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#e2e8f0">Language</text>
   <line x1="24" y1="48" x2="496" y2="48" stroke="#334155" stroke-width="1"/>
   <!-- Language selector -->
   <rect x="24" y="64" width="472" height="56" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-  <text x="40" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">语言 / Language</text>
+  <text x="40" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Language</text>
   <rect x="380" y="76" width="104" height="32" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-  <text x="392" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">简体中文</text>
+  <text x="392" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">English</text>
   <path d="M472 90 L476 96 L480 90" stroke="#64748b" stroke-width="1.5" fill="none"/>
   <!-- Language options -->
   <rect x="24" y="136" width="472" height="80" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-  <text x="40" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">支持的语言</text>
-  <!-- Chinese option (selected) -->
-  <rect x="40" y="176" width="220" height="28" rx="4" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="56" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#e2e8f0">🇨🇳  简体中文 (zh-CN)</text>
-  <text x="236" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3b82f6">✓</text>
-  <!-- English option -->
-  <rect x="276" y="176" width="208" height="28" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
-  <text x="292" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">🇺🇸  English (en-US)</text>
+  <text x="40" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Supported Languages</text>
+  <!-- English option (selected) -->
+  <rect x="40" y="176" width="208" height="28" rx="4" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="56" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#e2e8f0">🇺🇸  English (en-US)</text>
+  <text x="224" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3b82f6">✓</text>
+  <!-- Chinese option -->
+  <rect x="264" y="176" width="220" height="28" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="280" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">🇨🇳  Simplified Chinese (zh-CN)</text>
   <!-- Info box -->
   <rect x="24" y="232" width="472" height="72" rx="8" fill="#0f172a" stroke="#1e40af" stroke-width="1"/>
-  <text x="40" y="256" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#60a5fa">ℹ️  语言切换只影响应用 UI 文案</text>
-  <text x="40" y="276" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8">智能体的对话语言取决于其角色设定，不受界面语言影响。</text>
-  <text x="40" y="292" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">翻译回退：缺少翻译时自动回退到简体中文。</text>
+  <text x="40" y="256" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#60a5fa">ℹ️  Language switching only affects the app UI text</text>
+  <text x="40" y="276" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8">The agent's reply language follows its Persona, not the UI language.</text>
+  <text x="40" y="292" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Fallback: missing translations fall back to Simplified Chinese.</text>
 </svg>

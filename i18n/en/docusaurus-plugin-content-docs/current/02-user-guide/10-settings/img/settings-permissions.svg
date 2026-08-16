@@ -7,47 +7,47 @@
   </defs>
   <rect width="520" height="420" rx="12" fill="url(#bg)"/>
   <!-- Title -->
-  <text x="24" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#e2e8f0">权限设置</text>
+  <text x="24" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#e2e8f0">Permissions</text>
   <line x1="24" y1="48" x2="496" y2="48" stroke="#334155" stroke-width="1"/>
   <!-- Permission items -->
   <rect x="24" y="60" width="472" height="44" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
   <circle cx="48" cy="82" r="10" fill="#0f172a" stroke="#22c55e" stroke-width="1.5"/>
   <text x="48" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#22c55e" text-anchor="middle">✓</text>
-  <text x="68" y="78" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">屏幕录制</text>
-  <text x="68" y="94" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">截屏、屏幕共享等功能</text>
-  <text x="472" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e" text-anchor="end">已授权</text>
+  <text x="68" y="78" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Screen Recording</text>
+  <text x="68" y="94" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Screenshots, screen sharing</text>
+  <text x="472" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e" text-anchor="end">Authorized</text>
 
   <rect x="24" y="112" width="472" height="44" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
   <circle cx="48" cy="134" r="10" fill="#0f172a" stroke="#22c55e" stroke-width="1.5"/>
   <text x="48" y="138" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#22c55e" text-anchor="middle">✓</text>
-  <text x="68" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">麦克风</text>
-  <text x="68" y="146" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">语音输入、语音通话</text>
-  <text x="472" y="138" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e" text-anchor="end">已授权</text>
+  <text x="68" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Microphone</text>
+  <text x="68" y="146" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Voice input, voice calls</text>
+  <text x="472" y="138" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e" text-anchor="end">Authorized</text>
 
   <rect x="24" y="164" width="472" height="44" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
   <circle cx="48" cy="186" r="10" fill="#0f172a" stroke="#eab308" stroke-width="1.5"/>
   <text x="48" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#eab308" text-anchor="middle">!</text>
-  <text x="68" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">摄像头</text>
-  <text x="68" y="198" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">视频通话、拍照</text>
-  <text x="472" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#eab308" text-anchor="end">未授权</text>
+  <text x="68" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Camera</text>
+  <text x="68" y="198" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Video calls, photos</text>
+  <text x="472" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#eab308" text-anchor="end">Not Authorized</text>
 
   <rect x="24" y="216" width="472" height="44" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
   <circle cx="48" cy="238" r="10" fill="#0f172a" stroke="#eab308" stroke-width="1.5"/>
   <text x="48" y="242" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#eab308" text-anchor="middle">!</text>
-  <text x="68" y="234" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">辅助功能</text>
-  <text x="68" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">自动化操作、全局快捷键</text>
-  <text x="472" y="242" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#eab308" text-anchor="end">未授权</text>
+  <text x="68" y="234" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Accessibility</text>
+  <text x="68" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Automation, global shortcuts</text>
+  <text x="472" y="242" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#eab308" text-anchor="end">Not Authorized</text>
 
   <rect x="24" y="268" width="472" height="44" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
   <circle cx="48" cy="290" r="10" fill="#0f172a" stroke="#22c55e" stroke-width="1.5"/>
   <text x="48" y="294" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#22c55e" text-anchor="middle">✓</text>
-  <text x="68" y="286" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">通知</text>
-  <text x="68" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">桌面通知推送</text>
-  <text x="472" y="294" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e" text-anchor="end">已授权</text>
+  <text x="68" y="286" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#cbd5e1">Notifications</text>
+  <text x="68" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Desktop notification push</text>
+  <text x="472" y="294" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e" text-anchor="end">Authorized</text>
 
   <!-- Platform note -->
   <rect x="24" y="332" width="472" height="72" rx="8" fill="#0f172a" stroke="#1e40af" stroke-width="1"/>
-  <text x="40" y="356" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#60a5fa">ℹ️  平台差异</text>
-  <text x="40" y="374" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8">macOS：屏幕录制授权后需重启应用生效</text>
-  <text x="40" y="390" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Windows：大部分权限通过「设置 → 隐私」管理</text>
+  <text x="40" y="356" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#60a5fa">ℹ️  Platform notes</text>
+  <text x="40" y="374" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8">macOS: Screen Recording needs an app restart after granting.</text>
+  <text x="40" y="390" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b">Windows: Most permissions live under Settings → Privacy.</text>
 </svg>
