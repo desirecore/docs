@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.112](./v10.0.112) | 2026-08-16 | Send failure recovery and timeout retraction、Browser element-level operation ... |
 | [v10.0.111](./v10.0.111) | 2026-08-16 | Usage Statistics Toggle、Agreement Version Management，修复 2 项问题 |
 | [v10.0.110](./v10.0.110) | 2026-08-16 | Built-in browser support in standalone session windows、Agent-visible UI under... |
 | [v10.0.109](./v10.0.109) | 2026-08-16 | Full image avatar support、Remote Agent Service instance connection、Administra... |
