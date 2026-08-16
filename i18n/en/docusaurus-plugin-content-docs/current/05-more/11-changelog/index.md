@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.110](./v10.0.110) | 2026-08-16 | Built-in browser support in standalone session windows、Agent-visible UI under... |
 | [v10.0.109](./v10.0.109) | 2026-08-16 | Full image avatar support、Remote Agent Service instance connection、Administra... |
 | [v10.0.108](./v10.0.108) | 2026-08-13 | Automatic follow-up for background tasks，修复 4 项问题，改进 1 项 |
 | [v10.0.107](./v10.0.107) | 2026-08-12 | Automatic local HostAgent connection、Provider-scoped smart routing、Sidebar se... |
