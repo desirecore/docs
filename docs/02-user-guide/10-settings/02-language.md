@@ -24,6 +24,8 @@ DesireCore 支持多语言界面，你可以随时切换。
 3. 点击 **语言 / Language** 右侧的下拉菜单
 4. 选择目标语言
 
+![语言设置界面](/img/user-guide/settings/settings-language.svg)
+
 切换后，界面所有文案会立即更新为所选语言，无需重启。
 
 ## 语言切换的影响范围
