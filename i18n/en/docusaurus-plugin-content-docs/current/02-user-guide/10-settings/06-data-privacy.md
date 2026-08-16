@@ -29,7 +29,7 @@ DesireCore is local-first. Agents, skills, conversations, configuration, audit r
 
 ## Usage Statistics
 
-**Settings → Data & Privacy → Send Usage Statistics** is the single switch for installation and product-usage statistics. It is enabled by default in the current version.
+**Settings → Data & Privacy → Send Usage Statistics** is the single switch for installation and product-usage statistics. It is disabled by default in the current version. DesireCore begins accumulating and sending the statistics below only after you actively enable it.
 
 When enabled, DesireCore sends two categories of pseudonymous statistics:
 
