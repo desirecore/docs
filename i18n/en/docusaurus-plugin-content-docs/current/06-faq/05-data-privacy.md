@@ -101,4 +101,6 @@ However, please note that once data is sent to a third-party API, its processing
 
 ## What data does DesireCore itself collect?
 
-As a client application, DesireCore only sends anonymous installation statistics to the update server on launch (device hash identifier, version number, operating system platform, and CPU architecture), used for counting unique installations. Beyond this, it does not collect or upload any of your data. The application's update check only retrieves version information and does not transmit user data.
+**Send Usage Statistics** is enabled by default and can be turned off at any time under **Settings → Data & Privacy**. While enabled, DesireCore sends two categories of pseudonymous statistics: installation statistics containing a device hash identifier, version, operating system, and CPU architecture; and product statistics containing a random statistics identifier, date, version, platform, and aggregate numeric counts such as task outcomes.
+
+The statistics do not involve the user's own data. DesireCore does not read or send usernames, email addresses, account profiles, conversations, prompts, model outputs, artifacts, filenames, file contents, paths, Agent names or identifiers, or task titles for this purpose. Turning the switch off stops transmission and local product counting and deletes the local random statistics identifier and pending queue. See the [Privacy Policy](../privacy.md) and [Data & Privacy settings](../02-user-guide/10-settings/06-data-privacy.md).

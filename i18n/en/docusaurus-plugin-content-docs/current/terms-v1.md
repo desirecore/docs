@@ -1,14 +1,16 @@
 ---
 sidebar_position: 3
+slug: /terms/v1
+unlisted: true
 ---
 
 # Terms of Service
 
-Current Version: v2
+Version: v1 (Historical)
 
-Last Updated: August 16, 2026
+Current Version: [Terms of Service](./terms.md)
 
-Version History: [v1](./terms-v1.md)
+Last Updated: July 16, 2026
 
 ## 1. Service Scope
 
@@ -73,9 +75,9 @@ Third-party software, models, account systems, and network services may change o
 
 ## 8. Agreement Changes
 
-These Terms of Service are versioned. Each update creates a new version while historical versions remain available. Whenever either the Privacy Policy or Terms of Service changes version, DesireCore presents both then-current agreements before the main interface becomes available and requires the user to explicitly agree again.
+We reserve the right to modify these Terms of Service at any time. Significant changes will be communicated to users through in-app notifications or email.
 
-Continued use alone does not constitute acceptance of modified terms. If you do not agree to a new version, you should stop using the service and may export or delete your data before termination.
+Continued use of the service after changes to the terms constitutes acceptance of the modified terms. If you do not agree to the changes, you should stop using the service and delete your data.
 
 ## 9. Termination
 
