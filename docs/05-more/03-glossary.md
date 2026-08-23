@@ -25,6 +25,9 @@ Automatic Speech Recognition 的缩写，将语音转换为文字的技术。Des
 
 ## B
 
+### Business Ontology（企业业务本体）
+将企业中的对象、关系、规则、动作和权限组织成共享业务语境的方法，使人和 Agent 能够基于同一含义进行判断与受治理执行。DesireCore 通过 AgentFS、记忆与知识图谱、Skills、Workflow、多 Agent、Policy 和回执承接相关资产；详见[企业业务本体与 AI 落地](../04-concepts/13-business-ontology.md)。
+
 ### BYOK（Bring Your Own Key）
 "自带钥匙"模式。用户使用自己的 AI 供应商 API Key，DesireCore 不做中间代理，费用直接由供应商向用户结算。
 
@@ -69,6 +72,9 @@ DesireCore 的核心交互范式。不是"我问你答"，而是"我教你做"�
 
 ## F
 
+### FDE（Forward Deployed Engineer）
+前线部署工程师。进入真实业务现场，与一线专家共同识别决策、建立最小可用本体、连接数据与工具，并通过业务测试和运行证据持续迭代。FDE 是一种交付角色与工作方式，不是 DesireCore 的独立产品模块。
+
 ### Feedback（反馈）
 用户对智能体执行结果的评价和纠正。正面反馈强化行为，负面反馈触发调整，是智能体进化的重要信号。
 
@@ -106,6 +112,9 @@ DesireCore 的核心交互范式。不是"我问你答"，而是"我教你做"�
 智能体的行为规则文件（`principles.md`）。定义了"必须做什么""绝不做什么""什么时候找人确认"等规则。
 
 ## R
+
+### RAG（Retrieval-Augmented Generation，检索增强生成）
+先从知识源检索与当前问题相关的材料，再将其作为上下文提供给生成模型的方法。RAG 擅长提供资料与引用，但不天然定义完整业务状态、规则优先级、可执行动作和权限边界。
 
 ### Receipt（回执）
 智能体完成任务后生成的详细记录，包含输入输出摘要、工具调用清单、检索轨迹、步骤类型统计等信息。是"可信委派"的证据链。
