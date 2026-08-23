@@ -98,6 +98,24 @@ DesireCore: Received emergency task, adjusting resource priority...
         Expected first response to customer within 5 minutes.
 ```
 
+## Establish shared business context first
+
+Multi-agent coordination cannot rely only on each member interpreting a separate prompt. Before entering a real enterprise process, the team should share explicit definitions for critical business concepts:
+
+| Ontology dimension | Enterprise-coordination example |
+|---|---|
+| Objects | Product, release plan, agreement, budget, complaint, deliverable |
+| Links | Owner, task dependency, material source, decision impact |
+| Rules | Compliance, budget threshold, deadline, priority, escalation |
+| Actions | Delegate, pause, submit approval, release, notify, write back |
+| Governance | Who can read or change, which actions need Human Gates, how receipts are retained |
+
+Use the [Enterprise Business Ontology](/concepts/business-ontology) method to organize these semantics, rules, and action boundaries across AgentFS, Skills, Workflows, and Policies. Legal, finance, and product agents then use the same objects, state, and acceptance criteria when they discuss “release,” “risk,” or “done.”
+
+:::note
+A business ontology is an implementation method; it does not grant new permissions to any agent. Every member remains governed by its own [Agent Permission Boundary](/concepts/agent-permission-boundary), tool grants, Human Gates, and audit policy.
+:::
+
 ## Core Capabilities
 
 ### Task Orchestration

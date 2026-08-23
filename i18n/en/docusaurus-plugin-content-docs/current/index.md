@@ -78,6 +78,7 @@ Having issues? Find the most common answers here.
 
 - [Configure API Key](./getting-started/configure-api-key) — The first step to connect AI services
 - [Teach Your Agent](./user-guide/teaching/delegation-interaction) — DesireCore's core capability
+- [Enterprise Business Ontology](./concepts/business-ontology) — Connect objects, rules, actions, permissions, and FDE-style AI delivery
 - [Super Document](./user-guide/super-document/overview) — Collaborate on documents like Code Review
 - [Keyboard Shortcuts](./more/keyboard-shortcuts) — Boost your productivity
 - [Agent Marketplace](./user-guide/agents/marketplace) — Discover and install professional agents

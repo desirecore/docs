@@ -81,6 +81,7 @@ keywords: [DesireCore, 用户手册, AI 智能体, 委派式交互, Agent OS]
 - [配置 API Key](./getting-started/configure-api-key) — 连接 AI 服务的第一步
 - [教会智能体](./user-guide/teaching/delegation-interaction) — DesireCore 最核心的能力
 - [智能任务编排](./concepts/task-orchestration) — 自动拆解任务、匹配最佳智能体
+- [企业业务本体](./concepts/business-ontology) — 连接对象、规则、动作、权限与 FDE 式 AI 落地
 - [GUI 桌面自动化](./user-guide/capabilities/computer-use) — 让智能体操控电脑和手机
 - [超级文书](./user-guide/super-document/overview) — 像 Code Review 一样协作写文档
 - [快捷键速查](./more/keyboard-shortcuts) — 提升操作效率

@@ -25,6 +25,9 @@ A core interaction action beyond the Six Primitives, where users delegate specif
 
 ## B
 
+### Business Ontology
+A method for organizing enterprise objects, relationships, rules, actions, and permissions into shared business context so people and agents can judge and execute against the same governed meaning. DesireCore carries the related assets through AgentFS, memory and knowledge graphs, Skills, Workflows, multi-agent teams, Policies, and receipts. See [Enterprise Business Ontology and AI Deployment](../04-concepts/13-business-ontology.md).
+
 ### BYOK (Bring Your Own Key)
 "Bring Your Own Key" mode. Users use their own AI provider API keys; DesireCore does not act as an intermediary, and fees are settled directly between the provider and the user.
 
@@ -69,6 +72,9 @@ One of the Six Primitives. The agent acts from the current Plan within the allow
 
 ## F
 
+### FDE (Forward Deployed Engineer)
+A delivery role that works at the operational edge with domain experts to identify decisions, model a minimum viable ontology, connect data and tools, and iterate through business tests and operational evidence. FDE is a delivery role and method, not a standalone DesireCore product module.
+
 ### Feedback
 User evaluation and correction of agent execution results. Positive feedback reinforces behavior; negative feedback triggers adjustment—an important signal for agent evolution.
 
@@ -106,6 +112,9 @@ One of the Six Primitives. The agent keeps a versioned Plan in the current worki
 The agent's behavioral rules file (`principles.md`). Defines "must do," "never do," and "when to ask for confirmation" rules.
 
 ## R
+
+### RAG (Retrieval-Augmented Generation)
+A method that retrieves material relevant to the current question and supplies it as context to a generative model. RAG is effective for sources and citations, but it does not inherently define complete business state, rule priority, executable actions, or permission boundaries.
 
 ### Receipt
 A detailed record generated after an agent completes a task, containing input/output summaries, tool call lists, retrieval traces, step type statistics, and more. The evidence chain of "trustworthy delegation."

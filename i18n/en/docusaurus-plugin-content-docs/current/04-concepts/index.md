@@ -59,6 +59,7 @@ DesireCore is built around the core philosophy of "cultivating and hosting digit
 | [Task Orchestration](./task-orchestration) | Automatic task decomposition and best-agent matching — your "project manager" | Want to understand task distribution |
 | [Auto Dream](./auto-dream) | Lossless forgetting — preserving value through compression | Want to understand memory consolidation |
 | [Agent Permission Boundaries](./agent-permission-boundary) | Whoever acts is bound by their own ceiling; accountability for overreach lies with the executor | Want to understand permissions across collaborating agents |
+| [Enterprise Business Ontology](./business-ontology) | Connect business meaning and AI execution through objects, links, rules, actions, and permissions | Want to understand ontology, RAG, knowledge graphs, and FDE-style delivery |
 
 ## Reading Recommendations
 
@@ -70,3 +71,5 @@ If you're new to DesireCore, we recommend reading in this order:
 4. Finally, explore other concepts based on your interests
 
 If you have a technical background, you can jump directly to **AgentFS Filesystem** and **Receipt System** — these two concepts best demonstrate DesireCore's technical innovations.
+
+If you lead enterprise AI or industry-solution delivery, continue with **[Enterprise Business Ontology](./business-ontology)** to see how a real workflow becomes shared semantics, action boundaries, and acceptance evidence.
