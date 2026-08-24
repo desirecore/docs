@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.117](./v10.0.117) | 2026-08-24 | Multi-instance connection management、Session sidebar grouped by instance、Cros... |
 | [v10.0.116](./v10.0.116) | 2026-08-23 | My Apps and app resource management、Agent browser tab enumeration，修复 17 项问题，改... |
 | [v10.0.115](./v10.0.115) | 2026-08-21 | 终端 URL 可点击并经横幅确认在内置浏览器打开 (#2111)、执行载体换成独立子进程 + Node 权限模型 (#2121)、智能体/团队导入导出支持... |
 | [v10.0.114](./v10.0.114) | 2026-08-18 | Unified File and Document Workspace，修复 7 项问题，改进 1 项 |
