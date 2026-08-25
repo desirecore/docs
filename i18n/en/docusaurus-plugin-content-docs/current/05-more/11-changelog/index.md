@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.119](./v10.0.119) | 2026-08-25 | Minimal avatar rail for the conversation list、Quick toggle for the tool works... |
 | [v10.0.118](./v10.0.118) | 2026-08-25 | 修复：Delegate calls、Disconnected state、Authorized clients list、Restricted opera... |
 | [v10.0.117](./v10.0.117) | 2026-08-24 | Multi-instance connection management、Session sidebar grouped by instance、Cros... |
 | [v10.0.116](./v10.0.116) | 2026-08-23 | My Apps and app resource management、Agent browser tab enumeration，修复 17 项问题，改... |
