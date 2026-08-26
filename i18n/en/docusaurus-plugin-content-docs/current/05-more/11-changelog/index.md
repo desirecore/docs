@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.123](./v10.0.123) | 2026-08-26 | 修复：生产 renderer 登录来源误判 (#2292) |
 | [v10.0.122](./v10.0.122) | 2026-08-25 | 修复：Fixed an issue where a configured provider allowlist would silently disapp... |
 | [v10.0.121](./v10.0.121) | 2026-08-25 | Backup settings、Operations Center、Clone agent，修复 4 项问题，改进 2 项 |
 | [v10.0.120](./v10.0.120) | 2026-08-25 | Deferred retry，修复 3 项问题，改进 2 项 |
