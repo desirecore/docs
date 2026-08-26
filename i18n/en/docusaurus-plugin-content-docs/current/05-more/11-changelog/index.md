@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.125](./v10.0.125) | 2026-08-26 | 修复：修正连接恢复页在正常启动时的两处误报 / Fix two false alarms on the connection recovery page ... |
 | [v10.0.124](./v10.0.124) | 2026-08-26 | ADR-106 P3 第一刀——备份列表恢复按钮 (#2256)，修复 5 项问题 |
 | [v10.0.123](./v10.0.123) | 2026-08-26 | 修复：生产 renderer 登录来源误判 (#2292) |
 | [v10.0.122](./v10.0.122) | 2026-08-25 | 修复：Fixed an issue where a configured provider allowlist would silently disapp... |
