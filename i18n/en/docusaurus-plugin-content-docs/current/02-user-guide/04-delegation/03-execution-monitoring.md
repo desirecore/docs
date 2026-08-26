@@ -246,3 +246,7 @@ A synchronous delegation has a separate wait limit. If the parent receives a “
 :::info Next Step
 During execution, certain high-risk operations will trigger "Human Gate" confirmation. Go to [Human Gate Confirmation Mechanism](./04-human-gate.md) for details.
 :::
+
+:::tip Will the task run for half an hour or longer?
+See [Long-running tasks](./07-long-running-tasks.md) for instructions on saving stage progress, running commands in the background, and resuming from existing results after an interruption.
+:::
