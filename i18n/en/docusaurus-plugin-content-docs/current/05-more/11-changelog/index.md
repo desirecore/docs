@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.129](./v10.0.129) | 2026-08-29 | Team content approval: Changes to team rules and member lists require user ap... |
 | [v10.0.128](./v10.0.128) | 2026-08-29 | Multi-engine solving and universal solver team platform capability、Global tas... |
 | [v10.0.127](./v10.0.127) | 2026-08-28 | Scheduled backup task management、Automatic pre-backup before restore、Agent up... |
 | [v10.0.126](./v10.0.126) | 2026-08-28 | enable cross-instance conversations (#2328)、ADR-106 P2 后端——定时任务调度、GFS 保留与 JSO... |
