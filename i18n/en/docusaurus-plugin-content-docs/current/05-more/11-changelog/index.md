@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.132](./v10.0.132) | 2026-08-30 | Modernized Marketplace、Digital Human Personal Preferences，修复 7 项问题，改进 5 项 |
 | [v10.0.131](./v10.0.131) | 2026-08-30 | Ollama One-Click Configuration，修复 6 项问题，改进 3 项 |
 | [v10.0.130](./v10.0.130) | 2026-08-30 | Decision Workspace、Compute Service Governance、Deterministic External Browser ... |
 | [v10.0.129](./v10.0.129) | 2026-08-29 | Team content approval: Changes to team rules and member lists require user ap... |
