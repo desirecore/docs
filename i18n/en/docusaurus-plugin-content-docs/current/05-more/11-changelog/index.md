@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.136](./v10.0.136) | 2026-08-31 | 修复：Skill safety、Delivery pairing and reminders、Delegation recovery、Marketplac... |
 | [v10.0.135](./v10.0.135) | 2026-08-31 | PDF explicit page-image reading、Team repository pinned-version installation，修... |
 | [v10.0.134](./v10.0.134) | 2026-08-31 | GitHub Copilot subscription compute、Kimi WebBridge Marketplace entry、App back... |
 | [v10.0.133](./v10.0.133) | 2026-08-31 | Global Task Board Capability Toggle、Full-Width Message Style，修复 3 项问题，改进 1 项 |
