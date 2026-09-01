@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.138](./v10.0.138) | 2026-09-01 | Marketplace team asset distribution、Post-installation to-do list、File digest ... |
 | [v10.0.137](./v10.0.137) | 2026-09-01 | Unified catalog metadata and acquisition receipts，修复 6 项问题，改进 2 项 |
 | [v10.0.136](./v10.0.136) | 2026-08-31 | 修复：Skill safety、Delivery pairing and reminders、Delegation recovery、Marketplac... |
 | [v10.0.135](./v10.0.135) | 2026-08-31 | PDF explicit page-image reading、Team repository pinned-version installation，修... |
