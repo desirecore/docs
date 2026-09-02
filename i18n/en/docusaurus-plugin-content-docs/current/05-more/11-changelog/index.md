@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.141](./v10.0.141) | 2026-09-02 | Draggable resizing and collapsing for the Working Directory sidebar，修复 2 项问题 |
 | [v10.0.140](./v10.0.140) | 2026-09-02 | Persistent output event stream，修复 4 项问题，改进 2 项 |
 | [v10.0.139](./v10.0.139) | 2026-09-02 | Human-AI Shared Data Workbench、Decision Workspace Closed Loop and Shared Grap... |
 | [v10.0.138](./v10.0.138) | 2026-09-01 | Marketplace team asset distribution、Post-installation to-do list、File digest ... |
