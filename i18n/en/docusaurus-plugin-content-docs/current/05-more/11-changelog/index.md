@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.140](./v10.0.140) | 2026-09-02 | Persistent output event stream，修复 4 项问题，改进 2 项 |
 | [v10.0.139](./v10.0.139) | 2026-09-02 | Human-AI Shared Data Workbench、Decision Workspace Closed Loop and Shared Grap... |
 | [v10.0.138](./v10.0.138) | 2026-09-01 | Marketplace team asset distribution、Post-installation to-do list、File digest ... |
 | [v10.0.137](./v10.0.137) | 2026-09-01 | Unified catalog metadata and acquisition receipts，修复 6 项问题，改进 2 项 |
