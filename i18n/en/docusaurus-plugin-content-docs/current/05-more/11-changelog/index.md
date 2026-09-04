@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.145](./v10.0.145) | 2026-09-04 | Diagnostic Export on Connection Recovery Page、Agent Usage Instructions，修复 5 项... |
 | [v10.0.144](./v10.0.144) | 2026-09-04 | Automatic installation of Agent dependent skills、Solver multi-engine evidence... |
 | [v10.0.143](./v10.0.143) | 2026-09-03 | 修复：Skill symlink warning、Subtask approval and Q&A display、False interruption ... |
 | [v10.0.142](./v10.0.142) | 2026-09-03 | Multi-account credential management、Startup failure fallback and diagnostics、... |
