@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.148](./v10.0.148) | 2026-09-07 | Claude subscriptions reuse the claude-cac isolated environment for login; sou... |
 | [v10.0.146](./v10.0.146) | 2026-09-05 | OFD Document Parsing、Email Attachments Saved Directly to Disk、Outlook/IMAP Em... |
 | [v10.0.145](./v10.0.145) | 2026-09-04 | Diagnostic Export on Connection Recovery Page、Agent Usage Instructions，修复 5 项... |
 | [v10.0.144](./v10.0.144) | 2026-09-04 | Automatic installation of Agent dependent skills、Solver multi-engine evidence... |
