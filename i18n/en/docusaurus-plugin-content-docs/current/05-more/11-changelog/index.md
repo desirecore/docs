@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.150](./v10.0.150) | 2026-09-08 | Immersive voice and digital human interaction、Document collaboration and revi... |
 | [v10.0.149](./v10.0.149) | 2026-09-07 | 修复：Fixed an issue where, when an agent already had a real session, greeting i... |
 | [v10.0.148](./v10.0.148) | 2026-09-07 | Claude subscriptions reuse the claude-cac isolated environment for login; sou... |
 | [v10.0.146](./v10.0.146) | 2026-09-05 | OFD Document Parsing、Email Attachments Saved Directly to Disk、Outlook/IMAP Em... |
