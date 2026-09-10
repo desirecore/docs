@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.154](./v10.0.154) | 2026-09-10 | 修复：Fixed an issue where the embedded browser could become permanently unavail... |
 | [v10.0.153](./v10.0.153) | 2026-09-10 | 修复：Fixed the issue where the Windows version could not properly provide insta... |
 | [v10.0.152](./v10.0.152) | 2026-09-10 | 修复：Fixed build failures on macOS and Windows caused by native dependency vers... |
 | [v10.0.151](./v10.0.151) | 2026-09-09 | On-demand tool disclosure and same-turn discovery activation，修复 5 项问题，改进 3 项 |
