@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.152](./v10.0.152) | 2026-09-10 | 修复：Fixed build failures on macOS and Windows caused by native dependency vers... |
 | [v10.0.151](./v10.0.151) | 2026-09-09 | On-demand tool disclosure and same-turn discovery activation，修复 5 项问题，改进 3 项 |
 | [v10.0.150](./v10.0.150) | 2026-09-08 | Immersive voice and digital human interaction、Document collaboration and revi... |
 | [v10.0.149](./v10.0.149) | 2026-09-07 | 修复：Fixed an issue where, when an agent already had a real session, greeting i... |
