@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.157](./v10.0.157) | 2026-09-12 | Unified update rules for marketplace agents、Reset to upstream、Automatic upgra... |
 | [v10.0.156](./v10.0.156) | 2026-09-11 | WeChat auto-renewal and purchase page redesign、Scheduled task completion crit... |
 | [v10.0.155](./v10.0.155) | 2026-09-10 | 修复：Fixed an issue where messages containing invalid timestamps in session his... |
 | [v10.0.154](./v10.0.154) | 2026-09-10 | 修复：Fixed an issue where the embedded browser could become permanently unavail... |
