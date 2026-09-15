@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.163](./v10.0.163) | 2026-09-15 | Built-in browser explicit takeover and conversation recovery、1Password creden... |
 | [v10.0.162](./v10.0.162) | 2026-09-14 | 1Password credential source，修复 3 项问题，改进 1 项 |
 | [v10.0.161](./v10.0.161) | 2026-09-14 | Added “Creation Time” sorting to manual sessions、Added support for the DeepSe... |
 | [v10.0.160](./v10.0.160) | 2026-09-13 | Account System and Credential Authorization、Agent-Driven Application Associat... |
