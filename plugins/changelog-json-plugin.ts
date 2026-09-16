@@ -1,8 +1,9 @@
 /**
- * Docusaurus 插件：构建时生成 changelog.json
+ * Docusaurus 插件：构建时生成更新日志 JSON
  *
- * 读取 docs/05-more/11-changelog/v*.md，解析 frontmatter 和 markdown sections，
- * 输出结构化 JSON 到 static/api/changelog.json（开发+构建均可用）。
+ * 按 plugins/changelog-editions.json 的每个发行版条目读取 <zhSourceDir>/v*.md，解析 frontmatter 和 markdown sections，
+ * 输出结构化 JSON 到 static/api/<outputFile>（开发+构建均可用）。
+ * desirecore 条目的源目录、输出名与 url 前缀与改为配置之前相同（api/changelog.json）；OEM 发行版条目输出 api/changelog-<id>.json。
  */
 
 import type { LoadContext, Plugin } from '@docusaurus/types'
@@ -32,6 +33,14 @@ interface ChangelogJson {
   versions: ChangelogVersion[]
 }
 
+/** plugins/changelog-editions.json 中插件使用的条目字段（完整字段说明见该文件） */
+interface ChangelogEditionConfig {
+  id: string
+  zhSourceDir: string
+  outputFile: string
+  urlPrefix: string
+}
+
 /** section heading 到 type 的映射 */
 const SECTION_MAP: Record<string, ChangelogSection['type']> = {
   '新功能': 'feature',
@@ -44,7 +53,7 @@ const SITE_URL = 'https://docs.desirecore.com'
 /**
  * 从 markdown 文件内容中解析版本信息
  */
-function parseChangelogMd(content: string, fileName: string): ChangelogVersion | null {
+function parseChangelogMd(content: string, fileName: string, urlPrefix: string): ChangelogVersion | null {
   // 提取版本号（从文件名 v10.0.16.md → 10.0.16）
   const versionMatch = fileName.match(/^v(\d+\.\d+\.\d+)\.md$/)
   if (!versionMatch) return null
@@ -91,7 +100,7 @@ function parseChangelogMd(content: string, fileName: string): ChangelogVersion |
     version,
     date,
     sections: nonEmptySections,
-    url: `${SITE_URL}/more/changelog/v${version}`,
+    url: `${SITE_URL}${urlPrefix}/v${version}`,
   }
   if (coverImage) result.coverImage = coverImage
   return result
@@ -100,13 +109,16 @@ function parseChangelogMd(content: string, fileName: string): ChangelogVersion |
 /**
  * 生成 changelog.json 内容
  */
-function generateChangelogJson(changelogDir: string): ChangelogJson {
-  const files = fs.readdirSync(changelogDir).filter((f) => /^v\d+\.\d+\.\d+\.md$/.test(f))
+function generateChangelogJson(changelogDir: string, urlPrefix: string): ChangelogJson {
+  // 章节目录尚不存在时输出空列表：客户端拿到「没有版本」而不是 404
+  const files = fs.existsSync(changelogDir)
+    ? fs.readdirSync(changelogDir).filter((f) => /^v\d+\.\d+\.\d+\.md$/.test(f))
+    : []
 
   const versions: ChangelogVersion[] = []
   for (const file of files) {
     const content = fs.readFileSync(path.join(changelogDir, file), 'utf-8')
-    const parsed = parseChangelogMd(content, file)
+    const parsed = parseChangelogMd(content, file, urlPrefix)
     if (parsed) {
       versions.push(parsed)
     }
@@ -128,34 +140,66 @@ function generateChangelogJson(changelogDir: string): ChangelogJson {
 }
 
 /**
- * 将 changelog.json 写入目标目录
+ * 将更新日志 JSON 写入目标目录的 api/<outputFile>
  */
-function writeChangelogJson(targetDir: string, data: ChangelogJson): void {
+function writeChangelogJson(targetDir: string, outputFile: string, data: ChangelogJson): void {
   const apiDir = path.join(targetDir, 'api')
   fs.mkdirSync(apiDir, { recursive: true })
-  fs.writeFileSync(path.join(apiDir, 'changelog.json'), JSON.stringify(data, null, 2), 'utf-8')
+  fs.writeFileSync(path.join(apiDir, outputFile), JSON.stringify(data, null, 2), 'utf-8')
+}
+
+/**
+ * 读取并校验 plugins/changelog-editions.json；配置错误直接让构建失败
+ */
+function loadChangelogEditions(siteDir: string): ChangelogEditionConfig[] {
+  const configPath = path.join(siteDir, 'plugins', 'changelog-editions.json')
+  const raw = JSON.parse(fs.readFileSync(configPath, 'utf-8')) as { editions?: unknown }
+  if (!Array.isArray(raw.editions) || raw.editions.length === 0) {
+    throw new Error(`[changelog-json-plugin] ${configPath} 缺少 editions`)
+  }
+  const outputFiles = new Set<string>()
+  return raw.editions.map((entry, index) => {
+    const edition = entry as Partial<ChangelogEditionConfig>
+    for (const field of ['id', 'zhSourceDir', 'outputFile', 'urlPrefix'] as const) {
+      if (typeof edition[field] !== 'string' || edition[field] === '') {
+        throw new Error(`[changelog-json-plugin] editions[${index}].${field} 必须是非空字符串`)
+      }
+    }
+    const { outputFile, urlPrefix } = edition as ChangelogEditionConfig
+    if (!/^[a-z0-9-]+\.json$/.test(outputFile) || !urlPrefix.startsWith('/') || outputFiles.has(outputFile)) {
+      throw new Error(`[changelog-json-plugin] editions[${index}] 的 outputFile（小写 .json 文件名、不得重复）或 urlPrefix（以 / 开头）非法`)
+    }
+    outputFiles.add(outputFile)
+    return edition as ChangelogEditionConfig
+  })
 }
 
 export default function changelogJsonPlugin(context: LoadContext): Plugin {
-  const changelogDir = path.join(context.siteDir, 'docs', '05-more', '11-changelog')
+  const editions = loadChangelogEditions(context.siteDir)
+
+  /** 为每个发行版生成并写入 JSON */
+  function generateAll(targetDir: string, label: string): Record<string, ChangelogJson> {
+    const results: Record<string, ChangelogJson> = {}
+    for (const edition of editions) {
+      const data = generateChangelogJson(path.join(context.siteDir, edition.zhSourceDir), edition.urlPrefix)
+      writeChangelogJson(targetDir, edition.outputFile, data)
+      console.log(`[changelog-json-plugin] 已生成 ${label}/api/${edition.outputFile}（${data.versions.length} 个版本）`)
+      results[edition.id] = data
+    }
+    return results
+  }
 
   return {
     name: 'changelog-json-plugin',
 
     // 开发模式：在 static/ 中生成，Docusaurus 会自动 serve
     async loadContent() {
-      const data = generateChangelogJson(changelogDir)
-      const staticDir = path.join(context.siteDir, 'static')
-      writeChangelogJson(staticDir, data)
-      console.log(`[changelog-json-plugin] 已生成 static/api/changelog.json（${data.versions.length} 个版本）`)
-      return data
+      return generateAll(path.join(context.siteDir, 'static'), 'static')
     },
 
     // 构建模式：复制到 build 输出目录
     async postBuild({ outDir }) {
-      const data = generateChangelogJson(changelogDir)
-      writeChangelogJson(outDir, data)
-      console.log(`[changelog-json-plugin] 已生成 build/api/changelog.json（${data.versions.length} 个版本）`)
+      generateAll(outDir, 'build')
     },
   }
 }
