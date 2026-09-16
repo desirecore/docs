@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.165](./v10.0.165) | 2026-09-16 | 修复：Fixed an issue where IMAP folders named “Junk Mail” in Simplified or Tradi... |
 | [v10.0.164](./v10.0.164) | 2026-09-16 | Multi-distribution instance management、Data directory ownership protection、Pr... |
 | [v10.0.163](./v10.0.163) | 2026-09-15 | Built-in browser explicit takeover and conversation recovery、1Password creden... |
 | [v10.0.162](./v10.0.162) | 2026-09-14 | 1Password credential source，修复 3 项问题，改进 1 项 |
