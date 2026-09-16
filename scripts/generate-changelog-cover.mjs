@@ -18,6 +18,10 @@
  *   AI_BASE_URL=https://your-gateway AI_API_KEY=xxx \
  *     node scripts/generate-changelog-cover.mjs v10.0.16
  *   ... node scripts/generate-changelog-cover.mjs v10.0.16 --force
+ *   ... node scripts/generate-changelog-cover.mjs v10.0.16 --edition <id>
+ *
+ * --edition 选择 plugins/changelog-editions.json 中的发行版条目（缺省 desirecore）：章节目录、封面输出目录、
+ * 图片引用前缀、品牌字样与网址都取自该条目；desirecore 条目的取值与参数化之前写死的值相同。
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
@@ -30,9 +34,33 @@ const sharp = require('sharp')
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
-const CHANGELOG_DIR_ZH = resolve(ROOT, 'docs/05-more/11-changelog')
-const CHANGELOG_DIR_EN = resolve(ROOT, 'i18n/en/docusaurus-plugin-content-docs/current/05-more/11-changelog')
-const IMG_DIR = resolve(ROOT, 'static/img/changelog')
+const EDITIONS_CONFIG = resolve(ROOT, 'plugins/changelog-editions.json')
+
+/** 读取发行版条目：章节目录、封面目录、引用前缀与品牌 */
+function loadEdition(id) {
+  const { editions } = JSON.parse(readFileSync(EDITIONS_CONFIG, 'utf-8'))
+  const entry = Array.isArray(editions) ? editions.find(e => e && e.id === id) : undefined
+  if (!entry) {
+    console.error(`错误: ${EDITIONS_CONFIG} 中没有发行版 ${id}`)
+    process.exit(1)
+  }
+  for (const field of ['zhSourceDir', 'enSourceDir', 'coverImageDir', 'coverImageUrlPrefix', 'coverBrandText']) {
+    if (typeof entry[field] !== 'string' || entry[field] === '') {
+      console.error(`错误: 发行版 ${id} 缺少 ${field}`)
+      process.exit(1)
+    }
+  }
+  return {
+    changelogDirZh: resolve(ROOT, entry.zhSourceDir),
+    changelogDirEn: resolve(ROOT, entry.enSourceDir),
+    imgDir: resolve(ROOT, entry.coverImageDir),
+    imgUrlPrefix: entry.coverImageUrlPrefix.replace(/\/+$/, ''),
+    brand: {
+      text: entry.coverBrandText,
+      website: typeof entry.coverWebsite === 'string' && entry.coverWebsite !== '' ? entry.coverWebsite : null,
+    },
+  }
+}
 
 // 输出宣传图尺寸（文字叠加层布局按此尺寸计算）
 const WIDTH = 2848
@@ -106,16 +134,33 @@ const COLORS = {
 
 function parseArgs() {
   const args = process.argv.slice(2)
-  const version = args.find(a => !a.startsWith('--'))
-  const force = args.includes('--force')
+  let version
+  let force = false
+  let edition = 'desirecore'
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--force') {
+      force = true
+    } else if (args[i] === '--edition') {
+      edition = args[++i]
+      if (!edition || edition.startsWith('--')) {
+        console.error('错误: --edition 缺少取值')
+        process.exit(1)
+      }
+    } else if (args[i].startsWith('--')) {
+      console.error(`错误: 未知参数 ${args[i]}`)
+      process.exit(1)
+    } else if (version === undefined) {
+      version = args[i]
+    }
+  }
 
   if (!version) {
-    console.error('用法: node scripts/generate-changelog-cover.mjs <version> [--force]')
+    console.error('用法: node scripts/generate-changelog-cover.mjs <version> [--force] [--edition <id>]')
     console.error('示例: node scripts/generate-changelog-cover.mjs v10.0.16')
     process.exit(1)
   }
 
-  return { version, force }
+  return { version, force, edition }
 }
 
 function checkApiKey() {
@@ -396,7 +441,7 @@ function buildListColumn(items, opts) {
  *
  * 三阶段：1) 收集测量  2) 计算布局  3) 渲染 SVG
  */
-function buildTextOverlay(version, sections, lang = 'zh') {
+function buildTextOverlay(version, sections, lang = 'zh', brand = { text: 'DESIRECORE', website: 'www.desirecore.cn' }) {
   const { features, fixes, improvements, date } = sections
 
   // 中英文标签
@@ -622,7 +667,7 @@ function buildTextOverlay(version, sections, lang = 'zh') {
   <rect x="0" y="0" width="6" height="100%" fill="url(#edgeBar)"/>
 
   <!-- 品牌名 -->
-  <text x="${padLeft}" y="${brandY}" font-family="${FONT}" font-size="${brandFontSize}" fill="rgba(255,255,255,0.4)" font-weight="300" letter-spacing="10">DESIRECORE</text>
+  <text x="${padLeft}" y="${brandY}" font-family="${FONT}" font-size="${brandFontSize}" fill="rgba(255,255,255,0.4)" font-weight="300" letter-spacing="10">${escapeXml(brand.text)}</text>
 
   <!-- 版本号 -->
   <text x="${padLeft}" y="${versionY}" font-family="${FONT}" font-size="${versionFontSize}" fill="white" font-weight="800">${escapeXml(version)}</text>
@@ -646,9 +691,9 @@ ${fixSvg}
   <text x="${padLeft}" y="${statsY}" font-family="${FONT}" font-size="32" fill="rgba(255,255,255,0.35)" font-weight="300">${escapeXml(statsText)}</text>
   <text x="${padLeft}" y="${dateY}" font-family="${FONT}" font-size="32" fill="rgba(255,255,255,0.3)" font-weight="300">${escapeXml(date)}</text>
 
-  <!-- 官网（光环 + 加粗） -->
-  <text x="${WIDTH - 60}" y="${HEIGHT - 50}" font-family="${FONT}" font-size="28" fill="rgba(120,180,255,0.2)" font-weight="600" text-anchor="end" filter="url(#urlGlow)">www.desirecore.cn</text>
-  <text x="${WIDTH - 60}" y="${HEIGHT - 50}" font-family="${FONT}" font-size="28" fill="rgba(255,255,255,0.55)" font-weight="600" text-anchor="end">www.desirecore.cn</text>
+  <!-- 官网（光环 + 加粗） -->${brand.website ? `
+  <text x="${WIDTH - 60}" y="${HEIGHT - 50}" font-family="${FONT}" font-size="28" fill="rgba(120,180,255,0.2)" font-weight="600" text-anchor="end" filter="url(#urlGlow)">${escapeXml(brand.website)}</text>
+  <text x="${WIDTH - 60}" y="${HEIGHT - 50}" font-family="${FONT}" font-size="28" fill="rgba(255,255,255,0.55)" font-weight="600" text-anchor="end">${escapeXml(brand.website)}</text>` : ''}
 </svg>`
 }
 
@@ -691,7 +736,8 @@ function insertImageRef(content, version, imgPath) {
 }
 
 async function main() {
-  const { version, force } = parseArgs()
+  const { version, force, edition } = parseArgs()
+  const { changelogDirZh: CHANGELOG_DIR_ZH, changelogDirEn: CHANGELOG_DIR_EN, imgDir: IMG_DIR, imgUrlPrefix, brand } = loadEdition(edition)
   const bgFile = process.env.IMAGE_BG_FILE
   const apiKey = bgFile ? null : checkApiKey()
 
@@ -704,8 +750,8 @@ async function main() {
 
   const zhImgFile = resolve(IMG_DIR, `${version}.png`)
   const enImgFile = resolve(IMG_DIR, `${version}-en.png`)
-  const zhImgRefPath = `/img/changelog/${version}.png`
-  const enImgRefPath = `/img/changelog/${version}-en.png`
+  const zhImgRefPath = `${imgUrlPrefix}/${version}.png`
+  const enImgRefPath = `${imgUrlPrefix}/${version}-en.png`
 
   if (existsSync(zhImgFile) && existsSync(enImgFile) && !force) {
     console.log(`图片已存在: ${zhImgFile}, ${enImgFile}`)
@@ -754,7 +800,7 @@ async function main() {
 
   // 2. 生成中文配图
   console.log('正在合成中文宣传图...')
-  const zhOverlaySvg = buildTextOverlay(version, zhSections, 'zh')
+  const zhOverlaySvg = buildTextOverlay(version, zhSections, 'zh', brand)
   const zhFinalBuffer = await compositeImage(bgBuffer, zhOverlaySvg)
   writeFileSync(zhImgFile, zhFinalBuffer)
   console.log(`中文宣传图已保存: ${zhImgFile} (${(zhFinalBuffer.length / 1024 / 1024).toFixed(1)} MB)`)
@@ -778,7 +824,7 @@ async function main() {
     console.log(`  Date: ${enSections.date}\n`)
 
     console.log('正在合成英文宣传图...')
-    const enOverlaySvg = buildTextOverlay(version, enSections, 'en')
+    const enOverlaySvg = buildTextOverlay(version, enSections, 'en', brand)
     const enFinalBuffer = await compositeImage(bgBuffer, enOverlaySvg)
     writeFileSync(enImgFile, enFinalBuffer)
     console.log(`英文宣传图已保存: ${enImgFile} (${(enFinalBuffer.length / 1024 / 1024).toFixed(1)} MB)`)

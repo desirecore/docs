@@ -21,3 +21,4 @@ Here you'll find quick reference materials and changelog for DesireCore.
 | [Open Source Repositories](./09-open-source-repos.md) | Overview of official GitHub repositories |
 | [Third-Party Software & Licenses](./10-third-party-software.md) | Bundled third-party components and open-source licenses |
 | [Changelog](./11-changelog/index.md) | Version update history |
+| [达摩院AgentOS Changelog](./12-damo-solver-changelog/index.md) | 达摩院AgentOS version update history |

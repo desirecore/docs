@@ -1,0 +1,38 @@
+{
+  "description": "更新日志章节配置：每个条目是一个产品发行版的独立更新日志。plugins/changelog-json-plugin.ts 按条目读取 zhSourceDir 下的 v<X.Y.Z>.md，构建时生成站点 /api/<outputFile>（客户端按发行版拉取）；scripts/generate-changelog-cover.mjs <version> --edition <id> 按条目生成封面。DesireCore 发布流程只写 desirecore 章节；OEM 发布流程按 id 读取本文件定位章节目录，条目缺失时拒绝写入。新增发行版时追加条目并创建中英文两个章节目录（_category_.json 与 index.md，index.md 的表格分隔行与 desirecore 章节一致，发布流程据此插入版本行）。",
+  "fields": {
+    "id": "发行版更新日志 id（desirecore 仓库 editions/<id>/edition.json#distribution.changelogEdition）",
+    "zhSourceDir": "中文章节目录（相对仓库根）：版本页面 v<X.Y.Z>.md 与 index.md 所在目录",
+    "enSourceDir": "英文章节目录（相对仓库根）",
+    "outputFile": "构建输出到站点 api/ 下的 JSON 文件名",
+    "urlPrefix": "版本页面路由前缀（Docusaurus 去掉目录数字前缀后的路径）；JSON 中 url = 站点地址 + urlPrefix + /v<X.Y.Z>",
+    "coverImageDir": "封面图片输出目录（相对仓库根）",
+    "coverImageUrlPrefix": "版本页面中引用封面图片的路径前缀",
+    "coverBrandText": "封面左上角的品牌字样",
+    "coverWebsite": "封面右下角的网址；null 表示不显示"
+  },
+  "editions": [
+    {
+      "id": "desirecore",
+      "zhSourceDir": "docs/05-more/11-changelog",
+      "enSourceDir": "i18n/en/docusaurus-plugin-content-docs/current/05-more/11-changelog",
+      "outputFile": "changelog.json",
+      "urlPrefix": "/more/changelog",
+      "coverImageDir": "static/img/changelog",
+      "coverImageUrlPrefix": "/img/changelog",
+      "coverBrandText": "DESIRECORE",
+      "coverWebsite": "www.desirecore.cn"
+    },
+    {
+      "id": "damo-solver",
+      "zhSourceDir": "docs/05-more/12-damo-solver-changelog",
+      "enSourceDir": "i18n/en/docusaurus-plugin-content-docs/current/05-more/12-damo-solver-changelog",
+      "outputFile": "changelog-damo-solver.json",
+      "urlPrefix": "/more/damo-solver-changelog",
+      "coverImageDir": "static/img/changelog/damo-solver",
+      "coverImageUrlPrefix": "/img/changelog/damo-solver",
+      "coverBrandText": "达摩院AgentOS",
+      "coverWebsite": null
+    }
+  ]
+}
