@@ -14,3 +14,4 @@ This page records important changes in each version of 达摩院AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.164](./v10.0.164) | 2026-09-16 | Initial release |
