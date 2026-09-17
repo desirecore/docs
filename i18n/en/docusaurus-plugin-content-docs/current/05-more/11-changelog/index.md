@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.168](./v10.0.168) | 2026-09-17 | 修复：Fixed an issue where several features, including decision workspaces, deci... |
 | [v10.0.167](./v10.0.167) | 2026-09-17 | 修复：Fixed an issue where, after migrating data from Windows or an external dri... |
 | [v10.0.166](./v10.0.166) | 2026-09-16 | Local HTML Preview、Precise Resource Viewer、Task Approval Link Management、Work... |
 | [v10.0.165](./v10.0.165) | 2026-09-16 | 修复：Fixed an issue where IMAP folders named “Junk Mail” in Simplified or Tradi... |
