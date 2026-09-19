@@ -22,17 +22,6 @@
       "coverImageUrlPrefix": "/img/changelog",
       "coverBrandText": "DESIRECORE",
       "coverWebsite": "www.desirecore.cn"
-    },
-    {
-      "id": "damo-solver",
-      "zhSourceDir": "docs/05-more/12-damo-solver-changelog",
-      "enSourceDir": "i18n/en/docusaurus-plugin-content-docs/current/05-more/12-damo-solver-changelog",
-      "outputFile": "changelog-damo-solver.json",
-      "urlPrefix": "/more/damo-solver-changelog",
-      "coverImageDir": "static/img/changelog/damo-solver",
-      "coverImageUrlPrefix": "/img/changelog/damo-solver",
-      "coverBrandText": "达摩院AgentOS",
-      "coverWebsite": null
     }
   ]
 }

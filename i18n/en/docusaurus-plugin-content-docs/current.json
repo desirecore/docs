@@ -130,9 +130,5 @@
   "sidebar.more.category.更新日志": {
     "message": "Changelog",
     "description": "The label for category '更新日志' in sidebar 'more'"
-  },
-  "sidebar.more.category.达摩院AgentOS更新日志": {
-    "message": "达摩院AgentOS Changelog",
-    "description": "The label for category '达摩院AgentOS更新日志' in sidebar 'more'"
   }
 }
