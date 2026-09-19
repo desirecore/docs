@@ -21,4 +21,3 @@ sidebar_position: 0
 | [开源仓库](./09-open-source-repos.md) | 官方 GitHub 仓库一览 |
 | [第三方软件与许可](./10-third-party-software.md) | 内置第三方组件及开源许可 |
 | [更新日志](./11-changelog/index.md) | 版本更新历史记录 |
-| [达摩院AgentOS更新日志](./12-damo-solver-changelog/index.md) | 达摩院AgentOS版本更新历史记录 |
