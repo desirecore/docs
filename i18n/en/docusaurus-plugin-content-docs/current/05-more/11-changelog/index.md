@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.169](./v10.0.169) | 2026-09-19 | Account lifecycle management、DesireCore Control，修复 7 项问题，改进 3 项 |
 | [v10.0.168](./v10.0.168) | 2026-09-17 | 修复：Fixed an issue where several features, including decision workspaces, deci... |
 | [v10.0.167](./v10.0.167) | 2026-09-17 | 修复：Fixed an issue where, after migrating data from Windows or an external dri... |
 | [v10.0.166](./v10.0.166) | 2026-09-16 | Local HTML Preview、Precise Resource Viewer、Task Approval Link Management、Work... |
