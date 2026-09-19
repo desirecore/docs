@@ -33,6 +33,60 @@ DesireCore supports common LaTeX syntax:
 
 Long formulas scroll inside the message bubble instead of breaking the layout.
 
+## Rendering Examples
+
+The following examples show common Markdown elements in Companion replies:
+
+**Code blocks** (with syntax highlighting and one-click copying):
+
+````markdown
+```python
+def hello():
+    print("Hello, DesireCore!")
+```
+````
+
+**Tables** (automatically aligned, with horizontal scrolling on narrow screens):
+
+```markdown
+| Feature | Status |
+|---------|--------|
+| Rendering | ✅ |
+| Copying | ✅ |
+```
+
+**Mermaid diagrams** (automatically rendered as visual diagrams):
+
+````markdown
+```mermaid
+graph LR
+    A[User input] --> B[Companion processing]
+    B --> C[Return results]
+```
+````
+
+**Math formulas** (typeset with KaTeX):
+
+```markdown
+Inline: $E = mc^2$
+Block: $$\int_0^1 x^2 dx = \frac{1}{3}$$
+```
+
+## Troubleshooting Rendering
+
+| Issue | What Happens | What to Do |
+|-------|--------------|------------|
+| Invalid Mermaid syntax | The original code block is kept instead of a diagram | Ask the Companion to correct the syntax and output it again |
+| Invalid LaTeX formatting | The raw LaTeX source is displayed | Check that the `$` delimiters are paired |
+| Inconsistent table column counts | Some columns may be misaligned | Make sure each row has the same number of `\|` characters |
+| Unclosed code block | Subsequent content is treated as code | Make sure opening and closing triple backticks (`` ``` ``) are paired |
+
+:::tip Practical Tips
+- If a Companion's Mermaid diagram does not render, tell it: "The Mermaid syntax is invalid. Please fix it."
+- To copy diagram source, use "Copy Markdown" instead of "Copy".
+- Long formulas scroll horizontally inside the message bubble without breaking the layout.
+:::
+
 ## Copying
 
 | Action | Result |

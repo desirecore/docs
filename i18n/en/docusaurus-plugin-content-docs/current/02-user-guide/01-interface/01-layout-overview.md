@@ -10,6 +10,8 @@ DesireCore uses a **single-window three-column layout**, where all functions are
 
 ## Layout Diagram
 
+![DesireCore three-column layout](/img/user-guide/interface/three-column-layout-en.svg)
+
 ```
 +--------------------------------------------------------------+
 |  +------+--------------+----------------------------------+   |
