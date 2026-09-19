@@ -1,3 +1,9 @@
+---
+title: Feature Entry Points and Operation Paths
+description: Get to know DesireCore’s three main areas (Conversation Interface, Resource Manager, and Applications and Services) and common operation paths.
+keywords: [feature entry points, operation paths, conversation interface, resource manager, applications and services, getting started]
+---
+
 # Feature Entry Points and Operation Paths
 
 First time using DesireCore? Not sure where to start?

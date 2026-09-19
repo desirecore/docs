@@ -29,3 +29,25 @@ Before applying, DesireCore shows an impact preview. The old branch remains in h
 
 Rewind restores DesireCore-managed local state. It usually cannot undo external side effects such as sent emails, pushed commits, external API calls, or third-party approvals.
 
+## How Branching Works
+
+Rewind creates a new execution branch from a checkpoint while preserving the existing history:
+
+![Rewind branching diagram](/img/user-guide/conversations/rewind-branch-en.svg)
+
+- **The old branch is preserved**: All messages and operation records from before the rewind remain in history.
+- **A new branch is created**: After confirmation, the system starts a new execution path from the target checkpoint.
+- **Repeated rewinds**: Each rewind creates another branch, forming a structure similar to Git branches.
+
+```text
+Timeline:
+  Message 1 → Message 2 → Message 3 → Message 4 (original path)
+                        ↘
+                         Message 3' → Message 4' (after the first rewind)
+                        ↘
+                         Message 3'' → ... (after the second rewind)
+```
+
+:::tip Safety Net
+Preserving old branches makes it easier to try another path. If the new path is unsatisfactory, rewind again to an earlier checkpoint or refer to content in the old branch. The external side-effect limits described above still apply.
+:::

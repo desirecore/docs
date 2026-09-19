@@ -30,3 +30,28 @@ Markdown is best when you want to keep editing. PDF is best for sharing with peo
 
 Desktop PDF export uses the unified document rendering pipeline and preserves common Markdown structures such as headings, tables, code blocks, images, and formulas.
 
+## Step-by-Step Instructions
+
+### Export a Full Conversation
+
+1. Open the target Companion's chat.
+2. Click the "More" button (three dots) on the right side of the chat header.
+3. Choose "Export Conversation" from the menu.
+4. In the export settings panel, select the full-history scope, a format (Markdown / PDF), and content options.
+5. Confirm the export. The file is saved to your system's Downloads folder or the location you specify.
+
+### Export Selected Messages
+
+1. Choose "Multi-select" from the chat header's "More" menu to enter multi-select mode.
+2. Check the messages you want to export using the checkboxes on their left.
+3. Click "Export" in the bottom action bar.
+4. Choose a format and content options, then confirm.
+
+:::tip Export Scope
+Multi-select export groups selected messages by run (a complete request-response cycle) to preserve context. For example, selecting a Companion reply also includes its corresponding user question and tool calls in the export.
+:::
+
+## Next Steps
+
+- Learn about searching and locating messages in [Chat History](./05-chat-history.md).
+- Use [Context Control](./09-context-control.md) to manage long conversations.
