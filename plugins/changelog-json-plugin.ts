@@ -4,6 +4,12 @@
  * 按 plugins/changelog-editions.json 的每个发行版条目读取 <zhSourceDir>/v*.md，解析 frontmatter 和 markdown sections，
  * 输出结构化 JSON 到 static/api/<outputFile>（开发+构建均可用）。
  * desirecore 条目的源目录、输出名与 url 前缀与改为配置之前相同（api/changelog.json）；OEM 发行版条目输出 api/changelog-<id>.json。
+ *
+ * 草稿：front matter 声明 draft: true 的版本页面，与 Docusaurus 对页面的处理一致——只在开发环境可见。
+ * 生产构建时：
+ * - 草稿版本不进 JSON（条目仍输出合法的空列表：客户端拿到「没有版本」而不是 404）；
+ * - 草稿页面（中英）引用的封面图从站点输出中移除——static/ 会原样复制进站点，不处理就能凭 URL 直接访问。
+ * OEM 发行版的版本页面由发布流程一律写入 draft: true；公开某个版本 = 人工把该页面（中英）的 draft 改为 false 或删除该行。
  */
 
 import type { LoadContext, Plugin } from '@docusaurus/types'
@@ -37,6 +43,8 @@ interface ChangelogJson {
 interface ChangelogEditionConfig {
   id: string
   zhSourceDir: string
+  /** 可选：草稿封面清理需要同时扫描英文章节；缺省只扫中文章节 */
+  enSourceDir?: string
   outputFile: string
   urlPrefix: string
 }
@@ -49,6 +57,23 @@ const SECTION_MAP: Record<string, ChangelogSection['type']> = {
 }
 
 const SITE_URL = 'https://docs.desirecore.com'
+
+/** 版本页面文件名（v10.0.16.md） */
+const VERSION_FILE_PATTERN = /^v\d+\.\d+\.\d+\.md$/
+
+/** 版本页面中的配图（![...](/img/changelog/v10.0.17.png) 格式）；JSON 的 coverImage 与草稿封面清理共用这一条规则 */
+const COVER_IMAGE_PATTERN = /!\[.*?\]\((\/img\/changelog\/[^)]+)\)/
+
+/** 生产构建（docusaurus build）不发布草稿；开发环境（docusaurus start）草稿可见，与 Docusaurus 自身行为一致 */
+function isProduction(): boolean {
+  return process.env.NODE_ENV === 'production'
+}
+
+/** front matter 是否声明 draft: true（Docusaurus 只认布尔 true） */
+function isDraft(content: string): boolean {
+  const frontMatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  return frontMatter !== null && /^draft:\s*true\s*$/m.test(frontMatter[1])
+}
 
 /**
  * 从 markdown 文件内容中解析版本信息
@@ -63,8 +88,8 @@ function parseChangelogMd(content: string, fileName: string, urlPrefix: string):
   const dateMatch = content.match(/\*\*发布日期\*\*[：:]\s*(\d{4}-\d{2}-\d{2})/)
   const date = dateMatch ? dateMatch[1] : ''
 
-  // 提取配图（![...](/img/changelog/v10.0.17.png) 格式）
-  const imageMatch = content.match(/!\[.*?\]\((\/img\/changelog\/[^)]+)\)/)
+  // 提取配图
+  const imageMatch = content.match(COVER_IMAGE_PATTERN)
   const coverImage = imageMatch ? `${SITE_URL}${imageMatch[1]}` : undefined
 
   // 按 ## 标题分段解析
@@ -107,17 +132,26 @@ function parseChangelogMd(content: string, fileName: string, urlPrefix: string):
 }
 
 /**
- * 生成 changelog.json 内容
+ * 生成 changelog.json 内容；includeDrafts 为 false 时跳过草稿版本并返回跳过的个数
  */
-function generateChangelogJson(changelogDir: string, urlPrefix: string): ChangelogJson {
+function generateChangelogJson(
+  changelogDir: string,
+  urlPrefix: string,
+  includeDrafts: boolean,
+): { data: ChangelogJson; skippedDrafts: number } {
   // 章节目录尚不存在时输出空列表：客户端拿到「没有版本」而不是 404
   const files = fs.existsSync(changelogDir)
-    ? fs.readdirSync(changelogDir).filter((f) => /^v\d+\.\d+\.\d+\.md$/.test(f))
+    ? fs.readdirSync(changelogDir).filter((f) => VERSION_FILE_PATTERN.test(f))
     : []
 
   const versions: ChangelogVersion[] = []
+  let skippedDrafts = 0
   for (const file of files) {
     const content = fs.readFileSync(path.join(changelogDir, file), 'utf-8')
+    if (!includeDrafts && isDraft(content)) {
+      skippedDrafts++
+      continue
+    }
     const parsed = parseChangelogMd(content, file, urlPrefix)
     if (parsed) {
       versions.push(parsed)
@@ -134,8 +168,11 @@ function generateChangelogJson(changelogDir: string, urlPrefix: string): Changel
   })
 
   return {
-    generatedAt: new Date().toISOString(),
-    versions,
+    data: {
+      generatedAt: new Date().toISOString(),
+      versions,
+    },
+    skippedDrafts,
   }
 }
 
@@ -146,6 +183,31 @@ function writeChangelogJson(targetDir: string, outputFile: string, data: Changel
   const apiDir = path.join(targetDir, 'api')
   fs.mkdirSync(apiDir, { recursive: true })
   fs.writeFileSync(path.join(apiDir, outputFile), JSON.stringify(data, null, 2), 'utf-8')
+}
+
+/**
+ * 从站点输出目录移除草稿页面引用的封面图，返回移除的张数。
+ * 封面路径来自页面正文，必须仍落在输出目录之内才会删除。
+ */
+function removeDraftCovers(outDir: string, sourceDirs: string[]): number {
+  const root = path.resolve(outDir)
+  let removed = 0
+  for (const dir of sourceDirs) {
+    if (!fs.existsSync(dir)) continue
+    for (const file of fs.readdirSync(dir).filter((f) => VERSION_FILE_PATTERN.test(f))) {
+      const content = fs.readFileSync(path.join(dir, file), 'utf-8')
+      if (!isDraft(content)) continue
+      const image = content.match(COVER_IMAGE_PATTERN)?.[1]
+      if (!image) continue
+      const target = path.resolve(root, `.${image}`)
+      if (!target.startsWith(root + path.sep)) continue
+      if (fs.existsSync(target)) {
+        fs.rmSync(target)
+        removed++
+      }
+    }
+  }
+  return removed
 }
 
 /**
@@ -179,11 +241,17 @@ export default function changelogJsonPlugin(context: LoadContext): Plugin {
 
   /** 为每个发行版生成并写入 JSON */
   function generateAll(targetDir: string, label: string): Record<string, ChangelogJson> {
+    const includeDrafts = !isProduction()
     const results: Record<string, ChangelogJson> = {}
     for (const edition of editions) {
-      const data = generateChangelogJson(path.join(context.siteDir, edition.zhSourceDir), edition.urlPrefix)
+      const { data, skippedDrafts } = generateChangelogJson(
+        path.join(context.siteDir, edition.zhSourceDir),
+        edition.urlPrefix,
+        includeDrafts,
+      )
       writeChangelogJson(targetDir, edition.outputFile, data)
-      console.log(`[changelog-json-plugin] 已生成 ${label}/api/${edition.outputFile}（${data.versions.length} 个版本）`)
+      const skipped = skippedDrafts > 0 ? `，${skippedDrafts} 个草稿未收录` : ''
+      console.log(`[changelog-json-plugin] 已生成 ${label}/api/${edition.outputFile}（${data.versions.length} 个版本${skipped}）`)
       results[edition.id] = data
     }
     return results
@@ -197,9 +265,17 @@ export default function changelogJsonPlugin(context: LoadContext): Plugin {
       return generateAll(path.join(context.siteDir, 'static'), 'static')
     },
 
-    // 构建模式：复制到 build 输出目录
+    // 构建模式：复制到 build 输出目录；生产构建再移除草稿页面的封面（static/ 已被原样复制进输出目录）
     async postBuild({ outDir }) {
       generateAll(outDir, 'build')
+      if (!isProduction()) return
+      for (const edition of editions) {
+        const sourceDirs = [edition.zhSourceDir, edition.enSourceDir]
+          .filter((dir): dir is string => typeof dir === 'string' && dir !== '')
+          .map((dir) => path.join(context.siteDir, dir))
+        const removed = removeDraftCovers(outDir, sourceDirs)
+        if (removed > 0) console.log(`[changelog-json-plugin] 已从 build 移除 ${edition.id} 的草稿封面 ${removed} 张`)
+      }
     },
   }
 }

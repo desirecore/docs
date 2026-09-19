@@ -1,0 +1,17 @@
+---
+title: "达摩院AgentOS更新日志"
+description: "达摩院AgentOS版本更新历史记录"
+keywords: [更新日志, 版本历史, changelog]
+draft: true
+---
+
+# 达摩院AgentOS更新日志
+
+本页记录达摩院AgentOS各版本的重要变更。
+
+## 版本索引
+
+<!-- 版本行由发布流程插入到表格分隔行之后：分隔行必须与 DesireCore 更新日志章节保持一致。 -->
+
+| 版本 | 日期 | 概要 |
+|------|------|------|
