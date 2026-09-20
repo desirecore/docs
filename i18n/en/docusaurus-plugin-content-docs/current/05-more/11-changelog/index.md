@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.171](./v10.0.171) | 2026-09-20 | Session persistence recovery，修复 6 项问题，改进 3 项 |
 | [v10.0.170](./v10.0.170) | 2026-09-19 | Skill-first application installation and verification-based state tracking、Ma... |
 | [v10.0.169](./v10.0.169) | 2026-09-19 | Account lifecycle management、DesireCore Control，修复 7 项问题，改进 3 项 |
 | [v10.0.168](./v10.0.168) | 2026-09-17 | 修复：Fixed an issue where several features, including decision workspaces, deci... |
