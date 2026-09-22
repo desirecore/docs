@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.173](./v10.0.173) | 2026-09-22 | Unified Marketplace card detail experience、Improved built-in app presentation... |
 | [v10.0.172](./v10.0.172) | 2026-09-21 | Quick new session from project，修复 7 项问题，改进 1 项 |
 | [v10.0.171](./v10.0.171) | 2026-09-20 | Session persistence recovery，修复 6 项问题，改进 3 项 |
 | [v10.0.170](./v10.0.170) | 2026-09-19 | Skill-first application installation and verification-based state tracking、Ma... |
