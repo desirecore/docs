@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.175](./v10.0.175) | 2026-09-23 | Agent Autonomous Application Installation and Maintenance、Team Task Board Cre... |
 | [v10.0.174](./v10.0.174) | 2026-09-23 | 修复：Fixed an issue where macOS installation packages failed validation or coul... |
 | [v10.0.173](./v10.0.173) | 2026-09-22 | Unified Marketplace card detail experience、Improved built-in app presentation... |
 | [v10.0.172](./v10.0.172) | 2026-09-21 | Quick new session from project，修复 7 项问题，改进 1 项 |
