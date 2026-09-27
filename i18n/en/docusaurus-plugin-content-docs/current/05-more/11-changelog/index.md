@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.177](./v10.0.177) | 2026-09-27 | Workspace-level instance tabs、Team leads in a single team default to team sco... |
 | [v10.0.176](./v10.0.176) | 2026-09-25 | User self-service invoicing，修复 5 项问题，改进 1 项 |
 | [v10.0.175](./v10.0.175) | 2026-09-23 | Agent Autonomous Application Installation and Maintenance、Team Task Board Cre... |
 | [v10.0.174](./v10.0.174) | 2026-09-23 | 修复：Fixed an issue where macOS installation packages failed validation or coul... |
