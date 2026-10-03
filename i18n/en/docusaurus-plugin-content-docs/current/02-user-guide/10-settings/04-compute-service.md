@@ -127,7 +127,29 @@ When choosing mappings, combine models by role:
 
 Default mapping is the global fallback. Agent-level configuration takes precedence when present.
 
+## Provider Priorities for Smart Routing
+
+To make Smart routing prefer a provider:
+
+1. Open the model picker in the conversation and select **Provider priority settings**.
+2. Enter a priority for each provider. Higher values take precedence.
+3. Select **Save**. To reset the values, select **Restore defaults**, then save.
+
+| Setting | Rule |
+|---|---|
+| Accepted values | Integers from -10000 to 10000 |
+| Defaults | Official cloud compute: 100; other sources: 0 |
+| Selection order | Compare provider priorities within the same model tier; use model ranking when priorities are equal |
+| Scope | All conversations using Smart routing; fixed models are unaffected |
+
+The provider and model must still be usable. Increasing a priority cannot resolve sign-in, credential, or model availability problems.
+
 ## Agent-Level Model Override
+
+To use a fixed model, select it in the conversation's model picker.
+
+<details>
+<summary>Advanced configuration: edit agent.json</summary>
 
 An individual agent can override global defaults in `agent.json`:
 
@@ -144,6 +166,18 @@ An individual agent can override global defaults in `agent.json`:
 `provider` identifies the protocol or provider type. `providerId` identifies the concrete provider instance. When multiple providers share a protocol or model name, set `providerId` to avoid using the wrong Base URL or API Key.
 
 Migrated or manually maintained configs may still contain a `runtime` field. Use `llm` for agent model configuration. If you edit agent configuration manually, keep `llm.provider`, `llm.providerId`, and `llm.model` aligned.
+
+</details>
+
+### What if a fixed model is unavailable?
+
+The interface explains when a model is missing, disabled, or unsuitable for chat. A rejected selection preserves the previous setting.
+
+1. Read the reason to identify a model, provider configuration, or sign-in problem.
+2. Follow the action offered: select another model, open the Compute Center, or sign in.
+3. Continue the task after resolving the problem.
+
+A fixed model that becomes unavailable during execution also reports an error; it does not switch to Smart routing automatically.
 
 ## Managing Multiple Providers
 

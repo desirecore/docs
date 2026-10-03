@@ -80,14 +80,18 @@ Each task has a clear title, status, and links to related context:
         Pending · risk: high · needs your confirmation
 ```
 
-### Status Updates **Immediately**
+### What task states mean
 
-The agent's discipline is:
-- **Before starting a step**, immediately switch its status to "🔄 In Progress"
-- **As soon as a step is done**, switch to "✅ Completed"
-- **Never batch updates** across multiple steps
+| State | Meaning | What you can do |
+|---|---|---|
+| Not started | Work has not begun | Check the assignee and prerequisites |
+| In progress | Work is underway | Inspect the latest update and saved outputs |
+| Blocked | Input, permission, or a prerequisite is missing | Read the reason and provide what is needed |
+| Awaiting confirmation | Output has been submitted for acceptance | Open the output, accept it, or request changes |
+| Completed | The task has completed under its rules | Check the final deliverables |
+| Failed | Execution did not finish successfully | Inspect the error and saved outputs before retrying |
 
-That means what you see is always current—no "looks stalled but actually working" situations.
+The agent and task board maintain these states; they do not report every background command in real time. If updates stop, ask for progress or check Task Manager to see whether execution is still running.
 
 ### Task Dependencies
 
@@ -105,21 +109,15 @@ If the agent needs to adjust steps mid-flight, it will:
 
 This way, looking at the plan file + task list later gives you a complete reconstruction of "what actually happened".
 
-### Task Lists Are Private to Each Agent
+### The current conversation and the Global Task Board
 
-Each agent can see and modify **only its own** task list. By design:
+The conversation task list helps track current work. For work across conversations or multiple agents, open Global Task Board from the left navigation and browse by board or assignee. Board permissions determine which tasks can be viewed or changed; team members also follow assignment and review rules.
 
-- **No interference**: Switching to another agent shows you its list—you won't see another agent's to-dos mixed in
-- **Clear accountability**: Each task traces back to a specific agent (no "who did this?")
-- **Isolated audit**: Task records travel with the agent, making it easy to audit per-agent
-
-:::tip What about multi-agent collaboration?
-When several agents work on a big task (e.g. a team task), each agent manages its own list and **shares progress via messages and receipts**—not by reading each other's lists. This mirrors real teamwork: each person has their own to-do list and aligns through updates and receipts. See [Cross-Agent Collaboration](./06-cross-agent.md).
-:::
+Registering a task does not start execution. See [Long-running tasks](./07-long-running-tasks.md) for the full sequence.
 
 ## Deterministic Steps vs. Adaptive Steps
 
-This is one of DesireCore's core designs—each execution step is clearly categorized so you know which results are certain and which contain AI judgment.
+Execution steps may follow defined rules or involve AI judgment. Check the step type and the basis for its result.
 
 ### Deterministic Step
 
@@ -152,44 +150,24 @@ This is one of DesireCore's core designs—each execution step is clearly catego
   Result: ⚠️ Missing Chinese instruction manual clause, suggest adding
 ```
 
-:::info Why is the Distinction Important?
-You can fully trust the results of deterministic steps—they're executed according to rules. Adaptive step results require more attention—AI judgment may have deviations. Knowing which steps are adaptive tells you which results need careful checking.
+:::info What to check when reviewing results
+Deterministic steps follow defined rules, but their inputs, rules, or environment may still be incorrect. Adaptive steps also involve AI judgment. Check results in both cases, and inspect the reasoning behind judgment-based results.
 :::
 
-## Pausing and Resuming Execution
+## Stopping and Continuing Execution
 
-### Pausing Execution
+| Your goal | Action | What to check next |
+|---|---|---|
+| Interrupt execution | Use the current run's stop action, or ask the agent to pause | Check Task Manager for background commands that are still running |
+| Continue unfinished work | Ask the agent to inspect its plan and saved outputs before continuing | Completed steps, remaining work, and commands still running |
+| Retry a failed step | Read the failure reason before requesting a retry | Check for saved files and submitted external requests to avoid duplicates |
+| Restore local changes | Open [Rewind and Checkpoint](../02-conversations/10-rewind-checkpoints.md) | Check which files are covered and what will be restored |
 
-At any time, you can pause a task being executed:
-
-```
-[Click ⏸ Pause]
-
-Agent: "Task paused.
-        Current progress: Step 4/6 (Analyze imported equipment clauses)
-        Completed steps are unaffected.
-
-        You can:
-        ▶️ Continue execution
-        🔄 Retry current step
-        ⏭️ Skip current step
-        ⏪ Roll back to a step and restart
-        ⏹️ Terminate task"
-```
-
-### Resuming Execution
-
-After pausing, you have multiple resume options:
-
-| Option | Behavior | Applicable Scenario |
-|--------|----------|---------------------|
-| **Continue** | Continue from pause point | Temporarily needed to handle other things |
-| **Retry Current Step** | Re-execute current step | Temporary error in current step |
-| **Skip Current Step** | Jump to next step | Current step unimportant or handled manually |
-| **Roll Back** | Roll back to previous step | Found problems with previous steps |
-| **Terminate** | End task | No longer need to execute this task |
+Stopping execution does not guarantee cancellation of requests already accepted by external services. Retry, skip, and continuation options depend on the task; some operations cannot resume from the point of interruption.
 
 ## Exception Handling During Execution
+
+The workflow panel also shows failures at run level, including startup or connection errors before any node begins. Absence of a failed node does not mean success. Read the run failure message and check completed actions before reconnecting or retrying.
 
 When the agent encounters problems, it takes different handling approaches based on the situation:
 

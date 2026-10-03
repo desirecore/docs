@@ -1,19 +1,32 @@
 ---
 title: User Guide
-description: DesireCore User Guide overview — quickly find the feature modules you want to learn about.
-keywords: [User Guide, User Manual, DesireCore, Navigation]
+description: Find DesireCore instructions by common task or browse by feature, in Chinese or English.
+keywords: [common tasks, user guide, user manual, DesireCore, navigation]
 sidebar_position: 0
 ---
 
 # User Guide
 
-Welcome to the DesireCore User Guide. Here you'll find everything you need to know, organized by functional modules — from basic interface operations to advanced automation configuration.
+Find the task you want to complete below, or browse features in the sidebar.
 
-Choose a section that interests you and start exploring:
+## Common tasks
 
----
+| What you want to do | Read |
+|---|---|
+| Install or update agents, or resolve missing dependencies | [Agent Marketplace](./06-agents/02-marketplace.md) |
+| Create a project conversation, archive it, or restore it | [Manage Conversations](./02-conversations/06-managing-conversations.md) |
+| Switch file, terminal, and web tabs | [Interface Layout](./01-interface/01-layout-overview.md), [Keyboard Shortcuts](./10-settings/03-keyboard-shortcuts.md) |
+| Check task progress or stop background execution | [Long-running Tasks](./04-delegation/07-long-running-tasks.md) |
+| Send a message, attach files, or use commands | [Sending Messages](./02-conversations/01-sending-messages.md) |
+| Ask an agent to write or revise a document | [Collaborative Writing](./05-super-document/02-collaborative-writing.md) |
+| Review the agent's document edits | [Review Changes](./05-super-document/04-review-changes.md) |
+| Switch models or set provider priorities | [Compute Service](./10-settings/04-compute-service.md) |
+| Bind an email, merge accounts, or request an invoice | [User Profile](./10-settings/07-user-profile.md) |
+| Let the agent use a website or resume after manual interaction | [Web Access](./09-capabilities/07-web-access.md) |
+| Find a shortcut or troubleshoot an unresponsive key binding | [Shortcut Reference](../05-more/02-keyboard-shortcuts.md) |
+| Inspect changes or restore conversations and local files | [Rewind and Checkpoints](./02-conversations/10-rewind-checkpoints.md) |
 
-## Quick Navigation
+## Browse by feature {#quick-navigation}
 
 | Section | Description |
 |---------|-------------|
@@ -28,7 +41,4 @@ Choose a section that interests you and start exploring:
 | [Capability Expansion](./09-capabilities/01-tool-system.md) | Install skills and tools for agents to expand their capabilities |
 | [Settings & Personalization](./10-settings/01-appearance.md) | Customize appearance, keyboard shortcuts, language, and compute configuration |
 | [Security & Governance](./11-security/01-controllability.md) | Understand permission control, risk levels, and operation audit mechanisms |
-
-:::tip New User Recommendation
-If you're just getting started with DesireCore, we recommend reading [Interface Navigation](./01-interface/01-layout-overview.md) first to familiarize yourself with the interface, then follow [Conversation Interaction](./02-conversations/01-sending-messages.md) to learn the basic operations.
-:::
+| [Email](./12-email/01-overview.md) | Add accounts, read and compose email, and manage the inbox |

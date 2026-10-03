@@ -16,11 +16,11 @@ The chat area is your main workspace for interacting with Agents, occupying most
 |                    [Interact] [Buttons] [More] |
 +------------------------------------------+
 |                                          |
-|    [Agent Avatar]  Hello, how can I help?|  <- Agent message (left)
+|    Hello, how can I help?|  <- Agent message (left)
 |                                          |
 |            I want to learn about contract review [My Avatar] |  <- User message (right)
 |                                          |
-|    [Agent Avatar]  Okay, let me analyze... |
+|    Okay, let me analyze... |
 |                                          |
 +------------------------------------------+
 |  Query Summary Bar                        |  <- Displayed when not thinking
@@ -68,18 +68,17 @@ When the chat area width is less than 640px, the middle buttons are automaticall
 
 ## Message List
 
-The message list is the core area of the chat, supporting scrolling through historical messages.
+The message list shows the current conversation. Scroll up to read earlier messages.
 
 ### Message Types
 
 **Agent Messages** (Left):
-- With Agent avatar (28x28)
-- Semi-transparent white glass bubble
-- Top-left corner is right-angled, other corners rounded, creating a visual effect pointing to the avatar
+- Assistant messages have no left avatar or reserved avatar space; the Agent identity remains in the chat header
+- The default flat mode displays content directly; classic mode retains the translucent glass bubble
 - Can contain rich content such as text, code blocks, function cards, etc.
 
 **User Messages** (Right):
-- Green gradient background, white text
+- Neutral rounded bubbles in the default flat mode; green gradient bubbles with white text in classic mode
 - Top-right corner is right-angled, other corners rounded
 - Supports plain text and image attachments
 
@@ -104,7 +103,7 @@ New messages enter with a **fadeUp** animation — fading in and rising from 8px
 
 ## Input Area
 
-The input area is located at the bottom and has rich input capabilities.
+Use the input area at the bottom to send text, images, file references, and commands.
 
 ### Text Input
 

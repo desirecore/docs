@@ -99,7 +99,7 @@ Publication **only includes Agent core domain** content:
 - Runtime logs
 - Cache data
 
-This means your personal data and privacy are completely secure.
+Review the selected export or publication scope before sharing, especially if you have added personal information to the Agent configuration or general memories.
 
 ### Local Export
 
@@ -110,6 +110,12 @@ If you just want to backup or migrate, you can export the Agent as a zip file:
 3. Download the zip file
 
 During export, you can select content by category, such as Agents, skills, memory, and workspaces. The exported file can be imported and used on another device, and public Agent repositories can also be imported by public URL.
+
+## Synchronization and Conflicts
+
+Agents installed from the marketplace or a remote repository can check for updates. Marketplace-installed Agents whose content comes from a publisher repository target the currently approved catalog revision. If **Updates are paused**, address the source or client version issue shown before retrying.
+
+When an update is available, DesireCore compares the local Git state. An unchanged local copy can update directly; non-conflicting edits can merge with a recorded commit. Changes to the same file require conflict resolution. Review the conflicting files, compare the local and remote versions, and choose to keep local, use remote, edit manually, or keep both. Completing resolution records the merge. See [Clone and Sync](./09-clone-and-sync.md) for the workflow.
 
 ## Next Steps
 

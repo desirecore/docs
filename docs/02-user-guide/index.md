@@ -1,19 +1,32 @@
 ---
 title: 功能指南
-description: DesireCore 功能指南总览，快速找到你想了解的功能模块。
-keywords: [功能指南, 用户手册, DesireCore, 导航]
+description: 按常见任务查找 DesireCore 的操作说明，也可按功能浏览中英文指南。
+keywords: [常见操作, 功能指南, 用户手册, DesireCore, 导航]
 sidebar_position: 0
 ---
 
 # 功能指南
 
-欢迎来到 DesireCore 功能指南。这里按功能模块组织了你需要了解的一切——从基础界面操作到高级自动化配置。
+按你要做的事情查阅下表，也可以在侧栏按功能浏览。
 
-选择你感兴趣的板块，开始探索：
+## 常用操作
 
----
+| 你想做什么 | 查阅文档 |
+|---|---|
+| 安装、更新智能体或补齐依赖 | [智能体市场](./06-agents/02-marketplace.md) |
+| 新建项目会话、归档或恢复会话 | [管理对话](./02-conversations/06-managing-conversations.md) |
+| 切换文件、终端和网页标签 | [主界面布局](./01-interface/01-layout-overview.md)、[快捷键](./10-settings/03-keyboard-shortcuts.md) |
+| 查看任务进度或停止后台执行 | [长耗时任务](./04-delegation/07-long-running-tasks.md) |
+| 发送消息、添加附件或使用命令 | [发送消息](./02-conversations/01-sending-messages.md) |
+| 请智能体写文档或修改已有文档 | [协作写文档](./05-super-document/02-collaborative-writing.md) |
+| 审阅智能体对文档的修改 | [审阅变更](./05-super-document/04-review-changes.md) |
+| 切换模型或设置供应商优先级 | [算力服务](./10-settings/04-compute-service.md) |
+| 绑定邮箱、合并账号或申请发票 | [用户档案](./10-settings/07-user-profile.md) |
+| 让智能体操作网页，或在手动操作后继续 | [Web Access](./09-capabilities/07-web-access.md) |
+| 查找快捷键或处理按键无响应 | [快捷键速查表](../05-more/02-keyboard-shortcuts.md) |
+| 查看差异、恢复对话和本地文件 | [Rewind 与 Checkpoint](./02-conversations/10-rewind-checkpoints.md) |
 
-## 快速导航
+## 按功能查阅 {#快速导航}
 
 | 板块 | 说明 |
 |------|------|
@@ -28,7 +41,4 @@ sidebar_position: 0
 | [能力扩展](./09-capabilities/01-tool-system.md) | 为智能体安装技能和工具，扩展其能力边界 |
 | [设置与个性化](./10-settings/01-appearance.md) | 自定义外观、快捷键、语言和算力配置 |
 | [安全与治理](./11-security/01-controllability.md) | 理解权限控制、风险等级和操作审计机制 |
-
-:::tip 新手建议
-如果你刚开始使用 DesireCore，建议先阅读[界面导航](./01-interface/01-layout-overview.md)熟悉界面，然后跟随[对话交互](./02-conversations/01-sending-messages.md)学习基本操作。
-:::
+| [邮件](./12-email/01-overview.md) | 添加邮箱、阅读和撰写邮件、管理收件箱 |

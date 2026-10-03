@@ -6,7 +6,7 @@ keywords: [Collaborative Writing, AI Writing, Document Editing, Multi-round Iter
 
 # Collaborative Writing
 
-The core experience of Super Document is **collaborating with Agents**—you describe your needs, the Agent writes the draft; you review and edit, the Agent revises. This process can be repeated iteratively until the document meets your requirements.
+Describe the writing task in the conversation, inspect the document the Agent generates or revises, then review its changes. Give specific instructions for any further revisions.
 
 ## How to Start a Document Writing Task
 
@@ -83,6 +83,8 @@ Super Document is based on Markdown format and supports the following content ty
 After completing the document, you can export it as docx or PDF format for use in other scenarios. See [Version History](./05-version-history.md) for details.
 :::
 
+After export, check the layout of headings, tables, code blocks, images, and formulas. PDF is suitable for reading and sharing; DOCX is suitable for further editing.
+
 ## Editing and Modifying
 
 In addition to having the Agent modify through conversation, you can also directly edit document content manually in the editor. Manual edits are also recorded in version history.
@@ -91,5 +93,5 @@ In addition to having the Agent modify through conversation, you can also direct
 
 ## Next Steps
 
-- [Diff Visualization](./03-diff-view.md) — Deep dive into how to read the modification comparison view
-- [Review Changes](./04-review-changes.md) — Learn how to efficiently review modifications
+- [Diff Visualization](./03-diff-view.md) — Identify additions, deletions, and replacements
+- [Review Changes](./04-review-changes.md) — Find the steps for accepting, rejecting, and saving changes

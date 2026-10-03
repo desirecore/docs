@@ -19,7 +19,7 @@ DesireCore built-in tools evolve with the client. This page groups common tools 
 | `Ls` | List directory contents | Low | No |
 | `Glob` | Search by filename pattern | Low | No |
 | `Grep` | Search file contents | Low | No |
-| `ToolSearch` | Search deferred tools, connectors, and external capabilities | Low | No |
+| `ToolSearch` / `DiscoverTools` | Inspect authorized tools / load declarations on demand | Low | No |
 
 `Read` chooses a strategy by file type. PDFs may be read as text, rendered page by page for vision models, or loaded by range for large files.
 
@@ -43,11 +43,13 @@ Under the default approval mode, command execution asks you to review the full c
 | `WebFetch` | Fetch a webpage as Markdown | Low | No |
 | `WebSearch` | Search the web | Low | No |
 | `HttpRequest` | Send HTTP requests, primarily for Windows environments | Medium | Depends |
-| `Browser*` | Control browser tabs, clicks, scrolling, screenshots | Low-Medium | Depends |
+| `BrowserAct` | Navigation, input, waiting, screenshots, and browsing interactions | Low-Medium | Depends |
+| `BrowserDevtools` | Network, site storage, console, performance, and raw CDP | Low-High | Depends |
+| `BrowserResume` | Resume browser operations after the user asks to continue | Low | Verifies a new user turn |
 | `SitePattern*` | Read or write site usage patterns | Low-Medium | May be needed |
 | `LocalBookmarks` | Search local browser bookmarks/history hints | Low | No |
 
-Browser, SitePattern, and LocalBookmarks tools are Web Access skill-scoped tools. See [Web Access](../user-guide/capabilities/web-access).
+Browser interaction and developer tools, SitePattern, and LocalBookmarks are Web Access skill-scoped capabilities. `BrowserResume` is a base entry for resuming a user-paused session. See [Web Access](../user-guide/capabilities/web-access).
 
 ## Collaboration and Tasks
 
@@ -60,8 +62,20 @@ Browser, SitePattern, and LocalBookmarks tools are Web Access skill-scoped tools
 | `SendMessage` / `SendUserMessage` | Communicate between agents or proactively message the user | Low | No |
 | `AskUserQuestion` | Ask the user a structured question | Low | No |
 | `ManageTeam` | Create or adjust an agent team | Medium | Depends |
-| `TaskCreate` / `TaskUpdate` | Maintain the floating task board | Low | No |
+| `TaskBoardCreate` | Create a team task board in the current trusted team context and choose its review/responsibility policy | Low | No |
+| `TaskCreate` / `TaskUpdate` | Register and maintain tasks; state changes require run binding and authority | Low | No |
+| `TaskResponsibility` | Assignment, claim, handoff, and staged review, subject to server-authorized actions | Medium | Authority checks |
 | `TaskList` / `TaskGet` | Query task board state | Low | No |
+
+`TaskBoardCreate` creates a team task board only when trusted team context is available. The agent uses the returned board ID when it creates tasks. An ordinary `TaskCreate` without a board ID still uses the basic policy board.
+
+Task tool sequence:
+
+1. Register the task with `TaskCreate` and obtain its `taskRef`. This does not claim or start the task.
+2. Assign the executor, then start execution through `Delegate` with explicit `taskRef` and `contextMode`.
+3. After server admission checks pass, the executor can claim the task, advance its state, or submit it for review.
+
+Use `TaskGet` to inspect currently available actions and rejection reasons.
 
 ## Context, Memory, and Skills
 

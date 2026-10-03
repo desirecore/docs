@@ -18,14 +18,33 @@ DesireCore offers three keyboard shortcut modes, which you can switch between in
 | **Unified Mode** (Recommended) | Uses DesireCore unified shortcuts | Most users |
 | **Custom Mode** | Fully customizable, allows overriding all shortcuts | Power users |
 
-The following lists default shortcuts in Unified Mode. For macOS, replace `Ctrl` with `Cmd`.
+The following lists default shortcuts in Unified Mode. `Mod` means `Cmd` on macOS and `Ctrl` on Windows/Linux. Some shortcuts always use `Ctrl` and do not vary by platform.
 
 ## Global Shortcuts
 
 | Action | macOS | Windows/Linux | Description |
 |--------|-------|---------------|-------------|
-| Show/Hide Window | `Cmd+Shift+Space` | `Ctrl+Shift+Space` | Quickly summon the app |
+| Show/Hide Window | `Ctrl+Alt+Space` | `Ctrl+Alt+Space` | Quickly summon the app |
 | Screenshot | `Cmd+Shift+S` | `Ctrl+Shift+S` | Capture screen content |
+
+## Workspace Tabs
+
+Workspace shortcuts work at the window level and switch between resource tabs such as files, terminals, web pages, and reviews within a conversation. `Ctrl+Tab` shortcuts stay the same on every platform.
+
+| Action | macOS | Windows/Linux | Description |
+|--------|-------|---------------|-------------|
+| New workspace tab | `Cmd+T` | `Ctrl+T` | Create a composite page |
+| Close current tab | `Cmd+W` | `Ctrl+W` | Follows the resource's close behavior, with confirmation when needed |
+| Next tab | `Ctrl+Tab` | `Ctrl+Tab` | Move through workspace order |
+| Previous tab | `Ctrl+Shift+Tab` | `Ctrl+Shift+Tab` | Move through workspace order |
+| Next tab (alternate) | `Cmd+Alt+→` | `Ctrl+PageDown` | Alternate key combination |
+| Previous tab (alternate) | `Cmd+Alt+←` | `Ctrl+PageUp` | Alternate key combination |
+| Select tab 1–8 | `Cmd+1`–`Cmd+8` | `Ctrl+1`–`Ctrl+8` | Select by mixed resource-tab order |
+| Select last tab | `Cmd+9` | `Ctrl+9` | Select the last resource tab |
+| Focus address bar | `Cmd+L` | `Ctrl+L` | Available in a web tab |
+| Show/Hide workspace | `Cmd+Shift+B` | `Ctrl+Shift+B` | Expand or collapse the resource workspace |
+
+If a tab shortcut does not respond, close any dialog or overlay covering the workspace. For a custom binding, check shortcut settings and resolve any conflicts.
 
 ## Chat Input
 
@@ -37,19 +56,14 @@ The following lists default shortcuts in Unified Mode. For macOS, replace `Ctrl`
 
 ## Super Document
 
-| Action | macOS | Windows/Linux | Description |
-|--------|-------|---------------|-------------|
-| Accept Change | `Enter` | `Enter` | Accept current selected change |
-| Reject Change | `Backspace` | `Backspace` | Reject current selected change |
-| Next Change | `]` | `]` | Jump to next change |
-| Previous Change | `[` | `[` | Jump to previous change |
+Use review panel buttons to accept or reject changes. Focus a button with `Tab`, then activate it with `Enter` or Space. Press `Esc` inside the floating review panel to collapse it.
 
 ## General Editing
 
 | Action | macOS | Windows/Linux | Description |
 |--------|-------|---------------|-------------|
 | Undo | `Cmd+Z` | `Ctrl+Z` | Undo last action |
-| Redo | `Cmd+Shift+Z` | `Ctrl+Shift+Z` | Redo last action |
+| Redo | `Cmd+Shift+Z` | `Ctrl+Y` | Redo last action |
 | Cut | `Cmd+X` | `Ctrl+X` | Cut selected content |
 | Copy | `Cmd+C` | `Ctrl+C` | Copy selected content |
 | Paste | `Cmd+V` | `Ctrl+V` | Paste from clipboard |

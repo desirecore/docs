@@ -8,6 +8,8 @@ keywords: [layout, three-column layout, interface structure, NavRail, conversati
 
 DesireCore uses a **single-window three-column layout**, where all functions are completed within one window without switching between multiple windows.
 
+When the right-side tool workspace is expanded in chat, its header shows a **workspace tab strip**. Each tab opens a file, terminal, web page, or review. You can switch between, create, and close resource tabs. These differ from the left-side navigation tabs such as Chat, Resources, and Apps: navigation switches feature areas, while workspace tabs switch resources within the current conversation.
+
 ## Layout Diagram
 
 ![DesireCore three-column layout](/img/user-guide/interface/three-column-layout-en.svg)
@@ -52,6 +54,24 @@ When you are in the "Chat" tab, this area displays your conversation list with a
 
 Occupies the remaining space (**flex-1 adaptive**), this is your main workspace. In chat mode, this is the chat area; when switching to other tabs, it displays the full interface for the corresponding function.
 
+In chat mode, the expanded tool workspace appears in a panel beside the chat area, with resource tabs in the panel header. Opening a file, terminal, web page, or review adds its tab. Select a tab to switch resources. Closing a tab follows the close behavior for that resource type, including unsaved or running content. Workspace tabs are restored with the conversation so you can return to registered resources when you reopen it.
+
+## File Workspace
+
+Open a file tab, then click the floating **File actions** button in the content area. Markdown, Super Document, code, PDF, and board views share this entry; available editing and preview features depend on the format.
+
+| Goal | Action or behavior |
+|---|---|
+| Find the outline, task links, or file actions | Open **File actions** and select an action available for the format |
+| Locate a document section | Expand the outline, which starts collapsed |
+| Browse a PDF | Use the page navigation in the preview |
+| Operate the menu with a keyboard | Focus and open its entry; closing the menu returns focus to the entry |
+| Switch tabs in a narrow panel | The active tab scrolls into view; file actions leave the tab strip available for navigation |
+
+### Output Omitted When a Terminal Reconnects
+
+After an application restart, a terminal may reconnect with output missing from its replay. If output produced while the application was closed exceeded the retention limit, the active terminal tab shows an omission banner with the dropped byte count. Review the notice, then dismiss it when ready.
+
 ## Responsive Behavior
 
 DesireCore automatically adjusts the layout based on window size:
@@ -74,5 +94,3 @@ DesireCore's interface adopts the **Liquid Glass** design language. You will not
 - **Fine borders**: 0.5px thin divider lines between panels
 - **Highlight reflections**: Some elements have subtle glossy effects at the top
 - **Soft shadows**: Multi-layered shadows create a sense of depth
-
-This design makes the interface look lightweight and transparent, while establishing clear visual hierarchy through different levels of blur intensity.

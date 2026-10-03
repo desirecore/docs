@@ -59,7 +59,7 @@ When multiple agents collaborate, information transfers between them in an order
 
 ### Content Transferred
 
-What transfers between agents is not raw conversation content, but structured task handoffs:
+Structured task handoffs can include the following information:
 
 | Transfer Item | Explanation |
 |---------------|-------------|
@@ -70,6 +70,19 @@ What transfers between agents is not raw conversation content, but structured ta
 | **Context** | Relevant background information |
 
 For lighter-weight collaboration subtasks, the delegating agent also decides on its own how much background the collaborator actually needs. If the work is something like confirming a conclusion or checking a number—things that don't require reviewing the full history—it can have the collaborator skip the full memory retrieval and carry only the information required to finish that specific task. This lets the collaborator respond faster and use fewer resources. This judgment is made by the agent based on how substantial the task is; it isn't something you configure manually, and you'll only notice it as a note like "background information trimmed" in the collaboration receipt or process log.
+
+### Checking delegation progress
+
+Expand a delegation card to inspect each participant's state.
+
+| Card label | Meaning |
+|---|---|
+| Sequential delegation | Work progresses in order |
+| Parallel delegation | Work can proceed concurrently; results may arrive at different times |
+
+The label describes the delegation strategy. Participant states and execution records show whether work has started or finished. After reopening a conversation, inspect those records to avoid duplicating a task that is still running.
+
+To delegate board work, register the task, assign its owner, then ask that owner to execute it. Creating a task or sending a message alone does not start execution. See [Long-running tasks](./07-long-running-tasks.md).
 
 ## Letting one agent update another agent's configuration
 
@@ -127,6 +140,20 @@ You: "The trade advisor's analysis doesn't need to be too detailed, just confirm
 
 Trade Advisor: "Received, I will focus on reviewing export control related clauses."
 ```
+
+## Graph and Table Views in the Decision Tree Workbench
+
+In the Decision Tree Workbench, use the view selector to switch between Tree, Board, Graph, and Table. Graph displays the nodes, conditional edges, and branch topology in the decision definition. Table lists the properties of variables, input questions, nodes, and edges without requiring a canvas layout. Selecting an entity in either view selects its definition for inspection in the properties area. Graph and Table are for browsing and selection; edit and save the decision definition in the workbench’s structure or properties areas.
+
+### Answering questions and confirming statements
+
+The decision workspace lists missing inputs separately from business statements awaiting confirmation.
+
+1. Answer the questions first. Mark uncertain answers as unknown; answering does not confirm a statement.
+2. If the conversation entry shows pending confirmations, use its confirmation action to review the pending statements.
+3. Automatic continuation waits until all required statements in the current workspace are confirmed.
+
+After a submission timeout, inspect the saved result before retrying. An unconfirmed draft is not a submitted result.
 
 ## Collaboration Receipts
 

@@ -80,5 +80,5 @@ Navigation buttons have three visual states:
 The currently selected Tab is highlighted with a green icon, letting you know at a glance which function module you are in.
 
 :::tip Drag Window
-On desktop, the blank area in the middle of the navigation rail can be used to drag the entire window. On macOS, the three window buttons (red, yellow, green) are located at the top of the navigation rail; on Windows and Linux, window control buttons are in the upper right corner.
+On desktop, the blank area in the middle of the navigation rail can be used to drag the entire window. On macOS, the three window buttons (red, yellow, green) are located at the top of the navigation rail; on Windows and Linux, window control buttons are in the upper right corner. In the Windows chat view, the upper-left window title bar also contains a button to expand or collapse the conversation list, making more room for the workspace. This button is hidden on other feature pages.
 :::

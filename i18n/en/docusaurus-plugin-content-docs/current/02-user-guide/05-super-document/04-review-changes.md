@@ -1,31 +1,37 @@
 ---
 title: Review Changes
-description: Learn how to review Agent changes item by item in Super Document—accepting, rejecting, editing, and batch operations.
+description: Learn how to review Agent changes item by item in Super Document—accepting, rejecting, and batch operations.
 keywords: [Review, Accept Changes, Reject Changes, Batch Operations, Item-by-item Review]
 ---
 
 # Review Changes
 
-Review is the core interaction of Super Document. After the Agent proposes modifications, you can review each change item by item, deciding whether to accept, reject, or further edit.
+Inspect the Agent's changes in the review panel. Accept the changes you want to keep and reject the others.
 
-## Review Mode Introduction
+## Open the Review Panel
 
-When the Agent completes modifications, Super Document automatically enters review mode. At this time:
+When the Agent proposes changes, the document highlights the differences. Wait for output to finish before confirming changes; review buttons are unavailable while output is streaming.
 
-- All changes are highlighted in Diff form
-- The first change is automatically selected
-- A review progress bar is displayed at the top of the editor (e.g., "0/8 reviewed")
-- Operation buttons appear next to each change
+1. Find the collapsed floating review panel in the document area.
+2. Click the pending review count to expand its controls.
+3. Select a change to inspect, then use the accept or reject button.
 
-You can start reviewing from any change, not necessarily in order.
+The pending review count shows how many changes remain. You can review them in any order; start with passages that have the greatest impact.
+
+| View | Where differences appear |
+|---|---|
+| Inline | In the document text |
+| Side-by-side | In a separate diff panel |
+
+Each change batch uses one review interface. With focus inside the panel, press `Esc` to collapse it and return focus to its entry. You can review changes in any order.
 
 ## Accept/Reject Single Changes
 
-For each change, you have three options:
+Inspect the difference, then accept or reject it. For a revision, describe the change you need to the Agent.
 
 ### Accept
 
-Click the green "Accept" button (or press `Enter`), and the change takes effect immediately:
+Click the green "Accept" button, and the change takes effect immediately:
 
 - If it's added content, the green highlight disappears, content merges into the main text
 - If it's deleted content, the red-marked content is removed
@@ -33,63 +39,58 @@ Click the green "Accept" button (or press `Enter`), and the change takes effect 
 
 ### Reject
 
-Click the red "Reject" button (or press `Backspace`), restoring the original text:
+Click the red "Reject" button, restoring the original text:
 
 - Added content is removed
 - Deleted content is restored
 - Replaced content is restored to original text
 
-### Edit
+### Request Further Changes
 
-Click the "Edit" button (or press `E`), manually adjusting based on the Agent's modification:
+If a change has the right direction but needs different wording, identify the passage and the revision you need in the conversation. Confirm the current changes before asking the Agent to continue; review the next suggestions as well.
 
-1. The change enters editable state
-2. You can modify the text content
-3. Press `Esc` to cancel editing, press `Enter` to confirm
-
-:::tip When to Use Edit?
-When the Agent's modification direction is correct, but the wording needs fine-tuning—for example, AI changed "good" to "excellent", but you think "outstanding" is more appropriate.
-:::
+You can also edit the document text directly. Saving is unavailable while review items remain or the Agent is still streaming; save your manual edits after review is complete.
 
 ## Batch Operations
 
-If there are many changes, you can use batch operations to improve efficiency:
+In inline mode, expand the review panel when more than one item is pending and the Agent has finished output. Batch buttons are available there.
 
-| Operation | Shortcut | Description |
-|---|---|---|
-| Accept All | `Ctrl+Shift+Enter` | One-click acceptance of all pending changes |
-| Reject All | `Ctrl+Shift+Backspace` | One-click rejection of all pending changes |
-
-:::warning Use Batch Operations with Caution
-Batch accept or reject operations can be undone (`Ctrl+Z`), but it's recommended to at least quickly browse through them before deciding.
-:::
-
-You can also review important changes item by item first, then use batch operations for the remaining changes.
-
-## Adding Comments and Feedback
-
-During review, you can add comments to specific changes. These comments are passed to the Agent as reference for the next round of modifications:
-
-1. Select a change
-2. Click the "Comment" button
-3. Enter your feedback, for example: "This change is too formal, keep the original tone."
-4. The Agent will reference your comments in the next round of modifications
-
-:::info Comments Aren't Just for the Agent
-Comments are also preserved in version history. If you use Super Document in a team, others can see your review comments.
-:::
-
-## Shortcut Quick Reference
-
-| Operation | Shortcut |
+| Action | Result |
 |---|---|
-| Accept current change | `Enter` |
-| Reject current change | `Backspace` |
-| Edit current change | `E` |
-| Accept all | `Ctrl+Shift+Enter` |
-| Reject all | `Ctrl+Shift+Backspace` |
-| Jump to next change | `]` |
-| Jump to previous change | `[` |
+| Click **Accept All** | Accept all pending changes |
+| Click **Reject All** | Reject all pending changes and restore their original text |
+
+Inspect important changes first, then handle the remaining items. If a button is unavailable, wait for Agent output and the current review operation to finish before trying again.
+
+When there are only a few changes, review them one by one. For a larger set, scan the document first, review important passages individually, then batch-accept or batch-reject the rest when the same decision applies. A batch action affects every pending item, so check them before clicking.
+
+## Give Revision Feedback
+
+In the same conversation, identify the passage and the change you need, for example: “The second paragraph is too formal; keep the original tone.” The Agent can use that instruction for the next revision.
+
+## Keyboard Navigation
+
+Use `Tab` to focus a review button and `Enter` or Space to activate that button. Press `Esc` inside the floating review panel to collapse it. In the document editor, `Enter` and `Backspace` continue to edit text.
+
+
+## Keyboard controls
+
+| Key | Action |
+|---|---|
+| Tab | Focus the next review control |
+| Enter or Space | Activate the focused button |
+| Esc | Collapse the focused review panel |
+| Enter / Backspace in the document | Insert a line break / delete the character before the cursor |
+
+## Save or Continue Editing
+
+1. Check that all pending review items have been handled.
+2. Use the editor's save action or `Cmd/Ctrl + S` to save the document.
+3. To continue editing, give the next instruction in the same conversation or edit the text directly.
+
+If saving reports pending review items, accept or reject those changes first. Saving is also unavailable while the Agent is still streaming; wait for output to finish.
+
+Use **History** to revisit earlier content. See [Version History](./05-version-history.md).
 
 ## Next Steps
 

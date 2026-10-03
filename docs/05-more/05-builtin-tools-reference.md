@@ -19,7 +19,7 @@ DesireCore 的内置工具会随客户端版本更新。本文按能力域列出
 | `Ls` | 列出目录内容 | 低 | 否 |
 | `Glob` | 按文件名模式搜索 | 低 | 否 |
 | `Grep` | 按文本或正则搜索文件内容 | 低 | 否 |
-| `ToolSearch` | 搜索延迟加载的工具、连接器和外部能力 | 低 | 否 |
+| `ToolSearch` / `DiscoverTools` | 查询获准工具说明 / 按需加载工具声明 | 低 | 否 |
 
 `Read` 会按文件类型选择策略：文本走分页读取，图片走视觉输入，PDF 会在文本提取、按页渲染、目录定位和大文件分段读取之间切换。
 
@@ -43,11 +43,13 @@ DesireCore 的内置工具会随客户端版本更新。本文按能力域列出
 | `WebFetch` | 获取网页并转换为 Markdown | 低 | 否 |
 | `WebSearch` | 搜索互联网 | 低 | 否 |
 | `HttpRequest` | 发起 HTTP 请求，主要用于 Windows 环境 | 中 | 视请求而定 |
-| `Browser*` | 控制浏览器标签页、点击、滚动、截图 | 低 - 中 | 视操作而定 |
+| `BrowserAct` | 页面导航、输入、等待、截图和浏览中的交互 | 低 - 中 | 视操作而定 |
+| `BrowserDevtools` | 网络、站点存储、控制台、性能和原始 CDP | 低 - 高 | 视操作而定 |
+| `BrowserResume` | 在用户暂停后明确要求继续时恢复浏览器会话 | 低 | 核对新用户轮次 |
 | `SitePattern*` | 读取或写入站点经验 | 低 - 中 | 写入时可能需要 |
 | `LocalBookmarks` | 查询本机浏览器书签和历史线索 | 低 | 否 |
 
-`Browser*`、`SitePattern*` 和 `LocalBookmarks` 属于 Web Access v2 的 Skill-scoped 工具，只有对应技能启用后才会暴露。详见 [Web Access](../user-guide/capabilities/web-access)。
+浏览器交互与开发者工具、`SitePattern*` 和 `LocalBookmarks` 属于 Web Access v2 的技能能力；`BrowserResume` 是恢复用户暂停会话的基础入口。详见 [Web Access](../user-guide/capabilities/web-access)。
 
 ## 协作与任务
 
@@ -60,10 +62,22 @@ DesireCore 的内置工具会随客户端版本更新。本文按能力域列出
 | `SendMessage` / `SendUserMessage` | 智能体间沟通或主动向用户发送消息 | 低 | 否 |
 | `AskUserQuestion` | 向用户发起结构化问答 | 低 | 否 |
 | `ManageTeam` | 创建或调整智能体团队 | 中 | 视操作而定 |
-| `TaskCreate` / `TaskUpdate` | 维护悬浮任务板 | 低 | 否 |
+| `TaskBoardCreate` | 在当前可信团队上下文创建团队任务板，并选择审核/责任策略 | 低 | 否 |
+| `TaskCreate` / `TaskUpdate` | 登记任务及维护任务内容和状态，状态变更需运行绑定和权限检查 | 低 | 否 |
+| `TaskResponsibility` | 指派、认领、交接和分阶段审核；以服务端允许动作为准 | 中 | 权限检查 |
 | `TaskList` / `TaskGet` | 查询任务板状态 | 低 | 否 |
 
 任务工具用于让长任务透明可见，不会自行执行外部副作用。真正有影响的文件、命令、网络或服务调用仍受对应工具权限控制。
+
+`TaskBoardCreate` 只在可信团队上下文中创建团队任务板；之后创建任务时，智能体使用返回的任务板 ID。普通 `TaskCreate` 在没有指定任务板时仍会使用基础规则板。
+
+任务工具的调用顺序：
+
+1. 用 `TaskCreate` 登记任务，取得 `taskRef`。这一步不会认领或开始执行。
+2. 指派执行者，再通过 `Delegate` 显式提供 `taskRef` 和 `contextMode` 启动执行。
+3. 执行者通过服务端准入检查后，才能认领、推进状态或提交审核。
+
+用 `TaskGet` 查看当前允许的动作和拒绝原因。
 
 ## 上下文、记忆与技能
 
