@@ -92,6 +92,8 @@ Searches deferred tools and external capabilities that may be loaded on demand.
 | Requires Confirmation | No |
 | Typical Use Cases | Find GitHub, browser debugging, or documentation lookup tools |
 
+`ToolSearch` inspects authorized tool documentation without changing current declarations. An undeclared tool must be loaded with `DiscoverTools` before it can be called from the next model request using the actual declaration.
+
 ## Command Execution
 
 ### Bash - Execute Shell Commands
@@ -311,6 +313,12 @@ Creates a background scheduled task using a specific time, delay, interval, or c
 | Risk Level | Medium |
 | Requires Confirmation | Depends on approval policy |
 | Typical Use Cases | Set reminders, generate periodic reports, schedule independent prompt checks |
+
+## Task Board Tools
+
+`TaskBoardCreate` creates a board from an authorized team conversation. `TaskCreate` registers a task; it does not automatically start execution or make the current conversation its executor. `TaskList` and `TaskGet` show tasks and actions currently allowed by the server. `TaskUpdate` and `TaskResponsibility` manage task content, state, assignment, ownership, and review under permission checks.
+
+To delegate a board task, assign an executor and ask the agent to start execution linked to that task. Registration alone does not authorize state changes. See [Long-running tasks](../04-delegation/07-long-running-tasks.md).
 
 ## MCP Resources
 

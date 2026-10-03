@@ -23,6 +23,14 @@ Failed message content is not lost. You can quickly retrieve and resend it throu
 During a network interruption, the reply may still be running on the service. DesireCore reconciles and resumes the original session after connectivity returns. Resend only after the message has explicitly entered a failed terminal state.
 :::
 
+## What if the local service has stopped?
+
+If the local service crashes repeatedly in a short period, the app stops restarting it automatically and displays the reason. Use **Restart service** when offered. If it still cannot start, use **Restart application** and record the error for troubleshooting. Sending the same task repeatedly cannot restart the service.
+
+## What if a fixed model becomes unavailable?
+
+Read the reason in the system message and use **Select another model**, the Compute Center, or the sign-in action to repair the setting. An unavailable fixed model does not automatically switch to Smart routing. Select an available model before continuing the task.
+
 ## Companion replies too slowly?
 
 Reply speed is affected by multiple factors:
@@ -57,7 +65,7 @@ It's recommended to regularly back up the `~/.desirecore/` directory, especially
 
 When conversations accumulate large amounts of context, they may exceed the model's context window limit. Solutions:
 
-1. **Clear current conversation context** — Select clear conversation history from the more menu to start a new conversation
+1. **Compact current context** — Use `/compact` or ask the agent to compact context while keeping visible history; check what you need to retain before clearing conversation history
 2. **Switch to a model supporting longer context** — Such as the Claude series which supports larger context windows
 3. **Streamline questions** — Avoid including too much content in a single message
 

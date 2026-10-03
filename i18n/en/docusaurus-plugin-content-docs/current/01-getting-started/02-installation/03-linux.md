@@ -14,7 +14,7 @@ This guide covers how to install DesireCore on Linux. DesireCore is distributed 
 chmod +x DesireCore_x86_64_*.AppImage
 ./DesireCore_x86_64_*.AppImage
 ```
-If you hit a sandbox error, jump to [Troubleshooting](#troubleshooting-sandbox-errors).
+If you hit a sandbox error, jump to [Troubleshooting](#sandbox-diagnostics).
 :::
 
 :::tip Chinese Domestic OS Users
@@ -121,7 +121,7 @@ Trace/breakpoint trap (core dumped)
 
 This occurs because DesireCore is built on Electron, whose Chromium engine requires Linux **unprivileged user namespaces** for sandboxing. Some distributions (especially Ubuntu 24.04+) restrict this feature by default via AppArmor.
 
-<details>
+<details id="sandbox-diagnostics">
 <summary><strong>🔧 Full diagnosis and fix steps</strong> (click to expand)</summary>
 
 #### Step 1: Diagnose the Issue
@@ -202,7 +202,7 @@ echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
 ```
 
 :::warning
-`--no-sandbox` disables Chromium's process sandbox isolation, reducing security. Use it only for troubleshooting. For regular use, follow the [full diagnosis and fix steps above](#full-diagnosis-and-fix-steps-click-to-expand).
+`--no-sandbox` disables Chromium's process sandbox isolation, reducing security. Use it only for troubleshooting. For regular use, follow the [full diagnosis and fix steps above](#sandbox-diagnostics).
 :::
 
 ## Uninstall

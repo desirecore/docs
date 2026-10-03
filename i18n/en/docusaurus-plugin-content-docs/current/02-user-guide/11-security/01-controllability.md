@@ -1,22 +1,22 @@
 ---
 title: Three-Layer Controllability
-description: Learn about DesireCore's core security philosophy—Visible, Controllable, Reversible—keeping you always in control.
+description: Learn how to inspect execution records, handle approvals, and restore local changes through checkpoints.
 keywords: [controllability, security, visible, controllable, reversible, transparency]
 ---
 
 # Three-Layer Controllability
 
-DesireCore's security design revolves around one core philosophy: **You are always the final decision-maker.** Agents are your assistants, not your managers. To ensure this, we built a three-layer controllability system.
+Execution records, approval rules, and checkpoint restoration provide visibility, control, and reversibility. The sections below describe how to use them and their limits.
 
 ## Layer 1: Visible
 
 > You can see what the agent is doing.
 
-Every step of the agent's operation is transparently visible to you—there are no "black box" operations.
+Tool cards, execution receipts, and activity records show operations and results.
 
 **Specific manifestations:**
 
-- **Pre-operation Confirmation**: When the agent needs to execute operations like writing files or calling APIs, a confirmation dialog pops up clearly showing the operation type, impact scope, and risk level
+- **Pre-operation Confirmation**: Operations requiring approval show a confirmation card with their type, parameters, and risk. The current approval mode and permission rules determine whether approval is required
 - **Source Tracing**: Every operation request explains "why this operation is being executed," tracing back to which of your instructions triggered it
 - **Detail Expansion**: You can expand to view complete operation parameters, such as file content diff, full command text
 - **Execution Receipt**: A detailed receipt is generated after each task completion, recording the tool call chain, decision basis, and outputs
@@ -37,48 +37,37 @@ Seeing isn't enough—you also need to be able to influence the agent's behavior
   - **Allow**: Let the agent execute the operation
   - **Reject**: Cancel the operation, agent needs to adjust the plan
   - **Modify**: Open the editing panel, manually adjust operation parameters before executing
-- **Rule Memory**: For trusted operations, check "Allow and Remember," similar operations will automatically proceed next time
+- **Rule Memory**: For operations that support remembered rules, select "Allow and Remember"; later operations matching that rule follow its approval policy
 - **Permission Rule Management**: View and manage all remembered permission rules centrally in settings, supporting editing, disabling, and deletion
 - **Interrupt Capability**: During task execution, you can click the stop button to interrupt at any time
 
 ## Layer 3: Reversible
 
-> Any operation can be undone.
+> Inspect and restore local changes through checkpoints.
 
-Even if you allowed an operation, it's okay if you later find it wrong—all changes can be rolled back.
+Open [Rewind and Checkpoint](../02-conversations/10-rewind-checkpoints.md), inspect the differences and recovery scope, then decide whether to restore.
 
-**Specific manifestations:**
+| Content | Recovery boundary |
+|---|---|
+| Conversation records and local files | Limited to records and recoverable files covered by the actual checkpoint |
+| Sent email, payments, publications, and other external actions | Must be handled through the relevant service; local rollback cannot undo them |
+| Interrupted tasks | Check outputs, execution records, and commands still running before continuing or retrying |
 
-DesireCore supports four levels of rollback granularity:
-
-| Rollback Level | Description | Recovery Speed |
-|----------------|-------------|----------------|
-| **Patch Level** | Undo the most recent single file modification | < 100ms |
-| **Turn Level** | Undo all modifications from the most recent conversation round | < 500ms |
-| **Session Level** | Restore to state at the beginning of the current session | < 2s |
-| **Version Level** | Select any historical snapshot to restore | Depends on difference size |
-
-**Interrupt Recovery**: After you interrupt a running task, the system provides a recovery options panel where you can choose:
-
-- Continue execution
-- Retry current step
-- Skip current step
-- Roll back all modifications from this task
-- Abandon task but keep existing modifications
+Restoring a conversation does not restart every step. Before continuing a task with external effects, check whether the action already happened to avoid duplicates.
 
 ## Three Layers Working Together
 
-The three layers of controllability aren't independent—they build on each other and work together:
+During execution, check the following in order:
 
 ```
 Visible → You know what happened
   ↓
 Controllable → You decide whether to continue
   ↓
-Reversible → Even if the decision was wrong, you can safely roll back
+Reversible → Check checkpoint scope, then restore local changes
 ```
 
-This mechanism ensures you don't lose control of the system while enjoying the convenience brought by agents. No matter how "smart" the agent is, the final decision always rests with you.
+Before changing approval settings, check which operations the current mode permits.
 
 :::info
 DesireCore's security design draws on the human-machine collaboration principles of the NIST AI Security Framework, while making localized adaptations for desktop applications. We believe good security mechanisms should make you feel assured, not constrained.

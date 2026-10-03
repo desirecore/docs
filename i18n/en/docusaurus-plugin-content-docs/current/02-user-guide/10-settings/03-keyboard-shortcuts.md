@@ -6,7 +6,7 @@ keywords: [keyboard shortcuts, keyboard, efficiency, customization, editor]
 
 # Keyboard Shortcuts
 
-DesireCore provides rich keyboard shortcuts to help you operate efficiently. You can view all shortcuts and customize them according to your personal habits.
+View key combinations in shortcut settings, change a binding, or restore its default.
 
 ## Opening Keyboard Shortcut Settings
 
@@ -20,7 +20,7 @@ DesireCore has three built-in editor shortcut modes to adapt to different users'
 
 | Mode | Description | Suitable For |
 |------|-------------|--------------|
-| **Native Mode** | Retains each editor's built-in shortcuts without any overrides. This is the safest option. | Default choice when unsure |
+| **Native Mode** | Retains each editor's built-in shortcuts. | Default choice when unsure |
 | **Unified Mode** (Recommended) | Uses DesireCore's unified shortcut system for consistent key experience across all editors. | Users who frequently switch between multiple editors |
 | **Custom Mode** | Fully takes over shortcuts, allowing you to freely modify all key bindings. | Advanced users |
 
@@ -33,15 +33,25 @@ DesireCore has three built-in editor shortcut modes to adapt to different users'
 | Send Message | `Enter` |
 | New Line | `Shift + Enter` |
 | Cancel Input | `Esc` |
+| Accept prediction | `Tab` or `→` |
+| Rewind to checkpoint | `Cmd/Ctrl + Alt + Z` |
+
+### Workspace Tabs
+
+These shortcuts switch between workspace resources such as files, terminals, web pages, and reviews in window tab order. `Cmd` on macOS corresponds to `Ctrl` on Windows/Linux; the `Ctrl+Tab` combinations are the same on every platform.
+
+| Function | macOS | Windows/Linux |
+|----------|-------|---------------|
+| New workspace tab | `Cmd + T` | `Ctrl + T` |
+| Close current tab | `Cmd + W` | `Ctrl + W` |
+| Next / previous tab | `Ctrl + Tab` / `Ctrl + Shift + Tab` | `Ctrl + Tab` / `Ctrl + Shift + Tab` |
+| Select tab 1–8 | `Cmd + 1`–`Cmd + 8` | `Ctrl + 1`–`Ctrl + 8` |
+| Select last tab | `Cmd + 9` | `Ctrl + 9` |
+| Show / hide workspace | `Cmd + Shift + B` | `Ctrl + Shift + B` |
 
 ### Super Document
 
-| Function | Shortcut |
-|----------|----------|
-| Accept Changes | `Cmd/Ctrl + Enter` |
-| Reject Changes | `Cmd/Ctrl + Backspace` |
-| Next Change | `Cmd/Ctrl + ]` |
-| Previous Change | `Cmd/Ctrl + [` |
+Use review panel buttons to accept or reject changes. Focus a button with `Tab`, then activate it with `Enter` or Space. Press `Esc` inside the floating review panel to collapse it.
 
 ### Editor General
 
@@ -58,13 +68,13 @@ DesireCore has three built-in editor shortcut modes to adapt to different users'
 
 | Function | Shortcut |
 |----------|----------|
-| Show/Hide Window | Customizable |
-| Screenshot | Customizable |
+| Show/Hide Window | `Ctrl + Alt + Space` (default) |
+| Screenshot | `Cmd/Ctrl + Shift + S` (default) |
 | Undo | `Cmd/Ctrl + Z` |
-| Redo | `Cmd/Ctrl + Shift + Z` |
+| Redo | macOS: `Cmd + Shift + Z`; Windows/Linux: `Ctrl + Y` |
 
 :::tip
-Shortcuts marked "Customizable" in the table above need to be manually bound in keyboard shortcut settings. macOS uses `Cmd`, Windows/Linux uses `Ctrl`.
+Global shortcuts can be customized in keyboard shortcut settings. macOS uses `Cmd`, Windows/Linux uses `Ctrl`; Show/Hide Window defaults to `Ctrl + Alt + Space` on every platform.
 :::
 
 ## Customizing Shortcuts

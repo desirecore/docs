@@ -233,6 +233,13 @@ Only `active` and `paused` tasks can be toggled directly.
 
 Click **Trigger Now** to run the current task once without waiting for the next scheduled time. Manual triggers do not change the schedule rule, and the run is still written to execution history.
 
+If a task is already running, Trigger Now may show a conflict:
+
+1. Inspect the existing run to check whether it is still working.
+2. If you need another run, explicitly choose to trigger anyway. Both runs execute concurrently and may duplicate writes, messages, or submissions.
+
+Pausing a schedule stops future triggers. To stop an existing run, inspect and stop that run separately.
+
 ### Delete
 
 Delete tasks you no longer need. The detail panel uses two-step confirmation: click delete once to enter confirmation state, then click again within 5 seconds to delete. Deleting removes the corresponding `schedules/*.json` file.

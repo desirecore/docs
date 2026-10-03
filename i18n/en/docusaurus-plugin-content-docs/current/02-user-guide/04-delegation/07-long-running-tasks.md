@@ -3,14 +3,14 @@ title: Long-running tasks
 description: Use the Global Task Board to track builds, training runs, batch processing, and long research tasks, then resume from saved progress after an interruption.
 keywords: [long-running tasks, background tasks, global task board, task manager, staged progress, resume, builds, training, batch processing]
 sidebar_position: 7
-last-reviewed: 2026-08-26
+last-reviewed: 2026-10-03
 ---
 
 # Long-running tasks
 
 Some work simply takes time: analyzing hundreds of files, running a full build, training a model, solving a large schedule, or researching a subject across many sources. It may take half an hour or several hours.
 
-For this kind of task, do not focus on choosing a very large wait time. Ask the agent to leave its progress in the working directory. If the network drops, the app restarts, or a step fails, the agent can inspect what already exists and continue from there.
+Ask the agent to save stage outputs and progress in the working directory. After a network problem, restart, or failure, inspect these records before deciding where to continue.
 
 ## A prompt you can copy
 
@@ -40,6 +40,8 @@ Move a task to “In progress” when work starts. If work cannot continue, mark
 Update the board whenever the state changes instead of filling it in after all work is done.
 ```
 
+If the work belongs to a team and needs multi-agent responsibility rules, explicitly ask the agent to create a team board with the multi-agent responsibility policy in the current team conversation. Make this request in the relevant team conversation so the system can check team permissions. Ordinary tasks can also be registered on a basic policy board.
+
 A batch contract review might use these tasks:
 
 | Task | Assignee | Completion criteria | Prerequisite |
@@ -51,6 +53,21 @@ A batch contract review might use these tasks:
 
 Do not represent “analyze 300 contracts” as one enormous In progress task. Two hours later, that card still cannot tell you whether extraction is slow, review is blocked, or the report is already waiting for approval.
 
+### From registration to acceptance
+
+You can ask the agent to carry out these steps in the conversation:
+
+| Step | What to specify | How to check progress |
+|---|---|---|
+| Register | Goal, acceptance criteria, and output location | The task appears on the board |
+| Assign | Which agent is responsible | Task details show the assignee |
+| Execute | Ask the assignee to start this task | Execution records, status updates, and outputs show progress |
+| Review | Who should accept the finished work | Inspect the submitted output before completing the task |
+
+Registration does not start execution. Before the assignee executes, the system checks permission and whether this execution is linked to the task. Ordinary conversations can still add descriptions and comments.
+
+If a state update is rejected, ask the agent to read the reason and check the assignee and linked execution before proceeding.
+
 ### Reading the Global Task Board
 
 Open Global Task Board from the left navigation and switch to Task overview:
@@ -60,6 +77,8 @@ Open Global Task Board from the left navigation and switch to Task overview:
 - Needs attention collects work that has not started, is blocked, awaits agent review, awaits your acceptance, failed automatic handling, or needs manual takeover.
 
 After selecting a board, open Current board. Use the board or list view and filter by state, assignee, priority, or due date. To understand why work cannot continue, inspect prerequisites, comments, and linked records rather than relying on a percentage.
+
+Open a task’s details to browse its history in the Activity section. “Next activity page” continues through the records in the current browsing snapshot, and “First activity page” returns to the start of that snapshot. “Refresh activity” loads the latest history.
 
 For long-running work, check In progress, Blocked, and Needs review most often:
 
@@ -191,6 +210,10 @@ DesireCore also cannot infer what “one completed stage” means in your busine
 “Analyze these 300 contracts now” is a long-running task. “Analyze the contracts added this week every Friday” and “Check every day for new high-risk contracts and notify me only when one appears” are scheduled tasks because both specify when to run. “Notify me only when one appears” is an output condition, not a different scheduling mechanism. Use a heartbeat when the agent should decide whether the current matter needs proactive follow-up, without a business instruction tied to a specific daily, weekly, or clock-based schedule.
 
 ## Common questions
+
+### Why has a registered task not started?
+
+Registration adds work to the board. Check its assignee, then ask the agent to have that assignee start the task. If a state update is rejected, inspect the reason, permission, and linked execution. See [From registration to acceptance](#from-registration-to-acceptance).
 
 ### Will the task stop after five minutes?
 

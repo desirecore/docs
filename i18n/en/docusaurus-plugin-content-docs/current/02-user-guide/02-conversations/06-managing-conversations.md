@@ -6,7 +6,7 @@ keywords: [managing conversations, new conversation, delete conversation, clear 
 
 # Managing Conversations
 
-DesireCore organizes conversations by Companion — each Companion corresponds to an independent conversation window. You can quickly switch and manage these conversations in the conversation list.
+DesireCore organizes conversations by Companion. In manual multi-session mode, one Companion can have multiple independent conversations organized by Project. Select an Agent first, then select a conversation in its session column.
 
 ## Conversation List
 
@@ -43,8 +43,34 @@ Click an item in the conversation list to switch to that Companion's conversatio
 Click the "+" button in the conversation list header to create a new conversation. After creating a new conversation, it automatically switches to that conversation window.
 
 :::info
-In DesireCore, conversations correspond one-to-one with Companions. Creating a new conversation is essentially starting to interact with a new or existing Companion.
+Automatic and manual multi-session modes organize their lists differently. For manual mode, follow Create and Organize Conversations below.
 :::
+
+## Manual Sessions and Projects
+
+### Create and Organize Conversations
+
+1. Select an Agent and find a Project in its session column.
+2. Create a conversation from the Project row, or choose a project with the project picker. Choose to work outside a project if no project is needed.
+3. Send the first message to save the empty draft as a conversation.
+
+Conversations support renaming, pinning, moving to a project, and archiving. To bring one back, open the archived conversation list and choose **Restore**. Display conversations by project or in one list, sorted by creation time, recent updates, or manual order.
+
+### Set the Project Working Directory
+
+A Project can contain several working directories. Set one as the preferred directory for local conversations under that project. Changing the project primary directory in the working directory menu affects those local conversations.
+
+A Project can also have no directory. If the current conversation reports a missing or unavailable project directory, or a removed project, add a usable directory, move the conversation to another project, or remove its project binding before using directory capabilities or creating a terminal.
+
+### Manage Projects and Delete Conversations
+
+Open the Project row menu to edit or pin a project, show its preferred directory in the system file manager, archive its chats, or remove the project.
+
+| Action | Result |
+|---|---|
+| Archive a conversation | Restore it from the archived conversation list |
+| Remove a project | Its directories and conversations remain; affected conversations need an updated binding before using directory capabilities |
+| Delete a conversation bound to a worktree | Choose whether to preserve or remove the worktree; a chat backup is optional |
 
 ## Clear Chat History
 
@@ -58,7 +84,7 @@ If you want to clear all conversation records with a Companion:
 Clearing chat history is irreversible. Historical messages cannot be recovered after clearing, but knowledge the Companion has learned (Playbook) is not affected.
 :::
 
-## Delete Conversation
+## Delete an Agent and Its Conversations
 
 If you want to completely delete a Companion and its conversation:
 
@@ -71,7 +97,7 @@ If you want to completely delete a Companion and its conversation:
 
 DesireCore conversations support context continuation across sessions:
 
-- **Same Companion** conversations automatically load historical context
+- Reopening the same conversation restores its history; separate manual conversations maintain separate contexts
 - The Companion can reference previous conversation content and learning outcomes
 - Each session has an independent Run ID, but shares the Companion's long-term memory
 

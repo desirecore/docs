@@ -1,12 +1,12 @@
 ---
 title: App and Service Catalog
-description: Manage app installation, service registration, runtime status, approvals, and updates.
+description: Check app installations, manage app services, and handle approval requests.
 keywords: [apps, services, catalog, approvals, MCP, marketplace, app store]
 ---
 
 # App and Service Catalog
 
-The App and Service Catalog centrally manages third-party apps, MCP services, and local services derived from installed apps. It is not just a list—it provides a closed loop from installation and registration through approval to lifecycle management.
+Use the App and Service Catalog to install apps, check installation records, manage running services, and handle pending approvals.
 
 ## What It Contains
 
@@ -19,33 +19,34 @@ The App and Service Catalog centrally manages third-party apps, MCP services, an
 
 ## Installation Flow
 
-1. Select an app in the Marketplace or App Catalog
-2. Click **Install**; DesireCore delegates to a core agent to perform the installation
-3. The installation process is recorded locally (progress is visible in the catalog)
-4. After installation, services derived from the app are automatically discovered and registered by a watcher
-5. Services requiring permissions enter the pending-approval panel
-6. After approval, the service becomes available
-7. Agents can then use the service's capabilities in conversation
+1. Open an app's details in the Marketplace or App Catalog.
+2. Select **Install** and choose the target device.
+3. Follow progress while the core agent performs the installation.
+4. When it finishes, check the installation record for the correct source and device.
 
-Once installed, you can open, start, stop, restart, or update the app/service from the catalog.
+An agent performs installations and updates. If a task is cancelled, fails to send, or is interrupted, check the installation record before retrying.
+
+Some apps provide services that are discovered and registered automatically after installation. Services requiring permission appear in pending approvals; the agent can use them after approval. Not every app provides a service.
+
+After installation, open the entry's details for available actions, such as start, stop, restart, or update.
 
 :::info Installation Failed?
-If the installation is interrupted or fails, the catalog displays a **Failed** status with an error summary. Click **Retry** to reinstall, or check the logs for details.
+If installation fails, open the details to read the reason and logs. Select **Retry** if you want to try again.
 :::
 
 ## Service Approvals
 
-Services may request the following operations:
+When a service requests access or an operation, open the approval details. Check the source and requested permissions before deciding whether to approve.
 
-| Approval type | Trigger | Risk level |
+| Request | What to check | Risk level |
 |---------------|---------|------------|
-| Register new service | App first exposes an MCP/HTTP endpoint | Low |
-| Invoke external API | Service needs to access a third-party interface | Medium |
-| Access local files or ports | Service needs to read/write local resources | Medium |
-| Elevate privileges | Service requests higher execution permissions | High |
-| Health probe | Periodic check whether a service is alive | Low |
+| Register a service | Which service the app connects to and why | Low |
+| Call an external API | Which third-party service it will access | Medium |
+| Access local files or ports | Which local resources it may read or change | Medium |
+| Request higher privileges | Why extra permission is needed and what it affects | High |
+| Health check | What status the service will check | Low |
 
-These requests enter the approval flow. You can approve, reject, or inspect details. Unapproved stdio services are not executed silently in the background.
+You can inspect, approve, or reject a request. A service that requires approval is unavailable to agents until you approve it.
 
 :::tip Batch Approval
 If you trust all services from a particular app, select **Trust this app** in the approval panel. Future service registrations from that app will be approved automatically.
@@ -53,31 +54,25 @@ If you trust all services from a particular app, select **Trust this app** in th
 
 ## Status and Troubleshooting
 
-| Status | Meaning |
-|--------|---------|
-| Installed | Installed but not necessarily running |
-| Running | Service is active |
-| Stopped | Manually stopped |
-| Failed | Installation or startup failed |
-| Update available | A newer version is available |
-| Pending approval | Awaiting your approval |
-
-If a service is unavailable, check the detail page for health-check results, log summaries, and approval status.
+| Status | Meaning | Next step |
+|--------|---------|-----------|
+| Installed | Installed but not necessarily running | Open details for available actions |
+| Running | Service is active | If unavailable, check approval and health status |
+| Stopped | Not running | Check the start action in details when needed |
+| Failed | Installation or startup failed | Read the error and logs before retrying |
+| Update available | A newer version is available | Open details and select **Update** |
+| Pending approval | Awaiting your approval | Inspect and handle the request in the approval panel |
 
 ## FAQ
-
-**Q: I installed an app but cannot find it in the catalog?**
-
-Check whether installation completed. Progress is shown during installation; if you cancelled or it failed, the app will not appear in the installed list. Try reinstalling.
 
 **Q: The service shows Running but the agent says it cannot call it?**
 
 Check whether the service has been approved. An unapproved service runs as a process, but the agent cannot access its capabilities. Go to the approval panel to see if there are pending items.
 
-**Q: How do I update an installed app?**
+**Q: Why are there multiple installation records for the same app?**
 
-When a new version is available, the catalog displays an **Update available** badge. Click the app, go to its detail page, and select **Update**. Updates do not discard your configuration data.
+Records are managed separately by source and target device. Check both in the details before updating or uninstalling an instance.
 
 **Q: Will uninstalling an app delete existing data?**
 
-Uninstalling stops the app's derived services, but files and data already written locally are not deleted. If you need a thorough cleanup, manually remove the relevant data directories.
+Uninstalling stops the app's derived services. Before confirming, read the dialog: linked agents lose the app entry, while the agents and their data remain. Follow the app's instructions if you also need to remove other local files.

@@ -50,6 +50,17 @@ When you add an Agent to a team, the system records where it comes from. Four op
 If you plan to share a team with others, make sure every member is published or pushed to git first. Purely local Agents can't be installed by anyone else.
 :::
 
+## Default Member Display
+
+| Team default | Sidebar behavior |
+|---|---|
+| Flat, or not declared | Members appear separately |
+| Nested under the supervisor | Members start collapsed; expand the supervisor to view them |
+
+When you enable or disable nesting yourself, the sidebar uses your choice before the team default. If one supervisor manages several teams, any team declaring nested display makes that supervisor's members nested by default.
+
+Installing a team, refreshing configuration, or synchronizing updates reloads the defaults but keeps your chosen nesting setting.
+
 ## Connecting a Team Remote Repository
 
 To sync a team across devices or share it with others, first connect a remote repository (GitHub, Gitee, Gitea, etc.).

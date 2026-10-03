@@ -52,6 +52,8 @@ Each conversation item contains the following information:
 | Online Status | Status dot in the lower right corner of the avatar |
 | Unread Badge | Red numeric badge displayed when there are unread messages |
 
+Agent entries select a Companion. With manual multi-session mode enabled, a separate session column lists its conversations, with Project grouping, pinning, archiving, and moving between projects. See [Managing Conversations](../02-conversations/06-managing-conversations.md).
+
 ## Agent Grouping
 
 The conversation list is divided into two groups by Agent type:

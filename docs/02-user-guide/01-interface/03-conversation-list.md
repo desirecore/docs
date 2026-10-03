@@ -52,6 +52,8 @@ keywords: [对话列表, 搜索, 新建对话, 智能体分组, ConversationList
 | 在线状态 | 头像右下角的状态圆点 |
 | 未读角标 | 有未读消息时显示红色数字角标 |
 
+列表中的智能体入口用于选择 Companion；开启手动多会话模式后，还会显示该智能体的独立会话列，可按 Project 分组、置顶、归档或移动会话。详见[管理对话](../02-conversations/06-managing-conversations.md)。
+
 ## 智能体分组
 
 对话列表按智能体类型分为两组：

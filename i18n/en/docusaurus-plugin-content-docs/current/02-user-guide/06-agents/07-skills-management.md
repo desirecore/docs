@@ -78,6 +78,8 @@ The import flow validates structure, path safety, and required fields. If it fai
 DesireCore includes global skills for skill creation, document processing, PDF, PPT, spreadsheet, web access, frontend design, and mail operations. Built-in skills are maintained automatically through the client and marketplace sync, while user edits are preserved where possible.
 :::
 
+For incomplete Agent-declared Skill dependencies, review the missing reasons in the Agent marketplace details, repair retryable items, and refresh the status. See [Agent Marketplace](./02-marketplace.md#dependency-check).
+
 ## Skill Risk And Confirmation
 
 A skill is instruction and resources; it does not bypass tool permissions. Runtime risk comes from the tools it calls, the data it touches, and the external effects it produces.

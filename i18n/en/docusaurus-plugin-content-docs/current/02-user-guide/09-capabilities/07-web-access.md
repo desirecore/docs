@@ -10,7 +10,7 @@ Web Access v2 lets agents use a controlled browser when static fetching is not e
 
 ## Enabling
 
-Web Access is a skill-scoped capability. Browser control, CDP proxy, site-pattern, and local-bookmarks tools are only exposed when the related skill is active. This prevents ordinary tasks from accidentally using browser tools and lets you know when an agent may interact with web pages.
+Enable the relevant skill and permissions before using page actions, developer tools, site patterns, or local bookmarks. After taking control of a page yourself, you can ask the agent to continue in the same conversation. The recovery tool, `BrowserResume`, does not depend on these skills.
 
 ## Capabilities
 
@@ -23,6 +23,33 @@ Web Access is a skill-scoped capability. Browser control, CDP proxy, site-patter
 | File upload | Select local files when needed; usually requires confirmation |
 | Local bookmarks | Search Chrome/Edge bookmarks and history for URL hints |
 | Site patterns | Record login entry points, selectors, action paths, and notes for a site |
+
+## Browser tools and control
+
+| Tool | Use it for |
+|---|---|
+| `BrowserAct` | Navigation, clicking, typing, waiting, and screenshots |
+| `BrowserDevtools` | Inspecting or debugging network activity, cookies, site storage, console output, and performance; raw CDP calls |
+
+Both tools check permission to operate the current session and follow approval rules.
+
+### Letting the agent continue after manual interaction
+
+1. Agent browser operations pause when you take control or interact with the controlled page yourself.
+2. When you finish, ask the agent in the same conversation: “Continue working on this page.”
+3. The agent rereads the page before continuing. Send the instruction to continue after the pause.
+
+Resuming does not replay interrupted commands.
+
+### Handling control errors
+
+| Reported condition | What to do |
+|---|---|
+| Control was lost | Check who is operating the page before granting control again |
+| Session closed or crashed | Check task progress before opening another session |
+| Browser space was deleted | The old session is invalid; select or create an available space |
+
+The error receipt explains the cause. Check the page and completed actions before retrying.
 
 ## SitePattern
 

@@ -95,6 +95,8 @@ The working-directory pill below the input and the resource panel show agent dir
 
 Team selection is independent for each conversation. In manual multi-conversation mode, different conversations with the same agent can use different team directories.
 
+When an agent supervises exactly one team, a new conversation without a project starts in that team's scope. This default does not apply to project conversations, agents that supervise multiple teams, ordinary team members, or existing conversations. You can still check or change the team directory below the input.
+
 When a team is created, DesireCore automatically establishes one shared-directory binding for the team. The supervisor, initial members, later-added members, and a replacement supervisor all inherit that same directory from team membership; non-members do not see it. If the directory cannot be bound, team creation fails instead of leaving a team without a shared directory.
 
 ## Slash Commands

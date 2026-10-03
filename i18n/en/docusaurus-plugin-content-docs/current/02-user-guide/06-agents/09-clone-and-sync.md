@@ -52,15 +52,19 @@ When cloning, you can choose whether to copy private data between the current us
 If a cloned agent still retains its remote source (i.e., you chose "Keep Remote"), it can continue receiving upstream updates:
 
 1. Open the agent details page and check the **Source** area for the remote repository URL
-2. Click **Check for Updates** — the system fetches the latest remote commits and compares them with local
+2. Click **Check for Updates** — the system fetches the available remote version and compares it with the local copy
 3. If new content is available, a list of changed files and a diff summary are displayed
 4. Click **Merge Updates** — the system performs a Git merge
 
 :::info Update Strategy
-- **Pure config updates** (persona, principles, skills): usually safe to merge
-- **New skills/tools**: added automatically without affecting existing configs
+- **Pure config updates** (persona, principles, skills): review the differences and decide which local adjustments to retain
+- **New skills/tools**: check the added content and dependency requirements after merging
 - **Deletions or renames**: require manual confirmation; the system will not silently delete files you already have locally
 :::
+
+### What to Do When Updates Are Paused
+
+Marketplace-installed Agents whose content comes from a publisher's repository synchronize to the currently approved marketplace version. If checking updates reports **Updates are paused**, review the reason, restore catalog access or upgrade the client as prompted, and retry. A paused update does not mean no update exists.
 
 ## Conflict Resolution
 

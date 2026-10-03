@@ -51,6 +51,16 @@ Basic capabilities built into DesireCore, ready to use out of the box without ad
 
 Whether a tool enters the agent context depends on the current platform, permissions, and runtime environment. For example, PowerShell is only registered on Windows; when a tool is unavailable, its capability declaration is not injected into the agent context.
 
+### Preparing tools when needed
+
+The agent inspects and loads tools as the task requires. You usually do not need to do this manually.
+
+1. Inspect the purpose and parameters of authorized tools.
+2. Load the tools needed for this task.
+3. After loading succeeds, call the tools to perform the work.
+
+Finding documentation does not mean a tool is ready to call. Loading does not grant additional permission; platform and permission restrictions still apply.
+
 ### Layer 2: MCP Tools
 
 Connect to external services through MCP (Model Context Protocol). MCP is an open standard that lets agents securely access third-party services like GitHub, file systems, databases, and Slack.
@@ -66,15 +76,19 @@ When built-in tools and MCP can't meet your needs, you can create custom tools f
 
 ## Tool Security System
 
-When agents use tools, safety is always the first priority. Each tool has a clear risk level and confirmation rules:
+Tool risk levels and approval rules describe which effects to inspect and when confirmation is required.
 
-### Risk Levels
+### Risk levels and approval
 
-| Level | Meaning | Typical Tools | Default Behavior |
-|-------|---------|---------------|------------------|
-| **Low Risk** | Read-only operations, no side effects | Read file, search content | Execute directly |
-| **Medium Risk** | Write operations, but recoverable | Create file, send message | Confirm first use |
-| **High Risk** | Irreversible operations or external impact | Delete file, execute command | Confirm every time |
+Risk levels describe impact. Whether confirmation is required also depends on the current approval mode and the operation.
+
+| Level | What to inspect |
+|---|---|
+| Low | Read scope and whether the result fits the task |
+| Medium | Written content, destination, and recovery options |
+| High | External effects, irreversible outcomes, and execution scope |
+
+External actions such as sending messages cannot be undone through local restoration. See [Tool and command approval modes](../11-security/05-ai-approval.md) for approval rules.
 
 ### Permission Hierarchy
 

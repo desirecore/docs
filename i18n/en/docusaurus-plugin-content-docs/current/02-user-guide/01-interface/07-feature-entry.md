@@ -6,19 +6,14 @@ keywords: [feature entry points, operation paths, conversation interface, resour
 
 # Feature Entry Points and Operation Paths
 
-First time using DesireCore? Not sure where to start?
-
-This guide will help you get up to speed quickly. Daily use of DesireCore revolves around three main areas:
-- **Conversation Interface** — Chat with agents, assign tasks, and view results
-- **Resource Manager** — Manage agents, skills, compute resources, and more
-- **Applications and Services** — Browse installable apps and connect external services
-
-After reading this guide, you should be able to complete these basic operations:
+Find an entry by task. Use the Conversation Interface to send tasks and view results, the Resource Manager to manage agents and skills, and Applications and Services to install apps and connect services.
 
 | What You Want to Do | Where to Start | Shortest Path |
 |---|---|---|
 | Start a conversation with an agent | Conversation Interface | Select an agent on the left → Enter a task at the bottom → View the reply |
 | Find a historical conversation | Conversation Interface | Use the left-side list or search box → Click the conversation |
+| Switch files, terminals, or web pages | Workspace tabs | Open the right workspace → Select a resource tab; see [Interface Layout](./01-layout-overview.md) |
+| Review document edits | Document content area | Expand the pending review count → Accept or reject changes; see [Review Changes](../05-super-document/04-review-changes.md) |
 | Use a quick command | Conversation Interface | Type `/` in the input box → Select a command → Send |
 | Manage agents | Resource Manager | Click the “folder” icon on the left → Agents |
 | Import or configure skills | Resource Manager | Click the “folder” icon on the left → Skills → Import or configure |
@@ -28,9 +23,9 @@ After reading this guide, you should be able to complete these basic operations:
 
 ![Conversation interface operation path](/img/user-guide/feature-entry/main1.png)
 
-## 1. Three Core Areas of the Conversation Interface
+## 1. Three Areas of the Conversation Interface
 
-You don't need to memorize every button. Just understand the three areas marked ①, ②, and ③ — that covers 90% of daily use.
+The areas marked ①, ②, and ③ let you select an agent, view results, and send messages.
 
 | No. | Area | Purpose |
 |---|---|---|
@@ -38,7 +33,7 @@ You don't need to memorize every button. Just understand the three areas marked 
 | ② | Chat History Area | View agent replies, task execution progress, reports, and expanded content |
 | ③ | Input and Command Area | Enter messages, send tasks, upload attachments, or use slash commands |
 
-One sentence to remember: **Choose an agent in ① → Type your message in ③ → See results in ②**.
+Select an agent and send a message from the input area. Replies and execution notices appear in the chat history area.
 
 ### ① Agent and Conversation List
 
@@ -50,7 +45,7 @@ The left-side list is used to choose different agents or historical conversation
 | Plus button | Create a new conversation or add a new entry |
 | Agent avatar | Uses color and text to distinguish different agents |
 | Agent name | Shows available professional agents, such as DesireCore, Data Analyst, or Website Generator |
-| Green status dot | Indicates that the agent is online or available |
+| Green status dot | Shows an Agent status hint; use replies and execution receipts to check task completion |
 | Recent message | Shows the latest reply or task summary from that agent |
 | Time | Shows the most recent conversation or update time |
 
@@ -60,6 +55,8 @@ How to use:
 2. Click the agent name or conversation card.
 3. The right side switches to the corresponding chat page.
 4. If the list is long, use the search box at the top to find an agent quickly.
+
+In manual multi-session mode, click **New Session** on a Project row or select a project with the project picker. See [Managing Conversations](../02-conversations/06-managing-conversations.md) for saving, archiving, and directory settings.
 
 Examples:
 
@@ -81,10 +78,10 @@ The upper-right area is the chat history area. It displays the agent's replies, 
 | Message card | Displays replies, reminders, reports, or task results returned by the agent |
 | Title | Shows the topic of the current reply, such as “Heartbeat Check” |
 | Summary content | Shows key conclusions, scores, status, or explanations |
-| Expand all | Expands collapsed long content so you can view the full result |
+| Expand all | Expands collapsed content when the card provides this button |
 | History | Keeps previous conversations and execution progress in chronological order |
 
-When you see an agent's reply, check the title first to understand the topic, then read the summary. Click "Expand all" when you need the full details.
+Check the task name, result, and error notices in the reply. If the card provides **Expand all**, click it to read collapsed content.
 
 Common result types:
 
@@ -114,7 +111,7 @@ Reading tips:
 
 1. Check the title first to confirm which task the message belongs to.
 2. Read the summary to quickly judge whether the result is normal.
-3. If the content is collapsed, click “Expand all” to view the full details.
+3. If the card provides **Expand all**, click it to read collapsed content.
 4. If the agent asks for more information, continue replying in the input area at the bottom.
 
 ### ③ Input and Command Area
@@ -230,7 +227,7 @@ Suitable scenarios:
 | Scenario | Description |
 |---|---|
 | Find a professional assistant | See which agents are currently available |
-| Check availability | Use the green status dot to confirm whether an agent is available |
+| Check availability | Read the status hint; after sending a task, check its execution state and receipt |
 | Enter agent management | Click the card or arrow to open the detailed agent list |
 
 ### ② Skills
@@ -436,5 +433,3 @@ In simple terms, applications are like “software you can use directly”, whil
 | I do not know where to open an installed application | Return to the Applications area in Applications and Services, then check the application's Open, Start, or Manage entry |
 | A service is shown as offline | Check the service configuration, network connection, API key, or MCP / HTTP service address |
 | The agent's result is incomplete | Continue adding requirements in the same conversation, or describe the goal, files, and output format more clearly |
-
-If this is your first time using DesireCore, complete three steps in order: send one message in the Conversation Interface, open Resource Manager to check agents and skills, then visit Applications and Services to learn what can be installed or connected.
