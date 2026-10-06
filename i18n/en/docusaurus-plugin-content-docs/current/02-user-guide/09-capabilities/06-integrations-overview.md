@@ -12,7 +12,7 @@ DesireCore connects to external systems through several layers: **built-in tools
 
 MCP lets you connect services that expose APIs. Computer Use covers selected applications that have no suitable API, subject to platform, accessibility, permission, and UI limitations.
 
-Newer DesireCore releases also include the [App and Service Catalog](./app-service-catalog), which manages app installation, service registration, health checks, lifecycle actions, and approval requests.
+Installed apps and plugins share the Apps entry, with peer tabs for use and configuration. Discover new products in Marketplace and manage service connections and runtime diagnostics in Resources. See [Apps, Plugins, and Services](./app-service-catalog).
 
 ## Capability Map
 
@@ -24,7 +24,7 @@ Newer DesireCore releases also include the [App and Service Catalog](./app-servi
 | **Computer Use** | Local GUI control through HostAgent on macOS and temporarily through bundled CUA Driver on Windows; other HostAgent platforms are still evolving | [GUI Desktop Automation](./computer-use) |
 | **Email** | Manage Gmail, Outlook, and IMAP accounts | [Email Management](../email/overview) |
 | **Workflows** | Compose triggers, code, LLM, Agent, and human-confirmation nodes | [Task Orchestration](../../concepts/task-orchestration) |
-| **App and Service Catalog** | Manage apps, derived services, approvals, and health | [App and Service Catalog](./app-service-catalog) |
+| **Apps, Plugins, and Services** | Distinguish app use, plugin contribution management, and service connection diagnostics | [Apps, Plugins, and Services](./app-service-catalog) |
 
 ## Email Integration
 

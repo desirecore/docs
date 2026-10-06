@@ -42,9 +42,20 @@ The navigation rail is divided into three areas from top to bottom:
 | Tab 0 | Bubble | **Chat** | Default page, displays conversation list and chat area |
 | Tab 1 | Person | **Relationships** | Relationship graph of Agents and contacts |
 | Tab 2 | Folder | **Resources** | Agent resource manager (skills, tools, files) |
-| Tab 3 | Grid | **Apps** | Installed applications and services |
+| Tab 3 | Grid | **Apps** | Opens the Apps & Plugins workspace, with peer tabs for using apps and managing plugins |
 | Tab 4 | Bag | **Marketplace** | Agent and skill marketplace, browse and install new capabilities |
 | Tab 5 | Pulse | **Activity** | Activity records and execution logs for all Agents |
+
+## One Entry for Apps and Plugins
+
+The primary rail has one **Apps** button. It opens **Apps & Plugins**, with two peer tabs:
+
+- **Apps**: open and organize installed standalone applications, including existing pinning and Agent associations.
+- **Plugins**: inspect platform extensions, enable or disable contributions, configure them, and review diagnostics.
+
+Switching tabs preserves visited views, searches, selections, and drafts. Unsaved configuration uses the existing leave confirmation. Plugin settings opened from an Agent panel or resource entry can still return to that actual source.
+
+**Discover plugins** opens the Marketplace's Apps category with the product type set to Plugin. No installed plugins or matching catalog entries produces an empty state. Service connections and runtime diagnostics remain in Resources. Sharing the entry grants no new access permissions.
 
 ## Bottom Toolbar Area
 

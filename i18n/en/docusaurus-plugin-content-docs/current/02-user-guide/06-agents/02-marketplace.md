@@ -123,6 +123,8 @@ Besides installing from the marketplace, you can import Agents from local files 
 
 During import, DesireCore checks `agent.json`, repository structure, and agent ID. If a local Agent already uses the same UUID or path, the interface prompts you to overwrite, skip, or keep the existing content.
 
+Installed apps and plugins share the **Apps** entry and use peer tabs for opening applications or configuring platform contributions. Service connections and runtime diagnostics remain in Resources. See [Apps, Plugins, and Services](../capabilities/app-service-catalog).
+
 ## Updating and Uninstalling
 
 ### Updating
