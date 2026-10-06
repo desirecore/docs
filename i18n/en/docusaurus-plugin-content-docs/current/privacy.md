@@ -6,7 +6,7 @@ sidebar_position: 4
 
 Current Version: v3
 
-Last Updated: August 16, 2026
+Last updated: October 6, 2026
 
 ## 1. Data Collection Scope
 
@@ -21,6 +21,16 @@ When enabled, DesireCore also aggregates usage statistics locally by UTC day to 
 The installation-statistics device identifier and the product-usage random identifier are independent: neither is derived from the other, and they are never sent in the same request. **Send Usage Statistics** controls both categories and is enabled by default in the current version; you may turn it off at any time under **Settings → Data & Privacy**. Turning it off immediately stops transmission and local product-usage counting, and deletes the local random statistics identifier and pending queue. Re-enabling it creates a new random statistics identifier. Turning it off does not automatically delete records that were already transmitted.
 
 We do not proactively collect or review agent content that remains only on the local device. When a user chooses to use account services, update checks, remote connections, third-party models, or other connected features, the data required to provide that feature is sent to the relevant service. Users should review the transmission scope and provider policies before use.
+
+### Native iOS / iPadOS accounts and notifications
+
+When you sign in, the native mobile client sends your email or phone number and sign-in credentials over HTTPS to the official DesireCore account service to verify identity. Session tokens, service-pairing credentials and installation proof are stored in the device Keychain, rather than ordinary settings files.
+
+When you explicitly register production notifications, the client sends the account binding, random installation identifier, APNs token, token/binding versions, paired service instance identifier and a non-unique device model to the official push service. These fields support notification delivery, token changes and revocation. An explicitly requested notification verification also records queue, send and error states; Apple accepting a request does not confirm device receipt.
+
+Notifications use Apple APNs. Payloads contain a fixed message and synchronization references, including the notification, binding, instance and expiration, so the app can read current business facts after authentication. They do not contain chat or approval bodies or enable continuous background execution. Apple's handling of the push channel is also governed by its service terms and privacy policy.
+
+You can disable production notifications, unbind or sign out. Unbinding, sign-out, authorization expiry or a confirmed invalid endpoint clears the encrypted server-side token. Job metadata is retained for up to 90 days by default; revoked or invalid endpoint metadata with no pending jobs is retained for up to 30 days by default. Account deletion removes associated endpoints/jobs under the account deletion process. Necessary security and operation audits follow the account service's audit retention rules.
 
 ## 2. AgentFS Privacy Architecture
 
