@@ -44,7 +44,7 @@ Default width **290px**, displays different content based on the current functio
 | Chat | Conversation list (grouped by Agent) |
 | Relationships | Agent/Contact relationship graph |
 | Resources | Resource manager |
-| Apps | Installed applications list |
+| Apps | Apps & Plugins workspace, with peer tabs for installed apps and plugins |
 | Marketplace | Agent/Skill marketplace |
 | Activity | Activity record timeline |
 
