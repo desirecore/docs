@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Privacy Policy
 
-Current Version: v3
+Current Version: v4
 
 Last updated: October 6, 2026
 
