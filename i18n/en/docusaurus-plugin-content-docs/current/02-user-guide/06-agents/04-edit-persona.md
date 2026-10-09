@@ -6,6 +6,10 @@ keywords: [Persona, Role Positioning, Personality Traits, Agent Configuration]
 
 # Edit Persona
 
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
+
 Persona defines "who" the Agent is—its tone, style, professional domain, and behavior. This is not a character description, but an **executable behavioral specification**.
 
 ## What is Persona
@@ -16,14 +20,13 @@ Persona is saved in the `persona.md` file in the Agent directory. It tells the A
 |---|---|---|
 | **Response Strategy** | How to answer questions | "Give conclusion first, then reasons; less formalities" |
 | **Tone Style** | What tone to use | "Professional but not rigid, concise but not perfunctory" |
-| **Confirmation Strategy** | When to ask the user | "Must confirm before sending messages, deleting, or paid operations" |
 | **Forbidden Zones** | What not to do | "Don't use template clichés, don't avoid giving conclusions" |
 | **Uncertainty Handling** | What to do when unsure | "Explain uncertainty and provide verification path" |
 
-`persona.md` is part of the **Agent prompt layer**. At runtime, DesireCore also combines the current user's global prompt and prompts from every team the Agent belongs to. Open **Explorer -> Prompt Center** to edit these sources together and preview the result. See [Prompt Center and Prompt Layers](./12-prompt-center.md).
+`persona.md` is part of the **Agent prompt layer**. At runtime, DesireCore also combines the current user's global prompt and prompts from every team the Agent belongs to. Open **Explorer -> Prompt Center** to edit these sources together and preview the result. See [Prompt Center and Content Ownership](./12-prompt-center.md).
 
-:::info Persona vs. Principles
-**Persona** defines "how to do it"—tone, style, response methods. **Principles** define "what to do and not do"—rules, boundaries, priorities. They complement each other without overlapping.
+:::info Persona, Principles, and Standing Instructions
+**Persona** defines role and expression style. **Principles** defines boundaries, prohibited actions, and priorities. Optional **`instructions.md`** stores agent-specific stable responsibilities, default work strategies, and delivery standards. Keep user preferences, team conventions, and project rules in their own scopes, and detailed methods in skills. See [File Format Reference](../../05-more/06-file-formats.md).
 :::
 
 ## Editing Name, Avatar, Description
@@ -103,5 +106,5 @@ The Agent will record your preferences and apply them in subsequent conversation
 ## Next Steps
 
 - [Edit Principles](./05-edit-principles.md) — Set behavioral boundaries for the Agent
-- [Prompt Center and Prompt Layers](./12-prompt-center.md) — Manage global, team, and Agent prompts
+- [Prompt Center and Content Ownership](./12-prompt-center.md) — Manage global, team, and Agent prompts
 - [Create Custom Agent](./03-create-agent.md) — Review the creation process

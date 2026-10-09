@@ -6,6 +6,10 @@ keywords: [Create Agent, Custom Agent, Conversation Creation, Template]
 
 # Create Custom Agent
 
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
+
 When there is no Agent in the marketplace that meets your needs, you can create a fully custom Agent. DesireCore provides two creation methods.
 
 ## Create Through Conversation (Recommended)
@@ -24,6 +28,7 @@ The simplest way is to directly tell the DesireCore Core Agent what kind of assi
    - **Role Positioning**: Professional domain and behavioral style
    - **Skill Requirements**: What capabilities are needed
    - **Behavioral Guidelines**: What should or shouldn't be done
+   - **Standing Instructions** (optional): Stable responsibilities, default work strategies, and expected deliverables
 
 4. After confirmation, the Core Agent automatically creates the complete Agent configuration
 5. The new Agent appears in your Agent list and can be used immediately
@@ -47,8 +52,7 @@ If you are familiar with the AgentFS file system structure, you can directly cre
 
 3. Configure Persona (`persona.md`):
    - Role positioning and tone style
-   - Response strategy and confirmation strategy
-   - Forbidden zones and boundaries
+   - Expression preferences and answer structure
 
 4. Configure Principles (`principles.md`):
    - Core principles
@@ -59,6 +63,14 @@ If you are familiar with the AgentFS file system structure, you can directly cre
    - Install from skill marketplace
    - Or manually write SKILL.md
 
+### Add Standing Instructions (Optional)
+
+You can describe stable responsibilities during conversational creation or add them afterward. For example:
+
+> “Save standing instructions for this financial assistant: check the data period and definitions before each analysis, and deliver conclusions, key metrics, calculation evidence, and open questions. Keep detailed analysis procedures in a skill.”
+
+The content is stored in `instructions.md`. Edit it after creation through [File Explorer](./06-agent-files.md) or [Prompt Center](./12-prompt-center.md). It does not require L0/L1/L2 headings. Keep role and style in persona, boundaries in principles, and user, team, or project conventions in their own scopes. See [File Format Reference](../../05-more/06-file-formats.md) for the full contract.
+
 ### AgentFS Directory Structure
 
 After creation, the Agent's files are stored in `~/.desirecore/agents/<agent_id>/`:
@@ -68,6 +80,7 @@ After creation, the Agent's files are stored in `~/.desirecore/agents/<agent_id>
 ├── agent.json        # Entry configuration (name, description, version, etc.)
 ├── persona.md        # Persona
 ├── principles.md     # Principles
+├── instructions.md   # Optional stable responsibilities, work strategies, and delivery standards
 ├── memory/           # Memory directory
 ├── skills/           # Skills directory
 ├── tools/            # Tool registration

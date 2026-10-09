@@ -1,10 +1,14 @@
 ---
 title: File Format Reference
 description: Format and structure reference for core AgentFS files
-keywords: [file format, AgentFS, agent.json, SKILL.md, memory, principles]
+keywords: [file format, AgentFS, agent.json, instructions.md, SKILL.md, memory, principles]
 ---
 
 # File Format Reference
+
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
 
 AgentFS stores agent identity, behavior, memory, skills, and runtime policy as ordinary files. You can edit them through the UI or directly when you understand the fields.
 
@@ -115,15 +119,11 @@ Every agent has an `agent.json` at its root. It defines identity, default model,
 - Template-like empathy or generic encouragement
 - Analysis with no decision or next action
 
-## Safety and Confirmation
-- Reading files, organizing material, drafting, and analysis can proceed directly and should produce a receipt.
-- Sending messages or mail, deleting files, paying, production changes, and public publishing must pass a human gate first.
-
 ## When Uncertain
 - State what is uncertain and give a verification path. Escalate to the user when the uncertainty affects risk.
 ```
 
-`persona.md` should be an executable communication contract, not marketing copy. Keep it short, concrete, and easy to test so the agent can follow it consistently.
+`persona.md` stores role, expression style, and communication preferences. Put safety boundaries and confirmation rules in `principles.md`, and stable responsibilities and delivery requirements in `instructions.md`, so each requirement has one home.
 
 ## principles.md -- Behavioral Rules
 
@@ -145,6 +145,40 @@ Every agent has an `agent.json` at its root. It defines identity, default model,
 ```
 
 `Never Do` rules and safety boundaries should stay concise and unambiguous. These constraints affect long-running agent behavior, so avoid writing them as vague preferences.
+
+## instructions.md -- Agent Standing Instructions
+
+`instructions.md` is an optional file at the agent root. It stores stable responsibilities, default work strategies, and delivery standards. For example, it can define what a legal advisor should deliver in every contract review:
+
+```markdown
+# Contract Review Responsibilities
+
+Before reviewing, establish the transaction goal, contract version, and priority clauses.
+
+Deliver a risk summary, itemized comments, suggested revisions, and questions for the user.
+Include the source location for each comment. State uncertainty when evidence is missing;
+do not invent clauses or facts.
+```
+
+### Where Content Belongs
+
+| Content | Location |
+|---------|----------|
+| Role, tone, and expression style | `persona.md` |
+| Behavioral boundaries, prohibited actions, and priorities | `principles.md` |
+| This agent's stable responsibilities, default work strategies, and delivery standards | `instructions.md` |
+| Detailed procedures, long SOPs, templates, and reference material | `skills/*/SKILL.md` and its `references/` |
+| User preferences, team conventions, and project rules | `prompt.md`, `rules.md`, or `AGENTS.md` in the relevant scope; do not copy them into the shareable agent body |
+
+### File and Update Contract
+
+- Use ordinary UTF-8 Markdown. Frontmatter is not required or parsed, and L0/L1/L2 headings have no loading semantics. Content under `## L2` is still part of the full body.
+- When the current runtime context allows this source, its nonempty body is loaded in full as a separate prompt section. It is never automatically summarized or truncated. If it cannot fit the context budget, the operation fails explicitly; shorten the instructions and move detailed methods into skills.
+- Saved content is reread when new input, explicit continuation, or restoration is accepted. Tool loops, retries, and fallback models within the same execution turn retain the accepted snapshot.
+- Normal heartbeats also load the full instructions. Lightweight heartbeats with `lightContext=true` skip them.
+- The `ManageAgent` `instructions` parameter is a string: omission preserves the file, a string replaces the whole body, and an empty string clears it. Omitting it during creation does not require the file to be generated. The body must not contain NUL characters.
+
+This file is one source for the dynamically assembled system prompt; it does not store or replace the complete `systemPrompt`. Editing it grants no tools, file access, or approval authority. See [File Explorer](../02-user-guide/06-agents/06-agent-files.md) and [Prompt Center](../02-user-guide/06-agents/12-prompt-center.md) for editing.
 
 ## SKILL.md -- Skill Definition
 
