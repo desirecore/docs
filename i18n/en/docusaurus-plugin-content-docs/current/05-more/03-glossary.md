@@ -95,6 +95,11 @@ The agent's active monitoring mechanism. Agents can periodically check specific 
 ### Human Gate
 One of three step types. Steps requiring user personal confirmation. Execution automatically pauses at this step, waiting for explicit user instruction before continuing.
 
+## I
+
+### Instructions (Standing Instructions)
+Optional `instructions.md` at the agent root stores agent-specific stable responsibilities, default work strategies, and delivery standards. It uses ordinary Markdown and loads in full when allowed, without L0/L1/L2 parsing, summarization, or truncation. It grants no permissions. Implemented in development version 10.0.179; as of 2026-10-09, public release v10.0.177 does not yet include it. See [File Format Reference](./06-file-formats.md).
+
 ## M
 
 ### MCP (Model Context Protocol)
@@ -103,7 +108,7 @@ Model Context Protocol. An open standard proposed by Anthropic that allows AI mo
 ## P
 
 ### Persona
-The agent's personality definition file (`persona.md`). Contains communication style, decision preferences, output specifications, etc.—the core definition of "who the agent is like." Not a "character setting copy," but executable behavioral specifications.
+The agent's role and expression file (`persona.md`), including communication style, tone, and answer structure. Stable responsibilities and delivery standards belong in `instructions.md`; boundaries and priorities belong in `principles.md`.
 
 ### Plan
 One of the Six Primitives. The agent keeps a versioned Plan in the current working directory, recording goals, constraints, steps, risks, and verification. Plans are revised through natural conversation; they are not a mode or execution permission.

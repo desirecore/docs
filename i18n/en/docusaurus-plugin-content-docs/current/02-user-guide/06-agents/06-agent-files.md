@@ -6,6 +6,10 @@ keywords: [AgentFS, File System, File Explorer, Agent Files, File Structure]
 
 # File Explorer
 
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
+
 Each Agent's configuration, memory, and skills are stored as files in AgentFS (Agent File System). The file explorer lets you intuitively browse and manage these files.
 
 ## AgentFS File Structure Overview
@@ -17,6 +21,7 @@ Each Agent's files are stored in the `~/.desirecore/agents/<agent_id>/` director
 +-- agent.json        # Entry configuration
 +-- persona.md        # Persona
 +-- principles.md     # Principles
++-- instructions.md   # Optional stable responsibilities, strategies, and delivery standards
 +-- memory/           # Memory files
 |   +-- *.md          # One file per memory
 +-- skills/           # Skills directory
@@ -59,6 +64,12 @@ For Markdown and configuration files, you can edit directly in the preview inter
 Directly editing core configuration files like `agent.json` may affect the Agent's normal operation. If you're unsure about the meaning of a field, it's recommended to modify through the interface or conversation.
 :::
 
+### Edit Standing Instructions
+
+Open an existing `instructions.md` in the file tree and edit it like other Markdown files, or select the agent's **Standing Instructions** in [Prompt Center](./12-prompt-center.md). If the file does not exist yet, ask the agent through conversation to save its stable responsibilities, then edit the body.
+
+This file has no L0/L1/L2 loading tiers. Saved changes are read when the next input, explicit continuation, or restoration is accepted; the current execution turn keeps its original snapshot. Put detailed SOPs in skills and personal preferences in the user scope. See [File Format Reference](../../05-more/06-file-formats.md) for full-body loading, budget, and update behavior.
+
 ## Uploading and Managing Resource Files
 
 You can upload reference documents, templates, data files, etc. to the Agent's `resources/` directory for the Agent to reference during work.
@@ -83,6 +94,7 @@ You can upload reference documents, templates, data files, etc. to the Agent's `
 | `agent.json` | JSON | Entry configuration: name, version, description, default model, environment injection, heartbeat switch, permissions, and repository settings |
 | `persona.md` | Markdown | Persona: tone, style, response strategy |
 | `principles.md` | Markdown | Principles: rules, forbidden zones, priorities |
+| `instructions.md` | Ordinary Markdown | Optional agent-specific stable responsibilities, default work strategies, and delivery standards; loaded in full when allowed |
 | `memory/_policy.json` | JSON | Memory compression and retention policy |
 | `memory/*.md` | Markdown | Memory entries: learned knowledge and preferences |
 | `skills/*/SKILL.md` | Markdown | Skill documentation: skill description and execution instructions |

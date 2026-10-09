@@ -6,6 +6,10 @@ keywords: [self-evolution, Self-Evolution, learning, memory, experience accumula
 
 # Self-Evolution
 
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
+
 ## Agents Are Not Static
 
 Most AI products are "static" — using them 100 times is the same as using them once. Every conversation is like meeting for the first time.
@@ -26,7 +30,7 @@ This is the most direct evolution method — you explicitly tell the companion h
 - "When writing weekly reports for me in the future, follow this format: first what was completed this week, then next week's plan, finally problems encountered"
 - "When reviewing contracts, if you find unclear intellectual property ownership, you must mark it in red as a warning"
 
-**Output**: The companion generates a rule/skill modification proposal (diff), which takes effect after your confirmation.
+**Output**: The companion generates a rule/skill modification proposal (diff), which takes effect after your confirmation. Save content by ownership: role and expression in persona, boundaries and priorities in principles, agent-specific stable responsibilities and delivery requirements in optional `instructions.md`, and detailed methods in skills. Personal preferences remain in the user scope. See [File Format Reference](../05-more/06-file-formats.md).
 
 ### Layer 2: Experience Accumulation (Learned from Interaction)
 
@@ -65,13 +69,11 @@ By installing new skill packages or connecting new tools, the companion's capabi
 
 Free evolution sounds great, but without constraints, it could lead to companion "personality drift" or "memory pollution." Therefore, DesireCore sets strict evolution governance mechanisms.
 
-### Untouchable Baselines
+### Content Changes and Permission Boundaries
 
-The following **cannot** be automatically overridden by evolution:
+`persona.md`, `principles.md`, and `instructions.md` are editable content files. Review the specific diff when changing role, boundaries, or stable responsibilities, and follow existing tool permissions and approval policy. A heading in these files is not an immutable system permission level.
 
-- **Core Personality** (core part of `persona.md`): The companion's basic character won't change due to evolution
-- **Safety Red Lines** ("never do" in `principles.md`): Absolutely prohibited behaviors won't be relaxed
-- **Permission Configuration**: Permission levels won't be automatically elevated
+Content changes do not automatically elevate permissions or bypass approval. Saved standing instructions are read when new input, explicit continuation, or restoration is accepted; the same execution turn retains its original snapshot.
 
 ### Changes Reviewable
 

@@ -6,6 +6,10 @@ keywords: [AgentFS, filesystem, data storage, Git, agent repository]
 
 # AgentFS Filesystem
 
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
+
 ## AgentFS is Like Each Agent's "Home"
 
 If DesireCore is like a community, then AgentFS is each agent's "home" in that community. This home contains its personal profile, work manual, skill certificates, memory logs, and archived receipts from every job.
@@ -37,6 +41,7 @@ AgentFS's design is inspired by the Linux operating system's file structure:
 │       ├── agent.json          # ID card: basic info and configuration
 │       ├── persona.md          # Personality profile: communication style, decision preferences
 │       ├── principles.md       # Behavioral guidelines: rules, forbidden zones, baselines
+│       ├── instructions.md     # Optional standing responsibilities, strategies, and delivery standards
 │       ├── memory/             # Memory bank: facts and experiences it remembers
 │       ├── skills/             # Skill packages: various skills it has learned
 │       ├── workflows/          # Workflows: execution plans for complex tasks
@@ -72,6 +77,7 @@ This is where the agent's "soul" resides. Each agent is a Git repository contain
 | `agent.json` | Agent's basic info, version number | ID card |
 | `persona.md` | Personality, tone, decision preferences | Character traits |
 | `principles.md` | Behavioral guidelines, red lines, baselines | Professional ethics |
+| `instructions.md` | Optional stable responsibilities, work strategies, and delivery standards | Working agreement |
 | `memory/` | Accumulated knowledge and experience | Long-term memory |
 | `skills/` | Various learned skills | Skill certificates |
 | `tools/` | External tools it can use | Toolbox |
@@ -99,7 +105,7 @@ Detailed process of each task execution, including receipts, session records, et
 
 ### 1. Agents Can "Modify Themselves"
 
-Because everything is files, agents can directly read and write their own files to learn and evolve. For example, when you teach it a new rule, it writes the rule to `principles.md`. This is much simpler than operating a database through APIs.
+Because everything is files, agents can directly read and write their own files to learn and evolve. For example, behavioral boundaries belong in `principles.md`, agent-specific stable responsibilities in `instructions.md`, and detailed methods in skills. Personal preferences stay in the user scope. This is much simpler than operating a database through APIs.
 
 ### 2. Humans Can Easily Review
 
@@ -115,7 +121,7 @@ Made a mistake? `git revert` and it's back. Not satisfied with recent "evolution
 
 ## Tiered Loading
 
-To save AI model token consumption, AgentFS adopts a three-tier loading strategy:
+Persona, principles, and layered global or team prompts can use L0/L1/L2 to control loading granularity. Skills also support on-demand discovery. Not every AgentFS file uses these tiers:
 
 | Tier | Content | Consumption | Purpose |
 |------|---------|-------------|---------|
@@ -123,7 +129,7 @@ To save AI model token consumption, AgentFS adopts a three-tier loading strategy
 | **L1** | Core info + applicable scenarios | Low | Planning and decision-making |
 | **L2** | Complete content | On-demand | Actual execution |
 
-This means the agent doesn't need to read all files every time, but loads on demand — saving both cost and improving efficiency.
+`instructions.md` uses ordinary Markdown without L0/L1/L2 parsing. When allowed, it loads in full without summarization or truncation; detailed procedures belong in skills. See the [standing instructions format](../05-more/06-file-formats.md) for content ownership and update behavior.
 
 ## Next Steps
 

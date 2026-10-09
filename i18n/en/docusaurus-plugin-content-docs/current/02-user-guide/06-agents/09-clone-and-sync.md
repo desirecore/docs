@@ -6,6 +6,10 @@ keywords: [Clone, agent clone, sync, conflicts, Agent Git]
 
 # Clone and Sync
 
+:::info Standing instructions version support
+`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::
+
 Clone creates a new copy based on an existing agent. It is useful for experiments, preparing variants for different projects, or customizing a marketplace agent into your own version.
 
 ## When to Clone
@@ -34,6 +38,12 @@ Clone creates a new copy based on an existing agent. It is useful for experiment
 The core DesireCore agent (the system scheduler) cannot be cloned, to avoid breaking the main control entry. If the clone option is greyed out in the menu, the agent is protected.
 :::
 
+### Standing Instructions Travel with the Agent Body
+
+Optional `instructions.md` is cloned, imported, exported, and versioned with definition files such as persona and principles. It is not a private-data option. Keep only the agent's own stable responsibilities and delivery requirements in it. User, team, and project content should stay in the relevant scope to avoid sharing it with the agent body.
+
+Review the standing-instructions diff before updating, and decide how to merge local and upstream requirements. Meet the content package's minimum client version before using it. See [File Format Reference](../../05-more/06-file-formats.md) for format and ownership.
+
 ## Private Data Options
 
 When cloning, you can choose whether to copy private data between the current user and that agent:
@@ -57,7 +67,7 @@ If a cloned agent still retains its remote source (i.e., you chose "Keep Remote"
 4. Click **Merge Updates** — the system performs a Git merge
 
 :::info Update Strategy
-- **Pure config updates** (persona, principles, skills): review the differences and decide which local adjustments to retain
+- **Definition updates** (persona, principles, standing instructions, skills): review the differences and decide which local adjustments to retain
 - **New skills/tools**: check the added content and dependency requirements after merging
 - **Deletions or renames**: require manual confirmation; the system will not silently delete files you already have locally
 :::
