@@ -30,6 +30,29 @@ Attendance is determined by the run entry and calling relationship: whether the 
 
 Cross-Agent resource operations that previously read the target Agent's settings retain that original source when attended or without a parent. Only genuine unattended delegation uses the immediate parent's settings.
 
+## File access is independent of approval
+
+The approval pill in the chat composer and the resource panel offer quick choices for both approval mode and **file access**. The agent detail approval picker and configuration form also expose the setting. File access defaults to **Unrestricted**; existing restricted configurations remain restricted. A successfully saved choice applies on the next turn. This capability requires a client version containing the change.
+
+| File access option | Read/write inside the workspace | Read outside | Write outside with file tools |
+|---|---|---|---|
+| **Unrestricted** (default) | Allowed | Allowed | Allowed |
+| **Workspace only** | Allowed | Denied except existing read grants | Denied except legacy explicit directory read/write grants |
+| **Workspace read/write, outside read-only** | Allowed | Allowed | Denied; referencing an outside directory only grants reading |
+
+All allowed operations remain subject to sensitive path protection, platform resource grants, team isolation and the current run's permission ceilings. Platform data such as agent memory retains its existing grants. Workspaces come from configured work directories; explicitly add an outside project before modifying it with file tools.
+
+| Operation | With the new outside read-only option | Approval |
+|---|---|---|
+| Read inside the workspace | Allowed | Unchanged |
+| Write or edit inside the workspace | Allowed | Existing mode still applies; writable does not mean approval-exempt |
+| Read outside | Ordinary files allowed; sensitive paths remain protected | Unchanged |
+| Write outside with file tools | Denied | Allow-all, AI and human decisions cannot expand file scope |
+| Bash, PowerShell, terminals and external executors | Existing execution permissions | Command rules, approval and elevation remain unchanged |
+| Unattended delegation | Executor's file scope and the current run's ceilings | Ordinary approval still uses the immediate parent's settings |
+
+This option controls file tools; **it does not isolate the filesystem access of command processes**. Approved commands may still write outside the workspace. Temporary Workers and already-created background tasks retain their existing ceilings rather than gaining authority from the new selection. Legacy `restrictToWorkDirs=true` remains Workspace only; omission/false remains Unrestricted. Explicit `file_security.accessMode` takes precedence. The seven approval modes and unattended mappings do not change.
+
 ## Seven approval modes
 
 This table describes ordinary tool and command approval. Remembered rules, command allowlists, and existing non-gated operations are evaluated according to their own rules first.
