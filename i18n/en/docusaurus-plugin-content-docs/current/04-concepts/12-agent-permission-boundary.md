@@ -8,7 +8,7 @@ keywords: [permission, boundary, delegation, collaboration, security, accountabi
 
 ## The rule in one sentence
 
-**Every agent acts within its own permission ceiling. If something is done that shouldn't have been, accountability lies with the agent that performed the action -- not with whoever asked for it.**
+**Every agent acts within its own configuration and the authorized scope of the current run. If something is done that shouldn't have been, accountability lies with the agent that performed the action -- not with whoever asked for it.**
 
 ## Why this rule is needed
 
@@ -32,7 +32,7 @@ It sounds safer, but it falls apart immediately in real use:
 
 **Whoever acts is bound by their own ceiling.**
 
-- When companion B receives a request from companion A, it still acts entirely within the permissions **you** granted **B**: what it can read, what it can write, which tools it may call -- determined solely by B's own configuration.
+- When companion B receives a request from companion A, it acts within the permissions **you** granted **B** and the current run's existing ceilings: what it can read, what it can write, which tools it may call -- determined by B's configuration together with the run's authorized scope.
 - A cannot make B exceed B's own ceiling by asking, because that ceiling is absolute.
 - Conversely, A cannot expand its own reach by asking B. Whatever B does is recorded against B, and the results come back to A -- but **the execution happened inside B's boundary**.
 
@@ -93,3 +93,7 @@ Unattended delegation reads the immediate parent's approval mode and remembered 
 - Want the full picture on safety? Read [Three-Layer Controllability](./three-layer-control)
 - Want to understand how companions collaborate? Read [Delegation Model](./delegation-model)
 - Want to know how work is routed to the right companion? Read [Task Orchestration](./task-orchestration)
+
+## File access scope
+
+The executor can choose Unrestricted (default), Workspace only, or Workspace read/write with outside read-only. This setting is independent of the seven approval modes: writable operations still follow the existing mode, and approval cannot expand file scope. Platform resource grants, parent file ceilings, team isolation and ceilings frozen when background tasks were created still constrain the run. Temporary Workers retain their existing narrowing rules. Execution permissions remain unchanged; this file-tool setting adds no command-process sandbox. See [approval and file access](../02-user-guide/11-security/05-ai-approval.md#file-access-is-independent-of-approval) for compatibility, quick controls and combination tables.
