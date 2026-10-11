@@ -33,7 +33,11 @@ If requests to the model API frequently time out:
 
 ### What do the network banners in chat mean?
 
-Recent DesireCore versions evaluate the local Agent Service, device connectivity, and model-provider reachability separately instead of relying only on whether the operating system reports a Wi-Fi connection:
+:::info Effective version
+`v10.0.178+` (layered network banners and recovery in chat).
+:::
+
+DesireCore evaluates the local Agent Service, device connectivity, and model-provider reachability separately instead of relying only on whether the operating system reports a Wi-Fi connection:
 
 | Banner | Meaning | What to do |
 |------|------|------|

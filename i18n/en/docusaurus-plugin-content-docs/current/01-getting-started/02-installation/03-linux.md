@@ -51,7 +51,11 @@ AppImage is a portable application format — no installation required, just dow
 
 ## Recommended: Install the AppImage Launcher
 
-Newer builds include an AppImage launcher setup script. It places the AppImage in a fixed location and creates a command-line entry, application menu item, and desktop shortcut for you.
+:::info Effective version
+`v10.0.178+` (AppImage launcher setup script).
+:::
+
+Linux packages include an AppImage launcher setup script. It places the AppImage in a fixed location and creates a command-line entry, application menu item, and desktop shortcut for you.
 
 Typical installation result:
 

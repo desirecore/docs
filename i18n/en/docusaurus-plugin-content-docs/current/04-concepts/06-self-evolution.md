@@ -6,8 +6,8 @@ keywords: [self-evolution, Self-Evolution, learning, memory, experience accumula
 
 # Self-Evolution
 
-:::info Standing instructions version support
-`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::info Effective version
+`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
 :::
 
 ## Agents Are Not Static

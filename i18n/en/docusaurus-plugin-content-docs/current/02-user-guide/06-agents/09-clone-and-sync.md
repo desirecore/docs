@@ -6,8 +6,8 @@ keywords: [Clone, agent clone, sync, conflicts, Agent Git]
 
 # Clone and Sync
 
-:::info Standing instructions version support
-`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::info Effective version
+`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
 :::
 
 Clone creates a new copy based on an existing agent. It is useful for experiments, preparing variants for different projects, or customizing a marketplace agent into your own version.
