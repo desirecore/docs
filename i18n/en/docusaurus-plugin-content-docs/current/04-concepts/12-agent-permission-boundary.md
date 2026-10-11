@@ -84,6 +84,10 @@ When the calendar assistant asks the writing companion to "turn today's meeting 
 3. Writing the notes is recorded in the **writing companion's** receipts;
 4. If you decide the writing companion shouldn't be able to write files at all, what you change is **the writing companion's configuration** -- not the calendar assistant's ability to ask.
 
+## Approval settings and execution permissions are separate
+
+Unattended delegation reads the immediate parent's approval mode and remembered rules. It does not inherit the parent's execution identity or expand permissions. Attended runs retain their original approval source; `SendMessage` does not convey approval settings. See [Tool and Command Approval Modes](../02-user-guide/11-security/05-ai-approval.md) for the source and seven-mode tables. This development change does not mean a client installer has been released.
+
 ## Next steps
 
 - Want the full picture on safety? Read [Three-Layer Controllability](./three-layer-control)
