@@ -14,14 +14,14 @@ This page is a user-facing summary. It does not replace the complete license tex
 
 | Component | Use in DesireCore | Current source and license summary |
 |-----------|-------------------|------------------------------------|
-| CUA Driver | Transitional local Windows GUI carrier until Windows HostAgent is complete, run as an independent MCP subprocess | [trycua/cua](https://github.com/trycua/cua); the upstream repository identifies the project as MIT-licensed |
+| CUA Driver | Local Windows GUI automation, run as an independent MCP subprocess | [trycua/cua](https://github.com/trycua/cua); the upstream repository identifies the project as MIT-licensed |
 | Git | AgentFS history, checkpoints, and repository operations, run as an independent command-line subprocess | [Git](https://git-scm.com/about) is GPLv2; the current portable build comes from [dugite-native](https://github.com/desktop/dugite-native) |
 | Python | Recommended Hatch-managed Python runtime that can be imported offline from an archive in the installer | CPython is primarily under the [PSF License Version 2](https://docs.python.org/3/license.html); the archive comes from [python-build-standalone](https://github.com/astral-sh/python-build-standalone) and contains dependencies under additional licenses |
 | Node.js | Recommended Volta-managed Node.js runtime that can be imported offline from an official archive in the installer | The Node.js core is MIT-licensed; the official archive also includes software under multiple [third-party licenses](https://github.com/nodejs/node/blob/main/LICENSE) |
 
 The current release manifest identifies CUA Driver 0.7.1, Git 2.53.0, Python 3.13.9, and Node.js 24.18.0. Future releases may upgrade these components. Refer to the versions and notices supplied with the installed release.
 
-CUA Driver describes only the current transitional Windows path. macOS GUI operations still run through DesireCore HostAgent. Future HostAgent implementations for Windows, Linux, other desktop systems, and mobile platforms are outside CUA Driver's license and responsibility boundary.
+CUA Driver provides local Windows GUI operations; macOS uses DesireCore HostAgent. These are separate components with separate license and responsibility boundaries.
 
 ## Why One License Name Is Not Enough
 

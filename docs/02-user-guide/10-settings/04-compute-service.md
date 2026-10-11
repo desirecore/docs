@@ -79,31 +79,25 @@ DesireCore 内置多家主流供应商模板，也支持自定义 OpenAI 兼容�
 ## Claude Pro / Max 订阅
 
 :::info 生效版本
-`v10.0.178+`（Claude 订阅接入实现）。实际入口是否开放仍取决于下文的授权条件与发布策略。
+`v10.0.178+`（Claude 订阅接入）。使用前请阅读下文的授权条件。
 :::
 
-算力服务可显示 **Claude 订阅** 供应商。该路径使用 Anthropic 官方的 `@anthropic-ai/claude-agent-sdk` 发起模型请求，不会通过伪造 Claude Code 请求头来直连 Anthropic。
+如果算力服务中显示 **Claude 订阅** 供应商，可以按界面提示连接账号。使用此入口需要符合 Anthropic 的订阅与授权规则，具体条件见下文。
 
 ### 运行方式与 Claude Code 的区别
 
-从执行边界看，这是一条双运行时协作链路：
+选择 Claude 订阅模型后，你仍然在 DesireCore 中对话。智能体继续使用 DesireCore 的记忆、技能、工具、审批设置和审计记录，不会因此启用 Claude Code 自带的工具、插件或斜杠命令。
 
-1. **DesireCore Agent 运行时**负责系统提示词、记忆、Skill、工具注册、权限审批、委派和执行审计
-2. **Claude Agent SDK 运行时**负责使用 Claude 订阅身份完成模型请求并返回文本或 `tool_use`
-3. `tool_use` 会交回 DesireCore，由 DesireCore 的工具和审批链执行
-
-Claude Agent SDK 自带的工具、Skill、Plugin、子 Agent、斜杠命令和连接器不会在这条路径中使用；SDK 也不会代替 DesireCore 执行文件、命令或外部服务操作。因此，Claude 订阅模型在 DesireCore 中的上下文、工具集合、权限边界和最终效果，和直接使用 Claude Code 有本质区别。
-
-如果你需要在 DesireCore 中使用完整的 Claude Code 编程工作流，请让 **DesireCore 智能体调用本机的 Claude Code**；不要把“选择 Claude 订阅模型”理解为直接进入 Claude Code。
+如果你需要完整的 Claude Code 编程工作流，请让 **DesireCore 智能体调用本机安装的 Claude Code**。
 
 ### 连接方式
 
-界面会优先检测本机 Claude Code 登录状态。根据平台、授权条件和发布策略，还可能提供应用内登录或粘贴 `claude setup-token` 的高级连接方式。连接后可使用 Claude 订阅供应商提供的模型；断开、过期或刷新失败时，界面会提示重新检测或重新登录。
+界面会优先检测本机 Claude Code 登录状态。如果页面提供“登录”或粘贴 `claude setup-token` 的选项，按相应提示完成连接。连接后可使用 Claude 订阅供应商提供的模型；断开、过期或刷新失败时，界面会提示重新检测或重新登录。
 
 ### 条款、授权与账户风险
 
 :::warning 使用资格以 Anthropic 的规则为准
-使用官方 SDK 说明 DesireCore 按官方技术接口实现该路径，**不等于 Anthropic 已允许第三方产品转发 Claude Free、Pro 或 Max 凭据**。截至本文更新时，Anthropic 的 [Claude Code 法律与合规说明](https://code.claude.com/docs/en/legal-and-compliance)明确要求构建第三方产品的开发者使用 API Key 或受支持的云平台认证，并不允许第三方向用户提供 Claude.ai 登录或代用户转发 Free、Pro、Max 凭据。因此，Claude 订阅入口在取得适用于 DesireCore 场景的明确授权前应保持发布门控；该能力是否开放取决于后续官方授权、当时有效的条款、地区、账户和 DesireCore 发布策略。
+**使用 Claude 订阅需符合 Anthropic 的授权要求**。截至本文更新时，Anthropic 的 [Claude Code 法律与合规说明](https://code.claude.com/docs/en/legal-and-compliance)明确要求构建第三方产品的开发者使用 API Key 或受支持的云平台认证，并不允许第三方向用户提供 Claude.ai 登录或代用户转发 Free、Pro、Max 凭据。Claude 订阅仅可在获得适用授权、并符合条款及地区和账号条件时使用。如果你无法使用此入口，请改用 Anthropic API Key 或其明确支持的云平台认证。
 :::
 
 你应自行确认订阅用途、账户类型、使用地区和自动化方式符合 Anthropic 的现行条款。因订阅使用方式、账户状态或供应商政策导致的限流、功能限制、凭据失效、账户暂停或封禁风险由用户承担；DesireCore 无法控制 Anthropic 的账户处置。需要稳定的商业或组织级接入时，优先使用 Anthropic API Key 或其明确支持的云平台认证。

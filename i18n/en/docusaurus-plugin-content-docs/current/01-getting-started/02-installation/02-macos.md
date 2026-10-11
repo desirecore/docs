@@ -38,9 +38,9 @@ The entire installation typically takes just **1 minute** — download the DMG, 
 
 ## GUI Automation and HostAgent
 
-The macOS version currently uses **HostAgent** as the carrier for local GUI operations and related device capabilities. HostAgent is an active execution component and has not been replaced by the CUA Driver used on Windows.
+macOS uses **HostAgent** to operate local application interfaces. Before using GUI automation, check that HostAgent is connected to DesireCore.
 
-The first time you use interface inspection, clicking, typing, screenshots, or similar capabilities, macOS may request **Accessibility**, **Screen Recording**, or other permissions. Grant only what the task requires. If a capability does not recover immediately after a permission change, restart HostAgent or DesireCore and try again. Windows temporarily uses the bundled CUA Driver as a transitional way to provide GUI capability before Windows HostAgent is complete.
+The first time you use interface inspection, clicking, typing, screenshots, or similar capabilities, macOS may request **Accessibility**, **Screen Recording**, or other permissions. Grant only what the task requires. If a capability does not recover immediately after a permission change, restart HostAgent or DesireCore and try again.
 
 ## Handling Gatekeeper Prompts
 

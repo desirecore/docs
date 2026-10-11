@@ -55,7 +55,7 @@ DesireCore 会在首次启动后，将推荐的 Python 和 Node.js 版本导入�
 
 ### CUA Driver（GUI 自动化）
 
-CUA Driver 仅用于当前 Windows 电脑的 GUI 自动化，默认启用。它是 Windows HostAgent 完成前的过渡实现，让 Windows 用户先具备 GUI 操作能力。macOS 当前仍由 HostAgent 承载 GUI 操作，Windows、Linux 和其他平台的 HostAgent 仍在开发中。
+CUA Driver 默认启用，用于操作当前 Windows 电脑上的应用界面。你可以直接向智能体描述任务，例如“打开记事本并输入会议摘要”。
 
 :::note 磁盘占用与安全扫描
 这些归档和可执行程序会增加安装包与首次启动后的磁盘占用。安全软件也可能在首次解包或运行时再次扫描它们；请等待扫描完成，不要通过关闭系统防护来强行绕过告警。

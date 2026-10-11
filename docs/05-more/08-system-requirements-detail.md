@@ -52,7 +52,7 @@ DesireCore 桌面版会随包提供完成核心工作所需的基础组件，通
 | Python | 是 | 随包提供推荐版离线归档，首次启动后由 Hatch 静默导入到 DesireCore 管理目录 |
 | Node.js | 是 | 随包提供推荐版官方归档，首次启动后由 Volta 静默导入到 DesireCore 管理目录 |
 | macOS HostAgent | macOS 使用 | macOS 当前 GUI 操作载体；需要相应系统权限 |
-| CUA Driver | 仅 Windows | Windows HostAgent 完成前的本机 GUI 自动化过渡载体，默认启用 |
+| CUA Driver | 仅 Windows | Windows 本机 GUI 自动化，默认启用 |
 
 当前内置清单为 Git 2.53.0、Python 3.13.9、Node.js 24.18.0 和 CUA Driver 0.7.1。确切补丁版本会随 DesireCore 发布更新，以 **资源管理器** → **算力** → **运行环境** 和安装包随附声明为准。
 
@@ -76,7 +76,7 @@ Python 与 Node.js 的导入在服务启动后异步进行，不阻塞 DesireCor
 
 Git 检测会展示版本、路径和实际来源。默认“自动”模式会分别验证系统 Git 与随包 Git，并使用版本较高者；版本相同时优先系统 Git。你也可以在运行环境页明确选择“系统”或“内置”，首选项不可用时系统会提示并回退到另一来源。
 
-macOS 当前通过 HostAgent 承载本机 GUI 操作，需要辅助功能、屏幕录制等相应系统权限。Windows 的 CUA Driver 则优先使用 `PATH` 中用户自行安装的可用版本，再回退到 DesireCore 内置版本；它是 Windows HostAgent 完成前的过渡实现，只服务于当前 Windows 电脑。Windows、Linux、其他桌面与移动端 HostAgent 仍在开发。详见 [GUI 桌面自动化](../02-user-guide/09-capabilities/05-computer-use.md)。
+macOS 当前通过 HostAgent 承载本机 GUI 操作，需要辅助功能、屏幕录制等相应系统权限。Windows 的 CUA Driver 则优先使用 `PATH` 中用户自行安装的可用版本，再回退到 DesireCore 内置版本；它只操作当前 Windows 电脑。Linux 和移动设备暂不支持 GUI 自动化。详见 [GUI 桌面自动化](../02-user-guide/09-capabilities/05-computer-use.md)。
 
 缺少 Docker、Podman 或你任务指定的特殊版本时，相关脚本、MCP 服务或工作流仍可能不可用。
 

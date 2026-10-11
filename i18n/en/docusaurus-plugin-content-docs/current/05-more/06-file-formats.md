@@ -7,7 +7,7 @@ keywords: [file format, AgentFS, agent.json, instructions.md, SKILL.md, memory, 
 # File Format Reference
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 AgentFS stores agent identity, behavior, memory, skills, and runtime policy as ordinary files. You can edit them through the UI or directly when you understand the fields.

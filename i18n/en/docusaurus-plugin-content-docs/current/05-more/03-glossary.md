@@ -100,7 +100,7 @@ One of three step types. Steps requiring user personal confirmation. Execution a
 ### Instructions (Standing Instructions)
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 Optional `instructions.md` at the agent root stores agent-specific stable responsibilities, default work strategies, and delivery standards. It uses ordinary Markdown and loads in full when allowed, without L0/L1/L2 parsing, summarization, or truncation. It grants no permissions. See [File Format Reference](./06-file-formats.md).

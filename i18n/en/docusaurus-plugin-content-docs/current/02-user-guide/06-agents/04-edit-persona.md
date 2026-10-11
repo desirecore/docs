@@ -7,7 +7,7 @@ keywords: [Persona, Role Positioning, Personality Traits, Agent Configuration]
 # Edit Persona
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 Persona defines "who" the Agent is—its tone, style, professional domain, and behavior. This is not a character description, but an **executable behavioral specification**.

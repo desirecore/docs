@@ -6,9 +6,9 @@ keywords: [providers, Provider, AI models, API, OpenAI, Claude, DeepSeek]
 
 # Supported AI Providers
 
-DesireCore's provider and model catalog is updated through config-center. Availability depends on the client, account permissions, and synchronized configuration. Supported services include chat, reasoning, tool use, vision, embeddings, voice, image generation, video generation, and other types.
+DesireCore updates its provider and model catalog automatically. Available models depend on your client version, provider connection, and account permissions. Supported services include chat, reasoning, tool use, vision, embeddings, voice, image generation, video generation, and other types.
 
-The source-bundled config-center version 123 (2026-10-01) includes GPT-6.1 Sol, Claude Sonnet 5.5, and Claude Opus 5.5. GPT-6.1 Sol uses Responses API for tool calling; verify that your gateway supports it. Whether a model appears also depends on configuration sync, enabled providers, credentials, and account permissions.
+To find models such as GPT-6.1 Sol, Claude Sonnet 5.5, or Claude Opus 5.5, open **Settings → Compute Service**, connect and enable the relevant provider, then check its model list. For GPT-6.1 Sol through a gateway, choose a gateway that supports Responses API.
 
 The model and price tables below are configuration examples, not a complete current catalog or live quotes. Select models from the application's current list and consult the provider's current pricing for actual charges.
 

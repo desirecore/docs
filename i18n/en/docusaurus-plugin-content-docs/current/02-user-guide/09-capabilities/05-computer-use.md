@@ -1,6 +1,6 @@
 ---
 title: GUI Desktop Automation
-description: Learn how DesireCore uses HostAgent on macOS and the bundled CUA Driver as a temporary Windows carrier for local GUI automation.
+description: Learn how DesireCore uses HostAgent on macOS and the bundled CUA Driver on Windows for local GUI automation.
 keywords: [Computer Use, CUA Driver, GUI, Windows, macOS, desktop automation, HostAgent]
 ---
 
@@ -8,42 +8,32 @@ keywords: [Computer Use, CUA Driver, GUI, Windows, macOS, desktop automation, Ho
 
 ## Current Availability
 
-DesireCore can currently operate native application interfaces on **local macOS and Windows computers**. It can inspect windows and accessibility elements, click controls, type text, send keys, and capture interface state. The execution carrier differs by platform:
+DesireCore can currently operate native application interfaces on **local macOS and Windows computers**. It can inspect windows and accessibility elements, click controls, type text, send keys, and capture interface state. The setup requirements differ by platform:
 
-- **macOS**: HostAgent is the current GUI-operation carrier and uses native macOS system capabilities.
-- **Windows**: Until the Windows HostAgent is ready, DesireCore temporarily uses the bundled CUA Driver so Windows users can access local GUI automation now.
+- **macOS**: Connect HostAgent and grant the permissions your task requires, such as Accessibility and Screen Recording.
+- **Windows**: The bundled CUA Driver operates local application interfaces; no separate HostAgent installation is required.
 
 The Windows installer bundles and enables [CUA Driver](https://github.com/trycua/cua) by default. Under normal circumstances, Windows users do not need to install a separate driver or HostAgent.
-
-:::info Why is HostAgent not required for local Windows automation?
-CUA Driver has not replaced HostAgent: macOS GUI operations still run through HostAgent today. DesireCore uses the CUA Driver MCP subprocess on Windows only because the Windows HostAgent remains under development. The Windows carrier and capability boundary may change after that HostAgent is completed.
-:::
 
 | Scenario | Current status | Component |
 |----------|----------------|-----------|
 | Local macOS GUI automation | Supported | macOS HostAgent; applicable system permissions are required |
-| Local Windows GUI automation | Supported as a transitional implementation | Bundled CUA Driver; no separate installation |
-| Windows and Linux HostAgent | In development | Future native HostAgent implementations |
-| HostAgent for other desktop systems, Android, iOS, and HarmonyOS | In development | Future platform implementations |
+| Local Windows GUI automation | Supported | Bundled CUA Driver; no separate installation |
+| GUI automation on Linux, other desktop systems, Android, iOS, and HarmonyOS | Not yet available | — |
 
 ## How It Works
 
-The entry point is the same on both supported platforms, but the execution path differs.
-
 ### macOS: HostAgent path
 
-1. Describe a GUI task in DesireCore.
-2. The Agent plans the steps and invokes macOS HostAgent through the device-capability path.
-3. HostAgent uses native macOS frameworks and the granted Accessibility, Screen Recording, or other applicable permissions.
-4. HostAgent returns interface or execution results so the Agent can continue and verify the state.
+1. Describe the task in DesireCore.
+2. With HostAgent connected and the required permissions granted, the agent reads the interface and performs the requested clicks, typing, or screenshots.
+3. The agent checks the interface after each step and reports the result or asks for confirmation when needed.
 
-### Windows: transitional CUA Driver path
+### Windows: CUA Driver path
 
-1. You describe a task in DesireCore, such as “Open Notepad and enter the meeting summary.”
-2. The agent plans the steps and selects tools exposed by CUA Driver through the system MCP configuration.
-3. DesireCore starts an independent `cua-driver` subprocess and communicates with it over standard input and output.
-4. CUA Driver uses Windows UI Automation, window, and input capabilities, then returns window, element, or screenshot results.
-5. The agent continues based on those results and verifies the final state.
+1. Describe the task, for example: “Open Notepad and type the meeting summary.”
+2. The agent uses the available desktop tools to read windows, click controls, type text, and take screenshots.
+3. It checks the interface after each step and confirms the final result.
 
 If a separately installed `cua-driver` is already on your `PATH`, DesireCore prefers it. Otherwise, it falls back to the bundled version. If neither is available, the capability is skipped without repeatedly producing connection errors.
 
@@ -102,7 +92,7 @@ Recommended practices:
 - Test business-critical workflows with a test account or copied data first.
 
 :::warning Third-party component
-The CUA Driver currently used on Windows is an independent third-party program supplied under its own license. It is not a DesireCore-owned component or HostAgent and serves as the transitional Windows carrier until Windows HostAgent is ready. Its version, compatibility, and upstream support may change. See the notices supplied with the software and [Third-Party Software and Licenses](../../05-more/10-third-party-software.md).
+The CUA Driver currently used on Windows is an independent third-party program supplied under its own license. It is not a DesireCore-owned component or HostAgent. Its version, compatibility, and upstream support may change. See the notices supplied with the software and [Third-Party Software and Licenses](../../05-more/10-third-party-software.md).
 :::
 
 ## Next Steps

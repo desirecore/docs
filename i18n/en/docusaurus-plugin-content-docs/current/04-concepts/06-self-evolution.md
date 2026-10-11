@@ -7,7 +7,7 @@ keywords: [self-evolution, Self-Evolution, learning, memory, experience accumula
 # Self-Evolution
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 ## Agents Are Not Static

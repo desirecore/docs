@@ -9,7 +9,7 @@ keywords: [AI approval, tool approval, unattended, delegation, permissions]
 Each Agent has independent approval preferences. Approval decides whether an operation may proceed; the executor must still satisfy tool access, file scope, deny rules, and dedicated authorization gates.
 
 :::info Effective version
-`v10.0.178+` (unattended delegation reads the immediate parent's approval settings). Implemented on the development branch; availability depends on the installed package. Earlier clients may still read the executor's settings.
+`v10.0.178+` (unattended delegation reads the immediate parent's approval settings). Earlier clients may still read the executor's settings.
 :::
 
 ## Whose settings apply?

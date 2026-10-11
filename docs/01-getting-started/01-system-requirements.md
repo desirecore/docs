@@ -41,7 +41,7 @@ macOS 的 GUI 自动化当前由 HostAgent 承载。首次使用相关能力时�
 | 磁盘空间 | 2GB | 20 GB 及以上 |
 
 :::info Windows 本机 GUI 自动化
-Windows 安装包已内置并默认启用 CUA Driver，本机 GUI 自动化不需要另装 HostAgent。这是 Windows HostAgent 完成前的过渡实现；macOS 当前仍使用 HostAgent，Windows、Linux 和其他平台的 HostAgent 仍在开发。详见 [GUI 桌面自动化](../02-user-guide/09-capabilities/05-computer-use.md)。
+Windows 安装包已内置并默认启用 CUA Driver，本机 GUI 自动化不需要另装 HostAgent。macOS 的 GUI 自动化使用 HostAgent，需要授予相应系统权限。详见 [GUI 桌面自动化](../02-user-guide/09-capabilities/05-computer-use.md)。
 :::
 
 ### Linux

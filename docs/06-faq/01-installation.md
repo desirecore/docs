@@ -37,7 +37,7 @@ DesireCore 的安装包托管在多个下载源上（CDN、构建服务器、Git
 
 ## Windows GUI 自动化还需要安装 HostAgent 吗？
 
-不需要。Windows 安装包已内置并默认启用 CUA Driver，当前电脑上的 GUI 自动化可直接使用。CUA Driver 是 Windows HostAgent 完成前的权宜/过渡实现，让 Windows 用户先具备相关能力；它不代表 HostAgent 被弃用。macOS 当前仍由 HostAgent 承载 GUI 操作，Windows、Linux、其他桌面与移动端 HostAgent 仍在开发。
+不需要。Windows 安装包已内置并默认启用 CUA Driver，可以直接操作当前电脑上的应用界面。若功能不可用，请在 **资源管理器 → 算力 → 运行环境** 中检查 CUA Driver 的状态。macOS 用户则需连接 HostAgent 并授予相应系统权限。
 
 如果智能体找不到 GUI 工具，请打开 **资源管理器** → **算力** → **运行环境**，刷新并检查 CUA Driver：
 

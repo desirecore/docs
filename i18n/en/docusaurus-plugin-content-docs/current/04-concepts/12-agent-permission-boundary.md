@@ -86,7 +86,7 @@ When the calendar assistant asks the writing companion to "turn today's meeting 
 
 ## Approval settings and execution permissions are separate
 
-Unattended delegation reads the immediate parent's approval mode and remembered rules. It does not inherit the parent's execution identity or expand permissions. Attended runs retain their original approval source; `SendMessage` does not convey approval settings. See [Tool and Command Approval Modes](../02-user-guide/11-security/05-ai-approval.md) for the source and seven-mode tables. This development change does not mean a client installer has been released.
+Unattended delegation reads the immediate parent's approval mode and remembered rules. It does not inherit the parent's execution identity or expand permissions. Attended runs retain their original approval source; `SendMessage` does not convey approval settings. See [Tool and Command Approval Modes](../02-user-guide/11-security/05-ai-approval.md) for the source and seven-mode tables.
 
 ## Next steps
 

@@ -85,7 +85,7 @@ You: [Click ✓ Allow]
 Agent: "Okay, executing now..."
 ```
 
-For command approvals that support remembering, you can also choose **Always Allow**. The current implementation stores an exact rule for the complete command; it does not automatically broaden authority to every operation in the same directory or every invocation of the executable.
+For command approvals that support remembering, you can also choose **Always Allow**. DesireCore remembers an exact rule for the complete command; it does not automatically broaden authority to every operation in the same directory or every invocation of the executable.
 
 ### Deny
 

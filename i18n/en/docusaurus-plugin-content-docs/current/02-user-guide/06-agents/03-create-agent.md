@@ -7,7 +7,7 @@ keywords: [Create Agent, Custom Agent, Conversation Creation, Template]
 # Create Custom Agent
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 When there is no Agent in the marketplace that meets your needs, you can create a fully custom Agent. DesireCore provides two creation methods.
