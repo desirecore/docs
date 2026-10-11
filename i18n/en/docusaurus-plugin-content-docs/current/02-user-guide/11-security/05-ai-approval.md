@@ -1,65 +1,73 @@
 ---
 title: Tool and Command Approval Modes
-description: Understand AI Approval, Always Ask, Allowlist, External Tools Only, and Allow All modes.
-keywords: [AI approval, tool approval, command approval, ask-external, allowlist, permissions]
+description: Which Agent supplies approval settings and how seven modes behave in attended and unattended runs.
+keywords: [AI approval, tool approval, unattended, delegation, permissions]
 ---
 
 # Tool and Command Approval Modes
 
-DesireCore stores an independent tool and command approval preference for each Agent. Approval occurs before an operation is executed; prompts, skills, and delegation cannot bypass this execution boundary.
+Each Agent has independent approval preferences. Approval decides whether an operation may proceed; the executor must still satisfy tool access, file scope, deny rules, and dedicated authorization gates.
 
-## Five Modes
-
-| Mode | Behavior | Waiting behavior |
-|---|---|---|
-| **AI Approval** (default) | Shows an approval card and asks AI to evaluate the command or tool operation | You can decide first within 30 seconds; at expiry, the AI suggestion is applied, or the operation is denied if no suggestion is available |
-| **Always Ask** | Sends every confirmation-required operation to you | No automatic timeout; waits for your decision or session interruption |
-| **Allowlist** | Commands matching an administrator allowlist or an exact remembered rule run directly; other operations require confirmation | Non-matching operations wait for you |
-| **External Tools Only** | Built-in/system tools and shell commands run without confirmation; MCP, HTTP, and script executors still require confirmation | External tools wait for you |
-| **Allow All** | Skips ordinary tool and command confirmations | No ordinary approval card, but code-level deny rules still apply |
-
-These are Agent-level preferences; an Agent without a saved preference uses AI Approval. Built-in patterns such as protection for `secrets.json`, user or administrator deny lists, sensitive-path protection, tool availability, and other code-level checks take precedence; when "restrict to work directories" is enabled for an agent, the file-scope whitelist is likewise a hard boundary that approval cannot cross (with it disabled — the default — the agent may access regular local files while sensitive paths stay blocked). Allow All cannot override them.
-
-:::warning External Tools Only boundary
-“External” means MCP, HTTP, and script executors. It does not mean “ask only when an operation affects the internet.” Shell commands are treated as a built-in execution capability and run directly in this mode, so enable it only for trusted Agents.
+:::info Version scope
+Reading the immediate parent's settings for unattended delegation is a development change for client versions that include it. Earlier clients may still read the executor's settings. Documentation updates and development-branch merges do not mean an installer has been released.
 :::
 
-## How AI Approval Works
+## Whose settings apply?
 
-AI Approval is not a preference model that silently learns and expands authority over time. For an operation that requires confirmation, DesireCore starts a separate risk judgment and displays its suggestion and reason on the card:
+Attendance is determined by the run entry and calling relationship: whether the user can participate in this run. It does not detect whether someone is physically at the screen. Foreground display does not prove an approval card is attended.
 
-```text
-Approval request
-  |-- You decide within 30 seconds -> apply your decision immediately
-  `-- 30 seconds expires
-       |-- AI suggestion is ready -> approve or reject as suggested
-       `-- No AI suggestion -> deny; do not execute the operation
-```
+| Scenario | Settings source | Behavior |
+|---|---|---|
+| Attended: A delegates to B | B's existing source | Preserve current behavior; human approvals go directly to the user |
+| Unattended: A delegates to B | Immediate parent A | Read A's mode and remembered approval rules, then apply the mapping below |
+| Unattended A → B → C | C reads B | No automatic escalation to A or new conversation with B |
+| Unattended root run without a parent | Original executor | Preserve existing unattended behavior |
+| `SendMessage` input | Original executor | Messages convey information, not approval-setting authority |
+| Worker during synchronous waiting | Existing attendance test | Retain human participation when the parent is participatory and registered as waiting |
+| Detached/background Worker or absent parent | Immediate caller | Apply unattended mapping; the Worker's existing execution identity is unchanged |
+| Restored delegation | Preserve parent attribution | Re-read settings through the existing flow |
+| New human conversation turn | Current executor | Clear previous delegation attribution |
 
-The AI suggestion can be wrong. For irreversible actions, sensitive data, publishing, external communication, or payment, review the request before the countdown expires or switch that Agent to Always Ask.
+Cross-Agent resource operations that previously read the target Agent's settings retain that original source when attended or without a parent. Only genuine unattended delegation uses the immediate parent's settings.
 
-## Approve, Reject, and Remember
+## Seven approval modes
 
-The card shows the operation, risk, source Agent, and remaining time in AI Approval mode. You can:
+This table describes ordinary tool and command approval. Remembered rules, command allowlists, and existing non-gated operations are evaluated according to their own rules first.
 
-- **Allow** only this operation.
-- **Reject** this operation.
-- **Always Allow** when the card permits remembering; command approval records an exact rule for the complete command.
+| Configured mode | Attended | Unattended |
+|---|---|---|
+| **AI Approval** `ai-approve` (default) | Retain the human-first window; use AI after the window, continuing to wait if AI has not returned | Decide when a valid AI result arrives, without a human window |
+| **AI Automatic** `ai-auto` | Decide when AI returns; the user can decide earlier | Apply the existing AI-approval mapping, without a human window |
+| **AI Assisted** `ai-assist` | AI advises only; wait for the user | Convert to AI approval |
+| **Always Ask** `ask-always` | Wait for the user | Convert to AI approval rather than waiting indefinitely for an absent user |
+| **Allowlist** `allow-listed` | Matching rules allow; otherwise wait for the user | Matching rules allow; otherwise ask AI |
+| **External Tools Only** `ask-external` | Exempt internal operations under existing rules; wait for the user for external executors | Exempt internal operations under existing rules; ask AI for external executors |
+| **Allow All** `allow-all` | Exempt ordinary approval | Exempt ordinary approval, without an AI request |
 
-Always Allow does not broaden wildcard text into wider authority and cannot override deny lists. When a non-shell tool cannot be generalized safely, an `approved_always` response approves only the current invocation.
+External executors are MCP, HTTP, and script tools, not every operation that involves the internet. Shell is an internal capability. Explicit denials, sensitive paths, execution scope, tool availability, and dedicated gates such as administrator elevation remain effective under `allow-all`.
 
-## Approval in Delegated Tasks
+## AI and user decisions
 
-When a child Agent or temporary worker requests approval, both the request and its decision receipt are mirrored into the parent Agent conversation that started the delegation. You can stay in the parent conversation; deciding in either panel resolves the same unique request.
+The default human-first window is 30 seconds. It is a user decision window, not an AI response deadline. If AI is still running at expiry, the system waits for the actual result. Explicit AI unavailability follows the mode's failure rules; missing results never count as approval. Attended `ai-assist` continues waiting for a human.
 
-In AI Approval mode, a delegated request converges after 30 seconds to the AI suggestion or a denial. Other human-confirmation modes do not reject merely because they have waited for a while. If a synchronous delegation reaches its own wait limit first, the child can remain in the background waiting for approval; the parent receives a timeout notice and can continue waiting or terminate the child task.
+Unattended delegation changes only the settings source. AI still evaluates the executor's task and actual effects. Execution identity, compute calls, timeout rules, and the existing settlement flow are not replaced by those of the parent.
 
-## Audit
+Cards can offer Allow, Deny, and Always Allow when safe to remember. Command rules match the complete command exactly. Unattended delegation reads the immediate parent's remembered rules; the executor's remembered allowance cannot replace the parent's rules. Remembered approval never expands execution permissions.
 
-Approval requests, user and AI decisions, timeouts, and session interruption retain distinct sources. A session interruption is not recorded as a user rejection, and late or duplicate decisions cannot re-execute an operation that already ended.
+## Delegation, permissions, and audit
 
-## Next Steps
+Cards and receipts can be mirrored to the parent conversation. Mirroring keeps one request and does not add approval levels. Valid user and AI decisions share authoritative settlement; late or repeated decisions do not repeat execution.
 
-- [Human Gate Confirmation](../04-delegation/04-human-gate.md)
-- [Execution Monitoring](../04-delegation/03-execution-monitoring.md)
-- [Audit Trail](./03-audit-trail.md)
+| Question | Authority |
+|---|---|
+| Can the operation execute? | Executor tool access, file scope, hard denials, and existing invocation boundaries |
+| Does ordinary approval allow it? | Selected settings source, rules, and effective mode |
+| Who executes and owns the effects? | Original executor; changing settings source does not change identity |
+
+Records distinguish the executor, settings source, and user/AI/interruption decision sources. Credential visibility, destination, and entry denials are still checked first. A one-time `allow-all` approval does not create permanent credential grants.
+
+## Next steps
+
+- [Human Gate confirmation](../04-delegation/04-human-gate.md)
+- [Agent permission boundaries](../../04-concepts/12-agent-permission-boundary.md)
+- [Audit trail](./03-audit-trail.md)
