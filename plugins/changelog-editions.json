@@ -33,6 +33,17 @@
       "coverImageUrlPrefix": "/img/changelog/oem",
       "coverBrandText": "达摩院AgentOS",
       "coverWebsite": null
+    },
+    {
+      "id": "unbranded-agentos",
+      "zhSourceDir": "docs/05-more/13-agentos-changelog",
+      "enSourceDir": "i18n/en/docusaurus-plugin-content-docs/current/05-more/13-agentos-changelog",
+      "outputFile": "changelog-unbranded-agentos.json",
+      "urlPrefix": "/more/agentos-changelog",
+      "coverImageDir": "static/img/changelog/unbranded-agentos",
+      "coverImageUrlPrefix": "/img/changelog/unbranded-agentos",
+      "coverBrandText": "AgentOS",
+      "coverWebsite": null
     }
   ]
 }
