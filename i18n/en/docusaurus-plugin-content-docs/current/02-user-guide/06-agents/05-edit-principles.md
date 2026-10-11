@@ -7,7 +7,7 @@ keywords: [Principles, L0, L1, L2, Safety Rules, Priority]
 # Edit Principles
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 Principles are the Agent's "behavior manual"—they specify the rules the Agent must follow, the red lines it must not cross, and the priority order when making decisions.

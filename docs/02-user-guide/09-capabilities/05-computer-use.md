@@ -1,6 +1,6 @@
 ---
 title: GUI 桌面自动化
-description: 了解 DesireCore 如何在 macOS 上通过 HostAgent、在 Windows 上暂时通过内置 CUA Driver 操作本机图形界面。
+description: 了解 DesireCore 如何在 macOS 上通过 HostAgent、在 Windows 上通过内置 CUA Driver 操作本机图形界面。
 keywords: [Computer Use, CUA Driver, GUI, Windows, macOS, 桌面自动化, HostAgent]
 ---
 
@@ -8,42 +8,32 @@ keywords: [Computer Use, CUA Driver, GUI, Windows, macOS, 桌面自动化, HostA
 
 ## 当前可用范围
 
-DesireCore 当前可以在 **macOS 和 Windows 本机**操作原生应用的图形界面，例如读取窗口与可访问性元素、点击控件、输入文字、发送按键以及获取界面状态。两个平台使用的执行载体不同：
+DesireCore 当前可以在 **macOS 和 Windows 本机**操作原生应用的图形界面，例如读取窗口与可访问性元素、点击控件、输入文字、发送按键以及获取界面状态。两个平台的使用要求不同：
 
-- **macOS**：HostAgent 是现行 GUI 操作载体，通过 macOS 原生系统能力执行操作。
-- **Windows**：在 Windows HostAgent 完成前，DesireCore 暂时使用内置 CUA Driver，让 Windows 用户可以先使用本机 GUI 自动化。
+- **macOS**：需要连接 HostAgent，并授予辅助功能、屏幕录制等任务所需权限。
+- **Windows**：使用内置 CUA Driver 操作本机应用界面，无需另外安装 HostAgent。
 
 Windows 安装包已内置并默认启用 [CUA Driver](https://github.com/trycua/cua)。正常情况下，Windows 用户不需要另行下载安装驱动或 HostAgent，直接向智能体描述任务即可。
-
-:::info 为什么 Windows 本机不需要 HostAgent？
-HostAgent 并未被 CUA Driver 取代：macOS 当前仍通过 HostAgent 承载 GUI 操作。只是 Windows 版 HostAgent 尚在开发，DesireCore 才暂时通过 CUA Driver MCP 子进程提供本机能力。待 Windows HostAgent 完成后，平台载体和能力边界可能继续调整。
-:::
 
 | 场景 | 当前状态 | 所需组件 |
 |------|---------|---------|
 | macOS 本机 GUI 自动化 | 已支持 | macOS HostAgent；需授予相应系统权限 |
-| Windows 本机 GUI 自动化 | 已支持（过渡实现） | DesireCore 内置 CUA Driver，零安装 |
-| Windows、Linux HostAgent | 开发中 | 后续原生 HostAgent 实现 |
-| 其他桌面系统与 Android、iOS、HarmonyOS HostAgent | 开发中 | 后续平台实现 |
+| Windows 本机 GUI 自动化 | 已支持 | DesireCore 内置 CUA Driver，零安装 |
+| Linux、其他桌面系统与 Android、iOS、HarmonyOS GUI 自动化 | 暂不支持 | — |
 
 ## 工作原理
 
-两个已支持平台的任务入口相同，但执行路径不同。
-
 ### macOS：HostAgent 路径
 
-1. 你在 DesireCore 中描述 GUI 操作任务。
-2. 智能体规划步骤，并通过设备能力链路调用 macOS HostAgent。
-3. HostAgent 使用 macOS 原生 Framework 和已授予的辅助功能、屏幕录制等权限执行操作。
-4. HostAgent 返回界面或执行结果，智能体据此继续任务并核对状态。
+1. 在 DesireCore 中描述要完成的任务。
+2. HostAgent 已连接并获得所需权限后，智能体读取界面，执行点击、输入或截图等操作。
+3. 智能体在每一步后检查界面，并向你报告结果；需要确认时会暂停等待。
 
-### Windows：CUA Driver 过渡路径
+### Windows：CUA Driver 路径
 
-1. 你在 DesireCore 中描述任务，例如“打开记事本并输入会议摘要”。
-2. 智能体规划步骤，并从系统 MCP 中选择 CUA Driver 提供的工具。
-3. DesireCore 在本机启动独立的 `cua-driver` 子进程，通过标准输入输出与其通信。
-4. CUA Driver 调用 Windows UI Automation、窗口和输入相关能力，返回窗口、元素或截图结果。
-5. 智能体根据结果继续操作并核对最终状态。
+1. 在 DesireCore 中描述任务，例如“打开记事本并输入会议摘要”。
+2. 智能体使用可用的桌面操作工具读取窗口、点击控件、输入文字或获取截图。
+3. 智能体在每一步后检查界面，确认操作结果。
 
 如果你的 `PATH` 中已有自行安装的 `cua-driver`，DesireCore 会优先使用它；否则回退到安装包内置版本。两者都不可用时，系统会跳过该能力，不会反复弹出连接错误。
 
@@ -102,7 +92,7 @@ GUI 自动化依赖目标平台提供的可访问性、窗口和输入能力，�
 - 对业务关键流程先在测试账号或副本数据上验证。
 
 :::warning 第三方组件
-Windows 当前使用的 CUA Driver 是由其权利人提供、按其自身许可证分发的独立第三方程序，并非 DesireCore 自有组件或 HostAgent。它是 Windows HostAgent 完成前的过渡载体；其版本、兼容性和上游支持可能变化，具体以随软件提供的第三方声明及 [第三方软件与许可](../../05-more/10-third-party-software.md) 为准。
+Windows 当前使用的 CUA Driver 是由其权利人提供、按其自身许可证分发的独立第三方程序，并非 DesireCore 自有组件或 HostAgent。其版本、兼容性和上游支持可能变化，具体以随软件提供的第三方声明及 [第三方软件与许可](../../05-more/10-third-party-software.md) 为准。
 :::
 
 ## 下一步

@@ -73,11 +73,11 @@ DesireCore 内置完整的邮件管理能力，支持 Gmail、Outlook 和 IMAP/S
 
 ## 桌面与移动设备
 
-当没有现成的 API 或工具可用时，DesireCore 可以通过 Computer Use 操作图形界面。目前 **macOS 由 HostAgent 承载 GUI 操作**；**Windows 暂时由内置并默认启用的 CUA Driver 承载**，让 Windows 用户在原生 HostAgent 完成前先具备本机能力。Windows、Linux、其他桌面系统及移动端 HostAgent 仍在开发。
+当没有现成的 API 或工具可用时，DesireCore 可以通过 Computer Use 操作本机图形界面。目前支持 **macOS 和 Windows**：macOS 需连接 HostAgent 并授予系统权限，Windows 已内置并启用 CUA Driver。
 
 - **macOS 桌面应用操控** — 由 HostAgent 通过 macOS 原生能力执行，需要相应系统权限
-- **Windows 桌面应用操控** — 由 CUA Driver 过渡实现，通过可访问性元素、鼠标和键盘操作当前电脑上的 GUI 应用
-- **Linux、其他桌面与移动设备** — 属于后续 HostAgent 平台路线，当前不应按已经可用理解
+- **Windows 桌面应用操控** — 通过内置 CUA Driver 操作当前电脑上的 GUI 应用
+- **Linux、其他桌面与移动设备** — 暂不支持 GUI 自动化
 - **屏幕感知** — 截屏、识别界面元素，理解当前画面内容
 
 Computer Use 适合没有开放 API、需要跨多个桌面应用完成的任务，但并非所有界面都能可靠操控。自绘控件、UAC 安全桌面、锁屏、管理员应用和受保护内容可能不可访问；发送、支付、删除、发布等外部副作用仍应由用户确认。

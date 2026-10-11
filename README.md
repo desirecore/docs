@@ -100,7 +100,7 @@ Follow the same convention as [AGENTS.md](./AGENTS.md) when writing or revising 
 - Keep a documented introduction version. When the effective version is uncertain, use `v10.0.178+`. Do not replace a known version with the default; standing instructions retain `v10.0.179+`.
 - Place the callout near the beginning of the relevant page or section and name the affected feature. A constraint on one feature must not imply that every feature on the page requires that version. Keep the callout separate from prose paragraphs and other callouts.
 - When both locales already state a constraint for the same feature, their version and feature scope must agree. Do not add a constraint to a translation that had none merely to match formatting.
-- Preserve existing development status, installed-package availability, platform, permission, and provider eligibility conditions. An effective-version label does not prove public release or grant authorization.
+- State the client version the user needs directly. Omit internal caveats such as “implemented on the development branch,” “availability depends on the installed package,” or “confirm that the package includes this capability.” Preserve platform, permission, and provider eligibility conditions that affect use, expressed as requirements users can understand or check. For a feature that is not available, say so directly.
 - Release history, unimplemented plans, OS/runtime requirements, agreement revisions, configuration versions, and example content versions retain their own meaning and numbering.
 
 Use the following format, replacing the example version and feature name as appropriate:
@@ -116,6 +116,13 @@ Use the following format, replacing the example version and feature name as appr
 ````
 
 Keep this convention and AGENTS.md consistent when updating either file.
+
+### Writing for end users
+
+- Explain what a feature does, where to use it, what it requires, and how to resolve problems.
+- Keep development branches, merge status, source configuration snapshots, internal release gates, and component migration plans out of user instructions. Never ask users to check these details.
+- Replace implementation-status caveats with an effective version, current support scope, or visible steps. Keep component names and technical details when they help with configuration, troubleshooting, permissions, or licenses.
+- Keep advice for documentation authors out of user-facing prose. Apply this approach in both languages while preserving actual limitations and authorization conditions.
 
 ## License
 

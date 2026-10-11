@@ -81,8 +81,8 @@ DesireCore does not require ontology assets to be placed in another opaque syste
 | Hook / Policy / Human Gate | Constrain high-risk action and system write-back | Policy decisions, approvals, denial, temporary grants |
 | [Receipt System](./receipt-system) | Record which information, rules, and actions were used | Inputs, outputs, tool calls, evidence, exceptions |
 
-:::warning Do not document a method as a product capability that does not exist
-When a project uses files, memory, Skills, and Workflows to organize business context, describe that composition accurately. A dedicated ontology platform should only be claimed after the corresponding data model, editor, query surface, or runtime has actually been implemented.
+:::info Confirm the capabilities your project needs
+Files, memory, Skills, and Workflows can organize business context and connect information, rules, and execution steps. If your project needs a dedicated data model, editor, or query interface, specify those requirements in the project plan and check that your chosen tools provide them.
 :::
 
 ## FDE-style delivery: start with a minimum viable ontology

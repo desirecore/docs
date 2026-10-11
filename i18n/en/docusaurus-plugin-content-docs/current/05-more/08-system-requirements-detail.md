@@ -52,7 +52,7 @@ The DesireCore desktop package includes the baseline components needed for core 
 | Python | Yes | A recommended offline archive is bundled and silently imported into a Hatch-managed directory after first startup |
 | Node.js | Yes | A recommended official archive is bundled and silently imported into a Volta-managed directory after first startup |
 | macOS HostAgent | Used on macOS | Current carrier for macOS GUI operations; applicable system permissions are required |
-| CUA Driver | Windows only | Transitional local GUI carrier until Windows HostAgent is complete; enabled by default |
+| CUA Driver | Windows only | Local Windows GUI automation; enabled by default |
 
 The current bundled manifest identifies Git 2.53.0, Python 3.13.9, Node.js 24.18.0, and CUA Driver 0.7.1. Exact patch versions can change with a DesireCore release. Check **Explorer** → **Compute** → **Runtime Environment** and the notices supplied with your installer.
 
@@ -74,7 +74,7 @@ Open **Explorer** -> **Compute** -> **Runtime Environment** to inspect local too
 
 Git detection shows the version, path, and actual source. In the default Auto mode, DesireCore validates both system and bundled Git and uses the newer version; if their versions match, it prefers system Git. You can explicitly choose System or Bundled on the Runtime Environment page. If that source is unavailable, DesireCore reports the fallback and uses the other source.
 
-macOS currently uses HostAgent for local GUI operations and requires applicable permissions such as Accessibility and Screen Recording. On Windows, CUA Driver prefers a usable user-installed version on `PATH`, then falls back to the bundled version. It is a transitional implementation until Windows HostAgent is complete and controls only the current Windows computer. HostAgent implementations for Windows, Linux, other desktops, and mobile platforms remain under development. See [GUI Desktop Automation](../02-user-guide/09-capabilities/05-computer-use.md).
+macOS currently uses HostAgent for local GUI operations and requires applicable permissions such as Accessibility and Screen Recording. On Windows, CUA Driver prefers a usable user-installed version on `PATH`, then falls back to the bundled version. It controls only the current Windows computer. GUI automation is not yet available on Linux or mobile devices. See [GUI Desktop Automation](../02-user-guide/09-capabilities/05-computer-use.md).
 
 Docker, Podman, and task-specific runtime versions may still need to be installed separately.
 

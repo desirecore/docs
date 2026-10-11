@@ -7,7 +7,7 @@ keywords: [Prompt Center, system prompt, global prompt, team prompt, Persona, Pr
 # Prompt Center and Content Ownership
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 Prompt Center brings prompt sources stored across user, team, and agent directories into one management surface. Open **Explorer → Prompt Center**, select a scope on the left, and edit or preview it on the right.
@@ -89,7 +89,7 @@ A documentation engineer can keep each requirement in its own scope instead of p
 | Preview shows duplicate content | The same requirement is stored in multiple scopes. Keep it in the scope that owns it. |
 | A team prompt does not take effect | Confirm membership and check the corresponding source when the agent belongs to multiple teams. |
 | Layered source reports a format issue | Check for exact `## L0`, `## L1`, and `## L2` headings; standing instructions need none. |
-| Standing Instructions is unavailable | Update to `v10.0.179+` and confirm that the installed package includes standing instructions. |
+| Standing Instructions is unavailable | Check your version under **Settings → About**, update to `v10.0.179+`, and try again. |
 | Standing instructions exceed the budget | Shorten the body and move detailed steps into skills. Execution does not proceed by truncating it or hiding an L2 section. |
 
 :::caution Prompts Are Not Permissions

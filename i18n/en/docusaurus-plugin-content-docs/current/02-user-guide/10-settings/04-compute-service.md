@@ -74,31 +74,25 @@ Some providers distinguish pay-as-you-go API keys and Token Plan keys. The UI wa
 ## Claude Pro / Max Subscription
 
 :::info Effective version
-`v10.0.178+` (Claude subscription integration implementation). Access remains subject to the authorization conditions and release policy described below.
+`v10.0.178+` (Claude subscription integration). Read the authorization conditions below before use.
 :::
 
-Compute Service may show a **Claude Subscription** provider. This route sends model requests through Anthropic's official `@anthropic-ai/claude-agent-sdk`; it does not imitate Claude Code by forging request headers.
+If Compute Service shows a **Claude Subscription** provider, follow the on-screen steps to connect your account. Use of this entry must comply with Anthropic's subscription and authorization rules; see the conditions below.
 
-### Runtime model and how it differs from Claude Code
+### How this differs from Claude Code
 
-At the execution boundary, this is a dual-runtime collaboration:
+Selecting a Claude subscription model keeps your conversation in DesireCore. The agent continues to use DesireCore's memory, skills, tools, approval settings, and audit records. It does not enable Claude Code's tools, plugins, or slash commands.
 
-1. The **DesireCore Agent runtime** owns system prompts, memory, skills, tool registration, approvals, delegation, and execution audit.
-2. The **Claude Agent SDK runtime** uses the Claude subscription identity for model requests and returns text or `tool_use`.
-3. Every `tool_use` is handed back to DesireCore and executed through DesireCore's tools and approval pipeline.
-
-The SDK's bundled tools, skills, plugins, subagents, slash commands, and connectors are not enabled on this route, and the SDK does not execute file, command, or external-service actions for DesireCore. The context, tools, permission boundary, and resulting behavior therefore differ fundamentally from using Claude Code directly.
-
-If you need the full Claude Code programming workflow inside DesireCore, have a **DesireCore Agent invoke the locally installed Claude Code**. Selecting a Claude subscription model does not place the conversation inside Claude Code.
+If you need the full Claude Code programming workflow, ask a **DesireCore Agent to invoke the locally installed Claude Code**.
 
 ### Connecting
 
-The UI first detects a local Claude Code login. Depending on platform, authorization conditions, and release policy, advanced options may also offer in-app login or a `claude setup-token` paste. When a credential expires, refresh fails, or the connection is removed, use the re-detect or sign-in action shown in the panel.
+The UI first detects a local Claude Code login. If the panel offers sign-in or a `claude setup-token` field, follow the instructions shown there. When a credential expires, refresh fails, or the connection is removed, use the re-detect or sign-in action shown in the panel.
 
 ### Terms, authorization, and account risk
 
 :::warning Eligibility is governed by Anthropic's rules
-Use of the official SDK shows that DesireCore implements this route through an official technical interface. It **does not authorize a third-party product to relay Claude Free, Pro, or Max credentials**. As of this update, Anthropic's [Claude Code legal and compliance guidance](https://code.claude.com/docs/en/legal-and-compliance) directs developers building third-party products to use API-key authentication or a supported cloud provider and says they may not offer Claude.ai login or relay Free, Pro, or Max credentials on users' behalf. The subscription entry should therefore remain release-gated until DesireCore has explicit authorization for this use case. Later availability depends on official authorization, then-current terms, region, account, and DesireCore release policy.
+**Claude subscription use must comply with Anthropic's authorization requirements**. As of this update, Anthropic's [Claude Code legal and compliance guidance](https://code.claude.com/docs/en/legal-and-compliance) directs developers building third-party products to use API-key authentication or a supported cloud provider and says they may not offer Claude.ai login or relay Free, Pro, or Max credentials on users' behalf. Claude subscription access requires applicable authorization and compliance with the terms, region, and account conditions. If this entry is unavailable, use an Anthropic API key or an explicitly supported cloud authentication method.
 :::
 
 You are responsible for confirming that your subscription use, account type, region, and automation comply with Anthropic's current terms. Rate limits, feature restrictions, credential invalidation, account suspension, or bans arising from subscription use or provider policy are risks borne by the user; DesireCore cannot control Anthropic's account decisions. For stable commercial or organizational access, prefer an Anthropic API key or an explicitly supported cloud authentication method.

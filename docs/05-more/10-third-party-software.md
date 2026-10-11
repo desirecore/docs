@@ -14,14 +14,14 @@ DesireCore 为提供开箱即用的本地能力，会随安装包提供若干独
 
 | 组件 | 在 DesireCore 中的用途 | 当前来源与许可概要 |
 |------|-----------------------|-------------------|
-| CUA Driver | Windows HostAgent 完成前的本机 GUI 自动化过渡载体；作为独立 MCP 子进程运行 | [trycua/cua](https://github.com/trycua/cua)，上游仓库标注 MIT License |
+| CUA Driver | Windows 本机 GUI 自动化；作为独立 MCP 子进程运行 | [trycua/cua](https://github.com/trycua/cua)，上游仓库标注 MIT License |
 | Git | AgentFS 版本记录、检查点及仓库操作；作为独立命令行子进程运行 | [Git](https://git-scm.com/about) 为 GPLv2；当前可移植构建来自 [dugite-native](https://github.com/desktop/dugite-native) |
 | Python | 由 Hatch 管理的推荐 Python 运行时，可从安装包内归档离线导入 | CPython 主要适用 [PSF License Version 2](https://docs.python.org/3/license.html)；归档来自 [python-build-standalone](https://github.com/astral-sh/python-build-standalone)，并含多项依赖许可 |
 | Node.js | 由 Volta 管理的推荐 Node.js 运行时，可从安装包内官方归档离线导入 | Node.js 主体使用 MIT License，官方归档同时包含多项 [第三方许可](https://github.com/nodejs/node/blob/main/LICENSE) |
 
 当前发布清单对应 CUA Driver 0.7.1、Git 2.53.0、Python 3.13.9 和 Node.js 24.18.0。后续版本可能升级这些组件，请以当前安装包显示的版本和随附声明为准。
 
-CUA Driver 只描述当前 Windows 过渡路径。macOS 的 GUI 操作仍由 DesireCore HostAgent 承载；Windows、Linux、其他桌面与移动端 HostAgent 的后续实现不属于 CUA Driver 的许可或责任范围。
+CUA Driver 用于 Windows 本机 GUI 操作，macOS 使用 DesireCore HostAgent。这是不同的组件，各自适用的许可和责任范围应分别查看。
 
 ## 为什么许可不能只看一个名称
 

@@ -10,7 +10,7 @@ keywords: [performance, memory usage, response speed, optimization, GPU, lag, di
 
 The DesireCore desktop client is built on Electron and uses a baseline amount of memory (typically 200–400 MB). If memory usage is abnormally high:
 
-1. **Check your version** --- Ensure you're running the latest version; the development team continuously optimizes performance
+1. **Check your version** --- Check for updates under **Settings → About**, update the app, and try again
 2. **Check Agent count** --- Running more than 300 Agents simultaneously significantly increases memory overhead
 3. **Close unused conversations** --- Each active conversation occupies rendering memory; close tabs you don't need
 4. **Restart the app** --- Memory may gradually grow over long sessions; periodic restarts release accumulated memory

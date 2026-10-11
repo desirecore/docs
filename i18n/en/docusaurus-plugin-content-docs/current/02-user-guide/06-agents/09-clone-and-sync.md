@@ -7,7 +7,7 @@ keywords: [Clone, agent clone, sync, conflicts, Agent Git]
 # Clone and Sync
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 Clone creates a new copy based on an existing agent. It is useful for experiments, preparing variants for different projects, or customizing a marketplace agent into your own version.

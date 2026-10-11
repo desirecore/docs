@@ -55,7 +55,7 @@ After first startup, DesireCore imports the recommended Python and Node.js versi
 
 ### CUA Driver (GUI Automation)
 
-CUA Driver is enabled by default for GUI automation on the current Windows computer. It is a transitional implementation that gives Windows users GUI capabilities before Windows HostAgent is complete. macOS still uses HostAgent for GUI operations, while HostAgent implementations for Windows, Linux, and other platforms remain under development.
+CUA Driver is enabled by default to operate application interfaces on the current Windows computer. Describe the task directly to your agent, for example: “Open Notepad and type the meeting summary.”
 
 :::note Disk Usage and Security Scans
 These archives and executables increase installer and post-import disk usage. Security software may scan them again when they are extracted or first executed. Allow the scan to finish; do not disable system protection merely to bypass a warning.

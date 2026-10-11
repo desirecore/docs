@@ -37,7 +37,7 @@ macOS GUI automation currently runs through HostAgent. The first time you use th
 | Disk Space | 2 GB | 20 GB or more |
 
 :::info Local Windows GUI automation
-The Windows installer bundles and enables CUA Driver by default, so local GUI automation does not require a separate HostAgent installation. This is a transitional implementation until Windows HostAgent is complete. macOS still uses HostAgent today, while HostAgent implementations for Windows, Linux, and other platforms remain under development. See [GUI Desktop Automation](../02-user-guide/09-capabilities/05-computer-use.md).
+The Windows installer bundles and enables CUA Driver by default, so local GUI automation does not require a separate HostAgent installation. macOS GUI automation uses HostAgent and requires applicable system permissions. See [GUI Desktop Automation](../02-user-guide/09-capabilities/05-computer-use.md).
 :::
 
 ### Linux

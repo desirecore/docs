@@ -7,7 +7,7 @@ keywords: [AgentFS, 文件系统, 数据存储, Git, 智能体仓库]
 # AgentFS 文件系统
 
 :::info 生效版本
-`v10.0.179+`（长期指令 `instructions.md`）。该能力已在开发分支实现，使用前请确认安装包包含该能力。
+`v10.0.179+`（长期指令 `instructions.md`）。
 :::
 
 ## AgentFS 就像每个智能体的"家"

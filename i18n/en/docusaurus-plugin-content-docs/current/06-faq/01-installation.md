@@ -37,7 +37,7 @@ You can still install or use system versions. Git compares system and bundled so
 
 ## Does Windows GUI automation require HostAgent?
 
-No. The Windows installer bundles and enables CUA Driver by default, so GUI automation on the current computer can be used directly. CUA Driver is a pragmatic transitional implementation that gives Windows users this capability before Windows HostAgent is complete; it does not mean HostAgent has been deprecated. macOS GUI operations still run through HostAgent, while HostAgent implementations for Windows, Linux, other desktops, and mobile platforms remain under development.
+No. The Windows installer bundles and enables CUA Driver by default, so you can directly operate application interfaces on the current computer. If it is unavailable, check CUA Driver under **Explorer → Compute → Runtime Environment**. On macOS, connect HostAgent and grant the required system permissions.
 
 If an agent cannot find the GUI tools, open **Explorer** → **Compute** → **Runtime Environment**, refresh, and check CUA Driver:
 

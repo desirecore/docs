@@ -7,7 +7,7 @@ keywords: [文件格式, AgentFS, agent.json, instructions.md, SKILL.md, 记忆,
 # 文件格式说明
 
 :::info 生效版本
-`v10.0.179+`（长期指令 `instructions.md`）。该能力已在开发分支实现，使用前请确认安装包包含该能力。
+`v10.0.179+`（长期指令 `instructions.md`）。
 :::
 
 AgentFS 把智能体的身份、行为、记忆、技能和运行策略保存为普通文件。你可以通过界面编辑，也可以在了解字段含义后直接修改文件。

@@ -7,7 +7,7 @@ keywords: [AgentFS, File System, File Explorer, Agent Files, File Structure]
 # File Explorer
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 Each Agent's configuration, memory, and skills are stored as files in AgentFS (Agent File System). The file explorer lets you intuitively browse and manage these files.

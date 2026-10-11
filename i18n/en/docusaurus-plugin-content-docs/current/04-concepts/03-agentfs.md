@@ -7,7 +7,7 @@ keywords: [AgentFS, filesystem, data storage, Git, agent repository]
 # AgentFS Filesystem
 
 :::info Effective version
-`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
+`v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
 ## AgentFS is Like Each Agent's "Home"

@@ -40,11 +40,11 @@ MCP services can connect S3-compatible and other object-storage systems for uplo
 
 ## Desktop and Mobile Devices
 
-When no suitable API or tool exists, Computer Use can operate a graphical interface. **macOS GUI operations currently run through HostAgent**. **Windows temporarily uses the bundled, default-enabled CUA Driver** so users have local capability before the native Windows HostAgent is complete. HostAgent implementations for Windows, Linux, other desktop systems, and mobile platforms remain under development.
+When no suitable API or tool exists, Computer Use can operate local graphical interfaces on **macOS and Windows**. On macOS, connect HostAgent and grant the required system permissions. On Windows, CUA Driver is bundled and enabled by default.
 
 - **Local macOS applications**: operated by HostAgent through native macOS capabilities and applicable system permissions
-- **Local Windows applications**: temporarily operated by CUA Driver through accessibility elements, mouse, and keyboard
-- **Linux, other desktops, and mobile devices**: part of the future HostAgent roadmap and should not be treated as currently available
+- **Local Windows applications**: operated by the bundled CUA Driver through accessibility elements, mouse, and keyboard
+- **Linux, other desktops, and mobile devices**: GUI automation is not yet available
 - **Screen awareness**: screenshots and accessible UI text may enter model context and can contain sensitive data
 
 Computer Use is not reliable for every interface. Custom-drawn controls, the UAC secure desktop, locked screens, elevated applications, and protected content may be unavailable. External effects such as sending, payment, deletion, or publication should remain user-confirmed. See [GUI Desktop Automation](./computer-use).
