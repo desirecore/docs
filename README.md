@@ -48,6 +48,10 @@ pnpm build
 
 Static output is generated in the `build/` directory.
 
+## Deployment
+
+Merging a pull request into `main` or pushing to `main` automatically triggers deployment. Publish through Git and wait for the deployment result; no manual Vercel deployment command is needed.
+
 ## Project Structure
 
 ```
@@ -86,6 +90,32 @@ Contributions are welcome! To contribute:
 5. Open a Pull Request
 
 Please follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
+
+### Feature effective versions（生效版本）
+
+Follow the same convention as [AGENTS.md](./AGENTS.md) when writing or revising effective-version notes:
+
+- Normalize existing client-version constraints, including vague wording such as “newer versions” or “clients containing this change.” Add a note to new content only when its feature requires an explicit effective version. Do not force version requirements onto pages that never mentioned them or propagate requirements through related features or links.
+- Use a Docusaurus `info` callout titled **生效版本** in Chinese or **Effective version** in English. Write the version as inline code in the form `vX.Y.Z+`; `+` includes the named version and all later versions.
+- Keep a documented introduction version. When the effective version is uncertain, use `v10.0.178+`. Do not replace a known version with the default; standing instructions retain `v10.0.179+`.
+- Place the callout near the beginning of the relevant page or section and name the affected feature. A constraint on one feature must not imply that every feature on the page requires that version. Keep the callout separate from prose paragraphs and other callouts.
+- When both locales already state a constraint for the same feature, their version and feature scope must agree. Do not add a constraint to a translation that had none merely to match formatting.
+- Preserve existing development status, installed-package availability, platform, permission, and provider eligibility conditions. An effective-version label does not prove public release or grant authorization.
+- Release history, unimplemented plans, OS/runtime requirements, agreement revisions, configuration versions, and example content versions retain their own meaning and numbering.
+
+Use the following format, replacing the example version and feature name as appropriate:
+
+````markdown
+:::info 生效版本
+`v10.0.178+`（功能名称）。
+:::
+
+:::info Effective version
+`v10.0.178+` (feature name).
+:::
+````
+
+Keep this convention and AGENTS.md consistent when updating either file.
 
 ## License
 

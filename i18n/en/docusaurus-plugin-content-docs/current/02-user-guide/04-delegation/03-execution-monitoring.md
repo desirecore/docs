@@ -6,7 +6,11 @@ keywords: [execution, monitoring, deterministic step, adaptive step, pause, resu
 
 # Execution Monitoring
 
-After the plan is written, the agent follows your natural-language direction to continue, pause, or revise execution. You can monitor progress and intervene at any time; there is no blanket plan-approval state to operate first. For long-running work, newer DesireCore versions use the floating task board when responsibility, blockers, cross-agent coordination, or durable progress visibility genuinely need tracking.
+:::info Effective version
+`v10.0.178+` (floating task board).
+:::
+
+After the plan is written, the agent follows your natural-language direction to continue, pause, or revise execution. You can monitor progress and intervene at any time; there is no blanket plan-approval state to operate first. For long-running work, DesireCore uses the floating task board when responsibility, blockers, cross-agent coordination, or durable progress visibility genuinely need tracking.
 
 ## Real-Time Display of Execution Process
 

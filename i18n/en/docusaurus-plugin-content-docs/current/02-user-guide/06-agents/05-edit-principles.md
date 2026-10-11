@@ -6,8 +6,8 @@ keywords: [Principles, L0, L1, L2, Safety Rules, Priority]
 
 # Edit Principles
 
-:::info Standing instructions version support
-`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::info Effective version
+`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
 :::
 
 Principles are the Agent's "behavior manual"—they specify the rules the Agent must follow, the red lines it must not cross, and the priority order when making decisions.
@@ -87,7 +87,7 @@ Advanced users can edit the Agent's `principles.md` under the DesireCore data di
 
 ## Relationship to Other Prompt Layers
 
-In a version supporting standing instructions, editable sections are combined in this order: **global → team → agent persona → agent principles → agent standing instructions**, then runtime context such as team identity, tools, and memory is added. L0/L1/L2 controls layered files only. `instructions.md` is ordinary Markdown and loads in full when allowed.
+Editable sections are combined in this order: **global → team → agent persona → agent principles → agent standing instructions**, then runtime context such as team identity, tools, and memory is added. L0/L1/L2 controls layered files only. `instructions.md` is ordinary Markdown and loads in full when allowed.
 
 Keep boundaries and priorities in principles, stable responsibilities and delivery requirements in standing instructions, and role and expression in persona. User, team, and project requirements remain in their own scopes; detailed SOPs belong in skills. See [File Format Reference](../../05-more/06-file-formats.md), and use Prompt Preview to check duplication and conflicts.
 

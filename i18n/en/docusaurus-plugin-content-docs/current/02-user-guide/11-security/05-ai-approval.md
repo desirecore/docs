@@ -8,8 +8,8 @@ keywords: [AI approval, tool approval, unattended, delegation, permissions]
 
 Each Agent has independent approval preferences. Approval decides whether an operation may proceed; the executor must still satisfy tool access, file scope, deny rules, and dedicated authorization gates.
 
-:::info Version scope
-Reading the immediate parent's settings for unattended delegation is a development change for client versions that include it. Earlier clients may still read the executor's settings. Documentation updates and development-branch merges do not mean an installer has been released.
+:::info Effective version
+`v10.0.178+` (unattended delegation reads the immediate parent's approval settings). Implemented on the development branch; availability depends on the installed package. Earlier clients may still read the executor's settings.
 :::
 
 ## Whose settings apply?
@@ -32,7 +32,11 @@ Cross-Agent resource operations that previously read the target Agent's settings
 
 ## File access is independent of approval
 
-The approval pill in the chat composer and the resource panel offer quick choices for both approval mode and **file access**. The agent detail approval picker and configuration form also expose the setting. File access defaults to **Unrestricted**; existing restricted configurations remain restricted. A successfully saved choice applies on the next turn. This capability requires a client version containing the change.
+:::info Effective version
+`v10.0.178+` (independent file access settings and outside read-only mode).
+:::
+
+The approval pill in the chat composer and the resource panel offer quick choices for both approval mode and **file access**. The agent detail approval picker and configuration form also expose the setting. File access defaults to **Unrestricted**; existing restricted configurations remain restricted. A successfully saved choice applies on the next turn.
 
 | File access option | Read/write inside the workspace | Read outside | Write outside with file tools |
 |---|---|---|---|

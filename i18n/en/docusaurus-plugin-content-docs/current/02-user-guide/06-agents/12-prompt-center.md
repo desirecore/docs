@@ -6,8 +6,8 @@ keywords: [Prompt Center, system prompt, global prompt, team prompt, Persona, Pr
 
 # Prompt Center and Content Ownership
 
-:::info Standing instructions version support
-`instructions.md` is implemented in development version 10.0.179. As of 2026-10-09, the latest public release is still v10.0.177. Release users need a version that includes this capability before using it.
+:::info Effective version
+`v10.0.179+` (standing instructions in `instructions.md`). Implemented on the development branch; confirm that your installed package includes this capability before use.
 :::
 
 Prompt Center brings prompt sources stored across user, team, and agent directories into one management surface. Open **Explorer → Prompt Center**, select a scope on the left, and edit or preview it on the right.
@@ -20,7 +20,7 @@ Prompt Center brings prompt sources stored across user, team, and agent director
 | **Team** | Every member and supervisor; multiple memberships can produce multiple sections | Collaboration rules, shared terminology, and delivery standards |
 | **Agent** | One agent | `persona.md` for role and expression, `principles.md` for boundaries and priorities, and optional `instructions.md` for stable responsibilities and delivery requirements |
 
-In a version supporting standing instructions, editable sections are combined in this order: **global → team → agent persona → agent principles → agent standing instructions**. Runtime context such as team identity, tools, skills, memory, and conversation is then added. A team prompt cannot forge or replace real team identity; membership and relationships come from team configuration. Keep project rules in files such as `AGENTS.md` in the project working directory.
+Editable sections are combined in this order: **global → team → agent persona → agent principles → agent standing instructions**. Runtime context such as team identity, tools, skills, memory, and conversation is then added. A team prompt cannot forge or replace real team identity; membership and relationships come from team configuration. Keep project rules in files such as `AGENTS.md` in the project working directory.
 
 ## L0 / L1 / L2 in Layered Files
 
@@ -89,7 +89,7 @@ A documentation engineer can keep each requirement in its own scope instead of p
 | Preview shows duplicate content | The same requirement is stored in multiple scopes. Keep it in the scope that owns it. |
 | A team prompt does not take effect | Confirm membership and check the corresponding source when the agent belongs to multiple teams. |
 | Layered source reports a format issue | Check for exact `## L0`, `## L1`, and `## L2` headings; standing instructions need none. |
-| Standing Instructions is unavailable | Check whether the client includes the capability implemented in development version 10.0.179. |
+| Standing Instructions is unavailable | Update to `v10.0.179+` and confirm that the installed package includes standing instructions. |
 | Standing instructions exceed the budget | Shorten the body and move detailed steps into skills. Execution does not proceed by truncating it or hiding an L2 section. |
 
 :::caution Prompts Are Not Permissions

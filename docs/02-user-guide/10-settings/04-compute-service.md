@@ -78,7 +78,11 @@ DesireCore 内置多家主流供应商模板，也支持自定义 OpenAI 兼容�
 
 ## Claude Pro / Max 订阅
 
-部分版本会在算力服务中显示 **Claude 订阅** 供应商。该路径使用 Anthropic 官方的 `@anthropic-ai/claude-agent-sdk` 发起模型请求，不会通过伪造 Claude Code 请求头来直连 Anthropic。
+:::info 生效版本
+`v10.0.178+`（Claude 订阅接入实现）。实际入口是否开放仍取决于下文的授权条件与发布策略。
+:::
+
+算力服务可显示 **Claude 订阅** 供应商。该路径使用 Anthropic 官方的 `@anthropic-ai/claude-agent-sdk` 发起模型请求，不会通过伪造 Claude Code 请求头来直连 Anthropic。
 
 ### 运行方式与 Claude Code 的区别
 
@@ -94,7 +98,7 @@ Claude Agent SDK 自带的工具、Skill、Plugin、子 Agent、斜杠命令和�
 
 ### 连接方式
 
-界面会优先检测本机 Claude Code 登录状态。根据版本和平台，还可能提供应用内登录或粘贴 `claude setup-token` 的高级连接方式。连接后可使用 Claude 订阅供应商提供的模型；断开、过期或刷新失败时，界面会提示重新检测或重新登录。
+界面会优先检测本机 Claude Code 登录状态。根据平台、授权条件和发布策略，还可能提供应用内登录或粘贴 `claude setup-token` 的高级连接方式。连接后可使用 Claude 订阅供应商提供的模型；断开、过期或刷新失败时，界面会提示重新检测或重新登录。
 
 ### 条款、授权与账户风险
 

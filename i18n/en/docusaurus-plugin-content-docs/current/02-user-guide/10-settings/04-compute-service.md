@@ -73,7 +73,11 @@ Some providers distinguish pay-as-you-go API keys and Token Plan keys. The UI wa
 
 ## Claude Pro / Max Subscription
 
-Some releases may show a **Claude Subscription** provider in Compute Service. This route sends model requests through Anthropic's official `@anthropic-ai/claude-agent-sdk`; it does not imitate Claude Code by forging request headers.
+:::info Effective version
+`v10.0.178+` (Claude subscription integration implementation). Access remains subject to the authorization conditions and release policy described below.
+:::
+
+Compute Service may show a **Claude Subscription** provider. This route sends model requests through Anthropic's official `@anthropic-ai/claude-agent-sdk`; it does not imitate Claude Code by forging request headers.
 
 ### Runtime model and how it differs from Claude Code
 
@@ -89,7 +93,7 @@ If you need the full Claude Code programming workflow inside DesireCore, have a 
 
 ### Connecting
 
-The UI first detects a local Claude Code login. Depending on release and platform, advanced options may also offer in-app login or a `claude setup-token` paste. When a credential expires, refresh fails, or the connection is removed, use the re-detect or sign-in action shown in the panel.
+The UI first detects a local Claude Code login. Depending on platform, authorization conditions, and release policy, advanced options may also offer in-app login or a `claude setup-token` paste. When a credential expires, refresh fails, or the connection is removed, use the re-detect or sign-in action shown in the panel.
 
 ### Terms, authorization, and account risk
 
