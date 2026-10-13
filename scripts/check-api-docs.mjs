@@ -109,7 +109,9 @@ function scanMarkdown(content, file) {
 }
 
 function decodeXml(value) {
-  return value.replaceAll('&amp;', '&').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&quot;', '"').replaceAll('&apos;', "'")
+  const entities = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" }
+  // Decode one source entity per match; replacement text must not be decoded again.
+  return value.replace(/&(amp|lt|gt|quot|apos);/g, (_, entity) => entities[entity])
 }
 
 function linkMetadata(html) {

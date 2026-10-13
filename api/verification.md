@@ -8,7 +8,7 @@
 - 内部文档：`10b6007b7e46477ee4df2e15563f09c1ab7bd1fe`，已推送内部 `main`，作为主仓可达子模块指针。
 - 原有开发工作树的 `docs` 与 `package-lock.json` 修改、个人 Agent 仓库的本地提交均保留；实现使用隔离 checkout 与数据根。
 - 8 组双语页面；24 个 HTTP 操作；三个自包含 OpenAPI 3.1 子集；独立 Node.js 客户端及逐字相同的下载副本。
-- 内部盘点先覆盖79份非归档 API Markdown、817个字面量路由调用；加入新管理合同并扩展当前 Agent Service 扫描后，固定快照覆盖80份、855个 Babel AST 字面量路由调用。AST仅作发现，动态路径及条件装配不能由此证明；公开24个操作另核验认证、Schema和结果方式。
+- 内部盘点先覆盖79份非归档 API Markdown、817个字面量路由调用；加入新管理合同并扩展当前 Agent Service 扫描后，固定快照覆盖80份、855个 Babel AST 字面量路由调用；另核读并行新增的应用接口后台账共81份。AST仅作发现，动态路径及条件装配不能由此证明；公开24个操作另核验认证、Schema和结果方式。
 
 ## 接入缺口与代码修复
 
@@ -48,7 +48,7 @@ CAS回归使用受控writer钩子证明冲突分支无事件写入和无secret�
 
 网站 `pnpm typecheck`、双语 `pnpm build`、`pnpm api:check -- --build` 通过。后者核对HTML、canonical、hreflang、sitemap及两语言的3个spec和Node示例下载副本字节。1440、1280、1024、375宽度下六个API主/新页面均无整页水平溢出；中文对话指南切换英文后仍在同页。复制按钮反馈成功，浏览器提供的剪贴板读数为空，未声称核验剪贴板内容。
 
-源码 PR：[desirecore/desirecore#4798](https://github.com/desirecore/desirecore/pull/4798)。内部文档合并保留并行应用开发文档，指定gitlink已可达远程main。公开文档PR与自动部署结果待回写；尚未宣称生产部署成功。未验证商业模型、公网Caddy/TLS部署、已发行桌面安装包或用户业务副作用；新能力按实际服务支持条件使用。
+源码 PR：[desirecore/desirecore#4798](https://github.com/desirecore/desirecore/pull/4798)。内部文档合并保留并行应用开发文档，指定gitlink已可达远程main。公开文档 PR：[desirecore/docs#72](https://github.com/desirecore/docs/pull/72)，Vercel预览与CLA通过；自动部署结果待回写。CodeQL发现XML实体串联替换可重复解码，已改为单次匹配，并验证五类实体、嵌套编码和未知实体。尚未宣称生产部署成功。未验证商业模型、公网Caddy/TLS部署、已发行桌面安装包或用户业务副作用；新能力按实际服务支持条件使用。
 
 ---
 
