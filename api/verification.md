@@ -1,4 +1,58 @@
-# 首批接入基础与 Webhook 核查记录
+# API 完整实施核查与验证
+
+更新日期：2026-10-14。本次在首批基础上实现全部选定公开能力；以下验证按层记录，不将本机假上游、真实服务 listener 与商业模型或安装包验收混为一项。
+
+## 当前来源与范围
+
+- 主仓实现 HEAD：`d3bac348db5f15ce6a59469ffef8f495c84ced59`，基于 `5714a1899`；新代码通过独立源码 PR 进入 `dev`。
+- 内部文档：`10b6007b7e46477ee4df2e15563f09c1ab7bd1fe`，已推送内部 `main`，作为主仓可达子模块指针。
+- 原有开发工作树的 `docs` 与 `package-lock.json` 修改、个人 Agent 仓库的本地提交均保留；实现使用隔离 checkout 与数据根。
+- 8 组双语页面；24 个 HTTP 操作；三个自包含 OpenAPI 3.1 子集；独立 Node.js 客户端及逐字相同的下载副本。
+- 内部盘点先覆盖79份非归档 API Markdown、817个字面量路由调用；加入新管理合同并扩展当前 Agent Service 扫描后，固定快照覆盖80份、855个 Babel AST 字面量路由调用。AST仅作发现，动态路径及条件装配不能由此证明；公开24个操作另核验认证、Schema和结果方式。
+
+## 接入缺口与代码修复
+
+Webhook 新管理入口复用 owner 治理和 Agent 原子写入，服务解析所选实际工具及文件范围，调用方不能提交权限对象。首次 secret 与轮换值只返回一次，读取不返回 secret；触发仍使用 Agent 级共享 secret。配置在等待写锁时变化返回 `409 webhook_configuration_changed`，防止保存旧配置下的授权快照。新能力由握手 `webhookManagement` 检测，没有伪造首次客户端发行号。
+
+配置并非不可修改的可信签名体系。授权 Write、Bash 或系统文件写仍遵循既有审批并可以修改有效范围内的配置；指南给出最小工具授权建议。通用 Webhook 幂等、请求级 Run ID、结果回调与自动最终回答交付未新增。
+
+Compat Proxy 地址事实抽到轻量叶子模块，生命周期 owner 在监听成功/真实关闭后更新；`ComputeCredential list` 给出实际含 `/v1` 的本机 Base URL。默认 `get` 安全 token 输出和真实 Key 治理保持现行合同。
+
+合并最新 `dev` 时保留上游宿主认证治理规则、本次 Webhook 管理规则和双方内部文档；没有丢弃功能逻辑。最新 query 的可选应用准入与后台工具过滤按当前基线重新校准规范和测试。
+
+## 定向验证
+
+| 范围 | 最终结果与边界 |
+|---|---|
+| 最新源码7个unit文件 | 112通过：管理12、代理地址2、ComputeCredential62、代理生命周期2、治理21、URL编码5、握手8 |
+| 真实 Webhook 管理/执行 | owner认证、AgentFS原子写、生产运行时与工具执行、SendUserMessage持久交付、轮换、provider400后台失败、停用和删除；仅模型上游为回环假SSE |
+| 代理安全 token | 15通过；真实本机HTTP鉴权、吊销及Provider绑定 |
+| 代理协议 | 18通过、31未选择；Messages/Chat Completions转换和直通、非流式/流式、软硬截断、model错误、Models鉴权和地址生命周期 |
+| Workflow | 4通过；独立真实standalone、Node code节点、Webhook→SSE→持久history，重连终态、错误凭据、缺grant与退役写入拒绝 |
+| Node客户端独立合同 | 12通过；HTTP与Socket事件关联、先于响应的事件、丢确认、重连、保守恢复、内容冲突、中断和显式取消；实例与执行均为夹具 |
+| Node客户端实际路由 | 真实HTTP/Socket鉴权、query Schema/digest、持久准入与lookup、renderer房间；执行runtime仍为替身 |
+| 类型与依赖边界 | 主仓13个受影响TypeScript边界通过，local profile总并行3；依赖边界检查通过 |
+| 内部文档 | 37模块结构检查无问题；ADR引用通过；claim检查通过，既有未锚定提示不作为本轮新增声明 |
+
+CAS回归使用受控writer钩子证明冲突分支无事件写入和无secret生成；不宣称实测真实写锁并发时序。真实集成验证正常原子持久写与运行交付。成功Webhook回执的工具计数仍为0，不能据此宣称完整工具调用审计已验收。
+
+网站typecheck精确排除 `api/examples/agent-client/test/source-route.fixture.ts`：该维护夹具须复制到私有源码测试目录才能解析其真实内部导入，不能当作网站源码编译。独立示例的执行合同与源码路由集成分别验证。
+
+## 文档、规范与发布
+
+`pnpm api:check` 当前覆盖8组双语页、24操作、44 JSON示例块、3规范。规范保留实际Draft-07合同，以OpenAPI3.1的`jsonSchemaDialect`声明；没有把改写的元Schema检验算作真实OpenAPI验收。
+
+最新定向回归共10文件118通过（unit112、服务integration5、Node实际路由integration1），独立客户端12及额外代理33用例分别记录。后续两次 rebase 和文档指针修正只改变 docs；接口代码与已测完整代码树一致，未重复计算测试数。
+
+三份真实Redocly CLI2.63.0规范检验均0错误：Agent Service保留47条现有条件Schema告警，另外两份无告警。AJV Draft07验证51个Schema与34个media示例通过。
+
+网站 `pnpm typecheck`、双语 `pnpm build`、`pnpm api:check -- --build` 通过。后者核对HTML、canonical、hreflang、sitemap及两语言的3个spec和Node示例下载副本字节。1440、1280、1024、375宽度下六个API主/新页面均无整页水平溢出；中文对话指南切换英文后仍在同页。复制按钮反馈成功，浏览器提供的剪贴板读数为空，未声称核验剪贴板内容。
+
+源码 PR：[desirecore/desirecore#4798](https://github.com/desirecore/desirecore/pull/4798)。内部文档合并保留并行应用开发文档，指定gitlink已可达远程main。公开文档PR与自动部署结果待回写；尚未宣称生产部署成功。未验证商业模型、公网Caddy/TLS部署、已发行桌面安装包或用户业务副作用；新能力按实际服务支持条件使用。
+
+---
+
+# 首批接入基础与 Webhook 核查记录（2026-10-13 历史）
 
 核查日期：2026-10-13。公开范围为部署所有者的实例连接，以及管理员已预配置事件的 Webhook 调用参考。该记录保留来源与验证边界，不作为所有接口或客户端发行版的运行保证。
 

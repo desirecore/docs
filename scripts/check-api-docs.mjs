@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Offline checks for the selected public API pages. Source provenance is maintenance
+// Offline checks for selected public API pages and OpenAPI downloads. Source provenance is maintenance
 // data: this checker does not execute private source or certify runtime behavior.
 import { readFile, access } from 'node:fs/promises'
 import path from 'node:path'
@@ -37,6 +37,12 @@ async function read(relative) {
     fail(`${relative}: ${error.code ?? error.message}`)
     return null
   }
+}
+
+async function readBytes(relative) {
+  const file = localPath(relative, relative)
+  if (!file) return null
+  try { return await readFile(file) } catch (error) { fail(`${relative}: ${error.code ?? error.message}`); return null }
 }
 
 function scanMarkdown(content, file) {
@@ -116,6 +122,115 @@ function urlPath(url, context) {
   try { return normalizeRoute(new URL(url).pathname) } catch { fail(`${context}: invalid absolute URL ${url}`); return null }
 }
 
+const httpMethods = new Set(['get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace'])
+const openapiPath = value => value.replace(/:([A-Za-z_][\w]*)/g, '{$1}')
+
+function resolveLocalReference(spec, reference, context) {
+  if (!reference.startsWith('#/')) { fail(`${context}: public specs must use self-contained local references`); return null }
+  let value = spec
+  for (const key of reference.slice(2).split('/').map(part => part.replaceAll('~1', '/').replaceAll('~0', '~'))) value = value?.[key]
+  if (value === undefined) fail(`${context}: unresolved reference ${reference}`)
+  return value
+}
+
+function checkReferences(spec, value, context) {
+  if (Array.isArray(value)) { for (const item of value) checkReferences(spec, item, context); return }
+  if (!isRecord(value)) return
+  if (isText(value.$ref)) resolveLocalReference(spec, value.$ref, context)
+  for (const child of Object.values(value)) checkReferences(spec, child, context)
+}
+
+async function checkSpecs(catalog, pages) {
+  const specFiles = [...new Set(catalog.endpoints.map(endpoint => endpoint.spec).filter(Boolean))]
+  let operationCount = 0
+  for (const file of specFiles) {
+    if (!isText(file) || !/^static\/openapi\/[a-z0-9-]+\.json$/.test(file)) { fail('endpoint.spec: expected a static/openapi/<service>.json path'); continue }
+    const raw = await read(file)
+    if (raw === null) continue
+    let spec
+    try { spec = JSON.parse(raw) } catch (error) { fail(`${file}: invalid JSON (${error.message})`); continue }
+    if (!isRecord(spec) || !/^3\.1\.\d+$/.test(spec.openapi) || !isRecord(spec.info) || !isText(spec.info.title) || !isText(spec.info.version) || !isRecord(spec.paths)) { fail(`${file}: expected an OpenAPI 3.1 document with info and paths`); continue }
+    checkReferences(spec, spec, file)
+    const selected = catalog.endpoints.filter(endpoint => endpoint.spec === file)
+    const operations = new Map()
+    for (const [route, item] of Object.entries(spec.paths)) {
+      if (!route.startsWith('/') || !isRecord(item)) { fail(`${file}: invalid path item ${route}`); continue }
+      for (const [method, operation] of Object.entries(item)) {
+        if (!httpMethods.has(method)) continue
+        operationCount += 1
+        if (!isRecord(operation) || !isText(operation.operationId) || !isRecord(operation.responses) || !Object.keys(operation.responses).length) { fail(`${file}: ${method.toUpperCase()} ${route} needs operationId and responses`); continue }
+        if (operations.has(operation.operationId)) fail(`${file}: duplicate operationId ${operation.operationId}`)
+        operations.set(operation.operationId, { route, method, operation })
+        const endpoint = selected.find(candidate => candidate.operationId === operation.operationId)
+        if (!endpoint) { fail(`${file}: operation ${operation.operationId} is outside the catalog's selected spec scope`); continue }
+        if (endpoint.method.toLowerCase() !== method || openapiPath(endpoint.path) !== route) fail(`${file}: ${operation.operationId} method/path differs from catalog`)
+        if (spec['x-service'] !== endpoint.service) fail(`${file}: x-service differs from ${endpoint.service}`)
+        if (spec['x-source']?.revision !== endpoint.source?.revision || spec['x-source']?.repository !== endpoint.source?.repository) fail(`${file}: ${operation.operationId} source provenance differs from catalog`)
+        const parameters = [...(item.parameters ?? []), ...(operation.parameters ?? [])].map(parameter => parameter.$ref ? resolveLocalReference(spec, parameter.$ref, file) : parameter).filter(Boolean)
+        for (const match of route.matchAll(/\{([^}]+)\}/g)) {
+          if (!parameters.some(parameter => parameter.in === 'path' && parameter.name === match[1] && parameter.required === true)) fail(`${file}: ${operation.operationId} is missing required path parameter ${match[1]}`)
+        }
+        // Catalog lists the credential alternatives available to this operation.
+        // Public examples use one scheme per alternative, never anonymous access.
+        const requirements = operation.security ?? spec.security
+        if (!Array.isArray(endpoint.securitySchemes) || !endpoint.securitySchemes.length || endpoint.securitySchemes.some(name => !isText(name))) { fail(`${endpoint.operationId}: spec coverage requires explicit securitySchemes in the catalog`); continue }
+        if (!Array.isArray(requirements) || !requirements.length || requirements.some(requirement => !isRecord(requirement) || Object.keys(requirement).length !== 1)) { fail(`${file}: ${operation.operationId} requires explicit non-anonymous credential alternatives`); continue }
+        const actual = requirements.map(requirement => Object.keys(requirement)[0]).sort()
+        const expected = [...endpoint.securitySchemes].sort()
+        if (JSON.stringify(actual) !== JSON.stringify(expected)) fail(`${file}: ${operation.operationId} security schemes differ from catalog`)
+        for (const requirement of requirements) {
+          for (const [name, scopes] of Object.entries(requirement)) {
+            const scheme = spec.components?.securitySchemes?.[name]
+            if (!scheme) fail(`${file}: undefined security scheme ${name}`)
+            if (!Array.isArray(scopes) || scopes.length) fail(`${file}: ${name} must not claim OAuth scopes for these credential schemes`)
+            if (name === 'InstanceToken' && (scheme?.type !== 'apiKey' || scheme.in !== 'header' || scheme.name !== 'X-Agent-Service-Token')) fail(`${file}: InstanceToken must use the X-Agent-Service-Token header`)
+            if (name === 'WebhookSecret' && (scheme?.type !== 'http' || scheme.scheme !== 'bearer')) fail(`${file}: WebhookSecret must use HTTP Bearer authentication`)
+            if (name === 'ProxyBearer' && (scheme?.type !== 'http' || scheme.scheme !== 'bearer')) fail(`${file}: ProxyBearer must use HTTP Bearer authentication`)
+            if (name === 'ProxyApiKey' && (scheme?.type !== 'apiKey' || scheme.in !== 'header' || scheme.name?.toLowerCase() !== 'x-api-key')) fail(`${file}: ProxyApiKey must use the x-api-key header`)
+            if (name === 'WorkflowToken' && (scheme?.type !== 'apiKey' || scheme.in !== 'header' || scheme.name?.toLowerCase() !== 'x-workflow-service-token')) fail(`${file}: WorkflowToken must use the X-Workflow-Service-Token header`)
+          }
+        }
+      }
+    }
+    for (const endpoint of selected) if (!operations.has(endpoint.operationId)) fail(`${file}: catalog operation ${endpoint.operationId} is missing from the spec`)
+    const downloadPage = [...pages.values()].find(page => page.slug === '/api/openapi')
+    const href = '/' + file.replace(/^static\//, '')
+    if (!downloadPage) fail(`${file}: the catalog must include the /api/openapi download page`)
+    else {
+      for (const [language, content] of [['ZH', downloadPage.zhContent], ['EN', downloadPage.enContent]]) {
+        const targets = [...(content ?? '').matchAll(/\]\(([^\s)]+)(?:\s+[^)]*)?\)/g)].map(match => match[1].replace(/^pathname:\/\//, ''))
+        if (!targets.includes(href)) fail(`${file}: ${language} download page lacks a link to ${href}`)
+      }
+    }
+    if (args.includes('--build')) {
+      for (const language of ['', 'en']) {
+        const built = await read(path.posix.join('build', language, file.replace(/^static\//, '')))
+        if (built !== null && built !== raw) fail(`${file}: ${language || 'ZH'} built download is stale or different`)
+      }
+    }
+  }
+  return { files: specFiles.length, operations: operationCount }
+}
+
+async function checkClientExampleMirror() {
+  const sourceFile = 'api/examples/agent-client/client.mjs'
+  const sourcePath = localPath(sourceFile, sourceFile)
+  // Earlier batches may not include a client. Once it exists its public copy
+  // must be byte-for-byte equal, including both locale builds when requested.
+  try { await access(sourcePath) } catch (error) { if (error.code !== 'ENOENT') fail(`${sourceFile}: ${error.message}`); return }
+  const source = await readBytes(sourceFile)
+  const downloadFile = 'static/api-examples/agent-client.mjs'
+  const download = await readBytes(downloadFile)
+  if (source !== null && download !== null && !source.equals(download)) fail(`${downloadFile}: differs from the maintained Node client example`)
+  if (args.includes('--build')) {
+    for (const language of ['', 'en']) {
+      const file = path.posix.join('build', language, 'api-examples/agent-client.mjs')
+      const built = await readBytes(file)
+      if (built !== null && source !== null && !source.equals(built)) fail(`${file}: Node client download is stale or different`)
+    }
+  }
+}
+
 async function checkBuild(pages) {
   const sitemapUrls = new Map()
   for (const language of ['', 'en']) {
@@ -158,7 +273,7 @@ async function checkBuild(pages) {
 
 async function main() {
   if (args.some(argument => !['--build', '--help'].includes(argument))) throw new Error('Usage: node scripts/check-api-docs.mjs [--build]')
-  if (args.includes('--help')) { console.log('Usage: node scripts/check-api-docs.mjs [--build]\nChecks catalog-selected bilingual API pages offline. --build also checks local HTML, canonicals, language alternates and sitemaps.'); return }
+  if (args.includes('--help')) { console.log('Usage: node scripts/check-api-docs.mjs [--build]\nChecks catalog-selected bilingual API pages, self-contained OpenAPI scope, authentication and download links offline. --build also checks local HTML, canonicals, language alternates, sitemaps and copied downloads.'); return }
   const raw = await read('api/endpoint-catalog.json')
   if (raw === null) throw new Error(failures.join('\n'))
   const catalog = JSON.parse(raw)
@@ -186,7 +301,7 @@ async function main() {
       jsonBlocks += parsed?.jsonBlocks ?? 0
     }
     if (zh && en && JSON.stringify(zh.versions) !== JSON.stringify(en.versions)) fail(`${page.id}: bilingual version callout versions or heading scopes differ`)
-    pages.set(page.id, { ...page, zh, en })
+    pages.set(page.id, { ...page, zh, en, zhContent, enContent })
   }
   const operationIds = new Set()
   const routes = new Set()
@@ -212,16 +327,17 @@ async function main() {
       if (!endpoint.versionEvidence) fail(`${label}: effectiveVersion needs versionEvidence`)
       for (const [language, parsed] of [['ZH', page?.zh], ['EN', page?.en]]) if (parsed && !parsed.versions.some(callout => callout.version === endpoint.effectiveVersion)) fail(`${label}: ${language} page lacks effectiveVersion ${endpoint.effectiveVersion}`)
     }
-    // spec may be null/empty until selected endpoints have an actual public spec.
     // Runtime/schema validation records are reviewed separately; no source grep here.
   }
+  const specs = await checkSpecs(catalog, pages)
+  await checkClientExampleMirror()
   if (args.includes('--build')) await checkBuild([...pages.values()])
   if (failures.length) {
     console.error(`API documentation checks failed (${failures.length}):`)
     for (const failure of failures) console.error(`- ${failure}`)
     process.exitCode = 1
   } else {
-    console.log(`API documentation checks passed: ${pages.size} bilingual pages, ${catalog.endpoints.length} endpoints, ${jsonBlocks} JSON blocks${args.includes('--build') ? ', local built routes and metadata' : ''}.`)
+    console.log(`API documentation checks passed: ${pages.size} bilingual pages, ${catalog.endpoints.length} endpoints, ${jsonBlocks} JSON blocks, ${specs.files} specs / ${specs.operations} operations${args.includes('--build') ? ', local built routes and metadata' : ''}.`)
     console.log('Version scope checks compare section placement; translated feature meaning and source/runtime claims still require review.')
   }
 }

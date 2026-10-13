@@ -1,0 +1,952 @@
+{
+  "openapi": "3.1.0",
+  "jsonSchemaDialect": "http://json-schema.org/draft-07/schema#",
+  "x-service": "workflow-service",
+  "info": {
+    "title": "DesireCore Workflow Service — public integration subset",
+    "version": "1.0.0",
+    "description": "Independent administrator-provided Workflow Service origin and service credential. Only administrator-approved global Webhook definitions and read/observe endpoints are covered. Response Schemas manually present the current TypeScript/route contract; they do not claim a closed runtime validator. Execution-grant /run and retired definition writes are not covered."
+  },
+  "servers": [
+    {
+      "url": "https://{workflowHost}",
+      "description": "Use the independently provided Workflow Service origin. Default Agent Service Caddy deployment rejects these workflow paths.",
+      "variables": {
+        "workflowHost": {
+          "default": "workflow.example.com"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Workflow integration",
+      "description": "Service-authorized trigger, live events and historical reads for trusted administrators."
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "WorkflowToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Workflow-Service-Token",
+        "description": "Existing WORKFLOW_SERVICE_TOKEN supplied by the workflow deployment administrator. Separate service boundary even if a deployment reuses AGENT_SERVICE_TOKEN."
+      }
+    },
+    "schemas": {
+      "WorkflowError": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true,
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      },
+      "WorkflowParameters": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Workflow-specific input fields passed directly as params. The HTTP handler has no closed request Schema; omit the body for empty parameters.",
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      },
+      "WorkflowWebhookAccepted": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "const": "started"
+          }
+        },
+        "required": [
+          "runId",
+          "workflowId",
+          "status"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      },
+      "WorkflowRunSummary": {
+        "type": "object",
+        "required": [
+          "runId",
+          "status",
+          "startedAt",
+          "nodeCount",
+          "completedNodeCount",
+          "taskBoardBound"
+        ],
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "startedAt": {
+            "type": "string"
+          },
+          "completedAt": {
+            "type": "string"
+          },
+          "totalDurationMs": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          },
+          "taskBoardBound": {
+            "type": "boolean"
+          },
+          "taskTrigger": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "taskBoardScope": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "principalActor": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "executionIdentity": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "decisionTreeOrigin": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "nodeCount": {
+            "type": "number"
+          },
+          "completedNodeCount": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": true,
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      },
+      "WorkflowRunDetail": {
+        "type": "object",
+        "required": [
+          "workflowId",
+          "runId",
+          "status",
+          "startedAt",
+          "taskBoardBound"
+        ],
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "startedAt": {
+            "type": "string"
+          },
+          "completedAt": {
+            "type": "string"
+          },
+          "totalDurationMs": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          },
+          "taskBoardBound": {
+            "type": "boolean"
+          },
+          "taskTrigger": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "taskBoardScope": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "principalActor": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "executionIdentity": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "decisionTreeOrigin": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "nodeResults": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "finalOutputs": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "humanGate": {
+            "type": "object",
+            "properties": {
+              "nodeId": {
+                "type": "string"
+              },
+              "prompt": {
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "label",
+                    "value"
+                  ],
+                  "additionalProperties": true
+                }
+              }
+            },
+            "required": [
+              "nodeId",
+              "prompt",
+              "options"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true,
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      },
+      "WorkflowList": {
+        "type": "object",
+        "properties": {
+          "workflows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "description",
+                "creator",
+                "nodeCount",
+                "dslPath"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "creator": {
+                  "type": "string"
+                },
+                "nodeCount": {
+                  "type": "number"
+                },
+                "dslPath": {
+                  "type": "string"
+                },
+                "lastRun": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "taskBoardBound"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "taskBoardBound": {
+                      "type": "boolean"
+                    },
+                    "totalDurationMs": {
+                      "type": "number"
+                    },
+                    "completedAt": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "required": [
+          "workflows"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      },
+      "WorkflowRunList": {
+        "type": "object",
+        "properties": {
+          "runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkflowRunSummary"
+            }
+          }
+        },
+        "required": [
+          "runs"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Manual presentation of workflow-contracts TypeScript interfaces and current route output; no closed runtime HTTP Schema is asserted."
+      }
+    }
+  },
+  "paths": {
+    "/api/workflow/webhook": {
+      "post": {
+        "operationId": "triggerWorkflowWebhook",
+        "tags": [
+          "Workflow integration"
+        ],
+        "summary": "Trigger an administrator-approved global workflow",
+        "description": "The entire JSON body is the workflow-specific params object. Returns an asynchronous runId with status started; later execution may fail. No idempotency or request deduplication is provided; a lost response must not cause an unconditional retrigger.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/workflow-integration"
+        },
+        "security": [
+          {
+            "WorkflowToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workflow run was accepted, not completed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowWebhookAccepted"
+                },
+                "example": {
+                  "runId": "00000000-0000-4000-8000-000000000010",
+                  "workflowId": "your-workflow-id",
+                  "status": "started"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The id query parameter is missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid standalone Workflow Service credential.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Browser-origin or resource/TaskBoard scope authorization failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested global workflow cannot be resolved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service credential is not initialized, the owner is fenced, or a run could not be reserved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowParameters"
+              },
+              "example": {
+                "name": "API"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workflow/events": {
+      "get": {
+        "operationId": "watchWorkflowRunEvents",
+        "tags": [
+          "Workflow integration"
+        ],
+        "summary": "Watch live Workflow events over SSE",
+        "description": "Send the service token in a header, never in a query string. One active subscriber per run. This service-level gate is for trusted administrators, not a per-user Run ACL. Current-process terminal runs may return only workflow:complete with a failed or other terminal status; historical streams are not durable full-event replay. Read run history after a disconnect.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/workflow-integration"
+        },
+        "security": [
+          {
+            "WorkflowToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Named SSE events with JSON data. Inspect workflow:complete status or workflow:error; the event name alone is not success.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-cache"
+                }
+              }
+            },
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "event: workflow:complete\ndata: {\"runId\":\"example-run-id\",\"status\":\"completed\"}\n\n"
+              }
+            }
+          },
+          "400": {
+            "description": "runId is missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid standalone Workflow Service credential.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Browser-origin or resource/TaskBoard scope authorization failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No current-process live or terminal Run exists for that ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service credential is not initialized, the owner is fenced, or a run could not be reserved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workflow/{id}/runs": {
+      "get": {
+        "operationId": "listWorkflowRuns",
+        "tags": [
+          "Workflow integration"
+        ],
+        "summary": "List active and stored Workflow runs",
+        "description": "Combines active and stored summaries newest first; no pagination. TaskBoard records are projected only after source authorization. Optional Board/binding filters must be a valid authorized scope.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/workflow-integration"
+        },
+        "security": [
+          {
+            "WorkflowToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "boardId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "When requesting Task scope, boardId and workflowBindingId must be supplied together and belong to this Workflow. These IDs do not grant access."
+          },
+          {
+            "name": "workflowBindingId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "When requesting Task scope, boardId and workflowBindingId must be supplied together and belong to this Workflow. These IDs do not grant access."
+          },
+          {
+            "name": "taskId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Optional nonempty Task narrowing; must match the Board/binding."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Visible active and stored summaries.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowRunList"
+                },
+                "example": {
+                  "runs": [
+                    {
+                      "runId": "00000000-0000-4000-8000-000000000010",
+                      "status": "completed",
+                      "startedAt": "2026-10-14T02:00:00.000Z",
+                      "nodeCount": 2,
+                      "completedNodeCount": 2,
+                      "taskBoardBound": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Workflow ID is missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid standalone Workflow Service credential.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Browser-origin or resource/TaskBoard scope authorization failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service credential is not initialized, the owner is fenced, or a run could not be reserved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workflow/{id}/runs/{runId}": {
+      "get": {
+        "operationId": "getWorkflowRun",
+        "tags": [
+          "Workflow integration"
+        ],
+        "summary": "Read a Workflow Run detail",
+        "description": "Verifies Workflow/Run matching and current source resource access. An out-of-scope Run returns 404. A service token and Run ID do not replace TaskBoard authorization.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/workflow-integration"
+        },
+        "security": [
+          {
+            "WorkflowToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "boardId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "When requesting Task scope, boardId and workflowBindingId must be supplied together and belong to this Workflow. These IDs do not grant access."
+          },
+          {
+            "name": "workflowBindingId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "When requesting Task scope, boardId and workflowBindingId must be supplied together and belong to this Workflow. These IDs do not grant access."
+          },
+          {
+            "name": "taskId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Optional nonempty Task narrowing; must match the Board/binding."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current active snapshot or stored terminal detail.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowRunDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Workflow or Run ID is missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid standalone Workflow Service credential.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Browser-origin or resource/TaskBoard scope authorization failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Run was not found or is outside the requested Task scope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service credential is not initialized, the owner is fenced, or a run could not be reserved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workflows": {
+      "get": {
+        "operationId": "listWorkflows",
+        "tags": [
+          "Workflow integration"
+        ],
+        "summary": "List deployed Workflow metadata",
+        "description": "Lists readable parsed definitions with an optional compressed lastRun summary; invalid definitions are omitted. Discovery does not establish execution authorization. No pagination.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/workflow-integration"
+        },
+        "security": [
+          {
+            "WorkflowToken": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Deployed Workflow metadata.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid standalone Workflow Service credential.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Browser-origin or resource/TaskBoard scope authorization failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service credential is not initialized, the owner is fenced, or a run could not be reserved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-source": {
+    "repository": "desirecore/desirecore",
+    "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59"
+  }
+}

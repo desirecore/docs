@@ -93,3 +93,13 @@ After a timeout or lost connection, the sender may not know whether the service 
 ## Collect Troubleshooting Information
 
 When requesting help, record the request time, HTTP method and path, status, response type, redacted body, the handshake's `serverVersion` and `instanceId`, and whether the issue appeared after updating a token. Remove instance tokens, Webhook secrets, provider API keys, and business data before sharing log excerpts.
+
+## Webhook configuration conflicts and permissions
+
+Configuration management requires instance owner access and `capabilities.webhookManagement: true` in the handshake. Management requests use the instance token; trigger requests use the Webhook secret. Follow the [configuration steps](./02-agent-webhook.md).
+
+`409 webhook_configuration_changed` means the Agent's permissions or other configuration changed during setup. Reload available tools and existing events, review permissions, and save again. `400 webhook_tool_unavailable` means a tool ID is absent or ambiguous; select from the latest management GET's `availableTools`. `409 webhook_configuration_invalid` requires the administrator to repair malformed existing configuration.
+
+## Conversations, proxy and workflow troubleshooting
+
+After a conversation timeout, use the example's `--recover` to read admission records. Preserve request IDs, digest and state files; an unknown outcome does not prove execution never started. See [conversations and Runs](./04-conversations-and-runs.md). For model calls, check the local Base URL and provider binding of the safe token. For workflows, check the independent address and `X-Workflow-Service-Token`, then follow the [workflow guide](./06-workflow-integration.md) to inspect the `runId` and terminal status.

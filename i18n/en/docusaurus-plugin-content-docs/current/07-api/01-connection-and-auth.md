@@ -35,7 +35,7 @@ For example, use `https://agent.example.com` as `BASE_URL` if that is the public
 
 The instance access token represents the instance owner's access and should be held by the deployment owner or a trusted service. A Webhook secret is used for the corresponding Agent's trigger endpoint; a service that only needs to trigger events can use that secret. Each endpoint still has its own configuration, execution permissions, and approval requirements.
 
-Desktop instance addresses and credentials are managed by the desktop connection mechanism. The deployment manifest path above does not apply to desktop clients. Credentials obtained through desktop pairing also have their own lifetime and access conditions, so the owner connection procedure below does not directly apply to them.
+Desktop instance addresses and credentials are managed by the desktop connection mechanism. The deployment manifest path above does not apply to desktop clients. Credentials obtained through desktop pairing remain valid until revoked; restarting does not revoke them. The `interactive` label does not imply strictly minimal permissions. Pairing credentials are not interchangeable with the owner token, so the owner connection procedure below does not directly apply to them.
 
 ## Verify the Connection
 

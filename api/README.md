@@ -2,11 +2,15 @@
 
 `docs/07-api/` 维护公开接入指南，英文镜像位于 `i18n/en/docusaurus-plugin-content-docs/current/07-api/`。本目录维护经过筛选的端点来源、公开范围与验证记录，不进入 Docusaurus 文档路由。
 
-## 首批范围
+## 公开范围
 
-首批覆盖部署管理员提供地址与凭据的实例连接，以及已启用且验证过的 Agent Webhook 事件调用。Webhook 页面是预配置事件的调用参考；当前没有受支持的自助新建事件运行权限流程，不能把这一缺口包装成从零配置快速开始。
+8 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、模型代理、工作流与 OpenAPI 下载。24 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
 
-目录只收录 `/api/client-handshake` 和 `/api/webhook/:agent_id`。默认 Caddy 部署未转发 `/health`，域名的同名请求可能落入网页，不能作为公网探活示例。模型代理、Workflow 和完整对话执行另行核查，不沿用本批实例访问或 Webhook 凭据。
+Webhook 所有者管理依赖握手 `capabilities.webhookManagement: true`，由可信入口选择实际工具并生成文件范围快照；旧服务仅支持已有事件。该支持条件没有被改写成未经核对的客户端发行号。现有 Write/Bash 与审批模型保留，不把配置文件宣称为不可修改的安全边界。
+
+默认 Caddy 未代理 `/health`、Workflow 路径或本机 Compat Proxy。三种服务的地址、认证和权限分别维护。Workflow 只公开管理员预置定义的触发与观察，不伪造直接运行所需 grant 的公开签发流程。
+
+独立示例包在 [examples/agent-client](./examples/agent-client/README.md)，静态下载副本为 `static/api-examples/agent-client.mjs`；二者必须逐字一致。依赖和锁文件在示例目录维护，不改变站点依赖。
 
 ## 修改步骤
 
@@ -24,7 +28,7 @@ pnpm build
 pnpm api:check -- --build
 ```
 
-`api:check` 检查清单、两种语言的显式 slug、JSON 示例和已有版本提示框的结构；`--build` 额外读取本地 HTML 和 sitemap。它不读取私有源仓库、不访问生产 URL，也不证明翻译语义或接口运行已验收。
+`api:check` 检查清单、两种语言的显式 slug、JSON 示例、版本提示框及 OpenAPI 范围、引用、鉴权和下载链接；`--build` 额外读取本地 HTML 和 sitemap。它不读取私有源仓库、不访问生产 URL，也不证明翻译语义或接口运行已验收。
 
 ## 清单字段
 
@@ -37,8 +41,9 @@ pnpm api:check -- --build
 | `resultDelivery` | 实际响应与结果交付方式 |
 | `source`、`schemaRefs` | 固定来源 SHA、路由/认证文件和已有 Schema |
 | `effectiveVersion`、`versionEvidence` | 确需版本约束时记录依据；无约束时为 `null`，不得推断首次可用版本 |
+| `securitySchemes` | 该操作的实际认证方案，与规范逐项一致 |
 | `verification` | 验证记录和未覆盖范围 |
-| `spec` | 对应公开 OpenAPI 文件；本批尚未提供，为 `null` |
+| `spec` | 对应服务的公开 OpenAPI 文件；未收录项才为 `null` |
 
 遵循根 `AGENTS.md` 与 `README.md` 的生效版本和用户写作规范。已有明确版本不得改成默认值；协议修订、服务版本字段和客户端功能生效版本分别保留含义。
 
@@ -59,4 +64,4 @@ pnpm api:check -- --build
 
 ## 当前验证记录
 
-参见 [首批核查与验证](./verification.md)。后续更改认证、路由、配置入口或结果交付时，只重新核对受影响合同和相关示例，不将本批测试结果传播为其它功能的运行保证。
+参见 [核查与验证](./verification.md)。后续更改认证、路由、配置入口或结果交付时，只重新核对受影响合同和相关示例，不将本批测试结果传播为其它功能的运行保证。

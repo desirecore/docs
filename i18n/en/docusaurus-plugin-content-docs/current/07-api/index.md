@@ -1,40 +1,39 @@
 ---
-title: Integrations and API
-description: Connect external programs to a DesireCore instance, verify access, and call a configured Agent Webhook.
+title: Integration & API
+description: Connect an instance, run conversations, configure Agent Webhooks, and use model and workflow services.
 slug: /api
 sidebar_position: 0
-keywords: [API, integration, Webhook, Agent Service, access, authentication]
+keywords: [API, integration, Webhook, Agent Service, authentication]
 ---
 
-# Integrations and API
+# Integration & API
 
-Your scripts and services can connect to a DesireCore instance to verify its identity or send events to a configured Webhook for an Agent to handle in the background. Obtain the instance address, credentials, and event details before choosing a guide below.
+Connect your scripts or services to DesireCore using the address and credentials for the service you need. The guides cover connection checks, conversations and results, Agent Webhooks, model protocols, and workflow integration.
 
-## Choose an integration
+## Choose a guide
 
-| What you want to do | Requirements | Guide |
+| Goal | Requirements | Guide |
 |---|---|---|
-| Connect your program to an instance | An HTTPS address and instance access token supplied by the deployment administrator | [Connection and Authentication](./01-connection-and-auth.md) |
-| Trigger an Agent from an external event | An event enabled and verified by the administrator, plus its Agent ID, event name, and Webhook secret | [Agent Webhook](./02-agent-webhook.md) |
-| Let DesireCore call your business service | A service exposed through MCP, or connected through tools and skills | [MCP Server Connections](../02-user-guide/09-capabilities/03-mcp-integration.md) and [Integration Capabilities Overview](../02-user-guide/09-capabilities/06-integrations-overview.md) |
+| Connect an instance | Administrator-provided HTTPS address and instance token | [Connection and authentication](./01-connection-and-auth.md) |
+| Submit conversations and follow results | Instance owner access, Agent ID, Node.js 22+ for the example | [Conversations and Runs](./04-conversations-and-runs.md) |
+| Trigger an Agent from external events | Enabled event and Agent-level Webhook secret; owner configuration requires the `webhookManagement` capability | [Agent Webhook](./02-agent-webhook.md) |
+| Call model protocols through the local proxy | Running local proxy and provider-bound safe token | [Model proxy](./05-model-proxy.md) |
+| Trigger an existing workflow | Separate Workflow Service address, service token, and administrator-provided definition | [Workflow integration](./06-workflow-integration.md) |
+| Import HTTP contracts into a tool | Select the spec for your service | [OpenAPI downloads](./07-openapi.md) |
+| Let DesireCore call your business service | MCP server, tools or skills | [MCP integration](../02-user-guide/09-capabilities/03-mcp-integration.md) and [integration overview](../02-user-guide/09-capabilities/06-integrations-overview.md) |
 
-Self-service Webhook creation and runtime permission configuration are currently unavailable. This guide covers calls to an existing valid configuration. Ask your instance administrator for verified event details before connecting.
+## Credentials and results
 
-## Current API reference
+Agent Service uses `X-Agent-Service-Token`; external Webhooks use `Authorization: Bearer <Webhook secret>`. Model proxy credentials and Workflow Service tokens have their own scope. A provider API Key does not substitute for an instance credential.
 
-| Method and path | Purpose | Meaning of a successful response |
-|---|---|---|
-| `GET /api/client-handshake` | Verify instance access and read its identity and capabilities | Authentication succeeded and service metadata was returned |
-| `POST /api/webhook/:agent_id` | Send a configured event to the target Agent | The trigger was received; background execution has not necessarily completed |
+A handshake `200` confirms the authenticated request. Query submission `202` and Webhook `200 accepted` acknowledge admission or receipt; follow the corresponding guide to observe completion and delivery. Conversation events use Socket.IO, while Workflow progress uses SSE.
 
-These endpoints use different credentials. Instance reads use `X-Agent-Service-Token`; external Webhooks use `Authorization: Bearer <Webhook secret>` from the corresponding configuration. Model-provider API keys authenticate model requests and cannot replace these instance access credentials.
+## Start integrating
 
-## Get started
+1. Obtain the actual service address and its credential. Use verified HTTPS for remote access.
+2. Complete the connection check or the selected guide's minimal example.
+3. Check the actual response and result delivery. See [errors and troubleshooting](./03-errors-and-troubleshooting.md) for failures.
 
-1. Obtain the instance address and credentials for your intended operation from its administrator. Use HTTPS with certificate verification for remote calls.
-2. Follow [Connection and Authentication](./01-connection-and-auth.md) to verify instance access, or [Agent Webhook](./02-agent-webhook.md) to verify an event call.
-3. Check the actual response and how results are delivered. See [Errors and Troubleshooting](./03-errors-and-troubleshooting.md) for authentication failures, HTML responses, or timeouts.
-
-:::tip Documentation address and instance address
-`https://docs.desirecore.com/api` is a documentation page. Use your own instance address as `BASE_URL`, such as `https://agent.example.com`, when making requests. Do not send business requests to the documentation site.
+:::tip Documentation and instance addresses
+`https://docs.desirecore.com/api` is a documentation page. Send API requests to your own instance address, such as `https://agent.example.com`.
 :::

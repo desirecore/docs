@@ -57,7 +57,7 @@ keywords: [API, 错误, 排查, Webhook, 401, 403, 503]
 
 ## Webhook 请求错误
 
-外部 [Agent Webhook](./02-agent-webhook.md) 使用管理员提供的目标 Agent secret，按 `Authorization: Bearer <secret>` 发送。调用前需要管理员已经配置并验证该事件；不要把模型供应商 Key 或另一个 Agent 的 secret 用于这个入口。
+外部 [Agent Webhook](./02-agent-webhook.md) 使用管理员提供的目标 Agent secret，按 `Authorization: Bearer <secret>` 发送。调用前需要已配置并启用该事件；不要把模型供应商 Key 或另一个 Agent 的 secret 用于这个入口。
 
 | HTTP 状态 | 正文中的 `error` 或现象 | 含义与处理 |
 |---|---|---|
@@ -93,3 +93,13 @@ Webhook 的 `200` 和 `accepted: true` 表示已接收触发。响应中没有 R
 ## 提供排查信息
 
 求助时记录请求时间、HTTP 方法和路径、状态码、响应类型、脱敏正文、握手中的 `serverVersion` 与 `instanceId`，以及是否在更新令牌后出现问题。提供日志片段前移除实例令牌、Webhook secret、供应商 Key 和业务数据。
+
+## Webhook 配置冲突与权限
+
+配置管理需要实例所有者访问权限，并要求握手返回 `capabilities.webhookManagement: true`。管理请求使用实例令牌；触发请求使用 Webhook secret。参见 [Webhook 配置步骤](./02-agent-webhook.md)。
+
+`409 webhook_configuration_changed` 表示配置期间 Agent 的权限或其他配置发生变化。重新读取可用工具和现有事件，核对权限后再保存。`400 webhook_tool_unavailable` 表示工具 ID 当前不存在或无法唯一解析；重新从管理 GET 的 `availableTools` 选择。`409 webhook_configuration_invalid` 表示现有配置结构损坏，需要管理员修正。
+
+## 对话、代理与工作流排查
+
+对话超时后先使用示例的 `--recover` 读取准入记录；保留原请求 ID、摘要和状态文件，避免将未知状态当作未执行。详见[对话与 Run](./04-conversations-and-runs.md)。模型代理应核对本机 Base URL 和安全 token 的供应商绑定；Workflow Service 应核对独立地址和 `X-Workflow-Service-Token`，再按[工作流指南](./06-workflow-integration.md)检查 `runId` 与终态。

@@ -1,0 +1,934 @@
+{
+  "openapi": "3.1.0",
+  "jsonSchemaDialect": "http://json-schema.org/draft-07/schema#",
+  "x-service": "compat-proxy",
+  "info": {
+    "title": "DesireCore Compat Proxy — public protocol subset",
+    "version": "1.0.0",
+    "description": "Three registered model protocol endpoints for trusted programs on the same machine. Dynamic loopback address and Provider-bound desirecore_ safe token are obtained through the documented credential flow. Protocol conversion does not guarantee all vendor features."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:{port}",
+      "description": "Current loopback proxy origin. Obtain the actual Base URL including /v1, then use its origin here; do not duplicate /v1.",
+      "variables": {
+        "port": {
+          "default": "REPLACE_WITH_CURRENT_PORT"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Models",
+      "description": "Configured model metadata; listing is not filtered by the safe-token Provider binding."
+    },
+    {
+      "name": "Protocol requests",
+      "description": "Messages and Chat Completions forwarding/conversion with backend-specific restrictions."
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ProxyBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Provider-bound desirecore_ safe token; not a JWT, Agent Service token or upstream provider key."
+      },
+      "ProxyApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key",
+        "description": "The same Provider-bound safe token sent in x-api-key. A nonempty x-api-key takes precedence over Bearer when both are supplied."
+      }
+    },
+    "schemas": {
+      "Models": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "object": {
+                  "type": "string",
+                  "const": "model"
+                },
+                "created": {
+                  "type": "integer"
+                },
+                "owned_by": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "object",
+                "created",
+                "owned_by"
+              ],
+              "additionalProperties": true
+            }
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "ProxyAuthenticationError": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "error"
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "authentication_error"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "message"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "type",
+          "error"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "MessagesError": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "error"
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "message"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "type",
+          "error"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "ChatCompletionError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "message",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "FrameworkError": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "error",
+          "message"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "MessagesRequest": {
+        "type": "object",
+        "required": [
+          "model",
+          "messages",
+          "max_tokens"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "minLength": 1
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "user",
+                    "assistant"
+                  ]
+                },
+                "content": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "role",
+                "content"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "max_tokens": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "system": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            ]
+          },
+          "stream": {
+            "type": "boolean",
+            "default": false
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "top_p": {
+            "type": "number"
+          },
+          "stop_sequences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "tool_choice": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "thinking": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "output_config": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true,
+        "description": "Documented Messages protocol subset. Backend restrictions and format conversion still apply; the proxy does not validate this as a closed request Schema.",
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "ChatCompletionRequest": {
+        "type": "object",
+        "required": [
+          "model",
+          "messages"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "minLength": 1
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": [
+                    "string",
+                    "array",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "role",
+                "content"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "max_completion_tokens": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "max_tokens": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "stream": {
+            "type": "boolean",
+            "default": false
+          },
+          "stream_options": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "top_p": {
+            "type": "number"
+          },
+          "stop": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "tool_choice": {},
+          "parallel_tool_calls": {
+            "type": "boolean"
+          },
+          "reasoning_effort": {
+            "type": "string"
+          },
+          "response_format": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true,
+        "description": "Documented Chat Completions subset, not an exhaustive vendor request validator. Backend compatibility and authorization are checked during routing.",
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "MessagesResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "const": "message"
+          },
+          "role": {
+            "type": "string",
+            "const": "assistant"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "model": {
+            "type": "string"
+          },
+          "stop_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "stop_sequence": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "input_tokens": {
+                "type": "number"
+              },
+              "output_tokens": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "role",
+          "content",
+          "model",
+          "stop_reason",
+          "stop_sequence"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      },
+      "ChatCompletionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "type": "string",
+            "const": "chat.completion"
+          },
+          "created": {
+            "type": "integer"
+          },
+          "model": {
+            "type": "string"
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "tool_calls": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "finish_reason": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "index",
+                "message",
+                "finish_reason"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "prompt_tokens": {
+                "type": "number"
+              },
+              "completion_tokens": {
+                "type": "number"
+              },
+              "total_tokens": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "created",
+          "model",
+          "choices"
+        ],
+        "additionalProperties": true,
+        "x-schema-origin": "Protocol subset and actual proxy response implementation; not an exhaustive upstream protocol guarantee."
+      }
+    }
+  },
+  "paths": {
+    "/v1/models": {
+      "get": {
+        "operationId": "listProxyModels",
+        "tags": [
+          "Models"
+        ],
+        "summary": "List configured models from all enabled Providers",
+        "description": "No pagination. The returned inventory is not filtered by the safe token Provider. Appearance in the list does not establish token authorization, model availability, or model release date; created is the listing time.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/model-proxy#proxy-models"
+        },
+        "security": [
+          {
+            "ProxyBearer": []
+          },
+          {
+            "ProxyApiKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configured model inventory.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Models"
+                },
+                "example": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "your-model-name",
+                      "object": "model",
+                      "created": 1791943200,
+                      "owned_by": "openai"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed; this Messages-shaped error is used for both protocols.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyAuthenticationError"
+                },
+                "example": {
+                  "type": "error",
+                  "error": {
+                    "type": "authentication_error",
+                    "message": "Unauthorized compat-proxy request"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/messages": {
+      "post": {
+        "operationId": "createProxyMessage",
+        "tags": [
+          "Protocol requests"
+        ],
+        "summary": "Request a Messages completion",
+        "description": "Requires an exact modelName served by the token-bound Provider. A supplied x-desirecore-provider-id cannot change this binding. stream=true returns protocol-specific SSE; headers or partial text do not establish successful completion. The client executes any authorized tool calls itself.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/model-proxy#proxy-messages"
+        },
+        "security": [
+          {
+            "ProxyBearer": []
+          },
+          {
+            "ProxyApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "anthropic-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "const": "2023-06-01"
+            },
+            "description": "Stable Messages version; unsupported beta semantics are rejected for external safe-token callers."
+          }
+        ],
+        "x-max-body-bytes": 268435456,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessagesRequest"
+              },
+              "example": {
+                "model": "your-model-name",
+                "max_tokens": 64,
+                "stream": false,
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "Reply only with OK."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Non-streaming protocol response or streaming SSE. Read stop/finish reason and errors, including errors after headers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessagesResponse"
+                },
+                "example": {
+                  "id": "msg_example",
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "OK"
+                    }
+                  ],
+                  "model": "your-model-name",
+                  "stop_reason": "end_turn",
+                  "stop_sequence": null,
+                  "usage": {
+                    "input_tokens": 6,
+                    "output_tokens": 1
+                  }
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Protocol SSE stream, whose structure depends on the protocol and backend."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing model, invalid route or unsupported protocol input. Upstream errors may use another format.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessagesError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed; this Messages-shaped error is used for both protocols.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyAuthenticationError"
+                },
+                "example": {
+                  "type": "error",
+                  "error": {
+                    "type": "authentication_error",
+                    "message": "Unauthorized compat-proxy request"
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds 256 MiB.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrameworkError"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Use Content-Type: application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrameworkError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chat/completions": {
+      "post": {
+        "operationId": "createProxyChatCompletion",
+        "tags": [
+          "Protocol requests"
+        ],
+        "summary": "Request a Chat Completions completion",
+        "description": "Requires an exact modelName served by the token-bound Provider. A supplied x-desirecore-provider-id cannot change this binding. stream=true returns protocol-specific SSE; headers or partial text do not establish successful completion. The client executes any authorized tool calls itself.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/model-proxy#proxy-chat-completions"
+        },
+        "security": [
+          {
+            "ProxyBearer": []
+          },
+          {
+            "ProxyApiKey": []
+          }
+        ],
+        "parameters": [],
+        "x-max-body-bytes": 268435456,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatCompletionRequest"
+              },
+              "example": {
+                "model": "your-model-name",
+                "max_completion_tokens": 64,
+                "stream": false,
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "Reply only with OK."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Non-streaming protocol response or streaming SSE. Read stop/finish reason and errors, including errors after headers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatCompletionResponse"
+                },
+                "example": {
+                  "id": "chatcmpl_example",
+                  "object": "chat.completion",
+                  "created": 1791943200,
+                  "model": "your-model-name",
+                  "choices": [
+                    {
+                      "index": 0,
+                      "message": {
+                        "role": "assistant",
+                        "content": "OK"
+                      },
+                      "finish_reason": "stop"
+                    }
+                  ],
+                  "usage": {
+                    "prompt_tokens": 6,
+                    "completion_tokens": 1,
+                    "total_tokens": 7
+                  }
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Protocol SSE stream, whose structure depends on the protocol and backend."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing model, invalid route or unsupported protocol input. Upstream errors may use another format.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatCompletionError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed; this Messages-shaped error is used for both protocols.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyAuthenticationError"
+                },
+                "example": {
+                  "type": "error",
+                  "error": {
+                    "type": "authentication_error",
+                    "message": "Unauthorized compat-proxy request"
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds 256 MiB.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrameworkError"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Use Content-Type: application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrameworkError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other backend or reverse-proxy responses. Error formats vary; retain status, Content-Type and body.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-source": {
+    "repository": "desirecore/desirecore",
+    "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59"
+  }
+}
