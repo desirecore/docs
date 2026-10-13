@@ -142,3 +142,14 @@ Webhook 没有稳定请求关联、幂等键、请求级终态查询或结果回
 其余16项在CI固定第一父 `5714a1899c0cc80d26463e596f1cadfcc1dd4533` 的隔离checkout全部复现：9个显式文件、16个精确筛选用例，其他2559项只收集并跳过，无全量测试。结构化 [归因记录](./ci-base-attribution.json)保留环境、子模块、用例与失败签名；macOS/Node26环境未重建Linux CI，因此结论是基线已存在相同失败，而非所有环境等价。
 
 上游 #4793 已包含这些16项的对应修正。该上游PR的剩余导航测试缺少现行允许的application-object类型，独立 [测试修正 #4801](https://github.com/desirecore/desirecore/pull/4801)补清单并验证精确ref、current pin拒绝与consumer错配拒绝。仅测试文件改动，11单文件unit及13受控类型边界通过，未修改任何Schema或授权实现。待该修正与上游合入，再更新API分支完成完整门禁和发布。
+
+### 上游衔接补验
+
+#4801 已合并；上游最新 `33926b9d243b4f2bd6ea36b2e7634e347ec33d6b` 的新增应用对象导航未改变本轮24端点及 query/Socket.IO/Run 契约。本地隔离衔接快照 `66ee3deb567a7bbcbe1bde2f48f352a129c39ec0`、docs `f620bc410063301cb5828f2ad63f9a10ce61f086` 上，限定11个API生产文件与旧已测版本完全一致，18项unit与1项integration补验通过。补验是重复覆盖，不增加前述122个独立源码用例计数；本地快照未推送，不将其等同PR完整门禁。
+
+```bash
+node_modules/.bin/vitest run --project unit --maxWorkers=1 --no-file-parallelism packages/agent-service/src/routes/webhook-management-routes.test.ts packages/agent-service/src/builtin-tools/__tests__/compute-credential-proxy-address.test.ts packages/agent-service/src/__tests__/service-metadata.test.ts
+node_modules/.bin/vitest run --project integration --maxWorkers=1 --no-file-parallelism packages/agent-service/src/routes/webhook-management.integration.test.ts
+```
+
+公开PR #72 的CodeQL、CLA与Vercel预览全部通过；生产合并与部署仍等待源码前置PR。生产页面、下载字节、sitemap与搜索检查尚未执行。
