@@ -76,6 +76,7 @@ Having issues? Find the most common answers here.
 
 ## Popular Topics
 
+- [Integrations and API](./07-api/index.md) — Connect external programs to an instance and configured Webhooks
 - [Configure API Key](./getting-started/configure-api-key) — The first step to connect AI services
 - [Teach Your Agent](./user-guide/teaching/delegation-interaction) — DesireCore's core capability
 - [Enterprise Business Ontology](./concepts/business-ontology) — Connect objects, rules, actions, permissions, and FDE-style AI delivery

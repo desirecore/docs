@@ -124,6 +124,12 @@ Keep this convention and AGENTS.md consistent when updating either file.
 - Replace implementation-status caveats with an effective version, current support scope, or visible steps. Keep component names and technical details when they help with configuration, troubleshooting, permissions, or licenses.
 - Keep advice for documentation authors out of user-facing prose. Apply this approach in both languages while preserving actual limitations and authorization conditions.
 
+### API documentation
+
+Public API guides live in `docs/07-api/`, with matching English files under `i18n/en/docusaurus-plugin-content-docs/current/07-api/`. Keep endpoint provenance and publication scope in [api/endpoint-catalog.json](./api/endpoint-catalog.json); follow [the API maintenance guide](./api/README.md) when updating contracts and examples.
+
+Run `pnpm api:check` to check the selected bilingual pages and JSON examples. After `pnpm build`, run `pnpm api:check -- --build` to check their local routes, language links, canonical URLs, and sitemap entries. The check does not certify client implementation or replace request and response validation.
+
 ## License
 
 - Source code, theme customizations, and project configuration in this repository are licensed under the [MIT License](LICENSE).

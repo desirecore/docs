@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "reviewBaseline": {
+    "reviewedAt": "2026-10-13",
+    "clientRepository": "desirecore/desirecore",
+    "clientRevision": "2bb7add4497c6068a977b248106e922f9dfb196b",
+    "internalDocsRevision": "0b84089da1f7c050ccdab6f2912b36a8fcdb8802",
+    "publicDocsBaseRevision": "34fb4a7cbc8bd2f453ee79536981d22c7448373b"
+  },
+  "pages": [
+    {
+      "id": "api/index",
+      "file": "docs/07-api/index.md",
+      "slug": "/api"
+    },
+    {
+      "id": "api/connection-and-auth",
+      "file": "docs/07-api/01-connection-and-auth.md",
+      "slug": "/api/connection-and-auth"
+    },
+    {
+      "id": "api/agent-webhook",
+      "file": "docs/07-api/02-agent-webhook.md",
+      "slug": "/api/agent-webhook"
+    },
+    {
+      "id": "api/errors-and-troubleshooting",
+      "file": "docs/07-api/03-errors-and-troubleshooting.md",
+      "slug": "/api/errors-and-troubleshooting"
+    }
+  ],
+  "endpoints": [
+    {
+      "operationId": "getAgentServiceClientHandshake",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/client-handshake",
+      "doc": "api/connection-and-auth",
+      "deploymentModes": ["standalone-owner", "standalone-external"],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Valid instance access credential; metadata is service-level and does not expose a user ID or token.",
+      "resultDelivery": "Synchronous JSON metadata. A 200 response verifies this authenticated request, not every optional capability.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "2bb7add4497c6068a977b248106e922f9dfb196b",
+        "files": [
+          "packages/agent-service/src/routes/client-handshake-routes.ts",
+          "packages/agent-service/src/service-metadata.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/readiness.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": ["packages/schemas/src/agent-service/client-handshake.ts:clientHandshakeResponseSchema"],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source auth and handshake unit tests plus a real loopback HTTPS readiness integration; no public-domain or Caddy-container run."
+      },
+      "spec": null
+    },
+    {
+      "operationId": "triggerAgentWebhook",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/webhook/:agent_id",
+      "doc": "api/agent-webhook",
+      "deploymentModes": ["standalone-owner", "standalone-external"],
+      "authentication": "Authorization: Bearer <Webhook secret>; secret must be configured for external callers.",
+      "permissions": "The administrator must supply an enabled and verified event. Runtime tool permissions are bounded by the stored event ceiling and the Agent's current scope. Self-service creation of this runtime permission configuration is unavailable.",
+      "resultDelivery": "200 {accepted:true,agentId,event} acknowledges receipt, with no Run ID or delivery deduplication. Only explicit authorized SendUserMessage output is delivered to the user; final model answers are not automatically returned to the caller or added to chat.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "2bb7add4497c6068a977b248106e922f9dfb196b",
+        "files": [
+          "packages/agent-service/src/routes/webhook-routes.ts",
+          "packages/agent-service/src/routes/webhook-state.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/scheduler/background-delivery.ts",
+          "app/components/resources/agents/components/AgentFormEditor.tsx",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook.ts:webhookRequestSchema",
+        "packages/schemas/src/agent-service/webhook.ts:webhookEventConfigSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Preconfigured-event HTTP reference; real route/auth/schema with mocked query and stores. No self-service configuration, packaged-client or real-model execution acceptance."
+      },
+      "spec": null
+    }
+  ]
+}

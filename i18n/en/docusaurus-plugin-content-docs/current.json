@@ -130,5 +130,9 @@
   "sidebar.more.category.更新日志": {
     "message": "Changelog",
     "description": "The label for category '更新日志' in sidebar 'more'"
+  },
+  "sidebar.api.category.集成与 API": {
+    "message": "Integrations and API",
+    "description": "The label for category '集成与 API' in sidebar 'api'"
   }
 }

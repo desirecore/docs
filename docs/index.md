@@ -78,6 +78,7 @@ keywords: [DesireCore, 用户手册, AI 智能体, 委派式交互, Agent OS]
 
 ## 热门话题
 
+- [集成与 API](./07-api/index.md) — 外部程序接入实例与已配置的 Webhook
 - [配置 API Key](./getting-started/configure-api-key) — 连接 AI 服务的第一步
 - [教会智能体](./user-guide/teaching/delegation-interaction) — DesireCore 最核心的能力
 - [智能任务编排](./concepts/task-orchestration) — 自动拆解任务、匹配最佳智能体

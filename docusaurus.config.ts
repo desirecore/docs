@@ -130,6 +130,11 @@ const config: Config = {
           label: '更多',
           position: 'left',
         },
+        {
+          to: '/api',
+          label: 'API',
+          position: 'left',
+        },
         // ===== 右侧 =====
         {
           type: 'search',
@@ -173,6 +178,7 @@ const config: Config = {
             { label: '概念解析', to: '/concepts' },
             { label: '更多', to: '/more' },
             { label: '常见问题', to: '/faq' },
+            { label: '集成与 API', to: '/api' },
           ],
         },
         {
