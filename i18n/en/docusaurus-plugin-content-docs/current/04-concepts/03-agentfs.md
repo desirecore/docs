@@ -121,7 +121,7 @@ Made a mistake? `git revert` and it's back. Not satisfied with recent "evolution
 
 ## Tiered Loading
 
-Persona, principles, and layered global or team prompts can use L0/L1/L2 to control loading granularity. Skills also support on-demand discovery. Not every AgentFS file uses these tiers:
+Persona, principles, and layered team prompts can use L0/L1/L2 to control loading granularity. Skills also support on-demand discovery. User global prompts and agent standing instructions use ordinary Markdown loaded in full. Not every AgentFS file uses these tiers:
 
 | Tier | Content | Consumption | Purpose |
 |------|---------|-------------|---------|
