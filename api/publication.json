@@ -1,0 +1,78 @@
+{
+  "recordedAt": "2026-10-15T09:10:42.184Z",
+  "productionOrigin": "https://docs.desirecore.com",
+  "source": {
+    "pullRequest": "https://github.com/desirecore/desirecore/pull/4798",
+    "headRevision": "3801f4d79cd4e578b8f3e006913a0c552e3763f3",
+    "mergeRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+    "ciRun": "https://github.com/desirecore/desirecore/actions/runs/38559639612",
+    "internalDocsRevision": "9cc47fc9216db4a3803a982f00649f7af667c933",
+    "checks": "passed"
+  },
+  "documentation": {
+    "pullRequest": "https://github.com/desirecore/docs/pull/72",
+    "mergeRevision": "93fcbd26c64465e147b8c6532f48c1558a3c989a",
+    "productionDeploymentId": 7088235715,
+    "deployedAt": "2026-10-15T08:54:38Z",
+    "checks": "passed"
+  },
+  "canonicalRepair": {
+    "pullRequest": "https://github.com/desirecore/docs/pull/73",
+    "mergeRevision": "5d9cef1eac584ffa8c925636ac5d24ae174e5150",
+    "productionDeploymentId": 7088538260,
+    "deployedAt": "2026-10-15T09:09:54Z",
+    "reason": "Exclude author-only README implicit index, preserving the intended bilingual use-case pages.",
+    "checks": "passed"
+  },
+  "acceptance": {
+    "apiPages": 16,
+    "downloads": 8,
+    "apiFailures": 0,
+    "apiDetails": "production-verification.json",
+    "sitemapUrls": 716,
+    "sitemapHttp200": 716,
+    "sitemapSeoFailures": 0,
+    "useCases": {
+      "checkedAt": "2026-10-15T09:10:39.368Z",
+      "results": [
+        {
+          "pathname": "/use-cases",
+          "status": 200,
+          "finalUrl": "https://docs.desirecore.com/use-cases",
+          "canonical": "https://docs.desirecore.com/use-cases",
+          "h1": "应用场景",
+          "expectedH1": "应用场景",
+          "passed": true
+        },
+        {
+          "pathname": "/en/use-cases",
+          "status": 200,
+          "finalUrl": "https://docs.desirecore.com/en/use-cases",
+          "canonical": "https://docs.desirecore.com/en/use-cases",
+          "h1": "Use Cases",
+          "expectedH1": "Use Cases",
+          "passed": true
+        }
+      ]
+    },
+    "browser": {
+      "page": "https://docs.desirecore.com/api/conversations-and-runs",
+      "localeSwitchTo": "https://docs.desirecore.com/en/api/conversations-and-runs",
+      "samePage": true,
+      "englishHeading": "Conversations and Runs",
+      "documentHorizontalOverflow": false
+    }
+  },
+  "search": {
+    "checkedAt": "2026-10-15T09:10:17.966Z",
+    "httpStatus": 200,
+    "query": "Webhook",
+    "hits": 19,
+    "newApiUrls": [],
+    "status": "New API pages not returned by immediate search; page deployment, sitemap inclusion and crawlability passed. Search indexing is not claimed complete."
+  },
+  "limitations": [
+    "No commercial model, packaged-client or production business-operation acceptance is inferred from this documentation deployment.",
+    "Original source tests retain their recorded fixed revisions; final source CI and contract comparisons are recorded separately."
+  ]
+}

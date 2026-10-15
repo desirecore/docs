@@ -167,3 +167,9 @@ node_modules/.bin/vitest run --project integration --maxWorkers=1 --no-file-para
 公开PR #72 已合并为 `93fcbd26c64465e147b8c6532f48c1558a3c989a`，Production deployment `7088235715` 于北京时间16:54:38成功。16个API页面与8个下载的严格验收全部通过，报告为 [production-verification.json](./production-verification.json)：包含逐页canonical/语言/alternate/索引条件、sitemap/robots及下载长度和SHA-256；三个规范指向最终源码 `e45f229`。中文对话指南在浏览器切换英文后保持同页，正文和导航正常。
 
 全站sitemap初次检查718项均200，但两个应用场景入口存在README/index输出覆盖导致的canonical冲突。修复只重命名作者资产说明为 `_README.md`，继续保留严格验收规则；修复后的生产验收单独记录。
+
+## 发布完成与全站复验（2026-10-15）
+
+修复 #73 合并为 `5d9cef1eac584ffa8c925636ac5d24ae174e5150`，Production deployment `7088538260` 成功后，全站 `pnpm sitemap:check` 716URL全部200及SEO检查通过。两个应用场景入口的canonical与正文标题均准确。16个API页面、8下载及两sitemap/robots再次严格通过，`production-verification.json` 已更新为这次最终报告。
+
+完整发布链与限制见 [publication.json](./publication.json)。站内即时Webhook检索返回19个已有结果，尚无新增API路径；页面、导航和抓取条件已经通过，未宣称搜索索引刷新完成。商业模型、安装包与生产业务执行仍不属于本次文档部署验收。
