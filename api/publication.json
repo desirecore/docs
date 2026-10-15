@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-15T09:10:42.184Z",
+  "recordedAt": "2026-10-15T12:53:07.064Z",
   "productionOrigin": "https://docs.desirecore.com",
   "source": {
     "pullRequest": "https://github.com/desirecore/desirecore/pull/4798",
@@ -64,19 +64,19 @@
     }
   },
   "search": {
-    "checkedAt": "2026-10-15T11:34:17.100Z",
+    "checkedAt": "2026-10-15T12:53:07.064Z",
     "status": "passed",
     "rootCause": "The existing crawler runs on the 23rd day of each month; the previous complete crawl was on 2026-09-23, before API publication.",
     "crawlerId": "26591011-cca2-4aaa-9c75-75f1f0b3fad5",
-    "schedule": "on the 23 day of the month",
+    "schedule": "every 1 day",
     "manualCrawl": {
-      "startedAt": "2026-10-15T11:30:02Z",
-      "completedAt": "2026-10-15T11:32:35Z",
-      "successUrls": 734,
+      "startedAt": "2026-10-15T12:43:47Z",
+      "completedAt": "2026-10-15T12:46:35Z",
+      "successUrls": 736,
       "ignoredUrls": 2,
-      "failedUrls": 2,
-      "recordsBefore": 19324,
-      "recordsAfter": 21572
+      "failedUrls": 0,
+      "recordsBefore": 21572,
+      "recordsAfter": 21750
     },
     "titleTargets": 16,
     "titleTargetsMatched": 16,
@@ -86,15 +86,40 @@
     "legacyControlsPassed": 2,
     "contextualFilter": "language:<locale> AND (docusaurus_tag:default OR docusaurus_tag:docs-default-current)",
     "browserChecks": {
-      "zhQuery": "智能体 Webhook",
-      "enQuery": "Agent Webhook",
-      "targetLinksOpened": true
+      "apiGuides": "Previously passed Chinese/English Webhook checks.",
+      "changelogGuides": {
+        "passed": true,
+        "checks": [
+          {
+            "locale": "zh-Hans",
+            "query": "存量明文",
+            "openedUrl": "https://docs.desirecore.com/more/changelog/v10.0.180#%E4%BF%AE%E5%A4%8D",
+            "heading": "DesireCore v10.0.180"
+          },
+          {
+            "locale": "en",
+            "query": "legacy sensitive results",
+            "openedUrl": "https://docs.desirecore.com/en/more/changelog/v10.0.180#bug-fixes",
+            "heading": "DesireCore v10.0.180"
+          }
+        ],
+        "meaning": "The actual website search modal returned the changelog content and the selected result opened the correct language page and section."
+      }
     },
-    "details": "search-verification.json",
+    "details": "search-daily-verification.json",
     "limitations": [
-      "The monthly schedule is unchanged; website deployment does not itself trigger this external crawler.",
-      "The two oversized-record failures concern the Chinese and English v10.0.180 changelog pages, not API pages."
-    ]
+      "The free allowance estimate uses the current 738-URL site size; extra manual crawls and growth count toward usage.",
+      "Two strict quoted camelCase phrase probes returned no hits; separate targeted rechecks returned the full expected source content. Diagnostic misses are retained and not counted as passed queries."
+    ],
+    "configurationVersion": 5,
+    "freeDailyPlan": {
+      "name": "DocSearch",
+      "monthlyCrawledResources": 5000000,
+      "estimatedMonthlyCrawledResourcesAt31Days": 22878,
+      "termsUrl": "https://www.algolia.com/policies/docsearch-plan-specific-terms"
+    },
+    "changelogTitleChecksPassed": 2,
+    "changelogBodyTargetsVerified": 4
   },
   "limitations": [
     "No commercial model, packaged-client or production business-operation acceptance is inferred from this documentation deployment.",

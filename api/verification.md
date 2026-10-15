@@ -183,3 +183,11 @@ node_modules/.bin/vitest run --project integration --maxWorkers=1 --no-file-para
 22次正式只读搜索请求全部200：16个目标标题、4个关键端点、2个旧页对照全部命中。过滤与前端完全一致，为language及default/docs-default-current tag，不添加独立version过滤；返回目标记录的版本、语言与标签均正确。中英文真实搜索弹窗均返回Webhook指南，点击后URL与标题正确。详细请求、排名和配置快照见 [search-verification.json](./search-verification.json)。
 
 此前各节“尚未收录”的即时观察保留为历史；当前搜索状态以本节及 `publication.json` 为准。后续网站部署与外部索引抓取分别验收。
+
+## 免费每日调度与超大记录修复（2026-10-15）
+
+依据当前DocSearch免费账单及现行条款，738URL每天一次约22,878次/月，低于5,000,000免费抓取资源额度。管理端已发布v5调度 `every 1 day`，公开去密钥参考在 [algolia-crawler.config.js](./algolia-crawler.config.js)。
+
+仅两篇v10.0.180日志在提取DOM内按10条完整li分组，保留全部781正文列表项及heading/id/顺序；其它页继续原提取策略。原始URLTester的123KB超限已变为双语各89记录成功，API英文Webhook对照110不变。v5正式重抓736成功、2忽略、0失败，索引21,750条，两篇原错误清零。
+
+30请求全部HTTP200，28项目标验收通过（含补查确认中部内容），2条最初带引号camelCase严格短语无结果保留为诊断，不能称全部查询语义均通过。两语言中部和末尾的实际content均已确认，真实网站搜索也可找到并打开正确章节。详见 [每日调度与修复验收](./search-daily-verification.json)；此前月度调度及两个超大记录失败仅为历史状态。
