@@ -48,7 +48,7 @@ CAS回归使用受控writer钩子证明冲突分支无事件写入和无secret�
 
 网站 `pnpm typecheck`、双语 `pnpm build`、`pnpm api:check -- --build` 通过。后者核对HTML、canonical、hreflang、sitemap及两语言的3个spec和Node示例下载副本字节。1440、1280、1024、375宽度下六个API主/新页面均无整页水平溢出；中文对话指南切换英文后仍在同页。复制按钮反馈成功，浏览器提供的剪贴板读数为空，未声称核验剪贴板内容。
 
-源码 PR：[desirecore/desirecore#4798](https://github.com/desirecore/desirecore/pull/4798)。内部文档合并保留并行应用开发文档，指定gitlink已可达远程main。公开文档 PR：[desirecore/docs#72](https://github.com/desirecore/docs/pull/72)，Vercel预览与CLA通过；自动部署结果待回写。CodeQL发现XML实体串联替换可重复解码，已改为单次匹配，并验证五类实体、嵌套编码和未知实体。尚未宣称生产部署成功。未验证商业模型、公网Caddy/TLS部署、已发行桌面安装包或用户业务副作用；新能力按实际服务支持条件使用。
+源码 PR [desirecore/desirecore#4798](https://github.com/desirecore/desirecore/pull/4798) 已全绿合并，指定内部文档gitlink远程可达。公开文档 PR [desirecore/docs#72](https://github.com/desirecore/docs/pull/72) 与场景入口修复 #73 已合并并自动部署成功，API页面/下载及全站716URL验收通过，完整发布链见 [publication.json](./publication.json)。CodeQL发现的XML实体重复解码已修为单次匹配，并验证五类实体、嵌套编码和未知实体。商业模型、Agent服务公网Caddy/TLS部署、已发行桌面安装包或用户业务副作用不在本次文档部署验收范围；新能力按实际服务支持条件使用。
 
 ---
 
@@ -167,3 +167,9 @@ node_modules/.bin/vitest run --project integration --maxWorkers=1 --no-file-para
 公开PR #72 已合并为 `93fcbd26c64465e147b8c6532f48c1558a3c989a`，Production deployment `7088235715` 于北京时间16:54:38成功。16个API页面与8个下载的严格验收全部通过，报告为 [production-verification.json](./production-verification.json)：包含逐页canonical/语言/alternate/索引条件、sitemap/robots及下载长度和SHA-256；三个规范指向最终源码 `e45f229`。中文对话指南在浏览器切换英文后保持同页，正文和导航正常。
 
 全站sitemap初次检查718项均200，但两个应用场景入口存在README/index输出覆盖导致的canonical冲突。修复只重命名作者资产说明为 `_README.md`，继续保留严格验收规则；修复后的生产验收单独记录。
+
+## 发布完成与全站复验（2026-10-15）
+
+修复 #73 合并为 `5d9cef1eac584ffa8c925636ac5d24ae174e5150`，Production deployment `7088538260` 成功后，全站 `pnpm sitemap:check` 716URL全部200及SEO检查通过。两个应用场景入口的canonical与正文标题均准确。16个API页面、8下载及两sitemap/robots再次严格通过，`production-verification.json` 已更新为这次最终报告。
+
+完整发布链与限制见 [publication.json](./publication.json)。站内即时Webhook检索返回19个已有结果，尚无新增API路径；页面、导航和抓取条件已经通过，未宣称搜索索引刷新完成。商业模型、安装包与生产业务执行仍不属于本次文档部署验收。
