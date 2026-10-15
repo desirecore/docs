@@ -129,7 +129,7 @@ curl --silent --show-error \
 |---|---|
 | `run_id`, `user_id`, `agent_id` | Required strings identifying the Run, initiating user, and executing Agent |
 | `started_at` | Required ISO 8601 creation time; a Run can be reused across multiple turns |
-| `status` | Required: `running`, `idle`, `completed`, or `failed` |
+| `status` | Required: `running`, `idle`, `completed`, `failed`, or `handed_off` |
 | `conversation_id`, `session_id` | Optional conversation and realtime execution session identifiers; do not confuse them with one submission's request ID |
 | `turn_started_at`, `completed_at`, `updatedAt` | Optional current turn start, Run completion, and latest activity times |
 | `failure_reason` | Failure reasons include `process_restart`, `timeout`, `stale`, and `error` |
@@ -138,10 +138,15 @@ curl --silent --show-error \
 | `background`, `inbound` | Optional current turn identity, for background processing and a message from another Agent respectively |
 | `title`, `messageCount`, `archived_at`, `cleared` | Optional title, message count, and history lifecycle information |
 | `team_id`, `work_context_id`, `execution_attachment` | Optional execution ownership information; reading these fields grants no resource permissions |
+| `handoffFrom`, `handoffTo` | Optional source and target Run ID strings for tracing a handoff; they grant no permission to read or continue the target Run |
+| `handoff_pending` | Optional server-recorded marker for an ongoing handoff; it is not an access credential or a way to initiate or replay a handoff |
+| `handoff_attempted`, `handoff_accepted` | Optional booleans recording that target startup reached a potentially side-effecting stage and that the target runtime accepted the handoff, respectively; neither establishes target business completion |
 
 Responses may also include optional context, recovery, and working directory metadata. An absent field means that information is not recorded; do not invent completion times, failure reasons, or ownership.
 
-`idle` means the Run is not currently executing and can await another turn. It does not establish business success; an interrupted Run can also return to `idle`. `completed` and `failed` describe the Run lifecycle. To evaluate a particular submission, associate it with that turn's terminal event and receipt.
+`idle` means the Run is not currently executing. It establishes neither business success nor that a follow-up is available; an interrupted Run can also return to `idle`. `handed_off` means this Run's conversation was handed off. It is not an alias for `completed` and does not establish that the target Run finished. `completed`, `failed`, and `handed_off` describe the Run lifecycle. To evaluate a particular submission, associate it with that turn's terminal event and receipt.
+
+Handoff fields are read-only observations. Do not automatically replay source work while `handoff_pending` is present or send automatic follow-ups to a source runtime session observed as `handed_off`. You may separately read `handoffTo` when authorized, but the link does not replace the target's admission and terminal evidence. Absent fields do not establish that no handoff occurred.
 
 Some historical branches can appear in the list while this detail endpoint returns `404`. Use the endpoints below when you need runtime state or receipts, and handle their own read results separately.
 
@@ -165,7 +170,9 @@ curl --silent --show-error \
 }
 ```
 
-`status` accepts only `running`, `idle`, `completed`, and `failed`. An unreadable or unsupported state returns `404`. A stored `running` value is preserved, but this is still a snapshot. It grants no permission to cancel, rewind, or otherwise modify the Run, and the state can change before a subsequent submission.
+A successful response from this endpoint contains only `running`, `idle`, `completed`, or `failed`; a stored `running` value is preserved. A handed-off Run currently returns `404` rather than `handed_off` or a normalized `completed`. Other unreadable or unsupported states also return `404`, so that response alone does not establish that the record is missing or the task failed.
+
+This endpoint does not return handoff details such as `handoffTo`; use Run details for that link and handle its own read scope. This remains a snapshot. It grants no permission to cancel, rewind, or otherwise modify the Run, and the state can change before a subsequent submission.
 
 ## Read Execution Receipts {#list-run-receipts}
 
@@ -238,7 +245,7 @@ Empty receipts, skipped historical entries, or an older last receipt do not inde
 | Run list and paged receipts | `400`, with `error` starting `Invalid pagination:` | Use one valid decimal integer per parameter |
 | Run details | `404`, `error: "Run not found: ..."` | Check the Run ID and detail read scope |
 | Runtime state and receipts | `400`, `error: "Invalid run ID"` | Use a safe Run ID returned by the service; do not construct a path |
-| Runtime state | `404`, `error: "Run runtime state not found: ..."` | No supported runtime state is readable; do not assume `idle` |
+| Runtime state | `404`, `error: "Run runtime state not found: ..."` | Includes handed-off Runs and unreadable states; do not assume `idle`, failure, or a missing record. Read Run details separately when needed |
 | Receipts | `401`, `error: "无法解析用户身份"` | Ask the administrator to check instance identity configuration |
 | Receipts | `404`, `error: "Run not found: ..."` | Missing, unreadable, or differently owned Run; do not bypass ownership checks |
 | Read failure | `500` | Save the redacted response and ask the administrator to inspect service logs; use the actual returned error body |
@@ -271,7 +278,18 @@ node agent-client.mjs \
   --state ./request.json
 ```
 
-You can repeat `--follow-up`. The example attempts the next turn only after observing explicit completion and confirming through admission lookup that the session belongs to the current service process. An initial call does not overwrite an existing state file; use a new `--state` path for a separate task. The file persists original requests, business text, and correlation information without storing the instance token. Handle it as business data.
+You can repeat `--follow-up`. The example attempts the next turn only after observing explicit completion and confirming through admission lookup that the session belongs to the current service process. If it observes the source Run as `handed_off` or cannot read its runtime state, it retains pending text and stops automatic follow-ups. An initial call does not overwrite an existing state file; use a new `--state` path for a separate task. The file persists original requests, business text, file references, and correlation information without storing the instance token. Handle it as business data.
+
+For a general file, first [upload the attachment and use it in a conversation](./09-attachments-and-media.md#upload-and-query) on the same instance. Save the complete JSON receipt returned by the service and pass it to the example:
+
+```bash
+node agent-client.mjs \
+  --prompt 'Summarize the attached report.' \
+  --attachment-receipt ./receipt.json \
+  --state ./attachment-request.json
+```
+
+`--attachment-receipt` can be repeated. The example validates receipt shape, deduplicates `fileReference` values in first-occurrence order, places them in the initial turn's `options.fileReferences`, and includes them in the request digest. It does not upload files again or treat receipts as access credentials. A nonempty `--prompt` is still required. Sequential `--follow-up` turns send text only and do not automatically reattach the initial files. Recovery and retries retain the saved references and cannot accept new attachment arguments.
 
 The program verifies the handshake, registers event listeners, and connects through Socket.IO. Its path is `/socket.io/` and authentication is `auth: { token, clientInstanceId }`, with the same `token` as the HTTP `X-Agent-Service-Token` header. `clientInstanceId` is a stable 16–128 character identifier containing only letters, digits, `.`, `_`, `:`, and `-`. Authentication binds the client receiving channel; the example does not send an additional subscription message.
 
@@ -284,6 +302,7 @@ The program verifies the handshake, registers event listeners, and connects thro
 | `prompt` | User text for this turn; the example sends a nonempty string |
 | `options.agentId` | Target Agent ID |
 | `options.conversationId` | Conversation scope, saved as a stable value and reused for subsequent requests |
+| `options.fileReferences` | Optional references to uploaded general files; the example reads them from attachment receipts rather than placing them at the start request's top level |
 | `clientRequestId` | Stable ID for one submission; preserve it for recovery or bounded replay, and use a new ID for another turn |
 | `userMessageId` | Stable user message ID for this turn, saved with the request |
 | `requestDigest` | Request content digest beginning `qrd1:`, calculated by the example according to the protocol; it is not an access credential |
@@ -328,7 +347,7 @@ An admitted follow-up returns `202` with `ok: true`, `sessionId`, and the corres
 | `query:error` | `error`, possibly `code`, request and execution identifiers | Keep associated errors; do not attribute an uncorrelated error to another request |
 | `activity:run_status` | `runId`, `status`, possibly `sessionId` | Update Run observations; this is not a single submission's terminal status |
 
-`query:complete.terminal.status: completed` means the turn ended normally. `interrupted` means it was interrupted; inspect available `reason`, `partial`, and `runId` information. Evaluate business success using output and receipts as well. A `result`, an explicit delivery message, or an `idle` Run cannot replace the turn's terminal status.
+`query:complete.terminal.status: completed` means the turn ended normally. `interrupted` means it was interrupted; inspect available `reason`, `partial`, and `runId` information. Evaluate business success using output and receipts as well. A `result`, an explicit delivery message, or an `idle` or `handed_off` Run cannot replace the turn's terminal status. Normal termination of the source turn does not establish target completion after a handoff.
 
 Without a matching `clientRequestId` or structured `terminal`, the example does not declare that this request succeeded. Its state file retains observed information for reconciliation.
 
@@ -396,7 +415,7 @@ Inspect admission and readable execution records without submitting:
 node agent-client.mjs --recover ./request.json
 ```
 
-This mode establishes no Socket.IO subscription and sends no start or follow-up. With a known `runId`, it reads runtime state and receipts. With only `sessionId`, it searches for an exact Run match rather than guessing that the latest Run is this execution. These observations cannot replay all missed events or automatically repeat external actions. The outcome remains unknown when this turn's terminal evidence is missing.
+This mode establishes no Socket.IO subscription and sends no start or follow-up. With a known `runId`, it reads runtime state and receipts. With only `sessionId`, it searches for an exact Run match rather than guessing that the latest Run is this execution. These observations cannot replay all missed events or automatically repeat external actions. The outcome remains unknown when this turn's terminal evidence is missing. The example does not interpret `handed_off` as success or automatically follow its target. If it observes the source Run as handed off before a sequential follow-up, it stops automatic continuation and retains the pending text.
 
 Exit codes are `0` for an observed completed turn, `1` for rejection, failure, or interruption, and `2` for an unknown outcome or read-only recovery mode. `--recover` still returns `2` after completing its read-only checks; this does not mean the task was resubmitted or confirmed to have failed.
 

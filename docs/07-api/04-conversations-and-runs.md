@@ -129,7 +129,7 @@ curl --silent --show-error \
 |---|---|
 | `run_id`、`user_id`、`agent_id` | 必需字符串；Run、发起用户与执行智能体的标识 |
 | `started_at` | 必需 ISO 8601 时间，表示 Run 首次创建时间；同一 Run 可跨多轮复用 |
-| `status` | 必需，`running`、`idle`、`completed`、`failed` |
+| `status` | 必需，`running`、`idle`、`completed`、`failed`、`handed_off` |
 | `conversation_id`、`session_id` | 可选，对话与实时运行会话标识；不要与一次提交的请求 ID 混用 |
 | `turn_started_at`、`completed_at`、`updatedAt` | 可选，当前轮次开始、Run 完成和最近活动时间 |
 | `failure_reason` | 失败原因可能为 `process_restart`、`timeout`、`stale`、`error` |
@@ -138,10 +138,15 @@ curl --silent --show-error \
 | `background`、`inbound` | 可选当前轮次身份信息，分别描述后台处理和来自另一个智能体的消息 |
 | `title`、`messageCount`、`archived_at`、`cleared` | 可选标题、消息数量和历史生命周期信息 |
 | `team_id`、`work_context_id`、`execution_attachment` | 可选执行归属信息；读取这些字段不授予相应资源权限 |
+| `handoffFrom`、`handoffTo` | 可选字符串，转交来源与目标 Run ID；用于关联记录，不授予目标 Run 的读取或续接权限 |
+| `handoff_pending` | 可选字符串，服务端记录的进行中转交标记；不是调用凭据，也不能用来发起或重放转交 |
+| `handoff_attempted`、`handoff_accepted` | 可选布尔值，分别记录目标已进入可能产生副作用的启动阶段、目标运行时已接纳转交；均不表示目标业务已完成 |
 
 响应还可能包含上下文、恢复和工作目录等可选元信息。缺席字段表示没有这项记录；不要据此补造完成时间、失败原因或执行归属。
 
-`idle` 表示当前未在执行且可以等待后续对话，不等于整项业务已经成功。中止后的 Run 也可能回到 `idle`。`completed`、`failed` 是 Run 的生命周期状态，判断某次提交仍应关联该轮的终态和回执。
+`idle` 表示当前未在执行，不等于整项业务已经成功，也不单独保证可以续问；中止后的 Run 也可能回到 `idle`。`handed_off` 表示该 Run 的会话已转交，不是 `completed` 的别名，也不证明目标 Run 已完成。`completed`、`failed` 和 `handed_off` 都描述 Run 的生命周期；判断某次提交仍应关联该轮的终态和回执。
+
+转交字段都是只读观察信息。看到 `handoff_pending` 时不要自动重放来源工作；看到 `handed_off` 时不要继续向来源运行会话自动续问。可以在有权限时按 `handoffTo` 另行读取目标 Run，但读取链路不能替代目标的接纳与终态证据，缺席字段也不能证明没有发生转交。
 
 部分历史分支可在列表中出现，而此详情端点返回 `404`。需要判断运行态或读取回执时，分别使用下面的端点，并按它们自己的读取结果处理。
 
@@ -165,7 +170,9 @@ curl --silent --show-error \
 }
 ```
 
-`status` 只接受 `running`、`idle`、`completed`、`failed`。状态不能读取或不在支持范围时返回 `404`。`running` 不会被改成 `idle`，但这仍是一份快照；它不授权取消、回滚或其它修改操作，也不保证接下来提交时状态未变化。
+此端点成功返回的 `status` 只包含 `running`、`idle`、`completed`、`failed`，`running` 不会被改成 `idle`。已转交的 Run 当前会返回 `404`，不会从此端点返回 `handed_off` 或归一化后的 `completed`。其它无法读取或不支持的状态也返回 `404`，因此不能仅凭 `404` 判断记录不存在或任务失败。
+
+此端点不返回 `handoffTo` 等转交详情；需要查看链路时使用 Run 详情，并处理该端点自己的可读范围。这仍是一份快照，不授权取消、回滚或其它修改操作，也不保证接下来提交时状态未变化。
 
 ## 读取执行回执 {#list-run-receipts}
 
@@ -238,7 +245,7 @@ curl --silent --show-error --get \
 | Run 列表与分页回执 | `400`，`error` 以 `Invalid pagination:` 开头 | 使用单个符合要求的十进制整数参数 |
 | Run 详情 | `404`，`error: "Run not found: ..."` | 核对 Run ID 和详情可读范围 |
 | 运行态与回执 | `400`，`error: "Invalid run ID"` | 使用服务返回的安全 Run ID，不拼接路径 |
-| 运行态 | `404`，`error: "Run runtime state not found: ..."` | 无法取得支持的运行态；不要默认成 `idle` |
+| 运行态 | `404`，`error: "Run runtime state not found: ..."` | 包括已转交的 Run 和无法读取的状态；不要默认成 `idle`、失败或不存在，必要时另查 Run 详情 |
 | 回执 | `401`，`error: "无法解析用户身份"` | 请管理员检查实例身份配置 |
 | 回执 | `404`，`error: "Run not found: ..."` | Run 不存在、不可读取或不属于可信用户；不能据此跳过归属检查 |
 | 读取失败 | `500` | 保存脱敏响应，请管理员检查服务日志；错误正文以实际返回为准 |
@@ -271,7 +278,18 @@ node agent-client.mjs \
   --state ./request.json
 ```
 
-`--follow-up` 可以重复提供，示例只在上一轮得到明确完成信息、接纳查询确认会话属于当前服务进程后尝试续问。首次调用不覆盖已有状态文件；为独立的新任务使用新的 `--state` 路径。状态文件保存原请求、业务文本与关联信息，不保存实例令牌，应按业务数据保管。
+`--follow-up` 可以重复提供，示例只在上一轮得到明确完成信息、接纳查询确认会话属于当前服务进程后尝试续问；若观察到来源 Run 为 `handed_off` 或无法取得其运行态，会保留待发送文本并停止自动续问。首次调用不覆盖已有状态文件；为独立的新任务使用新的 `--state` 路径。状态文件保存原请求、业务文本、文件引用与关联信息，不保存实例令牌，应按业务数据保管。
+
+要提交通用文件，先按[上传附件并交给对话](./09-attachments-and-media.md#upload-and-query)将文件上传到同一实例，保存服务返回的完整 JSON 回执，再交给示例：
+
+```bash
+node agent-client.mjs \
+  --prompt 'Summarize the attached report.' \
+  --attachment-receipt ./receipt.json \
+  --state ./attachment-request.json
+```
+
+`--attachment-receipt` 可以重复提供。示例校验回执形状，将去重后按首次出现顺序排列的 `fileReference` 放入首轮的 `options.fileReferences` 并计入请求摘要；它不再次上传文件，也不把回执当作访问凭据。附文件仍需提供非空 `--prompt`。顺序 `--follow-up` 只发送文本，不自动重复附上首轮文件；恢复或重试沿用状态文件中的原引用，不能再加新的附件参数。
 
 程序先验证握手，再注册事件监听并建立 Socket.IO 连接。连接路径为 `/socket.io/`，认证为 `auth: { token, clientInstanceId }`；`token` 与 HTTP 请求的 `X-Agent-Service-Token` 相同。`clientInstanceId` 使用稳定的 16—128 字符标识，只包含字母、数字、`.`、`_`、`:`、`-`。认证连接会绑定相应客户端接收通道，示例无需另发订阅消息。
 
@@ -284,6 +302,7 @@ node agent-client.mjs \
 | `prompt` | 本轮用户文本；示例发送非空字符串 |
 | `options.agentId` | 目标智能体 ID |
 | `options.conversationId` | 对话范围；示例为其保存稳定值，后续请求沿用该范围 |
+| `options.fileReferences` | 可选，已上传通用文件的引用数组；示例从附件回执取得，不放在 start 请求顶层 |
 | `clientRequestId` | 一次提交的稳定 ID；同一请求恢复和有限重发时保留，新一轮使用新 ID |
 | `userMessageId` | 本轮用户消息的稳定 ID，与请求一起保存 |
 | `requestDigest` | `qrd1:` 开头的请求内容摘要，由示例按协议计算；它不是认证凭据 |
@@ -328,7 +347,7 @@ node agent-client.mjs \
 | `query:error` | `error`，可能有 `code`、请求和运行标识 | 保存可关联的错误；不要把未关联的错误归给另一次请求 |
 | `activity:run_status` | `runId`、`status`，可能有 `sessionId` | 更新 Run 状态观察；它不是单次提交的终态 |
 
-`query:complete.terminal.status` 为 `completed` 时，该轮正常收口；为 `interrupted` 时，该轮被中止，可继续读取其 `reason`、`partial`、`runId` 等已有信息。业务操作是否达到目标仍需核对输出和回执。`result`、某条主动交付消息或 Run 的 `idle` 都不能代替该轮的终态。
+`query:complete.terminal.status` 为 `completed` 时，该轮正常收口；为 `interrupted` 时，该轮被中止，可继续读取其 `reason`、`partial`、`runId` 等已有信息。业务操作是否达到目标仍需核对输出和回执。`result`、某条主动交付消息或 Run 的 `idle`、`handed_off` 都不能代替该轮的终态；来源轮次正常收口也不代表转交目标已经完成。
 
 没有匹配的 `clientRequestId` 或没有结构化 `terminal` 时，示例不会把事件判成这次请求已经成功。状态文件保留已观察的信息，供后续对账。
 
@@ -396,7 +415,7 @@ node agent-client.mjs --resume ./request.json
 node agent-client.mjs --recover ./request.json
 ```
 
-这个模式不建立 Socket.IO 订阅、不发送 start 或 follow-up。已有 `runId` 时读取运行态与回执；只有 `sessionId` 时查找准确匹配的 Run，不猜“最近一条”就是本次运行。对账数据不能重放离线期间全部事件，也不能自动补发曾经发生的外部操作。缺少该轮终态证据时仍保留结果未知。
+这个模式不建立 Socket.IO 订阅、不发送 start 或 follow-up。已有 `runId` 时读取运行态与回执；只有 `sessionId` 时查找准确匹配的 Run，不猜“最近一条”就是本次运行。对账数据不能重放离线期间全部事件，也不能自动补发曾经发生的外部操作。缺少该轮终态证据时仍保留结果未知。示例不会把 `handed_off` 当成成功，不自动追随转交目标；顺序续问前若观察到来源 Run 已转交，会停止自动续问并保留待发送文本。
 
 示例退出码为 `0`（观察到完成轮次）、`1`（拒绝、失败或中止）、`2`（结果未知或只读恢复模式）。`--recover` 完成只读检查后仍返回 `2`，这不是重新执行任务或确认任务失败的信号。
 

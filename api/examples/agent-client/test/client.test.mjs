@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { Server } from 'socket.io';
@@ -23,6 +23,7 @@ async function instance(scenario = 'normal') {
     if (url.pathname.endsWith('/runtime-state')) {
       observations.push('runtime-state');
       const record = [...records.values()].find(record => url.pathname.includes(record.run.run_id));
+      if (record?.run.status === 'handed_off') return json(response, 404, { error: 'Run runtime state not found: run-test' });
       return json(response, record ? 200 : 404, record ? record.run : { error: 'Run not found' });
     }
     if (url.pathname.endsWith('/receipt')) {
@@ -53,7 +54,7 @@ async function instance(scenario = 'normal') {
     assert.equal(socket.handshake.auth.token, request.headers['x-agent-service-token']);
     const prompt = body.prompt ?? body.message.content;
     const messageId = body.userMessageId ?? body.message.id;
-    assert.equal(body.requestDigest, queryDigest(prompt, messageId));
+    assert.equal(body.requestDigest, queryDigest(prompt, messageId, body.options?.fileReferences ?? body.fileReferences ?? []));
     if (scenario === 'conflict') return json(response, 409, { ok: false, code: 'CLIENT_REQUEST_BODY_MISMATCH', retryable: false });
     if (['lost-before-admission', 'expired', 'unknown'].includes(scenario) && requests.length === 1) {
       request.socket.destroy();
@@ -75,11 +76,12 @@ async function instance(scenario = 'normal') {
     } } }));
     if (scenario === 'missed-terminal') later(15, () => socket.conn.close());
     later(25, () => {
-      run.status = 'idle';
+      run.status = scenario.startsWith('handed-off') ? 'handed_off' : 'idle';
       emit('query:message', { ...data, message: { type: 'result', status: 'completed_idle', text: 'not a terminal' } });
       emit('query:message', { ...data, message: { type: 'user:message_delivery', message: 'delivery is not completion' } });
-      emit('activity:run_status', { runId: run.run_id, status: 'idle' });
-      if (scenario !== 'false-terminal-only') emit('query:complete', {
+      // The snapshot-only scenario deliberately misses the status event too.
+      if (scenario !== 'handed-off-snapshot') emit('activity:run_status', { runId: run.run_id, status: run.status });
+      if (!['false-terminal-only', 'handed-off-no-terminal'].includes(scenario)) emit('query:complete', {
         ...data, terminal: { status: scenario === 'interrupted' ? 'interrupted' : 'completed', runId: run.run_id },
       });
     });
@@ -109,7 +111,14 @@ async function execute(t, scenario, extra = {}) {
   const filename = join(directory, 'request.json');
   const logs = [], chunks = [];
   const env = { DESIRECORE_URL: service.origin, DESIRECORE_TOKEN: 'owner-test-token', DESIRECORE_AGENT_ID: 'agent-test' };
-  const options = { state: filename, prompt: 'hello', followUps: [], timeoutMs: 300, httpTimeoutMs: 200, pollMs: 20, ...extra };
+  const { receiptContents, ...overrides } = extra;
+  const attachmentReceipts = receiptContents?.map((receipt, index) => {
+    const file = join(directory, `attachment-${index}.json`);
+    writeFileSync(file, JSON.stringify(receipt));
+    return file;
+  });
+  const options = { state: filename, prompt: 'hello', followUps: [], timeoutMs: 300, httpTimeoutMs: 200, pollMs: 20,
+    ...(attachmentReceipts ? { attachmentReceipts } : {}), ...overrides };
   const code = await runClient(options, env, { log: data => logs.push(data), text: data => chunks.push(data) });
   return { service, filename, env, code, logs, chunks, state: JSON.parse(readFileSync(filename, 'utf8')) };
 }
@@ -164,6 +173,54 @@ test('missed terminal is recovered by read-only snapshots, without claiming comp
   assert.equal(result.service.requests.length, 1);
   assert.equal(result.state.turns[0].recovery.runtime.status, 'idle');
   assert.equal(result.state.turns[0].outcome, undefined);
+});
+
+test('handed_off observations do not finish a turn or start pending follow-ups', async t => {
+  const result = await execute(t, 'handed-off-no-terminal', { followUps: ['do not send'] });
+  assert.equal(result.code, 2);
+  assert.equal(result.service.requests.length, 1);
+  assert.equal(result.state.turns[0].outcome, undefined);
+  assert.equal(result.state.turns[0].recovery.runtime.httpStatus, 404);
+  assert.equal(result.state.turns[0].runState.status, 'handed_off');
+  assert.deepEqual(result.state.pendingFollowUps, ['do not send']);
+});
+
+test('an unavailable runtime snapshot prevents continuing a completed source turn after handoff', async t => {
+  const result = await execute(t, 'handed-off-snapshot', { followUps: ['retain this'] });
+  assert.equal(result.code, 2);
+  assert.equal(result.state.turns[0].outcome.status, 'completed');
+  assert.equal(result.service.requests.length, 1);
+  assert.equal(result.state.turns[0].runState, undefined);
+  assert.deepEqual(result.state.pendingFollowUps, ['retain this']);
+  assert.ok(result.logs.some(item => item.event === 'follow_up_unavailable' && item.httpStatus === 404));
+});
+
+const attachmentReceipt = (id, fileReference) => ({
+  attachmentId: `00000000-0000-4000-8000-${String(id).padStart(12, '0')}`,
+  name: `report-${id}.txt`, mimeType: 'text/plain', size: 7, sha256: 'a'.repeat(64), fileReference,
+});
+
+test('attachment receipts add ordered unique start references and participate in the frozen digest', async t => {
+  const first = attachmentReceipt(1, 'instance-attachment/first.txt');
+  const second = attachmentReceipt(2, 'instance-attachment/second.txt');
+  const result = await execute(t, 'lost-before-admission', { timeoutMs: 5000, receiptContents: [first, second, first] });
+  assert.equal(result.code, 0);
+  assert.equal(result.service.requests.length, 2);
+  const body = result.service.requests[0].body;
+  assert.deepEqual(body.options.fileReferences, [first.fileReference, second.fileReference]);
+  assert.equal(body.fileReferences, undefined);
+  assert.notEqual(body.requestDigest, queryDigest(body.prompt, body.userMessageId));
+  const { originSocketId: originalSocket, ...original } = body;
+  const { originSocketId: retrySocket, ...retry } = result.service.requests[1].body;
+  assert.notEqual(originalSocket, retrySocket);
+  assert.deepEqual(retry, original);
+  assert.deepEqual(result.state.turns[0].body.options.fileReferences, body.options.fileReferences);
+  assert.equal(await runClient({ recover: result.filename }, result.env, { log() {}, text() {} }), 2);
+});
+
+test('invalid or non-closed attachment receipts are rejected before query admission', async t => {
+  await assert.rejects(execute(t, 'normal', { receiptContents: [{ ...attachmentReceipt(1, 'file.txt'), size: 0 }] }), /Invalid attachment receipt/);
+  await assert.rejects(execute(t, 'normal', { receiptContents: [{ ...attachmentReceipt(1, 'file.txt'), extra: true }] }), /Invalid attachment receipt/);
 });
 
 for (const scenario of ['unknown', 'expired']) test(`${scenario} admission never generates a new execution`, async t => {

@@ -16,6 +16,8 @@ keywords: [API, 集成, Webhook, Agent Service, 接入, 认证]
 |---|---|---|
 | 用自己的程序连接实例 | 管理员提供 HTTPS 地址和实例访问令牌 | [连接与认证](./01-connection-and-auth.md) |
 | 提交对话并观察结果 | 实例所有者访问权限、Agent ID；运行示例需要 Node.js 22+ | [对话与 Run](./04-conversations-and-runs.md) |
+| 读取历史、分页消息与搜索 | 实例所有者访问权限、已知 Agent 或 Run | [会话历史与消息](./08-session-history-and-messages.md) |
+| 上传附件、提交文件引用或访问媒体 | 实例所有者访问权限；媒体播放使用短期签名链接 | [附件与媒体](./09-attachments-and-media.md) |
 | 从外部事件触发智能体 | 已启用事件和 Agent 级 Webhook secret；所有者配置需服务支持 `webhookManagement` | [Agent Webhook](./02-agent-webhook.md) |
 | 通过本机代理调用模型协议 | 正在运行的本机代理和绑定供应商的安全 token | [模型代理](./05-model-proxy.md) |
 | 触发现有工作流 | 独立 Workflow Service 地址、服务令牌和管理员提供的定义 | [工作流集成](./06-workflow-integration.md) |

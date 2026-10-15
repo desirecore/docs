@@ -16,6 +16,8 @@ Connect your scripts or services to DesireCore using the address and credentials
 |---|---|---|
 | Connect an instance | Administrator-provided HTTPS address and instance token | [Connection and authentication](./01-connection-and-auth.md) |
 | Submit conversations and follow results | Instance owner access, Agent ID, Node.js 22+ for the example | [Conversations and Runs](./04-conversations-and-runs.md) |
+| Read history, page through messages, and search | Instance owner access and a known Agent or Run | [Session history and messages](./08-session-history-and-messages.md) |
+| Upload attachments, submit file references, or access media | Instance owner access; media playback uses short-lived signed URLs | [Attachments and media](./09-attachments-and-media.md) |
 | Trigger an Agent from external events | Enabled event and Agent-level Webhook secret; owner configuration requires the `webhookManagement` capability | [Agent Webhook](./02-agent-webhook.md) |
 | Call model protocols through the local proxy | Running local proxy and provider-bound safe token | [Model proxy](./05-model-proxy.md) |
 | Trigger an existing workflow | Separate Workflow Service address, service token, and administrator-provided definition | [Workflow integration](./06-workflow-integration.md) |

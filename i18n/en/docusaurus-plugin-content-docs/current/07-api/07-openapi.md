@@ -9,9 +9,9 @@ sidebar_position: 7
 
 Import the JSON file below into an API tool that supports [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.0.html) to inspect parameters, responses, and authentication requirements. Request and response schemas declare the JSON Schema Draft 7 dialect. The file describes only the published HTTP endpoints listed in the table.
 
-**[Download Agent Service OpenAPI JSON](/openapi/agent-service.json)**
+**[Download Agent Service OpenAPI JSON](pathname:///openapi/agent-service.json)**
 
-Also available: **[model protocol proxy OpenAPI JSON](/openapi/compat-proxy.json)** and **[Workflow Service OpenAPI JSON](/openapi/workflow-service.json)**. Each file uses its own service address and credential.
+Also available: **[model protocol proxy OpenAPI JSON](pathname:///openapi/compat-proxy.json)** and **[Workflow Service OpenAPI JSON](pathname:///openapi/workflow-service.json)**. Each file uses its own service address and credential.
 
 ## Agent Service coverage
 
@@ -33,6 +33,17 @@ Also available: **[model protocol proxy OpenAPI JSON](/openapi/compat-proxy.json
 | `POST /api/query/start` | Submit a new conversation request | [Conversations and Runs](./04-conversations-and-runs.md) |
 | `POST /api/query/follow-up` | Submit another turn to an established session | [Conversations and Runs](./04-conversations-and-runs.md) |
 | `POST /api/query/client-requests/lookup` | Reconcile admission by stable request ID | [Conversations and Runs](./04-conversations-and-runs.md) |
+| `GET /api/sessions` | List historical sessions | [Session history and messages](./08-session-history-and-messages.md) |
+| `GET /api/sessions/{runId}` | Read a full session snapshot | [Session history and messages](./08-session-history-and-messages.md) |
+| `GET /api/sessions/{runId}/messages` | Page through durable messages | [Session history and messages](./08-session-history-and-messages.md) |
+| `GET /api/sessions/messages/search` | Search an Agent’s historical messages | [Session history and messages](./08-session-history-and-messages.md) |
+| `GET /api/conversation/{agentId}/overview` | Read the conversation topic overview | [Session history and messages](./08-session-history-and-messages.md) |
+| `GET /api/conversation/{agentId}/matters/{id}/full` | Read a topic’s messages | [Session history and messages](./08-session-history-and-messages.md) |
+| `POST /api/attachments` | Upload an attachment and obtain a file reference | [Attachments and media](./09-attachments-and-media.md) |
+| `GET /api/attachments/{attachmentId}` | Download an attachment owned by the current user | [Attachments and media](./09-attachments-and-media.md) |
+| `POST /api/media/upload` | Upload an image, audio, or video | [Attachments and media](./09-attachments-and-media.md) |
+| `POST /api/media/access-urls` | Issue short-lived media access URLs | [Attachments and media](./09-attachments-and-media.md) |
+| `GET /media/{filename}` | Read signed media, including byte ranges | [Attachments and media](./09-attachments-and-media.md) |
 
 Braces identify path parameters to replace, corresponding to colon notation in the endpoint guides. Webhook management requires `capabilities.webhookManagement: true` from the authenticated handshake and the instance owner's credential. Older instances without that capability use administrator-enabled and verified events. Run lists and details use the deployment owner's instance read access; receipt access additionally checks trusted-user ownership.
 
@@ -70,6 +81,7 @@ Replace the example server `https://your-instance.example` with the instance HTT
 |---|---|---|
 | `InstanceToken` | Existing instance access token | `X-Agent-Service-Token: <instance token>` |
 | `WebhookSecret` | Dedicated secret for the target Agent Webhook | `Authorization: Bearer <Webhook secret>` |
+| `SignedMediaSignature` | Short-lived signature returned by the media access endpoint | URL query parameter `signature`, together with `expires` |
 
 The table applies to the Agent Service file. Select the scheme required by the operation. Provider API keys let DesireCore connect to model providers; the proxy and Workflow files use their own addresses and authentication schemes.
 
@@ -86,3 +98,5 @@ Socket.IO connections, subscriptions, and asynchronous events require correspond
 A conversation submission's `202` response also does not prove completion. Connect Socket.IO first and submit its current `socket.id` as `originSocketId`; the HTTP request and socket must identify the same authenticated principal. Stable `clientInstanceId` belongs to Socket authentication data. After a disconnect, follow the reconciliation steps in [Conversations and Runs](./04-conversations-and-runs.md); a Run's `idle` state does not prove that a particular submission succeeded.
 
 The file's `info.version` is the version of this HTTP interface description. It is separate from DesireCore feature effective versions and the handshake's `serverVersion` and `apiProtocolVersion`.
+
+For native media playback, use the complete `/media/{filename}?expires=…&signature=…` URL returned by the issuing endpoint. This read endpoint uses its short-lived signature rather than an instance token. Attachment downloads still require instance authentication. Consult each guide for history, topic, and media access rules.
