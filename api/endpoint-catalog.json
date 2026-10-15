@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "reviewBaseline": {
-    "reviewedAt": "2026-10-14",
+    "reviewedAt": "2026-10-15",
     "clientRepository": "desirecore/desirecore",
-    "clientRevision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
-    "internalDocsRevision": "10b6007b7e46477ee4df2e15563f09c1ab7bd1fe",
+    "clientRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+    "internalDocsRevision": "9cc47fc9216db4a3803a982f00649f7af667c933",
     "publicDocsBaseRevision": "34fb4a7cbc8bd2f453ee79536981d22c7448373b"
   },
   "pages": [
@@ -65,7 +65,7 @@
       "resultDelivery": "Synchronous JSON metadata. A 200 response verifies this authenticated request, not every optional capability.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/client-handshake-routes.ts",
           "packages/agent-service/src/service-metadata.ts",
@@ -103,7 +103,7 @@
       "resultDelivery": "200 {accepted:true,agentId,event} acknowledges receipt, with no Run ID or delivery deduplication. Only explicit authorized SendUserMessage output is delivered to the user; final model answers are not automatically returned to the caller or added to chat.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/webhook-routes.ts",
           "packages/agent-service/src/routes/webhook-state.ts",
@@ -142,7 +142,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/agent-routes.ts",
           "packages/agent-service/src/agent/list-projection.ts"
@@ -176,7 +176,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-manager.ts"
@@ -210,7 +210,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-meta-read.ts"
@@ -244,7 +244,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts"
         ]
@@ -277,7 +277,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/receipts/reader.ts"
@@ -311,7 +311,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -345,7 +345,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -379,7 +379,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -413,7 +413,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -447,7 +447,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -481,7 +481,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -515,7 +515,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -549,7 +549,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -583,7 +583,7 @@
       "resultDelivery": "Synchronous {items,total,limit,offset}; default limit50, maximum200. Items may include other authorized background deliveries.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/agent-service/src/routes/schedule-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -615,7 +615,7 @@
       "resultDelivery": "Protocol-specific JSON or SSE stream; streaming failures are interpreted inside the stream.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/shared/src/compat-proxy/server.ts",
           "packages/shared/src/compat-proxy/proxy-auth.ts",
@@ -649,7 +649,7 @@
       "resultDelivery": "Protocol-specific JSON or SSE stream; streaming failures are interpreted inside the stream.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/shared/src/compat-proxy/server.ts",
           "packages/shared/src/compat-proxy/proxy-auth.ts",
@@ -683,7 +683,7 @@
       "resultDelivery": "Protocol-specific JSON or SSE stream; streaming failures are interpreted inside the stream.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "packages/shared/src/compat-proxy/server.ts",
           "packages/shared/src/compat-proxy/proxy-auth.ts",
@@ -717,7 +717,7 @@
       "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "lib/workflow-service/server.ts",
           "packages/shared/src/workflow-contracts/api.ts"
@@ -751,7 +751,7 @@
       "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "lib/workflow-service/server.ts",
           "packages/shared/src/workflow-contracts/api.ts"
@@ -785,7 +785,7 @@
       "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "lib/workflow-service/server.ts",
           "packages/shared/src/workflow-contracts/api.ts"
@@ -819,7 +819,7 @@
       "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "lib/workflow-service/server.ts",
           "packages/shared/src/workflow-contracts/api.ts"
@@ -853,7 +853,7 @@
       "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
         "files": [
           "lib/workflow-service/server.ts",
           "packages/shared/src/workflow-contracts/api.ts"
