@@ -1,0 +1,1619 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-15T11:34:17.100Z",
+  "site": "https://docs.desirecore.com",
+  "algolia": {
+    "appId": "68TB6NUYVW",
+    "indexName": "DesireCore Docs",
+    "crawlerId": "26591011-cca2-4aaa-9c75-75f1f0b3fad5"
+  },
+  "evidence": {
+    "cloud": "Crawler configuration, URL Tester, crawl history and index counts observed in the Algolia administration UI.",
+    "search": "Bounded read-only public search API queries using the same language and Docusaurus tag filters as the website.",
+    "browser": "Chinese and English DocSearch queries were checked in the website UI and the target pages opened successfully.",
+    "dataHandling": "Keys, account identities, request headers and local filesystem locations are omitted. Query responses are reduced to counts, ranks, facet checks and the first matching public record."
+  },
+  "cause": {
+    "finding": "The saved crawler was scheduled monthly and its previous completed crawl preceded publication of the API pages. A manual crawl populated the new records without a crawler configuration or schedule change.",
+    "previousCompleteCrawl": {
+      "startedAtDisplay": "2026-09-23 08:00:06",
+      "completedAtDisplay": "2026-09-23 08:41:52",
+      "timeBasis": "Administration UI display; timezone not independently verified."
+    }
+  },
+  "crawlerConfiguration": {
+    "version": 4,
+    "savedAtDisplay": "2026-03-11",
+    "schedule": {
+      "frequency": "monthly",
+      "dayOfMonth": 23,
+      "nextRunDisplay": "2026-10-23 08:00",
+      "timeBasis": "Administration UI display; timezone not independently verified."
+    },
+    "pathsToMatch": [
+      "https://docs.desirecore.com/**"
+    ],
+    "discoveryPatterns": [
+      "https://docs.desirecore.com/**"
+    ],
+    "startUrls": [
+      "https://docs.desirecore.com/"
+    ],
+    "sitemaps": [
+      "https://docs.desirecore.com/sitemap.xml"
+    ],
+    "maxUrls": null,
+    "rateLimit": 8,
+    "maxDepth": 10,
+    "renderJavaScript": false,
+    "ignoreCanonicalTo": true
+  },
+  "actions": {
+    "manualCrawlTriggered": true,
+    "editorDraftPublished": false,
+    "scheduleChanged": false,
+    "newKeyCreated": false
+  },
+  "urlTester": [
+    {
+      "locale": "zh-Hans",
+      "url": "https://docs.desirecore.com/api/agent-webhook",
+      "status": "success",
+      "records": 110
+    },
+    {
+      "locale": "en",
+      "url": "https://docs.desirecore.com/en/api/agent-webhook",
+      "status": "success",
+      "records": 110
+    }
+  ],
+  "manualCrawl": {
+    "startedAt": "2026-10-15T11:30:02Z",
+    "completedAt": "2026-10-15T11:32:35Z",
+    "totalUrls": 738,
+    "successfulUrls": 734,
+    "ignoredUrls": 2,
+    "ignoredReason": "Content type",
+    "failedUrls": 2,
+    "failures": [
+      {
+        "url": "https://docs.desirecore.com/more/changelog/v10.0.180",
+        "reason": "Records too big"
+      },
+      {
+        "url": "https://docs.desirecore.com/en/more/changelog/v10.0.180",
+        "reason": "Records too big"
+      }
+    ],
+    "indexRecordsBefore": 19324,
+    "indexRecordsAfter": 21572,
+    "indexRecordIncrease": 2248
+  },
+  "queryAudit": {
+    "startedAt": "2026-10-15T11:34:08.251Z",
+    "completedAt": "2026-10-15T11:34:17.100Z",
+    "method": "Read-only search; one query per title, four endpoint queries, two old-page controls; no polling, browse, settings, or write operation",
+    "results": [
+      {
+        "kind": "title",
+        "pageId": "api/index",
+        "locale": "zh-Hans",
+        "query": "集成与 API",
+        "target": "https://docs.desirecore.com/api",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 24,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 4,
+        "targetMatchRanks": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 4,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "集成与 API",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/index",
+        "locale": "en",
+        "query": "Integration & API",
+        "target": "https://docs.desirecore.com/en/api",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 98,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 4,
+        "targetMatchRanks": [
+          19,
+          20,
+          21,
+          22
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 4,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Integration &amp; API",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/connection-and-auth",
+        "locale": "zh-Hans",
+        "query": "连接实例与认证",
+        "target": "https://docs.desirecore.com/api/connection-and-auth",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 20,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 9,
+        "targetMatchRanks": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 9,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/connection-and-auth",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "连接实例与认证",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/connection-and-auth"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/connection-and-auth",
+        "locale": "en",
+        "query": "Connect to an Instance and Authenticate",
+        "target": "https://docs.desirecore.com/en/api/connection-and-auth",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 14,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 9,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 9,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/connection-and-auth",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Connect to an Instance and Authenticate",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/connection-and-auth"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/agent-webhook",
+        "locale": "zh-Hans",
+        "query": "智能体 Webhook",
+        "target": "https://docs.desirecore.com/api/agent-webhook",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 26,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 15,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 15,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/agent-webhook",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "智能体 Webhook",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/agent-webhook"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/agent-webhook",
+        "locale": "en",
+        "query": "Agent Webhook",
+        "target": "https://docs.desirecore.com/en/api/agent-webhook",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 38,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 15,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 15,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/agent-webhook",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Agent Webhook",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/agent-webhook"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/errors-and-troubleshooting",
+        "locale": "zh-Hans",
+        "query": "错误与排查",
+        "target": "https://docs.desirecore.com/api/errors-and-troubleshooting",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 24,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 8,
+        "targetMatchRanks": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 8,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/errors-and-troubleshooting",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "错误与排查",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/errors-and-troubleshooting"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/errors-and-troubleshooting",
+        "locale": "en",
+        "query": "Errors and Troubleshooting",
+        "target": "https://docs.desirecore.com/en/api/errors-and-troubleshooting",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 24,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 8,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 8,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/errors-and-troubleshooting",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Errors and Troubleshooting",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/errors-and-troubleshooting"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/conversations-and-runs",
+        "locale": "zh-Hans",
+        "query": "对话与运行记录",
+        "target": "https://docs.desirecore.com/api/conversations-and-runs",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 54,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 24,
+        "targetMatchRanks": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 24,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/conversations-and-runs",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "对话与运行记录",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/conversations-and-runs"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/conversations-and-runs",
+        "locale": "en",
+        "query": "Conversations and Runs",
+        "target": "https://docs.desirecore.com/en/api/conversations-and-runs",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 137,
+        "nbPages": 2,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": true,
+        "targetMatchCount": 24,
+        "targetMatchRanks": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 24,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/conversations-and-runs",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Conversations and Runs",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/conversations-and-runs"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/model-proxy",
+        "locale": "zh-Hans",
+        "query": "模型协议代理",
+        "target": "https://docs.desirecore.com/api/model-proxy",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 21,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 12,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 12,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/model-proxy",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "模型协议代理",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/model-proxy"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/model-proxy",
+        "locale": "en",
+        "query": "Model Protocol Proxy",
+        "target": "https://docs.desirecore.com/en/api/model-proxy",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 18,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 12,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 12,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/model-proxy",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Model Protocol Proxy",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/model-proxy"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/workflow-integration",
+        "locale": "zh-Hans",
+        "query": "工作流集成",
+        "target": "https://docs.desirecore.com/api/workflow-integration",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 26,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 15,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 15,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/workflow-integration",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "工作流集成",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/workflow-integration"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/workflow-integration",
+        "locale": "en",
+        "query": "Workflow Integration",
+        "target": "https://docs.desirecore.com/en/api/workflow-integration",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 44,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 15,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 15,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/workflow-integration",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Workflow Integration",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/workflow-integration"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/openapi",
+        "locale": "zh-Hans",
+        "query": "OpenAPI 下载",
+        "target": "https://docs.desirecore.com/api/openapi",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 11,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 6,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 6,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/openapi",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "OpenAPI 下载",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/api/openapi"
+        },
+        "error": null
+      },
+      {
+        "kind": "title",
+        "pageId": "api/openapi",
+        "locale": "en",
+        "query": "OpenAPI download",
+        "target": "https://docs.desirecore.com/en/api/openapi",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 12,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 6,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 6,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/openapi",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "OpenAPI download",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/openapi"
+        },
+        "error": null
+      },
+      {
+        "kind": "endpoint",
+        "locale": "zh-Hans",
+        "query": "/api/client-handshake",
+        "target": "https://docs.desirecore.com/api/connection-and-auth",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 3,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 1,
+        "targetMatchRanks": [
+          1
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 1,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/connection-and-auth#get-apiclient-handshake",
+          "language": "zh-Hans",
+          "type": "lvl3",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "连接实例与认证",
+            "lvl2": "验证连接​",
+            "lvl3": "GET /api/client-handshake​",
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "18-https://docs.desirecore.com/api/connection-and-auth"
+        },
+        "error": null
+      },
+      {
+        "kind": "endpoint",
+        "locale": "en",
+        "query": "/api/webhook",
+        "target": "https://docs.desirecore.com/en/api/agent-webhook",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 42,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 15,
+        "targetMatchRanks": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 15,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/agent-webhook",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Agent Webhook",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/api/agent-webhook"
+        },
+        "error": null
+      },
+      {
+        "kind": "endpoint",
+        "locale": "zh-Hans",
+        "query": "/api/query/client-requests/lookup",
+        "target": "https://docs.desirecore.com/api/conversations-and-runs",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 2,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 1,
+        "targetMatchRanks": [
+          1
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 1,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/api/conversations-and-runs#post-apiqueryclient-requestslookup",
+          "language": "zh-Hans",
+          "type": "lvl3",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "对话与运行记录",
+            "lvl2": "接纳未知、重试与断线对账​",
+            "lvl3": "POST /api/query/client-requests/lookup​",
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "175-https://docs.desirecore.com/api/conversations-and-runs"
+        },
+        "error": null
+      },
+      {
+        "kind": "endpoint",
+        "locale": "en",
+        "query": "/api/workflow/webhook",
+        "target": "https://docs.desirecore.com/en/api/workflow-integration",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 8,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 3,
+        "targetMatchRanks": [
+          3,
+          5,
+          7
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 3,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/api/workflow-integration",
+          "language": "en",
+          "type": "content",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "API",
+            "lvl1": "Workflow Integration",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "2-https://docs.desirecore.com/en/api/workflow-integration"
+        },
+        "error": null
+      },
+      {
+        "kind": "control",
+        "locale": "zh-Hans",
+        "query": "配置 API Key",
+        "target": "https://docs.desirecore.com/getting-started/configure-api-key",
+        "facetFilters": [
+          "language:zh-Hans",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 71,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 19,
+        "targetMatchRanks": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 19,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/getting-started/configure-api-key",
+          "language": "zh-Hans",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "快速上手",
+            "lvl1": "配置 API Key",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/getting-started/configure-api-key"
+        },
+        "error": null
+      },
+      {
+        "kind": "control",
+        "locale": "en",
+        "query": "Configure API Key",
+        "target": "https://docs.desirecore.com/en/getting-started/configure-api-key",
+        "facetFilters": [
+          "language:en",
+          [
+            "docusaurus_tag:default",
+            "docusaurus_tag:docs-default-current"
+          ]
+        ],
+        "httpStatus": 200,
+        "nbHits": 54,
+        "nbPages": 1,
+        "exhaustiveNbHits": true,
+        "hitWindowTruncated": false,
+        "targetMatchCount": 18,
+        "targetMatchRanks": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "returnedTargetFacets": {
+          "checkedRecords": 18,
+          "languageMatches": true,
+          "versionContainsCurrent": true,
+          "tags": [
+            "docs-default-current"
+          ]
+        },
+        "firstTargetMatch": {
+          "version": [
+            "current"
+          ],
+          "url": "https://docs.desirecore.com/en/getting-started/configure-api-key",
+          "language": "en",
+          "type": "lvl1",
+          "docusaurus_tag": "docs-default-current",
+          "hierarchy": {
+            "lvl0": "Quick Start",
+            "lvl1": "Configure API Key",
+            "lvl2": null,
+            "lvl3": null,
+            "lvl4": null,
+            "lvl5": null,
+            "lvl6": null
+          },
+          "objectID": "1-https://docs.desirecore.com/en/getting-started/configure-api-key"
+        },
+        "error": null
+      }
+    ],
+    "summary": {
+      "requests": 22,
+      "http200": 22,
+      "titles": {
+        "matched": 16,
+        "total": 16
+      },
+      "endpoints": {
+        "matched": 4,
+        "total": 4
+      },
+      "controls": {
+        "matched": 2,
+        "total": 2
+      },
+      "failures": [],
+      "limitations": [
+        "This is a bounded query audit, not an exhaustive browse of the index.",
+        "The public search API does not establish the crawler run status; it verifies returned search results."
+      ],
+      "returnedTargetFacetFailures": [],
+      "firstTargetRanks": [
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api",
+          "rank": 7
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api",
+          "rank": 19
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/connection-and-auth",
+          "rank": 2
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/connection-and-auth",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/agent-webhook",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/agent-webhook",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/errors-and-troubleshooting",
+          "rank": 5
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/errors-and-troubleshooting",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/conversations-and-runs",
+          "rank": 5
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/conversations-and-runs",
+          "rank": 3
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/model-proxy",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/model-proxy",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/workflow-integration",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/workflow-integration",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/openapi",
+          "rank": 1
+        },
+        {
+          "kind": "title",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/openapi",
+          "rank": 1
+        },
+        {
+          "kind": "endpoint",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/connection-and-auth",
+          "rank": 1
+        },
+        {
+          "kind": "endpoint",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/agent-webhook",
+          "rank": 1
+        },
+        {
+          "kind": "endpoint",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/api/conversations-and-runs",
+          "rank": 1
+        },
+        {
+          "kind": "endpoint",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/api/workflow-integration",
+          "rank": 3
+        },
+        {
+          "kind": "control",
+          "locale": "zh-Hans",
+          "target": "https://docs.desirecore.com/getting-started/configure-api-key",
+          "rank": 3
+        },
+        {
+          "kind": "control",
+          "locale": "en",
+          "target": "https://docs.desirecore.com/en/getting-started/configure-api-key",
+          "rank": 2
+        }
+      ]
+    }
+  },
+  "browserChecks": [
+    {
+      "locale": "zh-Hans",
+      "query": "智能体 Webhook",
+      "target": "https://docs.desirecore.com/api/agent-webhook",
+      "targetFound": true,
+      "targetOpened": true
+    },
+    {
+      "locale": "en",
+      "query": "Agent Webhook",
+      "target": "https://docs.desirecore.com/en/api/agent-webhook",
+      "targetFound": true,
+      "targetOpened": true
+    }
+  ],
+  "conclusion": {
+    "apiSearchAcceptance": "passed",
+    "scope": "16 bilingual API page-title queries, 4 endpoint queries, 2 existing-page controls and 2 browser checks.",
+    "remainingFailures": "The two oversized v10.0.180 changelog pages remain crawl failures; this report does not claim a failure-free whole-site crawl.",
+    "limitations": [
+      "This bounded audit verifies selected returned results, not every record or future ranking.",
+      "A successful website deployment does not trigger or prove an Algolia index update.",
+      "Crawler status is supported by administration UI evidence, separately from public search API results."
+    ]
+  }
+}

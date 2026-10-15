@@ -64,12 +64,37 @@
     }
   },
   "search": {
-    "checkedAt": "2026-10-15T09:10:17.966Z",
-    "httpStatus": 200,
-    "query": "Webhook",
-    "hits": 19,
-    "newApiUrls": [],
-    "status": "New API pages not returned by immediate search; page deployment, sitemap inclusion and crawlability passed. Search indexing is not claimed complete."
+    "checkedAt": "2026-10-15T11:34:17.100Z",
+    "status": "passed",
+    "rootCause": "The existing crawler runs on the 23rd day of each month; the previous complete crawl was on 2026-09-23, before API publication.",
+    "crawlerId": "26591011-cca2-4aaa-9c75-75f1f0b3fad5",
+    "schedule": "on the 23 day of the month",
+    "manualCrawl": {
+      "startedAt": "2026-10-15T11:30:02Z",
+      "completedAt": "2026-10-15T11:32:35Z",
+      "successUrls": 734,
+      "ignoredUrls": 2,
+      "failedUrls": 2,
+      "recordsBefore": 19324,
+      "recordsAfter": 21572
+    },
+    "titleTargets": 16,
+    "titleTargetsMatched": 16,
+    "endpointChecks": 4,
+    "endpointChecksPassed": 4,
+    "legacyControls": 2,
+    "legacyControlsPassed": 2,
+    "contextualFilter": "language:<locale> AND (docusaurus_tag:default OR docusaurus_tag:docs-default-current)",
+    "browserChecks": {
+      "zhQuery": "智能体 Webhook",
+      "enQuery": "Agent Webhook",
+      "targetLinksOpened": true
+    },
+    "details": "search-verification.json",
+    "limitations": [
+      "The monthly schedule is unchanged; website deployment does not itself trigger this external crawler.",
+      "The two oversized-record failures concern the Chinese and English v10.0.180 changelog pages, not API pages."
+    ]
   },
   "limitations": [
     "No commercial model, packaged-client or production business-operation acceptance is inferred from this documentation deployment.",

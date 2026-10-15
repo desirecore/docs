@@ -173,3 +173,13 @@ node_modules/.bin/vitest run --project integration --maxWorkers=1 --no-file-para
 修复 #73 合并为 `5d9cef1eac584ffa8c925636ac5d24ae174e5150`，Production deployment `7088538260` 成功后，全站 `pnpm sitemap:check` 716URL全部200及SEO检查通过。两个应用场景入口的canonical与正文标题均准确。16个API页面、8下载及两sitemap/robots再次严格通过，`production-verification.json` 已更新为这次最终报告。
 
 完整发布链与限制见 [publication.json](./publication.json)。站内即时Webhook检索返回19个已有结果，尚无新增API路径；页面、导航和抓取条件已经通过，未宣称搜索索引刷新完成。商业模型、安装包与生产业务执行仍不属于本次文档部署验收。
+
+## 站内搜索最终验收（2026-10-15）
+
+通过已登录Algolia管理端确认：当前文档crawler为每月23日运行，前次完整抓取为9月23日，因此本次API发布后索引未自动刷新。路径/发现范围覆盖全站，目标索引与前端一致；页面与过滤条件未发现阻碍。中英文Webhook URL Tester各成功生成110条记录。
+
+手动抓取于北京时间19:30:02—19:32:35完成，索引19,324→21,572条。734URL成功、2个内容类型忽略；两条记录过大错误仅为中英文v10.0.180更新日志，API目标不受影响。没有调整月度周期或发布编辑器草稿。
+
+22次正式只读搜索请求全部200：16个目标标题、4个关键端点、2个旧页对照全部命中。过滤与前端完全一致，为language及default/docs-default-current tag，不添加独立version过滤；返回目标记录的版本、语言与标签均正确。中英文真实搜索弹窗均返回Webhook指南，点击后URL与标题正确。详细请求、排名和配置快照见 [search-verification.json](./search-verification.json)。
+
+此前各节“尚未收录”的即时观察保留为历史；当前搜索状态以本节及 `publication.json` 为准。后续网站部署与外部索引抓取分别验收。
