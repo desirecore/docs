@@ -30,6 +30,20 @@ pnpm api:check -- --build
 
 `api:check` 检查清单、两种语言的显式 slug、JSON 示例、版本提示框及 OpenAPI 范围、引用、鉴权和下载链接；`--build` 额外读取本地 HTML 和 sitemap。它不读取私有源仓库、不访问生产 URL，也不证明翻译语义或接口运行已验收。
 
+## 搜索索引维护
+
+网站自动部署与 Algolia 索引更新是两个独立步骤。现有 DocSearch crawler 按月在每月 23 日运行，部署成功不能证明新增页面已经收录。当前使用应用 `68TB6NUYVW`、索引 `DesireCore Docs` 和 crawler `26591011-cca2-4aaa-9c75-75f1f0b3fad5`；周期时间以管理端显示为准。
+
+发布新增或调整后的 API 页面后，按以下步骤验收：
+
+1. 先确认生产页面、canonical、robots、双语 sitemap 与正文正常。API 页应有可直接读取的 `.theme-doc-markdown`、标题及 `docsearch:language`、`docsearch:version`、`docsearch:docusaurus_tag` 元数据。
+2. 在现有 crawler 的 URL Tester 中分别检查中英文页面的记录提取，再手动触发该 crawler 抓取。保留已保存配置和现有月度周期，不将编辑器草稿发布或新建密钥作为常规重抓步骤。
+3. 等待该次抓取结束，记录时间、成功/忽略/失败 URL 数与索引记录数；检查失败原因，不能只看记录总数增长。先保留路径规则、选择器、调度等变量，只有抓取证据指向具体配置问题时再处理该项。
+4. 按站点实际过滤条件查询：中文 `language:zh-Hans`、英文 `language:en`，并使用 `docusaurus_tag:default OR docs-default-current`。逐项检查 16 个双语 API 页面标题、代表性端点和两种语言的旧页面对照，确认返回目标 URL、`current` 版本和正确 tag；结果排名不要求固定第一。
+5. 在网站搜索框分别查找“智能体 Webhook”和“Agent Webhook”，打开目标页面，再更新 [搜索验收记录](./search-verification.json)。公开记录只保留必要的时间、配置、查询与结果证据，不保存密钥、账号身份、请求头或本机绝对路径。
+
+2026-10-15 的手动抓取使索引从 19,324 条增至 21,572 条，22 项查询及双语浏览器检查通过。该次抓取仍有两篇 `v10.0.180` 更新日志因记录过大而失败；API 搜索验收通过不等于全站抓取没有失败。完整结果见搜索验收记录。
+
 ## 清单字段
 
 `pages` 列出本批公开页面的 `id`、源码 `file` 和稳定 `slug`。`endpoints` 使用以下字段：
@@ -64,4 +78,4 @@ pnpm api:check -- --build
 
 ## 当前验证记录
 
-参见 [核查与验证](./verification.md)、[发布与验收摘要](./publication.json)及[生产逐项报告](./production-verification.json)。后续更改认证、路由、配置入口或结果交付时，只重新核对受影响合同和相关示例，不将本批测试结果传播为其它功能的运行保证。
+参见 [核查与验证](./verification.md)、[发布与验收摘要](./publication.json)、[生产逐项报告](./production-verification.json)及[搜索验收记录](./search-verification.json)。后续更改认证、路由、配置入口或结果交付时，只重新核对受影响合同和相关示例，不将本批测试结果传播为其它功能的运行保证。
