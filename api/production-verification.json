@@ -1,0 +1,491 @@
+{
+  "checkedAt": "2026-10-15T08:55:45.929Z",
+  "mode": "strict",
+  "result": "passed",
+  "origin": "https://docs.desirecore.com",
+  "expectedPages": 16,
+  "expectedDownloads": 8,
+  "pages": 16,
+  "downloads": 8,
+  "infrastructure": [
+    {
+      "pathname": "/sitemap.xml",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/sitemap.xml",
+      "contentType": "application/xml",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "sitemap",
+      "entries": 359
+    },
+    {
+      "pathname": "/en/sitemap.xml",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/sitemap.xml",
+      "contentType": "application/xml",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "sitemap",
+      "entries": 359
+    },
+    {
+      "pathname": "/robots.txt",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/robots.txt",
+      "contentType": "text/plain; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "robots",
+      "matchesExpectedBytes": true,
+      "sitemaps": [
+        "https://docs.desirecore.com/sitemap.xml",
+        "https://docs.desirecore.com/en/sitemap.xml"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "pathname": "/api",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "集成与 API | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/connection-and-auth",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/connection-and-auth",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "连接实例与认证 | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/connection-and-auth",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/connection-and-auth"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/connection-and-auth"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/agent-webhook",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/agent-webhook",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "智能体 Webhook | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/agent-webhook",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/agent-webhook"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/agent-webhook"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/errors-and-troubleshooting",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/errors-and-troubleshooting",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "错误与排查 | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/errors-and-troubleshooting",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/errors-and-troubleshooting"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/errors-and-troubleshooting"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/conversations-and-runs",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/conversations-and-runs",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "对话与运行记录 | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/conversations-and-runs",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/conversations-and-runs"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/conversations-and-runs"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/model-proxy",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/model-proxy",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "模型协议代理 | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/model-proxy",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/model-proxy"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/model-proxy"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/workflow-integration",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/workflow-integration",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "工作流集成 | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/workflow-integration",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/workflow-integration"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/workflow-integration"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/api/openapi",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api/openapi",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "OpenAPI 下载 | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/api/openapi",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/openapi"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/openapi"
+        ]
+      },
+      "htmlLanguage": "zh-Hans"
+    },
+    {
+      "pathname": "/openapi/agent-service.json",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/openapi/agent-service.json",
+      "contentType": "application/json; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 233920,
+      "sha256": "8c79f8b81971e9bc28b9194fd6de4639d5e28844ccc3541b268d0bcadf8873d8",
+      "expectedSha256": "8c79f8b81971e9bc28b9194fd6de4639d5e28844ccc3541b268d0bcadf8873d8",
+      "openapi": "3.1.0",
+      "service": "agent-service",
+      "sourceRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    },
+    {
+      "pathname": "/openapi/compat-proxy.json",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/openapi/compat-proxy.json",
+      "contentType": "application/json; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 27811,
+      "sha256": "a8c145b0bfef5375d802362821cba3a26b6a3c58b71faaa82c0ac4978528817a",
+      "expectedSha256": "a8c145b0bfef5375d802362821cba3a26b6a3c58b71faaa82c0ac4978528817a",
+      "openapi": "3.1.0",
+      "service": "compat-proxy",
+      "sourceRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    },
+    {
+      "pathname": "/openapi/workflow-service.json",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/openapi/workflow-service.json",
+      "contentType": "application/json; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 29839,
+      "sha256": "7db1982e527c2ff7f7c09b6d7b69981a19cd02e35bc26aab210408afb91451a2",
+      "expectedSha256": "7db1982e527c2ff7f7c09b6d7b69981a19cd02e35bc26aab210408afb91451a2",
+      "openapi": "3.1.0",
+      "service": "workflow-service",
+      "sourceRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    },
+    {
+      "pathname": "/api-examples/agent-client.mjs",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/api-examples/agent-client.mjs",
+      "contentType": "application/javascript; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 20273,
+      "sha256": "b1524eec87782f9bd3eb2719d6df47e7d5ccb9fa40d9fd507c8670913b20a2db",
+      "expectedSha256": "b1524eec87782f9bd3eb2719d6df47e7d5ccb9fa40d9fd507c8670913b20a2db"
+    },
+    {
+      "pathname": "/en/api",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Integration & API | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/connection-and-auth",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/connection-and-auth",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Connect to an Instance and Authenticate | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/connection-and-auth",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/connection-and-auth"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/connection-and-auth"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/agent-webhook",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/agent-webhook",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Agent Webhook | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/agent-webhook",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/agent-webhook"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/agent-webhook"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/errors-and-troubleshooting",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/errors-and-troubleshooting",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Errors and Troubleshooting | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/errors-and-troubleshooting",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/errors-and-troubleshooting"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/errors-and-troubleshooting"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/conversations-and-runs",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/conversations-and-runs",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Conversations and Runs | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/conversations-and-runs",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/conversations-and-runs"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/conversations-and-runs"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/model-proxy",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/model-proxy",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Model Protocol Proxy | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/model-proxy",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/model-proxy"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/model-proxy"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/workflow-integration",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/workflow-integration",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "Workflow Integration | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/workflow-integration",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/workflow-integration"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/workflow-integration"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/api/openapi",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api/openapi",
+      "contentType": "text/html; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "page",
+      "title": "OpenAPI download | DesireCore Docs",
+      "canonical": "https://docs.desirecore.com/en/api/openapi",
+      "alternates": {
+        "zh-Hans": [
+          "https://docs.desirecore.com/api/openapi"
+        ],
+        "en": [
+          "https://docs.desirecore.com/en/api/openapi"
+        ]
+      },
+      "htmlLanguage": "en"
+    },
+    {
+      "pathname": "/en/openapi/agent-service.json",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/openapi/agent-service.json",
+      "contentType": "application/json; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 233920,
+      "sha256": "8c79f8b81971e9bc28b9194fd6de4639d5e28844ccc3541b268d0bcadf8873d8",
+      "expectedSha256": "8c79f8b81971e9bc28b9194fd6de4639d5e28844ccc3541b268d0bcadf8873d8",
+      "openapi": "3.1.0",
+      "service": "agent-service",
+      "sourceRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    },
+    {
+      "pathname": "/en/openapi/compat-proxy.json",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/openapi/compat-proxy.json",
+      "contentType": "application/json; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 27811,
+      "sha256": "a8c145b0bfef5375d802362821cba3a26b6a3c58b71faaa82c0ac4978528817a",
+      "expectedSha256": "a8c145b0bfef5375d802362821cba3a26b6a3c58b71faaa82c0ac4978528817a",
+      "openapi": "3.1.0",
+      "service": "compat-proxy",
+      "sourceRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    },
+    {
+      "pathname": "/en/openapi/workflow-service.json",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/openapi/workflow-service.json",
+      "contentType": "application/json; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 29839,
+      "sha256": "7db1982e527c2ff7f7c09b6d7b69981a19cd02e35bc26aab210408afb91451a2",
+      "expectedSha256": "7db1982e527c2ff7f7c09b6d7b69981a19cd02e35bc26aab210408afb91451a2",
+      "openapi": "3.1.0",
+      "service": "workflow-service",
+      "sourceRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    },
+    {
+      "pathname": "/en/api-examples/agent-client.mjs",
+      "status": 200,
+      "finalUrl": "https://docs.desirecore.com/en/api-examples/agent-client.mjs",
+      "contentType": "application/javascript; charset=utf-8",
+      "cacheStatus": "MISS",
+      "problems": [],
+      "kind": "download",
+      "matchesExpectedBytes": true,
+      "bytes": 20273,
+      "sha256": "b1524eec87782f9bd3eb2719d6df47e7d5ccb9fa40d9fd507c8670913b20a2db",
+      "expectedSha256": "b1524eec87782f9bd3eb2719d6df47e7d5ccb9fa40d9fd507c8670913b20a2db"
+    }
+  ],
+  "failureCount": 0
+}

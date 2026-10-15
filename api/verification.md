@@ -161,3 +161,9 @@ node_modules/.bin/vitest run --project integration --maxWorkers=1 --no-file-para
 相对两个原测试基线，24端点汇总的33个来源/Schema文件中仅 `instance-auth.ts` 静态导入改异步导入，仍先执行同一application authority gate，再处理豁免与owner fallback。请求、响应、路由和认证分支未变。外围用量消息新可选model和混合模型回执省略身份的行为与现有指南/客户端兼容；本次只读差异核对不作为新增运行测试。公开清单及三个spec已同步固定来源，未改变API合同。
 
 部署前快照：生产首页200，API中英文入口与规范下载404，两语言sitemap不含API路径。生产验收结果将在自动部署后单独回写；这些404不作为部署后结果。
+
+## 生产验收（2026-10-15）
+
+公开PR #72 已合并为 `93fcbd26c64465e147b8c6532f48c1558a3c989a`，Production deployment `7088235715` 于北京时间16:54:38成功。16个API页面与8个下载的严格验收全部通过，报告为 [production-verification.json](./production-verification.json)：包含逐页canonical/语言/alternate/索引条件、sitemap/robots及下载长度和SHA-256；三个规范指向最终源码 `e45f229`。中文对话指南在浏览器切换英文后保持同页，正文和导航正常。
+
+全站sitemap初次检查718项均200，但两个应用场景入口存在README/index输出覆盖导致的canonical冲突。修复只重命名作者资产说明为 `_README.md`，继续保留严格验收规则；修复后的生产验收单独记录。
