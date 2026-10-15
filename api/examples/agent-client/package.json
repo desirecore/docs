@@ -1,0 +1,11 @@
+{
+  "name": "desirecore-agent-client-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "HTTP and Socket.IO client example for an administrator's DesireCore instance",
+  "engines": { "node": ">=22" },
+  "scripts": { "start": "node client.mjs", "test": "node --test test/*.test.mjs" },
+  "dependencies": { "socket.io-client": "4.8.4" },
+  "devDependencies": { "socket.io": "4.8.4" }
+}

@@ -25,6 +25,7 @@ Installed apps and plugins share the Apps entry, with peer tabs for use and conf
 | **Email** | Manage Gmail, Outlook, and IMAP accounts | [Email Management](../email/overview) |
 | **Workflows** | Compose triggers, code, LLM, Agent, and human-confirmation nodes | [Task Orchestration](../../concepts/task-orchestration) |
 | **Apps, Plugins, and Services** | Distinguish app use, plugin contribution management, and service connection diagnostics | [Apps, Plugins, and Services](./app-service-catalog) |
+| **Instance API and Webhooks** | Verify instance access from an external program or send a trigger to a configured event | [Integrations and API](../../07-api/index.md) |
 
 ## Email Integration
 
@@ -54,6 +55,8 @@ Computer Use is not reliable for every interface. Custom-drawn controls, the UAC
 DesireCore records supported tool calls, approvals, and external operations so users can review what was requested and executed. The exact detail depends on the tool and service; logs may contain sensitive metadata and should be protected. See [Audit Trail](../security/audit-trail).
 
 ## Custom Integrations
+
+To connect your program to a DesireCore instance or trigger a configured Agent Webhook from an external event, see [Integrations and API](../../07-api/index.md). A successful Webhook response only confirms receipt of the trigger; its guide explains how results can be delivered.
 
 Choose the extension path that matches the task:
 

@@ -21,3 +21,4 @@ Here you'll find quick reference materials and changelog for DesireCore.
 | [Open Source Repositories](./09-open-source-repos.md) | Overview of official GitHub repositories |
 | [Third-Party Software & Licenses](./10-third-party-software.md) | Bundled third-party components and open-source licenses |
 | [Changelog](./11-changelog/index.md) | Version update history |
+| [Integrations and API](../07-api/index.md) | Connect external programs, verify instance access, and call configured Webhooks |

@@ -58,5 +58,9 @@
   "link.item.label.文档仓库": {
     "message": "Docs Repository",
     "description": "The label of footer link with label=文档仓库 linking to https://github.com/desirecore/docs"
+  },
+  "link.item.label.集成与 API": {
+    "message": "Integrations and API",
+    "description": "The label of footer link with label=集成与 API linking to /api"
   }
 }

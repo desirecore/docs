@@ -1,0 +1,877 @@
+{
+  "schemaVersion": 1,
+  "reviewBaseline": {
+    "reviewedAt": "2026-10-15",
+    "clientRepository": "desirecore/desirecore",
+    "clientRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+    "internalDocsRevision": "9cc47fc9216db4a3803a982f00649f7af667c933",
+    "publicDocsBaseRevision": "34fb4a7cbc8bd2f453ee79536981d22c7448373b"
+  },
+  "pages": [
+    {
+      "id": "api/index",
+      "file": "docs/07-api/index.md",
+      "slug": "/api"
+    },
+    {
+      "id": "api/connection-and-auth",
+      "file": "docs/07-api/01-connection-and-auth.md",
+      "slug": "/api/connection-and-auth"
+    },
+    {
+      "id": "api/agent-webhook",
+      "file": "docs/07-api/02-agent-webhook.md",
+      "slug": "/api/agent-webhook"
+    },
+    {
+      "id": "api/errors-and-troubleshooting",
+      "file": "docs/07-api/03-errors-and-troubleshooting.md",
+      "slug": "/api/errors-and-troubleshooting"
+    },
+    {
+      "id": "api/conversations-and-runs",
+      "file": "docs/07-api/04-conversations-and-runs.md",
+      "slug": "/api/conversations-and-runs"
+    },
+    {
+      "id": "api/model-proxy",
+      "file": "docs/07-api/05-model-proxy.md",
+      "slug": "/api/model-proxy"
+    },
+    {
+      "id": "api/workflow-integration",
+      "file": "docs/07-api/06-workflow-integration.md",
+      "slug": "/api/workflow-integration"
+    },
+    {
+      "id": "api/openapi",
+      "file": "docs/07-api/07-openapi.md",
+      "slug": "/api/openapi"
+    }
+  ],
+  "endpoints": [
+    {
+      "operationId": "getAgentServiceClientHandshake",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/client-handshake",
+      "doc": "api/connection-and-auth",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Valid instance access credential; metadata is service-level and does not expose a user ID or token.",
+      "resultDelivery": "Synchronous JSON metadata. A 200 response verifies this authenticated request, not every optional capability.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/client-handshake-routes.ts",
+          "packages/agent-service/src/service-metadata.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/readiness.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/client-handshake.ts:clientHandshakeResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source auth and handshake unit tests plus a real loopback HTTPS readiness integration; no public-domain or Caddy-container run."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "triggerAgentWebhook",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/webhook/:agent_id",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Authorization: Bearer <Webhook secret>; secret must be configured for external callers.",
+      "permissions": "Enabled event with an administrator-created tool/file permission snapshot. Owner management is available when handshake.capabilities.webhookManagement is true. Runtime intersects the stored ceiling with current Agent scope; authorized file or command tools retain existing approval semantics.",
+      "resultDelivery": "200 {accepted:true,agentId,event} acknowledges receipt, with no Run ID or delivery deduplication. Only explicit authorized SendUserMessage output is delivered to the user; final model answers are not automatically returned to the caller or added to chat.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/webhook-routes.ts",
+          "packages/agent-service/src/routes/webhook-state.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/scheduler/background-delivery.ts",
+          "app/components/resources/agents/components/AgentFormEditor.tsx",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook.ts:webhookRequestSchema",
+        "packages/schemas/src/agent-service/webhook.ts:webhookEventConfigSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Real production owner management, atomic AgentFS snapshot writes, local fake-provider runtime and SendUserMessage delivery, rotation, failure and disable/delete integration. No commercial-provider or packaged-client claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "WebhookSecret"
+      ]
+    },
+    {
+      "operationId": "listAgents",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/agents",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner access. Run list, metadata and live-state reads are instance-level; receipt reads additionally check trusted user ownership and return 404 for another owner.",
+      "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/agent-routes.ts",
+          "packages/agent-service/src/agent/list-projection.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/agent-summary.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listRuns",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/runs",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner access. Run list, metadata and live-state reads are instance-level; receipt reads additionally check trusted user ownership and return 404 for another owner.",
+      "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/runs-routes.ts",
+          "packages/agent-service/src/session/run-manager.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/run.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getRun",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/runs/:id",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner access. Run list, metadata and live-state reads are instance-level; receipt reads additionally check trusted user ownership and return 404 for another owner.",
+      "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/runs-routes.ts",
+          "packages/agent-service/src/session/run-meta-read.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/run.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getRunRuntimeState",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/runs/:id/runtime-state",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner access. Run list, metadata and live-state reads are instance-level; receipt reads additionally check trusted user ownership and return 404 for another owner.",
+      "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/runs-routes.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/run.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listRunReceipts",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/runs/:id/receipt",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner access. Run list, metadata and live-state reads are instance-level; receipt reads additionally check trusted user ownership and return 404 for another owner.",
+      "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/runs-routes.ts",
+          "packages/agent-service/src/receipts/reader.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/operations-activity.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "startAgentQuery",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/query/start",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner identity from instance authentication; durable request identifiers and digest preserve admission identity. Socket.IO uses the same instance credential and current originSocketId.",
+      "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/query-routes.ts",
+          "packages/agent-service/src/query/client-request-registry.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/query.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "followUpAgentQuery",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/query/follow-up",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner identity from instance authentication; durable request identifiers and digest preserve admission identity. Socket.IO uses the same instance credential and current originSocketId.",
+      "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/query-routes.ts",
+          "packages/agent-service/src/query/client-request-registry.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/query.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "lookupQueryAdmissions",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/query/client-requests/lookup",
+      "doc": "api/conversations-and-runs",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Owner identity from instance authentication; durable request identifiers and digest preserve admission identity. Socket.IO uses the same instance credential and current originSocketId.",
+      "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/query-routes.ts",
+          "packages/agent-service/src/query/client-request-registry.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/client-request-admission.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getAgentWebhookConfiguration",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/agents/:id/webhooks",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment owner",
+      "permissions": "Management requires governed owner access and webhookManagement capability; selected tool IDs and current file scope are resolved by the server. Schedule messages are explicit persisted user deliveries, not request-level execution status.",
+      "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/webhook-management-routes.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook-management.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "upsertAgentWebhookEvent",
+      "service": "agent-service",
+      "method": "PUT",
+      "path": "/api/agents/:id/webhooks/events/:event",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment owner",
+      "permissions": "Management requires governed owner access and webhookManagement capability; selected tool IDs and current file scope are resolved by the server. Schedule messages are explicit persisted user deliveries, not request-level execution status.",
+      "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/webhook-management-routes.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook-management.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "setAgentWebhookEnabled",
+      "service": "agent-service",
+      "method": "PATCH",
+      "path": "/api/agents/:id/webhooks",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment owner",
+      "permissions": "Management requires governed owner access and webhookManagement capability; selected tool IDs and current file scope are resolved by the server. Schedule messages are explicit persisted user deliveries, not request-level execution status.",
+      "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/webhook-management-routes.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook-management.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "deleteAgentWebhookEvent",
+      "service": "agent-service",
+      "method": "DELETE",
+      "path": "/api/agents/:id/webhooks/events/:event",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment owner",
+      "permissions": "Management requires governed owner access and webhookManagement capability; selected tool IDs and current file scope are resolved by the server. Schedule messages are explicit persisted user deliveries, not request-level execution status.",
+      "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/webhook-management-routes.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook-management.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "rotateAgentWebhookSecret",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/agents/:id/webhooks/secret/rotate",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment owner",
+      "permissions": "Management requires governed owner access and webhookManagement capability; selected tool IDs and current file scope are resolved by the server. Schedule messages are explicit persisted user deliveries, not request-level execution status.",
+      "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/webhook-management-routes.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/webhook-management.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listAgentScheduleMessages",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/agents/:agentId/schedule-messages",
+      "doc": "api/agent-webhook",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment owner",
+      "permissions": "Authenticated request identity; visibility is filtered by authorizedMessageIds using current delivery-resource authorization. This is persisted explicit delivery, not request-level Webhook execution status.",
+      "resultDelivery": "Synchronous {items,total,limit,offset}; default limit50, maximum200. Items may include other authorized background deliveries.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/agent-service/src/routes/schedule-routes.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "createProxyMessage",
+      "service": "compat-proxy",
+      "method": "POST",
+      "path": "/v1/messages",
+      "doc": "api/model-proxy",
+      "deploymentModes": [
+        "local-loopback"
+      ],
+      "authentication": "Provider-bound safe token in Authorization: Bearer or x-api-key",
+      "permissions": "Local service access and valid non-revoked provider-bound safe token. Models listing is not an authorization list; no automatic token expiry or per-model quota promise.",
+      "resultDelivery": "Protocol-specific JSON or SSE stream; streaming failures are interpreted inside the stream.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/shared/src/compat-proxy/server.ts",
+          "packages/shared/src/compat-proxy/proxy-auth.ts",
+          "packages/agent-service/src/builtin-tools/compute-credential.ts"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Focused local proxy contract tests; no commercial-provider acceptance."
+      },
+      "spec": "static/openapi/compat-proxy.json",
+      "securitySchemes": [
+        "ProxyBearer",
+        "ProxyApiKey"
+      ]
+    },
+    {
+      "operationId": "createProxyChatCompletion",
+      "service": "compat-proxy",
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "doc": "api/model-proxy",
+      "deploymentModes": [
+        "local-loopback"
+      ],
+      "authentication": "Provider-bound safe token in Authorization: Bearer or x-api-key",
+      "permissions": "Local service access and valid non-revoked provider-bound safe token. Models listing is not an authorization list; no automatic token expiry or per-model quota promise.",
+      "resultDelivery": "Protocol-specific JSON or SSE stream; streaming failures are interpreted inside the stream.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/shared/src/compat-proxy/server.ts",
+          "packages/shared/src/compat-proxy/proxy-auth.ts",
+          "packages/agent-service/src/builtin-tools/compute-credential.ts"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Focused local proxy contract tests; no commercial-provider acceptance."
+      },
+      "spec": "static/openapi/compat-proxy.json",
+      "securitySchemes": [
+        "ProxyBearer",
+        "ProxyApiKey"
+      ]
+    },
+    {
+      "operationId": "listProxyModels",
+      "service": "compat-proxy",
+      "method": "GET",
+      "path": "/v1/models",
+      "doc": "api/model-proxy",
+      "deploymentModes": [
+        "local-loopback"
+      ],
+      "authentication": "Provider-bound safe token in Authorization: Bearer or x-api-key",
+      "permissions": "Local service access and valid non-revoked provider-bound safe token. Models listing is not an authorization list; no automatic token expiry or per-model quota promise.",
+      "resultDelivery": "Protocol-specific JSON or SSE stream; streaming failures are interpreted inside the stream.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "packages/shared/src/compat-proxy/server.ts",
+          "packages/shared/src/compat-proxy/proxy-auth.ts",
+          "packages/agent-service/src/builtin-tools/compute-credential.ts"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Focused local proxy contract tests; no commercial-provider acceptance."
+      },
+      "spec": "static/openapi/compat-proxy.json",
+      "securitySchemes": [
+        "ProxyBearer",
+        "ProxyApiKey"
+      ]
+    },
+    {
+      "operationId": "listWorkflows",
+      "service": "workflow-service",
+      "method": "GET",
+      "path": "/api/workflows",
+      "doc": "api/workflow-integration",
+      "deploymentModes": [
+        "administrator-provided-workflow-service"
+      ],
+      "authentication": "X-Workflow-Service-Token for the independent Workflow Service",
+      "permissions": "Administrator-preconfigured definitions; service-token reads are service-level. TaskBoard-backed history additionally enforces current ACL. Public grant minting and unguarded /run are not included.",
+      "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "lib/workflow-service/server.ts",
+          "packages/shared/src/workflow-contracts/api.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/shared/src/workflow-contracts/api.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Implementation-derived contract and focused workflow validation; no execution-grant acquisition flow."
+      },
+      "spec": "static/openapi/workflow-service.json",
+      "securitySchemes": [
+        "WorkflowToken"
+      ]
+    },
+    {
+      "operationId": "triggerWorkflowWebhook",
+      "service": "workflow-service",
+      "method": "POST",
+      "path": "/api/workflow/webhook",
+      "doc": "api/workflow-integration",
+      "deploymentModes": [
+        "administrator-provided-workflow-service"
+      ],
+      "authentication": "X-Workflow-Service-Token for the independent Workflow Service",
+      "permissions": "Administrator-preconfigured definitions; service-token reads are service-level. TaskBoard-backed history additionally enforces current ACL. Public grant minting and unguarded /run are not included.",
+      "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "lib/workflow-service/server.ts",
+          "packages/shared/src/workflow-contracts/api.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/shared/src/workflow-contracts/api.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Implementation-derived contract and focused workflow validation; no execution-grant acquisition flow."
+      },
+      "spec": "static/openapi/workflow-service.json",
+      "securitySchemes": [
+        "WorkflowToken"
+      ]
+    },
+    {
+      "operationId": "watchWorkflowRunEvents",
+      "service": "workflow-service",
+      "method": "GET",
+      "path": "/api/workflow/events",
+      "doc": "api/workflow-integration",
+      "deploymentModes": [
+        "administrator-provided-workflow-service"
+      ],
+      "authentication": "X-Workflow-Service-Token for the independent Workflow Service",
+      "permissions": "Administrator-preconfigured definitions; service-token reads are service-level. TaskBoard-backed history additionally enforces current ACL. Public grant minting and unguarded /run are not included.",
+      "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "lib/workflow-service/server.ts",
+          "packages/shared/src/workflow-contracts/api.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/shared/src/workflow-contracts/api.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Implementation-derived contract and focused workflow validation; no execution-grant acquisition flow."
+      },
+      "spec": "static/openapi/workflow-service.json",
+      "securitySchemes": [
+        "WorkflowToken"
+      ]
+    },
+    {
+      "operationId": "listWorkflowRuns",
+      "service": "workflow-service",
+      "method": "GET",
+      "path": "/api/workflow/:id/runs",
+      "doc": "api/workflow-integration",
+      "deploymentModes": [
+        "administrator-provided-workflow-service"
+      ],
+      "authentication": "X-Workflow-Service-Token for the independent Workflow Service",
+      "permissions": "Administrator-preconfigured definitions; service-token reads are service-level. TaskBoard-backed history additionally enforces current ACL. Public grant minting and unguarded /run are not included.",
+      "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "lib/workflow-service/server.ts",
+          "packages/shared/src/workflow-contracts/api.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/shared/src/workflow-contracts/api.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Implementation-derived contract and focused workflow validation; no execution-grant acquisition flow."
+      },
+      "spec": "static/openapi/workflow-service.json",
+      "securitySchemes": [
+        "WorkflowToken"
+      ]
+    },
+    {
+      "operationId": "getWorkflowRun",
+      "service": "workflow-service",
+      "method": "GET",
+      "path": "/api/workflow/:id/runs/:runId",
+      "doc": "api/workflow-integration",
+      "deploymentModes": [
+        "administrator-provided-workflow-service"
+      ],
+      "authentication": "X-Workflow-Service-Token for the independent Workflow Service",
+      "permissions": "Administrator-preconfigured definitions; service-token reads are service-level. TaskBoard-backed history additionally enforces current ACL. Public grant minting and unguarded /run are not included.",
+      "resultDelivery": "Synchronous metadata/history or trigger runId, followed by SSE workflow events; inspect terminal status even on workflow:complete.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "files": [
+          "lib/workflow-service/server.ts",
+          "packages/shared/src/workflow-contracts/api.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/shared/src/workflow-contracts/api.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/verification.md",
+        "scope": "Implementation-derived contract and focused workflow validation; no execution-grant acquisition flow."
+      },
+      "spec": "static/openapi/workflow-service.json",
+      "securitySchemes": [
+        "WorkflowToken"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "baseline": "5714a1899c0cc80d26463e596f1cadfcc1dd4533",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "node": "v26.4.0",
+  "vitest": "5.0.3",
+  "scope": {
+    "files": 9,
+    "executed": 16,
+    "failures": 16,
+    "passed": 0,
+    "skippedCollectedCases": 2559,
+    "ciNameMatches": 16,
+    "excluded": "The two service-metadata cases are outside this baseline-attribution assignment."
+  },
+  "submodules": {
+    "docs": {
+      "gitlink": "de4b857a48f350b2abba253d44657a195001fa01",
+      "checkedOut": "f620bc410063301cb5828f2ad63f9a10ce61f086",
+      "remoteDefault": "origin/main"
+    },
+    "drawio": {
+      "gitlink": "88ee1f5ab4d40603a8f3aaa0d9d6dc3794c6b3f0",
+      "checkedOut": "88ee1f5ab4d40603a8f3aaa0d9d6dc3794c6b3f0",
+      "remoteDefault": "origin/dev"
+    }
+  },
+  "dependencies": {
+    "workspacePackages": 12,
+    "workspaceLocation": "Each points to the baseline checkout packages directory.",
+    "thirdParty": "Reused installed dependencies entry-by-entry; published @desirecore/super-doc 0.2.16 is not a workspace."
+  },
+  "failures": [
+    {
+      "file": "app/stores/__tests__/chat-store-pending-message.test.ts",
+      "name": "chat.store 排队消息机制 多个会话的排队请求分组发送，不跨会话合并",
+      "signature": "AssertionError: expected \"vi.fn()\" to be called with arguments: [ 'A1\\nA2', ObjectContaining{…}, …(6) ]",
+      "seenInCI": true
+    },
+    {
+      "file": "app/components/market/__tests__/MarketAgentDetail.test.tsx",
+      "name": "MarketAgentDetail 可信度与骨架 已安装 Agent 在 listing-only 阻断新获取时仍可卸载",
+      "signature": "AssertionError: expected true to be false // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "app/components/market/__tests__/MarketAgentDetail.test.tsx",
+      "name": "MarketAgentDetail 可信度与骨架 已安装 Agent 在 client-incompatible 阻断新获取时仍可卸载",
+      "signature": "AssertionError: expected true to be false // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/agent-git-conflicts.unit.test.ts",
+      "name": "commitAgentChange / auto-commit 阶段 Should call add when file exists with unstaged modifications / 文件被改但未暂存 → 调用 add",
+      "signature": "Error: ENOENT: no such file or directory, lstat '/tmp/test-facade-agents/test-agent-001/modified.txt'",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tool-definition-budget.test.ts",
+      "name": "内置工具定义体积预算 AppManage 的描述不超过上限",
+      "signature": "AssertionError: AppManage [posix / zh / 目录描述]: description=1050 rules=281 schema=678 total=2009: expected 1050 to be less than or equal to 600",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tool-schema-sync.test.ts",
+      "name": "内置工具 params 与 inputSchema 同步守卫 array/object 参数必须有结构（零豁免；有意开放用 additionalProperties: true 显式声明） AppManage.file_ref",
+      "signature": "AssertionError: AppManage.file_ref 的 inputSchema 缺少 properties/additionalProperties 结构。真自由形态请显式写 additionalProperties: true 并在工具文件注释说明有意开放。: expected false to be true // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tool-schema-sync.test.ts",
+      "name": "内置工具 params 与 inputSchema 同步守卫 array/object 参数必须有结构（零豁免；有意开放用 additionalProperties: true 显式声明） AppManage.release_request",
+      "signature": "AssertionError: AppManage.release_request 的 inputSchema 缺少 properties/additionalProperties 结构。真自由形态请显式写 additionalProperties: true 并在工具文件注释说明有意开放。: expected false to be true // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tool-schema-sync.test.ts",
+      "name": "内置工具 params 与 inputSchema 同步守卫 array/object 参数必须有结构（零豁免；有意开放用 additionalProperties: true 显式声明） AppManage.owner_request",
+      "signature": "AssertionError: AppManage.owner_request 的 inputSchema 缺少 properties/additionalProperties 结构。真自由形态请显式写 additionalProperties: true 并在工具文件注释说明有意开放。: expected false to be true // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tool-schema-sync.test.ts",
+      "name": "内置工具 params 与 inputSchema 同步守卫 array/object 参数必须有结构（零豁免；有意开放用 additionalProperties: true 显式声明） AppManage.export_file_ref",
+      "signature": "AssertionError: AppManage.export_file_ref 的 inputSchema 缺少 properties/additionalProperties 结构。真自由形态请显式写 additionalProperties: true 并在工具文件注释说明有意开放。: expected false to be true // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tools-all.test.ts",
+      "name": "Tool Registration / 工具注册 内置工具应全部注册 / All builtin tools should be registered",
+      "signature": "AssertionError: expected [ 'AppData', 'AppManage', …(119) ] to deeply equal [ 'AppManage', …(118) ]",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tools-all.test.ts",
+      "name": "Tool Registration / 工具注册 getAllBuiltinToolsAsRegistered 返回有效 RegisteredTool[] / getAllBuiltinToolsAsRegistered returns valid RegisteredTool[]",
+      "signature": "AssertionError: expected 121 to be 119 // Object.is equality",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tools-static-closure-budget.test.ts",
+      "name": "内置工具静态闭包预算 builtin-tools/terminal-control.ts 的静态闭包不超过 110 个模块",
+      "signature": "AssertionError: builtin-tools/terminal-control.ts 的模块初始化期静态闭包为 113，超过预算 110。",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/__tests__/builtin-tools-static-closure-budget.test.ts",
+      "name": "内置工具静态闭包预算 除已知遗留外，没有内置工具静态可达 socket-server",
+      "signature": "AssertionError: 这些内置工具的静态闭包里出现了 socket-server —— 一条新的间接回边成环了。",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/builtin-tools/__tests__/tool-text-translations-guard.test.ts",
+      "name": "内置工具文本的语言守卫 每个内置工具都有英文视图",
+      "signature": "AssertionError: expected [ 'AppData', 'ApplicationObject' ] to deeply equal []",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/agent-service/src/builtin-tools/__tests__/tool-text-translations-guard.test.ts",
+      "name": "内置工具文本的语言守卫 声明了英文视图的工具，英文视图里没有中文",
+      "signature": "AssertionError: expected [ …(21) ] to deeply equal []",
+      "seenInCI": true
+    },
+    {
+      "file": "packages/schemas/src/agent-service/__tests__/embedded-service-process.test.ts",
+      "name": "Embedded Agent Service utility process frame schema 所有控制字段和 payload 字段都有 description",
+      "signature": "AssertionError: $.oneOf[8].properties.payload.oneOf[20].properties.params.properties.request.properties.resourceRef.oneOf[13].properties.pin 缺少 description: expected undefined to deeply equal Any<String>",
+      "seenInCI": true
+    }
+  ],
+  "ciMergeRevision": "6bbd71a944419858e130e70429bba1931aaf0a89",
+  "ciFeatureRevision": "d3bac348db5f15ce6a59469ffef8f495c84ced59",
+  "interpretation": "All 16 selected failures reproduce at the fixed CI first-parent baseline. This record attributes failures; it is not a successful acceptance run. The additional two service-metadata expectations were repaired separately in the API feature branch."
+}
