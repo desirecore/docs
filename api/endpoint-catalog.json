@@ -3,9 +3,9 @@
   "reviewBaseline": {
     "reviewedAt": "2026-10-15",
     "clientRepository": "desirecore/desirecore",
-    "clientRevision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
-    "internalDocsRevision": "9cc47fc9216db4a3803a982f00649f7af667c933",
-    "publicDocsBaseRevision": "34fb4a7cbc8bd2f453ee79536981d22c7448373b"
+    "clientRevision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+    "internalDocsRevision": "b17e6a7a2d3dc4d969ea422ee37825ae39eb6177",
+    "publicDocsBaseRevision": "3e0e3de7168e2392802d37d295f73a65af070f5e"
   },
   "pages": [
     {
@@ -47,6 +47,16 @@
       "id": "api/openapi",
       "file": "docs/07-api/07-openapi.md",
       "slug": "/api/openapi"
+    },
+    {
+      "id": "api/session-history-and-messages",
+      "file": "docs/07-api/08-session-history-and-messages.md",
+      "slug": "/api/session-history-and-messages"
+    },
+    {
+      "id": "api/attachments-and-media",
+      "file": "docs/07-api/09-attachments-and-media.md",
+      "slug": "/api/attachments-and-media"
     }
   ],
   "endpoints": [
@@ -65,7 +75,7 @@
       "resultDelivery": "Synchronous JSON metadata. A 200 response verifies this authenticated request, not every optional capability.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/client-handshake-routes.ts",
           "packages/agent-service/src/service-metadata.ts",
@@ -81,7 +91,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Fixed-source auth and handshake unit tests plus a real loopback HTTPS readiness integration; no public-domain or Caddy-container run."
+        "scope": "Fixed-source auth and handshake unit tests plus a real loopback HTTPS readiness integration; no public-domain or Caddy-container run.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -103,7 +114,7 @@
       "resultDelivery": "200 {accepted:true,agentId,event} acknowledges receipt, with no Run ID or delivery deduplication. Only explicit authorized SendUserMessage output is delivered to the user; final model answers are not automatically returned to the caller or added to chat.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/webhook-routes.ts",
           "packages/agent-service/src/routes/webhook-state.ts",
@@ -121,7 +132,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Real production owner management, atomic AgentFS snapshot writes, local fake-provider runtime and SendUserMessage delivery, rotation, failure and disable/delete integration. No commercial-provider or packaged-client claim."
+        "scope": "Real production owner management, atomic AgentFS snapshot writes, local fake-provider runtime and SendUserMessage delivery, rotation, failure and disable/delete integration. No commercial-provider or packaged-client claim.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -142,7 +154,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/agent-routes.ts",
           "packages/agent-service/src/agent/list-projection.ts"
@@ -155,7 +167,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -176,7 +189,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-manager.ts"
@@ -188,8 +201,9 @@
       "effectiveVersion": null,
       "versionEvidence": null,
       "verification": {
-        "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -210,7 +224,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-meta-read.ts"
@@ -222,8 +236,9 @@
       "effectiveVersion": null,
       "versionEvidence": null,
       "verification": {
-        "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -244,7 +259,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts"
         ]
@@ -255,8 +270,9 @@
       "effectiveVersion": null,
       "versionEvidence": null,
       "verification": {
-        "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -277,7 +293,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/receipts/reader.ts"
@@ -290,7 +306,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -311,7 +328,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -324,7 +341,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -345,7 +363,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -358,7 +376,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -379,7 +398,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -392,7 +411,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture."
+        "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -413,7 +433,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -426,7 +446,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -447,7 +468,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -460,7 +481,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -481,7 +503,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -494,7 +516,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -515,7 +538,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -528,7 +551,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -549,7 +573,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -562,7 +586,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -583,7 +608,7 @@
       "resultDelivery": "Synchronous {items,total,limit,offset}; default limit50, maximum200. Items may include other authorized background deliveries.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
         "files": [
           "packages/agent-service/src/routes/schedule-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -594,7 +619,8 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/verification.md",
-        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification."
+        "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
+        "baselineNote": "Source contract rechecked at 7fe016c. Historical runtime test results retain their recorded source baseline; this batch coverage is recorded separately in api/history-attachments-verification.md."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -871,6 +897,414 @@
       "spec": "static/openapi/workflow-service.json",
       "securitySchemes": [
         "WorkflowToken"
+      ]
+    },
+    {
+      "operationId": "uploadAttachment",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/attachments",
+      "doc": "api/attachments-and-media",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token supplied by the instance administrator",
+      "permissions": "One non-empty multipart file, at most 20 MiB. Stores bytes without extraction or execution. Per-user retained-directory limit 256, total retained data limit 512 MiB. Each successful POST creates a new attachment; no automatic retry/idempotency contract. The receipt fileReference is passed unchanged in Query options.fileReferences on this instance and does not grant tool or cross-user permission.",
+      "resultDelivery": "Complete persisted attachment receipt.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/attachment-routes.ts",
+          "packages/schemas/src/agent-service/attachments.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/http-server.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/attachments.ts:attachmentReceiptSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "downloadAttachment",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/attachments/:attachmentId",
+      "doc": "api/attachments-and-media",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token supplied by the instance administrator",
+      "permissions": "Returns original bytes as an attachment, not JSON. The user is resolved from instance authentication. IDs do not confer cross-user permission. This route has no media byte-Range contract.",
+      "resultDelivery": "Original file bytes with no-store and nosniff.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/attachment-routes.ts",
+          "packages/schemas/src/agent-service/attachments.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/http-server.ts"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "uploadMedia",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/media/upload",
+      "doc": "api/attachments-and-media",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token supplied by the instance administrator",
+      "permissions": "Single multipart file with an allowed MIME. Service multipart limit is 2 GiB; deployment/proxy limits may be smaller. Empty files are rejected. New files retain authenticated owner metadata. Metadata may be passed in top-level Query mediaRefs; model support is a separate condition.",
+      "resultDelivery": "Direct media metadata.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/media-routes.ts",
+          "packages/agent-service/src/media/media-store.ts",
+          "packages/shared/src/utils/media-upload-policy.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/http-server.ts"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "createMediaAccessUrls",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/media/access-urls",
+      "doc": "api/attachments-and-media",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token supplied by the instance administrator",
+      "permissions": "Normal instance authentication is required to mint five-minute links. Validates new-media ownership and actual media content. Legacy media without owner metadata retains read compatibility. Existing objects forbidden to the user reject the request. The signing service requires an initialized instance token.",
+      "resultDelivery": "Links and missing IDs; no universal success/data wrapper.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/media-routes.ts",
+          "packages/agent-service/src/media/media-store.ts",
+          "packages/shared/src/utils/media-upload-policy.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/http-server.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/agent-service/src/routes/media-routes.ts:mediaAccessUrlsBodySchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getSignedMedia",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/media/:filename",
+      "doc": "api/attachments-and-media",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "expires and signature query values from an authenticated media access-urls response; no instance token header for the signed GET",
+      "permissions": "Only GET/HEAD on the single-segment /media/:filename path bypass normal instance-token authentication, after the application authority fence. The handler requires the signed expires/signature pair; /api/media/*, other methods, and multi-segment paths do not inherit this exemption. Configured Origin policy and service readiness still apply. Anyone holding a valid complete link can read until expiry; owner is checked at issuance, not re-resolved from the unsigned reader. Supports one byte range, open-ended/suffix ranges, and private caching bounded by remaining TTL. The implementation also supplies HEAD with the same validation and no body; HEAD is not selected as another public catalog operation.",
+      "resultDelivery": "Full media bytes.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/media-routes.ts",
+          "packages/agent-service/src/media/media-store.ts",
+          "packages/shared/src/utils/media-upload-policy.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "packages/agent-service/src/auth/app-authority-gate.ts",
+          "packages/agent-service/src/auth/media-access-signing.ts",
+          "packages/agent-service/src/security/origin-policy.ts",
+          "packages/agent-service/src/readiness.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "SignedMediaSignature"
+      ]
+    },
+    {
+      "operationId": "listSessionHistory",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/sessions",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Valid deployment-owner instance credential; exact history is filtered by the trusted user before preview/body reads. Knowing a Run ID does not grant access.",
+      "resultDelivery": "Lists ordinary user-visible history by updatedAt descending. Excludes delegated, manual and dedicated schedule/Webhook/Mention timelines. Preserves fork generations; do not concatenate branches as a deduplicated transcript. Pagination is not an immutable snapshot.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/history-routes.ts",
+          "packages/agent-service/src/session/store.ts",
+          "packages/agent-service/src/session/run-meta-read.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/session.ts:sessionSummarySchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getSessionSnapshot",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/sessions/:runId",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Valid deployment-owner instance credential; exact history is filtered by the trusted user before preview/body reads. Knowing a Run ID does not grant access.",
+      "resultDelivery": "Checks trusted user ownership before body/image reads. Missing, cleared and unowned Runs return 404. Delegated Runs return 403 delegated_run_requires_inspect_view; use the messages inspection view instead. pendingAssistant is temporary and separate from durable messages. Returned configuration is not execution authority.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/history-routes.ts",
+          "packages/agent-service/src/session/store.ts",
+          "packages/agent-service/src/session/public-session-projection.ts",
+          "packages/agent-service/src/session/persistent-state/history.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/session.ts:sessionSnapshotSchema",
+        "packages/schemas/src/agent-service/session.ts:sessionMessageSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listSessionMessages",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/sessions/:runId/messages",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Valid deployment-owner instance credential; exact history is filtered by the trusted user before preview/body reads. Knowing a Run ID does not grant access.",
+      "resultDelivery": "Checks ownership before content reads. Delegated Runs require view=inspect-run. total counts source rows, not returned messages; advance offset by the requested limit and stop at total, even if a page is empty. Optional live is a temporary delegated display checkpoint, not a durable message or terminal. There is no cross-page consistency revision.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/history-routes.ts",
+          "packages/agent-service/src/session/store.ts",
+          "packages/agent-service/src/session/message-index.ts",
+          "packages/agent-service/src/session/public-session-projection.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/session.ts:sessionMessageSchema",
+        "packages/schemas/src/agent-service/session.ts:liveRunInspectionSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "searchSessionMessages",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/sessions/messages/search",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Valid deployment-owner instance credential; exact history is filtered by the trusted user before preview/body reads. Knowing a Run ID does not grant access.",
+      "resultDelivery": "Matches extracted message text case-insensitively, newest timestamp first. Includes independent manual conversations; excludes archived and delegated Runs. Default-conversation fork families select the visible history window. preferredRunId is neither a credential nor an exact-Run filter. limit/offset and their sum must be safe nonnegative integers. limit=0 returns all remaining hits and hasMore=false. Match original text before cropping previews.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/history-routes.ts",
+          "packages/agent-service/src/session/store.ts",
+          "packages/agent-service/src/session/lineage.ts",
+          "packages/agent-service/src/session/history-search-page.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/agent-service/src/session/store.ts:FlattenedMessage"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getConversationOverview",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/conversation/:agentId/overview",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Deployment owner only: conversation memory is selected by the instance's current local profile. This is not a multi-tenant isolation API. Matter Run sources additionally verify user and Agent ownership.",
+      "resultDelivery": "Reads the instance's current local profile, not a caller-supplied tenant ID. Intended for the deployment owner. Returns all active matters and at most ten recent entries, not a complete transcript. No pagination. An empty overview does not establish Agent existence or absence of history.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/conversation-routes.ts",
+          "packages/agent-service/src/conversation-memory/overview-projection.ts",
+          "packages/agent-service/src/conversation-memory/types.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/agent-service/src/conversation-memory/types.ts:ConversationOverview"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getConversationMatterMessages",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/conversation/:agentId/matters/:id/full",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Deployment owner only: conversation memory is selected by the instance's current local profile. This is not a multi-tenant isolation API. Matter Run sources additionally verify user and Agent ownership.",
+      "resultDelivery": "Reads the instance owner's local-profile conversation memory. Supports active, recent and archived source data. Underlying Run reads recheck that user and Agent ownership. Reads at most 120 source messages and sets truncated=true if more exist; projection may omit entries. No pagination or limit-override parameter. Entries are not guaranteed to have the per-Run message shape.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb",
+        "files": [
+          "packages/agent-service/src/routes/conversation-routes.ts",
+          "packages/agent-service/src/conversation-memory/conversation-store.ts",
+          "packages/agent-service/src/session/run-meta-read.ts",
+          "packages/agent-service/src/session/public-session-projection.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/agent-service/src/conversation-memory/conversation-store.ts:MatterMessagesResult"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/history-attachments-verification.md",
+        "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
       ]
     }
   ]

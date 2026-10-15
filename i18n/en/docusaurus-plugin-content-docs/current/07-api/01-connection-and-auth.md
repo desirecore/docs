@@ -127,6 +127,8 @@ Wait as directed by `Retry-After`, then retry this read-only handshake. If the r
 
 `GET /health` is for probes connecting directly to the service listener. It does not require an instance access token and only reports service status. The default standalone reverse proxy does not expose this path as a public API. Use the authenticated handshake above for external calls.
 
+Attachment and history endpoints use instance authentication under `/api/*`. Media playback URLs use the separate `/media/*` path. The default deployment proxies it; a custom proxy must also preserve that path and its signed query parameters and support `Range` requests. See [attachments and media](./09-attachments-and-media.md).
+
 A direct probe also receives `503 service_not_ready` during startup. Once the service can accept requests, its response looks like this:
 
 ```json

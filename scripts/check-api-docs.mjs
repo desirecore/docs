@@ -215,20 +215,18 @@ async function checkSpecs(catalog, pages) {
 }
 
 async function checkClientExampleMirror() {
-  const sourceFile = 'api/examples/agent-client/client.mjs'
-  const sourcePath = localPath(sourceFile, sourceFile)
-  // Earlier batches may not include a client. Once it exists its public copy
-  // must be byte-for-byte equal, including both locale builds when requested.
-  try { await access(sourcePath) } catch (error) { if (error.code !== 'ENOENT') fail(`${sourceFile}: ${error.message}`); return }
-  const source = await readBytes(sourceFile)
-  const downloadFile = 'static/api-examples/agent-client.mjs'
-  const download = await readBytes(downloadFile)
-  if (source !== null && download !== null && !source.equals(download)) fail(`${downloadFile}: differs from the maintained Node client example`)
-  if (args.includes('--build')) {
-    for (const language of ['', 'en']) {
-      const file = path.posix.join('build', language, 'api-examples/agent-client.mjs')
-      const built = await readBytes(file)
-      if (built !== null && source !== null && !source.equals(built)) fail(`${file}: Node client download is stale or different`)
+  for (const [maintained, published] of [['client.mjs', 'agent-client.mjs'], ['history.mjs', 'history.mjs'], ['attachments.mjs', 'attachments.mjs']]) {
+    const sourceFile = `api/examples/agent-client/${maintained}`
+    const source = await readBytes(sourceFile)
+    const downloadFile = `static/api-examples/${published}`
+    const download = await readBytes(downloadFile)
+    if (source !== null && download !== null && !source.equals(download)) fail(`${downloadFile}: differs from the maintained Node example`)
+    if (args.includes('--build')) {
+      for (const language of ['', 'en']) {
+        const file = path.posix.join('build', language, 'api-examples', published)
+        const built = await readBytes(file)
+        if (built !== null && source !== null && !source.equals(built)) fail(`${file}: Node example download is stale or different`)
+      }
     }
   }
 }

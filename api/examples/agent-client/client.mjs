@@ -7,9 +7,9 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
 
-export function queryDigest(prompt, userMessageId) {
+export function queryDigest(prompt, userMessageId, fileReferences = []) {
   // packages/shared/src/query/request-digest.ts: UTF-8 FNV-1a, not a security hash.
-  const canonical = JSON.stringify(['qrd1', prompt, userMessageId, [], []]);
+  const canonical = JSON.stringify(['qrd1', prompt, userMessageId, [], [...fileReferences]]);
   let hash = 0xcbf29ce484222325n;
   for (const byte of new TextEncoder().encode(canonical)) {
     hash = ((hash ^ BigInt(byte)) * 0x100000001b3n) & 0xffffffffffffffffn;
@@ -18,7 +18,7 @@ export function queryDigest(prompt, userMessageId) {
 }
 
 const help = `Usage:
-  node client.mjs --prompt "Hello" [--follow-up "And ..."] --state ./request.json
+  node client.mjs --prompt "Hello" [--attachment-receipt ./receipt.json] [--follow-up "And ..."] --state ./request.json
   node client.mjs --resume ./request.json
   node client.mjs --recover ./request.json     # read-only; does not resend
   node client.mjs --cancel ./request.json      # explicit cancellation request
@@ -27,12 +27,13 @@ Environment: DESIRECORE_URL, DESIRECORE_TOKEN, DESIRECORE_AGENT_ID (new requests
 Options: --timeout-ms 300000, --http-timeout-ms 10000, --poll-ms 1000.
 Use HTTPS remotely; HTTP is accepted only for localhost/127.0.0.1/::1.
 Exit: 0 observed completed turn; 1 rejected/failed/interrupted; 2 unknown or recovery-only.
-State files contain prompts and IDs, never the access token. Do not share them.
+--attachment-receipt can repeat; it attaches already-uploaded files to the initial turn only.
+State files contain prompts, file references and IDs, never the access token. Do not share them.
 Ctrl+C exits this client without cancelling the server; use --cancel to request cancellation.
 `;
 
 function argumentsFor(argv) {
-  const options = { followUps: [], timeoutMs: 300_000, httpTimeoutMs: 10_000, pollMs: 1_000 };
+  const options = { followUps: [], attachmentReceipts: [], timeoutMs: 300_000, httpTimeoutMs: 10_000, pollMs: 1_000 };
   const names = new Map([
     ['--prompt', 'prompt'], ['--state', 'state'], ['--resume', 'resume'],
     ['--recover', 'recover'], ['--cancel', 'cancel'], ['--timeout-ms', 'timeoutMs'],
@@ -44,6 +45,7 @@ function argumentsFor(argv) {
     const value = argv[++i];
     if (!value || value.startsWith('--')) throw new Error(`Missing value for ${option}`);
     if (option === '--follow-up') options.followUps.push(value);
+    else if (option === '--attachment-receipt') options.attachmentReceipts.push(value);
     else if (names.has(option)) options[names.get(option)] = value;
     else throw new Error(`Unknown option ${option}`);
   }
@@ -52,7 +54,7 @@ function argumentsFor(argv) {
     if (!Number.isSafeInteger(options[key]) || options[key] < 10) throw new Error(`Invalid ${key}`);
   }
   const modes = ['resume', 'recover', 'cancel'].filter(key => options[key]);
-  if (modes.length > 1 || (modes.length && (options.prompt || options.state || options.followUps.length))) {
+  if (modes.length > 1 || (modes.length && (options.prompt || options.state || options.followUps.length || options.attachmentReceipts.length))) {
     throw new Error('Use either a new --prompt/--state or one of --resume/--recover/--cancel.');
   }
   if (!modes.length && (!options.prompt?.trim() || !options.state)) throw new Error(help);
@@ -71,12 +73,32 @@ function baseUrl(value) {
   return url.origin;
 }
 
-function newTurn(prompt, kind, sessionId, agentId, conversationId) {
+function attachmentReferences(files) {
+  const references = [];
+  const fields = ['attachmentId', 'name', 'mimeType', 'size', 'sha256', 'fileReference'];
+  const sizedString = (value, maximum) => typeof value === 'string' && [...value].length >= 1 && [...value].length <= maximum;
+  for (const file of files) {
+    const receipt = JSON.parse(readFileSync(file, 'utf8'));
+    if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)
+      || Object.keys(receipt).length !== fields.length || fields.some(key => !Object.hasOwn(receipt, key))
+      || typeof receipt.attachmentId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(receipt.attachmentId)
+      || !sizedString(receipt.name, 240) || !sizedString(receipt.mimeType, 128)
+      || !Number.isSafeInteger(receipt.size) || receipt.size < 1 || receipt.size > 20 * 1024 * 1024
+      || typeof receipt.sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(receipt.sha256)
+      || !sizedString(receipt.fileReference, 2048)) {
+      throw new Error('Invalid attachment receipt; use the complete JSON returned by the same instance upload.');
+    }
+    references.push(receipt.fileReference);
+  }
+  return [...new Set(references)]; // Keep the first occurrence order for the request digest.
+}
+
+function newTurn(prompt, kind, sessionId, agentId, conversationId, fileReferences = []) {
   const clientRequestId = randomUUID();
   const userMessageId = randomUUID();
-  const requestDigest = queryDigest(prompt, userMessageId);
+  const requestDigest = queryDigest(prompt, userMessageId, fileReferences);
   const body = kind === 'start'
-    ? { prompt, options: { agentId, conversationId }, clientRequestId, userMessageId, requestDigest }
+    ? { prompt, options: { agentId, conversationId, ...(fileReferences.length ? { fileReferences: [...fileReferences] } : {}) }, clientRequestId, userMessageId, requestDigest }
     : { sessionId, message: { id: userMessageId, role: 'user', content: prompt, timestamp: Date.now() }, clientRequestId, requestDigest };
   return { kind, body, userMessageId, firstDispatchedAt: null, firstDispatchedServerTime: null, attempts: 0 };
 }
@@ -89,9 +111,11 @@ function readState(file) {
   state.baseUrl = baseUrl(state.baseUrl);
   for (const turn of state.turns) {
     const prompt = turn.kind === 'start' ? turn.body?.prompt : turn.body?.message?.content;
+    const fileReferences = (turn.kind === 'start' ? turn.body?.options?.fileReferences : turn.body?.fileReferences) ?? [];
     if (!['start', 'follow-up'].includes(turn.kind) || typeof prompt !== 'string'
       || !turn.body?.clientRequestId || !turn.userMessageId
-      || turn.body.requestDigest !== queryDigest(prompt, turn.userMessageId)) {
+      || !Array.isArray(fileReferences) || fileReferences.some(value => typeof value !== 'string')
+      || turn.body.requestDigest !== queryDigest(prompt, turn.userMessageId, fileReferences)) {
       throw new Error('Invalid or edited request state. Create a new state file for a different request.');
     }
   }
@@ -104,6 +128,8 @@ export async function runClient(options, env = process.env, output = {}) {
   const filename = resolve(options.resume || options.recover || options.cancel || options.state);
   const existing = Boolean(options.resume || options.recover || options.cancel);
   if (!existing && existsSync(filename)) throw new Error('State file already exists. Use --resume or a new --state path.');
+  if (existing && options.attachmentReceipts?.length) throw new Error('Saved requests retain their original attachment references.');
+  const fileReferences = existing ? [] : attachmentReferences(options.attachmentReceipts ?? []);
   const token = env.DESIRECORE_TOKEN;
   if (!token) throw new Error('Set DESIRECORE_TOKEN to the existing instance access token.');
   const origin = existing ? readState(filename).baseUrl : baseUrl(env.DESIRECORE_URL);
@@ -150,7 +176,7 @@ export async function runClient(options, env = process.env, output = {}) {
   };
   if (!state.agentId) throw new Error('Set DESIRECORE_AGENT_ID to the target Agent ID.');
   if (state.instanceId !== metadata.instanceId) throw new Error('Instance identity changed; refusing to send or recover requests on another instance.');
-  if (!existing) state.turns.push(newTurn(options.prompt, 'start', undefined, state.agentId, state.conversationId));
+  if (!existing) state.turns.push(newTurn(options.prompt, 'start', undefined, state.agentId, state.conversationId, fileReferences));
   function save() {
     const temporary = `${filename}.${process.pid}.tmp`;
     writeFileSync(temporary, `${JSON.stringify(state, null, 2)}\n`, { mode: 0o600 });
@@ -187,6 +213,9 @@ export async function runClient(options, env = process.env, output = {}) {
       const runtime = await http(`${path}/runtime-state`);
       const history = await http(`${path}/receipt?offset=0&limit=10`);
       snapshot.runtime = { httpStatus: runtime.status, ...runtime.data };
+      if (runtime.status === 200 && runtime.data.run_id === turn.runId && runtime.data.agent_id === state.agentId) {
+        turn.runState = { runId: turn.runId, status: runtime.data.status, source: 'runtime-state' };
+      }
       snapshot.receipts = { httpStatus: history.status, ...history.data };
     }
     turn.recovery = snapshot;
@@ -251,8 +280,11 @@ export async function runClient(options, env = process.env, output = {}) {
     save(); log({ event: 'turn_terminal', clientRequestId: data.clientRequestId, ...item.outcome });
   });
   socket.on('activity:run_status', data => {
-    if (turn.runId === data.runId) log({ event: 'run_status', runId: data.runId, status: data.status,
-      note: 'Run state does not identify completion of this turn.' });
+    if (turn.runId === data.runId) {
+      turn.runState = { runId: data.runId, status: data.status, source: 'activity:run_status' }; save();
+      log({ event: 'run_status', runId: data.runId, status: data.status,
+        note: 'Run state does not identify completion of this turn or any handoff target.' });
+    }
   });
   async function connected(deadline) {
     while (!socket.connected) {
@@ -342,6 +374,21 @@ export async function runClient(options, env = process.env, output = {}) {
       if (!turn.sessionId || observed.verdict.status !== 'committed'
         || observed.verdict.committedServerInstance !== 'current') {
         await recovery(turn); log({ event: 'follow_up_unavailable', note: 'A live current-process session was not confirmed.' }); return 2;
+      }
+      if (turn.runState?.status === 'handed_off') {
+        log({ event: 'follow_up_unavailable', runId: turn.runId, status: 'handed_off',
+          note: 'The source Run was handed off. Pending text is retained; no target execution or source replay is inferred.' });
+        return 2;
+      }
+      if (turn.runId) {
+        const runtime = await http(`/api/runs/${encodeURIComponent(turn.runId)}/runtime-state`);
+        if (runtime.status !== 200 || runtime.data.run_id !== turn.runId || runtime.data.agent_id !== state.agentId
+          || !['running', 'idle', 'completed', 'failed'].includes(runtime.data.status)) {
+          log({ event: 'follow_up_unavailable', runId: turn.runId, httpStatus: runtime.status,
+            note: 'Source runtime state is unavailable. Pending text is retained; a 404 can include a handed-off Run.' });
+          return 2;
+        }
+        turn.runState = { runId: turn.runId, status: runtime.data.status, source: 'runtime-state' }; save();
       }
       const next = state.pendingFollowUps.shift();
       turn = newTurn(next, 'follow-up', turn.sessionId, state.agentId, state.conversationId);

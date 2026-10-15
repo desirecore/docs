@@ -4,13 +4,13 @@
 
 ## 公开范围
 
-8 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、模型代理、工作流与 OpenAPI 下载。24 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
+10 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、会话历史与消息、附件与媒体、模型代理、工作流与 OpenAPI 下载。35 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
 
 Webhook 所有者管理依赖握手 `capabilities.webhookManagement: true`，由可信入口选择实际工具并生成文件范围快照；旧服务仅支持已有事件。该支持条件没有被改写成未经核对的客户端发行号。现有 Write/Bash 与审批模型保留，不把配置文件宣称为不可修改的安全边界。
 
-默认 Caddy 未代理 `/health`、Workflow 路径或本机 Compat Proxy。三种服务的地址、认证和权限分别维护。Workflow 只公开管理员预置定义的触发与观察，不伪造直接运行所需 grant 的公开签发流程。
+默认 Caddy 未代理 `/health`、Workflow 路径或本机 Compat Proxy；附件和历史使用 `/api/*`，签名媒体读取使用单独代理的 `/media/*`。三种服务的地址、认证和权限分别维护。Workflow 只公开管理员预置定义的触发与观察，不伪造直接运行所需 grant 的公开签发流程。
 
-独立示例包在 [examples/agent-client](./examples/agent-client/README.md)，静态下载副本为 `static/api-examples/agent-client.mjs`；二者必须逐字一致。依赖和锁文件在示例目录维护，不改变站点依赖。
+独立示例包在 [examples/agent-client](./examples/agent-client/README.md)。`client.mjs`、`history.mjs` 和 `attachments.mjs` 分别对应 `static/api-examples/agent-client.mjs`、`history.mjs` 和 `attachments.mjs`，每一对必须逐字一致。依赖和锁文件在示例目录维护，不改变站点依赖。
 
 ## 修改步骤
 
@@ -45,7 +45,7 @@ v5 只对 `/more/changelog/v10.0.180` 和 `/en/more/changelog/v10.0.180` 做定�
 1. 先确认生产页面、canonical、robots、双语 sitemap 与正文正常。API 页应有可直接读取的 `.theme-doc-markdown`、标题及 `docsearch:language`、`docsearch:version`、`docsearch:docusaurus_tag` 元数据。
 2. 在现有 crawler 的 URL Tester 中分别检查中英文页面的记录提取，再手动触发该 crawler 抓取。保留已保存配置和现有每日周期，不将编辑器草稿发布或新建密钥作为常规重抓步骤。
 3. 等待该次抓取结束，记录时间、成功/忽略/失败 URL 数与索引记录数；检查失败原因，不能只看记录总数增长。先保留路径规则、选择器、调度等变量，只有抓取证据指向具体配置问题时再处理该项。
-4. 按站点实际过滤条件查询：中文 `language:zh-Hans`、英文 `language:en`，并使用 `docusaurus_tag:default OR docs-default-current`。逐项检查 16 个双语 API 页面标题、代表性端点和两种语言的旧页面对照，确认返回目标 URL、`current` 版本和正确 tag；结果排名不要求固定第一。
+4. 按站点实际过滤条件查询：中文 `language:zh-Hans`、英文 `language:en`，并使用 `docusaurus_tag:default OR docs-default-current`。逐项检查 清单内全部双语 API 页面标题、代表性端点和两种语言的旧页面对照，确认返回目标 URL、`current` 版本和正确 tag；结果排名不要求固定第一。
 5. 在网站搜索框分别查找“智能体 Webhook”和“Agent Webhook”，打开目标页面，再更新 [每日调度与分块验收记录](./search-daily-verification.json)。公开记录只保留必要的时间、配置、查询与结果证据，不保存密钥、账号身份、请求头或本机绝对路径。
 
 首次收录时的 [v4 搜索验收记录](./search-verification.json) 保留当时的月度调度快照：2026-10-15 手动抓取使索引从 19,324 条增至 21,572 条，22 项查询及双语浏览器检查通过，但两篇 `v10.0.180` 更新日志因记录过大而失败。该历史记录不随 v5 改写；每日调度、定向分块和后续真实抓取结果单独记录，URL Tester 通过不等于整站抓取已全部通过。
@@ -85,3 +85,11 @@ v5 只对 `/more/changelog/v10.0.180` 和 `/en/more/changelog/v10.0.180` 做定�
 ## 当前验证记录
 
 参见 [核查与验证](./verification.md)、[发布与验收摘要](./publication.json)、[生产逐项报告](./production-verification.json)、[首次搜索验收记录](./search-verification.json)及[每日调度与分块验收记录](./search-daily-verification.json)。后续更改认证、路由、配置入口或结果交付时，只重新核对受影响合同和相关示例，不将本批测试结果传播为其它功能的运行保证。
+
+## Run、历史消息与附件媒体扩展
+
+本批固定核对源码 `7fe016c76ab98e0643ab4f2710c3733f757ef4fb`、内部文档 `b17e6a7a2d3dc4d969ea422ee37825ae39eb6177`，记录见 [本批验证](./history-attachments-verification.md)。公共规范中 Agent Service 为 27 个操作，Compat Proxy 3 个、Workflow Service 5 个。后两份规范保留原来源基线。
+
+RunMeta 接受 `handed_off`，但现行 runtime-state HTTP 入口仍对该状态返回 `404`。共享 Schema 的五值枚举不能直接当作该路由的实际响应合同。历史消息的分页窗口与返回消息条数不同，示例按请求窗口推进；媒体读取使用短期签名，附件下载使用实例身份。
+
+`publication.json`、生产和搜索验收 JSON 保留已经发布批次的事实；本批提交 PR 不代表这些新页面已经部署或收录。

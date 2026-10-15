@@ -9,9 +9,9 @@ sidebar_position: 7
 
 你可以把下面的 JSON 文件导入支持 [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.0.html) 的 API 工具，查看参数、响应和认证要求。请求与响应声明使用 JSON Schema Draft 7 方言；文件只描述表中列出的公开 HTTP 端点。
 
-**[下载 Agent Service OpenAPI JSON](/openapi/agent-service.json)**
+**[下载 Agent Service OpenAPI JSON](pathname:///openapi/agent-service.json)**
 
-另外提供 **[模型协议代理 OpenAPI JSON](/openapi/compat-proxy.json)** 和 **[Workflow Service OpenAPI JSON](/openapi/workflow-service.json)**。三份文件各自使用对应服务的地址与凭据。
+另外提供 **[模型协议代理 OpenAPI JSON](pathname:///openapi/compat-proxy.json)** 和 **[Workflow Service OpenAPI JSON](pathname:///openapi/workflow-service.json)**。三份文件各自使用对应服务的地址与凭据。
 
 ## Agent Service 覆盖范围
 
@@ -33,6 +33,17 @@ sidebar_position: 7
 | `POST /api/query/start` | 提交一次新对话请求 | [对话与运行](./04-conversations-and-runs.md) |
 | `POST /api/query/follow-up` | 向已建立的会话提交下一轮 | [对话与运行](./04-conversations-and-runs.md) |
 | `POST /api/query/client-requests/lookup` | 按稳定请求 ID 对账接纳状态 | [对话与运行](./04-conversations-and-runs.md) |
+| `GET /api/sessions` | 列出历史会话 | [会话历史与消息](./08-session-history-and-messages.md) |
+| `GET /api/sessions/{runId}` | 读取完整会话快照 | [会话历史与消息](./08-session-history-and-messages.md) |
+| `GET /api/sessions/{runId}/messages` | 分页读取持久消息 | [会话历史与消息](./08-session-history-and-messages.md) |
+| `GET /api/sessions/messages/search` | 搜索某个智能体的历史消息 | [会话历史与消息](./08-session-history-and-messages.md) |
+| `GET /api/conversation/{agentId}/overview` | 读取话题总览 | [会话历史与消息](./08-session-history-and-messages.md) |
+| `GET /api/conversation/{agentId}/matters/{id}/full` | 读取话题消息 | [会话历史与消息](./08-session-history-and-messages.md) |
+| `POST /api/attachments` | 上传通用附件并取得文件引用 | [附件与媒体](./09-attachments-and-media.md) |
+| `GET /api/attachments/{attachmentId}` | 下载当前用户的附件 | [附件与媒体](./09-attachments-and-media.md) |
+| `POST /api/media/upload` | 上传图片、音频或视频 | [附件与媒体](./09-attachments-and-media.md) |
+| `POST /api/media/access-urls` | 签发短期媒体访问链接 | [附件与媒体](./09-attachments-and-media.md) |
+| `GET /media/{filename}` | 使用签名链接读取媒体与 Range | [附件与媒体](./09-attachments-and-media.md) |
 
 花括号表示需要替换的路径参数，对应端点指南中的冒号写法。Webhook 管理操作要求认证握手中的 `capabilities.webhookManagement` 为 `true`，并使用实例所有者凭据。旧实例缺少该能力时，使用管理员已启用并验证的事件。运行列表和详情按部署所有者的实例读取范围使用；回执读取另外检查可信用户归属。
 
@@ -70,6 +81,7 @@ sidebar_position: 7
 |---|---|---|
 | `InstanceToken` | 已有实例访问令牌 | `X-Agent-Service-Token: <实例令牌>` |
 | `WebhookSecret` | 目标智能体的专用 Webhook 密钥 | `Authorization: Bearer <Webhook 密钥>` |
+| `SignedMediaSignature` | 媒体签发接口返回的短期签名 | URL 查询参数 `signature`，并保留 `expires` |
 
 上表适用于 Agent Service 文件。根据具体操作选择对应的方案。供应商 API Key 用于 DesireCore 连接模型供应商；模型代理和 Workflow 文件使用各自的地址与认证方案。
 
@@ -86,3 +98,5 @@ Socket.IO 的连接、订阅与异步事件需要配套客户端逻辑。OpenAPI
 对话提交的 `202` 也不是运行完成反馈。先连接 Socket.IO，再使用当前连接的 `socket.id` 作为 `originSocketId` 提交；HTTP 请求与 Socket 连接必须属于同一认证主体。稳定的 `clientInstanceId` 位于 Socket 认证数据中。断线后按[对话与运行](./04-conversations-and-runs.md)的对账步骤处理，不把 Run 的 `idle` 状态当作某次提交成功的证据。
 
 文件的 `info.version` 是这份 HTTP 接口描述的版本。它不代表 DesireCore 客户端的生效版本，也不代替握手中的 `serverVersion` 或 `apiProtocolVersion`。
+
+媒体原生播放使用签发端点返回的完整 `/media/{filename}?expires=…&signature=…` 链接；该读取入口不使用实例令牌，链接应按短期凭据保管。附件下载仍使用实例认证。历史、话题和媒体的权限与响应范围见各自指南。

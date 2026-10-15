@@ -4,5 +4,5 @@
   "compilerOptions": {
     "baseUrl": "."
   },
-  "exclude": [".docusaurus", "build", "api/examples/agent-client/test/source-route.fixture.ts"]
+  "exclude": [".docusaurus", "build", "api/examples/agent-client/test/source-route.fixture.ts", "api/examples/agent-client/test/source-history.fixture.ts"]
 }

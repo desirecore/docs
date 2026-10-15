@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "http://json-schema.org/draft-07/schema#",
   "info": {
     "title": "DesireCore Agent Service — public HTTP subset",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Selected externally callable endpoints for an administrator-provided standalone instance. This document is a subset of the service, and is not an application release declaration. Consult the linked guides for deployment, authorization and asynchronous results."
   },
   "servers": [
@@ -38,6 +38,14 @@
     {
       "name": "Webhook management",
       "description": "Owner configuration, selected Tool grants and dedicated secret rotation."
+    },
+    {
+      "name": "Attachments and media",
+      "description": "Authenticated uploads and attachment downloads; short-lived signed media access."
+    },
+    {
+      "name": "Session history",
+      "description": "Owner-scoped historical messages and bounded conversation-matter reads."
     }
   ],
   "paths": {
@@ -904,7 +912,7 @@
             }
           },
           "404": {
-            "description": "The Run runtime state is unavailable.",
+            "description": "No readable supported runtime state. A handed_off Run currently also returns 404; this does not establish absence, failure, or completion.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2715,6 +2723,1614 @@
           }
         }
       }
+    },
+    "/api/attachments": {
+      "post": {
+        "operationId": "uploadAttachment",
+        "tags": [
+          "Attachments and media"
+        ],
+        "summary": "Upload a general attachment",
+        "description": "One non-empty multipart file, at most 20 MiB. Stores bytes without extraction or execution. Per-user retained-directory limit 256, total retained data limit 512 MiB. Each successful POST creates a new attachment; no automatic retry/idempotency contract. The receipt fileReference is passed unchanged in Query options.fileReferences on this instance and does not grant tool or cross-user permission.",
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "One general file, 1–20,971,520 bytes. MIME is descriptive, not restricted to the media MIME list."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Complete persisted attachment receipt.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentReceipt"
+                },
+                "example": {
+                  "attachmentId": "00000000-0000-4000-8000-000000000001",
+                  "name": "report.txt",
+                  "mimeType": "text/plain",
+                  "size": 18,
+                  "sha256": "0932d7133fdafd99d58020fca2539266aa11731a72f741067b1009c4c8c66553",
+                  "fileReference": "/srv/desirecore/attachments/owner/00000000-0000-4000-8000-000000000001/data"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "attachment_file_required or attachment_empty; malformed multipart may use framework errors.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid instance credential or unresolved user identity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Configured Origin/application authority or resource ownership rejects the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "attachment_too_large or multipart parser size rejection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "attachment_limit or attachment_storage_limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "attachment_storage_unavailable, service not ready, or instance credential unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/attachments/{attachmentId}": {
+      "get": {
+        "operationId": "downloadAttachment",
+        "tags": [
+          "Attachments and media"
+        ],
+        "summary": "Download an attachment owned by the authenticated user",
+        "description": "Returns original bytes as an attachment, not JSON. The user is resolved from instance authentication. IDs do not confer cross-user permission. This route has no media byte-Range contract.",
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Original file bytes with no-store and nosniff.",
+            "headers": {
+              "Content-Disposition": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Attachment download filename."
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "no-store"
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "const": "nosniff"
+                }
+              }
+            },
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid instance credential or unresolved user identity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Configured Origin/application authority or resource ownership rejects the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "attachment_not_found for invalid, absent, other-user, or unreadable files/metadata.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service not ready, credential not initialized, or endpoint-specific service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/media/upload": {
+      "post": {
+        "operationId": "uploadMedia",
+        "tags": [
+          "Attachments and media"
+        ],
+        "summary": "Upload an image, audio, or video",
+        "description": "Single multipart file with an allowed MIME. Service multipart limit is 2 GiB; deployment/proxy limits may be smaller. Empty files are rejected. New files retain authenticated owner metadata. Metadata may be passed in top-level Query mediaRefs; model support is a separate condition.",
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Non-empty media, at most 2,147,483,648 bytes at the service multipart layer. Allowed MIME: image/jpeg, image/png, image/gif, image/webp, audio/mpeg, audio/mp3, audio/opus, audio/aac, audio/flac, audio/wav, audio/ogg, video/mp4, video/webm."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Direct media metadata.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaMetadata"
+                },
+                "example": {
+                  "type": "image",
+                  "mediaId": "00000000-0000-4000-8000-000000000004.png",
+                  "name": "diagram.png",
+                  "mimeType": "image/png",
+                  "size": 68,
+                  "width": 1,
+                  "height": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No file uploaded or empty content.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid instance credential or unresolved user identity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Configured Origin/application authority or resource ownership rejects the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Multipart size rejection. Parser errors may differ from the route error shape.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported MIME type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "media_internal_error; includes unexpected upload/parser failures caught by the route.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service not ready, credential not initialized, or endpoint-specific service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/media/access-urls": {
+      "post": {
+        "operationId": "createMediaAccessUrls",
+        "tags": [
+          "Attachments and media"
+        ],
+        "summary": "Issue short-lived media read URLs",
+        "description": "Normal instance authentication is required to mint five-minute links. Validates new-media ownership and actual media content. Legacy media without owner metadata retains read compatibility. Existing objects forbidden to the user reject the request. The signing service requires an initialized instance token.",
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaAccessUrlsRequest"
+              },
+              "example": {
+                "mediaIds": [
+                  "00000000-0000-4000-8000-000000000004.png"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Links and missing IDs; no universal success/data wrapper.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaAccessUrlsResponse"
+                },
+                "example": {
+                  "items": [
+                    {
+                      "mediaId": "00000000-0000-4000-8000-000000000004.png",
+                      "url": "/media/00000000-0000-4000-8000-000000000004.png?expires=1792112700&signature=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "expiresAt": "2026-10-16T01:05:00.000Z"
+                    }
+                  ],
+                  "missing": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Schema validation, invalid_media_id, or invalid_media_ref.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid instance credential or unresolved user identity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "media_owner_forbidden or configured Origin/application authority rejection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected media service failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "media_signing_unavailable or common service readiness/credential rejection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/media/{filename}": {
+      "get": {
+        "operationId": "getSignedMedia",
+        "tags": [
+          "Attachments and media"
+        ],
+        "summary": "Read media using its issued signed URL",
+        "description": "Only GET/HEAD on the single-segment /media/:filename path bypass normal instance-token authentication, after the application authority fence. The handler requires the signed expires/signature pair; /api/media/*, other methods, and multi-segment paths do not inherit this exemption. Configured Origin policy and service readiness still apply. Anyone holding a valid complete link can read until expiry; owner is checked at issuance, not re-resolved from the unsigned reader. Supports one byte range, open-ended/suffix ranges, and private caching bounded by remaining TTL. The implementation also supplies HEAD with the same validation and no body; HEAD is not selected as another public catalog operation.",
+        "security": [
+          {
+            "SignedMediaSignature": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-f0-9-]+\\.\\w+$",
+              "description": "Service-issued media filename. Values containing two consecutive dots are rejected."
+            }
+          },
+          {
+            "name": "expires",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]{1,12}$"
+            },
+            "description": "Positive Unix epoch seconds from the issued URL. Bound to signature; must be in the future."
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "description": "One bytes range, e.g. bytes=0-1023, bytes=1024-, or bytes=-1024; no multipart ranges."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Full media bytes.",
+            "headers": {
+              "Accept-Ranges": {
+                "schema": {
+                  "type": "string",
+                  "const": "bytes"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "private, max-age=<remaining signature lifetime in seconds>"
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "const": "nosniff"
+                }
+              }
+            },
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/gif": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/opus": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/aac": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/flac": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/wav": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/ogg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "video/mp4": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "video/webm": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Requested single media range.",
+            "headers": {
+              "Accept-Ranges": {
+                "schema": {
+                  "type": "string",
+                  "const": "bytes"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "private, max-age=<remaining signature lifetime in seconds>"
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "const": "nosniff"
+                }
+              },
+              "Content-Range": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/gif": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/opus": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/aac": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/flac": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/wav": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/ogg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "video/mp4": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "video/webm": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid_media_id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_media_signature or media_signature_expired. This is signed URL authentication, not an InstanceToken requirement.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Configured Origin policy or application authority rejects the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "media_not_found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "416": {
+            "description": "range_not_satisfiable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            },
+            "headers": {
+              "Content-Range": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "bytes */<complete file length>"
+              }
+            }
+          },
+          "500": {
+            "description": "media_internal_error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "media_signing_unavailable or service not ready.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentMediaError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions": {
+      "get": {
+        "operationId": "listSessionHistory",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "List the owner user's session-history branches",
+        "description": "Lists ordinary user-visible history by updatedAt descending. Excludes delegated, manual and dedicated schedule/Webhook/Mention timelines. Preserves fork generations; do not concatenate branches as a deduplicated transcript. Pagination is not an immutable snapshot.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#list-sessions"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional exact Agent filter."
+          },
+          {
+            "name": "includeArchived",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Only the wire string true includes archived sessions."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Send a positive decimal integer. No fixed maximum is declared by this route."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Source/page offset. Send a nonnegative decimal integer; the route uses compatibility integer parsing."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistorySessionPage"
+                },
+                "example": {
+                  "sessions": [
+                    {
+                      "runId": "run-example",
+                      "agentId": "your-agent-id",
+                      "status": "idle",
+                      "messageCount": 1,
+                      "createdAt": "2026-10-15T08:00:00Z",
+                      "updatedAt": "2026-10-15T08:00:00Z",
+                      "preview": "Please review the release notes"
+                    }
+                  ],
+                  "total": 1,
+                  "hasMore": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{runId}": {
+      "get": {
+        "operationId": "getSessionSnapshot",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "Read an owned ordinary session snapshot",
+        "description": "Checks trusted user ownership before body/image reads. Missing, cleared and unowned Runs return 404. Delegated Runs return 403 delegated_run_requires_inspect_view; use the messages inspection view instead. pendingAssistant is temporary and separate from durable messages. Returned configuration is not execution authority.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#get-session"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "description": "Actual owned Run ID, not a runtime session ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistorySessionSnapshot"
+                },
+                "example": {
+                  "runId": "run-example",
+                  "agentId": "your-agent-id",
+                  "userId": "your-instance-user-id",
+                  "engine": "desirecore-engine",
+                  "messages": [
+                    {
+                      "id": "d8d53a7a-478e-4d96-970e-657dece814f7",
+                      "role": "user",
+                      "content": "Please review the release notes",
+                      "timestamp": 1792051200000
+                    }
+                  ],
+                  "options": {},
+                  "status": "idle",
+                  "createdAt": "2026-10-15T08:00:00Z",
+                  "updatedAt": "2026-10-15T08:00:00Z"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "private, no-store"
+                },
+                "description": "Private history read."
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Run ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Session unavailable or not owned by the trusted user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{runId}/messages": {
+      "get": {
+        "operationId": "listSessionMessages",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "Read a source-record window from an owned Run",
+        "description": "Checks ownership before content reads. Delegated Runs require view=inspect-run. total counts source rows, not returned messages; advance offset by the requested limit and stop at total, even if a page is empty. Optional live is a temporary delegated display checkpoint, not a durable message or terminal. There is no cross-page consistency revision.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#session-messages"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "description": "Actual owned Run ID, not a runtime session ID."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Source/page offset. Send a nonnegative decimal integer; the route uses compatibility integer parsing."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Requested source-record window. Advance by this limit even if the returned array is shorter or empty."
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "inspect-run"
+              ]
+            },
+            "description": "Explicit delegated inspection view; does not bypass ownership."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryMessagePage"
+                },
+                "examples": {
+                  "durablePage": {
+                    "value": {
+                      "messages": [
+                        {
+                          "id": "d8d53a7a-478e-4d96-970e-657dece814f7",
+                          "role": "user",
+                          "content": "Please review the release notes",
+                          "timestamp": 1792051200000,
+                          "lineIndex": 0,
+                          "offset": 0
+                        }
+                      ],
+                      "total": 1
+                    }
+                  },
+                  "delegatedInspectView": {
+                    "summary": "Optional live snapshot; request view=inspect-run.",
+                    "value": {
+                      "messages": [],
+                      "total": 0,
+                      "live": {
+                        "turnId": "turn-example",
+                        "text": "Working on the delegated task",
+                        "toolCalls": [],
+                        "timestamp": 1792051200000
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "private, no-store"
+                },
+                "description": "Private history read."
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Run ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Session unavailable or not owned by the trusted user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/messages/search": {
+      "get": {
+        "operationId": "searchSessionMessages",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "Search visible messages for one Agent",
+        "description": "Matches extracted message text case-insensitively, newest timestamp first. Includes independent manual conversations; excludes archived and delegated Runs. Default-conversation fork families select the visible history window. preferredRunId is neither a credential nor an exact-Run filter. limit/offset and their sum must be safe nonnegative integers. limit=0 returns all remaining hits and hasMore=false. Match original text before cropping previews.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#search-messages"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Required Agent ID."
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional case-insensitive substring; omitted means no text filter."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "image",
+                "file",
+                "tool"
+              ],
+              "default": "all"
+            },
+            "description": "Other wire values fall back to all."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991,
+              "default": 50
+            },
+            "description": "0 returns every remaining hit from offset; prefer bounded pages."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991,
+              "default": 0
+            },
+            "description": "Hit offset, not a returned message's byte position."
+          },
+          {
+            "name": "preferredRunId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional default-conversation history window; independent manual conversations remain included."
+          },
+          {
+            "name": "previewChars",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8000
+            },
+            "description": "Optional preview budget; matching happens before cropping."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistorySearchPage"
+                },
+                "example": {
+                  "items": [
+                    {
+                      "runId": "run-example",
+                      "messageIndex": 0,
+                      "offset": 0,
+                      "messageId": "d8d53a7a-478e-4d96-970e-657dece814f7",
+                      "role": "user",
+                      "text": "Please review the release notes",
+                      "timestamp": 1792051200000,
+                      "hasImages": false,
+                      "hasFiles": false,
+                      "hasToolUse": false
+                    }
+                  ],
+                  "total": 1,
+                  "hasMore": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "agentId is required or history page parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversation/{agentId}/overview": {
+      "get": {
+        "operationId": "getConversationOverview",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "Read the instance owner's conversation-matter overview",
+        "description": "Reads the instance's current local profile, not a caller-supplied tenant ID. Intended for the deployment owner. Returns all active matters and at most ten recent entries, not a complete transcript. No pagination. An empty overview does not establish Agent existence or absence of history.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#conversation-overview"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Agent ID belonging to the instance owner."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationMatterOverview"
+                },
+                "example": {
+                  "agentId": "your-agent-id",
+                  "activeMatters": [
+                    {
+                      "id": "mat_example",
+                      "title": "Release review",
+                      "type": "task"
+                    }
+                  ],
+                  "recentMatters": [],
+                  "totalMatters": 1,
+                  "totalArchived": 0
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversation/{agentId}/matters/{id}/full": {
+      "get": {
+        "operationId": "getConversationMatterMessages",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "Read bounded public source entries for one matter",
+        "description": "Reads the instance owner's local-profile conversation memory. Supports active, recent and archived source data. Underlying Run reads recheck that user and Agent ownership. Reads at most 120 source messages and sets truncated=true if more exist; projection may omit entries. No pagination or limit-override parameter. Entries are not guaranteed to have the per-Run message shape.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#matter-messages"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Agent ID belonging to the instance owner."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Actual matter ID returned by the overview."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationMatterMessages"
+                },
+                "example": {
+                  "matterId": "mat_example",
+                  "messages": [
+                    {
+                      "role": "user",
+                      "content": "Please review the release notes",
+                      "timestamp": 1792051200000
+                    }
+                  ],
+                  "truncated": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Matter source messages unavailable, invalid or not owned by this user and Agent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2729,6 +4345,12 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Dedicated secret for the target Agent Webhook; not a provider API key or JWT."
+      },
+      "SignedMediaSignature": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "signature",
+        "description": "Five-minute HMAC-SHA-256 capability issued by POST /api/media/access-urls. 43-character canonical base64url signature bound to the filename and required expires query value. Reusable until expiry; no instance header required for this GET. Expired/invalid links return 401. Application authority, configured Origin restrictions, and readiness are checked separately."
       }
     },
     "schemas": {
@@ -3472,12 +5094,13 @@
           },
           "status": {
             "type": "string",
-            "description": "运行状态：running（执行中）、idle（空闲，等待下一轮对话）、completed（成功完成）、failed（执行失败，查看 failure_reason 字段了解原因）",
+            "description": "Run lifecycle state. handed_off means the conversation was handed off, not that the target completed or the submitted turn succeeded.",
             "enum": [
               "running",
               "idle",
               "completed",
-              "failed"
+              "failed",
+              "handed_off"
             ]
           },
           "failure_reason": {
@@ -3672,11 +5295,13 @@
           },
           "handoffFrom": {
             "type": "string",
-            "description": "转交来源 Run ID（C-9.3）：本 run 承接自该 run 的会话转交（handoff）。回撤不跨转交边界，仅展示\"承接自 X\"链路"
+            "readOnly": true,
+            "description": "Source Run ID for this handoff. A link grants no access or continuation permission."
           },
           "handoffTo": {
             "type": "string",
-            "description": "转交目标 Run ID（C-9.3）：本 run 已将会话转交给该 run。回撤不跨转交边界，仅展示\"已转交给 X\"链路"
+            "readOnly": true,
+            "description": "Target Run ID for this handoff. Target admission and completion require their own evidence."
           },
           "team_id": {
             "type": "string",
@@ -4294,6 +5919,21 @@
               }
             },
             "additionalProperties": false
+          },
+          "handoff_pending": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Server-recorded marker for a pending handoff. Not an access credential or a replay token."
+          },
+          "handoff_attempted": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "Target startup reached a stage that may have side effects. Does not establish target completion."
+          },
+          "handoff_accepted": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "The target runtime accepted the handoff. Does not establish target business completion."
           }
         },
         "additionalProperties": false
@@ -4316,7 +5956,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Raw Run state. idle does not prove successful completion of a particular submitted turn.",
+            "description": "Raw state returned by this HTTP endpoint: running, idle, completed or failed. A handed_off Run currently returns 404 because the route filters that state; do not infer missing data, failure or completion from 404.",
             "enum": [
               "running",
               "idle",
@@ -6596,12 +8236,760 @@
           }
         },
         "additionalProperties": false
+      },
+      "AttachmentReceipt": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "attachmentId",
+          "name",
+          "mimeType",
+          "size",
+          "sha256",
+          "fileReference"
+        ],
+        "properties": {
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "服务端随机签发的附件ID。"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240,
+            "description": "不含路径分隔符/控制符的显示文件名。"
+          },
+          "mimeType": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "上传时的内容类型，只作描述，下载禁止嗅探执行。"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20971520,
+            "description": "完整已持久化的字节数。"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "文件内容摘要；未完成上传不返回成功。"
+          },
+          "fileReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048,
+            "description": "Server-side file reference. Pass unchanged to options.fileReferences of a Query start request on the same instance; it is not a public URL or a local client path."
+          }
+        }
+      },
+      "AttachmentMediaError": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "description": "Route error. Framework, origin, readiness, and proxy errors may carry additional fields; there is no universal response wrapper."
+      },
+      "MediaMetadata": {
+        "type": "object",
+        "required": [
+          "type",
+          "mediaId",
+          "name",
+          "mimeType",
+          "size"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "image",
+              "audio",
+              "video"
+            ]
+          },
+          "mediaId": {
+            "type": "string",
+            "pattern": "^[a-f0-9-]+\\.\\w+$",
+            "description": "Service-issued media filename. Values containing two consecutive dots are rejected."
+          },
+          "name": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string",
+            "enum": [
+              "image/jpeg",
+              "image/png",
+              "image/gif",
+              "image/webp",
+              "audio/mpeg",
+              "audio/mp3",
+              "audio/opus",
+              "audio/aac",
+              "audio/flac",
+              "audio/wav",
+              "audio/ogg",
+              "video/mp4",
+              "video/webm"
+            ]
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483648
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "description": "Direct upload response, manually represented from MediaMeta and saveAuthorizedMediaRaw. Dimensions are optional; no additional response wrapper."
+      },
+      "MediaAccessUrlsRequest": {
+        "type": "object",
+        "required": [
+          "mediaIds"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "mediaIds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "type": "string"
+            },
+            "description": "Duplicates removed in first-occurrence order; IDs are validated by the route."
+          }
+        }
+      },
+      "MediaAccessUrlsResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "missing"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "mediaId",
+                "url",
+                "expiresAt"
+              ],
+              "properties": {
+                "mediaId": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9-]+\\.\\w+$",
+                  "description": "Service-issued media filename. Values containing two consecutive dots are rejected."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Service-relative URL with expires and signature. Use only the actual returned link."
+                },
+                "expiresAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "missing": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Missing files do not prevent other readable IDs from receiving links. Any ownership failure for an existing object rejects the request rather than returning partial items."
+      },
+      "HistoryError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": true
+      },
+      "HistorySessionSummary": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "idle",
+              "completed",
+              "failed",
+              "handed_off"
+            ],
+            "description": "Historical display status, not live Run execution state or a request terminal."
+          },
+          "messageCount": {
+            "type": "number"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "preview": {
+            "type": "string"
+          },
+          "archivedAt": {
+            "type": "string"
+          },
+          "forkedFrom": {
+            "type": "string"
+          },
+          "conversationId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "titleSource": {
+            "type": "string",
+            "enum": [
+              "custom",
+              "auto"
+            ]
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "user",
+              "delegation"
+            ]
+          },
+          "background": {
+            "type": "boolean"
+          },
+          "delegated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "runId",
+          "agentId",
+          "status",
+          "messageCount",
+          "createdAt",
+          "updatedAt"
+        ],
+        "additionalProperties": true,
+        "description": "Known SessionSummary fields from sessionSummarySchema. This HTTP projection is intentionally open."
+      },
+      "HistoryMessage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ]
+          },
+          "content": {
+            "description": "Display content; commonly a string or content-block array. Do not reconstruct Provider protocol from it."
+          },
+          "timestamp": {
+            "type": "number",
+            "description": "Unix milliseconds when present."
+          },
+          "lineIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Source row position, not stable identity."
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Byte position, not a pagination query offset."
+          },
+          "toolUse": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "summaryRef": {
+                  "type": "object",
+                  "properties": {
+                    "filename": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {}
+          },
+          "media": {
+            "type": "array",
+            "items": {}
+          },
+          "file": {},
+          "thinking": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true,
+        "description": "Known fields of the public SessionMessage projection, derived from sessionMessageSchema. Runtime-private recovery fields are not part of this contract. Additional public fields remain allowed."
+      },
+      "HistoryLiveInspectionTool": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "isError": {
+            "type": "boolean"
+          },
+          "activity": {
+            "description": "Optional bounded public Tool activity; no Tool input or output."
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "isError"
+        ],
+        "additionalProperties": true
+      },
+      "HistoryLiveInspection": {
+        "type": "object",
+        "properties": {
+          "turnId": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 16384
+          },
+          "toolCalls": {
+            "type": "array",
+            "maxItems": 128,
+            "items": {
+              "$ref": "#/components/schemas/HistoryLiveInspectionTool"
+            }
+          },
+          "timestamp": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "text",
+          "toolCalls",
+          "timestamp"
+        ],
+        "additionalProperties": true,
+        "description": "Temporary delegated-Run display checkpoint. It is not durable history, a receipt or proof of completion; replace it instead of appending it to messages."
+      },
+      "HistorySessionSnapshot": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "engine": {
+            "type": "string",
+            "enum": [
+              "desirecore-engine"
+            ]
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryMessage"
+            }
+          },
+          "options": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Display/recovery configuration. Returned configuration grants no execution authority."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "idle",
+              "completed",
+              "failed",
+              "handed_off"
+            ],
+            "description": "Historical display status, not live Run execution state or a request terminal."
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "conversationId": {
+            "type": "string"
+          },
+          "forkedFrom": {
+            "type": "string"
+          },
+          "teamId": {
+            "type": "string"
+          },
+          "workDir": {
+            "type": "string"
+          },
+          "worktreeCwd": {
+            "type": "string"
+          },
+          "pendingAssistant": {
+            "$ref": "#/components/schemas/HistoryMessage"
+          },
+          "runtimeSession": {
+            "type": "object",
+            "properties": {
+              "sessionId": {
+                "type": "string"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "scopeEpoch": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "scopeSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "boundModel": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "runId",
+          "agentId",
+          "userId",
+          "engine",
+          "messages",
+          "options",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "additionalProperties": true,
+        "description": "Known public fields derived from sessionSnapshotSchema and the public session projection; additional public fields are allowed. Images may be expanded to data URLs."
+      },
+      "HistorySessionPage": {
+        "type": "object",
+        "properties": {
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistorySessionSummary"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "hasMore": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "sessions",
+          "total",
+          "hasMore"
+        ],
+        "additionalProperties": true
+      },
+      "HistoryMessagePage": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryMessage"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Source-record row count. Omitted or damaged rows mean returned messages can be fewer than the requested window."
+          },
+          "live": {
+            "$ref": "#/components/schemas/HistoryLiveInspection"
+          }
+        },
+        "required": [
+          "messages",
+          "total"
+        ],
+        "additionalProperties": true
+      },
+      "HistorySearchHit": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          },
+          "messageIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Source row position within this Run."
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Byte position, not the next search-page offset."
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "hasImages": {
+            "type": "boolean",
+            "description": "Based on legacy images or media fields; not proof that every attachment is an image."
+          },
+          "hasFiles": {
+            "type": "boolean"
+          },
+          "hasToolUse": {
+            "type": "boolean"
+          },
+          "toolNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conversationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId",
+          "messageIndex",
+          "offset",
+          "messageId",
+          "role",
+          "text",
+          "timestamp",
+          "hasImages",
+          "hasFiles",
+          "hasToolUse"
+        ],
+        "additionalProperties": true
+      },
+      "HistorySearchPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistorySearchHit"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "hasMore": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "hasMore"
+        ],
+        "additionalProperties": true
+      },
+      "ConversationMatterOverview": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "activeMatters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "type"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "recentMatters": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "completedAt": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "type"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "totalMatters": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalArchived": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "agentId",
+          "activeMatters",
+          "recentMatters",
+          "totalMatters",
+          "totalArchived"
+        ],
+        "additionalProperties": true
+      },
+      "ConversationMatterMessages": {
+        "type": "object",
+        "properties": {
+          "matterId": {
+            "type": "string"
+          },
+          "messages": {
+            "type": "array",
+            "maxItems": 120,
+            "items": {},
+            "description": "Public source entries; not guaranteed to have the per-Run SessionMessage shape."
+          },
+          "truncated": {
+            "type": "boolean",
+            "const": true,
+            "description": "Present and true when the source read exceeded 120 messages. Public projection may return fewer entries."
+          }
+        },
+        "required": [
+          "matterId",
+          "messages"
+        ],
+        "additionalProperties": true
       }
     }
   },
   "x-service": "agent-service",
   "x-source": {
     "repository": "desirecore/desirecore",
-    "revision": "e45f22902af2dc45b109cfa8f454795538aea2ed"
+    "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb"
   }
 }
