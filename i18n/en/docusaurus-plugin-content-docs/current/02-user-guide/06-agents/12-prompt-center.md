@@ -10,10 +10,6 @@ keywords: [Prompt Center, system prompt, global prompt, team prompt, Persona, Pr
 `v10.0.179+` (standing instructions in `instructions.md`).
 :::
 
-:::info Global prompt editor
-Plain Markdown loading for the global prompt is not yet available in the released app. If your installed version still shows an L0/L1/L2 form, its layered behavior still applies. Before upgrading to a version with full-body loading, review any old global L2 content: it will become active on every run.
-:::
-
 Prompt Center brings prompt sources stored across user, team, and agent directories into one management surface. Open **Explorer → Prompt Center**, select a scope on the left, and edit or preview it on the right.
 
 ## Three Scopes
@@ -28,7 +24,15 @@ Editable sections are combined in this order: **global → team → agent person
 
 ## Global Prompts Use Ordinary Markdown
 
+:::info Effective version
+`v10.0.181+` (plain Markdown loading for the global prompt).
+:::
+
 The global prompt has one editor for the complete Markdown file, saved as the current user's `prompt.md`. Its nonempty body enters the system prompt of all that user's agents. Headings such as `## L0`, `## L1`, and `## L2` are ordinary headings and do not control loading. Keep long material needed only for particular tasks in separate skills or reference files.
+
+:::warning Upgrading from an earlier version
+Versions before `v10.0.181` show the global prompt as an L0/L1/L2 form, and its L2 content is not injected by default. After the upgrade, the same `prompt.md` takes effect as a whole, so long material under `## L2` that was meant only for particular tasks also enters every conversation. Review your global prompt and move such material to skills or reference files.
+:::
 
 ## L0 / L1 / L2 in Team and Agent Files
 
