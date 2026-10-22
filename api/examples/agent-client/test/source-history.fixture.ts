@@ -84,6 +84,29 @@ describe('公开历史 API 的实际路由合同', () => {
     expect((await app.inject({ method: 'GET', url: '/api/sessions/missing-run', headers })).statusCode).toBe(404)
   })
 
+  it('真实历史读取隐藏敏感失败正文和引用，同时保留失败状态', async () => {
+    createRun('privacy-run')
+    writeFileSync(join(rootRef.current, 'runs', 'privacy-run', 'messages.jsonl'), [
+      { role: 'user', content: 'fixture privacy request', timestamp: 1 },
+      { role: 'assistant', content: '', timestamp: 2, toolUse: [{
+        id: 'private-call', name: 'BrowserScript', status: 'failed', isError: true,
+        summary: 'PRIVATE-RESULT-BODY', summaryRef: { filename: 'private-result.txt', size: 19 },
+        summaryIncomplete: true,
+      }] },
+    ].map(value => JSON.stringify(value)).join('\n') + '\n')
+    for (const suffix of ['', '/messages?offset=0&limit=2']) {
+      const response = await app.inject({ method: 'GET', url: '/api/sessions/privacy-run' + suffix, headers })
+      expect(response.statusCode).toBe(200)
+      const tool = response.json().messages[1].toolUse[0]
+      expect(tool).toMatchObject({ status: 'failed', isError: true })
+      expect(typeof tool.summary).toBe('string')
+      expect(tool.summary).toContain('failed')
+      expect(tool).not.toHaveProperty('summaryRef')
+      expect(tool).not.toHaveProperty('summaryIncomplete')
+      expect(response.body).not.toMatch(/PRIVATE-RESULT-BODY|private-result\.txt/)
+    }
+  })
+
   it('搜索使用真实历史，缺少Agent或非法分页返回400', async () => {
     createRun('search-run')
     const response = await app.inject({ method: 'GET', url: '/api/sessions/messages/search?agentId=docs-agent&q=needle&limit=1&offset=0&previewChars=20', headers })

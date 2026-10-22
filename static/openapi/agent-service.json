@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "http://json-schema.org/draft-07/schema#",
   "info": {
     "title": "DesireCore Agent Service — public HTTP subset",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Selected externally callable endpoints for an administrator-provided standalone instance. This document is a subset of the service, and is not an application release declaration. Consult the linked guides for deployment, authorization and asynchronous results."
   },
   "servers": [
@@ -3653,7 +3653,7 @@
           "Session history"
         ],
         "summary": "Read an owned ordinary session snapshot",
-        "description": "Checks trusted user ownership before body/image reads. Missing, cleared and unowned Runs return 404. Delegated Runs return 403 delegated_run_requires_inspect_view; use the messages inspection view instead. pendingAssistant is temporary and separate from durable messages. Returned configuration is not execution authority.",
+        "description": "Checks trusted user ownership before body/image reads. Missing, cleared and unowned Runs return 404. Delegated Runs return 403 delegated_run_requires_inspect_view; use the messages inspection view instead. pendingAssistant is temporary and separate from durable messages. Returned configuration is not execution authority. Returns a display projection: sensitive tool results may be withheld and their body references removed. Do not infer success, reconstruct private protocol or automatically rerun work from placeholder text.",
         "externalDocs": {
           "url": "https://docs.desirecore.com/api/session-history-and-messages#get-session"
         },
@@ -3782,7 +3782,7 @@
           "Session history"
         ],
         "summary": "Read a source-record window from an owned Run",
-        "description": "Checks ownership before content reads. Delegated Runs require view=inspect-run. total counts source rows, not returned messages; advance offset by the requested limit and stop at total, even if a page is empty. Optional live is a temporary delegated display checkpoint, not a durable message or terminal. There is no cross-page consistency revision.",
+        "description": "Checks ownership before content reads. Delegated Runs require view=inspect-run. total counts source rows, not returned messages; advance offset by the requested limit and stop at total, even if a page is empty. Optional live is a temporary delegated display checkpoint, not a durable message or terminal. There is no cross-page consistency revision. Returns a display projection: sensitive tool results may be withheld and their body references removed. Do not infer success, reconstruct private protocol or automatically rerun work from placeholder text.",
         "externalDocs": {
           "url": "https://docs.desirecore.com/api/session-history-and-messages#session-messages"
         },
@@ -4228,7 +4228,7 @@
           "Session history"
         ],
         "summary": "Read bounded public source entries for one matter",
-        "description": "Reads the instance owner's local-profile conversation memory. Supports active, recent and archived source data. Underlying Run reads recheck that user and Agent ownership. Reads at most 120 source messages and sets truncated=true if more exist; projection may omit entries. No pagination or limit-override parameter. Entries are not guaranteed to have the per-Run message shape.",
+        "description": "Reads the instance owner's local-profile conversation memory. Supports active, recent and archived source data. Underlying Run reads recheck that user and Agent ownership. Reads at most 120 source messages and sets truncated=true if more exist; projection may omit entries. No pagination or limit-override parameter. Entries are not guaranteed to have the per-Run message shape. Returns a display projection: sensitive tool results may be withheld and their body references removed. Do not infer success, reconstruct private protocol or automatically rerun work from placeholder text.",
         "externalDocs": {
           "url": "https://docs.desirecore.com/api/session-history-and-messages#matter-messages"
         },
@@ -8555,7 +8555,8 @@
                   "type": "string"
                 },
                 "summary": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Display summary. Sensitive results may be replaced by a placeholder; running/interrupted summaries may be absent. Do not parse outcome or replay instructions from this text."
                 },
                 "summaryRef": {
                   "type": "object",
@@ -8564,7 +8565,16 @@
                       "type": "string"
                     }
                   },
-                  "additionalProperties": true
+                  "additionalProperties": true,
+                  "description": "Optional body reference for public output. Withheld results omit this reference; its absence does not mean the tool did not run."
+                },
+                "isError": {
+                  "type": "boolean",
+                  "description": "When present, preserve the actual tool error fact even if its summary is withheld."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Tool-call state when present. Preserve this independently from display summaries; it is not the Query terminal or a child Run/Worker status."
                 }
               },
               "additionalProperties": true
@@ -8584,7 +8594,7 @@
           }
         },
         "additionalProperties": true,
-        "description": "Known fields of the public SessionMessage projection, derived from sessionMessageSchema. Runtime-private recovery fields are not part of this contract. Additional public fields remain allowed."
+        "description": "Known fields of the public SessionMessage projection, derived from sessionMessageSchema. Runtime-private recovery fields are not part of this contract. Additional public fields remain allowed. Sensitive tool results and unverifiable protocol results may be withheld; privacy placeholders are display text, not execution outcomes. Body references may be omitted."
       },
       "HistoryLiveInspectionTool": {
         "type": "object",
@@ -8743,7 +8753,7 @@
           "updatedAt"
         ],
         "additionalProperties": true,
-        "description": "Known public fields derived from sessionSnapshotSchema and the public session projection; additional public fields are allowed. Images may be expanded to data URLs."
+        "description": "Known public fields derived from sessionSnapshotSchema and the public session projection; additional public fields are allowed. Images may be expanded to data URLs. Tool summaries and result blocks may be replaced by privacy placeholders with body references removed."
       },
       "HistorySessionPage": {
         "type": "object",
@@ -8971,7 +8981,7 @@
             "type": "array",
             "maxItems": 120,
             "items": {},
-            "description": "Public source entries; not guaranteed to have the per-Run SessionMessage shape."
+            "description": "Public source entries; not guaranteed to have the per-Run SessionMessage shape. Sensitive or unverifiable tool-result bodies may be replaced and external result references removed."
           },
           "truncated": {
             "type": "boolean",
@@ -8990,6 +9000,6 @@
   "x-service": "agent-service",
   "x-source": {
     "repository": "desirecore/desirecore",
-    "revision": "7fe016c76ab98e0643ab4f2710c3733f757ef4fb"
+    "revision": "a101a40c14cc9d478c7f9a23d8a125ac2404509b"
   }
 }

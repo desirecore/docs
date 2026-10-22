@@ -103,3 +103,9 @@ Configuration management requires instance owner access and `capabilities.webhoo
 ## Conversations, proxy and workflow troubleshooting
 
 After a conversation timeout, use the example's `--recover` to read admission records. Preserve request IDs, digest and state files; an unknown outcome does not prove execution never started. See [conversations and Runs](./04-conversations-and-runs.md). For model calls, check the local Base URL and provider binding of the safe token. For workflows, check the independent address and `X-Workflow-Service-Token`, then follow the [workflow guide](./06-workflow-integration.md) to inspect the `runId` and terminal status.
+
+## A history read succeeds but output is incomplete {#history-projection-troubleshooting}
+
+HTTP `200` confirms the read, not availability of every tool-result body. Sensitive results or results whose call identity cannot be verified may contain only placeholders with body references omitted. This does not by itself establish execution failure, damaged history, or a need to rerun work. Preserve actual `status` and `isError` facts and follow [history-result read boundaries](./08-session-history-and-messages.md#history-result-privacy); do not infer success or retry automatically from placeholder text.
+
+A per-Run message's `offset` is a byte position, whereas the pagination request's `offset` is a source-row position. Advance by the requested window, not the number of returned messages. History can change while being read; see [session history and messages](./08-session-history-and-messages.md).

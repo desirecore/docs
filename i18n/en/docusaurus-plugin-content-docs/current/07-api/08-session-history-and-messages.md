@@ -249,6 +249,17 @@ Use a topic ID from the overview; there are no pagination parameters. The source
 }
 ```
 
+## Tool results and read consistency {#history-result-privacy}
+
+These endpoints return message views for display and search. Some tool results contain credentials, interface content, or other sensitive information; history, session snapshots, and topic messages replace that content with a placeholder. Protocol records may also withhold result bodies when the tool-call identity cannot be verified or contains conflicting facts.
+
+- `toolUse[].summary` or a tool-result content block may be replaced. Summaries for running or interrupted tools may also be absent. Do not depend on the exact placeholder wording.
+- For withheld results, body references or preview markers such as `summaryRef`, `summaryIncomplete`, and `externalizedPreview` may be removed. An absent reference does not mean the tool never ran, and does not permit constructing a filename to obtain its body.
+- Preserve and read the actual `status`, `isError`, and other outcome fields. A placeholder for a failed result still represents failure; the word `completed` in a summary does not establish completion of the submitted turn or the business task.
+- If sensitive output is needed, have the user obtain it through the original tool or application. A placeholder is not a reason to rerun tools, resubmit a conversation, or approve an action automatically.
+
+The same historical record may produce different display content over time because of privacy rules, display deduplication, or concurrent writes. Message IDs and source-row windows locate records; they do not guarantee byte-identical bodies. These reads are not a full backup or model-protocol replay. The pagination rules and request-terminal rules above continue to apply independently.
+
 ## Runnable read example {#history-example}
 
 **[Download history.mjs](pathname:///api-examples/history.mjs)**. It requires Node.js 22 or later, with no npm dependencies to install.

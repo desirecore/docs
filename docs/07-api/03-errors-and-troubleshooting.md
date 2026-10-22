@@ -103,3 +103,9 @@ Webhook 的 `200` 和 `accepted: true` 表示已接收触发。响应中没有 R
 ## 对话、代理与工作流排查
 
 对话超时后先使用示例的 `--recover` 读取准入记录；保留原请求 ID、摘要和状态文件，避免将未知状态当作未执行。详见[对话与 Run](./04-conversations-and-runs.md)。模型代理应核对本机 Base URL 和安全 token 的供应商绑定；Workflow Service 应核对独立地址和 `X-Workflow-Service-Token`，再按[工作流指南](./06-workflow-integration.md)检查 `runId` 与终态。
+
+## 历史读取成功但结果不完整 {#history-projection-troubleshooting}
+
+HTTP `200` 表示读取成功，不保证返回完整的工具结果正文。敏感结果或无法核验调用身份的结果可能只提供占位提示，并省略正文引用；这与执行失败、历史损坏或需要重跑不是一回事。保留实际的 `status`、`isError`，按[历史结果的读取边界](./08-session-history-and-messages.md#history-result-privacy)处理，不从占位文字推断成功或自动重试。
+
+逐 Run 消息中的 `offset` 是字节位置，而分页请求的 `offset` 是源行位置；按请求窗口推进，不能用返回消息条数补算下一页。历史可能在读取期间变化，参见[会话历史与消息](./08-session-history-and-messages.md)。
