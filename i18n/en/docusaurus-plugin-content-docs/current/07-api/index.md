@@ -30,6 +30,15 @@ Agent Service uses `X-Agent-Service-Token`; external Webhooks use `Authorization
 
 A handshake `200` confirms the authenticated request. Query submission `202` and Webhook `200 accepted` acknowledge admission or receipt; follow the corresponding guide to observe completion and delivery. Conversation events use Socket.IO, while Workflow progress uses SSE.
 
+## Compatibility and stability {#api-compatibility}
+
+Verify the handshake and required capabilities before integrating, then follow each endpoint's status codes, fields, and asynchronous results. A successful connection does not establish every capability. The three services' addresses and credentials are not interchangeable.
+
+- Send requests according to their own Schema. Do not apply one endpoint's extra fields or response wrapper to another.
+- Where a response permits extensions, ignore new optional fields you do not use while validating instance identity, required fields, and known states. Treat unknown states and absent fields as unknown rather than silently substituting `idle` or success.
+- OpenAPI `info.version` identifies a revision of the interface description. It is neither a compatibility guarantee shared by every service nor an effective client version. Follow each guide and the actual instance response for support conditions.
+- History is a display view that may contain privacy placeholders and omit body references. See [history-result read boundaries](./08-session-history-and-messages.md#history-result-privacy). For timeouts, disconnects, and unknown outcomes, follow [admission reconciliation](./04-conversations-and-runs.md#request-reconciliation) instead of creating a new execution immediately.
+
 ## Start integrating
 
 1. Obtain the actual service address and its credential. Use verified HTTPS for remote access.

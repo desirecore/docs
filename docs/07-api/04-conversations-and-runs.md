@@ -351,6 +351,8 @@ node agent-client.mjs \
 
 没有匹配的 `clientRequestId` 或没有结构化 `terminal` 时，示例不会把事件判成这次请求已经成功。状态文件保留已观察的信息，供后续对账。
 
+`query:retrying` 和 `query:warning` 是可选的诊断事件，可能携带 `conversationId`、`clientRequestId` 等关联字段。只在能关联到当前请求时显示为该轮的提示；缺少标识的事件不能据此结束、重发或切换当前请求。它们也不替代 `query:complete.terminal`。
+
 ### 区分各种 ID {#conversation-identifiers}
 
 | ID | 标识范围与生命周期 |

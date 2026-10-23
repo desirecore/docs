@@ -351,6 +351,8 @@ An admitted follow-up returns `202` with `ok: true`, `sessionId`, and the corres
 
 Without a matching `clientRequestId` or structured `terminal`, the example does not declare that this request succeeded. Its state file retains observed information for reconciliation.
 
+`query:retrying` and `query:warning` are optional diagnostic events and may carry correlation fields such as `conversationId` and `clientRequestId`. Show them as hints for a turn only when they can be associated with that request. Uncorrelated events must not end, replay, or switch the current request, and do not replace `query:complete.terminal`.
+
 ### Distinguish Identifiers {#conversation-identifiers}
 
 | Identifier | Scope and lifetime |

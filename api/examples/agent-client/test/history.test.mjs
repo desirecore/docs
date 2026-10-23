@@ -114,11 +114,14 @@ test('bounds all-pages requests and reports the next offset', async t => {
 });
 
 test('uses the exact Run snapshot endpoint and leaves the public payload intact', async t => {
-  const snapshot = { runId: 'run-a', messages: [], pendingAssistant: { role: 'assistant', content: 'in progress' }, status: 'idle' };
+  const snapshot = { runId: 'run-a', messages: [{ role: 'assistant', content: '', toolUse: [
+    { id: 'private-call', name: 'BrowserScript', summary: 'Tool result withheld', status: 'failed', isError: true },
+  ] }], pendingAssistant: { role: 'assistant', content: 'in progress' }, status: 'idle', optionalExtension: { displayOnly: true } };
   const f = await fixture(t, (url, response) => { assert.equal(url.pathname, '/api/sessions/run-a'); json(response, 200, snapshot); });
   const out = await read({ command: 'session', id: 'run-a' }, f.env);
   assert.deepEqual(out.records[0].data, snapshot);
   assert.equal(out.result.exitCode, 0);
+  assert.equal(f.requests.length, 2); // Handshake and read only: withheld output never triggers execution.
 });
 
 test('overview and matter are unpaginated; a truncated matter exits 2', async t => {
