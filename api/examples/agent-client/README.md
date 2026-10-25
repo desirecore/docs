@@ -76,7 +76,7 @@ Run `npm test` for the independent HTTP + Socket.IO contract fixture. It verifie
 
 `test/source-route.fixture.ts` can be copied into a fixed-source DesireCore checkout as `packages/agent-service/src/__tests__/api-docs-node-client.integration.test.ts`. Set `DESIRECORE_API_EXAMPLE_PATH` to the absolute path of this directory's `client.mjs`, then run that single file in the repository's integration test project. It verifies this client against the actual query routes, HTTP/Socket authentication, request Schema and digest, durable admission registry and lookup, and renderer delivery room. The query runtime and follow-up execution callback remain fake. Use its isolated temporary data root; do not point it at an existing user profile.
 
-Current source review: `desirecore/desirecore` commit `3131e2d4900bce418abe1bb0a0569148ef901682` (source PR #5194; not yet a release declaration). Historical validation remains in `api/verification.md`; this extension is recorded in `api/history-attachments-verification.md`.
+Current source review: `desirecore/desirecore` commit `a0186f6feeaf66eb88787e8b80b8fea5559b8761` (fixed review snapshot; source PR #5194). Historical validation remains in `api/verification.md`; this extension is recorded in `api/history-attachments-verification.md`.
 
 - HTTP submission: `packages/agent-service/src/routes/query-routes.ts`.
 - Admission lookup: `packages/agent-service/src/routes/client-request-lookup-routes.ts`; shared Schema in `packages/schemas/src/agent-service/client-request-admission.ts`.
