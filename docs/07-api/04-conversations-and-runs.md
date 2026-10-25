@@ -12,7 +12,7 @@ keywords: [API, 智能体, Run, Receipt, 对话, 运行状态, 分页]
 
 ## 读取范围
 
-智能体列表、Run 列表、Run 详情和运行态供实例所有者读取实例数据，不能作为多个租户之间逐用户隔离的接口。回执读取另核对服务端解析的可信用户身份与 Run 的用户归属；Run 不存在或不属于该用户时均返回 `404`。
+智能体列表、输入配置、Run 列表、Run 详情和运行态供实例所有者读取实例数据，不能作为多个租户之间逐用户隔离的接口。回执读取另核对服务端解析的可信用户身份与 Run 的用户归属；Run 不存在或不属于该用户时均返回 `404`。
 
 Agent ID、Run ID、`user_id` 和 `conversation_id` 是标识信息，不是访问凭据。请求中自报用户 ID、知道 Run ID 或曾在别处看到一条记录，都不能代替认证与对应接口的归属检查。
 
@@ -57,6 +57,50 @@ curl --silent --show-error \
 | `description`、`engine`、`hasRemote`、`syncStatus` | 可选描述、运行引擎、上游仓库和同步信息 |
 | `ui`、`avatar`、`avatarImage` | 可选界面与头像摘要；头像配置存在不等于对应文件可用 |
 | `unread`、`pinned`、`pinnedAt`、`folded`、`groupOverride`、`nestMembers` | 可选的当前实例用户未读信息与显示偏好，缺席时不要自行补成已观测值 |
+
+## 读取智能体输入配置 {#agent-input-config}
+
+### `GET /api/agents/:id/input-config`
+
+:::info 生效版本
+`v10.0.180+`（读取智能体输入配置）。
+:::
+
+选中智能体后，用此接口取得轻量输入配置，判断它当前是否使用手动独立会话模式。`:id` 使用智能体列表返回的 `id`，仅含字母、数字、连字符或下划线；没有请求体或查询参数。读取不会创建会话或发送问候。
+
+```bash
+curl --silent --show-error \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  "${BASE_URL}/api/agents/${AGENT_ID}/input-config"
+```
+
+```json
+{
+  "version": 1,
+  "agentId": "your-agent-id",
+  "manual": true,
+  "configRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+```
+
+| 字段 | 含义 |
+|---|---|
+| `version` | 当前为整数 `1`；未知版本应提示不兼容，不要自行按普通会话模式继续 |
+| `agentId` | 实际读取的智能体 ID；应与所选目标一致 |
+| `manual` | `true` 表示手动独立会话模式；合法配置未声明该模式时为 `false` |
+| `configRevision` | 64 位小写十六进制内容摘要；只比较是否相等，不按大小或时间排序 |
+
+响应使用 `Cache-Control: no-store`。切换目标或准备输入时重新读取；`configRevision` 不锁定后续配置，也不是执行授权或递增事件序号。`manual: false` 只说明输入模式，不能据此跳过实际执行的权限与状态检查。读取失败时保留“配置不可用”，不要补成 `manual: false`。
+
+| HTTP / `code` | 处理方式 |
+|---|---|
+| `400 AGENT_INPUT_CONFIG_INVALID_ID` | 使用所选智能体的真实 ID |
+| `404 AGENT_NOT_FOUND` | 目标不可用或不存在；重新选择智能体。这是业务错误，不代表旧服务缺少此接口 |
+| `409 AGENT_INPUT_CONFIG_CHANGED` | 读取期间配置发生变化；重新读取后再更新输入界面 |
+| `503 AGENT_INPUT_CONFIG_INVALID` | 配置格式无效，请管理员修复智能体配置 |
+| `503 AGENT_INPUT_CONFIG_UNREADABLE` | 配置暂不可读，请管理员检查后重试读取 |
+
+缺少路由的旧服务可能也返回 `404`；结合 JSON 中的 `code`、握手和客户端版本判断，不要把所有 `404` 都解释为可安全降级。认证和服务未就绪错误见[错误与排查](./03-errors-and-troubleshooting.md)。可运行调用见[观察接口示例](./10-observability.md#observe-example)。
 
 ## 查询 Run 列表 {#list-runs}
 

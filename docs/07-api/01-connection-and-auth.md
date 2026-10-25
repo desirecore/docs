@@ -154,3 +154,5 @@ Cache-Control: no-store
 
 - [Agent Webhook](./02-agent-webhook.md)：通过目标 Agent 的专用 secret 触发事件。
 - [错误与排查](./03-errors-and-troubleshooting.md)：处理认证、启动、请求和异步执行问题。
+
+- [实例诊断与用量](./10-observability.md)：区分实例连接、上游网络与已记录用量。

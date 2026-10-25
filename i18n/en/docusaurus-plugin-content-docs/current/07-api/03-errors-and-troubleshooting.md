@@ -109,3 +109,7 @@ After a conversation timeout, use the example's `--recover` to read admission re
 HTTP `200` confirms the read, not availability of every tool-result body. Sensitive results or results whose call identity cannot be verified may contain only placeholders with body references omitted. This does not by itself establish execution failure, damaged history, or a need to rerun work. Preserve actual `status` and `isError` facts and follow [history-result read boundaries](./08-session-history-and-messages.md#history-result-privacy); do not infer success or retry automatically from placeholder text.
 
 A per-Run message's `offset` is a byte position, whereas the pagination request's `offset` is a source-row position. Advance by the requested window, not the number of returned messages. History can change while being read; see [session history and messages](./08-session-history-and-messages.md).
+
+## A connected client cannot reach upstream services
+
+A connected Socket.IO client does not establish that the instance can reach a model provider. Read [upstream network health](./10-observability.md#network-health) and inspect `reason`, `since` and provider scope. `unknown` is not offline, and a historical `online` does not prove the current request succeeded. Recent calls and usage are observations, not instructions to replay work.

@@ -12,7 +12,7 @@ Deployment owners can use these endpoints to read their own history on a standal
 
 ## Read scope and identifiers {#history-scope}
 
-Session listings, search, and reads of a specific Run use the user identity resolved by the service. Requests for a specific Run check ownership before returning content. A missing, other-user, or cleared Run returns `404`. Knowing its ID does not grant access, and a caller-supplied `userId` cannot select another user's data.
+Session listings, merged history, search, and reads of a specific Run use the user identity resolved by the service. Requests for a specific Run check ownership before returning content. A missing, other-user, or cleared Run returns `404`. Knowing its ID does not grant access, and a caller-supplied `userId` cannot select another user's data.
 
 The two topic endpoints read Agent conversation memory for the connected instance's current local user profile. They are intended for the instance owner and do not provide tenant isolation for a shared service. A missing profile returns `401`; ask the instance administrator to check it.
 
@@ -165,6 +165,81 @@ While execution is in progress and output has not been persisted, the response m
 
 `live` is a replaceable temporary display snapshot. It may roll back or disappear after a terminal event or persistence of the final message. It is excluded from `total` and is not a persisted message, receipt, or success signal. It contains displayable output text and a limited set of tool states; do not use it to reconstruct tool inputs or execution. `text` is limited to 16,384 characters and `toolCalls` to 128 entries.
 
+## Read merged history {#merged-history}
+
+### `GET /api/sessions/messages/all`
+
+Use this endpoint to display the continuous visible timeline of an Agent or one conversation. It filters by trusted user ownership before selecting visible fork branches, merging source messages, applying the public projection, and paging. Its offsets differ from per-Run source-row paging. `all` does not mean every execution branch or a complete backup.
+
+| Query parameter | Meaning |
+|---|---|
+| `agentId` | Required target Agent ID |
+| `conversationId` | Optional exact conversation lineage within that Agent, such as an existing `__manual:…` conversation ID; grants no access to other conversations |
+| `preferredRunId` | Optional visible history branch window; neither an exact-Run filter nor an access credential |
+| `order` | `desc` by default (newest first), or `asc`; other values fall back to `desc` |
+| `limit` | Default `100`, range `0`–`1000`; `0` returns empty `items`, the total, and revision with `hasMore: false`, rather than all results |
+| `offset` | Default `0`; a nonnegative safe integer position in the complete merged view |
+| `expectedRevision` | Send the first page's `historyRevision` on later pages: `h1:` followed by 64 lowercase hexadecimal characters |
+
+Send canonical decimal integers for `limit` and `offset`. The service accepts legacy integer-prefix parsing; do not depend on conversions of mixed strings or fractions. The largest safe integer is `9007199254740991`.
+
+Without `conversationId`, an Agent currently in manual mode excludes separate manual conversations. Once manual mode is disabled, existing manual conversations join the default timeline again. An explicit `conversationId` selects only that conversation. Cleared and archived records, delegated child Runs, and dedicated schedule and Webhook execution timelines are excluded. Mention execution timelines remain separate, but visible Conversation source messages can appear. No visible history returns an empty page; it neither establishes that an Agent is missing nor reveals other users' records.
+
+```bash
+curl --silent --show-error --get \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  --data-urlencode "agentId=${AGENT_ID}" \
+  --data-urlencode 'order=asc' --data-urlencode 'limit=100' \
+  --data-urlencode 'offset=0' \
+  "${BASE_URL}/api/sessions/messages/all"
+```
+
+```json
+{
+  "items": [
+    {
+      "runId": "run-example",
+      "messageIndex": 0,
+      "offset": 0,
+      "sessionTime": "2026-10-15T08:00:00Z",
+      "message": {
+        "id": "d8d53a7a-478e-4d96-970e-657dece814f7",
+        "role": "user",
+        "content": "Please review the release notes",
+        "timestamp": 1792051200000
+      }
+    }
+  ],
+  "total": 1,
+  "hasMore": false,
+  "historyRevision": "h1:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+```
+
+Each `items` entry wraps `runId`, `messageIndex`, `sessionTime`, and a public `message`. Persisted Run messages may also carry a byte `offset`. Positions inside entries are not next-page parameters: advance by **the request's `offset + limit`**, using `hasMore` to decide whether to continue. `total` counts merged public entries, rather than the sum of each Run's source rows.
+
+**Mention source entries** may carry `message.mentionSourceOnly: true` and a synthetic outer `runId` beginning with `__mention_source:`. They have no actual Run ownership and may have no byte `offset`. Preserve Mention references for display. Do not send synthetic IDs to Run, follow-up, or recovery APIs, or add source entries to model replay history. Prefer `message.id` for linking messages; do not deduplicate all Runs solely by text.
+
+### Keep one public view revision
+
+1. Begin at `offset=0` and save the first page's `historyRevision`.
+2. Keep the same `agentId`, `conversationId`, `preferredRunId`, `order`, and page size on later pages, sending `expectedRevision`.
+3. Buffer the current attempt until all pages finish. On `409 history_revision_changed`, discard every buffered page and start again at `offset=0` for a new revision. Never concatenate pages from different revisions.
+4. Retry reads only. History changes, withheld results, and read failures must not trigger conversation submissions, tool reruns, or recovery execution.
+
+```bash
+# HISTORY_REVISION is the first response's complete historyRevision; retain all filters.
+curl --silent --show-error --get \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  --data-urlencode "agentId=${AGENT_ID}" \
+  --data-urlencode 'order=asc' --data-urlencode 'limit=100' \
+  --data-urlencode 'offset=100' \
+  --data-urlencode "expectedRevision=${HISTORY_REVISION}" \
+  "${BASE_URL}/api/sessions/messages/all"
+```
+
+Content edits, deletions, branch changes, or public projection changes can invalidate the revision. `historyRevision` hashes the current complete public view; it is not a persistent cursor, transaction snapshot, or incremental log. Later reads must confirm the revision again. Each page may read and sort all visible history, so bound page counts and avoid unbounded concurrent scans of large histories.
+
 ## Search an Agent's messages {#search-messages}
 
 ### `GET /api/sessions/messages/search`
@@ -273,24 +348,30 @@ node history.mjs list --limit 20 --all-pages
 node history.mjs session run-example
 node history.mjs messages run-example --limit 100 --all-pages
 node history.mjs messages delegated-run-id --inspect-run
+node history.mjs all --order asc --limit 100 --all-pages
+node history.mjs all --conversation-id '__manual:existing-conversation' --limit 0
 node history.mjs search --query 'release' --preview-chars 240 --all-pages
 node history.mjs overview
 node history.mjs matter mat_example
 ```
 
-The example checks the instance handshake before issuing GET requests. It does not submit queries, send follow-ups, or cancel Runs. Each command reads one page by default. `--all-pages` reads up to 20 pages, adjustable with `--max-pages`. Output is newline-delimited JSON containing history content; store it as private data.
+The example checks the instance handshake before issuing GET requests. It does not submit queries, send follow-ups, or cancel Runs. Each command reads one page by default. `--all-pages` reads up to 20 pages per attempt, adjustable with `--max-pages`. Output is newline-delimited JSON containing history content; store it as private data.
 
-`list` accepts `--include-archived`. `search` also supports `--type`, `--preferred-run-id`, and `--preview-chars`. The `messages` inspection view requires the explicit `--inspect-run` option.
+`list` accepts `--include-archived`. `search` also supports `--type`, `--preferred-run-id`, and `--preview-chars`. The `messages` inspection view requires the explicit `--inspect-run` option. `all` supports `--conversation-id`, `--order`, and `--preferred-run-id`; for a later single page, pair `--offset` with `--expected-revision`.
 
-Exit code `0` means the requested reads succeeded; `1` indicates a configuration or HTTP failure. Code `2` means pagination reached its configured limit, stopped after observing a changed total, or received a truncated topic response. A stop record's `nextOffset` provides the next read position. Check whether history changed before restarting.
+Exit code `0` means the requested reads succeeded; `1` indicates a configuration or HTTP failure. Code `2` means pagination reached its configured limit, stopped after observing a changed total or repeated revision conflicts, or received a truncated topic response. A stop record's `nextOffset` provides the next read position, accompanied by `historyRevision` for `all`. A revision-conflict stop provides `restartOffset: 0`; do not resume at an old offset.
 
-These endpoints provide no version ensuring consistency across pages. Appending, editing, or clearing history during a scan can produce duplicates or omissions. The example stops if `total` changes, but cannot detect content changes that leave the total unchanged. Do not treat a paginated scan as an audit snapshot from a fixed point in time.
+`all --all-pages` buffers the current attempt and discards it on a revision conflict before restarting at the first page. It restarts at most once by default (`--max-restarts` changes this), with `--max-pages` applying to each attempt. Success emits pages from one revision. Reaching the page bound emits a revision-tagged partial window and exits `2`. `all --limit 0` makes only one metadata read.
+
+The other paginated endpoints provide no revision ensuring consistency across pages. Appending, editing, or clearing history during a scan can produce duplicates or omissions. The example stops if `total` changes, but cannot detect content changes that leave the total unchanged. Do not treat a paginated scan as an audit snapshot from a fixed point in time.
 
 ## Common errors {#history-errors}
 
 | HTTP / error | Action |
 |---|---|
-| `400 agentId is required` | Provide an actual Agent ID when searching |
+| `400 agentId is required` | Provide an actual Agent ID for merged history or search |
+| `400 invalid_history_page` | For merged history, use `limit` from `0` to `1000`, a nonnegative safe integer `offset`, and the complete `expectedRevision` format |
+| `409 history_revision_changed` | Discard every page from the attempt and restart at the first page; do not rerun execution |
 | `400 Invalid history page parameters` | Use nonnegative safe integers for search `limit` and `offset`, and check the `previewChars` range |
 | `400 Invalid runId` | Use a Run ID returned by the session list, not a path or runtime session ID |
 | `401` | Check the instance token; for `User not authenticated` or `User not found`, ask the administrator to check the instance's current user profile |

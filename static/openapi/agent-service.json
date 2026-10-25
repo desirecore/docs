@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "http://json-schema.org/draft-07/schema#",
   "info": {
     "title": "DesireCore Agent Service — public HTTP subset",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "description": "Selected externally callable endpoints for an administrator-provided standalone instance. This document is a subset of the service, and is not an application release declaration. Consult the linked guides for deployment, authorization and asynchronous results."
   },
   "servers": [
@@ -46,6 +46,10 @@
     {
       "name": "Session history",
       "description": "Owner-scoped historical messages and bounded conversation-matter reads."
+    },
+    {
+      "name": "Observability",
+      "description": "Upstream connectivity, user-scoped recent tool calls and recorded usage. Observations do not authorize or replay work."
     }
   ],
   "paths": {
@@ -4331,6 +4335,866 @@
           }
         }
       }
+    },
+    "/api/network/health": {
+      "get": {
+        "operationId": "getNetworkHealth",
+        "tags": [
+          "Observability"
+        ],
+        "summary": "Read the current upstream network observation",
+        "description": "Instance-owner observation. No body or query parameters. unknown is not offline; state can be stale while idle or monitoring is disabled. online does not prove every provider or a particular query succeeded. Authenticated Socket.IO network:health uses the same payload. Install a listener before fetching a snapshot; compare seq only within the same monitor and establish a fresh baseline after reconnection or service restart. No event replay.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/observability#network-health"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Read the current upstream network observation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NetworkHealthState"
+                },
+                "example": {
+                  "status": "unknown",
+                  "reason": "init",
+                  "since": "2026-10-25T00:00:00.000Z",
+                  "seq": 0
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed or no trusted user identity could be resolved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OperationsError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceAuthenticationError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A browser Origin is not allowed by this deployment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginRejection"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected server failure occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OperationsError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Startup is incomplete or instance authentication is not initialized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Present for service_not_ready; retry the read-only request after this many seconds."
+              }
+            }
+          },
+          "default": {
+            "description": "Other service or reverse-proxy failures. Preserve the HTTP status, Content-Type and response body; formats are not uniform.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/recent-calls": {
+      "get": {
+        "operationId": "listRecentToolCalls",
+        "tags": [
+          "Observability"
+        ],
+        "summary": "Read recent tool-call metadata for the trusted user",
+        "description": "Filters Runs by the trusted user before reading a bounded recent window. Does not return tool inputs or outputs, offset, cursor or total. Preserve opaque call IDs; use the separate runId for Run reads. Explicit tool status/time takes precedence; older receipts may fall back to receipt outcome/time. Missing duration is represented as zero, not a measured zero. A usable upgraded index and receipt fallback share field projection; without one only the latest 100 user Runs are scanned. This is neither complete audit export nor proof of a query terminal.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/observability#recent-tool-calls"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991,
+              "default": 30
+            },
+            "description": "Single positive decimal safe integer; no additional route item cap. Empty, repeated, mixed-text, fractional or unsafe values return 400."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read recent tool-call metadata for the trusted user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationsRecentCallsResponse"
+                },
+                "example": {
+                  "calls": [
+                    {
+                      "id": "example-tool-invocation",
+                      "timestamp": "2026-10-25T00:00:01.000Z",
+                      "agentId": "your-agent-id",
+                      "runId": "run-example",
+                      "toolName": "Read",
+                      "status": "success",
+                      "durationMs": 12
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The instance credential is invalid or no trusted user identity could be resolved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OperationsError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceAuthenticationError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A browser Origin is not allowed by this deployment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginRejection"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected server failure occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OperationsError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Startup is incomplete or instance authentication is not initialized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Present for service_not_ready; retry the read-only request after this many seconds."
+              }
+            }
+          },
+          "default": {
+            "description": "Other service or reverse-proxy failures. Preserve the HTTP status, Content-Type and response body; formats are not uniform.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid limit; use a single positive decimal safe integer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationsError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/usage/summary": {
+      "get": {
+        "operationId": "getRunUsageSummary",
+        "tags": [
+          "Observability"
+        ],
+        "summary": "Read recorded usage aggregates for the trusted user",
+        "description": "Returns total/byModel/byDate/byAgent without conversation bodies. since filters Run start time, not each receipt; invalid since is ignored. Filtered/fallback scans may cover only the latest 1000 owner Runs; cleared Runs may retain usage. Cached for about 30 seconds. queryCount counts receipt queries carrying usage, not all submissions. costUsd is recorded cost, not a final invoice. byDate maps existing UTC date buckets using UTC midday for timezone; it does not regroup individual events into exact local days. Invalid timezone retains UTC. A read can trigger background index rebuilding; it does not issue a model request.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/observability#usage-summary"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Recommended ISO timestamp with timezone; filters Run started_at. Invalid values are ignored rather than rejected."
+          },
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional associated Agent ID; does not select another user."
+          },
+          {
+            "name": "timezone",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IANA zone such as UTC. Maps UTC date buckets, not individual events; invalid values retain UTC dates."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Read recorded usage aggregates for the trusted user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationsUsageSummaryResponse"
+                },
+                "example": {
+                  "total": {
+                    "inputTokens": 0,
+                    "outputTokens": 0,
+                    "cacheReadTokens": 0,
+                    "cacheWriteTokens": 0,
+                    "costUsd": 0,
+                    "queryCount": 0
+                  },
+                  "byModel": [],
+                  "byDate": [],
+                  "byAgent": []
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The instance credential is invalid or no trusted user identity could be resolved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OperationsError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceAuthenticationError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A browser Origin is not allowed by this deployment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginRejection"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected server failure occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OperationsError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Startup is incomplete or instance authentication is not initialized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Present for service_not_ready; retry the read-only request after this many seconds."
+              }
+            }
+          },
+          "default": {
+            "description": "Other service or reverse-proxy failures. Preserve the HTTP status, Content-Type and response body; formats are not uniform.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agents/{id}/input-config": {
+      "get": {
+        "operationId": "getAgentInputConfig",
+        "tags": [
+          "Read-only"
+        ],
+        "summary": "Read lightweight Agent input configuration",
+        "description": "Available in client v10.0.180+. Instance-owner read; no per-tenant isolation. Reads fresh configuration without creating a session. Verify version=1 and the returned Agent ID. A valid omitted manual mode defaults to false; failures must not be replaced with false. configRevision compares content equality only: it is not execution permission, a lock, a timestamp, or an event sequence.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/conversations-and-runs#agent-input-config"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "description": "Selected actual Agent ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fresh lightweight input configuration.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                },
+                "description": "Do not cache this input configuration read."
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInputConfig"
+                },
+                "example": {
+                  "version": 1,
+                  "agentId": "your-agent-id",
+                  "manual": true,
+                  "configRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Agent ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInputConfigError"
+                },
+                "example": {
+                  "code": "AGENT_INPUT_CONFIG_INVALID_ID",
+                  "error": "Invalid agent ID"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The instance credential is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstanceAuthenticationError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A browser Origin is not allowed by this deployment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginRejection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agent unavailable or missing. AGENT_NOT_FOUND is a business result; do not treat it as an older service lacking this route. A route-unavailable 404 is not this DTO.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInputConfigError"
+                },
+                "example": {
+                  "code": "AGENT_NOT_FOUND",
+                  "error": "Agent not found"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Configuration changed during the read; read again before updating the input UI.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInputConfigError"
+                },
+                "example": {
+                  "code": "AGENT_INPUT_CONFIG_CHANGED",
+                  "error": "Agent input config unavailable"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Input configuration is invalid or unreadable, or the service is not ready. Preserve the error code; never substitute manual=false.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/AgentInputConfigError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other service or reverse-proxy failures. Preserve the HTTP status, Content-Type and response body; formats are not uniform.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/messages/all": {
+      "get": {
+        "operationId": "listMergedHistoryMessages",
+        "tags": [
+          "Session history"
+        ],
+        "summary": "Read a revision-checked merged public history page",
+        "description": "Filters trusted user ownership before content reads and selects visible fork branches. Excludes archived, cleared, delegated, schedule/Webhook, and Mention execution timelines; visible Conversation-owned Mention sources may appear. Without conversationId, separate manual conversations join the default timeline only when manual mode is disabled; an explicit conversationId selects that lineage. preferredRunId selects a history window, not an exact-Run filter or permission. items wrap public messages. Synthetic __mention_source: IDs are display-only source references, not Run IDs for execution or recovery. Keep scope/order fixed and send the first historyRevision as expectedRevision on later pages. On 409, discard all pages of the attempt and reread from offset=0 without rerunning execution. The revision hashes the current complete public view; it is not a persistent cursor, transaction snapshot, incremental log, or backup. Each page may read and sort the entire visible history.",
+        "externalDocs": {
+          "url": "https://docs.desirecore.com/api/session-history-and-messages#merged-history"
+        },
+        "security": [
+          {
+            "InstanceToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Required target Agent ID."
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact conversation lineage within the Agent; does not grant cross-conversation access."
+          },
+          {
+            "name": "preferredRunId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional visible branch window; not an exact-Run filter or access credential."
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            },
+            "description": "Order by message timestamp. Other wire values fall back to desc."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000,
+              "default": 100
+            },
+            "description": "0 returns empty items, total and revision with hasMore=false, not all results. Send canonical decimal integers; the route accepts compatibility integer-prefix parsing."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991,
+              "default": 0
+            },
+            "description": "Position in the merged public view, not an item byte offset or source messageIndex. Send a canonical decimal integer."
+          },
+          {
+            "name": "expectedRevision",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^h1:[0-9a-f]{64}$"
+            },
+            "description": "First page historyRevision, required by clients on later pages to detect a changed public view."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Merged public history page, including an empty page when no owned visible history matches.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MergedHistoryPage"
+                },
+                "examples": {
+                  "page": {
+                    "value": {
+                      "items": [
+                        {
+                          "runId": "run-example",
+                          "messageIndex": 0,
+                          "offset": 0,
+                          "sessionTime": "2026-10-15T08:00:00Z",
+                          "message": {
+                            "id": "d8d53a7a-478e-4d96-970e-657dece814f7",
+                            "role": "user",
+                            "content": "Please review the release notes",
+                            "timestamp": 1792051200000
+                          }
+                        }
+                      ],
+                      "total": 1,
+                      "hasMore": false,
+                      "historyRevision": "h1:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    }
+                  },
+                  "sourceOnly": {
+                    "summary": "A Conversation source reference, not an actual Run.",
+                    "value": {
+                      "items": [
+                        {
+                          "runId": "__mention_source:source-example",
+                          "messageIndex": 0,
+                          "sessionTime": "2026-10-15T08:00:00Z",
+                          "message": {
+                            "id": "source-example",
+                            "role": "user",
+                            "content": "Please review the release notes",
+                            "timestamp": 1792051200000,
+                            "mentionSourceOnly": true,
+                            "mentionSource": {
+                              "kind": "conversation_message",
+                              "source_id": "source-example",
+                              "source_revision": 1,
+                              "conversation_id": "your-agent-id"
+                            },
+                            "mentionOccurrences": [],
+                            "mentionRecipientAgentIds": [
+                              "another-agent"
+                            ],
+                            "mentionDeliveryIds": []
+                          }
+                        }
+                      ],
+                      "total": 1,
+                      "hasMore": false,
+                      "historyRevision": "h1:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    }
+                  },
+                  "metadataOnly": {
+                    "summary": "limit=0 does not return messages.",
+                    "value": {
+                      "items": [],
+                      "total": 42,
+                      "hasMore": false,
+                      "historyRevision": "h1:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing agentId or invalid merged page/revision parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                },
+                "examples": {
+                  "missingAgent": {
+                    "value": {
+                      "error": "agentId is required"
+                    }
+                  },
+                  "invalidPage": {
+                    "value": {
+                      "error": "invalid_history_page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid instance credential, or unavailable user profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin or endpoint-specific access restriction.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The complete public view changed. Discard the attempt and restart at offset=0 with no expectedRevision.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryError"
+                },
+                "example": {
+                  "error": "history_revision_changed"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is not ready or its instance credential is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ServiceStarting"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstanceTokenUninitialized"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FrameworkError"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Other service or reverse-proxy failures. Preserve the HTTP status, Content-Type and response body; formats are not uniform.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -8591,6 +9455,38 @@
           "file": {},
           "thinking": {
             "type": "string"
+          },
+          "mentionSourceOnly": {
+            "type": "boolean",
+            "description": "true marks a Conversation source without current-Agent Run ownership. Display only; do not feed into model replay."
+          },
+          "mentionSource": {
+            "type": "object",
+            "description": "Conversation-owned Mention source reference, when present.",
+            "additionalProperties": true
+          },
+          "mentionOccurrences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "Structured Mention occurrences, when present."
+          },
+          "mentionRecipientAgentIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "mentionDeliveryIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "description": "Delivery references, not proof of successful execution."
           }
         },
         "additionalProperties": true,
@@ -8994,12 +9890,497 @@
           "messages"
         ],
         "additionalProperties": true
+      },
+      "NetworkHealthState": {
+        "type": "object",
+        "required": [
+          "status",
+          "reason",
+          "since",
+          "seq"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "online",
+              "degraded",
+              "offline",
+              "unknown"
+            ],
+            "description": "网络健康状态：online=上游请求或探测成功；degraded=出现网络类失败但未确认公网断开（或仅个别 Provider 不可达）；offline=通用连通性探测失败且近期失败的上游也探测不通，或多 host DNS 失败，确认网络不可达；unknown=启动后尚无样本（或休眠唤醒后待重新确认），UI 不应据此显示异常"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "global",
+              "provider"
+            ],
+            "description": "异常范围（仅 degraded/offline 时有意义）：global=公网整体不可达；provider=公网通但个别模型服务商不可达（通用探测成功、Provider origin 探测失败）"
+          },
+          "affectedProviders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "scope=provider 时受影响的 Provider ID 列表（供前端展示\"服务商暂不可达\"）"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "init",
+              "request_ok",
+              "probe_ok",
+              "request_failed",
+              "probe_failed",
+              "stream_stall",
+              "multi_host_dns",
+              "suspend_resume"
+            ],
+            "description": "进入当前状态的原因：init=启动初始；request_ok/probe_ok=真实请求或探测成功；request_failed=上游请求网络类失败；probe_failed=通用连通性探测失败；stream_stall=流式空闲超时；multi_host_dns=窗口期内多个不同 host DNS 失败（最强离线证据）；suspend_resume=系统唤醒后重置待确认"
+          },
+          "subcategory": {
+            "type": "string",
+            "enum": [
+              "dns",
+              "tls",
+              "tcp_reset",
+              "refused",
+              "unreachable",
+              "timeout",
+              "stream_interrupted"
+            ],
+            "description": "触发本次状态变化的网络错误子类（若有），供前端给出针对性提示（如 dns → 检查 DNS/代理设置）"
+          },
+          "since": {
+            "type": "string",
+            "description": "进入当前状态的 ISO 8601 时间；消费方据此判断状态新鲜度（无活跃请求时状态允许 stale）"
+          },
+          "seq": {
+            "type": "number",
+            "minimum": 0,
+            "description": "单调递增序号；前端用于拒绝乱序/迟到的旧状态事件（快照与实时事件以 seq 大者为准）"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OperationsRecentCallsResponse": {
+        "type": "object",
+        "required": [
+          "calls"
+        ],
+        "properties": {
+          "calls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "timestamp",
+                "agentId",
+                "runId",
+                "toolName",
+                "status",
+                "durationMs"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "不透明的稳定调用 ID；优先 invocation_id，旧记录由 Run/Receipt 身份和工具序号确定。不得解析为 Run ID，也不是恢复或授权凭据。"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "优先工具 started_at；旧记录缺失时回退 Receipt started_at，再回退 Run started_at。不是保证精确的工具开始时间。"
+                },
+                "agentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "执行 Agent ID。"
+                },
+                "runId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "关联 Run ID；详情跳转不得从展示 ID 猜测。"
+                },
+                "toolName": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "工具名称。"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "success",
+                    "warning",
+                    "error"
+                  ],
+                  "description": "优先工具 success/error；旧记录缺失时按 Receipt outcome 的 failed→error、partial→warning、其他→success 投影，不代表 Query 或 Run 终态。"
+                },
+                "durationMs": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "已记录工具耗时（毫秒）；旧记录缺失时为 0，不表示真实零耗时。"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "当前可信用户最近的工具调用，按时间倒序。"
+          }
+        },
+        "additionalProperties": false,
+        "description": "运行中心活动分区的用户隔离工具调用列表。"
+      },
+      "OperationsUsageSummaryResponse": {
+        "type": "object",
+        "required": [
+          "total",
+          "byModel",
+          "byDate",
+          "byAgent"
+        ],
+        "properties": {
+          "total": {
+            "type": "object",
+            "required": [
+              "inputTokens",
+              "outputTokens",
+              "cacheReadTokens",
+              "cacheWriteTokens",
+              "costUsd",
+              "queryCount"
+            ],
+            "properties": {
+              "inputTokens": {
+                "type": "number",
+                "minimum": 0,
+                "description": "非缓存输入 Token 总数。"
+              },
+              "outputTokens": {
+                "type": "number",
+                "minimum": 0,
+                "description": "输出 Token 总数。"
+              },
+              "cacheReadTokens": {
+                "type": "number",
+                "minimum": 0,
+                "description": "缓存读取 Token 总数。"
+              },
+              "cacheWriteTokens": {
+                "type": "number",
+                "minimum": 0,
+                "description": "缓存写入 Token 总数。"
+              },
+              "costUsd": {
+                "type": "number",
+                "minimum": 0,
+                "description": "已记录的美元成本总额。"
+              },
+              "queryCount": {
+                "type": "number",
+                "minimum": 0,
+                "description": "带用量数据的查询次数。"
+              }
+            },
+            "additionalProperties": false,
+            "description": "当前可信用户的用量汇总。"
+          },
+          "byModel": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "inputTokens",
+                "outputTokens",
+                "cacheReadTokens",
+                "cacheWriteTokens",
+                "costUsd",
+                "queryCount",
+                "provider",
+                "model"
+              ],
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "description": "模型 Provider 标识。"
+                },
+                "model": {
+                  "type": "string",
+                  "description": "模型 ID。"
+                },
+                "inputTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "非缓存输入 Token 总数。"
+                },
+                "outputTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "输出 Token 总数。"
+                },
+                "cacheReadTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "缓存读取 Token 总数。"
+                },
+                "cacheWriteTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "缓存写入 Token 总数。"
+                },
+                "costUsd": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "已记录的美元成本总额。"
+                },
+                "queryCount": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "带用量数据的查询次数。"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "按 Provider/模型聚合的用量。"
+          },
+          "byDate": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "inputTokens",
+                "outputTokens",
+                "cacheReadTokens",
+                "cacheWriteTokens",
+                "costUsd",
+                "queryCount",
+                "date"
+              ],
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "description": "聚合日期（YYYY-MM-DD）；UTC 日桶可按其中点映射到请求时区，不是逐事件的精确本地日结。"
+                },
+                "inputTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "非缓存输入 Token 总数。"
+                },
+                "outputTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "输出 Token 总数。"
+                },
+                "cacheReadTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "缓存读取 Token 总数。"
+                },
+                "cacheWriteTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "缓存写入 Token 总数。"
+                },
+                "costUsd": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "已记录的美元成本总额。"
+                },
+                "queryCount": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "带用量数据的查询次数。"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "按 UTC 日桶聚合的用量；有效 timezone 将桶的 UTC 12:00 映射到本地日期，无法恢复桶内每条记录的本地日界。"
+          },
+          "byAgent": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "inputTokens",
+                "outputTokens",
+                "cacheReadTokens",
+                "cacheWriteTokens",
+                "costUsd",
+                "queryCount",
+                "agentId"
+              ],
+              "properties": {
+                "agentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "关联 Agent ID。"
+                },
+                "inputTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "非缓存输入 Token 总数。"
+                },
+                "outputTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "输出 Token 总数。"
+                },
+                "cacheReadTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "缓存读取 Token 总数。"
+                },
+                "cacheWriteTokens": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "缓存写入 Token 总数。"
+                },
+                "costUsd": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "已记录的美元成本总额。"
+                },
+                "queryCount": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "带用量数据的查询次数。"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "按 Agent 聚合的用量。"
+          }
+        },
+        "additionalProperties": false,
+        "description": "运行中心活动分区的用户隔离用量摘要。"
+      },
+      "AgentInputConfig": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "agentId",
+          "manual",
+          "configRevision"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "const": 1,
+            "description": "Projection protocol version; unknown versions do not unlock ordinary input."
+          },
+          "agentId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "description": "Actual Agent read; match it against the selected target."
+          },
+          "manual": {
+            "type": "boolean",
+            "description": "Current separate-conversation manual mode. Valid omission in Agent configuration defaults to false."
+          },
+          "configRevision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Opaque digest of configuration content. Equality only; not a permission, lock, timestamp or sequence."
+          }
+        }
+      },
+      "AgentInputConfigError": {
+        "type": "object",
+        "required": [
+          "code",
+          "error"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "AGENT_INPUT_CONFIG_INVALID_ID",
+              "AGENT_NOT_FOUND",
+              "AGENT_INPUT_CONFIG_CHANGED",
+              "AGENT_INPUT_CONFIG_INVALID",
+              "AGENT_INPUT_CONFIG_UNREADABLE"
+            ]
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "MergedHistoryItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "runId",
+          "messageIndex",
+          "sessionTime",
+          "message"
+        ],
+        "properties": {
+          "runId": {
+            "type": "string",
+            "description": "Owned source Run ID, or __mention_source:SOURCE_ID for a Conversation source-only entry. Synthetic IDs cannot be used with Run, follow-up or recovery APIs."
+          },
+          "messageIndex": {
+            "type": "number",
+            "description": "Source row navigation position; source-only entries use 0. Not the merged page offset."
+          },
+          "offset": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Optional source byte position for persisted Run messages. Not a page offset."
+          },
+          "sessionTime": {
+            "type": "string",
+            "description": "Source session creation time or source creation time, in ISO 8601 form."
+          },
+          "message": {
+            "$ref": "#/components/schemas/HistoryMessage"
+          }
+        }
+      },
+      "MergedHistoryPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "total",
+          "hasMore",
+          "historyRevision"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 1000,
+            "items": {
+              "$ref": "#/components/schemas/MergedHistoryItem"
+            },
+            "description": "Public display projection; sensitive result bodies and references may be withheld."
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total entries in this complete merged public view, not source rows across Runs."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Whether more entries remain for a positive limit. Always false for limit=0."
+          },
+          "historyRevision": {
+            "type": "string",
+            "pattern": "^h1:[0-9a-f]{64}$",
+            "description": "Current complete public view digest including read scope and order. Later pages send expectedRevision; changes yield 409. Not a persistent cursor or transaction snapshot."
+          }
+        }
       }
     }
   },
   "x-service": "agent-service",
   "x-source": {
     "repository": "desirecore/desirecore",
-    "revision": "a101a40c14cc9d478c7f9a23d8a125ac2404509b"
+    "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761"
   }
 }

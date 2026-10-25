@@ -23,6 +23,7 @@ keywords: [API, 集成, Webhook, Agent Service, 接入, 认证]
 | 触发现有工作流 | 独立 Workflow Service 地址、服务令牌和管理员提供的定义 | [工作流集成](./06-workflow-integration.md) |
 | 将 HTTP 合同导入工具 | 选择对应服务的规范文件 | [OpenAPI 下载](./07-openapi.md) |
 | 让 DesireCore 调用你的业务服务 | 通过 MCP、工具或技能连接 | [MCP 服务器连接](../02-user-guide/09-capabilities/03-mcp-integration.md)与[集成能力概览](../02-user-guide/09-capabilities/06-integrations-overview.md) |
+| 排查上游网络、观察近期工具调用和已记录用量 | 实例所有者访问权限 | [实例诊断与用量](./10-observability.md) |
 
 ## 凭据与结果
 

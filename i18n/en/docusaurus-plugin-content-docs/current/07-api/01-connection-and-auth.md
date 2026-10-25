@@ -154,3 +154,5 @@ Browser calls also depend on HTTPS, browser cross-origin rules, and any allowed 
 
 - [Agent Webhook](./02-agent-webhook.md): trigger events with the target Agent's dedicated secret.
 - [Errors and Troubleshooting](./03-errors-and-troubleshooting.md): resolve authentication, startup, request, and asynchronous execution issues.
+
+- [Instance Diagnostics and Usage](./10-observability.md): distinguish instance connectivity, upstream health and recorded usage.

@@ -180,3 +180,112 @@ test('validates flags, IDs, finite pagination and HTTPS before network access', 
   }
   await assert.rejects(runHistory({ command: 'list' }, { DESIRECORE_URL: 'http://remote.example', DESIRECORE_TOKEN: token }), /Use HTTPS/);
 });
+
+test('merged history preserves scope and pins later pages to the first public revision', async t => {
+  const revision = `h1:${'a'.repeat(64)}`;
+  const source = { runId: '__mention_source:source-1', messageIndex: 0, sessionTime: '2026-10-25T01:00:00Z',
+    message: { id: 'source-1', role: 'user', content: 'Source display only', mentionSourceOnly: true } };
+  const f = await fixture(t, (url, response) => {
+    assert.equal(url.pathname, '/api/sessions/messages/all');
+    assert.equal(url.searchParams.get('agentId'), 'agent-a');
+    assert.equal(url.searchParams.get('conversationId'), '__manual:topic a');
+    assert.equal(url.searchParams.get('preferredRunId'), 'run-old');
+    assert.equal(url.searchParams.get('order'), 'asc');
+    const first = url.searchParams.get('offset') === '0';
+    assert.equal(url.searchParams.get('expectedRevision'), first ? null : revision);
+    json(response, 200, { items: first ? [source] : [], total: 2, hasMore: first, historyRevision: revision });
+  });
+  const out = await read({ command: 'all', agentId: 'agent-a', conversationId: '__manual:topic a', preferredRunId: 'run-old', order: 'asc', limit: 1, allPages: true }, f.env);
+  assert.equal(out.result.exitCode, 0);
+  assert.equal(out.result.pages, 2);
+  assert.deepEqual(out.records[0].data.items, [source]);
+  assert.deepEqual(f.requests.slice(1).map(item => item.url.searchParams.get('offset')), ['0', '1']);
+  assert.ok(f.requests.every(item => item.method === 'GET'));
+  assert.ok(f.requests.every(item => !item.url.pathname.includes('__mention_source')));
+});
+
+test('merged history discards an invalidated attempt and restarts reads without mixing or replay', async t => {
+  const oldRevision = `h1:${'a'.repeat(64)}`, newRevision = `h1:${'b'.repeat(64)}`;
+  let requests = 0;
+  const f = await fixture(t, (url, response) => {
+    requests++;
+    const offset = url.searchParams.get('offset');
+    if (requests === 1) {
+      assert.equal(offset, '0');
+      return json(response, 200, { items: [{ message: { content: 'old secret display' } }], total: 2, hasMore: true, historyRevision: oldRevision });
+    }
+    if (requests === 2) {
+      assert.equal(offset, '1'); assert.equal(url.searchParams.get('expectedRevision'), oldRevision);
+      return json(response, 409, { error: 'history_revision_changed' });
+    }
+    if (requests === 3) {
+      assert.equal(offset, '0'); assert.equal(url.searchParams.has('expectedRevision'), false);
+      return json(response, 200, { items: [{ message: { content: 'new display' } }], total: 2, hasMore: true, historyRevision: newRevision });
+    }
+    assert.equal(offset, '1'); assert.equal(url.searchParams.get('expectedRevision'), newRevision);
+    json(response, 200, { items: [], total: 2, hasMore: false, historyRevision: newRevision });
+  });
+  const out = await read({ command: 'all', agentId: 'agent-a', limit: 1, allPages: true }, f.env);
+  assert.equal(out.result.exitCode, 0);
+  assert.equal(out.result.restarts, 1);
+  assert.equal(out.records[0].kind, 'restarting');
+  assert.equal(out.records.filter(item => item.kind === 'all').length, 2);
+  assert.ok(out.records.filter(item => item.kind === 'all').every(item => item.data.historyRevision === newRevision));
+  assert.ok(!JSON.stringify(out.records).includes('old secret display'));
+  assert.ok(f.requests.every(item => item.method === 'GET'));
+  assert.equal(f.requests.length, 5);
+});
+
+test('merged history conflicts are bounded and do not emit discarded pages', async t => {
+  const revision = `h1:${'c'.repeat(64)}`;
+  const f = await fixture(t, (url, response) => url.searchParams.get('offset') === '0'
+    ? json(response, 200, { items: [{ message: { content: 'discard me' } }], total: 3, hasMore: true, historyRevision: revision })
+    : json(response, 409, { error: 'history_revision_changed' }));
+  const out = await read({ command: 'all', agentId: 'agent-a', limit: 1, allPages: true }, f.env);
+  assert.deepEqual(out.result, { exitCode: 2, pages: 0, restarts: 1, restartOffset: 0 });
+  assert.equal(out.records.at(-1).reason, 'history-revision-changed');
+  assert.ok(out.records.every(item => item.kind !== 'all'));
+  assert.equal(f.requests.length, 5);
+});
+
+test('merged limit=0 returns metadata once; limit=1000 is valid and bounded', async t => {
+  const revision = `h1:${'d'.repeat(64)}`;
+  const f = await fixture(t, (url, response) => json(response, 200, { items: [], total: 42, hasMore: false, historyRevision: revision }));
+  const out = await read({ command: 'all', agentId: 'agent-a', limit: 0, allPages: true }, f.env);
+  assert.equal(out.result.pages, 1);
+  assert.equal(out.result.exitCode, 0);
+  assert.equal(f.requests.length, 2);
+  assert.equal(f.requests[1].url.searchParams.get('limit'), '0');
+  await read({ command: 'all', agentId: 'agent-a', limit: 1000 }, f.env);
+  assert.equal(f.requests.at(-1).url.searchParams.get('limit'), '1000');
+});
+
+test('merged partial windows include a revision; explicit later reads retain it', async t => {
+  const revision = `h1:${'e'.repeat(64)}`;
+  const f = await fixture(t, (_url, response) => json(response, 200, { items: [], total: 3, hasMore: true, historyRevision: revision }));
+  const out = await read({ command: 'all', agentId: 'agent-a', limit: 1, maxPages: 1, allPages: true }, f.env);
+  assert.deepEqual(out.result, { exitCode: 2, pages: 1, restarts: 0, nextOffset: 1, historyRevision: revision });
+  const later = await read({ command: 'all', agentId: 'agent-a', limit: 1, offset: 1, expectedRevision: revision }, f.env);
+  assert.equal(later.result.exitCode, 0);
+  assert.equal(f.requests.at(-1).url.searchParams.get('expectedRevision'), revision);
+});
+
+test('merged single-page errors are surfaced without retries; no mismatched revision is accepted', async t => {
+  const revision = `h1:${'f'.repeat(64)}`;
+  const conflict = await fixture(t, (_url, response) => json(response, 409, { error: 'history_revision_changed' }));
+  await assert.rejects(runHistory({ command: 'all', agentId: 'agent-a', offset: 1, expectedRevision: revision }, conflict.env), error => error.status === 409);
+  assert.equal(conflict.requests.length, 2);
+  const mismatch = await fixture(t, (_url, response) => json(response, 200, { items: [], total: 0, hasMore: false, historyRevision: `h1:${'a'.repeat(64)}` }));
+  await assert.rejects(runHistory({ command: 'all', agentId: 'agent-a', expectedRevision: revision }, mismatch.env), /Unexpected merged history/);
+});
+
+test('merged flags validate revision, ranges and command scope before network access', async () => {
+  assert.deepEqual(parseHistoryArgs(['all', '--conversation-id', '__manual:one', '--expected-revision', `h1:${'a'.repeat(64)}`, '--max-restarts', '2']),
+    { command: 'all', conversationId: '__manual:one', expectedRevision: `h1:${'a'.repeat(64)}`, maxRestarts: '2' });
+  for (const options of [
+    { command: 'all', agentId: 'a', limit: 1001 }, { command: 'all', agentId: 'a', offset: 1 },
+    { command: 'all', agentId: 'a', expectedRevision: 'not-a-revision' }, { command: 'all', agentId: 'a', order: 'random' },
+    { command: 'all', agentId: 'a', maxRestarts: -1 }, { command: 'all', agentId: 'a', conversationId: '' },
+    { command: 'search', agentId: 'a', conversationId: 'wrong-command' }, { command: 'messages', id: 'run-a', maxRestarts: 1 },
+  ]) await assert.rejects(runHistory(options, {}));
+});

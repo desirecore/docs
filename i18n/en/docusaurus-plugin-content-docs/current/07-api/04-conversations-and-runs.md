@@ -12,7 +12,7 @@ Deployment owners can query Agents and execution records in their own standalone
 
 ## Read Scope
 
-The Agent list, Run list, Run details, and runtime state are instance data reads for the instance owner. They do not provide per-user isolation between multiple tenants. Receipt reads additionally match the trusted identity resolved by the server to the Run's user ownership; both a missing Run and a Run belonging to another user return `404`.
+The Agent list, input configuration, Run list, Run details, and runtime state are instance data reads for the instance owner. They do not provide per-user isolation between multiple tenants. Receipt reads additionally match the trusted identity resolved by the server to the Run's user ownership; both a missing Run and a Run belonging to another user return `404`.
 
 Agent IDs, Run IDs, `user_id`, and `conversation_id` identify records; they are not access credentials. Supplying a user ID, knowing a Run ID, or having seen a record elsewhere does not replace authentication and the endpoint's ownership checks.
 
@@ -57,6 +57,50 @@ Example response structure:
 | `description`, `engine`, `hasRemote`, `syncStatus` | Optional description, engine, upstream repository, and synchronization information |
 | `ui`, `avatar`, `avatarImage` | Optional UI and avatar summaries; configured avatar metadata does not establish that its file is usable |
 | `unread`, `pinned`, `pinnedAt`, `folded`, `groupOverride`, `nestMembers` | Optional unread information and display preferences for the instance's current user; do not fabricate observed values for absent fields |
+
+## Read Agent input configuration {#agent-input-config}
+
+### `GET /api/agents/:id/input-config`
+
+:::info Effective version
+`v10.0.180+` (reading Agent input configuration).
+:::
+
+After selecting an Agent, read its lightweight input configuration to determine whether it currently uses separate conversations in manual mode. Use the Agent list's `id` for `:id`, containing only letters, digits, hyphens, or underscores. There is no request body or query parameter. Reading does not create a session or send a greeting.
+
+```bash
+curl --silent --show-error \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  "${BASE_URL}/api/agents/${AGENT_ID}/input-config"
+```
+
+```json
+{
+  "version": 1,
+  "agentId": "your-agent-id",
+  "manual": true,
+  "configRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `version` | Currently integer `1`; report an unknown version as incompatible rather than continuing in ordinary conversation mode |
+| `agentId` | The Agent actually read; verify it matches the selected target |
+| `manual` | `true` means separate conversations in manual mode; a valid configuration that omits this mode returns `false` |
+| `configRevision` | A 64-character lowercase hexadecimal content digest; compare equality only, without ordering by value or time |
+
+Responses use `Cache-Control: no-store`. Read again when changing targets or preparing input. `configRevision` neither locks subsequent configuration nor grants execution permission, and is not an increasing event sequence. `manual: false` describes the input mode; execution still requires its own permission and state checks. Keep a failed read unavailable instead of substituting `manual: false`.
+
+| HTTP / `code` | Action |
+|---|---|
+| `400 AGENT_INPUT_CONFIG_INVALID_ID` | Use the selected Agent's actual ID |
+| `404 AGENT_NOT_FOUND` | The target is unavailable or missing; select again. This business error does not mean an older service lacks the endpoint |
+| `409 AGENT_INPUT_CONFIG_CHANGED` | Configuration changed while being read; read again before updating the input UI |
+| `503 AGENT_INPUT_CONFIG_INVALID` | Configuration is invalid; ask the administrator to repair it |
+| `503 AGENT_INPUT_CONFIG_UNREADABLE` | Configuration is temporarily unreadable; ask the administrator to check it before retrying the read |
+
+An older service without this route may also return `404`. Check the JSON `code`, handshake, and client version rather than treating every `404` as a safe fallback. See [Errors and Troubleshooting](./03-errors-and-troubleshooting.md) for authentication and service readiness failures, and the [observation example](./10-observability.md#observe-example) for a runnable call.
 
 ## List Runs {#list-runs}
 

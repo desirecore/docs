@@ -109,3 +109,7 @@ Webhook 的 `200` 和 `accepted: true` 表示已接收触发。响应中没有 R
 HTTP `200` 表示读取成功，不保证返回完整的工具结果正文。敏感结果或无法核验调用身份的结果可能只提供占位提示，并省略正文引用；这与执行失败、历史损坏或需要重跑不是一回事。保留实际的 `status`、`isError`，按[历史结果的读取边界](./08-session-history-and-messages.md#history-result-privacy)处理，不从占位文字推断成功或自动重试。
 
 逐 Run 消息中的 `offset` 是字节位置，而分页请求的 `offset` 是源行位置；按请求窗口推进，不能用返回消息条数补算下一页。历史可能在读取期间变化，参见[会话历史与消息](./08-session-history-and-messages.md)。
+
+## 网络连接正常但上游不可用
+
+Socket.IO 已连接并不保证实例可访问模型供应商。先读取[上游网络状态](./10-observability.md#network-health)，结合 `reason`、`since` 和供应商范围排查；`unknown` 不是离线，历史 `online` 也不证明当前请求成功。近期调用和用量只是观察信息，不据此自动重放执行。
