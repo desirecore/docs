@@ -1,6 +1,6 @@
-# DesireCore Node conversation client
+# DesireCore Node client examples
 
-These examples call an administrator's existing standalone Agent Service using the same owner credential for HTTP and Socket.IO. Obtain its HTTPS origin, existing instance token, and target Agent ID from the administrator. The Agent needs a working model configuration and permissions appropriate for your prompt.
+These examples call an administrator's existing standalone Agent Service. Obtain its HTTPS origin and existing owner token from the administrator. The conversation client also needs a target Agent ID, a working model configuration and permissions appropriate for the prompt; it uses the same owner credential for HTTP and Socket.IO. Read examples use HTTP and do not require a model call.
 
 Use Node.js 22 or newer. Install dependencies **in this directory**, independently of the documentation website:
 
@@ -105,3 +105,36 @@ node history.mjs all --agent-id your-agent-id --limit 100 --all-pages
 ```
 
 Merged history buffers one revision per attempt. A 409 discards that attempt and restarts from page zero within the configured restart budget. No rejected attempt is emitted as a successful page set. Source-only Mention IDs remain display identifiers and are never passed to Run or execution APIs. `limit=0` returns metadata with an empty page rather than all messages. Current validation is recorded in `api/observation-verification-2026-10-25.md`.
+
+
+## TaskBoard reads
+
+`taskboards.mjs` uses the configured TaskBoard capability and the authenticated owner's readable scope. It requires Node.js 22+, with no npm dependencies. See [TaskBoard reads](https://docs.desirecore.com/en/api/taskboards) for request and response contracts.
+
+```bash
+node taskboards.mjs list
+node taskboards.mjs query --filter '{"statuses":["pending"]}' --page-size 50
+node taskboards.mjs board --board-id BOARD_ID
+node taskboards.mjs task --board-id BOARD_ID --task-id TASK_ID
+node taskboards.mjs handoff --board-id BOARD_ID
+node taskboards.mjs activity --board-id BOARD_ID --task-id TASK_ID --page-size 50
+node taskboards.mjs resolve --run-id RUN_ID
+```
+
+Query cursors remain opaque. Activity freezes `throughRevision` across pages, which bounds the event prefix; owner summary projections are still current per page. The example buffers query/activity pages and emits only after paging succeeds. A conflict or bounded-page failure discards the buffered output; it does not retry, modify tasks or create a missing session board. Board `handoff` returns handoff evidence without activity pagination. Treat task descriptions and returned data as private.
+
+## Object-storage reads
+
+`s3.mjs` uses an installed, enabled Object Storage capability and an existing configured S3 connection. It requires Node.js 22+, with no npm dependencies or AK/SK in the calling program. See [Object-storage reads](https://docs.desirecore.com/en/api/object-storage).
+
+```bash
+node s3.mjs connections
+node s3.mjs list --connection-id CONNECTION_ID --prefix reports/ --all
+node s3.mjs download --connection-id CONNECTION_ID --key reports/summary.txt
+node s3.mjs download --connection-id CONNECTION_ID --key reports/summary.txt \
+  --mode binary --output ./summary.txt --max-bytes 10485760
+```
+
+The list command reads one page unless `--all` is specified; all-page output is streamed and can be partial on failure. It preserves provider continuation tokens and stops on missing/repeated tokens or the page cap. Link mode only prints the returned public/presigned link; it never fetches that URL or sends the instance token to it. Binary mode requests the authenticated instance directly, rejects redirects, bounds bytes and creates the explicitly selected output file without overwriting an existing file. Incomplete output from the current download is removed on failure. Object contents, keys and signed links may be private.
+
+Maintained `taskboards.mjs` and `s3.mjs` are byte-identical to their files under `static/api-examples/`, as checked by `pnpm api:check`. Their HTTP tests use a synthetic local server and do not prove real TaskBoard or S3 provider availability.

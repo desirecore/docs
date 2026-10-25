@@ -49,6 +49,16 @@ sidebar_position: 7
 | `POST /api/media/upload` | 上传图片、音频或视频 | [附件与媒体](./09-attachments-and-media.md) |
 | `POST /api/media/access-urls` | 签发短期媒体访问链接 | [附件与媒体](./09-attachments-and-media.md) |
 | `GET /media/{filename}` | 使用签名链接读取媒体与 Range | [附件与媒体](./09-attachments-and-media.md) |
+| `GET /api/taskboards` | 列出可读任务板 | [TaskBoard 读取](./11-taskboards.md) |
+| `POST /api/taskboards/query` | 查询任务板与任务 | [TaskBoard 读取](./11-taskboards.md) |
+| `GET /api/taskboards/{id}` | 读取任务板投影 | [TaskBoard 读取](./11-taskboards.md) |
+| `GET /api/taskboards/{id}/tasks/{taskId}` | 读取单个任务 | [TaskBoard 读取](./11-taskboards.md) |
+| `GET /api/taskboards/{id}/activity` | 读取任务板交接证据 | [TaskBoard 读取](./11-taskboards.md) |
+| `GET /api/taskboards/{id}/tasks/{taskId}/activity` | 分页读取任务活动 | [TaskBoard 读取](./11-taskboards.md) |
+| `POST /api/taskboards/session-board/resolve` | 解析现有会话任务板 | [TaskBoard 读取](./11-taskboards.md) |
+| `GET /api/s3/connections` | 读取已配置连接摘要 | [S3 对象读取](./12-object-storage.md) |
+| `GET /api/s3/list` | 列出存储对象 | [S3 对象读取](./12-object-storage.md) |
+| `GET /api/s3/download` | 下载对象字节或取得链接 | [S3 对象读取](./12-object-storage.md) |
 
 花括号表示需要替换的路径参数，对应端点指南中的冒号写法。Webhook 管理操作要求认证握手中的 `capabilities.webhookManagement` 为 `true`，并使用实例所有者凭据。旧实例缺少该能力时，使用管理员已启用并验证的事件。运行列表和详情按部署所有者的实例读取范围使用；回执读取另外检查可信用户归属。
 
@@ -107,3 +117,5 @@ Socket.IO 的连接、订阅与异步事件需要配套客户端逻辑。OpenAPI
 媒体原生播放使用签发端点返回的完整 `/media/{filename}?expires=…&signature=…` 链接；该读取入口不使用实例令牌，链接应按短期凭据保管。附件下载仍使用实例认证。历史、话题和媒体的权限与响应范围见各自指南。
 
 观察和聚合历史的可运行读取示例分别为 **[observe.mjs](pathname:///api-examples/observe.mjs)** 与 **[history.mjs](pathname:///api-examples/history.mjs)**。聚合历史的 revision 冲突需要重新读取，不能混拼旧页；用量聚合不等于供应商最终账单。
+
+TaskBoard 与 S3 的读取示例分别为 **[taskboards.mjs](pathname:///api-examples/taskboards.mjs)** 和 **[s3.mjs](pathname:///api-examples/s3.mjs)**。查询游标、活动修订、对象续读令牌和下载模式按对应指南处理。

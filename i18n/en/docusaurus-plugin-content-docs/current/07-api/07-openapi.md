@@ -49,6 +49,16 @@ Also available: **[model protocol proxy OpenAPI JSON](pathname:///openapi/compat
 | `POST /api/media/upload` | Upload an image, audio, or video | [Attachments and media](./09-attachments-and-media.md) |
 | `POST /api/media/access-urls` | Issue short-lived media access URLs | [Attachments and media](./09-attachments-and-media.md) |
 | `GET /media/{filename}` | Read signed media, including byte ranges | [Attachments and media](./09-attachments-and-media.md) |
+| `GET /api/taskboards` | List readable task boards | [TaskBoard reads](./11-taskboards.md) |
+| `POST /api/taskboards/query` | Query boards and tasks | [TaskBoard reads](./11-taskboards.md) |
+| `GET /api/taskboards/{id}` | Read a board projection | [TaskBoard reads](./11-taskboards.md) |
+| `GET /api/taskboards/{id}/tasks/{taskId}` | Read one task | [TaskBoard reads](./11-taskboards.md) |
+| `GET /api/taskboards/{id}/activity` | Read board handoff evidence | [TaskBoard reads](./11-taskboards.md) |
+| `GET /api/taskboards/{id}/tasks/{taskId}/activity` | Page task activity | [TaskBoard reads](./11-taskboards.md) |
+| `POST /api/taskboards/session-board/resolve` | Resolve an existing session board | [TaskBoard reads](./11-taskboards.md) |
+| `GET /api/s3/connections` | Read configured connection summaries | [S3 object reads](./12-object-storage.md) |
+| `GET /api/s3/list` | List stored objects | [S3 object reads](./12-object-storage.md) |
+| `GET /api/s3/download` | Download bytes or request an object link | [S3 object reads](./12-object-storage.md) |
 
 Braces identify path parameters to replace, corresponding to colon notation in the endpoint guides. Webhook management requires `capabilities.webhookManagement: true` from the authenticated handshake and the instance owner's credential. Older instances without that capability use administrator-enabled and verified events. Run lists and details use the deployment owner's instance read access; receipt access additionally checks trusted-user ownership.
 
@@ -107,3 +117,5 @@ The file's `info.version` is the version of this HTTP interface description. It 
 For native media playback, use the complete `/media/{filename}?expires=…&signature=…` URL returned by the issuing endpoint. This read endpoint uses its short-lived signature rather than an instance token. Attachment downloads still require instance authentication. Consult each guide for history, topic, and media access rules.
 
 Runnable observation and merged-history readers are **[observe.mjs](pathname:///api-examples/observe.mjs)** and **[history.mjs](pathname:///api-examples/history.mjs)**. Restart merged-history reads on revision conflicts instead of combining old pages. Usage aggregates are not final provider invoices.
+
+TaskBoard and S3 read examples are available as **[taskboards.mjs](pathname:///api-examples/taskboards.mjs)** and **[s3.mjs](pathname:///api-examples/s3.mjs)**. Follow the corresponding guides for opaque cursors, activity revisions, object continuation tokens and download modes.

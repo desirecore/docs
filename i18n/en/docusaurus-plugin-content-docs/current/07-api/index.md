@@ -24,6 +24,8 @@ Connect your scripts or services to DesireCore using the address and credentials
 | Import HTTP contracts into a tool | Select the spec for your service | [OpenAPI downloads](./07-openapi.md) |
 | Let DesireCore call your business service | MCP server, tools or skills | [MCP integration](../02-user-guide/09-capabilities/03-mcp-integration.md) and [integration overview](../02-user-guide/09-capabilities/06-integrations-overview.md) |
 | Diagnose upstream connectivity and observe recent tool calls and recorded usage | Instance-owner access | [Instance Diagnostics and Usage](./10-observability.md) |
+| Read task boards, task details and activity | Instance owner access and the TaskBoard capability | [TaskBoard reads](./11-taskboards.md) |
+| List objects or download from configured storage | Instance owner access, Object Storage capability and a configured connection | [S3 object reads](./12-object-storage.md) |
 
 ## Credentials and results
 

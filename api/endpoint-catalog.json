@@ -3,16 +3,11 @@
   "reviewBaseline": {
     "reviewedAt": "2026-10-25",
     "clientRepository": "desirecore/desirecore",
-    "clientRevision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
-    "internalDocsRevision": "f8e1005d1cdfbeae37d3374de8631307b3d94534",
-    "publicDocsBaseRevision": "c76753613425d236d54360b111efb708b1349131"
+    "clientRevision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+    "internalDocsRevision": "9fbe5f4668d223553b38ebd4e7a2a49450000a9b",
+    "publicDocsBaseRevision": "b8fc9329b935f85a20ab8bd253cf3afbbe99020b"
   },
   "pages": [
-    {
-      "id": "api/index",
-      "file": "docs/07-api/index.md",
-      "slug": "/api"
-    },
     {
       "id": "api/connection-and-auth",
       "file": "docs/07-api/01-connection-and-auth.md",
@@ -62,6 +57,21 @@
       "id": "api/observability",
       "file": "docs/07-api/10-observability.md",
       "slug": "/api/observability"
+    },
+    {
+      "id": "api/taskboards",
+      "file": "docs/07-api/11-taskboards.md",
+      "slug": "/api/taskboards"
+    },
+    {
+      "id": "api/object-storage",
+      "file": "docs/07-api/12-object-storage.md",
+      "slug": "/api/object-storage"
+    },
+    {
+      "id": "api/index",
+      "file": "docs/07-api/index.md",
+      "slug": "/api"
     }
   ],
   "endpoints": [
@@ -80,7 +90,7 @@
       "resultDelivery": "Synchronous JSON metadata. A 200 response verifies this authenticated request, not every optional capability.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/client-handshake-routes.ts",
           "packages/agent-service/src/service-metadata.ts",
@@ -120,7 +130,7 @@
       "resultDelivery": "200 {accepted:true,agentId,event} acknowledges receipt, with no Run ID or delivery deduplication. Only explicit authorized SendUserMessage output is delivered to the user; final model answers are not automatically returned to the caller or added to chat.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/webhook-routes.ts",
           "packages/agent-service/src/routes/webhook-state.ts",
@@ -161,7 +171,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/agent-routes.ts",
           "packages/agent-service/src/agent/list-projection.ts"
@@ -197,7 +207,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-manager.ts"
@@ -233,7 +243,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-meta-read.ts"
@@ -269,7 +279,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts"
         ]
@@ -304,7 +314,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/receipts/reader.ts"
@@ -340,7 +350,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -376,7 +386,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -412,7 +422,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -448,7 +458,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -484,7 +494,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -520,7 +530,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -556,7 +566,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -592,7 +602,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -628,7 +638,7 @@
       "resultDelivery": "Synchronous {items,total,limit,offset}; default limit50, maximum200. Items may include other authorized background deliveries.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/schedule-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -935,7 +945,7 @@
       "resultDelivery": "Complete persisted attachment receipt.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/attachment-routes.ts",
           "packages/schemas/src/agent-service/attachments.ts",
@@ -974,7 +984,7 @@
       "resultDelivery": "Original file bytes with no-store and nosniff.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/attachment-routes.ts",
           "packages/schemas/src/agent-service/attachments.ts",
@@ -1011,7 +1021,7 @@
       "resultDelivery": "Direct media metadata.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/media-routes.ts",
           "packages/agent-service/src/media/media-store.ts",
@@ -1049,7 +1059,7 @@
       "resultDelivery": "Links and missing IDs; no universal success/data wrapper.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/media-routes.ts",
           "packages/agent-service/src/media/media-store.ts",
@@ -1089,7 +1099,7 @@
       "resultDelivery": "Full media bytes.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/media-routes.ts",
           "packages/agent-service/src/media/media-store.ts",
@@ -1130,7 +1140,7 @@
       "resultDelivery": "Lists ordinary user-visible history by updatedAt descending. Excludes delegated, manual and dedicated schedule/Webhook/Mention timelines. Preserves fork generations; do not concatenate branches as a deduplicated transcript. Pagination is not an immutable snapshot.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1168,7 +1178,7 @@
       "resultDelivery": "Checks trusted user ownership before body/image reads. Missing, cleared and unowned Runs return 404. Delegated Runs return 403 delegated_run_requires_inspect_view; use the messages inspection view instead. pendingAssistant is temporary and separate from durable messages. Returned configuration is not execution authority. Sensitive tool results may be withheld in the display projection; body references can be removed without changing the underlying execution outcome.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1209,7 +1219,7 @@
       "resultDelivery": "Checks ownership before content reads. Delegated Runs require view=inspect-run. total counts source rows, not returned messages; advance offset by the requested limit and stop at total, even if a page is empty. Optional live is a temporary delegated display checkpoint, not a durable message or terminal. There is no cross-page consistency revision. Sensitive tool results may be withheld in the display projection; body references can be removed without changing the underlying execution outcome.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1250,7 +1260,7 @@
       "resultDelivery": "Matches extracted message text case-insensitively, newest timestamp first. Includes independent manual conversations; excludes archived and delegated Runs. Default-conversation fork families select the visible history window. preferredRunId is neither a credential nor an exact-Run filter. limit/offset and their sum must be safe nonnegative integers. limit=0 returns all remaining hits and hasMore=false. Match original text before cropping previews.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1289,7 +1299,7 @@
       "resultDelivery": "Reads the instance's current local profile, not a caller-supplied tenant ID. Intended for the deployment owner. Returns all active matters and at most ten recent entries, not a complete transcript. No pagination. An empty overview does not establish Agent existence or absence of history.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/conversation-routes.ts",
           "packages/agent-service/src/conversation-memory/overview-projection.ts",
@@ -1327,7 +1337,7 @@
       "resultDelivery": "Reads the instance owner's local-profile conversation memory. Supports active, recent and archived source data. Underlying Run reads recheck that user and Agent ownership. Reads at most 120 source messages and sets truncated=true if more exist; projection may omit entries. No pagination or limit-override parameter. Entries are not guaranteed to have the per-Run message shape. Sensitive tool results may be withheld in the display projection; body references can be removed without changing the underlying execution outcome.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/conversation-routes.ts",
           "packages/agent-service/src/conversation-memory/conversation-store.ts",
@@ -1367,7 +1377,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/agent-input-config-route.ts",
           "packages/agent-service/src/routes/agent-input-config-observation.ts",
@@ -1405,7 +1415,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1443,7 +1453,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/network-routes.ts",
           "packages/agent-service/src/connection/network-health.ts",
@@ -1480,7 +1490,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/runs-index.ts",
@@ -1519,7 +1529,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "a0186f6feeaf66eb88787e8b80b8fea5559b8761",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/runs-index.ts",
@@ -1535,6 +1545,409 @@
       "verification": {
         "record": "api/observation-verification-2026-10-25.md",
         "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listTaskBoards",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/taskboards",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "No pagination. Can include archived boards; counts exclude archived/deleted tasks. Team and owner visibility is rechecked.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard.ts:taskBoardListResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "queryTaskBoards",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/taskboards/query",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "Read-only POST. Default pageSize 50 (1..200), updatedAt desc, active boards/tasks. Opaque nextCursor must retain filters/sort. 409 versionConflict requires discarding old pages and restarting. Claim tokens are always omitted; current liveness can change without invalidating the cursor. Missing/invisible boardIds are silently omitted.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard-workbench.ts:taskBoardQueryRequestSchema",
+        "packages/schemas/src/agent-service/taskboard-workbench.ts:taskBoardQueryResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getTaskBoard",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/taskboards/:id",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "Actor-specific projection. Deleted tasks excluded; archived tasks may remain. Redacted comment bodies and private claim tokens are withheld as documented. Direct arbitrary missing/invisible Board IDs normally return 403. Authorized missing scope aliases can return exists:false.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard.ts:taskBoardDetailResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getTaskBoardTask",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/taskboards/:id/tasks/:taskId",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "Board access check runs first. A missing/deleted task within an authorized Board returns 200 exists:false. Available actions are a current actor snapshot, not a grant.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard-workbench.ts:taskDirectReadResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listTaskBoardHandoffEvidence",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/taskboards/:id/activity",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "Only handoff evidence; not a complete Board activity log. Optional taskId restricts visible tasks; no pagination.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard-workflow.ts:taskBoardHandoffEvidenceSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getTaskBoardTaskActivity",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/taskboards/:id/tasks/:taskId/activity",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "Canonical task events use Board revision continuation. First page captures throughRevision; preserve it with nextAfterRevision on all later pages. Positive afterRevision requires throughRevision. null nextAfterRevision means complete, even if items is empty earlier. pageSize bounds candidate scans, not total returned items. Owner projections are current summaries, can repeat/change on every page, and are not frozen by throughRevision.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard-workbench.ts:taskActivityPageRequestSchema",
+        "packages/schemas/src/agent-service/taskboard-workbench.ts:taskActivityResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "resolveSessionTaskBoard",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/taskboards/session-board/resolve",
+      "doc": "api/taskboards",
+      "deploymentModes": [
+        "standalone-owner"
+      ],
+      "authentication": "Existing instance-owner X-Agent-Service-Token.",
+      "permissions": "Authenticated human user; global TaskBoard capability enabled, owner scope and current Team/Board ACL checks. Request fields do not grant actor or team authority.",
+      "resultDelivery": "Read-only POST, 4 KiB body limit. Requires runId or sessionId; accepts no claimed session list. Current session with exactly one visible board wins, including archived boards; multiple current boards have no default. Otherwise choose newest unarchived board from another persisted session of the same Run. No default returns 200 exists:false. IDs do not expand current visibility.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/taskboard-routes.ts",
+          "packages/agent-service/src/taskboard/service.ts",
+          "packages/agent-service/src/taskboard/policy.ts",
+          "packages/agent-service/src/taskboard/query-index.ts",
+          "packages/agent-service/src/taskboard/session-board.ts",
+          "packages/agent-service/src/taskboard/integrations/http-capability-port.ts",
+          "packages/agent-service/src/auth/instance-auth.ts",
+          "deploy/Caddyfile"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/taskboard-session-board.ts:taskBoardSessionBoardResolveRequestSchema",
+        "packages/schemas/src/agent-service/taskboard.ts:taskBoardDetailResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listS3Connections",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/s3/connections",
+      "doc": "api/object-storage",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Current user Object Storage capability must be enabled. Uses instance-configured connections and credentials; no separate object/prefix grant. Provider list/read permission is required for object operations.",
+      "resultDelivery": "Configured connection summaries; an empty configuration returns an empty connections array.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/s3-routes.ts",
+          "packages/agent-service/src/routes/object-storage-capability-gate.ts",
+          "packages/agent-service/src/object-storage/index.ts",
+          "packages/agent-service/src/object-storage/s3-connection-resolver.ts",
+          "packages/agent-service/src/object-storage/s3-client.ts",
+          "packages/agent-service/src/capabilities/error.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/s3-operations.ts:s3ConnectionSummarySchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Static source review plus source-handler fixture with synthetic capability/config/provider substitutes and Node HTTP client fixtures; no real S3 provider.",
+        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listS3Objects",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/s3/list",
+      "doc": "api/object-storage",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Current user Object Storage capability must be enabled. Uses instance-configured connections and credentials; no separate object/prefix grant. Provider list/read permission is required for object operations.",
+      "resultDelivery": "One provider page. Final pages omit a missing continuation token rather than returning null.",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/s3-routes.ts",
+          "packages/agent-service/src/routes/object-storage-capability-gate.ts",
+          "packages/agent-service/src/object-storage/index.ts",
+          "packages/agent-service/src/object-storage/s3-connection-resolver.ts",
+          "packages/agent-service/src/object-storage/s3-client.ts",
+          "packages/agent-service/src/capabilities/error.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/s3-operations.ts:s3ListResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Static source review plus source-handler fixture with synthetic capability/config/provider substitutes and Node HTTP client fixtures; no real S3 provider.",
+        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries."
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "downloadS3Object",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/s3/download",
+      "doc": "api/object-storage",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "X-Agent-Service-Token from the deployment administrator",
+      "permissions": "Current user Object Storage capability must be enabled. Uses instance-configured connections and credentials; no separate object/prefix grant. Provider list/read permission is required for object operations.",
+      "resultDelivery": "Link mode returns JSON; binary mode returns arbitrary object bytes, which can themselves contain JSON or HTML. Check HTTP status before saving. Optional link metadata can be absent (including content_length for an empty object).",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "files": [
+          "packages/agent-service/src/routes/s3-routes.ts",
+          "packages/agent-service/src/routes/object-storage-capability-gate.ts",
+          "packages/agent-service/src/object-storage/index.ts",
+          "packages/agent-service/src/object-storage/s3-connection-resolver.ts",
+          "packages/agent-service/src/object-storage/s3-client.ts",
+          "packages/agent-service/src/capabilities/error.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/s3-operations.ts:s3DownloadLinkResponseSchema"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/taskboard-s3-verification-2026-10-25.md",
+        "scope": "Static source review plus source-handler fixture with synthetic capability/config/provider substitutes and Node HTTP client fixtures; no real S3 provider.",
+        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries."
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [

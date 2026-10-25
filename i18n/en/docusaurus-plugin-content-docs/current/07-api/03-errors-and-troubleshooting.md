@@ -113,3 +113,10 @@ A per-Run message's `offset` is a byte position, whereas the pagination request'
 ## A connected client cannot reach upstream services
 
 A connected Socket.IO client does not establish that the instance can reach a model provider. Read [upstream network health](./10-observability.md#network-health) and inspect `reason`, `since` and provider scope. `unknown` is not offline, and a historical `online` does not prove the current request succeeded. Recent calls and usage are observations, not instructions to replay work.
+
+
+## TaskBoard and object-storage reads
+
+A successful authenticated handshake does not enable optional applications or validate a storage connection. For `403 capabilityDisabled`, check the corresponding application in My Apps; do not keep retrying the same disabled capability. TaskBoard access also depends on the readable resource scope, and a missing or inaccessible board may return `403`. Read the [TaskBoard error and paging rules](./11-taskboards.md) before treating a missing task or a pagination conflict as an empty successful query.
+
+S3 link and binary modes have different response and error contracts. A link-mode `404 NOT_FOUND` means the instance could not confirm the object is readable; check the key, provider permissions and connection. Binary mode can report the same provider failure as `500 DOWNLOAD_FAILED`. Follow [object-storage reads](./12-object-storage.md), preserve the HTTP status, and keep signed download links out of shared logs.

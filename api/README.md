@@ -4,7 +4,7 @@
 
 ## 公开范围
 
-11 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、会话历史与消息、附件与媒体、模型代理、工作流与 OpenAPI 下载。40 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
+13 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、会话历史与消息、附件与媒体、实例诊断与用量、TaskBoard 与 S3 读取、模型代理、工作流与 OpenAPI 下载。50 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
 
 Webhook 所有者管理依赖握手 `capabilities.webhookManagement: true`，由可信入口选择实际工具并生成文件范围快照；旧服务仅支持已有事件。该支持条件没有被改写成未经核对的客户端发行号。现有 Write/Bash 与审批模型保留，不把配置文件宣称为不可修改的安全边界。
 
@@ -106,3 +106,14 @@ RunMeta五态与runtime-state HTTP四态/转交404的差异仍存在，公开文
 本批新增输入配置、网络状态、聚合历史、近期工具调用和用量汇总5操作，Agent Service32、Compat3、Workflow5。新增双语实例诊断与用量页，扩展history all读取器及observe.mjs；observe维护文件与static下载逐字一致，校验器覆盖该镜像。源码ID与字段投影修复、旧索引过渡和本批定向验证见[本批记录](./observation-verification-2026-10-25.md)。
 
 Worker两项未加入公开清单：独立隔离夹具确认其早期进度/旧结果重投影与entry游标说明仍需修复。该专项结果不扩写为跨用户泄漏或真实数据事故；见验证记录的范围说明。此前生产/搜索验收保留原始批次，不代表本批已部署。
+
+
+## 2026-10-25 TaskBoard 与 S3 读取扩展
+
+本批固定源码 `ba6a550aeb397c377f6c3c6e620863d06d526628`、内部文档 `9fbe5f4668d223553b38ebd4e7a2a49450000a9b`，增加 TaskBoard 7 项及 S3 3 项读取操作。当前公开范围为 Agent Service 42、Compat Proxy 3、Workflow Service 5，共50操作、13组双语页面。Agent Service描述修订为1.3.0；其它两规范的来源和修订保持原事实。
+
+TaskBoard 整板activity只提供handoff证据；单任务activity使用固定throughRevision的事件前缀，同时每页关联owner摘要仍为当前投影。S3连接摘要不验证凭据；link/binary错误和响应分别建模，public链接无expires_in、末页通常省略续读令牌。相关文档及可运行示例见TaskBoard与对象存储页；两个POST查询不会创建任务板或发起执行。
+
+`taskboards.mjs`、`s3.mjs`及static镜像由api:check逐字核对，示例包不增加站点依赖。隔离源码fixture维护在示例test目录，必须复制到注明的源码位置后使用该仓的Vitest执行；它们不属于站点TypeScript编译。详细验证及未覆盖范围见[本批记录](./taskboard-s3-verification-2026-10-25.md)。
+
+Worker投影修复单独提交源码PR，本批没有将Worker两项加入公开清单或规范。此前发布与搜索验收保留其历史基线，不代表本批已部署或收录。
