@@ -7,27 +7,34 @@ const HELP = `Usage:
   node history.mjs list [--agent-id ID] [--include-archived] [--all-pages]
   node history.mjs session RUN_ID
   node history.mjs messages RUN_ID [--inspect-run] [--all-pages]
+  node history.mjs all --agent-id ID [--conversation-id ID] [--order asc|desc] [--all-pages]
   node history.mjs search --agent-id ID [--query TEXT] [--type all|image|file|tool] [--all-pages]
   node history.mjs overview --agent-id ID
   node history.mjs matter MATTER_ID --agent-id ID
 
 Environment: DESIRECORE_URL, DESIRECORE_TOKEN, optional DESIRECORE_AGENT_ID.
-Pagination: --offset 0; --limit defaults to list=20, messages=100, search=50.
-Search alone accepts --limit 0 (all remaining hits), --preferred-run-id ID,
-and --preview-chars 1..8000. --all-pages is bounded by --max-pages 20.
+Pagination: --offset 0; --limit defaults to list=20, messages/all=100, search=50.
+all accepts --limit 0 (metadata only), --preferred-run-id ID, --expected-revision h1:HASH,
+and --max-restarts 1. A later offset requires --expected-revision. Revision conflicts
+discard buffered pages and restart all-pages reads at 0; no execution is replayed.
+Search accepts --limit 0 (all remaining hits), --preferred-run-id ID, and
+--preview-chars 1..8000. --all-pages is bounded by --max-pages 20 per attempt.
 HTTP: --timeout-ms 10000. Remote origins must use HTTPS.
 Output: one JSON record per page; history may contain private conversation data.
 Exit: 0 requested reads succeeded; 1 request/configuration failed;
 2 an all-pages read stopped early or a matter response was truncated.
-These endpoints do not provide a consistent multi-page history snapshot.
+Only all checks the public view revision; it is not a persistent snapshot or backup.
 `;
 
-const PAGED = new Set(['list', 'messages', 'search']);
-const NUMERIC = new Set(['limit', 'offset', 'maxPages', 'timeoutMs', 'previewChars']);
+const PAGED = new Set(['list', 'messages', 'search', 'all']);
+const NUMERIC = new Set(['limit', 'offset', 'maxPages', 'maxRestarts', 'timeoutMs', 'previewChars']);
+const REVISION = /^h1:[0-9a-f]{64}$/;
 const VALUES = new Map([
   ['--agent-id', 'agentId'], ['--limit', 'limit'], ['--offset', 'offset'],
   ['--query', 'query'], ['--type', 'type'], ['--preferred-run-id', 'preferredRunId'],
   ['--preview-chars', 'previewChars'], ['--max-pages', 'maxPages'], ['--timeout-ms', 'timeoutMs'],
+  ['--conversation-id', 'conversationId'], ['--order', 'order'],
+  ['--expected-revision', 'expectedRevision'], ['--max-restarts', 'maxRestarts'],
 ]);
 const FLAGS = new Map([
   ['--all-pages', 'allPages'], ['--include-archived', 'includeArchived'], ['--inspect-run', 'inspectRun'],
@@ -68,10 +75,10 @@ function identifier(value, label) {
 
 function optionsFor(input, env) {
   const options = { ...input };
-  if (!['list', 'session', 'messages', 'search', 'overview', 'matter'].includes(options.command)) throw new Error(HELP);
+  if (!['list', 'session', 'messages', 'all', 'search', 'overview', 'matter'].includes(options.command)) throw new Error(HELP);
   options.agentId ??= env.DESIRECORE_AGENT_ID;
   if (options.agentId !== undefined) identifier(options.agentId, 'Agent ID');
-  if (['search', 'overview', 'matter'].includes(options.command) && !options.agentId) throw new Error('Set DESIRECORE_AGENT_ID or --agent-id.');
+  if (['all', 'search', 'overview', 'matter'].includes(options.command) && !options.agentId) throw new Error('Set DESIRECORE_AGENT_ID or --agent-id.');
   if (['session', 'messages'].includes(options.command)) identifier(options.id, 'Run ID');
   else if (options.command === 'matter') {
     if (typeof options.id !== 'string' || !options.id || /[\\/\u0000-\u001f\u007f]/.test(options.id) || options.id.includes('..') || options.id === '.') {
@@ -85,11 +92,19 @@ function optionsFor(input, env) {
       if (!Number.isSafeInteger(options[key]) || options[key] < 0) throw new Error(`Invalid ${key}.`);
     }
   }
-  options.limit ??= options.command === 'list' ? 20 : options.command === 'messages' ? 100 : 50;
+  options.limit ??= options.command === 'list' ? 20 : ['messages', 'all'].includes(options.command) ? 100 : 50;
   options.offset ??= 0;
   options.maxPages ??= 20;
+  options.maxRestarts ??= 1;
   options.timeoutMs ??= 10_000;
-  if ((options.limit === 0 && options.command !== 'search') || !Number.isSafeInteger(options.offset + options.limit)) throw new Error('Use a positive limit and a safe offset; only search permits limit=0.');
+  if ((options.limit === 0 && !['search', 'all'].includes(options.command)) || !Number.isSafeInteger(options.offset + options.limit)) throw new Error('Use a positive limit and a safe offset; only search and all permit limit=0.');
+  if (options.command === 'all') {
+    if (options.limit > 1000) throw new Error('all limit must be 0..1000.');
+    if (options.expectedRevision !== undefined && !REVISION.test(options.expectedRevision)) throw new Error('Use the returned h1: revision as --expected-revision.');
+    if (options.offset > 0 && options.expectedRevision === undefined) throw new Error('A later all page requires --expected-revision from the same read scope.');
+    if (options.order !== undefined && !['asc', 'desc'].includes(options.order)) throw new Error('order must be asc or desc.');
+    if (options.conversationId !== undefined && (typeof options.conversationId !== 'string' || !options.conversationId || /[\u0000-\u001f\u007f]/.test(options.conversationId))) throw new Error('Use a nonempty conversation ID.');
+  } else if (['conversationId', 'order', 'expectedRevision', 'maxRestarts'].some(key => input[key] !== undefined)) throw new Error('Revision and merged-history options apply only to all.');
   if (options.maxPages < 1 || options.timeoutMs < 1) throw new Error('maxPages and timeoutMs must be positive.');
   if (options.previewChars !== undefined && (options.previewChars < 1 || options.previewChars > 8000)) throw new Error('previewChars must be 1..8000.');
   if (options.type !== undefined && !['all', 'image', 'file', 'tool'].includes(options.type)) throw new Error('type must be all, image, file or tool.');
@@ -97,17 +112,24 @@ function optionsFor(input, env) {
   if (options.includeArchived && options.command !== 'list') throw new Error('--include-archived applies only to list.');
   if (options.inspectRun && options.command !== 'messages') throw new Error('--inspect-run applies only to messages.');
   if (!PAGED.has(options.command) && (options.allPages || input.limit !== undefined || input.offset !== undefined)) throw new Error('This endpoint is not paginated.');
-  if (options.command !== 'search' && ['query', 'type', 'preferredRunId', 'previewChars'].some(key => options[key] !== undefined)) throw new Error('Search filters apply only to search.');
+  if (options.command !== 'search' && ['query', 'type', 'previewChars'].some(key => options[key] !== undefined)) throw new Error('Search filters apply only to search.');
+  if (!['search', 'all'].includes(options.command) && options.preferredRunId !== undefined) throw new Error('--preferred-run-id applies only to search or all.');
   return options;
 }
 
-function endpoint(options, offset) {
+function endpoint(options, offset, expectedRevision) {
   const query = new URLSearchParams();
   let path;
   if (options.command === 'list') {
     path = '/api/sessions';
     if (options.agentId) query.set('agentId', options.agentId);
     if (options.includeArchived) query.set('includeArchived', 'true');
+  } else if (options.command === 'all') {
+    path = '/api/sessions/messages/all';
+    query.set('agentId', options.agentId);
+    for (const [key, value] of Object.entries({ conversationId: options.conversationId, order: options.order, preferredRunId: options.preferredRunId, expectedRevision })) {
+      if (value !== undefined) query.set(key, value);
+    }
   } else if (options.command === 'search') {
     path = '/api/sessions/messages/search';
     query.set('agentId', options.agentId);
@@ -145,6 +167,7 @@ export async function runHistory(input, env = process.env, output = {}) {
       const error = new Error(`HTTP ${response.status}: ${typeof data?.error === 'string' ? data.error : 'request rejected'}`);
       error.status = response.status;
       error.code = typeof data?.code === 'string' ? data.code : undefined;
+      error.apiError = typeof data?.error === 'string' ? data.error : undefined;
       throw error;
     }
     return data;
@@ -152,6 +175,42 @@ export async function runHistory(input, env = process.env, output = {}) {
   const handshake = await get('/api/client-handshake');
   if (handshake.service !== 'desirecore-agent-service' || handshake.apiProtocolVersion !== '1' || typeof handshake.instanceId !== 'string' || !handshake.instanceId) {
     throw new Error('Unexpected service identity or API protocol; history was not requested.');
+  }
+  if (options.command === 'all') {
+    let offset = options.offset, revision = options.expectedRevision, restarts = 0, buffered = [];
+    while (true) {
+      let data;
+      try { data = await get(endpoint(options, offset, revision)); }
+      catch (error) {
+        if (error.status !== 409 || error.apiError !== 'history_revision_changed' || !options.allPages) throw error;
+        // Nothing from an invalidated attempt has been emitted. Restart only GET reads.
+        buffered = [];
+        if (restarts >= options.maxRestarts) {
+          emit({ kind: 'stopped', reason: 'history-revision-changed', restartOffset: 0, discarded: true });
+          return { exitCode: 2, pages: 0, restarts, restartOffset: 0 };
+        }
+        emit({ kind: 'restarting', reason: 'history-revision-changed', restartOffset: 0, discarded: true });
+        restarts++; offset = 0; revision = undefined;
+        continue;
+      }
+      if (!Array.isArray(data?.items) || data.items.length > options.limit || !Number.isSafeInteger(data.total) || data.total < 0
+        || typeof data.hasMore !== 'boolean' || !REVISION.test(data.historyRevision)
+        || (revision !== undefined && revision !== data.historyRevision)) throw new Error('Unexpected merged history page or revision.');
+      revision = data.historyRevision;
+      buffered.push({ kind: 'all', instanceId: handshake.instanceId, offset, limit: options.limit, data });
+      const nextOffset = offset + options.limit;
+      if (!data.hasMore || !options.allPages || options.limit === 0) {
+        for (const record of buffered) emit(record);
+        return { exitCode: 0, pages: buffered.length, restarts, ...(data.hasMore && options.limit > 0 && { nextOffset, historyRevision: revision }) };
+      }
+      if (buffered.length >= options.maxPages || !Number.isSafeInteger(nextOffset)) {
+        // A bounded partial window is explicitly marked and retains its revision for a later read.
+        for (const record of buffered) emit(record);
+        emit({ kind: 'stopped', reason: buffered.length >= options.maxPages ? 'max-pages' : 'invalid-next-offset', nextOffset, historyRevision: revision });
+        return { exitCode: 2, pages: buffered.length, restarts, nextOffset, historyRevision: revision };
+      }
+      offset = nextOffset;
+    }
   }
   let offset = options.offset, pages = 0, firstTotal;
   while (true) {

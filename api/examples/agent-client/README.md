@@ -76,7 +76,7 @@ Run `npm test` for the independent HTTP + Socket.IO contract fixture. It verifie
 
 `test/source-route.fixture.ts` can be copied into a fixed-source DesireCore checkout as `packages/agent-service/src/__tests__/api-docs-node-client.integration.test.ts`. Set `DESIRECORE_API_EXAMPLE_PATH` to the absolute path of this directory's `client.mjs`, then run that single file in the repository's integration test project. It verifies this client against the actual query routes, HTTP/Socket authentication, request Schema and digest, durable admission registry and lookup, and renderer delivery room. The query runtime and follow-up execution callback remain fake. Use its isolated temporary data root; do not point it at an existing user profile.
 
-Current source review: `desirecore/desirecore` commit `a101a40c14cc9d478c7f9a23d8a125ac2404509b`. Historical validation remains in `api/verification.md`; this extension is recorded in `api/history-attachments-verification.md`.
+Current source review: `desirecore/desirecore` commit `3131e2d4900bce418abe1bb0a0569148ef901682` (source PR #5194; not yet a release declaration). Historical validation remains in `api/verification.md`; this extension is recorded in `api/history-attachments-verification.md`.
 
 - HTTP submission: `packages/agent-service/src/routes/query-routes.ts`.
 - Admission lookup: `packages/agent-service/src/routes/client-request-lookup-routes.ts`; shared Schema in `packages/schemas/src/agent-service/client-request-admission.ts`.
@@ -90,3 +90,18 @@ Keep the three published downloads byte-identical to their maintained files: `cl
 `test/source-history.fixture.ts` can be copied to the fixed source tree as `packages/agent-service/src/__tests__/api-docs-history.test.ts` and run in the `unit` project. It uses actual instance authentication, history/topic/Run routes and temporary file storage. The local profile and runtime discovery are stubs. It checks owner filtering, public message projection, search validation, empty topic reads, and the actual `handed_off` detail/`404` runtime-state behavior. It does not run a model or real handoff. Website TypeScript checking excludes these two source fixtures because their imports resolve only inside DesireCore’s source repository.
 
 History output is a display projection: sensitive tool results may be placeholders, and body references may be absent. The reader preserves these payloads and optional response extensions; it does not infer tool success from placeholder text, retrieve withheld references, or execute replacement work. Current stability review and verification are recorded in `api/stability-verification-2026-10-22.md`.
+
+
+## Observation reader
+
+`observe.mjs` requires Node.js 22+ and no npm packages. It uses the same administrator-provided instance origin and owner credential, checks the handshake, performs one GET, and preserves the returned data. It does not poll, replay work or reconcile billing. The example validates recommended input formats; service fallback behavior is documented separately.
+
+```bash
+node observe.mjs input-config --agent-id your-agent-id
+node observe.mjs network
+node observe.mjs recent-calls --limit 20
+node observe.mjs usage --since 2026-10-01T00:00:00Z --timezone UTC
+node history.mjs all --agent-id your-agent-id --limit 100 --all-pages
+```
+
+Merged history buffers one revision per attempt. A 409 discards that attempt and restarts from page zero within the configured restart budget. No rejected attempt is emitted as a successful page set. Source-only Mention IDs remain display identifiers and are never passed to Run or execution APIs. `limit=0` returns metadata with an empty page rather than all messages. Current validation is recorded in `api/observation-verification-2026-10-25.md`.

@@ -26,6 +26,11 @@ sidebar_position: 7
 | `POST /api/agents/{id}/webhooks/secret/rotate` | 轮换智能体的专用 Webhook 密钥 | [智能体 Webhook](./02-agent-webhook.md) |
 | `GET /api/agents/{agentId}/schedule-messages` | 读取可见的后台消息与交付 | [智能体 Webhook](./02-agent-webhook.md) |
 | `GET /api/agents` | 读取智能体摘要列表 | [智能体列表](./04-conversations-and-runs.md#list-agents) |
+| `GET /api/agents/{id}/input-config` | 读取轻量输入模式和配置摘要 | [输入配置](./04-conversations-and-runs.md#agent-input-config) |
+| `GET /api/network/health` | 读取上游网络观察状态 | [实例诊断与用量](./10-observability.md#network-health) |
+| `GET /api/runs/recent-calls` | 读取当前用户近期工具调用元数据 | [近期工具调用](./10-observability.md#recent-tool-calls) |
+| `GET /api/runs/usage/summary` | 读取当前用户已记录用量汇总 | [已记录用量](./10-observability.md#usage-summary) |
+| `GET /api/sessions/messages/all` | 按版本分页读取合并历史 | [合并历史](./08-session-history-and-messages.md#merged-history) |
 | `GET /api/runs` | 按条件读取实例运行记录 | [运行列表](./04-conversations-and-runs.md#list-runs) |
 | `GET /api/runs/{id}` | 读取单个运行的元信息 | [运行详情](./04-conversations-and-runs.md#get-run) |
 | `GET /api/runs/{id}/runtime-state` | 读取运行的原始状态 | [运行状态](./04-conversations-and-runs.md#get-run-runtime-state) |
@@ -100,3 +105,5 @@ Socket.IO 的连接、订阅与异步事件需要配套客户端逻辑。OpenAPI
 文件的 `info.version` 是这份 HTTP 接口描述的版本。它不代表 DesireCore 客户端的生效版本，也不代替握手中的 `serverVersion` 或 `apiProtocolVersion`。
 
 媒体原生播放使用签发端点返回的完整 `/media/{filename}?expires=…&signature=…` 链接；该读取入口不使用实例令牌，链接应按短期凭据保管。附件下载仍使用实例认证。历史、话题和媒体的权限与响应范围见各自指南。
+
+观察和聚合历史的可运行读取示例分别为 **[observe.mjs](pathname:///api-examples/observe.mjs)** 与 **[history.mjs](pathname:///api-examples/history.mjs)**。聚合历史的 revision 冲突需要重新读取，不能混拼旧页；用量聚合不等于供应商最终账单。

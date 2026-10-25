@@ -12,7 +12,7 @@ keywords: [API, 会话历史, 消息, 搜索, 话题, 分页, Run]
 
 ## 读取范围与标识 {#history-scope}
 
-会话列表、搜索和精确 Run 历史按服务端解析的用户归属读取。精确 Run 读取在返回正文前检查该归属；不存在、不属于该用户或已经清除的 Run 均按 `404` 处理。知道 Run ID 不等于有读取权限，也不能通过请求参数自报 `userId` 来选择其他用户。
+会话列表、合并历史、搜索和精确 Run 历史按服务端解析的用户归属读取。精确 Run 读取在返回正文前检查该归属；不存在、不属于该用户或已经清除的 Run 均按 `404` 处理。知道 Run ID 不等于有读取权限，也不能通过请求参数自报 `userId` 来选择其他用户。
 
 两个话题接口读取所连接实例当前本机用户资料所属的智能体对话记忆。它们适用于实例所有者，不能作为共享服务的多租户隔离接口。资料缺失时返回 `401`；请实例管理员检查当前用户资料。
 
@@ -165,6 +165,81 @@ curl --silent --show-error --get \
 
 `live` 是可替换的临时显示快照，可能回退，也可能在终态或最终消息落盘后消失；它不计入 `total`，不能当作持久消息、回执或成功结论。只包含普通输出文本和有限工具状态；不要据此恢复工具输入或执行。`text` 最多 16,384 字符，`toolCalls` 最多 128 项。
 
+## 读取合并历史 {#merged-history}
+
+### `GET /api/sessions/messages/all`
+
+需要展示一个智能体或一个对话的连续可见时间线时，使用此接口。它先按可信用户归属筛选，再选择 fork 家族的可见分支、合并来源消息并做公开投影，最后分页。它与逐 Run 消息的源行分页不同；`all` 也不表示所有执行分支或完整备份。
+
+| 查询参数 | 含义 |
+|---|---|
+| `agentId` | 必填，目标智能体 ID |
+| `conversationId` | 可选，精确限定该智能体下有权读取的对话谱系，例如已有的 `__manual:…` 会话 ID；不授予其他对话的读取权限 |
+| `preferredRunId` | 可选，选择可见历史分支窗口；不是只返回该 Run，也不是访问凭据 |
+| `order` | `desc`（默认，新到旧）或 `asc`；其他值按 `desc` 处理 |
+| `limit` | 默认 `100`，范围 `0`–`1000`；`0` 仅返回空 `items`、总数与版本，且 `hasMore: false`，不表示取全部 |
+| `offset` | 默认 `0`，完整合并视图中的条目位置；非负安全整数 |
+| `expectedRevision` | 后续页携带首屏的 `historyRevision`，格式为 `h1:` 加 64 位小写十六进制字符 |
+
+`limit` 与 `offset` 请使用规范十进制整数。服务兼容解析整数前缀，不应依赖混杂字符串或小数的转换结果。安全整数最大为 `9007199254740991`。
+
+不传 `conversationId` 时，手动模式仍开启的智能体不合并独立手动会话；关闭手动模式后，已有手动会话会合并回默认时间线。传入 `conversationId` 时只读取该对话。已清除、已归档、委派子 Run、调度与 Webhook 专用执行时间线不会纳入；Mention 的独立执行时间线也不混入，但可见的 Conversation 来源消息可以出现。无可见历史时返回空页，不表示智能体不存在，也不会泄露他人的记录。
+
+```bash
+curl --silent --show-error --get \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  --data-urlencode "agentId=${AGENT_ID}" \
+  --data-urlencode 'order=asc' --data-urlencode 'limit=100' \
+  --data-urlencode 'offset=0' \
+  "${BASE_URL}/api/sessions/messages/all"
+```
+
+```json
+{
+  "items": [
+    {
+      "runId": "run-example",
+      "messageIndex": 0,
+      "offset": 0,
+      "sessionTime": "2026-10-15T08:00:00Z",
+      "message": {
+        "id": "d8d53a7a-478e-4d96-970e-657dece814f7",
+        "role": "user",
+        "content": "Please review the release notes",
+        "timestamp": 1792051200000
+      }
+    }
+  ],
+  "total": 1,
+  "hasMore": false,
+  "historyRevision": "h1:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+```
+
+`items` 每项封装 `runId`、`messageIndex`、`sessionTime` 与公开 `message`，持久化 Run 消息还可带字节 `offset`。这些项内位置不是下一页参数；下一页仍使用**请求的 `offset + limit`**，根据 `hasMore` 决定是否继续。`total` 计合并后的公开条目，不是各 Run 源行数之和。
+
+**Mention 来源项**可能带 `message.mentionSourceOnly: true`，其外层 `runId` 为 `__mention_source:…`，没有真正的 Run 归属，也可能没有字节 `offset`。保留消息的 Mention 引用供显示；不要把合成 ID 传给 Run、续聊或恢复接口，不要把来源项补入模型回放。关联消息优先使用 `message.id`，不要跨所有 Run 仅按文字去重。
+
+### 保持同一公开视图版本
+
+1. 从 `offset=0` 开始，保存首屏 `historyRevision`。
+2. 后续页保持相同的 `agentId`、`conversationId`、`preferredRunId`、`order` 和页大小，携带 `expectedRevision`。
+3. 在所有页读完之前，暂存该轮结果。收到 `409 history_revision_changed` 时丢弃整轮已暂存页，从 `offset=0` 重新读取并取得新版本；不要拼接新旧页。
+4. 只重试读取。不要因历史变化、敏感结果占位或读取错误重新提交对话、重跑工具或发起恢复。
+
+```bash
+# HISTORY_REVISION 为首屏响应的完整 historyRevision；其他筛选与首屏一致。
+curl --silent --show-error --get \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  --data-urlencode "agentId=${AGENT_ID}" \
+  --data-urlencode 'order=asc' --data-urlencode 'limit=100' \
+  --data-urlencode 'offset=100' \
+  --data-urlencode "expectedRevision=${HISTORY_REVISION}" \
+  "${BASE_URL}/api/sessions/messages/all"
+```
+
+正文编辑、删除、分支或公开投影变化都可能使版本失效。`historyRevision` 是当前完整公开视图的摘要，不是持久游标、事务快照或增量日志。以后再次读取仍需重新确认版本。每页可能读取并排序完整可见历史，大历史应使用有限页数，避免无界并发读取。
+
 ## 搜索一个 Agent 的消息 {#search-messages}
 
 ### `GET /api/sessions/messages/search`
@@ -273,24 +348,30 @@ node history.mjs list --limit 20 --all-pages
 node history.mjs session run-example
 node history.mjs messages run-example --limit 100 --all-pages
 node history.mjs messages delegated-run-id --inspect-run
+node history.mjs all --order asc --limit 100 --all-pages
+node history.mjs all --conversation-id '__manual:existing-conversation' --limit 0
 node history.mjs search --query 'release' --preview-chars 240 --all-pages
 node history.mjs overview
 node history.mjs matter mat_example
 ```
 
-示例先验证实例握手，再发起 GET；不会提交查询、续聊或撤销运行。默认每个命令只读一页，`--all-pages` 最多读取 20 页，可用 `--max-pages` 调整。输出为逐行 JSON，包含历史正文，请按私密数据保存。
+示例先验证实例握手，再发起 GET；不会提交查询、续聊或撤销运行。默认每个命令只读一页，`--all-pages` 每次尝试最多读取 20 页，可用 `--max-pages` 调整。输出为逐行 JSON，包含历史正文，请按私密数据保存。
 
-`list` 用 `--include-archived` 包含归档；`search` 另支持 `--type`、`--preferred-run-id` 和 `--preview-chars`。`messages` 的检查视图仅通过显式 `--inspect-run` 开启。
+`list` 用 `--include-archived` 包含归档；`search` 另支持 `--type`、`--preferred-run-id` 和 `--preview-chars`。`messages` 的检查视图仅通过显式 `--inspect-run` 开启。`all` 支持 `--conversation-id`、`--order` 和 `--preferred-run-id`；后续单页用 `--offset` 与 `--expected-revision` 配对读取。
 
-退出码 `0` 表示请求的读取成功，`1` 表示配置或 HTTP 请求失败，`2` 表示翻页达到设定上限、观测到总数变化而停止，或话题响应被截断。后续读取位置见停止记录中的 `nextOffset`；重新开始前应确认历史是否变化。
+退出码 `0` 表示请求的读取成功，`1` 表示配置或 HTTP 请求失败，`2` 表示翻页达到设定上限、观测到总数变化或持续版本冲突而停止，或话题响应被截断。后续读取位置见停止记录中的 `nextOffset`；`all` 同时保留 `historyRevision`。版本冲突停止记录给出 `restartOffset: 0`，不能从旧位置继续。
 
-这些接口没有提供跨页一致性版本。执行中追加、编辑或清理历史，都可能让多次读取出现重复或遗漏。示例发现 `total` 变化会停止，但不能检测总数不变的内容改写；不要把一次分页扫描当成固定时点的审计快照。
+`all --all-pages` 暂存当前尝试，版本冲突时丢弃后从首屏重读，默认最多重启一次（`--max-restarts` 可调整），每次仍受 `--max-pages` 限制。成功后输出同一版本的页；达到页数上限时输出带版本的部分窗口并以 `2` 退出。`all --limit 0` 只读取一次元信息。
+
+其余分页接口没有跨页一致性版本。执行中追加、编辑或清理历史，都可能让多次读取出现重复或遗漏。示例发现 `total` 变化会停止，但不能检测总数不变的内容改写；不要把一次分页扫描当成固定时点的审计快照。
 
 ## 常见错误 {#history-errors}
 
 | HTTP / 错误 | 处理方式 |
 |---|---|
-| `400 agentId is required` | 搜索时提供真实 Agent ID |
+| `400 agentId is required` | 合并历史或搜索时提供真实 Agent ID |
+| `400 invalid_history_page` | 合并历史的 `limit` 使用 `0`–`1000`，检查非负安全整数 `offset` 和完整 `expectedRevision` 格式 |
+| `409 history_revision_changed` | 丢弃该轮所有页，从首屏重新读取；不要重跑执行 |
 | `400 Invalid history page parameters` | 搜索的 `limit`、`offset` 使用非负安全整数，并检查 `previewChars` 范围 |
 | `400 Invalid runId` | 使用会话列表返回的 Run ID，不传路径或运行时 session ID |
 | `401` | 检查实例令牌；若为 `User not authenticated` 或 `User not found`，请管理员检查当前实例用户资料 |

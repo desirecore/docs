@@ -23,6 +23,7 @@ Connect your scripts or services to DesireCore using the address and credentials
 | Trigger an existing workflow | Separate Workflow Service address, service token, and administrator-provided definition | [Workflow integration](./06-workflow-integration.md) |
 | Import HTTP contracts into a tool | Select the spec for your service | [OpenAPI downloads](./07-openapi.md) |
 | Let DesireCore call your business service | MCP server, tools or skills | [MCP integration](../02-user-guide/09-capabilities/03-mcp-integration.md) and [integration overview](../02-user-guide/09-capabilities/06-integrations-overview.md) |
+| Diagnose upstream connectivity and observe recent tool calls and recorded usage | Instance-owner access | [Instance Diagnostics and Usage](./10-observability.md) |
 
 ## Credentials and results
 

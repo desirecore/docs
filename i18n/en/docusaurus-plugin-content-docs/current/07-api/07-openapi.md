@@ -26,6 +26,11 @@ Also available: **[model protocol proxy OpenAPI JSON](pathname:///openapi/compat
 | `POST /api/agents/{id}/webhooks/secret/rotate` | Rotate the Agent's dedicated Webhook secret | [Agent Webhook](./02-agent-webhook.md) |
 | `GET /api/agents/{agentId}/schedule-messages` | Read visible background messages and deliveries | [Agent Webhook](./02-agent-webhook.md) |
 | `GET /api/agents` | Read Agent summaries | [Agent list](./04-conversations-and-runs.md#list-agents) |
+| `GET /api/agents/{id}/input-config` | Read lightweight input mode and configuration digest | [Input configuration](./04-conversations-and-runs.md#agent-input-config) |
+| `GET /api/network/health` | Read upstream network observations | [Instance Diagnostics and Usage](./10-observability.md#network-health) |
+| `GET /api/runs/recent-calls` | Read recent tool-call metadata for the current user | [Recent tool calls](./10-observability.md#recent-tool-calls) |
+| `GET /api/runs/usage/summary` | Read recorded usage aggregates for the current user | [Recorded usage](./10-observability.md#usage-summary) |
+| `GET /api/sessions/messages/all` | Read merged history with revision pagination | [Merged history](./08-session-history-and-messages.md#merged-history) |
 | `GET /api/runs` | Read filtered instance Run metadata | [Run list](./04-conversations-and-runs.md#list-runs) |
 | `GET /api/runs/{id}` | Read one Run's metadata | [Run details](./04-conversations-and-runs.md#get-run) |
 | `GET /api/runs/{id}/runtime-state` | Read the raw Run state | [Run state](./04-conversations-and-runs.md#get-run-runtime-state) |
@@ -100,3 +105,5 @@ A conversation submission's `202` response also does not prove completion. Conne
 The file's `info.version` is the version of this HTTP interface description. It is separate from DesireCore feature effective versions and the handshake's `serverVersion` and `apiProtocolVersion`.
 
 For native media playback, use the complete `/media/{filename}?expires=…&signature=…` URL returned by the issuing endpoint. This read endpoint uses its short-lived signature rather than an instance token. Attachment downloads still require instance authentication. Consult each guide for history, topic, and media access rules.
+
+Runnable observation and merged-history readers are **[observe.mjs](pathname:///api-examples/observe.mjs)** and **[history.mjs](pathname:///api-examples/history.mjs)**. Restart merged-history reads on revision conflicts instead of combining old pages. Usage aggregates are not final provider invoices.
