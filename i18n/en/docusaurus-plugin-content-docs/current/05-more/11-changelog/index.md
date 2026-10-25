@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.188](./v10.0.188) | 2026-10-25 | 修复：Fixed an issue where a document review still incorrectly reported “not sav... |
 | [v10.0.187](./v10.0.187) | 2026-10-25 | Cross-device email access and reliable sending、Workspace incremental upgrade、... |
 | [v10.0.181](./v10.0.181) | 2026-10-13 | Agent development workbench and My Apps publishing、Intranet repository distri... |
 | [v10.0.180](./v10.0.180) | 2026-10-12 | 启动页并跟随应用亮暗主题 (#4713)、构建期品牌与无品牌 AgentOS / Build-only branding and unbranded Ag... |
