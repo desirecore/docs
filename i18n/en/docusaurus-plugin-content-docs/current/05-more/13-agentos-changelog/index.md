@@ -15,4 +15,5 @@ This page records important changes in each version of unbranded AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.180](./v10.0.180) | 2026-10-13 | Initial release |
 | [v10.0.181](./v10.0.181) | 2026-10-14 | Application development workbench and distribution、Intranet and offline distr... |
