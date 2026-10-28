@@ -14,7 +14,6 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
-| [v10.0.200](./v10.0.200) | 2026-10-27 | 修复：Fixed an issue where whiteboard revision history, command receipts, and au... |
 | [v10.0.191](./v10.0.191) | 2026-10-27 | 修复：Backup & Transfer、Security Hardening |
 | [v10.0.190](./v10.0.190) | 2026-10-26 | 修复：Fixed an issue where task-bound runs without a schedule were incorrectly r... |
 | [v10.0.189](./v10.0.189) | 2026-10-26 | Proactive Markdown review、Delegated card background outcome、Dispatch run popu... |
