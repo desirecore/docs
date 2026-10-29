@@ -15,6 +15,7 @@ This page records important changes in each version of unbranded AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.192](./v10.0.192) | 2026-10-29 | Task Board Workspace、Structured Acceptance Criteria、Agent Step Progress、Workf... |
 | [v10.0.191](./v10.0.191) | 2026-10-27 | 修复：Backup and transfer now preserve whiteboard revision history, command rece... |
 | [v10.0.190](./v10.0.190) | 2026-10-26 | System browser offline automation、Progress write-back for regular chat tasks、... |
 | [v10.0.186](./v10.0.186) | 2026-10-22 | Simplified model selection、Layered reading for thinking and tool processes，修复... |
