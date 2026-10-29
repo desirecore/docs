@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-// Standalone observation reads. Node.js 22+, no packages required.
+// Instance diagnostics and explicit owner recovery. Node.js 22+, no packages required.
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const HELP = `Usage:
   node observe.mjs input-config --agent-id ID
+  node observe.mjs compute-retry [--timeout-ms 60000]
   node observe.mjs network
   node observe.mjs recent-calls [--limit 30]
   node observe.mjs usage [--since ISO_DATE] [--agent-id ID] [--timezone UTC]
@@ -38,7 +39,7 @@ export function parseObserveArgs(argv) {
 export async function runObserve(input, { env = process.env, emit = value => process.stdout.write(`${JSON.stringify(value)}\n`) } = {}) {
   if (input.help) { process.stdout.write(HELP); return; }
   const { command } = input;
-  if (!['input-config', 'network', 'recent-calls', 'usage'].includes(command)) throw new Error(HELP);
+  if (!['input-config', 'network', 'recent-calls', 'usage', 'compute-retry'].includes(command)) throw new Error(HELP);
   const origin = originFor(env.DESIRECORE_URL);
   if (typeof env.DESIRECORE_TOKEN !== 'string' || !env.DESIRECORE_TOKEN.trim()) throw new Error('Set DESIRECORE_TOKEN.');
   const allowed = new Set(['command', 'help', 'timeoutMs', ...(command === 'input-config' ? ['agentId'] : command === 'usage' ? ['agentId', 'since', 'timezone'] : command === 'recent-calls' ? ['limit'] : [])]);
@@ -57,9 +58,9 @@ export async function runObserve(input, { env = process.env, emit = value => pro
   if (input.timezone !== undefined) {
     try { new Intl.DateTimeFormat('en', { timeZone: input.timezone }); } catch { throw new Error('Use a valid IANA --timezone, for example UTC.'); }
   }
-  async function get(path) {
+  async function get(path, method = 'GET') {
     const response = await fetch(origin + path, {
-      headers: { 'X-Agent-Service-Token': env.DESIRECORE_TOKEN },
+      method, headers: { 'X-Agent-Service-Token': env.DESIRECORE_TOKEN },
       redirect: 'error', signal: AbortSignal.timeout(timeoutMs),
     });
     if (!response.headers.get('content-type')?.toLowerCase().includes('application/json')) throw new Error(`HTTP ${response.status}: expected JSON from the instance API.`);
@@ -78,11 +79,13 @@ export async function runObserve(input, { env = process.env, emit = value => pro
   if (command === 'input-config') path = `/api/agents/${encodeURIComponent(agentId)}/input-config`;
   else if (command === 'network') path = '/api/network/health';
   else if (command === 'recent-calls') { path = '/api/runs/recent-calls'; query.set('limit', String(limit)); }
+  else if (command === 'compute-retry') path = '/api/compute/preparation/retry';
   else {
     path = '/api/runs/usage/summary';
     for (const [key, value] of Object.entries({ since: input.since, agentId, timezone: input.timezone })) if (value !== undefined) query.set(key, value);
   }
-  const data = await get(path + (query.size ? `?${query}` : ''));
+  const data = await get(path + (query.size ? `?${query}` : ''), command === 'compute-retry' ? 'POST' : 'GET');
+  if (command === 'compute-retry' && data.status !== 'ready') throw new Error('Compute preparation is not confirmed ready.');
   if (command === 'input-config' && (data.version !== 1 || data.agentId !== agentId || typeof data.manual !== 'boolean' || !/^[0-9a-f]{64}$/.test(data.configRevision))) throw new Error('Invalid input configuration; do not assume manual=false.');
   if (command === 'network' && (!['online', 'degraded', 'offline', 'unknown'].includes(data.status) || !Number.isFinite(data.seq) || data.seq < 0 || typeof data.since !== 'string' || typeof data.reason !== 'string')) throw new Error('Invalid network observation.');
   if (command === 'recent-calls' && !Array.isArray(data.calls)) throw new Error('Invalid recent calls observation.');

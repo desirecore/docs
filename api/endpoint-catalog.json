@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "reviewBaseline": {
-    "reviewedAt": "2026-10-25",
+    "reviewedAt": "2026-10-29",
     "clientRepository": "desirecore/desirecore",
-    "clientRevision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
-    "internalDocsRevision": "9fbe5f4668d223553b38ebd4e7a2a49450000a9b",
-    "publicDocsBaseRevision": "b8fc9329b935f85a20ab8bd253cf3afbbe99020b"
+    "clientRevision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+    "internalDocsRevision": "3122dd869b37fc65dbcb3c5b0e356d2571c83b48",
+    "publicDocsBaseRevision": "2fbf12b265dd6eab28c186716b0de290a084dd0d"
   },
   "pages": [
     {
@@ -72,6 +72,16 @@
       "id": "api/index",
       "file": "docs/07-api/index.md",
       "slug": "/api"
+    },
+    {
+      "id": "api/subagent-records",
+      "file": "docs/07-api/13-subagent-records.md",
+      "slug": "/api/subagent-records"
+    },
+    {
+      "id": "api/instance-management",
+      "file": "docs/07-api/14-instance-management.md",
+      "slug": "/api/instance-management"
     }
   ],
   "endpoints": [
@@ -90,7 +100,7 @@
       "resultDelivery": "Synchronous JSON metadata. A 200 response verifies this authenticated request, not every optional capability.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/client-handshake-routes.ts",
           "packages/agent-service/src/service-metadata.ts",
@@ -108,7 +118,12 @@
         "record": "api/verification.md",
         "scope": "Fixed-source auth and handshake unit tests plus a real loopback HTTPS readiness integration; no public-domain or Caddy-container run.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -130,7 +145,7 @@
       "resultDelivery": "200 {accepted:true,agentId,event} acknowledges receipt, with no Run ID or delivery deduplication. Only explicit authorized SendUserMessage output is delivered to the user; final model answers are not automatically returned to the caller or added to chat.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/webhook-routes.ts",
           "packages/agent-service/src/routes/webhook-state.ts",
@@ -150,7 +165,12 @@
         "record": "api/verification.md",
         "scope": "Real production owner management, atomic AgentFS snapshot writes, local fake-provider runtime and SendUserMessage delivery, rotation, failure and disable/delete integration. No commercial-provider or packaged-client claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -171,7 +191,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/agent-routes.ts",
           "packages/agent-service/src/agent/list-projection.ts"
@@ -186,7 +206,12 @@
         "record": "api/verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -207,7 +232,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-manager.ts"
@@ -222,7 +247,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -243,7 +273,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/run-meta-read.ts"
@@ -258,7 +288,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -279,7 +314,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts"
         ]
@@ -293,7 +328,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -314,7 +354,7 @@
       "resultDelivery": "Synchronous read; live state is observational, not a query completion signal.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/receipts/reader.ts"
@@ -329,7 +369,12 @@
         "record": "api/verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -350,7 +395,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -365,7 +410,12 @@
         "record": "api/verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -386,7 +436,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -401,7 +451,12 @@
         "record": "api/verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -422,7 +477,7 @@
       "resultDelivery": "HTTP admission or lookup JSON; query completion and incremental messages arrive through correlated Socket.IO events.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/query-routes.ts",
           "packages/agent-service/src/query/client-request-registry.ts"
@@ -437,7 +492,12 @@
         "record": "api/verification.md",
         "scope": "Fixed-source request/response examples and focused HTTP + Socket.IO client contract; runtime fake in the public client fixture.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -458,7 +518,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -473,7 +533,12 @@
         "record": "api/verification.md",
         "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -494,7 +559,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -509,7 +574,12 @@
         "record": "api/verification.md",
         "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -530,7 +600,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -545,7 +615,12 @@
         "record": "api/verification.md",
         "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -566,7 +641,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -581,7 +656,12 @@
         "record": "api/verification.md",
         "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -602,7 +682,7 @@
       "resultDelivery": "Synchronous configuration or explicit delivery JSON. First configuration and rotation disclose a secret once; GET does not return it.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/webhook-management-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -617,7 +697,12 @@
         "record": "api/verification.md",
         "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -638,7 +723,7 @@
       "resultDelivery": "Synchronous {items,total,limit,offset}; default limit50, maximum200. Items may include other authorized background deliveries.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/schedule-routes.ts",
           "packages/agent-service/src/auth/governed-endpoint-auth.ts"
@@ -651,7 +736,12 @@
         "record": "api/verification.md",
         "scope": "Production Webhook management integration with local fake model upstream and real delivery persistence; no commercial model or desktop package verification.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -945,7 +1035,7 @@
       "resultDelivery": "Complete persisted attachment receipt.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/attachment-routes.ts",
           "packages/schemas/src/agent-service/attachments.ts",
@@ -962,7 +1052,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -984,7 +1079,7 @@
       "resultDelivery": "Original file bytes with no-store and nosniff.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/attachment-routes.ts",
           "packages/schemas/src/agent-service/attachments.ts",
@@ -999,7 +1094,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1021,7 +1121,7 @@
       "resultDelivery": "Direct media metadata.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/media-routes.ts",
           "packages/agent-service/src/media/media-store.ts",
@@ -1037,7 +1137,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1059,7 +1164,7 @@
       "resultDelivery": "Links and missing IDs; no universal success/data wrapper.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/media-routes.ts",
           "packages/agent-service/src/media/media-store.ts",
@@ -1077,7 +1182,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1099,7 +1209,7 @@
       "resultDelivery": "Full media bytes.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/media-routes.ts",
           "packages/agent-service/src/media/media-store.ts",
@@ -1119,7 +1229,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/schema/auth review. Standalone uploader: 12 local HTTP contract tests with a fake server, not production storage or model execution. Root records actual fixed-source route validation separately.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1140,7 +1255,7 @@
       "resultDelivery": "Lists ordinary user-visible history by updatedAt descending. Excludes delegated, manual and dedicated schedule/Webhook/Mention timelines. Preserves fork generations; do not concatenate branches as a deduplicated transcript. Pagination is not an immutable snapshot.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1157,7 +1272,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1178,7 +1298,7 @@
       "resultDelivery": "Checks trusted user ownership before body/image reads. Missing, cleared and unowned Runs return 404. Delegated Runs return 403 delegated_run_requires_inspect_view; use the messages inspection view instead. pendingAssistant is temporary and separate from durable messages. Returned configuration is not execution authority. Sensitive tool results may be withheld in the display projection; body references can be removed without changing the underlying execution outcome.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1198,7 +1318,12 @@
         "record": "api/stability-verification-2026-10-22.md",
         "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1219,7 +1344,7 @@
       "resultDelivery": "Checks ownership before content reads. Delegated Runs require view=inspect-run. total counts source rows, not returned messages; advance offset by the requested limit and stop at total, even if a page is empty. Optional live is a temporary delegated display checkpoint, not a durable message or terminal. There is no cross-page consistency revision. Sensitive tool results may be withheld in the display projection; body references can be removed without changing the underlying execution outcome.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1239,7 +1364,12 @@
         "record": "api/stability-verification-2026-10-22.md",
         "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1260,7 +1390,7 @@
       "resultDelivery": "Matches extracted message text case-insensitively, newest timestamp first. Includes independent manual conversations; excludes archived and delegated Runs. Default-conversation fork families select the visible history window. preferredRunId is neither a credential nor an exact-Run filter. limit/offset and their sum must be safe nonnegative integers. limit=0 returns all remaining hits and hasMore=false. Match original text before cropping previews.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1278,7 +1408,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1299,7 +1434,7 @@
       "resultDelivery": "Reads the instance's current local profile, not a caller-supplied tenant ID. Intended for the deployment owner. Returns all active matters and at most ten recent entries, not a complete transcript. No pagination. An empty overview does not establish Agent existence or absence of history.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/conversation-routes.ts",
           "packages/agent-service/src/conversation-memory/overview-projection.ts",
@@ -1316,7 +1451,12 @@
         "record": "api/history-attachments-verification.md",
         "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1337,7 +1477,7 @@
       "resultDelivery": "Reads the instance owner's local-profile conversation memory. Supports active, recent and archived source data. Underlying Run reads recheck that user and Agent ownership. Reads at most 120 source messages and sets truncated=true if more exist; projection may omit entries. No pagination or limit-override parameter. Entries are not guaranteed to have the per-Run message shape. Sensitive tool results may be withheld in the display projection; body references can be removed without changing the underlying execution outcome.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/conversation-routes.ts",
           "packages/agent-service/src/conversation-memory/conversation-store.ts",
@@ -1356,7 +1496,12 @@
         "record": "api/stability-verification-2026-10-22.md",
         "scope": "Fixed-source route/owner/pagination review; real local source history routes and SessionStore fixture verifies authentication, owner isolation, public projection, search validation and empty/404 matter reads. The independent example uses 13 local HTTP contract tests, including paging gaps and truncation; no deployed-instance claim.",
         "baselineNote": "Source contract reviewed at a101a40c on 2026-10-22. Historical test results retain their own recorded baseline; current validation is recorded in api/stability-verification-2026-10-22.md.",
-        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md."
+        "currentReview": "Static contract recheck at a0186f6feeaf66eb88787e8b80b8fea5559b8761 on 2026-10-25; historical executed tests retain their recorded baseline. Current observation checks are in api/observation-verification-2026-10-25.md.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1377,7 +1522,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/agent-input-config-route.ts",
           "packages/agent-service/src/routes/agent-input-config-observation.ts",
@@ -1394,7 +1539,12 @@
       "versionEvidence": "Input-config introduction: implementation PR #4158 and its client v10.0.180 support statement, preserved from the internal Agent API reference.",
       "verification": {
         "record": "api/observation-verification-2026-10-25.md",
-        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim."
+        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1415,7 +1565,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/history-routes.ts",
           "packages/agent-service/src/session/store.ts",
@@ -1432,7 +1582,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/observation-verification-2026-10-25.md",
-        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim."
+        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1453,7 +1608,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/network-routes.ts",
           "packages/agent-service/src/connection/network-health.ts",
@@ -1469,7 +1624,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/observation-verification-2026-10-25.md",
-        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim."
+        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1490,7 +1650,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/runs-index.ts",
@@ -1508,7 +1668,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/observation-verification-2026-10-25.md",
-        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim."
+        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1529,7 +1694,7 @@
       "resultDelivery": "Synchronous JSON observation; no execution request or automatic replay.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/runs-routes.ts",
           "packages/agent-service/src/session/runs-index.ts",
@@ -1544,7 +1709,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/observation-verification-2026-10-25.md",
-        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim."
+        "scope": "See the fixed-source route fixtures, index migration regressions and independent client checks; no model/provider or production execution claim.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1565,7 +1735,7 @@
       "resultDelivery": "No pagination. Can include archived boards; counts exclude archived/deleted tasks. Team and owner visibility is rechecked.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1584,7 +1754,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1605,7 +1780,7 @@
       "resultDelivery": "Read-only POST. Default pageSize 50 (1..200), updatedAt desc, active boards/tasks. Opaque nextCursor must retain filters/sort. 409 versionConflict requires discarding old pages and restarting. Claim tokens are always omitted; current liveness can change without invalidating the cursor. Missing/invisible boardIds are silently omitted.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1625,7 +1800,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1646,7 +1826,7 @@
       "resultDelivery": "Actor-specific projection. Deleted tasks excluded; archived tasks may remain. Redacted comment bodies and private claim tokens are withheld as documented. Direct arbitrary missing/invisible Board IDs normally return 403. Authorized missing scope aliases can return exists:false.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1665,7 +1845,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1686,7 +1871,7 @@
       "resultDelivery": "Board access check runs first. A missing/deleted task within an authorized Board returns 200 exists:false. Available actions are a current actor snapshot, not a grant.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1705,7 +1890,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1726,7 +1916,7 @@
       "resultDelivery": "Only handoff evidence; not a complete Board activity log. Optional taskId restricts visible tasks; no pagination.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1745,7 +1935,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1766,7 +1961,7 @@
       "resultDelivery": "Canonical task events use Board revision continuation. First page captures throughRevision; preserve it with nextAfterRevision on all later pages. Positive afterRevision requires throughRevision. null nextAfterRevision means complete, even if items is empty earlier. pageSize bounds candidate scans, not total returned items. Owner projections are current summaries, can repeat/change on every page, and are not frozen by throughRevision.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1786,7 +1981,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1807,7 +2007,7 @@
       "resultDelivery": "Read-only POST, 4 KiB body limit. Requires runId or sessionId; accepts no claimed session list. Current session with exactly one visible board wins, including archived boards; multiple current boards have no default. Otherwise choose newest unarchived board from another persisted session of the same Run. No default returns 200 exists:false. IDs do not expand current visibility.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/taskboard-routes.ts",
           "packages/agent-service/src/taskboard/service.ts",
@@ -1827,7 +2027,12 @@
       "versionEvidence": null,
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
-        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution."
+        "scope": "Fixed-source contract review; independent local HTTP example fixtures. Real route/service/store checks are recorded separately; no real Agent/model execution.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1849,7 +2054,7 @@
       "resultDelivery": "Configured connection summaries; an empty configuration returns an empty connections array.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/s3-routes.ts",
           "packages/agent-service/src/routes/object-storage-capability-gate.ts",
@@ -1867,7 +2072,12 @@
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
         "scope": "Static source review plus source-handler fixture with synthetic capability/config/provider substitutes and Node HTTP client fixtures; no real S3 provider.",
-        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries."
+        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1889,7 +2099,7 @@
       "resultDelivery": "One provider page. Final pages omit a missing continuation token rather than returning null.",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/s3-routes.ts",
           "packages/agent-service/src/routes/object-storage-capability-gate.ts",
@@ -1907,7 +2117,12 @@
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
         "scope": "Static source review plus source-handler fixture with synthetic capability/config/provider substitutes and Node HTTP client fixtures; no real S3 provider.",
-        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries."
+        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [
@@ -1929,7 +2144,7 @@
       "resultDelivery": "Link mode returns JSON; binary mode returns arbitrary object bytes, which can themselves contain JSON or HTML. Check HTTP status before saving. Optional link metadata can be absent (including content_length for an empty object).",
       "source": {
         "repository": "desirecore/desirecore",
-        "revision": "ba6a550aeb397c377f6c3c6e620863d06d526628",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
         "files": [
           "packages/agent-service/src/routes/s3-routes.ts",
           "packages/agent-service/src/routes/object-storage-capability-gate.ts",
@@ -1947,7 +2162,357 @@
       "verification": {
         "record": "api/taskboard-s3-verification-2026-10-25.md",
         "scope": "Static source review plus source-handler fixture with synthetic capability/config/provider substitutes and Node HTTP client fixtures; no real S3 provider.",
-        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries."
+        "baselineNote": "Reviewed at ba6a550aeb397c377f6c3c6e620863d06d526628; 9 real-handler fixture checks passed with synthetic capability/config/provider substitutes. See the record for boundaries.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listRunWorkers",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/runs/:id/workers",
+      "doc": "api/subagent-records",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; resource ownership is resolved from the authenticated identity.",
+      "permissions": "Owner of the parent Run. Foreign/missing parent both return 404. No independent Worker Run. Status is derived on read.",
+      "resultDelivery": "List user-owned parent Run Workers",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/runs-routes.ts",
+          "packages/agent-service/src/session/worker-transcript.ts",
+          "packages/agent-service/src/session/worker-public-projection.ts",
+          "packages/agent-service/src/builtin-tools/tool-result-privacy.ts",
+          "packages/schemas/src/agent-service/worker-transcript.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/worker-transcript.ts"
+      ],
+      "effectiveVersion": "v10.0.189+",
+      "versionEvidence": "v10.0.189 is the earliest local release tag containing833e4d55a (#5224): sensitive field projection and valid-entry pagination.",
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getWorkerTranscript",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/runs/:id/workers/:workerId/transcript",
+      "doc": "api/subagent-records",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; resource ownership is resolved from the authenticated identity.",
+      "permissions": "Offset/total count valid entries, not seq or messages. parseInt/clamp query handling. Sensitive/unknown call results and extra fields are projected before paging; truncated means recording cap, not hasMore.",
+      "resultDelivery": "Page valid Worker record entries",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/runs-routes.ts",
+          "packages/agent-service/src/session/worker-transcript.ts",
+          "packages/agent-service/src/session/worker-public-projection.ts",
+          "packages/agent-service/src/builtin-tools/tool-result-privacy.ts",
+          "packages/schemas/src/agent-service/worker-transcript.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/worker-transcript.ts"
+      ],
+      "effectiveVersion": "v10.0.189+",
+      "versionEvidence": "v10.0.189 is the earliest local release tag containing833e4d55a (#5224): sensitive field projection and valid-entry pagination.",
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listArchivedManualTopics",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/manual-topics/archived",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; resource ownership is resolved from the authenticated identity.",
+      "permissions": "Fresh current-owner projection. Numeric query values are converted with Number then checked as safe integers. Unreadable/importing sources may be omitted; no snapshot revision.",
+      "resultDelivery": "List current owner archived topics across Agents",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/manual-topic-routes.ts",
+          "packages/agent-service/src/session/manual-topic-archive.ts",
+          "packages/schemas/src/agent-service/manual-topic-archive.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/manual-topic-archive.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "getSessionRuntimeReference",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/sessions/:runId/runtime-state",
+      "doc": "api/session-history-and-messages",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; resource ownership is resolved from the authenticated identity.",
+      "permissions": "Does not report live Run state. Foreign/missing Run returns 404. runtimeSession:null is a legitimate absent reference; verified local recovery failure returns 500 SESSION_RESTORE_FAILED instead.",
+      "resultDelivery": "Read a persistent recovery reference",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/history-routes.ts",
+          "packages/agent-service/src/session/persistent-state/store.ts",
+          "packages/schemas/src/agent-service/persistent-session.ts",
+          "packages/schemas/src/agent-service/session-recovery-error.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/persistent-session.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "retryComputePreparation",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/compute/preparation/retry",
+      "doc": "api/observability",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; embedded management also requires official renderer authority.",
+      "permissions": "Owner management action. No query parameters and no body (including {}). Pending requests join the same attempt; failed preparation may retry; ready is idempotent. Does not replay business requests or prove model/provider success.",
+      "resultDelivery": "Explicitly retry instance compute preparation",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/compute-routes.ts",
+          "packages/agent-service/src/startup/capability-preparation.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts",
+          "packages/agent-service/src/auth/instance-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/agent-service/src/startup/capability-preparation.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "listTeamArchives",
+      "service": "agent-service",
+      "method": "GET",
+      "path": "/api/team-archive",
+      "doc": "api/instance-management",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; embedded management also requires official renderer authority.",
+      "permissions": "Deployment-owner read with management authority; includes local paths and member facts. Current summary, no reservation or pagination.",
+      "resultDelivery": "List local team archive summaries",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/team-archive-routes.ts",
+          "packages/agent-service/src/team/team-service.ts",
+          "packages/agent-service/src/team/archive-store.ts",
+          "packages/schemas/src/agent-service/team-archive.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/team-archive.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "restoreTeamArchive",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/team-archive/:archiveId/restore",
+      "doc": "api/instance-management",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; embedded management also requires official renderer authority.",
+      "permissions": "Changes persistent team state. Cannot overwrite an occupied ID; use newName. A missing supervisor requires a replacement. Inspect warnings/approval/workdir; no public idempotency key, no automatic retry.",
+      "resultDelivery": "Explicitly restore one archived team",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/team-archive-routes.ts",
+          "packages/agent-service/src/team/team-service.ts",
+          "packages/agent-service/src/team/archive-store.ts",
+          "packages/schemas/src/agent-service/team-archive.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/schemas/src/agent-service/team-archive.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
+      },
+      "spec": "static/openapi/agent-service.json",
+      "securitySchemes": [
+        "InstanceToken"
+      ]
+    },
+    {
+      "operationId": "createGovernedWorkflowBinding",
+      "service": "agent-service",
+      "method": "POST",
+      "path": "/api/workflow-definitions/:workflowId/taskboard-bindings",
+      "doc": "api/instance-management",
+      "deploymentModes": [
+        "standalone-owner",
+        "standalone-external"
+      ],
+      "authentication": "Existing deployment owner X-Agent-Service-Token; resource ownership is resolved from the authenticated identity.",
+      "permissions": "Agent Service gateway with an existing connected Workflow Service. Request limit: 16 KiB, 128 nodes, depth 8. Requires an exact owned definition ref and resource CAS. Trigger requires a Task and required typed outputs.task_ref without defaults. Stable idempotency key; does not start execution or issue a grant. Owner rejection status/body is preserved.",
+      "resultDelivery": "Bind an exact owned Workflow definition to a Board or Task",
+      "source": {
+        "repository": "desirecore/desirecore",
+        "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+        "files": [
+          "packages/agent-service/src/routes/workflow-definition-routes.ts",
+          "packages/agent-service/src/workflow/governed-binding-owner.ts",
+          "packages/shared/src/workflow-contracts/governed-binding.ts",
+          "lib/workflow-service/routes.ts",
+          "lib/workflow-service/taskboard-bindings.ts",
+          "packages/schemas/src/agent-service/taskboard-workflow.ts",
+          "packages/agent-service/src/auth/governed-endpoint-auth.ts"
+        ]
+      },
+      "schemaRefs": [
+        "packages/shared/src/workflow-contracts/governed-binding.ts"
+      ],
+      "effectiveVersion": null,
+      "versionEvidence": null,
+      "verification": {
+        "record": "api/update-verification-2026-10-29.md",
+        "scope": "Pinned-source review and isolated route/domain/Node fixtures; no real provider, user data or production acceptance.",
+        "sourceReview": {
+          "reviewedAt": "2026-10-29",
+          "revision": "724d8fe87c2e01a7495c3e22f1910e1b4486caa9",
+          "note": "Static contract review at this revision; previous executed evidence retains its original scope/date."
+        }
       },
       "spec": "static/openapi/agent-service.json",
       "securitySchemes": [

@@ -120,3 +120,12 @@ Socket.IO 已连接并不保证实例可访问模型供应商。先读取[上游
 认证握手成功不会自动启用可选应用，也不验证存储连接。收到 `403 capabilityDisabled` 时，在“我的应用”检查对应应用的安装与启用状态，不持续重试已关闭的能力。TaskBoard 还受可读资源范围限制，不存在或无权读取的任务板可能返回 `403`；请按 [TaskBoard 错误与分页规则](./11-taskboards.md)处理任务缺失及分页冲突，不把它们一概当成成功的空查询。
 
 S3 链接模式和二进制模式的响应及错误合同不同。链接模式的 `404 NOT_FOUND` 表示实例未能确认对象可读，需要检查对象键、供应商权限与连接；二进制模式下，同类供应商失败可能返回 `500 DOWNLOAD_FAILED`。按[对象存储读取](./12-object-storage.md)处理实际 HTTP 状态，分享日志时移除签名下载链接。
+
+
+## 恢复引用与实例管理错误 {#recovery-management-errors}
+
+`GET /api/sessions/:runId/runtime-state` 返回 `runtimeSession: null` 表示当前没有可恢复引用。`500 SESSION_RESTORE_FAILED` 表示归属核实后的本地恢复失败；保留安全诊断信息交给管理员，不把错误降级为空值，也不删除历史或自动重放输入。参见[会话恢复引用](./08-session-history-and-messages.md#session-runtime-reference)。
+
+算力准备的 `503 SERVICE_PREPARATION_FAILED` 与启动中的 `503 service_not_ready` 不同。部署所有者可显式调用[准备重试](./10-observability.md#compute-preparation)，不带查询参数或请求体；不重发原业务请求。
+
+团队归档接口的 `403 renderer_origin_required` 表示内嵌客户端来源不满足要求，应使用官方界面；远程管理使用部署所有者令牌。团队恢复超时后先核对是否已经恢复。Workflow绑定发生版本或幂等冲突时保留原请求，核对资源后再处理，不自动换键。详见[实例管理](./14-instance-management.md)。

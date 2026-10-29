@@ -5,6 +5,8 @@ import { pathToFileURL } from 'node:url';
 
 const HELP = `Usage:
   node history.mjs list [--agent-id ID] [--include-archived] [--all-pages]
+  node history.mjs archived-topics [--all-pages]
+  node history.mjs runtime-reference RUN_ID
   node history.mjs session RUN_ID
   node history.mjs messages RUN_ID [--inspect-run] [--all-pages]
   node history.mjs all --agent-id ID [--conversation-id ID] [--order asc|desc] [--all-pages]
@@ -13,7 +15,7 @@ const HELP = `Usage:
   node history.mjs matter MATTER_ID --agent-id ID
 
 Environment: DESIRECORE_URL, DESIRECORE_TOKEN, optional DESIRECORE_AGENT_ID.
-Pagination: --offset 0; --limit defaults to list=20, messages/all=100, search=50.
+Pagination: --offset 0; --limit defaults to list=20, messages/all=100, search/archived-topics=50.
 all accepts --limit 0 (metadata only), --preferred-run-id ID, --expected-revision h1:HASH,
 and --max-restarts 1. A later offset requires --expected-revision. Revision conflicts
 discard buffered pages and restart all-pages reads at 0; no execution is replayed.
@@ -26,7 +28,7 @@ Exit: 0 requested reads succeeded; 1 request/configuration failed;
 Only all checks the public view revision; it is not a persistent snapshot or backup.
 `;
 
-const PAGED = new Set(['list', 'messages', 'search', 'all']);
+const PAGED = new Set(['list', 'messages', 'search', 'all', 'archived-topics']);
 const NUMERIC = new Set(['limit', 'offset', 'maxPages', 'maxRestarts', 'timeoutMs', 'previewChars']);
 const REVISION = /^h1:[0-9a-f]{64}$/;
 const VALUES = new Map([
@@ -75,11 +77,12 @@ function identifier(value, label) {
 
 function optionsFor(input, env) {
   const options = { ...input };
-  if (!['list', 'session', 'messages', 'all', 'search', 'overview', 'matter'].includes(options.command)) throw new Error(HELP);
-  options.agentId ??= env.DESIRECORE_AGENT_ID;
+  if (!['list', 'session', 'messages', 'all', 'search', 'overview', 'matter', 'archived-topics', 'runtime-reference'].includes(options.command)) throw new Error(HELP);
+  if (options.command === 'archived-topics' && options.agentId !== undefined) throw new Error('archived-topics is owner-wide and does not accept an Agent filter.');
+  if (options.command !== 'archived-topics') options.agentId ??= env.DESIRECORE_AGENT_ID;
   if (options.agentId !== undefined) identifier(options.agentId, 'Agent ID');
   if (['all', 'search', 'overview', 'matter'].includes(options.command) && !options.agentId) throw new Error('Set DESIRECORE_AGENT_ID or --agent-id.');
-  if (['session', 'messages'].includes(options.command)) identifier(options.id, 'Run ID');
+  if (['session', 'messages', 'runtime-reference'].includes(options.command)) identifier(options.id, 'Run ID');
   else if (options.command === 'matter') {
     if (typeof options.id !== 'string' || !options.id || /[\\/\u0000-\u001f\u007f]/.test(options.id) || options.id.includes('..') || options.id === '.') {
       throw new Error('Use a matter ID returned by the conversation overview.');
@@ -98,6 +101,7 @@ function optionsFor(input, env) {
   options.maxRestarts ??= 1;
   options.timeoutMs ??= 10_000;
   if ((options.limit === 0 && !['search', 'all'].includes(options.command)) || !Number.isSafeInteger(options.offset + options.limit)) throw new Error('Use a positive limit and a safe offset; only search and all permit limit=0.');
+  if (options.command === 'archived-topics' && options.limit > 200) throw new Error('archived-topics limit must be 1..200.');
   if (options.command === 'all') {
     if (options.limit > 1000) throw new Error('all limit must be 0..1000.');
     if (options.expectedRevision !== undefined && !REVISION.test(options.expectedRevision)) throw new Error('Use the returned h1: revision as --expected-revision.');
@@ -124,6 +128,10 @@ function endpoint(options, offset, expectedRevision) {
     path = '/api/sessions';
     if (options.agentId) query.set('agentId', options.agentId);
     if (options.includeArchived) query.set('includeArchived', 'true');
+  } else if (options.command === 'archived-topics') {
+    path = '/api/manual-topics/archived';
+  } else if (options.command === 'runtime-reference') {
+    path = `/api/sessions/${encodeURIComponent(options.id)}/runtime-state`;
   } else if (options.command === 'all') {
     path = '/api/sessions/messages/all';
     query.set('agentId', options.agentId);
@@ -164,7 +172,8 @@ export async function runHistory(input, env = process.env, output = {}) {
     let data;
     try { data = await response.json(); } catch { throw new Error(`HTTP ${response.status}: invalid JSON response.`); }
     if (!response.ok) {
-      const error = new Error(`HTTP ${response.status}: ${typeof data?.error === 'string' ? data.error : 'request rejected'}`);
+      const code = typeof data?.code === 'string' && /^[A-Za-z0-9_-]{1,100}$/.test(data.code) ? ` ${data.code}` : '';
+      const error = new Error(`HTTP ${response.status}: request rejected${code}`);
       error.status = response.status;
       error.code = typeof data?.code === 'string' ? data.code : undefined;
       error.apiError = typeof data?.error === 'string' ? data.error : undefined;
@@ -216,10 +225,11 @@ export async function runHistory(input, env = process.env, output = {}) {
   while (true) {
     const data = await get(endpoint(options, offset));
     if (!PAGED.has(options.command)) {
+      if (options.command === 'runtime-reference' && (data?.runId !== options.id || !Object.hasOwn(data, 'runtimeSession') || (data.runtimeSession !== null && (typeof data.runtimeSession !== 'object' || typeof data.runtimeSession.sessionId !== 'string' || !Number.isSafeInteger(data.runtimeSession.revision) || data.runtimeSession.revision < 1 || !Number.isSafeInteger(data.runtimeSession.scopeEpoch) || data.runtimeSession.scopeEpoch < 0 || !Number.isSafeInteger(data.runtimeSession.scopeSequence) || data.runtimeSession.scopeSequence < 0)))) throw new Error('Invalid recovery reference; do not assume runtimeSession=null.');
       emit({ kind: options.command, instanceId: handshake.instanceId, data });
       return { exitCode: options.command === 'matter' && data?.truncated === true ? 2 : 0, pages: 1 };
     }
-    const field = options.command === 'list' ? 'sessions' : options.command === 'search' ? 'items' : 'messages';
+    const field = options.command === 'list' ? 'sessions' : ['search', 'archived-topics'].includes(options.command) ? 'items' : 'messages';
     if (!Array.isArray(data?.[field]) || !Number.isSafeInteger(data.total) || data.total < 0
       || (options.command !== 'messages' && typeof data.hasMore !== 'boolean')) throw new Error('Unexpected history page response.');
     if (firstTotal !== undefined && data.total !== firstTotal) {

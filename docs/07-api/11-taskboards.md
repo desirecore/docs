@@ -24,6 +24,10 @@ keywords: [API, TaskBoard, 任务看板, 活动记录, 分页]
 
 路径中的 ID 使用接口返回的原值，并分别按 URL path segment 编码。Board revision、Task version、查询游标和活动分页位置用途不同，不能互换。
 
+## 数据与策略版本 {#taskboard-versions}
+
+响应的 `schemaVersion: 3`、`meta.policy.version`、Board `revision` 和 Task `version` 各有不同含义。当前新板默认使用 V5 策略，已有板继续保留保存的策略，需显式升级才改变。策略编号不是客户端生效版本。读取实际策略、能力和当前 actor 的动作投影，不只按版本号猜测可用动作。不可用动作可能涉及需要任务计划（`taskPlanRequired`）等前置条件；读取 DTO 没有因此新增公开的 `TaskItem.plan` 字段，也不授予执行权限。
+
 ## 看板列表和详情 {#boards}
 
 ### `GET /api/taskboards`

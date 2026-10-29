@@ -174,3 +174,28 @@ The example verifies the handshake, reads one endpoint and emits `{kind, instanc
 | `200` containing HTML | The origin or proxy may point to a website; repeat the authenticated handshake and verify the service marker |
 
 See [Errors and Troubleshooting](./03-errors-and-troubleshooting.md) for authentication, origin restrictions and response handling.
+
+
+## Retry compute preparation {#compute-preparation}
+
+### `POST /api/compute/preparation/retry`
+
+A remote/standalone deployment owner can explicitly retry the instance's existing compute preparation after `SERVICE_PREPARATION_FAILED`. Embedded clients require official UI authority. A successful connection handshake does not establish that compute preparation or a model request will succeed.
+
+Send **no query parameters and no request body**, including no empty `{}`. This fixed recovery operation accepts no task name or provider configuration:
+
+```bash
+curl --silent --show-error --request POST \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  "${BASE_URL}/api/compute/preparation/retry"
+```
+
+Success is `200 {"status":"ready"}`. An in-progress preparation is awaited; concurrent requests share the same attempt, and an already-ready preparation stays ready. A previous failed attempt may start one new attempt. Readiness does not prove upstream connectivity or complete an earlier conversation.
+
+Unexpected parameters return `400 {"error":"COMPUTE_PREPARATION_RETRY_PARAMETERS_NOT_ALLOWED"}`. Preparation failure returns `503 {"error":"SERVICE_PREPARATION_FAILED"}`. Authentication and management-source failures can return `401` or `403 renderer_origin_required`.
+
+A timeout leaves preparation outcome unknown. Inspect the instance before manually retrying; do not replay the original conversation or business request. This administrator command is explicit in the example:
+
+```bash
+node observe.mjs compute-retry --timeout-ms 60000
+```

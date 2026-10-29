@@ -215,7 +215,7 @@ async function checkSpecs(catalog, pages) {
 }
 
 async function checkClientExampleMirror() {
-  for (const [maintained, published] of [['client.mjs', 'agent-client.mjs'], ['history.mjs', 'history.mjs'], ['attachments.mjs', 'attachments.mjs'], ['observe.mjs', 'observe.mjs'], ['taskboards.mjs', 'taskboards.mjs'], ['s3.mjs', 's3.mjs']]) {
+  for (const [maintained, published] of [['client.mjs', 'agent-client.mjs'], ['history.mjs', 'history.mjs'], ['attachments.mjs', 'attachments.mjs'], ['observe.mjs', 'observe.mjs'], ['taskboards.mjs', 'taskboards.mjs'], ['s3.mjs', 's3.mjs'], ['workers.mjs', 'workers.mjs'], ['admin.mjs', 'admin.mjs']]) {
     const sourceFile = `api/examples/agent-client/${maintained}`
     const source = await readBytes(sourceFile)
     const downloadFile = `static/api-examples/${published}`

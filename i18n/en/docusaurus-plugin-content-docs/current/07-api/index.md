@@ -26,6 +26,8 @@ Connect your scripts or services to DesireCore using the address and credentials
 | Diagnose upstream connectivity and observe recent tool calls and recorded usage | Instance-owner access | [Instance Diagnostics and Usage](./10-observability.md) |
 | Read task boards, task details and activity | Instance owner access and the TaskBoard capability | [TaskBoard reads](./11-taskboards.md) |
 | List objects or download from configured storage | Instance owner access, Object Storage capability and a configured connection | [S3 object reads](./12-object-storage.md) |
+| Read temporary Worker records | Parent Run ownership | [Worker records](./13-subagent-records.md) |
+| Restore team archives or bind an exact Workflow definition | Deployment-owner management credential and configured services | [Instance management](./14-instance-management.md) |
 
 ## Credentials and results
 
