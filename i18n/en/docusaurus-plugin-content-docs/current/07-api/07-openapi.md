@@ -59,6 +59,14 @@ Also available: **[model protocol proxy OpenAPI JSON](pathname:///openapi/compat
 | `GET /api/s3/connections` | Read configured connection summaries | [S3 object reads](./12-object-storage.md) |
 | `GET /api/s3/list` | List stored objects | [S3 object reads](./12-object-storage.md) |
 | `GET /api/s3/download` | Download bytes or request an object link | [S3 object reads](./12-object-storage.md) |
+| `GET /api/runs/{id}/workers` | List parent Run Workers | [Guide](./13-subagent-records.md) |
+| `GET /api/runs/{id}/workers/{workerId}/transcript` | Read valid-entry transcript pages | [Guide](./13-subagent-records.md) |
+| `GET /api/manual-topics/archived` | Read owner-wide archived topics | [Guide](./08-session-history-and-messages.md) |
+| `GET /api/sessions/{runId}/runtime-state` | Read a session recovery reference | [Guide](./08-session-history-and-messages.md) |
+| `POST /api/compute/preparation/retry` | Explicitly retry compute preparation | [Guide](./10-observability.md) |
+| `GET /api/team-archive` | List team archive summaries | [Guide](./14-instance-management.md) |
+| `POST /api/team-archive/{archiveId}/restore` | Explicitly restore one team | [Guide](./14-instance-management.md) |
+| `POST /api/workflow-definitions/{workflowId}/taskboard-bindings` | Bind an exact owned Workflow definition | [Guide](./14-instance-management.md) |
 
 Braces identify path parameters to replace, corresponding to colon notation in the endpoint guides. Webhook management requires `capabilities.webhookManagement: true` from the authenticated handshake and the instance owner's credential. Older instances without that capability use administrator-enabled and verified events. Run lists and details use the deployment owner's instance read access; receipt access additionally checks trusted-user ownership.
 
@@ -119,3 +127,5 @@ For native media playback, use the complete `/media/{filename}?expires=…&signa
 Runnable observation and merged-history readers are **[observe.mjs](pathname:///api-examples/observe.mjs)** and **[history.mjs](pathname:///api-examples/history.mjs)**. Restart merged-history reads on revision conflicts instead of combining old pages. Usage aggregates are not final provider invoices.
 
 TaskBoard and S3 read examples are available as **[taskboards.mjs](pathname:///api-examples/taskboards.mjs)** and **[s3.mjs](pathname:///api-examples/s3.mjs)**. Follow the corresponding guides for opaque cursors, activity revisions, object continuation tokens and download modes.
+
+New standalone examples: **[workers.mjs](pathname:///api-examples/workers.mjs)** for Worker reads and **[admin.mjs](pathname:///api-examples/admin.mjs)** for explicit owner actions. Recovery references, archived topics and compute preparation use the updated history/observe scripts.

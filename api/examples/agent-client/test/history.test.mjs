@@ -141,7 +141,7 @@ test('authentication failures stop at the handshake without printing the credent
   const f = await fixture(t, () => assert.fail('history must not be requested'));
   await assert.rejects(runHistory({ command: 'list' }, { ...f.env, DESIRECORE_TOKEN: 'wrong-owner-token' }), error => {
     assert.equal(error.status, 401);
-    assert.equal(error.message, 'HTTP 401: unauthorized');
+    assert.equal(error.message, 'HTTP 401: request rejected');
     assert.ok(!error.message.includes('wrong-owner-token'));
     return true;
   });

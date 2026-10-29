@@ -324,12 +324,72 @@ Use a topic ID from the overview; there are no pagination parameters. The source
 }
 ```
 
+
+## Archived topics {#archived-topics}
+
+### `GET /api/manual-topics/archived`
+
+Read archived manual topics across the current user's local Agents, without message bodies or local paths. Use the existing owner token; callers cannot claim a user identity. There is no Agent filter.
+
+| Query parameter | Rule |
+|---|---|
+| `limit` | Default `50`, safe integer `1..200` |
+| `offset` | Default `0`, nonnegative safe integer |
+
+The service converts with `Number` and then checks safe integers. Prefer decimal integers. Zero limit, negative offset, fractions and nonnumeric values return `400 {"error":"Invalid pagination"}`.
+
+```json
+{
+  "items":[{"agentId":"agent-example","conversationId":"__manual:example","title":null,"archivedAt":"2026-10-29T00:00:00.000Z"}],
+  "total":1,"hasMore":false
+}
+```
+
+Items contain `agentId`, `conversationId`, nullable `title`, `archivedAt` and optional `projectId`/`projectName`. User-assigned titles take priority over recent titled Runs. An unavailable project name does not discard its ID. Ordering is descending archive time, with Agent/topic IDs as tie-breakers.
+
+Each request derives current visible data. Importing, corrupt or unreadable sources may be omitted; `total` is not a lossless backup count. Continue with the original `offset + limit` while `hasMore` is true. There is no revision, and archive/restore activity may change the list. Refresh from the first page for a current display. This read neither restores a topic nor starts a conversation.
+
+```bash
+node history.mjs archived-topics --limit 50 --all-pages
+```
+
+The example never restores topics and stops paging when the observed total changes. Missing trusted user identity returns `401`.
+
+## Session recovery reference {#session-runtime-reference}
+
+### `GET /api/sessions/:runId/runtime-state`
+
+Read the persistent session identity/version of an authorized Run. Responses use `Cache-Control: private, no-store`. This differs from [Run runtime state](./04-conversations-and-runs.md#get-run-runtime-state): it does not report live `running/idle` outcomes, call a model or resend old input.
+
+```json
+{"runId":"run-example","teamId":null,"runtimeSession":null}
+```
+
+`teamId: null` explicitly means personal scope. An omitted field on an older instance means unknown ownership; do not default it to personal. `runtimeSession: null` means no currently restorable in-place state, including archived, cleared or delegated records. It is not successful completion. A reference can look like:
+
+```json
+{
+  "runId":"run-example","teamId":null,
+  "runtimeSession":{"sessionId":"saved-session","revision":1,"scopeEpoch":0,"scopeSequence":3}
+}
+```
+
+The reference can also contain `boundModel`. These fields describe identity/version, not an execution grant or guaranteed future admission. Continue using [admission reconciliation](./04-conversations-and-runs.md#request-reconciliation).
+
+Missing/foreign Runs return `404`. Local recovery failures after ownership verification return `500`, `code: "SESSION_RESTORE_FAILED"`, a safe `error` and optional `hint`. Do not turn that failure into `runtimeSession: null`. Keep the diagnostic ID and ask the administrator to inspect history storage; do not delete history, switch Runs or replay old input automatically.
+
+```bash
+node history.mjs runtime-reference run-example
+```
+
 ## Tool results and read consistency {#history-result-privacy}
 
 These endpoints return message views for display and search. Some tool results contain credentials, interface content, or other sensitive information; history, session snapshots, and topic messages replace that content with a placeholder. Protocol records may also withhold result bodies when the tool-call identity cannot be verified or contains conflicting facts.
 
+For ordinary results allowed in the public view, `toolUse` items may also include `modelOutput`/`modelOutputRefs`: structured result text or references intended for the model. They need not match the UI `summary`. Read the fields actually returned; do not fetch replacement bodies when they are absent.
+
 - `toolUse[].summary` or a tool-result content block may be replaced. Summaries for running or interrupted tools may also be absent. Do not depend on the exact placeholder wording.
-- For withheld results, body references or preview markers such as `summaryRef`, `summaryIncomplete`, and `externalizedPreview` may be removed. An absent reference does not mean the tool never ran, and does not permit constructing a filename to obtain its body.
+- For withheld results, body references or preview markers such as `modelOutput`, `modelOutputRefs`, `summaryRef`, `summaryIncomplete`, and `externalizedPreview` may be removed. An absent reference does not mean the tool never ran, and does not permit constructing a filename to obtain its body.
 - Preserve and read the actual `status`, `isError`, and other outcome fields. A placeholder for a failed result still represents failure; the word `completed` in a summary does not establish completion of the submitted turn or the business task.
 - If sensitive output is needed, have the user obtain it through the original tool or application. A placeholder is not a reason to rerun tools, resubmit a conversation, or approve an action automatically.
 

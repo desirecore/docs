@@ -324,12 +324,72 @@ curl --silent --show-error --get \
 }
 ```
 
+
+## 归档话题列表 {#archived-topics}
+
+### `GET /api/manual-topics/archived`
+
+跨当前用户的本机 Agent 读取已归档的手动话题，不返回消息正文或本机路径。使用实例所有者令牌，不接受调用方自报用户；该接口没有 Agent 筛选条件。
+
+| 查询参数 | 规则 |
+|---|---|
+| `limit` | 默认 `50`，安全整数 `1..200` |
+| `offset` | 默认 `0`，安全非负整数 |
+
+服务按 `Number` 转换后校验安全整数；推荐十进制整数。零 limit、负 offset、非整数或无法转换的值返回 `400 {"error":"Invalid pagination"}`。
+
+```json
+{
+  "items":[{"agentId":"agent-example","conversationId":"__manual:example","title":null,"archivedAt":"2026-10-29T00:00:00.000Z"}],
+  "total":1,"hasMore":false
+}
+```
+
+每项含 `agentId`、`conversationId`、可空 `title` 和 `archivedAt`；可选 `projectId`、`projectName`。标题优先用户命名，其次使用该话题近期已有标题的 Run；项目名称缺失时不抹掉项目 ID。按归档时间倒序，同时间按 Agent／话题 ID 排序。
+
+每次请求重新读取当前可见数据，导入中、损坏或不可读的部分来源可能被省略；`total` 不代表无损备份数量。`hasMore` 为真时用原 `offset + limit` 续读。此接口没有 revision，期间归档／恢复会改变列表；需要一致显示时从首屏刷新。它不恢复话题或启动对话。
+
+```bash
+node history.mjs archived-topics --limit 50 --all-pages
+```
+
+示例不自动恢复，并在观察到 total 变化时停止分页。无可信用户时返回 `401`。
+
+## 会话恢复引用 {#session-runtime-reference}
+
+### `GET /api/sessions/:runId/runtime-state`
+
+读取有权查看的 Run 所属持久会话身份及版本，响应使用 `Cache-Control: private, no-store`。这与[Run 实时状态](./04-conversations-and-runs.md#get-run-runtime-state)是不同接口，不返回 `running/idle` 等实时结局，也不执行模型或重发旧输入。
+
+```json
+{"runId":"run-example","teamId":null,"runtimeSession":null}
+```
+
+`teamId: null` 明确为个人作用域；旧实例省略该字段时归属未知，不能自动补成个人。`runtimeSession` 可为 `null`，表示此时没有可原位恢复的状态，例如已归档、清理或委派记录；它不表示会话已成功完成。有引用时形如：
+
+```json
+{
+  "runId":"run-example","teamId":null,
+  "runtimeSession":{"sessionId":"saved-session","revision":1,"scopeEpoch":0,"scopeSequence":3}
+}
+```
+
+引用还可含 `boundModel`。这些字段描述恢复身份与版本，不构成执行授权，不保证后续提交仍可接纳；继续输入仍按[接纳与对账](./04-conversations-and-runs.md#request-reconciliation)处理。
+
+不存在或不属于当前用户时返回 `404`。在已核实归属后发生本地恢复错误，会返回 `500`、`code: "SESSION_RESTORE_FAILED"` 及安全的 `error`／可选 `hint`，不能把它降级为 `runtimeSession: null`。保留诊断编号，请管理员检查历史存储；不要删除历史、换 Run 或自动重放旧输入。
+
+```bash
+node history.mjs runtime-reference run-example
+```
+
 ## 工具结果与读取稳定性 {#history-result-privacy}
 
 这些接口返回供显示和检索使用的消息视图。某些工具结果含凭据、界面内容等敏感信息，读取历史、会话快照或话题消息时，正文会改为占位提示。协议记录缺少可核验的工具调用身份、或身份信息矛盾时，也可能不返回结果正文。
 
+对允许公开的普通工具结果，`toolUse` 项可额外带 `modelOutput`／`modelOutputRefs`，表示面向模型的结构化结果文本或引用；它们与界面摘要 `summary` 不保证相同。按实际字段读取，缺席时不自行补取正文。
+
 - `toolUse[].summary` 或内容块中的工具结果可能被替换；执行中或中断的工具摘要也可能缺席。不要依赖占位文字的固定措辞。
-- 对被隐藏的结果，`summaryRef`、`summaryIncomplete`、`externalizedPreview` 等正文引用或预览标记可能被移除。缺少引用不表示工具没有执行，也不表示可以自行拼接文件名取得正文。
+- 对被隐藏的结果，`modelOutput`、`modelOutputRefs`、`summaryRef`、`summaryIncomplete`、`externalizedPreview` 等正文引用或预览标记可能被移除。缺少引用不表示工具没有执行，也不表示可以自行拼接文件名取得正文。
 - 判断工具结局时保留并读取实际的 `status`、`isError` 等状态字段。失败结果的占位仍表示失败；摘要中出现 `completed` 也不能证明本轮请求或整项业务成功。
 - 需要敏感结果时，让用户通过原工具或应用重新取得所需数据。不要因为占位提示自动重跑工具、重复提交对话或代替用户批准操作。
 

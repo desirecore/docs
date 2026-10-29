@@ -1,6 +1,6 @@
 # DesireCore Node client examples
 
-These examples call an administrator's existing standalone Agent Service. Obtain its HTTPS origin and existing owner token from the administrator. The conversation client also needs a target Agent ID, a working model configuration and permissions appropriate for the prompt; it uses the same owner credential for HTTP and Socket.IO. Read examples use HTTP and do not require a model call.
+These examples call an administrator's existing standalone Agent Service. Obtain its HTTPS origin and existing owner token from the administrator. The conversation client also needs a target Agent ID, a working model configuration and permissions appropriate for the prompt; it uses the same owner credential for HTTP and Socket.IO. Read examples use HTTP and do not require a model call. The explicit management commands below can modify instance state.
 
 Use Node.js 22 or newer. Install dependencies **in this directory**, independently of the documentation website:
 
@@ -76,7 +76,7 @@ Run `npm test` for the independent HTTP + Socket.IO contract fixture. It verifie
 
 `test/source-route.fixture.ts` can be copied into a fixed-source DesireCore checkout as `packages/agent-service/src/__tests__/api-docs-node-client.integration.test.ts`. Set `DESIRECORE_API_EXAMPLE_PATH` to the absolute path of this directory's `client.mjs`, then run that single file in the repository's integration test project. It verifies this client against the actual query routes, HTTP/Socket authentication, request Schema and digest, durable admission registry and lookup, and renderer delivery room. The query runtime and follow-up execution callback remain fake. Use its isolated temporary data root; do not point it at an existing user profile.
 
-Current source review: `desirecore/desirecore` commit `a0186f6feeaf66eb88787e8b80b8fea5559b8761` (fixed review snapshot; source PR #5194). Historical validation remains in `api/verification.md`; this extension is recorded in `api/history-attachments-verification.md`.
+Current source review: `desirecore/desirecore` commit `724d8fe87c2e01a7495c3e22f1910e1b4486caa9` (fixed review snapshot). Current validation is recorded in `api/update-verification-2026-10-29.md`; earlier verification files preserve their original scope and baselines.
 
 - HTTP submission: `packages/agent-service/src/routes/query-routes.ts`.
 - Admission lookup: `packages/agent-service/src/routes/client-request-lookup-routes.ts`; shared Schema in `packages/schemas/src/agent-service/client-request-admission.ts`.
@@ -85,16 +85,16 @@ Current source review: `desirecore/desirecore` commit `a0186f6feeaf66eb88787e8b8
 - Delivery identity: `packages/agent-service/src/handlers/renderer-delivery.ts` and `auth/delivery-principal.ts`.
 - Run snapshots/receipts: `packages/agent-service/src/routes/runs-routes.ts`.
 
-Keep the three published downloads byte-identical to their maintained files: `client.mjs` → `static/api-examples/agent-client.mjs`, `history.mjs` → `static/api-examples/history.mjs`, and `attachments.mjs` → `static/api-examples/attachments.mjs`. Revalidate the affected contracts after changes. The example is deliberately a small client, not a complete renderer, SDK, or durable execution orchestrator.
+Keep all eight published downloads byte-identical to their maintained files: `client.mjs` → `static/api-examples/agent-client.mjs`; `history.mjs`, `attachments.mjs`, `observe.mjs`, `taskboards.mjs`, `s3.mjs`, `workers.mjs` and `admin.mjs` → their same-named files in `static/api-examples/`. Revalidate the affected contracts after changes. The example is deliberately a small client, not a complete renderer, SDK, or durable execution orchestrator.
 
-`test/source-history.fixture.ts` can be copied to the fixed source tree as `packages/agent-service/src/__tests__/api-docs-history.test.ts` and run in the `unit` project. It uses actual instance authentication, history/topic/Run routes and temporary file storage. The local profile and runtime discovery are stubs. It checks owner filtering, public message projection, search validation, empty topic reads, and the actual `handed_off` detail/`404` runtime-state behavior. It does not run a model or real handoff. Website TypeScript checking excludes these two source fixtures because their imports resolve only inside DesireCore’s source repository.
+`test/source-history.fixture.ts` can be copied to the fixed source tree as `packages/agent-service/src/__tests__/api-docs-history.test.ts` and run in the `unit` project. It uses actual instance authentication, history/topic/Run routes and temporary file storage. The local profile and runtime discovery are stubs. It checks owner filtering, public message projection, search validation, empty topic reads, and the actual `handed_off` detail/`404` runtime-state behavior. It does not run a model or real handoff. Website TypeScript checking excludes `source-*.fixture.ts` files because their imports resolve only inside DesireCore’s source repository.
 
 History output is a display projection: sensitive tool results may be placeholders, and body references may be absent. The reader preserves these payloads and optional response extensions; it does not infer tool success from placeholder text, retrieve withheld references, or execute replacement work. Current stability review and verification are recorded in `api/stability-verification-2026-10-22.md`.
 
 
 ## Observation reader
 
-`observe.mjs` requires Node.js 22+ and no npm packages. It uses the same administrator-provided instance origin and owner credential, checks the handshake, performs one GET, and preserves the returned data. It does not poll, replay work or reconcile billing. The example validates recommended input formats; service fallback behavior is documented separately.
+`observe.mjs` requires Node.js 22+ and no npm packages. It uses the same administrator-provided instance origin and owner credential, checks the handshake, performs the requested read, and preserves the returned data. Only the explicit `compute-retry` command sends a bodyless POST to retry existing Compute preparation; it never resubmits a query or changes provider configuration. It does not poll, replay work or reconcile billing. The example validates recommended input formats; service fallback behavior is documented separately.
 
 ```bash
 node observe.mjs input-config --agent-id your-agent-id
@@ -138,3 +138,40 @@ node s3.mjs download --connection-id CONNECTION_ID --key reports/summary.txt \
 The list command reads one page unless `--all` is specified; all-page output is streamed and can be partial on failure. It preserves provider continuation tokens and stops on missing/repeated tokens or the page cap. Link mode only prints the returned public/presigned link; it never fetches that URL or sends the instance token to it. Binary mode requests the authenticated instance directly, rejects redirects, bounds bytes and creates the explicitly selected output file without overwriting an existing file. Incomplete output from the current download is removed on failure. Object contents, keys and signed links may be private.
 
 Maintained `taskboards.mjs` and `s3.mjs` are byte-identical to their files under `static/api-examples/`, as checked by `pnpm api:check`. Their HTTP tests use a synthetic local server and do not prove real TaskBoard or S3 provider availability.
+
+
+## Archived topics and session recovery references
+
+```bash
+node history.mjs archived-topics --limit 50 --all-pages
+node history.mjs runtime-reference RUN_ID
+node observe.mjs compute-retry --timeout-ms 60000
+```
+
+Archived topics cover the authenticated owner across Agents and do not accept an Agent filter; the default Agent environment variable is ignored. Pages are current views without a snapshot revision. A runtime reference uses `/api/sessions/:runId/runtime-state`, distinct from live Run status. `runtimeSession: null` is valid; `500 SESSION_RESTORE_FAILED` is an error and never becomes null. These reads do not replay input or start execution. Compute retry accepts no query or body, including `{}`; a timeout leaves preparation outcome unknown.
+
+## Worker records
+
+`workers.mjs` requires Node.js 22+ and no npm packages. Use the parent Run ID, not a Worker session ID:
+
+```bash
+node workers.mjs list --run-id PARENT_RUN_ID
+node workers.mjs transcript --run-id PARENT_RUN_ID --worker-id WORKER_ID \
+  --limit 500 --all-pages --max-pages 20
+```
+
+Pagination counts valid entries, not `seq` or folded messages. The reader emits raw page envelopes, preserves unknown status and does not fold patches or resume execution. It stops with exit code 2 if total changes or the page cap is reached; already emitted pages remain partial. Recorder `truncated` is independent of page availability and completion. Data can contain private inputs and business content. See [Worker records](https://docs.desirecore.com/en/api/subagent-records).
+
+## Explicit owner management
+
+`admin.mjs` requires Node.js 22+ and no npm packages. Use only an administrator-provided remote/standalone owner credential. Each write requires its own command:
+
+```bash
+node admin.mjs archives
+node admin.mjs restore-team --archive-id RETURNED_ARCHIVE_ID --new-name 'Restored team'
+node admin.mjs bind-workflow --workflow-id WORKFLOW_ID --request ./binding.json
+```
+
+Copy `binding.json` from the [management guide](https://docs.desirecore.com/en/api/instance-management#workflow-binding) and replace IDs, exact definition revision/hash and resource version with actual values. Preserve the same body and idempotency key when resolving an unknown binding outcome. A binding does not execute a Workflow or grant execution rights. Team restore has no public idempotency key: after a timeout inspect current state before another write. Restore success can contain warnings and pending approval; preserve and address them rather than restoring again. The helper checks instance identity before sending the requested operation, rejects redirects and never retries a write automatically.
+
+`test/source-management.fixture.ts` runs only after copying it to the source path stated in its header. It uses real Fastify, instance authentication, governance hooks and request validation, with synthetic profile/Team/Workflow owner ports. It does not restore real teams or call a provider. Tests distinguish embedded archive source requirements from Workflow owner injection.

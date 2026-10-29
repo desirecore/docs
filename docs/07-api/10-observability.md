@@ -174,3 +174,28 @@ node observe.mjs usage --agent-id your-agent-id --timezone UTC
 | `200` 却是 HTML | 地址或代理可能指向网页；重新执行认证握手并确认服务标识 |
 
 更多认证、来源限制和响应处理见[错误与排查](./03-errors-and-troubleshooting.md)。
+
+
+## 重试算力准备 {#compute-preparation}
+
+### `POST /api/compute/preparation/retry`
+
+远程／standalone 实例的部署所有者可在 `SERVICE_PREPARATION_FAILED` 后显式重试实例既有的算力准备步骤。内嵌客户端需要官方界面权限。握手成功不保证算力准备或某次模型请求成功。
+
+**不带查询参数，也不发送请求体**，包括空 `{}`。这个固定恢复操作不接受任务名或供应商配置：
+
+```bash
+curl --silent --show-error --request POST \
+  --header "X-Agent-Service-Token: ${AGENT_SERVICE_TOKEN}" \
+  "${BASE_URL}/api/compute/preparation/retry"
+```
+
+成功为 `200 {"status":"ready"}`。已有准备在执行时等待同一次尝试；并发请求共享尝试，已经 ready 时保持 ready。之前失败时可重新开始一次准备。它不证明上游网络可用，也不代表旧对话完成。
+
+多余参数返回 `400 {"error":"COMPUTE_PREPARATION_RETRY_PARAMETERS_NOT_ALLOWED"}`；准备失败返回 `503 {"error":"SERVICE_PREPARATION_FAILED"}`。实例鉴权和管理来源拒绝还可返回 `401` 或 `403 renderer_origin_required`。
+
+超时只表示本次等待结束，准备结果可能未知。先检查实例，再决定是否手动重试；不要重放原对话或业务请求。示例中的管理员命令必须显式选择：
+
+```bash
+node observe.mjs compute-retry --timeout-ms 60000
+```

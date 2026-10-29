@@ -26,6 +26,8 @@ keywords: [API, 集成, Webhook, Agent Service, 接入, 认证]
 | 排查上游网络、观察近期工具调用和已记录用量 | 实例所有者访问权限 | [实例诊断与用量](./10-observability.md) |
 | 读取任务板、任务详情及活动 | 实例所有者访问权限、任务板能力 | [TaskBoard 读取](./11-taskboards.md) |
 | 列出对象或从已配置存储下载 | 实例所有者访问权限、对象存储能力和已配置连接 | [S3 对象读取](./12-object-storage.md) |
+| 读取临时 Worker 记录 | 父 Run 所属用户权限 | [临时子智能体记录](./13-subagent-records.md) |
+| 恢复团队归档或绑定精确工作流定义 | 部署者管理令牌、已配置的相关服务 | [实例管理](./14-instance-management.md) |
 
 ## 凭据与结果
 

@@ -4,13 +4,13 @@
 
 ## 公开范围
 
-13 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、会话历史与消息、附件与媒体、实例诊断与用量、TaskBoard 与 S3 读取、模型代理、工作流与 OpenAPI 下载。50 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
+15 组中英文页面覆盖接入认证、Agent Webhook 管理与触发、只读 Agent/Run/回执、HTTP + Socket.IO 对话、会话历史与消息、附件与媒体、实例诊断与用量、TaskBoard 与 S3 读取、临时子智能体记录、实例管理与工作流绑定、模型代理、工作流与 OpenAPI 下载。58 个 HTTP 操作按服务分成三个自包含 OpenAPI 3.1 文件；对话事件和恢复规则维护在指南与可运行 Node.js 示例中。
 
 Webhook 所有者管理依赖握手 `capabilities.webhookManagement: true`，由可信入口选择实际工具并生成文件范围快照；旧服务仅支持已有事件。该支持条件没有被改写成未经核对的客户端发行号。现有 Write/Bash 与审批模型保留，不把配置文件宣称为不可修改的安全边界。
 
-默认 Caddy 未代理 `/health`、Workflow 路径或本机 Compat Proxy；附件和历史使用 `/api/*`，签名媒体读取使用单独代理的 `/media/*`。三种服务的地址、认证和权限分别维护。Workflow 只公开管理员预置定义的触发与观察，不伪造直接运行所需 grant 的公开签发流程。
+默认 Caddy 未代理 `/health`、Workflow 路径或本机 Compat Proxy；附件和历史使用 `/api/*`，签名媒体读取使用单独代理的 `/media/*`。三种服务的地址、认证和权限分别维护。Workflow Service 公开管理员预置定义的触发与观察；Agent Service 另提供已有精确定义的 TaskBoard 绑定。绑定不签发直接执行所需 grant。
 
-独立示例包在 [examples/agent-client](./examples/agent-client/README.md)。`client.mjs`、`history.mjs` 和 `attachments.mjs` 分别对应 `static/api-examples/agent-client.mjs`、`history.mjs` 和 `attachments.mjs`，每一对必须逐字一致。依赖和锁文件在示例目录维护，不改变站点依赖。
+独立示例包在 [examples/agent-client](./examples/agent-client/README.md)。8个维护脚本（client/history/attachments/observe/taskboards/s3/workers/admin）分别对应 `static/api-examples/` 中的下载；仅 client 的下载名为 `agent-client.mjs`，其它保持原名。每一对必须逐字一致，`api:check` 核验全部镜像。依赖和锁文件在示例目录维护，不改变站点依赖。
 
 ## 修改步骤
 
@@ -117,3 +117,12 @@ TaskBoard 整板activity只提供handoff证据；单任务activity使用固定th
 `taskboards.mjs`、`s3.mjs`及static镜像由api:check逐字核对，示例包不增加站点依赖。隔离源码fixture维护在示例test目录，必须复制到注明的源码位置后使用该仓的Vitest执行；它们不属于站点TypeScript编译。详细验证及未覆盖范围见[本批记录](./taskboard-s3-verification-2026-10-25.md)。
 
 Worker投影修复单独提交源码PR，本批没有将Worker两项加入公开清单或规范。此前发布与搜索验收保留其历史基线，不代表本批已部署或收录。
+
+
+## 2026-10-29 Worker、归档与管理扩展
+
+固定源码 `724d8fe87c2e01a7495c3e22f1910e1b4486caa9`、内部文档 `3122dd869b37fc65dbcb3c5b0e356d2571c83b48`。新增8操作：Worker列表/记录、归档手动话题、会话恢复引用、算力准备重试、团队归档列表/恢复和精确Workflow定义绑定。当前公开58操作（Agent Service50、Compat3、Workflow5），15组双语页面，Agent Service规范修订为1.4.0。其它两规范保留历史来源。
+
+Worker公开以已合入的隐私重投影修复及本次重新验证为依据；相关功能真实生效版本为 `v10.0.189+`。TaskBoard数据版本3与默认策略V5分别说明，旧板不自动升级策略；敏感历史结果同时移除modelOutput/modelOutputRefs。管理示例必须显式选择写入，无自动恢复或写重试。内嵌团队归档来源门与Workflow鉴权owner判据分别验证。
+
+[本批验证记录](./update-verification-2026-10-29.md)区分真实路由/存储、合成owner端口、Schema及本机HTTP示例测试。提交PR不表示已部署或已被站内搜索收录；既有发布与搜索文件保留各自历史事实。

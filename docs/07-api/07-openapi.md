@@ -59,6 +59,14 @@ sidebar_position: 7
 | `GET /api/s3/connections` | 读取已配置连接摘要 | [S3 对象读取](./12-object-storage.md) |
 | `GET /api/s3/list` | 列出存储对象 | [S3 对象读取](./12-object-storage.md) |
 | `GET /api/s3/download` | 下载对象字节或取得链接 | [S3 对象读取](./12-object-storage.md) |
+| `GET /api/runs/{id}/workers` | 列出父 Run 的 Worker | [使用说明](./13-subagent-records.md) |
+| `GET /api/runs/{id}/workers/{workerId}/transcript` | 按有效 entry 分页读取记录 | [使用说明](./13-subagent-records.md) |
+| `GET /api/manual-topics/archived` | 读取当前用户的归档话题 | [使用说明](./08-session-history-and-messages.md) |
+| `GET /api/sessions/{runId}/runtime-state` | 读取会话恢复引用 | [使用说明](./08-session-history-and-messages.md) |
+| `POST /api/compute/preparation/retry` | 显式重试算力准备 | [使用说明](./10-observability.md) |
+| `GET /api/team-archive` | 列出团队归档摘要 | [使用说明](./14-instance-management.md) |
+| `POST /api/team-archive/{archiveId}/restore` | 显式恢复一份团队归档 | [使用说明](./14-instance-management.md) |
+| `POST /api/workflow-definitions/{workflowId}/taskboard-bindings` | 绑定已有精确工作流定义 | [使用说明](./14-instance-management.md) |
 
 花括号表示需要替换的路径参数，对应端点指南中的冒号写法。Webhook 管理操作要求认证握手中的 `capabilities.webhookManagement` 为 `true`，并使用实例所有者凭据。旧实例缺少该能力时，使用管理员已启用并验证的事件。运行列表和详情按部署所有者的实例读取范围使用；回执读取另外检查可信用户归属。
 
@@ -119,3 +127,5 @@ Socket.IO 的连接、订阅与异步事件需要配套客户端逻辑。OpenAPI
 观察和聚合历史的可运行读取示例分别为 **[observe.mjs](pathname:///api-examples/observe.mjs)** 与 **[history.mjs](pathname:///api-examples/history.mjs)**。聚合历史的 revision 冲突需要重新读取，不能混拼旧页；用量聚合不等于供应商最终账单。
 
 TaskBoard 与 S3 的读取示例分别为 **[taskboards.mjs](pathname:///api-examples/taskboards.mjs)** 和 **[s3.mjs](pathname:///api-examples/s3.mjs)**。查询游标、活动修订、对象续读令牌和下载模式按对应指南处理。
+
+新增独立示例：**[workers.mjs](pathname:///api-examples/workers.mjs)** 读取 Worker，**[admin.mjs](pathname:///api-examples/admin.mjs)** 执行显式所有者管理操作。会话恢复引用、归档话题和算力准备使用更新后的 history／observe 脚本。

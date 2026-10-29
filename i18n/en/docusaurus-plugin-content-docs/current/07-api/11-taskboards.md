@@ -24,6 +24,10 @@ These endpoints use the authenticated user and their actual team permissions. HT
 
 Use IDs returned by the API, encoding each URL path segment separately. Board revision, Task version, query cursor and activity position serve different purposes and are not interchangeable.
 
+## Data and policy versions {#taskboard-versions}
+
+Response `schemaVersion: 3`, `meta.policy.version`, Board `revision` and Task `version` describe different facts. Current new boards use V5 policies; existing boards retain their saved policy until explicitly upgraded. Policy numbers are not client effective versions. Read the actual policy/capability and current actor action projection instead of selecting actions from a version number alone. A disabled action can report prerequisites such as a required task plan (`taskPlanRequired`); the read DTO does not add a public `TaskItem.plan` field or grant execution authority.
+
 ## Board list and details {#boards}
 
 ### `GET /api/taskboards`

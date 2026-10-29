@@ -120,3 +120,12 @@ A connected Socket.IO client does not establish that the instance can reach a mo
 A successful authenticated handshake does not enable optional applications or validate a storage connection. For `403 capabilityDisabled`, check the corresponding application in My Apps; do not keep retrying the same disabled capability. TaskBoard access also depends on the readable resource scope, and a missing or inaccessible board may return `403`. Read the [TaskBoard error and paging rules](./11-taskboards.md) before treating a missing task or a pagination conflict as an empty successful query.
 
 S3 link and binary modes have different response and error contracts. A link-mode `404 NOT_FOUND` means the instance could not confirm the object is readable; check the key, provider permissions and connection. Binary mode can report the same provider failure as `500 DOWNLOAD_FAILED`. Follow [object-storage reads](./12-object-storage.md), preserve the HTTP status, and keep signed download links out of shared logs.
+
+
+## Recovery references and management errors {#recovery-management-errors}
+
+A `runtimeSession: null` response from `GET /api/sessions/:runId/runtime-state` means no current recovery reference. `500 SESSION_RESTORE_FAILED` means local restoration failed after ownership was verified. Keep safe diagnostics for the administrator; do not convert the error into null, delete history or replay input. See [session recovery references](./08-session-history-and-messages.md#session-runtime-reference).
+
+Compute preparation `503 SERVICE_PREPARATION_FAILED` differs from startup `503 service_not_ready`. A deployment owner can explicitly request [preparation retry](./10-observability.md#compute-preparation) without query parameters or a request body. Do not resend the original business request.
+
+For team archives, `403 renderer_origin_required` means the embedded client source requirement was not met; use the official UI. Remote management uses the deployment owner credential. After a team restore timeout, inspect current state first. For Workflow version or idempotency conflicts, retain the original request and check the resource rather than automatically replacing the key. See [instance management](./14-instance-management.md).
