@@ -15,6 +15,7 @@ This page records important changes in each version of 达摩院AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.195](./v10.0.195) | 2026-10-29 | Unified archive page、Mute regular conversation messages、Explicit scope select... |
 | [v10.0.192](./v10.0.192) | 2026-10-29 | Task Board Workspace、Task Step Progress、Structured Acceptance Criteria and It... |
 | [v10.0.188](./v10.0.188) | 2026-10-25 | Fixes: document review recovery, startup responsiveness, interrupted replies, new-file tabs and tool records. |
 | [v10.0.187](./v10.0.187) | 2026-10-25 | Native app email and business interfaces、Image integrity verification、... |
