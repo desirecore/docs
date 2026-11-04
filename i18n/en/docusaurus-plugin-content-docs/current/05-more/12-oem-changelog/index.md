@@ -15,6 +15,7 @@ This page records important changes in each version of 达摩院AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.199](./v10.0.199) | 2026-11-04 | 随包携带 FFmpeg 7.1.5-dc1 / Bundle FFmpeg 7.1.5-dc1 (ADR-287) (#5646)、FFmpeg 套件手动... |
 | [v10.0.196](./v10.0.196) | 2026-11-02 | Agent archive and restore、Local audio/video transcription、Large optimization ... |
 | [v10.0.195](./v10.0.195) | 2026-10-29 | Unified archive page、Mute regular conversation messages、Explicit scope select... |
 | [v10.0.192](./v10.0.192) | 2026-10-29 | Task Board Workspace、Task Step Progress、Structured Acceptance Criteria and It... |
