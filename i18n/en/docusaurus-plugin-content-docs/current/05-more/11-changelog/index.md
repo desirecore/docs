@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.199](./v10.0.199) | 2026-11-04 | 随包携带 FFmpeg 7.1.5-dc1 / Bundle FFmpeg 7.1.5-dc1 (ADR-287) (#5646)、FFmpeg 套件手动... |
 | [v10.0.198](./v10.0.198) | 2026-11-03 | Built-in plugins and open-source notices、MiniMax speech synthesis adapter、Off... |
 | [v10.0.196](./v10.0.196) | 2026-11-02 | Local audio/video transcription、Mobile file editing and review、Read-only mobi... |
 | [v10.0.195](./v10.0.195) | 2026-10-29 | 修复：Fixed an issue where sub-sessions that had been granted delegation permiss... |
