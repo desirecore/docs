@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.200](./v10.0.200) | 2026-11-05 | Linux 前台命令独立分组与 POSIX 孤儿脚本回收（ADR-334）/ Per-command systemd scopes on Linux an... |
 | [v10.0.199](./v10.0.199) | 2026-11-04 | 随包携带 FFmpeg 7.1.5-dc1 / Bundle FFmpeg 7.1.5-dc1 (ADR-287) (#5646)、FFmpeg 套件手动... |
 | [v10.0.198](./v10.0.198) | 2026-11-03 | Built-in plugins and open-source notices、MiniMax speech synthesis adapter、Off... |
 | [v10.0.196](./v10.0.196) | 2026-11-02 | Local audio/video transcription、Mobile file editing and review、Read-only mobi... |
