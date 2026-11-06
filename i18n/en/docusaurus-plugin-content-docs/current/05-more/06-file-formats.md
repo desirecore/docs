@@ -74,6 +74,43 @@ Every agent has an `agent.json` at its root. It defines identity, default model,
 | `trigger_patterns` | Simple trigger patterns |
 | `repository` | Remote repository, branch, and publishing connection |
 
+### `mcp_servers` External Capabilities
+
+Each key is a server ID and each value configures one server. MCP tool names follow `{serverId}__{toolName}`.
+
+| Field | Meaning |
+|-------|---------|
+| `transport` | `stdio`, `streamable-http`, or `sse` |
+| `enabled` | Whether the connection is enabled |
+| `command`, `args`, `env` | stdio executable, argument array, and environment variables |
+| `cwd` | Explicit stdio working directory, defaulting to the application process directory |
+| `url`, `headers` | HTTP or SSE endpoint and request headers |
+| `oauth` | OAuth client overrides for a remote server |
+| `version_negotiation` | `auto`, `legacy`, or `modern` for stdio and Streamable HTTP, defaulting to `auto` |
+| `sampling` | Explicit Sampling authorization and quotas, disabled by default |
+
+:::info Effective version
+`v10.0.201+` (dual-era `version_negotiation` behavior and turn-bound Sampling quotas).
+:::
+
+```json
+{
+  "requiredClientVersion": "10.0.201",
+  "mcp_servers": {
+    "docs": {
+      "transport": "streamable-http",
+      "url": "https://mcp.example.com/mcp",
+      "enabled": true,
+      "version_negotiation": "auto"
+    }
+  }
+}
+```
+
+When publishing an agent with a non-default protocol strategy, set `requiredClientVersion` to at least `10.0.201`. SSE configurations do not accept `version_negotiation`.
+
+`sampling` requires `enabled: true`, `max_tokens` (1–32768), and `max_requests_per_query` (1–32). Quotas apply to each initiating request and server. Every embedded request counts, including failed, rejected, and cancelled requests. Reconnection preserves the current turn's consumed quota.
+
 ### `llm` Model Configuration
 
 `llm` is the current agent-level model configuration. Legacy `runtime` model fields are accepted for compatibility, but new files should use `llm`.
