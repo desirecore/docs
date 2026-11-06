@@ -44,7 +44,7 @@ MCP 是一个开放标准协议，定义了 AI 应用如何与外部工具和数
 ## 新旧协议兼容
 
 :::info 生效版本
-`v10.0.201+`（双时代协商、目录有效期与订阅恢复）。
+`v10.0.202+`（双时代协商、目录有效期与订阅恢复）。
 :::
 
 stdio 和 Streamable HTTP 默认使用 `auto`，先发现服务器支持的协议，再建立连接。旧服务器仍可使用 initialize 握手，新服务器可使用 `2026-07-28` 协议。SSE 连接沿用旧协议。
@@ -55,7 +55,7 @@ stdio 和 Streamable HTTP 默认使用 `auto`，先发现服务器支持的协�
 
 MCP Tasks 和 MCP Apps 暂不可用。Sampling 属于已弃用的兼容能力，默认关闭。显式启用后，每个发起请求对每台服务器单独计额，每条嵌入的采样请求都计入，失败、拒绝和取消也消耗额度。采样使用发起调用绑定的模型与权限，停止该轮会取消在途采样。
 
-发布配置了 `version_negotiation` 非默认值的智能体时，将 `requiredClientVersion` 至少设为 `10.0.201`。
+发布配置了 `version_negotiation` 非默认值的智能体时，将 `requiredClientVersion` 至少设为 `10.0.202`。
 
 ## 管理 MCP 工具
 

@@ -90,12 +90,12 @@ Each key is a server ID and each value configures one server. MCP tool names fol
 | `sampling` | Explicit Sampling authorization and quotas, disabled by default |
 
 :::info Effective version
-`v10.0.201+` (dual-era `version_negotiation` behavior and turn-bound Sampling quotas).
+`v10.0.202+` (dual-era `version_negotiation` behavior and turn-bound Sampling quotas).
 :::
 
 ```json
 {
-  "requiredClientVersion": "10.0.201",
+  "requiredClientVersion": "10.0.202",
   "mcp_servers": {
     "docs": {
       "transport": "streamable-http",
@@ -107,7 +107,7 @@ Each key is a server ID and each value configures one server. MCP tool names fol
 }
 ```
 
-When publishing an agent with a non-default protocol strategy, set `requiredClientVersion` to at least `10.0.201`. SSE configurations do not accept `version_negotiation`.
+When publishing an agent with a non-default protocol strategy, set `requiredClientVersion` to at least `10.0.202`. SSE configurations do not accept `version_negotiation`.
 
 `sampling` requires `enabled: true`, `max_tokens` (1–32768), and `max_requests_per_query` (1–32). Quotas apply to each initiating request and server. Every embedded request counts, including failed, rejected, and cancelled requests. Reconnection preserves the current turn's consumed quota.
 

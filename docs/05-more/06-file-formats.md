@@ -107,12 +107,12 @@ PDF 读取会根据文件大小和内容选择策略：文字页优先文本提�
 | `sampling` | 显式 Sampling 授权及额度，缺省禁用 |
 
 :::info 生效版本
-`v10.0.201+`（`version_negotiation` 的双时代行为与轮级 Sampling 额度）。
+`v10.0.202+`（`version_negotiation` 的双时代行为与轮级 Sampling 额度）。
 :::
 
 ```json
 {
-  "requiredClientVersion": "10.0.201",
+  "requiredClientVersion": "10.0.202",
   "mcp_servers": {
     "docs": {
       "transport": "streamable-http",
@@ -124,7 +124,7 @@ PDF 读取会根据文件大小和内容选择策略：文字页优先文本提�
 }
 ```
 
-若发布的智能体使用非默认协议策略，将 `requiredClientVersion` 至少设为 `10.0.201`。SSE 配置不接受 `version_negotiation`。
+若发布的智能体使用非默认协议策略，将 `requiredClientVersion` 至少设为 `10.0.202`。SSE 配置不接受 `version_negotiation`。
 
 `sampling` 需要同时提供 `enabled: true`、`max_tokens`（1–32768）和 `max_requests_per_query`（1–32）。额度按发起请求与服务器计算，每条嵌入采样分别计数，失败、拒绝和取消也计入，重连保留本轮已用额度。
 
