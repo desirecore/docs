@@ -15,6 +15,7 @@ This page records important changes in each version of unbranded AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.201](./v10.0.201) | 2026-11-07 | 工具调用审计写入接受判定所用的 Schema 摘要，收尾 PR5 核对遗留 / Record the acceptance schema digest i... |
 | [v10.0.195](./v10.0.195) | 2026-10-30 | Unified archive page、Streaming save for large results、Conversation message mu... |
 | [v10.0.192](./v10.0.192) | 2026-10-29 | Task Board Workspace、Structured Acceptance Criteria、Agent Step Progress、Workf... |
 | [v10.0.191](./v10.0.191) | 2026-10-27 | 修复：Backup and transfer now preserve whiteboard revision history, command rece... |
