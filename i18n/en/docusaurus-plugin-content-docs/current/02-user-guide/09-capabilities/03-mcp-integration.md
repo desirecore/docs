@@ -53,7 +53,7 @@ If an older server exits during discovery or fails to connect, set `"version_neg
 
 The server's discovery TTL controls refreshes for tools, resources, and prompts. `ttlMs: 0` causes a new request whenever discovery is needed and can increase process or network load. Disconnected list subscriptions retry with backoff and return to the normal retry frequency after a stable recovery.
 
-MCP Tasks and MCP Apps are currently unavailable. Sampling is a deprecated compatibility capability and is disabled by default. When explicitly enabled, quotas apply to each initiating request and server. Every embedded Sampling request counts, including failed, rejected, and cancelled requests. Sampling uses the initiating call's bound model and permissions. Stopping that turn cancels in-flight Sampling.
+MCP Tasks and MCP Apps are currently unavailable. Sampling is a deprecated compatibility capability and is disabled by default. When explicitly enabled, quotas apply to each initiating request and server. Every embedded Sampling request counts, including failed, rejected, and cancelled requests. Sampling uses the initiating call's bound model and permissions. When Sampling is enabled, tool calls, resource reads, and prompt requests on the same server connection run serially. A Sampling request must be bound to one of those calls while it is in progress; otherwise it is rejected. Stopping that turn cancels in-flight Sampling.
 
 When publishing an agent with a non-default `version_negotiation` value, set `requiredClientVersion` to at least `10.0.202`.
 
