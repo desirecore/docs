@@ -41,6 +41,22 @@ MCP is an open standard protocol that defines how AI applications communicate wi
 - **SSE**: Use Server-Sent Events, supports server-initiated push. Suitable for scenarios requiring real-time updates.
 :::
 
+## Legacy and Modern Protocols
+
+:::info Effective version
+`v10.0.202+` (dual-era negotiation, discovery TTL, and subscription recovery).
+:::
+
+stdio and Streamable HTTP use `auto` by default to discover the server's supported protocol before connecting. Legacy servers retain the initialize handshake, while modern servers can use protocol `2026-07-28`. SSE connections use the legacy protocol.
+
+If an older server exits during discovery or fails to connect, set `"version_negotiation": "legacy"` in that server's configuration, save it, and reconnect. `modern` requires the modern protocol and suits services that explicitly require it. This field applies to stdio and Streamable HTTP.
+
+The server's discovery TTL controls refreshes for tools, resources, and prompts. `ttlMs: 0` causes a new request whenever discovery is needed and can increase process or network load. Disconnected list subscriptions retry with backoff and return to the normal retry frequency after a stable recovery.
+
+MCP Tasks and MCP Apps are currently unavailable. Sampling is a deprecated compatibility capability and is disabled by default. When explicitly enabled, quotas apply to each initiating request and server. Every embedded Sampling request counts, including failed, rejected, and cancelled requests. Sampling uses the initiating call's bound model and permissions. Stopping that turn cancels in-flight Sampling.
+
+When publishing an agent with a non-default `version_negotiation` value, set `requiredClientVersion` to at least `10.0.202`.
+
 ## Managing MCP Tools
 
 After connecting an MCP Server, tools it exposes appear in the agent's tool list. You can:

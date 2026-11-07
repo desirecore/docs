@@ -91,6 +91,43 @@ PDF 读取会根据文件大小和内容选择策略：文字页优先文本提�
 | `trigger_patterns` | string[] | 简单触发词匹配 |
 | `repository` | object | 远程仓库、分支和发布连接配置 |
 
+### `mcp_servers` 外部能力配置
+
+键是服务器 ID，值是一台服务器的配置。MCP 工具名使用 `{服务器ID}__{工具名}`。
+
+| 字段 | 说明 |
+|------|------|
+| `transport` | `stdio`、`streamable-http` 或 `sse` |
+| `enabled` | 是否启用连接 |
+| `command`、`args`、`env` | stdio 启动程序、参数数组和环境变量 |
+| `cwd` | stdio 的显式工作目录，缺省沿用应用进程工作目录 |
+| `url`、`headers` | HTTP 或 SSE 的端点与请求头 |
+| `oauth` | 远程服务器的 OAuth 客户端覆盖配置 |
+| `version_negotiation` | stdio 与 Streamable HTTP 使用 `auto`、`legacy` 或 `modern`，缺省 `auto` |
+| `sampling` | 显式 Sampling 授权及额度，缺省禁用 |
+
+:::info 生效版本
+`v10.0.202+`（`version_negotiation` 的双时代行为与轮级 Sampling 额度）。
+:::
+
+```json
+{
+  "requiredClientVersion": "10.0.202",
+  "mcp_servers": {
+    "docs": {
+      "transport": "streamable-http",
+      "url": "https://mcp.example.com/mcp",
+      "enabled": true,
+      "version_negotiation": "auto"
+    }
+  }
+}
+```
+
+若发布的智能体使用非默认协议策略，将 `requiredClientVersion` 至少设为 `10.0.202`。SSE 配置不接受 `version_negotiation`。
+
+`sampling` 需要同时提供 `enabled: true`、`max_tokens`（1–32768）和 `max_requests_per_query`（1–32）。额度按发起请求与服务器计算，每条嵌入采样分别计数，失败、拒绝和取消也计入，重连保留本轮已用额度。
+
 ### `llm` 模型配置
 
 `llm` 是智能体级默认模型配置。旧的 `runtime` 模型字段只作为兼容输入，保存和新建配置时应使用 `llm`。
