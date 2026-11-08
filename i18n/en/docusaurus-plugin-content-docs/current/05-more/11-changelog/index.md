@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.202](./v10.0.202) | 2026-11-07 | 补齐外部执行事实与原视频作业查询 (#5851)、完成轮级 Sampling 与 MRTR 语义 (#5730)、完成列表 TTL 与订阅恢复 / Com... |
 | [v10.0.201](./v10.0.201) | 2026-11-06 | 工具调用审计写入接受判定所用的 Schema 摘要，收尾 PR5 核对遗留 / Record the acceptance schema digest i... |
 | [v10.0.200](./v10.0.200) | 2026-11-05 | Linux 前台命令独立分组与 POSIX 孤儿脚本回收（ADR-334）/ Per-command systemd scopes on Linux an... |
 | [v10.0.199](./v10.0.199) | 2026-11-04 | 随包携带 FFmpeg 7.1.5-dc1 / Bundle FFmpeg 7.1.5-dc1 (ADR-287) (#5646)、FFmpeg 套件手动... |
