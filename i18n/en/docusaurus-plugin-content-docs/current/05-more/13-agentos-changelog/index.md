@@ -15,6 +15,7 @@ This page records important changes in each version of unbranded AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.204](./v10.0.204) | 2026-11-17 | 市场卸载改为归档 / Archive agents uninstalled from Market (#6243)、增加模型快速模式配置与请求传递 (#6... |
 | [v10.0.201](./v10.0.201) | 2026-11-07 | 工具调用审计写入接受判定所用的 Schema 摘要，收尾 PR5 核对遗留 / Record the acceptance schema digest i... |
 | [v10.0.195](./v10.0.195) | 2026-10-30 | Unified archive page、Streaming save for large results、Conversation message mu... |
 | [v10.0.192](./v10.0.192) | 2026-10-29 | Task Board Workspace、Structured Acceptance Criteria、Agent Step Progress、Workf... |
