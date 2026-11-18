@@ -15,6 +15,7 @@ This page records important changes in each version of unbranded AgentOS.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.208](./v10.0.208) | 2026-11-18 | 支持准备式配对凭据与持久化失败恢复 (#6264)、自我认知列出已接入的 MCP 服务端，ToolCatalog 可按服务端 ID 检索 / List c... |
 | [v10.0.204](./v10.0.204) | 2026-11-17 | 市场卸载改为归档 / Archive agents uninstalled from Market (#6243)、增加模型快速模式配置与请求传递 (#6... |
 | [v10.0.201](./v10.0.201) | 2026-11-07 | 工具调用审计写入接受判定所用的 Schema 摘要，收尾 PR5 核对遗留 / Record the acceptance schema digest i... |
 | [v10.0.195](./v10.0.195) | 2026-10-30 | Unified archive page、Streaming save for large results、Conversation message mu... |
