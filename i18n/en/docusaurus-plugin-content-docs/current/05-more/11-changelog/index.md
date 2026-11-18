@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.208](./v10.0.208) | 2026-11-18 | 支持准备式配对凭据与持久化失败恢复 (#6264)，修复 1 项问题 |
 | [v10.0.205](./v10.0.205) | 2026-11-17 | 自我认知列出已接入的 MCP 服务端，ToolCatalog 可按服务端 ID 检索 / List connected MCP servers in se... |
 | [v10.0.204](./v10.0.204) | 2026-11-16 | 市场卸载改为归档 / Archive agents uninstalled from Market (#6243)、增加模型快速模式配置与请求传递 (#6... |
 | [v10.0.203](./v10.0.203) | 2026-11-08 | 团队成员接入统一 Agent 更新链路 (#5814)，修复 29 项问题，改进 5 项 |
