@@ -14,6 +14,7 @@ This page records important changes in each version of DesireCore.
 
 | Version | Date | Summary |
 |---------|------|---------|
+| [v10.0.211](./v10.0.211) | 2026-11-23 | 修复：OEM 发布说明的 Git 历史读取 / Restore OEM release note history reads (#6349) |
 | [v10.0.210](./v10.0.210) | 2026-11-23 | 文件工作台支持可编辑演示文稿与 PowerPoint 导出 / Editable presentations and native PowerPoint ... |
 | [v10.0.209](./v10.0.209) | 2026-11-20 | 按现有审批记录本机 MCP 启动信任 (#6323)、支持 Codex 会话速度选择与继承 / Add per-conversation Codex sp... |
 | [v10.0.208](./v10.0.208) | 2026-11-18 | 支持准备式配对凭据与持久化失败恢复 (#6264)，修复 1 项问题 |
