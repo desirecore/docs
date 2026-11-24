@@ -1,0 +1,11 @@
+{
+  "client_id": "https://docs.desirecore.com/oauth/clients/desirecore-desktop-v1.json",
+  "client_name": "DesireCore Desktop",
+  "client_uri": "https://www.desirecore.com",
+  "application_type": "native",
+  "redirect_uris": ["http://127.0.0.1/callback"],
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"],
+  "token_endpoint_auth_method": "none",
+  "token_endpoint_auth_methods_supported": ["none"]
+}
