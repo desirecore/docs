@@ -24,6 +24,7 @@ DesireCore 不是一个封闭系统。它通过多层集成架构连接外部世
 | **MCP 服务** | 通过 Model Context Protocol 连接外部 API 和服务 | [MCP 集成](./mcp-integration) |
 | **技能包** | 把多个工具编排成专业工作流 | [技能包](./skill-packs) |
 | **Computer Use** | macOS 通过 HostAgent、Windows 暂时通过内置 CUA Driver 操控本机 GUI；其他平台 HostAgent 仍在演进 | [GUI 桌面自动化](./computer-use) |
+| **1Password** | 从专用保险库按需读取已关联的凭据 | [连接 1Password](./10-1password.md) |
 | **邮件** | 统一管理 Gmail / Outlook / IMAP 邮箱 | [邮件管理](../email/overview) |
 | **工作流** | 用可视化 DSL 编排触发器、代码、LLM、Agent 和人工确认节点 | [任务编排](../../concepts/task-orchestration) |
 | **应用、插件与服务** | 区分应用使用、插件贡献管理和服务连接诊断 | [应用、插件与服务](./app-service-catalog) |

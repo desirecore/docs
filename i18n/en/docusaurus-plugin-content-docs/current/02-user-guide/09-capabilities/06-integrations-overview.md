@@ -22,6 +22,7 @@ Installed apps and plugins share the Apps entry, with peer tabs for use and conf
 | **MCP services** | Connect external APIs and services through Model Context Protocol | [MCP Integration](./mcp-integration) |
 | **Skills** | Package tools and instructions into reusable workflows | [Skill Packs](./skill-packs) |
 | **Computer Use** | Local GUI control through HostAgent on macOS and temporarily through bundled CUA Driver on Windows; other HostAgent platforms are still evolving | [GUI Desktop Automation](./computer-use) |
+| **1Password** | Read linked credentials from a dedicated vault on demand | [Connect 1Password](./10-1password.md) |
 | **Email** | Manage Gmail, Outlook, and IMAP accounts | [Email Management](../email/overview) |
 | **Workflows** | Compose triggers, code, LLM, Agent, and human-confirmation nodes | [Task Orchestration](../../concepts/task-orchestration) |
 | **Apps, Plugins, and Services** | Distinguish app use, plugin contribution management, and service connection diagnostics | [Apps, Plugins, and Services](./app-service-catalog) |
