@@ -2,6 +2,7 @@ import { themes as prismThemes } from 'prism-react-renderer'
 import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
 import changelogJsonPlugin from './plugins/changelog-json-plugin'
+import oauthClientMetadataPlugin from './plugins/oauth-client-metadata-plugin'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -50,7 +51,7 @@ const config: Config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
 
-  plugins: [changelogJsonPlugin],
+  plugins: [changelogJsonPlugin, oauthClientMetadataPlugin],
 
   presets: [
     [

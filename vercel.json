@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "headers": [
+    {
+      "source": "/oauth/clients/:file",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=300" }]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/oauth/clients/:file/",
+      "destination": "/oauth/clients/:file",
+      "permanent": true
+    }
+  ]
+}
